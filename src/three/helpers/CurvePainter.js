@@ -10,7 +10,7 @@ import {
 } from "three-full";
 import { TweenLite, Linear } from "gsap/TweenMax";
 
-import { MeshLine, MeshLineMaterial } from "threejs/helpers/MeshLine";
+import { MeshLine, MeshLineMaterial } from "three/helpers/MeshLine";
 
 const CurvePainter = ({
   curve,
@@ -22,7 +22,7 @@ const CurvePainter = ({
   canvasWidth = 1024,
   canvasHeight = 128,
   fogColor = new Color(0xd7cbb1),
-  fogDensity = 0.0025,
+  fogDensity = 0.02,
   imagePath = "/img/stroke.png"
 }) => {
   let life = 0;
@@ -40,17 +40,6 @@ const CurvePainter = ({
   line.setGeometry(geometry, function(p) {
     return p;
   }); // makes width taper
-
-  // var img = new Image();
-  // img.src = imagePath;
-
-  // var canvas = document.createElement("canvas");
-  // canvas.width = canvasWidth;
-  // canvas.height = canvasHeight;
-  // var context = canvas.getContext("2d");
-
-  // const strokeTexture = new CanvasTexture(canvas);
-  // strokeTexture.wrapS = strokeTexture.wrapT = RepeatWrapping;
 
   const strokeTexture = new TextureLoader().load(imagePath, texture => {
     const strokeTexture = texture;
@@ -100,34 +89,6 @@ const CurvePainter = ({
     if (material) {
       material.uniforms.revealProgress.value = life;
     }
-
-    // const { life } = params;
-    // if (life <= 1) {
-    //   context.clearRect(0, 0, canvasWidth, canvasHeight);
-    //   context.drawImage(img, 0, 0, canvasWidth, canvasHeight);
-    //   context.globalCompositeOperation = "source-in";
-    //   var grd = context.createLinearGradient(0.01, 0, life * canvasWidth, 0);
-    //   grd.addColorStop(life, `rgba(255, 255, 255, ${life})`);
-    //   grd.addColorStop(1, "rgba(255, 255, 255, 0)");
-    //   context.fillStyle = grd;
-    //   context.fillRect(0, 0, life * canvasWidth, canvasHeight);
-    //   // reset
-    //   context.globalCompositeOperation = "source-over";
-    //   strokeTexture.needsUpdate = true;
-    // }
-    // if (renderFrame < totalFrames) {
-    //   geometry.vertices[renderFrame] = points[renderFrame].clone();
-    //   // the vertices array has to be the final length of the points array
-    //   // so this runs through the points and sets the values of the 'future'
-    //   // vertices to the last 'rendered' vertex
-    //   for (var i = renderFrame; i < totalFrames; i++) {
-    //     geometry.vertices[i] = points[renderFrame].clone();
-    //   }
-    //   renderFrame++;
-    //   line.setGeometry(geometry, function(p) {
-    //     return p;
-    //   }); // makes width taper
-    // }
   }
 
   return {

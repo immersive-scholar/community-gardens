@@ -30,7 +30,7 @@ export default ({ scene, controls }) => {
   light2.castShadow = true;
   scene.add(light2);
 
-  var r = 150;
+  var r = 10;
   light2.shadow.mapSize.set(1024, 1024);
   light2.shadow.camera.left = -r;
   light2.shadow.camera.right = r;
@@ -39,9 +39,9 @@ export default ({ scene, controls }) => {
   light2.shadow.camera.updateProjectionMatrix();
 
   var effectController = {
-    x: 4,
-    y: 25,
-    z: 50
+    x: 30,
+    y: 90,
+    z: -50
   };
 
   const onDataChange = function() {

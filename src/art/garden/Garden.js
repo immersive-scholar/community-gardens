@@ -1,23 +1,17 @@
-import { Mesh, BoxGeometry } from "three";
+import { Group, BoxGeometry } from "three";
 import { MeshPhongMaterial } from "three-full";
 
-const Garden = ({ size = 1 }) => {
-  const geometry = Garden.createGeometry(size);
-  const material = Garden.createMaterial();
+import Circle from "art/circle/Circle";
 
-  const mesh = new Mesh(geometry, material);
+const Garden = ({ size = 1, R, camera }) => {
+  const group = new Group();
+
+  const circle = new Circle({ R, camera });
+  group.add(circle.group);
 
   return {
-    mesh
+    mesh: group
   };
-};
-
-Garden.createGeometry = size => {
-  return new BoxGeometry(size, size, size);
-};
-
-Garden.createMaterial = () => {
-  return new MeshPhongMaterial({ color: 0xff9900 });
 };
 
 export default Garden;

@@ -9,7 +9,7 @@ import {
 } from "three-full";
 
 const root = this;
-const MAGIC = function() {
+const Wrapper = function() {
   function MeshLine() {
     this.positions = [];
 
@@ -495,5 +495,5 @@ const MAGIC = function() {
   return root;
 }.call(this);
 
-const { MeshLine, MeshLineMaterial } = MAGIC;
+const { MeshLine, MeshLineMaterial } = Wrapper;
 export { MeshLine, MeshLineMaterial };
