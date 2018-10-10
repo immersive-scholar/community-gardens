@@ -5,7 +5,9 @@ import {
   CatmullRomCurve3,
   Mesh,
   MeshBasicMaterial,
-  DoubleSide
+  DoubleSide,
+  LineBasicMaterial,
+  Line
 } from "three-full";
 import { Back } from "gsap";
 import BendModifier from "three/modifiers/BendModifier";
@@ -56,16 +58,24 @@ class SolomonsSealLeaf extends BaseRenderable {
       geometry.computeBoundingSphere();
       geometry.computeVertexNormals();
 
-      const leaf = this.toCurve({
+      const leafMesh = this.toBasicCurve({
         geometry,
         color,
         delay: i * 0.2,
-        pointCount,
-        thickness,
-        fogDensity: 0.2,
-        camera
+        pointCount
       });
-      this.group.add(leaf.curvePainter.mesh);
+      this.group.add(leafMesh);
+
+      // const leaf = this.toCurve({
+      //   geometry,
+      //   color,
+      //   delay: i * 0.2,
+      //   pointCount,
+      //   thickness,
+      //   fogDensity: 0.2,
+      //   camera
+      // });
+      // this.group.add(leaf.curvePainter.mesh);
 
       const fillMesh = this.createFill({
         line1: lines[0],
@@ -141,6 +151,20 @@ class SolomonsSealLeaf extends BaseRenderable {
     curvePainter.mesh.matrixAutoUpdate = true;
 
     return { curvePainter, geometry, curve };
+  };
+
+  toBasicCurve = ({ geometry, color, fogColor, fogDensity, camera }) => {
+    const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
+
+    const points = curve.getPoints(50);
+    const curveGeometry = new BufferGeometry().setFromPoints(points);
+
+    const material = new LineBasicMaterial({
+      color
+    });
+
+    const mesh = new Line(curveGeometry, material);
+    return mesh;
   };
 
   createFill = ({ line1, line2 }) => {

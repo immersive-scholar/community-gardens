@@ -38,7 +38,7 @@ class SolomonsSeal extends BaseRenderable {
       pointCount = 10,
       thickness = R.floatBetween(0.01, 0.05),
       color = new ColorSampler().getRandomColor(),
-      displacementScale = new Vector3(10, 1, 1)
+      displacementScale = new Vector3(5, 1, 5)
     } = props;
 
     // stem
