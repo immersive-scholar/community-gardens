@@ -43,7 +43,7 @@ const Circle = ({
     delay,
     pointCount,
     thickness,
-    fogDensity: 0.02,
+    fogDensity: 0.2,
     camera
   });
   group.add(renderable.curvePainter.mesh);

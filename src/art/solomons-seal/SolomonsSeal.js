@@ -33,11 +33,12 @@ class SolomonsSeal extends BaseRenderable {
       rx = R.random(),
       ry = R.random(),
       camera,
-      height = R.floatBetween(12, 24),
+      height = R.floatBetween(0.24, 0.96),
       leafCount = 10,
       pointCount = 10,
-      thickness = R.floatBetween(0.1, 1),
-      color = new ColorSampler().getRandomColor()
+      thickness = R.floatBetween(0.01, 0.05),
+      color = new ColorSampler().getRandomColor(),
+      displacementScale = new Vector3(10, 1, 1)
     } = props;
 
     // stem
@@ -45,7 +46,13 @@ class SolomonsSeal extends BaseRenderable {
       height,
       pointCount
     });
-    geometry.vertices = this.displaceGeometry({ geometry, R, rx, ry });
+    geometry.vertices = this.displaceGeometry({
+      geometry,
+      R,
+      rx,
+      ry,
+      displacementScale
+    });
     // geometry.vertices = this.bendGeometry({ geometry, R });
 
     geometry.computeBoundingSphere();
@@ -57,7 +64,7 @@ class SolomonsSeal extends BaseRenderable {
       delay,
       pointCount,
       thickness,
-      fogDensity: 0.02,
+      fogDensity: 0.2,
       camera
     });
     this.group.add(stem.curvePainter.mesh);
@@ -89,7 +96,7 @@ class SolomonsSeal extends BaseRenderable {
     // this.animateLeaves({ delay });
   }
 
-  createStemGeometry = ({ height = 10, pointCount = 8 }) => {
+  createStemGeometry = ({ height = 1, pointCount = 8 }) => {
     let x,
       y,
       z,
@@ -106,29 +113,28 @@ class SolomonsSeal extends BaseRenderable {
     return geometry;
   };
 
-  displaceGeometry = ({ geometry, R, rx, ry }) => {
-    const scale = new Vector3(0.02, 0.02, 0.02),
-      displacement = new Vector3(
-        R.floatBetween(5, 10),
+  displaceGeometry = ({ geometry, R, rx, ry, displacementScale }) => {
+    const displacement = new Vector3(
+        R.floatBetween(0.1, 0.5),
         0,
-        R.floatBetween(5, 10)
+        R.floatBetween(0.1, 0.5)
       ),
       offset = new Vector3(rx, ry, 0);
     let displacedPoints = noise3D({
       points: geometry.vertices,
-      scale,
+      scale: displacementScale,
       displacement,
       offset
     });
 
     displacedPoints = gradientTransform({
       points: displacedPoints,
-      start: new Vector3(0.1, 0.1, 0.1),
-      end: new Vector3(5, 1, 5),
+      start: new Vector3(0.001, 0.001, 0.001),
+      end: new Vector3(1, 1, 1),
       ease: Back.easeOut
     });
-
     displacedPoints.reverse();
+
     return displacedPoints;
   };
 
@@ -178,11 +184,11 @@ class SolomonsSeal extends BaseRenderable {
     pointCount = 10,
     mesh,
     color,
-    height = 10,
+    height = 1,
     R,
     camera
   }) {
-    const curvePoints = mesh.curve.getPoints(height),
+    const curvePoints = mesh.curve.getPoints(height * 100),
       leaves = [];
 
     curvePoints.reverse();
@@ -191,25 +197,25 @@ class SolomonsSeal extends BaseRenderable {
       let i = 0,
         ratio,
         leaf,
-        startPoint = Math.ceil(height / 3),
+        startPoint = Math.ceil((height * 100) / 3),
         pos,
         size,
         positionIndex;
       i < leafCount;
       i += R(2) + 1
     ) {
-      size = R.intBetween(1.5, 2);
+      size = R.floatBetween(0.04, 0.12);
       ratio = i / leafCount;
       leaf = new SolomonsSealLeaf({
         color,
-        length: size,
-        width: size >> 1,
+        length: size * 2 * (1 - ratio),
+        width: size * (1 - ratio),
         camera,
-        lineCount: R.intBetween(3, 7)
+        lineCount: R.intBetween(3, 5)
       });
 
       positionIndex =
-        startPoint + Math.floor((i / leafCount) * height * 0.7) - 1;
+        startPoint + Math.floor((i / leafCount) * height * 100 * 0.7) - 1;
       pos = curvePoints[positionIndex];
       leaf.group.position.x = pos.x;
       leaf.group.position.y = pos.y;

@@ -48,7 +48,7 @@ const noise3D = ({
   points,
   scale = new Vector3(0.01, 0.01, 0.01),
   perlinScale,
-  displacement = new Vector3(150, 150, 150),
+  displacement = new Vector3(1, 1, 1),
   offset = new Vector3(0, 0, 0)
 }) => {
   if (typeof scale === "number") {

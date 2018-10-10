@@ -30,7 +30,7 @@ export default ({ scene, controls }) => {
   light2.castShadow = true;
   scene.add(light2);
 
-  var r = 10;
+  var r = 2;
   light2.shadow.mapSize.set(1024, 1024);
   light2.shadow.camera.left = -r;
   light2.shadow.camera.right = r;

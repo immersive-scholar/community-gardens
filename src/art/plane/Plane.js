@@ -19,7 +19,7 @@ class Plane extends BaseRenderable {
   }
 
   createPlane() {
-    var planeGeometry = new PlaneBufferGeometry(50, 50, 1, 1);
+    var planeGeometry = new PlaneBufferGeometry(5, 5, 1, 1);
     var planeMaterial = new MeshLambertMaterial({
       color: 0xffffff,
       wireframe: !true

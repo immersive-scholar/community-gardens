@@ -22,8 +22,9 @@ const CurvePainter = ({
   canvasWidth = 1024,
   canvasHeight = 128,
   fogColor = new Color(0xd7cbb1),
-  fogDensity = 0.02,
-  imagePath = "/img/stroke.png"
+  fogDensity = 0.2,
+  imagePath = "/img/stroke.png",
+  animated = true
 }) => {
   let life = 0;
 
@@ -74,12 +75,17 @@ const CurvePainter = ({
     life
   };
 
-  TweenLite.to(params, 2, {
-    life: 1,
-    onUpdate: render,
-    ease: Linear.easeNone,
-    delay
-  });
+  if (animated) {
+    TweenLite.to(params, 2, {
+      life: 1,
+      onUpdate: render,
+      ease: Linear.easeNone,
+      delay
+    });
+  } else {
+    params.life = 1;
+    render();
+  }
 
   function update() {}
 

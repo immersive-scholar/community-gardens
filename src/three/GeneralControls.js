@@ -9,7 +9,7 @@ export default ({ camera }) => {
   controls.autoRotateSpeed = 0.2;
   controls.screenSpacePanning = false;
 
-  camera.position.set(2, 1, 2);
+  camera.position.set(0.75, 0.45, 0.75);
   controls.update();
 
   return controls;

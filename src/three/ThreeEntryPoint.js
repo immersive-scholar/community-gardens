@@ -5,7 +5,7 @@ import GeneralCanvas from "./GeneralCanvas";
 
 export default container => {
   const seed = Math.random();
-  // const seed = 0.5158405963706854;
+  // const seed = 0.611401917109186;
   const R = RandomSeed.create(seed);
   console.log("Random seed: ", seed);
 

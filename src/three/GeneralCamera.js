@@ -4,7 +4,7 @@ export default ({ width, height }) => {
   const aspectRatio = width / height;
   const fieldOfView = 70;
   const nearPlane = 0.01;
-  const farPlane = 1000;
+  const farPlane = 100;
   const camera = new PerspectiveCamera(
     fieldOfView,
     aspectRatio,

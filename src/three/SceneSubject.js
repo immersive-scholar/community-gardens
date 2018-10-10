@@ -12,18 +12,18 @@ const SceneSubject = ({ scene, camera, R }) => {
 
   let solomonsSeal,
     solomonsSealGroup = new Group(),
-    count = 2;
+    count = 4;
 
-  solomonsSealGroup.position.y = -15;
+  solomonsSealGroup.position.y = 0;
 
   for (let x = 0, i = 0; x < count; x++) {
     for (let y = 0; y < count; y++) {
       solomonsSeal = new SolomonsSeal({
         camera,
         R,
-        delay: i * 0.1,
-        rx: x * 0.2,
-        ry: y * 0.2
+        delay: i * 0.05,
+        rx: x * 0.5,
+        ry: y * 0.5
       });
       solomonsSealGroup.add(solomonsSeal.group);
       i++;
@@ -34,14 +34,13 @@ const SceneSubject = ({ scene, camera, R }) => {
     group: solomonsSealGroup,
     rows: count,
     columns: count,
-    rowWidth: 4,
-    columnHeight: 4
+    rowWidth: 0.25,
+    columnHeight: 0.25
   });
 
   scene.add(solomonsSealGroup);
 
   const plane = new Plane();
-  plane.group.position.y = -25;
   scene.add(plane.group);
 
   function update() {}

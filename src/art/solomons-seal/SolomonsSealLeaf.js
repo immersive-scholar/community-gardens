@@ -23,11 +23,11 @@ class SolomonsSealLeaf extends BaseRenderable {
       R,
       delay = 0,
       pointCount = 12,
-      length = 4.8,
-      width = 2.4,
+      length = 0.2,
+      width = 0.5,
       midPoint = 0.4,
       lineCount = 5,
-      thickness = 0.2,
+      thickness = 0.02,
       camera,
       color = new ColorSampler().getRandomColor()
     } = props;
@@ -53,8 +53,8 @@ class SolomonsSealLeaf extends BaseRenderable {
 
       lines.push(geometry);
 
-      // geometry.computeBoundingSphere();
-      // geometry.computeVertexNormals();
+      geometry.computeBoundingSphere();
+      geometry.computeVertexNormals();
 
       const leaf = this.toCurve({
         geometry,
@@ -62,7 +62,7 @@ class SolomonsSealLeaf extends BaseRenderable {
         delay: i * 0.2,
         pointCount,
         thickness,
-        fogDensity: 0.02,
+        fogDensity: 0.2,
         camera
       });
       this.group.add(leaf.curvePainter.mesh);
@@ -79,14 +79,14 @@ class SolomonsSealLeaf extends BaseRenderable {
   }
 
   createLine = ({
-    length = 10,
-    width = 5,
+    length = 0.1,
+    width = 0.05,
     pointCount = 8,
     offset = new Vector3(0, 0, 0),
     lineIndex,
     geometry = new Geometry(),
     startPosition = new Vector3(0, 0, 0),
-    midPoint = 0.4
+    midPoint = 0.5
   }) => {
     let x,
       y,
@@ -134,7 +134,8 @@ class SolomonsSealLeaf extends BaseRenderable {
       fogColor,
       fogDensity,
       canvasWidth: 32,
-      canvasHeight: 8
+      canvasHeight: 8,
+      animated: false
     });
 
     curvePainter.mesh.matrixAutoUpdate = true;
