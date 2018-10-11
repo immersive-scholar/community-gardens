@@ -15,7 +15,8 @@ export default ({ controls }) => {
       displacementY: 0,
       displacementZ: 0,
       height: 0.5,
-      animated: true
+      animated: true,
+      leafCount: 10
     };
 
     const onDataChange = function() {
@@ -42,6 +43,7 @@ export default ({ controls }) => {
           )
         );
         instance.setAnimated(effectController.animated);
+        instance.setLeafCount(effectController.leafCount);
       } catch (error) {
         console.log("Instance required ", error);
       }
@@ -102,6 +104,10 @@ export default ({ controls }) => {
       .onFinishChange(onDataChangeComplete);
     gui
       .add(effectController, "animated", true)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    gui
+      .add(effectController, "leafCount", 0, 48, 1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     // gui.close();

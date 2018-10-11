@@ -7,7 +7,7 @@ import {
   TextureLoader,
   RepeatWrapping
 } from "three-full";
-import { TweenLite, Power2 } from "gsap/TweenMax";
+import { TweenMax, Power2 } from "gsap/TweenMax";
 
 import { MeshLine, MeshLineMaterial } from "three/helpers/MeshLine";
 
@@ -21,7 +21,7 @@ const CurvePainter = ({
   fogColor = new Color(0xd7cbb1),
   fogDensity = 0.2,
   imagePath = "/img/stroke.png",
-  animated = true
+  animated = false
 }) => {
   let life = 0;
 
@@ -72,9 +72,9 @@ const CurvePainter = ({
     life
   };
 
+  this.tween && this.tween.kill();
   if (animated) {
-    console.log("animated ", animated);
-    TweenLite.to(params, 5, {
+    this.tween = TweenMax.to(params, 5, {
       life: 1,
       onUpdate: render,
       ease: Power2.easeOut,

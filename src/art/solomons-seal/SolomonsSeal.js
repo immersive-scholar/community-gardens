@@ -39,16 +39,16 @@ class SolomonsSeal extends BaseRenderable {
     this.clean();
 
     const {
-      delay = 0,
       height = this.R.floatBetween(0.24, 0.96),
+      displacement = new Vector3(0.2, 0.1, 0.2),
+      scale = new Vector3(2, 2, 4),
+      offset = new Vector3(this.R.random(), this.R.random(), this.R.random()),
+      animated = true,
       leafCount = 10,
       pointCount = height * 100,
       thickness = 0.02,
       color = new ColorSampler().getRandomColor(),
-      displacement = new Vector3(0.2, 0.1, 0.2),
-      scale = new Vector3(2, 2, 4),
-      offset = new Vector3(this.R.random(), this.R.random(), this.R.random()),
-      animated = true
+      delay = 0
     } = this.state;
 
     // stem
@@ -302,24 +302,34 @@ class SolomonsSeal extends BaseRenderable {
     });
   }
 
-  getPositionAt(v) {
-    return [0, 10, 0];
-  }
-
   setHeight(height) {
-    this.setState({ height }) ? this.init() : null;
+    this.setState({ height }, isDirty => {
+      isDirty && this.init();
+    });
   }
 
   setOffset(offset) {
-    this.setState({ offset }) ? this.init() : null;
+    this.setState({ offset }, isDirty => {
+      isDirty && this.init();
+    });
   }
 
   setDisplacement(displacement) {
-    this.setState({ displacement }) ? this.init() : null;
+    this.setState({ displacement }, isDirty => {
+      isDirty && this.init();
+    });
   }
 
   setAnimated(animated) {
-    this.setState({ animated }) ? this.init() : null;
+    this.setState({ animated }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setLeafCount(leafCount) {
+    this.setState({ leafCount }, isDirty => {
+      isDirty && this.init();
+    });
   }
 
   clean() {

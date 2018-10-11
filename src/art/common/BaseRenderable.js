@@ -43,8 +43,31 @@ class BaseRenderable {
     this.R = R;
   }
 
-  setState(props) {
-    var isDirty = false;
+  promiseRequestAnimationFrame(isDirty) {
+    new Promise(resolve =>
+      window.requestAnimationFrame(() => {
+        console.log("DONE TIMEOUT");
+        return resolve(isDirty);
+      })
+    );
+  }
+
+  promiseTimeoutWithCancel(ms, isDirty, callback) {
+    this.isDirty = isDirty;
+    this.id && window.clearTimeout(this.id);
+    const p = new Promise(resolve => {
+      this.id = window.setTimeout(() => {
+        callback && isDirty && callback(this.isDirty);
+        this.isDirty = false;
+        resolve();
+      }, ms);
+    });
+    p.cancel = () => window.clearTimeout(this.id);
+    return p;
+  }
+
+  async setState(props, callback) {
+    var isDirty = false || this.isDirty;
     for (var i in props) {
       if (props[i] !== this.state[i]) {
         isDirty = true;
@@ -56,7 +79,7 @@ class BaseRenderable {
       ...props
     };
 
-    return isDirty;
+    return await this.promiseTimeoutWithCancel(50, isDirty, callback);
   }
 
   update() {
