@@ -9,12 +9,9 @@ import {
   LineBasicMaterial,
   Line
 } from "three-full";
-import { Back } from "gsap";
-import BendModifier from "three/modifiers/BendModifier";
+// import BendModifier from "three/modifiers/BendModifier";
 import CurvePainter from "three/helpers/CurvePainter";
 import ColorSampler from "util/ColorSampler";
-import { noise3D } from "util/NoiseFunctions";
-import { gradientTransform } from "util/GradientTransform";
 import BaseRenderable from "art/common/BaseRenderable";
 
 class SolomonsSealLeaf extends BaseRenderable {
@@ -22,14 +19,11 @@ class SolomonsSealLeaf extends BaseRenderable {
     super(props);
 
     const {
-      R,
-      delay = 0,
       pointCount = 12,
       length = 0.2,
       width = 0.5,
       midPoint = 0.4,
       lineCount = 5,
-      thickness = 0.02,
       camera,
       color = new ColorSampler().getRandomColor()
     } = props;
@@ -98,19 +92,8 @@ class SolomonsSealLeaf extends BaseRenderable {
     startPosition = new Vector3(0, 0, 0),
     midPoint = 0.5
   }) => {
-    let x,
-      y,
-      z,
-      vertices,
-      point = new Vector3();
-    // for (var i = 0; i < pointCount; i++) {
-    //   x = (i / pointCount) * length;
-    //   y = 0;
-    //   z = offset.x;
+    let vertices;
 
-    //   point.set(x, y, z);
-    //   geometry.vertices.push(point.clone());
-    // }
     geometry = geometry.clone();
     vertices = geometry.vertices;
     vertices.push(new Vector3(0.001, 0.001, 0.001));

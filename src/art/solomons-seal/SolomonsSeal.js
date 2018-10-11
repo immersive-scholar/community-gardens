@@ -35,10 +35,16 @@ class SolomonsSeal extends BaseRenderable {
       camera,
       height = R.floatBetween(0.24, 0.96),
       leafCount = 10,
-      pointCount = 10,
-      thickness = R.floatBetween(0.01, 0.05),
+      pointCount = 24,
+      thickness = 0.02,
       color = new ColorSampler().getRandomColor(),
-      displacementScale = new Vector3(5, 1, 5)
+      displacement = new Vector3(0.2, 0.1, 0.2),
+      scale = new Vector3(
+        R.floatBetween(3, 5),
+        R.floatBetween(3, 5),
+        R.floatBetween(3, 5)
+      ),
+      offset = new Vector3(rx, ry, rx + ry)
     } = props;
 
     // stem
@@ -49,9 +55,9 @@ class SolomonsSeal extends BaseRenderable {
     geometry.vertices = this.displaceGeometry({
       geometry,
       R,
-      rx,
-      ry,
-      displacementScale
+      scale,
+      displacement,
+      offset
     });
     // geometry.vertices = this.bendGeometry({ geometry, R });
 
@@ -113,26 +119,20 @@ class SolomonsSeal extends BaseRenderable {
     return geometry;
   };
 
-  displaceGeometry = ({ geometry, R, rx, ry, displacementScale }) => {
-    const displacement = new Vector3(
-        R.floatBetween(0.1, 0.5),
-        0,
-        R.floatBetween(0.1, 0.5)
-      ),
-      offset = new Vector3(rx, ry, 0);
+  displaceGeometry = ({ geometry, R, displacement, offset, scale }) => {
     let displacedPoints = noise3D({
       points: geometry.vertices,
-      scale: displacementScale,
+      scale,
       displacement,
       offset
     });
 
-    displacedPoints = gradientTransform({
-      points: displacedPoints,
-      start: new Vector3(0.001, 0.001, 0.001),
-      end: new Vector3(1, 1, 1),
-      ease: Back.easeOut
-    });
+    // displacedPoints = gradientTransform({
+    //   points: displacedPoints,
+    //   start: new Vector3(0.001, 0.001, 0.001),
+    //   end: new Vector3(1, 1, 1),
+    //   ease: Back.easeOut
+    // });
     displacedPoints.reverse();
 
     return displacedPoints;

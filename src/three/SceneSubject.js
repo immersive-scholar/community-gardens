@@ -2,7 +2,7 @@ import { Group } from "three-full";
 import SolomonsSeal from "art/solomons-seal/SolomonsSeal";
 import Plane from "art/plane/Plane";
 import GridLayoutHelper from "util/GridLayoutHelper";
-import SolomonsSealLeaf from "../art/solomons-seal/SolomonsSealLeaf";
+// import SolomonsSealLeaf from "../art/solomons-seal/SolomonsSealLeaf";
 
 // import Garden from "art/garden/Garden";
 
@@ -22,8 +22,8 @@ const SceneSubject = ({ scene, camera, R }) => {
         camera,
         R,
         delay: i * 0.05,
-        rx: x * 0.5,
-        ry: y * 0.5
+        rx: R.random() * x,
+        ry: R.random() * y
       });
       solomonsSealGroup.add(solomonsSeal.group);
       i++;
@@ -34,8 +34,8 @@ const SceneSubject = ({ scene, camera, R }) => {
     group: solomonsSealGroup,
     rows: count,
     columns: count,
-    rowWidth: 0.25,
-    columnHeight: 0.25
+    rowWidth: 0.1,
+    columnHeight: 0.1
   });
 
   scene.add(solomonsSealGroup);

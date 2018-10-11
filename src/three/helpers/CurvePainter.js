@@ -4,11 +4,10 @@ import {
   Color,
   Mesh,
   DoubleSide,
-  CanvasTexture,
   TextureLoader,
   RepeatWrapping
 } from "three-full";
-import { TweenLite, Linear } from "gsap/TweenMax";
+import { TweenLite, Power2 } from "gsap/TweenMax";
 
 import { MeshLine, MeshLineMaterial } from "three/helpers/MeshLine";
 
@@ -76,10 +75,10 @@ const CurvePainter = ({
   };
 
   if (animated) {
-    TweenLite.to(params, 2, {
+    TweenLite.to(params, 5, {
       life: 1,
       onUpdate: render,
-      ease: Linear.easeNone,
+      ease: Power2.easeOut,
       delay
     });
   } else {
