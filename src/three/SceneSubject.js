@@ -1,18 +1,19 @@
 import { Group } from "three-full";
 import SolomonsSeal from "art/solomons-seal/SolomonsSeal";
+import SolomonsSealController from "art/solomons-seal/SolomonsSealController";
 import Plane from "art/plane/Plane";
 import GridLayoutHelper from "util/GridLayoutHelper";
-// import SolomonsSealLeaf from "../art/solomons-seal/SolomonsSealLeaf";
 
 // import Garden from "art/garden/Garden";
 
-const SceneSubject = ({ scene, camera, R }) => {
+const SceneSubject = ({ scene, camera, R, controls }) => {
   // const garden = new Garden({ R, camera });
   // scene.add(garden.mesh);
 
   let solomonsSeal,
     solomonsSealGroup = new Group(),
-    count = 4;
+    count = 1,
+    solomonsSealInstances = [];
 
   solomonsSealGroup.position.y = 0;
 
@@ -22,13 +23,18 @@ const SceneSubject = ({ scene, camera, R }) => {
         camera,
         R,
         delay: i * 0.05,
-        rx: R.random() * x,
-        ry: R.random() * y
+        rx: x * 0.02,
+        ry: y * 0.02
       });
       solomonsSealGroup.add(solomonsSeal.group);
+      solomonsSealInstances.push(solomonsSeal);
       i++;
     }
   }
+
+  const solomonsSealController = new SolomonsSealController({ controls });
+  solomonsSealController.setInstance(solomonsSealInstances[0]);
+  solomonsSealController.enable();
 
   GridLayoutHelper({
     group: solomonsSealGroup,

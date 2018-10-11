@@ -38,43 +38,47 @@ export default ({ scene, controls }) => {
   light2.shadow.camera.bottom = -r;
   light2.shadow.camera.updateProjectionMatrix();
 
-  var effectController = {
-    x: 30,
-    y: 90,
-    z: -50
+  const createControls = () => {
+    var effectController = {
+      x: 30,
+      y: 90,
+      z: -50
+    };
+
+    const onDataChange = function() {
+      controls.enabled = false;
+      light2.position.set(
+        effectController.x,
+        effectController.y,
+        effectController.z
+      );
+    };
+
+    const onDataChangeComplete = function() {
+      controls.enabled = true;
+    };
+
+    var gui = new dat.GUI().getRoot();
+
+    gui
+      .add(effectController, "x", -200, 200, 1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    gui
+      .add(effectController, "y", -200, 200, 1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    gui
+      .add(effectController, "z", -200, 200, 1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    gui.close();
+
+    onDataChange();
+    onDataChangeComplete();
   };
 
-  const onDataChange = function() {
-    controls.enabled = false;
-    light2.position.set(
-      effectController.x,
-      effectController.y,
-      effectController.z
-    );
+  return {
+    createControls
   };
-
-  const onDataChangeComplete = function() {
-    controls.enabled = true;
-  };
-
-  var gui = new dat.GUI().getRoot();
-
-  gui
-    .add(effectController, "x", -200, 200, 1)
-    .onChange(onDataChange)
-    .onFinishChange(onDataChangeComplete);
-  gui
-    .add(effectController, "y", -200, 200, 1)
-    .onChange(onDataChange)
-    .onFinishChange(onDataChangeComplete);
-  gui
-    .add(effectController, "z", -200, 200, 1)
-    .onChange(onDataChange)
-    .onFinishChange(onDataChangeComplete);
-  gui.close();
-
-  onDataChange();
-  onDataChangeComplete();
-
-  return {};
 };

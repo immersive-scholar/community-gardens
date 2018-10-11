@@ -11,12 +11,12 @@ import {
   DoubleSide,
   Mesh
 } from "three-full";
-import { TweenMax, Linear, Back } from "gsap";
+import { TweenMax, Linear } from "gsap";
 import BendModifier from "three/modifiers/BendModifier";
 import CurvePainter from "three/helpers/CurvePainter";
 import ColorSampler from "util/ColorSampler";
 import { noise3D } from "util/NoiseFunctions";
-import { gradientTransform } from "util/GradientTransform";
+// import { gradientTransform } from "util/GradientTransform";
 import BaseRenderable from "art/common/BaseRenderable";
 
 import SolomonsSealLeaf from "./SolomonsSealLeaf";
@@ -27,66 +27,70 @@ class SolomonsSeal extends BaseRenderable {
   constructor(props) {
     super(props);
 
+    this.camera = props.camera;
+    this.R = props.R;
+
+    this.init(props);
+  }
+
+  init = props => {
     const {
-      R,
       delay = 0,
-      rx = R.random(),
-      ry = R.random(),
-      camera,
-      height = R.floatBetween(0.24, 0.96),
+      rx = this.R.random(),
+      ry = this.R.random(),
+      height = this.R.floatBetween(0.24, 0.96),
       leafCount = 10,
-      pointCount = 24,
+      pointCount = height * 100,
       thickness = 0.02,
       color = new ColorSampler().getRandomColor(),
-      displacement = new Vector3(0.2, 0.1, 0.2),
-      scale = new Vector3(
-        R.floatBetween(3, 5),
-        R.floatBetween(3, 5),
-        R.floatBetween(3, 5)
+      displacement = new Vector3(
+        this.R.floatBetween(0, 0.3),
+        0.1,
+        this.R.floatBetween(0, 0.3)
       ),
-      offset = new Vector3(rx, ry, rx + ry)
+      scale = new Vector3(
+        this.R.floatBetween(3, 5),
+        this.R.floatBetween(3, 5),
+        this.R.floatBetween(3, 5)
+      ),
+      offset = new Vector3(rx, rx + ry, ry)
     } = props;
 
     // stem
-    const geometry = this.createStemGeometry({
+    this.geometry = this.createStemGeometry({
       height,
       pointCount
     });
-    geometry.vertices = this.displaceGeometry({
-      geometry,
-      R,
+    this.geometry.vertices = this.displaceGeometry({
+      geometry: this.geometry,
       scale,
       displacement,
       offset
     });
     // geometry.vertices = this.bendGeometry({ geometry, R });
 
-    geometry.computeBoundingSphere();
-    geometry.computeVertexNormals();
+    this.geometry.computeBoundingSphere();
+    this.geometry.computeVertexNormals();
 
-    const stem = this.toCurve({
-      geometry,
+    this.stem = this.toCurve({
+      geometry: this.geometry,
       color,
       delay,
       pointCount,
       thickness,
-      fogDensity: 0.2,
-      camera
+      fogDensity: 0.2
     });
-    this.group.add(stem.curvePainter.mesh);
+    this.group.add(this.stem.curvePainter.mesh);
 
     // leaves
-    // TODO pass thickness and pointCount to leaves
-    const leaves = this.createLeaves({
+    this.leaves = this.createLeaves({
       leafCount,
       height,
-      mesh: stem,
+      mesh: this.stem,
       color,
-      R,
-      camera,
       pointCount
     });
-    this.addAll(leaves);
+    this.addAll(this.leaves);
 
     // this.leavesMesh = this.createLeavesInstanced({
     //   leafCount,
@@ -100,7 +104,7 @@ class SolomonsSeal extends BaseRenderable {
 
     // this.currentTime = 0;
     // this.animateLeaves({ delay });
-  }
+  };
 
   createStemGeometry = ({ height = 1, pointCount = 8 }) => {
     let x,
@@ -119,7 +123,7 @@ class SolomonsSeal extends BaseRenderable {
     return geometry;
   };
 
-  displaceGeometry = ({ geometry, R, displacement, offset, scale }) => {
+  displaceGeometry = ({ geometry, displacement, offset, scale }) => {
     let displacedPoints = noise3D({
       points: geometry.vertices,
       scale,
@@ -139,9 +143,9 @@ class SolomonsSeal extends BaseRenderable {
   };
 
   bendGeometry = ({ geometry, R }) => {
-    var direction = new Vector3(0, 0, -R.random());
-    var axis = new Vector3(R.random(), R.random(), 0);
-    var angle = (Math.PI / 2) * R.floatBetween(0.5, 0.7);
+    var direction = new Vector3(0, 0, -this.R.random());
+    var axis = new Vector3(this.R.random(), this.R.random(), 0);
+    var angle = (Math.PI / 2) * this.R.floatBetween(0.5, 0.7);
 
     var bend = new BendModifier().set(direction, axis, angle);
     bend.modify(geometry);
@@ -156,13 +160,12 @@ class SolomonsSeal extends BaseRenderable {
     thickness = 2,
     pointCount = 8,
     fogColor,
-    fogDensity,
-    camera
+    fogDensity
   }) => {
     const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
 
     const curvePainter = new CurvePainter({
-      camera,
+      camera: this.camera,
       curve,
       color,
       pointCount,
@@ -179,15 +182,7 @@ class SolomonsSeal extends BaseRenderable {
     return { curvePainter, geometry, curve };
   };
 
-  createLeaves({
-    leafCount = 10,
-    pointCount = 10,
-    mesh,
-    color,
-    height = 1,
-    R,
-    camera
-  }) {
+  createLeaves({ leafCount = 10, pointCount = 10, mesh, color, height = 1 }) {
     const curvePoints = mesh.curve.getPoints(height * 100),
       leaves = [];
 
@@ -202,16 +197,16 @@ class SolomonsSeal extends BaseRenderable {
         size,
         positionIndex;
       i < leafCount;
-      i += R(2) + 1
+      i += this.R(2) + 1
     ) {
-      size = R.floatBetween(0.04, 0.12);
+      size = this.R.floatBetween(0.04, 0.12);
       ratio = i / leafCount;
       leaf = new SolomonsSealLeaf({
         color,
         length: size * 2 * (1 - ratio),
         width: size * (1 - ratio),
-        camera,
-        lineCount: R.intBetween(3, 5)
+        camera: this.camera,
+        lineCount: this.R.intBetween(3, 5)
       });
 
       positionIndex =
@@ -225,18 +220,12 @@ class SolomonsSeal extends BaseRenderable {
       leaf.group.rotation.z = (Math.PI / 6) * ratio;
 
       this.group.add(leaf.group);
+      leaves.push(leaf);
     }
     return leaves;
   }
 
-  createLeavesInstanced({
-    leafCount = 10,
-    mesh,
-    color,
-    height = 10,
-    R,
-    camera
-  }) {
+  createLeavesInstanced({ leafCount = 10, mesh, color, height = 10 }) {
     const vector = new Vector4();
 
     const instances = leafCount;
@@ -319,6 +308,26 @@ class SolomonsSeal extends BaseRenderable {
 
   getPositionAt(v) {
     return [0, 10, 0];
+  }
+
+  setHeight(height) {
+    this.clean();
+    this.init({ height });
+  }
+
+  clean() {
+    this.group.remove(this.stem.curvePainter.mesh);
+    this.geometry.dispose();
+    this.stem.curvePainter.clean();
+    this.stem = undefined;
+
+    for (let i = 0, iL = this.leaves.length, leaf; i < iL; i++) {
+      leaf = this.leaves[i];
+      this.group.remove(leaf.group);
+      leaf.clean();
+    }
+
+    this.leaves = [];
   }
 
   render() {}

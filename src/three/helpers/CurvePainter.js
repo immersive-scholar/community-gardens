@@ -67,7 +67,7 @@ const CurvePainter = ({
     revealProgress: life
   });
 
-  const mesh = new Mesh(line.geometry, material);
+  let mesh = new Mesh(line.geometry, material);
   mesh.frustumCulled = false;
 
   const params = {
@@ -96,9 +96,16 @@ const CurvePainter = ({
     }
   }
 
+  const clean = () => {
+    geometry.dispose();
+    material.dispose();
+    mesh = undefined;
+  };
+
   return {
     update,
-    mesh
+    mesh,
+    clean
   };
 };
 

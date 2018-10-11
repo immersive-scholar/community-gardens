@@ -24,8 +24,9 @@ export default ({ generalCanvas, R }) => {
   });
   const camera = new GeneralCamera(screenDimensions);
   const controls = new GeneralControls({ camera });
-  new GeneralLights({ scene, controls });
-  const subject = new SceneSubject({ scene, camera, R });
+  const lights = new GeneralLights({ scene, controls });
+  // lights.createControls();
+  const subject = new SceneSubject({ scene, camera, R, controls });
 
   function update() {
     stats.begin();

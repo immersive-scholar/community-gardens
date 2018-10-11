@@ -28,7 +28,8 @@ class SolomonsSealLeaf extends BaseRenderable {
       color = new ColorSampler().getRandomColor()
     } = props;
 
-    const lines = [];
+    this.lines = [];
+    this.lineMeshes = [];
 
     let geometry,
       offset,
@@ -47,7 +48,7 @@ class SolomonsSealLeaf extends BaseRenderable {
         camera
       });
 
-      lines.push(geometry);
+      this.lines.push(geometry);
 
       geometry.computeBoundingSphere();
       geometry.computeVertexNormals();
@@ -59,6 +60,7 @@ class SolomonsSealLeaf extends BaseRenderable {
         pointCount
       });
       this.group.add(leafMesh);
+      this.lineMeshes.push(leafMesh);
 
       // const leaf = this.toCurve({
       //   geometry,
@@ -71,11 +73,12 @@ class SolomonsSealLeaf extends BaseRenderable {
       // });
       // this.group.add(leaf.curvePainter.mesh);
 
-      const fillMesh = this.createFill({
-        line1: lines[0],
-        line2: lines[lines.length - 1]
+      // use the 'outer' lines to create the fill
+      this.fillMesh = this.createFill({
+        line1: this.lines[0],
+        line2: this.lines[this.lines.length - 1]
       });
-      this.group.add(fillMesh);
+      this.group.add(this.fillMesh);
     }
 
     // geometry.vertices = this.displaceGeometry({ geometry, R, rx, ry });
@@ -173,6 +176,24 @@ class SolomonsSealLeaf extends BaseRenderable {
   };
 
   update() {}
+
+  clean() {
+    for (let i = 0, iL = this.lineMeshes.length, line; i < iL; i++) {
+      line = this.lineMeshes[i];
+      this.group.remove(line);
+      line.geometry.dispose();
+      line.material.dispose();
+      line = undefined;
+    }
+
+    this.lines = [];
+    this.lineMeshes = [];
+
+    this.group.remove(this.fillMesh);
+    this.fillMesh.geometry.dispose();
+    this.fillMesh.material.dispose();
+    this.fillMesh = undefined;
+  }
 }
 
 export default SolomonsSealLeaf;
