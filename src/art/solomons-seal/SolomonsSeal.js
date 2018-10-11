@@ -24,37 +24,32 @@ import fragmentShaderSource from "./FragmentShaderSource";
 import vertexShaderSource from "./VertexShaderSource";
 
 class SolomonsSeal extends BaseRenderable {
-  constructor(props) {
+  constructor(props, camera, R) {
     super(props);
 
-    this.camera = props.camera;
-    this.R = props.R;
+    this.camera = camera;
+    this.R = R;
 
     this.init(props);
   }
 
-  init = props => {
+  init = (props = {}) => {
+    this.setState(props);
+
+    this.clean();
+
     const {
       delay = 0,
-      rx = this.R.random(),
-      ry = this.R.random(),
       height = this.R.floatBetween(0.24, 0.96),
       leafCount = 10,
       pointCount = height * 100,
       thickness = 0.02,
       color = new ColorSampler().getRandomColor(),
-      displacement = new Vector3(
-        this.R.floatBetween(0, 0.3),
-        0.1,
-        this.R.floatBetween(0, 0.3)
-      ),
-      scale = new Vector3(
-        this.R.floatBetween(3, 5),
-        this.R.floatBetween(3, 5),
-        this.R.floatBetween(3, 5)
-      ),
-      offset = new Vector3(rx, rx + ry, ry)
-    } = props;
+      displacement = new Vector3(0.2, 0.1, 0.2),
+      scale = new Vector3(2, 2, 4),
+      offset = new Vector3(this.R.random(), this.R.random(), this.R.random()),
+      animated = true
+    } = this.state;
 
     // stem
     this.geometry = this.createStemGeometry({
@@ -78,7 +73,8 @@ class SolomonsSeal extends BaseRenderable {
       delay,
       pointCount,
       thickness,
-      fogDensity: 0.2
+      fogDensity: 0.2,
+      animated
     });
     this.group.add(this.stem.curvePainter.mesh);
 
@@ -160,7 +156,8 @@ class SolomonsSeal extends BaseRenderable {
     thickness = 2,
     pointCount = 8,
     fogColor,
-    fogDensity
+    fogDensity,
+    animated
   }) => {
     const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
 
@@ -172,9 +169,8 @@ class SolomonsSeal extends BaseRenderable {
       lineWidth: thickness,
       delay: delay,
       fogColor,
-      fogDensity
-      // canvasWidth: 16,
-      // canvasHeight: 4
+      fogDensity,
+      animated
     });
 
     curvePainter.mesh.matrixAutoUpdate = true;
@@ -311,20 +307,35 @@ class SolomonsSeal extends BaseRenderable {
   }
 
   setHeight(height) {
-    this.clean();
-    this.init({ height });
+    this.setState({ height }) ? this.init() : null;
+  }
+
+  setOffset(offset) {
+    this.setState({ offset }) ? this.init() : null;
+  }
+
+  setDisplacement(displacement) {
+    this.setState({ displacement }) ? this.init() : null;
+  }
+
+  setAnimated(animated) {
+    this.setState({ animated }) ? this.init() : null;
   }
 
   clean() {
-    this.group.remove(this.stem.curvePainter.mesh);
-    this.geometry.dispose();
-    this.stem.curvePainter.clean();
-    this.stem = undefined;
+    if (this.stem) {
+      this.group.remove(this.stem.curvePainter.mesh);
+      this.geometry.dispose();
+      this.stem.curvePainter.clean();
+      this.stem = undefined;
+    }
 
-    for (let i = 0, iL = this.leaves.length, leaf; i < iL; i++) {
-      leaf = this.leaves[i];
-      this.group.remove(leaf.group);
-      leaf.clean();
+    if (this.leaves) {
+      for (let i = 0, iL = this.leaves.length, leaf; i < iL; i++) {
+        leaf = this.leaves[i];
+        this.group.remove(leaf.group);
+        leaf.clean();
+      }
     }
 
     this.leaves = [];

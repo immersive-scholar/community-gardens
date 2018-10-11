@@ -1,4 +1,4 @@
-import { Group } from "three-full";
+import { Group, Vector3 } from "three-full";
 import SolomonsSeal from "art/solomons-seal/SolomonsSeal";
 import SolomonsSealController from "art/solomons-seal/SolomonsSealController";
 import Plane from "art/plane/Plane";
@@ -19,13 +19,14 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
 
   for (let x = 0, i = 0; x < count; x++) {
     for (let y = 0; y < count; y++) {
-      solomonsSeal = new SolomonsSeal({
+      solomonsSeal = new SolomonsSeal(
+        {
+          delay: i * 0.05,
+          offset: new Vector3(x * 0.002, (x + y) * 0.002, y * 0.002)
+        },
         camera,
-        R,
-        delay: i * 0.05,
-        rx: x * 0.02,
-        ry: y * 0.02
-      });
+        R
+      );
       solomonsSealGroup.add(solomonsSeal.group);
       solomonsSealInstances.push(solomonsSeal);
       i++;

@@ -18,8 +18,6 @@ const CurvePainter = ({
   color = 0xff0000,
   lineWidth = 1,
   delay = 0,
-  canvasWidth = 1024,
-  canvasHeight = 128,
   fogColor = new Color(0xd7cbb1),
   fogDensity = 0.2,
   imagePath = "/img/stroke.png",
@@ -75,6 +73,7 @@ const CurvePainter = ({
   };
 
   if (animated) {
+    console.log("animated ", animated);
     TweenLite.to(params, 5, {
       life: 1,
       onUpdate: render,

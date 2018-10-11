@@ -1,4 +1,5 @@
 import * as dat from "dat.gui";
+import { Vector3 } from "three-full";
 
 export default ({ controls }) => {
   let instance;
@@ -7,7 +8,14 @@ export default ({ controls }) => {
       x: 0,
       y: 0,
       z: 0,
-      height: 0.5
+      offsetX: 0,
+      offsetY: 0,
+      offsetZ: 0,
+      displacementX: 0,
+      displacementY: 0,
+      displacementZ: 0,
+      height: 0.5,
+      animated: true
     };
 
     const onDataChange = function() {
@@ -19,6 +27,21 @@ export default ({ controls }) => {
           effectController.z
         );
         instance.setHeight(effectController.height);
+        instance.setOffset(
+          new Vector3(
+            effectController.offsetX,
+            effectController.offsetY,
+            effectController.offsetZ
+          )
+        );
+        instance.setDisplacement(
+          new Vector3(
+            effectController.displacementX,
+            effectController.displacementY,
+            effectController.displacementZ
+          )
+        );
+        instance.setAnimated(effectController.animated);
       } catch (error) {
         console.log("Instance required ", error);
       }
@@ -30,6 +53,7 @@ export default ({ controls }) => {
 
     var gui = new dat.GUI().getRoot();
 
+    gui.addFolder("position");
     gui
       .add(effectController, "x", -5, 5, 0.01)
       .onChange(onDataChange)
@@ -42,11 +66,45 @@ export default ({ controls }) => {
       .add(effectController, "z", -5, 5, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
+
+    gui.addFolder("offset");
+    gui
+      .add(effectController, "offsetX", -2, 2, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    gui
+      .add(effectController, "offsetY", -2, 2, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    gui
+      .add(effectController, "offsetZ", -2, 2, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+
+    gui.addFolder("displacement");
+    gui
+      .add(effectController, "displacementX", -1, 1, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    gui
+      .add(effectController, "displacementY", -1, 1, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    gui
+      .add(effectController, "displacementZ", -1, 1, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+
+    gui.addFolder("Attributes");
     gui
       .add(effectController, "height", 0.1, 2, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
-    gui.close();
+    gui
+      .add(effectController, "animated", true)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    // gui.close();
 
     onDataChange();
     onDataChangeComplete();

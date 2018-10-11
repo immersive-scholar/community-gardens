@@ -1,7 +1,8 @@
 import { Group } from "three-full";
 
 class BaseRenderable {
-  constructor() {
+  constructor(props) {
+    this.state = {};
     this.group = new Group();
     this.renderables = [];
   }
@@ -32,6 +33,30 @@ class BaseRenderable {
     }
 
     return removed;
+  }
+
+  setCamera(camera) {
+    this.camera = camera;
+  }
+
+  setR(R) {
+    this.R = R;
+  }
+
+  setState(props) {
+    var isDirty = false;
+    for (var i in props) {
+      if (props[i] !== this.state[i]) {
+        isDirty = true;
+      }
+      break;
+    }
+    this.state = {
+      ...this.state,
+      ...props
+    };
+
+    return isDirty;
   }
 
   update() {
