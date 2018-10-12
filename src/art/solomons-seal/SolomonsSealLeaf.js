@@ -88,8 +88,6 @@ class SolomonsSealLeaf extends BaseRenderable {
   createLine = ({
     length = 0.1,
     width = 0.05,
-    pointCount = 8,
-    offset = new Vector3(0, 0, 0),
     lineIndex,
     geometry = new Geometry(),
     startPosition = new Vector3(0, 0, 0),

@@ -22,7 +22,9 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
       solomonsSeal = new SolomonsSeal(
         {
           delay: i * 0.05,
-          offset: new Vector3(x * 0.002, (x + y) * 0.002, y * 0.002)
+          offset: new Vector3(x * 0.002, (x + y) * 0.002, y * 0.002),
+          animated: false,
+          leafCount: 1
         },
         camera,
         R

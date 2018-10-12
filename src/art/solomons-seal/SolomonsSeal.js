@@ -1,4 +1,5 @@
 import {
+  Vector2,
   Vector3,
   Vector4,
   Geometry,
@@ -45,10 +46,14 @@ class SolomonsSeal extends BaseRenderable {
       offset = new Vector3(this.R.random(), this.R.random(), this.R.random()),
       animated = true,
       leafCount = 10,
-      pointCount = height * 100,
+      pointCount = height * 10,
       thickness = 0.02,
       color = new ColorSampler().getRandomColor(),
-      delay = 0
+      delay = 0,
+      leafStartPoint = 0.3,
+      leafEndPoint = 1,
+      rotationStep = new Vector3(0.5, 1.7, 0.2),
+      sizeStep = new Vector2(0.2, 0.2)
     } = this.state;
 
     // stem
@@ -79,12 +84,17 @@ class SolomonsSeal extends BaseRenderable {
     this.group.add(this.stem.curvePainter.mesh);
 
     // leaves
+    this.leaves = [];
     this.leaves = this.createLeaves({
       leafCount,
       height,
       mesh: this.stem,
       color,
-      pointCount
+      pointCount,
+      leafStartPoint,
+      leafEndPoint,
+      rotationStep,
+      sizeStep
     });
     this.addAll(this.leaves);
 
@@ -178,42 +188,52 @@ class SolomonsSeal extends BaseRenderable {
     return { curvePainter, geometry, curve };
   };
 
-  createLeaves({ leafCount = 10, pointCount = 10, mesh, color, height = 1 }) {
-    const curvePoints = mesh.curve.getPoints(height * 100),
+  createLeaves({
+    leafCount = 10,
+    mesh,
+    color,
+    height = 1,
+    leafStartPoint,
+    leafEndPoint,
+    pointCount,
+    rotationStep,
+    sizeStep
+  }) {
+    const curvePoints = mesh.curve.getPoints(pointCount),
       leaves = [];
 
     curvePoints.reverse();
 
     for (
-      let i = 0,
-        ratio,
-        leaf,
-        startPoint = Math.ceil((height * 100) / 3),
-        pos,
-        size,
-        positionIndex;
+      let i = 0, ratio, leaf, pos, length, width, positionIndex;
       i < leafCount;
       i += this.R(2) + 1
     ) {
-      size = this.R.floatBetween(0.04, 0.12);
+      // size = this.R.floatBetween(0.04, 0.12);
       ratio = i / leafCount;
+      length = (1 - ratio) * sizeStep.x;
+      width = (1 - ratio) * sizeStep.y;
       leaf = new SolomonsSealLeaf({
         color,
-        length: size * 2 * (1 - ratio),
-        width: size * (1 - ratio),
+        length,
+        width,
         camera: this.camera,
         lineCount: this.R.intBetween(3, 5)
       });
 
       positionIndex =
-        startPoint + Math.floor((i / leafCount) * height * 100 * 0.7) - 1;
+        Math.ceil(leafStartPoint * pointCount) +
+        Math.floor(
+          (i / leafCount) * pointCount * (leafEndPoint - leafStartPoint)
+        ) -
+        1;
       pos = curvePoints[positionIndex];
       leaf.group.position.x = pos.x;
       leaf.group.position.y = pos.y;
       leaf.group.position.z = pos.z;
-      leaf.group.rotation.x = (Math.PI / 6) * ratio;
-      leaf.group.rotation.y = (Math.PI / 2) * ratio;
-      leaf.group.rotation.z = (Math.PI / 6) * ratio;
+      leaf.group.rotation.x = rotationStep.x * ratio;
+      leaf.group.rotation.y = rotationStep.y * ratio;
+      leaf.group.rotation.z = rotationStep.z * ratio;
 
       this.group.add(leaf.group);
       leaves.push(leaf);
@@ -328,6 +348,42 @@ class SolomonsSeal extends BaseRenderable {
 
   setLeafCount(leafCount) {
     this.setState({ leafCount }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setThickness(thickness) {
+    this.setState({ thickness }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setPointCount(pointCount) {
+    this.setState({ pointCount }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setLeafStartPoint(leafStartPoint) {
+    this.setState({ leafStartPoint }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setLeafEndPoint(leafEndPoint) {
+    this.setState({ leafEndPoint }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setRotationStep(rotationStep) {
+    this.setState({ rotationStep }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setSizeStep(sizeStep) {
+    this.setState({ sizeStep }, isDirty => {
       isDirty && this.init();
     });
   }
