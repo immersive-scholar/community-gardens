@@ -142,6 +142,7 @@ class Crystals extends BaseRenderable {
     var animation = new Animation(geometry);
     this.group.add(animation);
 
+    // 6. interactivity
     window.addEventListener("mousemove", function(e) {
       // if (paused) return;
 

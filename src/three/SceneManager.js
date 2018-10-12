@@ -17,14 +17,16 @@ export default ({ generalCanvas, R }) => {
   const screenDimensions = generalCanvas.getDimensions();
 
   const scene = new GeneralScene({});
-  const renderer = new GeneralRenderer({
-    canvas: generalCanvas.canvas,
-    width: screenDimensions.width,
-    height: screenDimensions.height
-  });
   const camera = new GeneralCamera(screenDimensions);
   const controls = new GeneralControls({ camera });
   const lights = new GeneralLights({ scene, controls });
+  const { renderer, composer, DPR } = new GeneralRenderer({
+    canvas: generalCanvas.canvas,
+    width: screenDimensions.width,
+    height: screenDimensions.height,
+    scene,
+    camera
+  });
   // lights.createControls();
   const subject = new SceneSubject({ scene, camera, R, controls });
 
@@ -39,6 +41,8 @@ export default ({ generalCanvas, R }) => {
 
     subject.update(elapsedTime);
     renderer.render(scene, camera);
+    renderer.clear();
+    composer.render();
 
     stats.end();
   }
@@ -46,8 +50,13 @@ export default ({ generalCanvas, R }) => {
   function onWindowResize() {
     generalCanvas.resizeCanvas();
 
-    camera.aspect = window.innerWidth / window.innerHeight;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    camera.aspect = width / height;
     camera.updateProjectionMatrix();
+
+    composer.setSize(width * DPR, height * DPR);
 
     renderer.setSize(window.innerWidth, window.innerHeight);
   }
