@@ -27,7 +27,7 @@ export default ({ scene, camera, canvas, width, height }) => {
   renderer.autoClear = false;
 
   // post
-  // const bloomPass = new BloomPass(2.0, 25, 4, 512);
+  // const bloomPass = new BloomPass(1.5, 25, 4, 512);
   // const copyPass = new ShaderPass(CopyShader);
 
   // const passes = [bloomPass, copyPass];
@@ -56,8 +56,9 @@ export default ({ scene, camera, canvas, width, height }) => {
   //   composer.addPass(pass);
   // }
 
-  // renderer.clear();
+  renderer.clear();
   // composer.render();
 
+  // return { renderer, composer, DPR };
   return { renderer, DPR };
 };

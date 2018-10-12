@@ -1,7 +1,7 @@
 import { _Math, Mesh, Color, VertexColors, DoubleSide } from "three-full";
 import {
   ModelBufferGeometry,
-  StandardAnimationMaterial,
+  LambertAnimationMaterial,
   ShaderChunk
 } from "three/vendor/BAS";
 
@@ -54,7 +54,7 @@ function Animation(modelGeometry) {
     }
   }
 
-  var material = new StandardAnimationMaterial({
+  var material = new LambertAnimationMaterial({
     flatShading: true,
     vertexColors: VertexColors,
     transparent: true,
