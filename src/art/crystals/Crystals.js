@@ -16,6 +16,7 @@ class Crystals extends BaseRenderable {
     super(props);
 
     this.R = R;
+    this.currentTime = 0;
 
     this.init(props);
   }
@@ -26,8 +27,8 @@ class Crystals extends BaseRenderable {
     this.clean();
 
     const {
-      pointCount = 1000,
-      extrudeAmount = 2.0,
+      pointCount = 100,
+      extrudeAmount = 1,
       splineStepsX = 1,
       splineStepsY = 1
     } = this.state;
@@ -40,14 +41,16 @@ class Crystals extends BaseRenderable {
     // 1. generate random points in grid formation with some noise
     var PHI = Math.PI * (3 - Math.sqrt(5));
     var n = pointCount;
-    var radius = 100;
-    var noise = 4.0;
+    var radius = 10;
+    // var noise = 0.04;
 
-    for (i = 0; i <= n; i++) {
-      var t = i * PHI;
-      var r = Math.sqrt(i) / Math.sqrt(n);
-      var x = r * Math.cos(t) * (radius - _Math.randFloat(0, noise));
-      var y = r * Math.sin(t) * (radius - _Math.randFloatSpread(0, noise));
+    for (let i = 0, t, r, x, y; i <= n; i++) {
+      t = i * PHI;
+      r = Math.sqrt(i) / Math.sqrt(n);
+      //   x = r * Math.cos(t) * (radius - _Math.randFloat(0, noise));
+      //   y = r * Math.sin(t) * (radius - _Math.randFloatSpread(0, noise));
+      x = r * Math.cos(t) * radius;
+      y = r * Math.sin(t) * radius;
 
       vertices.push([x, y]);
     }
@@ -66,7 +69,7 @@ class Crystals extends BaseRenderable {
         new Vector3(
           _Math.mapLinear(i, 0, segmentsX, -radius, radius),
           0,
-          i === 0 || i === segmentsX ? 0 : -_Math.randFloat(64, 72)
+          i === 0 || i === segmentsX ? 0 : -_Math.randFloat(8, 9)
         )
       );
     }
@@ -75,7 +78,7 @@ class Crystals extends BaseRenderable {
         new Vector3(
           0,
           _Math.mapLinear(i, 0, segmentsY, -radius, radius),
-          i === 0 || i === segmentsY ? 0 : -_Math.randFloat(64, 72)
+          i === 0 || i === segmentsY ? 0 : -_Math.randFloat(8, 9)
         )
       );
     }
@@ -139,30 +142,38 @@ class Crystals extends BaseRenderable {
     geometry.center();
 
     // 5. feed the geometry to the animation
-    var animation = new Animation(geometry);
-    this.group.add(animation);
+    this.animation = new Animation(geometry);
+    this.group.add(this.animation);
 
     // 6. interactivity
-    window.addEventListener("mousemove", function(e) {
-      // if (paused) return;
+    // window.addEventListener("mousemove", e => {
+    //   // if (paused) return;
 
-      var px = e.clientX / window.innerWidth;
-      var py = e.clientY / window.innerHeight;
+    //   var px = e.clientX / window.innerWidth;
+    //   var py = e.clientY / window.innerHeight;
+    //   this.animation.material.uniforms["uD"].value = 2.0 + px * 16;
+    //   this.animation.material.uniforms["uA"].value = py * 4.0;
 
-      animation.material.uniforms["uD"].value = 2.0 + px * 16;
-      animation.material.uniforms["uA"].value = py * 4.0;
+    //   this.animation.material.uniforms["roughness"].value = px;
+    //   //   this.animation.material.uniforms["metalness"].value = py;
+    // });
 
-      animation.material.uniforms["roughness"].value = px;
-      animation.material.uniforms["metalness"].value = py;
-    });
+    this.update();
   };
 
   clean() {}
 
-  render() {}
+  render() {
+    this.animation.material.uniforms["uTime"].value = this.currentTime;
+  }
 
   update() {
-    // this.leavesMesh.material.uniforms.time.value = this.currentTime;
+    this.currentTime += 0.01;
+    this.render();
+
+    requestAnimationFrame(() => {
+      this.update();
+    });
   }
 }
 

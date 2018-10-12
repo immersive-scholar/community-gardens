@@ -4,7 +4,6 @@ import {
   StandardAnimationMaterial,
   ShaderChunk
 } from "three/vendor/BAS";
-console.log("ModelBufferGeometry ", ModelBufferGeometry);
 
 function Animation(modelGeometry) {
   var geometry = new ModelBufferGeometry(modelGeometry);
@@ -17,8 +16,8 @@ function Animation(modelGeometry) {
 
   for (i = 0; i < aOffsetAmplitude.array.length; i += 12) {
     // 6 * 2
-    var offset = _Math.randFloat(1, 4);
-    var amplitude = _Math.randFloat(0.5, 1.0);
+    var offset = _Math.randFloat(0.1, 0.4);
+    var amplitude = _Math.randFloat(0.5, 1);
 
     x = 0;
     y = 0;
@@ -68,7 +67,7 @@ function Animation(modelGeometry) {
     uniformValues: {
       diffuse: new Color(0x9b111e),
       roughness: 0.2,
-      metalness: 0.8,
+      metalness: 0.1,
       opacity: 0.8
     },
     vertexFunctions: [ShaderChunk["ease_cubic_in_out"]],

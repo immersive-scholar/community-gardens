@@ -20,7 +20,7 @@ export default ({ generalCanvas, R }) => {
   const camera = new GeneralCamera(screenDimensions);
   const controls = new GeneralControls({ camera });
   const lights = new GeneralLights({ scene, controls });
-  const { renderer, composer, DPR } = new GeneralRenderer({
+  const { renderer, DPR } = new GeneralRenderer({
     canvas: generalCanvas.canvas,
     width: screenDimensions.width,
     height: screenDimensions.height,
@@ -41,8 +41,8 @@ export default ({ generalCanvas, R }) => {
 
     subject.update(elapsedTime);
     renderer.render(scene, camera);
-    renderer.clear();
-    composer.render();
+    // renderer.clear();
+    // composer.render();
 
     stats.end();
   }
@@ -56,9 +56,9 @@ export default ({ generalCanvas, R }) => {
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 
-    composer.setSize(width * DPR, height * DPR);
+    // composer.setSize(width * DPR, height * DPR);
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(width, height);
   }
 
   return {

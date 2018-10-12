@@ -27,37 +27,37 @@ export default ({ scene, camera, canvas, width, height }) => {
   renderer.autoClear = false;
 
   // post
-  const bloomPass = new BloomPass(2.0, 25, 4, 512);
-  const copyPass = new ShaderPass(CopyShader);
+  // const bloomPass = new BloomPass(2.0, 25, 4, 512);
+  // const copyPass = new ShaderPass(CopyShader);
 
-  const passes = [bloomPass, copyPass];
+  // const passes = [bloomPass, copyPass];
 
-  const size = renderer.getSize();
-  const pixelRatio = renderer.getPixelRatio();
-  size.width *= pixelRatio;
-  size.height *= pixelRatio;
+  // const size = renderer.getSize();
+  // const pixelRatio = renderer.getPixelRatio();
+  // size.width *= pixelRatio;
+  // size.height *= pixelRatio;
 
-  const composer = new EffectComposer(
-    renderer,
-    new WebGLRenderTarget(size.width, size.height, {
-      minFilter: LinearFilter,
-      magFilter: LinearFilter,
-      format: RGBAFormat,
-      stencilBuffer: false
-    })
-  );
+  // const composer = new EffectComposer(
+  //   renderer,
+  //   new WebGLRenderTarget(size.width, size.height, {
+  //     minFilter: LinearFilter,
+  //     magFilter: LinearFilter,
+  //     format: RGBAFormat,
+  //     stencilBuffer: false
+  //   })
+  // );
 
-  const renderPass = new RenderPass(scene, camera);
-  composer.addPass(renderPass);
+  // const renderPass = new RenderPass(scene, camera);
+  // composer.addPass(renderPass);
 
-  for (let i = 0, pass; i < passes.length; i++) {
-    pass = passes[i];
-    pass.renderToScreen = i === passes.length - 1;
-    composer.addPass(pass);
-  }
+  // for (let i = 0, pass; i < passes.length; i++) {
+  //   pass = passes[i];
+  //   pass.renderToScreen = i === passes.length - 1;
+  //   composer.addPass(pass);
+  // }
 
-  renderer.clear();
-  composer.render();
+  // renderer.clear();
+  // composer.render();
 
-  return { renderer, composer, DPR };
+  return { renderer, DPR };
 };
