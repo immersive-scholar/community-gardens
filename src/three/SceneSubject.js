@@ -21,8 +21,8 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
     for (let y = 0; y < count; y++) {
       solomonsSeal = new SolomonsSeal(
         {
-          delay: i * 0.05,
-          offset: new Vector3(x * 0.002, (x + y) * 0.002, y * 0.002)
+          delay: i * 0.05
+          // offset: new Vector3(x * 0.02, (x + y) * 0.02, y * 0.02)
         },
         camera,
         R
@@ -41,8 +41,8 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
     group: solomonsSealGroup,
     rows: count,
     columns: count,
-    rowWidth: 0.1,
-    columnHeight: 0.1
+    rowWidth: 0.15,
+    columnHeight: 0.15
   });
 
   scene.add(solomonsSealGroup);

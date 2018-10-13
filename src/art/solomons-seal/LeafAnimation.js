@@ -3,9 +3,8 @@ import {
   ModelBufferGeometry,
   LambertAnimationMaterial
 } from "three/vendor/BAS";
-import { TweenMax } from "gsap";
 
-function Animation({ modelGeometry, color }) {
+function Animation({ modelGeometry, color, animated }) {
   var geometry = new ModelBufferGeometry(modelGeometry);
 
   var i, j;
@@ -61,7 +60,7 @@ function Animation({ modelGeometry, color }) {
     side: DoubleSide,
     fog: true,
     uniforms: {
-      uTime: { value: 0 }
+      uTime: { value: animated ? 0 : 1 }
     },
     uniformValues: {
       diffuse: new Color(color)
@@ -89,12 +88,5 @@ Object.defineProperty(Animation.prototype, "time", {
     this.material.uniforms["uTime"].value = v;
   }
 });
-
-// Animation.prototype.animate = function(duration, options) {
-//   options = options || {};
-//   options.time = this.totalDuration;
-
-//   return TweenMax.fromTo(this, duration, { time: 0.0, onUpdate: () => {} }, options);
-// };
 
 export default Animation;

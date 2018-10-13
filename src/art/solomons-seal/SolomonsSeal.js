@@ -1,31 +1,13 @@
-import {
-  Vector2,
-  Vector3,
-  Vector4,
-  Geometry,
-  Color,
-  CatmullRomCurve3,
-  InstancedBufferGeometry,
-  InstancedBufferAttribute,
-  Float32BufferAttribute,
-  RawShaderMaterial,
-  DoubleSide,
-  Mesh,
-  Shape,
-  ShapeGeometry
-} from "three-full";
+import { Vector2, Vector3, CatmullRomCurve3 } from "three-full";
 import { TweenMax, Power2 } from "gsap";
-import BendModifier from "three/modifiers/BendModifier";
+// import BendModifier from "three/modifiers/BendModifier";
 import CurvePainter from "three/helpers/CurvePainter";
 import ColorSampler from "util/ColorSampler";
-import { noise3D } from "util/NoiseFunctions";
-// import { gradientTransform } from "util/GradientTransform";
 import BaseRenderable from "art/common/BaseRenderable";
 
 import SolomonsSealLeaf from "./SolomonsSealLeaf";
-import fragmentShaderSource from "./FragmentShaderSource";
-import vertexShaderSource from "./VertexShaderSource";
-import LeafAnimation from "./LeafAnimation";
+import StemGeometry from "./StemGeometry";
+import LeavesBAS from "./LeavesBAS";
 
 class SolomonsSeal extends BaseRenderable {
   constructor(props, camera, R) {
@@ -47,10 +29,14 @@ class SolomonsSeal extends BaseRenderable {
       height = this.R.floatBetween(0.24, 0.96),
       displacement = new Vector3(0.2, 0.1, 0.2),
       scale = new Vector3(2, 2, 4),
-      offset = new Vector3(this.R.random(), this.R.random(), this.R.random()),
+      offset = new Vector3(
+        this.R.floatBetween(-0.5, 0.5),
+        this.R.floatBetween(-0.5, 0.5),
+        this.R.floatBetween(-0.5, 0.5)
+      ),
       animated = true,
       leafCount = 10,
-      pointCount = height * 10,
+      pointCount = height * 25,
       thickness = 0.02,
       color = new ColorSampler().getRandomColor(),
       delay = 0,
@@ -63,20 +49,15 @@ class SolomonsSeal extends BaseRenderable {
     } = this.state;
 
     // stem
-    this.geometry = this.createStemGeometry({
+    this.geometry = new StemGeometry({
       height,
-      pointCount
-    });
-    this.geometry.vertices = this.displaceGeometry({
-      geometry: this.geometry,
-      scale,
+      pointCount,
       displacement,
+      scale,
       offset
     });
-    // geometry.vertices = this.bendGeometry({ geometry, R });
 
-    this.geometry.computeBoundingSphere();
-    this.geometry.computeVertexNormals();
+    // geometry.vertices = this.bendGeometry({ geometry, R });
 
     this.stem = this.toCurve({
       geometry: this.geometry,
@@ -89,29 +70,7 @@ class SolomonsSeal extends BaseRenderable {
     });
     this.group.add(this.stem.curvePainter.mesh);
 
-    // leaves
-    // this.leaves = this.createLeaves({
-    //   leafCount,
-    //   height,
-    //   mesh: this.stem,
-    //   color,
-    //   pointCount,
-    //   leafStartPoint,
-    //   leafEndPoint,
-    //   rotationStep,
-    //   sizeStep
-    // });
-    // this.addAll(this.leaves);
-
-    // this.leavesMesh = this.createLeavesInstanced({
-    //   leafCount,
-    //   height,
-    //   mesh: this.stem,
-    //   color
-    // });
-    // this.group.add(this.leavesMesh);
-
-    this.leavesMesh = this.createLeavesBAS({
+    this.leavesMesh = new LeavesBAS({
       leafCount,
       size: 0.1,
       centerX: 0,
@@ -125,60 +84,31 @@ class SolomonsSeal extends BaseRenderable {
       sizeEnd,
       rotationStart,
       rotationEnd,
-      leafMidPoint: 0.4
+      leafMidPoint: 0.4,
+      R: this.R,
+      animated
     });
     this.group.add(this.leavesMesh);
 
-    this.currentTime = 0;
-    this.animateLeaves({ delay });
-  };
-
-  createStemGeometry = ({ height = 1, pointCount = 8 }) => {
-    let x,
-      y,
-      z,
-      point,
-      geometry = new Geometry();
-    for (var i = 0; i < pointCount; i++) {
-      x = 0;
-      y = (i / pointCount) * height;
-      z = 0;
-
-      point = new Vector3(x, y, z);
-      geometry.vertices.push(point);
+    this.tween && this.tween.kill(null, this);
+    if (animated) {
+      this.currentTime = 0;
+      this.animateLeaves({ delay });
+    } else {
+      this.currentTime = 1;
     }
-    return geometry;
   };
 
-  displaceGeometry = ({ geometry, displacement, offset, scale }) => {
-    let displacedPoints = noise3D({
-      points: geometry.vertices,
-      scale,
-      displacement,
-      offset
-    });
+  // bendGeometry = ({ geometry, R }) => {
+  //   var direction = new Vector3(0, 0, -this.R.random());
+  //   var axis = new Vector3(this.R.random(), this.R.random(), 0);
+  //   var angle = (Math.PI / 2) * this.R.floatBetween(0.5, 0.7);
 
-    // displacedPoints = gradientTransform({
-    //   points: displacedPoints,
-    //   start: new Vector3(0.001, 0.001, 0.001),
-    //   end: new Vector3(1, 1, 1),
-    //   ease: Back.easeOut
-    // });
-    displacedPoints.reverse();
+  //   var bend = new BendModifier().set(direction, axis, angle);
+  //   bend.modify(geometry);
 
-    return displacedPoints;
-  };
-
-  bendGeometry = ({ geometry, R }) => {
-    var direction = new Vector3(0, 0, -this.R.random());
-    var axis = new Vector3(this.R.random(), this.R.random(), 0);
-    var angle = (Math.PI / 2) * this.R.floatBetween(0.5, 0.7);
-
-    var bend = new BendModifier().set(direction, axis, angle);
-    bend.modify(geometry);
-
-    return geometry.vertices;
-  };
+  //   return geometry.vertices;
+  // };
 
   toCurve = ({
     geometry,
@@ -264,177 +194,6 @@ class SolomonsSeal extends BaseRenderable {
       leaves.push(leaf);
     }
     return leaves;
-  }
-
-  createLeavesInstanced({ leafCount = 10, mesh, color, height = 10 }) {
-    const vector = new Vector4();
-
-    const instances = leafCount;
-
-    const positions = [];
-    const offsets = [];
-    const orientationsStart = [];
-    const orientationsEnd = [];
-
-    positions.push(25, -25, 0);
-    positions.push(-25, 25, 0);
-    positions.push(0, 0, 25);
-
-    // instanced attributes
-
-    for (let i = 0; i < instances; i++) {
-      // offsets
-      offsets.push(i * 2, 0, i * 3);
-
-      // orientation start
-      vector.set(0, 0, 0, 0);
-      vector.normalize();
-      orientationsStart.push(vector.x, vector.y, vector.z, vector.w);
-
-      // orientation end
-      vector.set(-Math.PI / 2, 0, 0, 0);
-      vector.normalize();
-      orientationsEnd.push(vector.x, vector.y, vector.z, vector.w);
-    }
-
-    const geometry = new InstancedBufferGeometry();
-    geometry.maxInstancedCount = instances; // set so its initalized for dat.GUI, will be set in first draw otherwise
-
-    geometry.addAttribute("position", new Float32BufferAttribute(positions, 3));
-
-    geometry.addAttribute(
-      "offset",
-      new InstancedBufferAttribute(new Float32Array(offsets), 3)
-    );
-    geometry.addAttribute(
-      "orientationStart",
-      new InstancedBufferAttribute(new Float32Array(orientationsStart), 4)
-    );
-    geometry.addAttribute(
-      "orientationEnd",
-      new InstancedBufferAttribute(new Float32Array(orientationsEnd), 4)
-    );
-
-    // material
-
-    const material = new RawShaderMaterial({
-      uniforms: {
-        time: { value: 1.0 },
-        sineTime: { value: 1.0 },
-        color: { value: new Color(color) }
-      },
-      vertexShader: vertexShaderSource.join("\r\n"),
-      fragmentShader: fragmentShaderSource.join("\r\n"),
-      side: DoubleSide,
-      transparent: true
-    });
-
-    const leavesMesh = new Mesh(geometry, material);
-
-    return leavesMesh;
-  }
-
-  createLeavesBAS({
-    leafCount,
-    mesh,
-    color,
-    pointCount = 24,
-    leafStartPoint,
-    leafEndPoint,
-    rotationStart,
-    rotationEnd,
-    sizeStart,
-    sizeEnd,
-    leafMidPoint
-  }) {
-    // pinwheel
-    // for (let i = 0, t, x, y, angle; i <= pointCount; i++) {
-    //   angle = (TWO_PI / pointCount) * i;
-    //   x = Math.cos(angle) * size;
-    //   y = Math.sin(angle) * size;
-
-    //   vertices.push([x, y]);
-    // }
-
-    const geometry = new Geometry(),
-      curvePoints = mesh.curve.getPoints(pointCount);
-    curvePoints.reverse();
-
-    for (
-      let i = 0,
-        ratio,
-        pos,
-        length,
-        width,
-        positionIndex,
-        lineIndex,
-        shape,
-        shapeGeometry;
-      i < leafCount;
-      i += this.R(2) + 1
-    ) {
-      ratio = i / leafCount;
-      length = sizeStart.x + (sizeEnd.x - sizeStart.x) * (1 - ratio);
-      width = sizeStart.y + (sizeEnd.y - sizeStart.y) * (1 - ratio);
-      lineIndex = ratio - 0.5;
-
-      positionIndex =
-        Math.ceil(leafStartPoint * pointCount) +
-        Math.floor(
-          (i / leafCount) * pointCount * (leafEndPoint - leafStartPoint)
-        ) -
-        1;
-      pos = curvePoints[positionIndex];
-
-      // draw the shape
-      shape = new Shape();
-      shape.moveTo(0, 0);
-      shape.bezierCurveTo(
-        lineIndex * width,
-        leafMidPoint * length,
-        lineIndex * width,
-        leafMidPoint * length,
-        0,
-        length
-      );
-      shape.bezierCurveTo(
-        -lineIndex * width,
-        leafMidPoint * length,
-        -lineIndex * width,
-        leafMidPoint * length,
-        0,
-        0
-      );
-
-      // use the shape to create a geometry
-      shapeGeometry = new ShapeGeometry(shape);
-
-      // shapeGeometry.rotateX(rotationStep.x * ratio);
-      // shapeGeometry.rotateY(rotationStep.y * ratio);
-      // shapeGeometry.rotateZ(rotationStep.z * ratio);
-
-      shapeGeometry.rotateX(
-        rotationStart.x + (rotationEnd.x - rotationStart.x) * ratio
-      );
-      shapeGeometry.rotateY(
-        rotationStart.y + (rotationEnd.y - rotationStart.y) * ratio
-      );
-      shapeGeometry.rotateZ(
-        rotationStart.z + (rotationEnd.z - rotationStart.z) * ratio
-      );
-
-      shapeGeometry.translate(pos.x, -pos.z, pos.y);
-      shapeGeometry.rotateX(-Math.PI / 2);
-
-      // merge into the whole
-      geometry.merge(shapeGeometry);
-    }
-
-    // geometry.center();
-
-    // 5. feed the geometry to the animation
-    const leafAnimation = new LeafAnimation({ modelGeometry: geometry, color });
-    return leafAnimation;
   }
 
   animateLeaves({ delay }) {
