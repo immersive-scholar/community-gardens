@@ -3,6 +3,7 @@ import {
   ModelBufferGeometry,
   LambertAnimationMaterial
 } from "three/vendor/BAS";
+import { TweenMax } from "gsap";
 
 function Animation({ modelGeometry, color }) {
   var geometry = new ModelBufferGeometry(modelGeometry);
@@ -40,7 +41,7 @@ function Animation({ modelGeometry, color }) {
   }
 
   var aColor = geometry.createAttribute("color", 3);
-  var leafColor = new Color();
+  var leafColor = new Color(color);
 
   for (i = 0; i < aColor.array.length; i += 18) {
     // 6 * 3
@@ -58,13 +59,17 @@ function Animation({ modelGeometry, color }) {
     vertexColors: VertexColors,
     transparent: true,
     side: DoubleSide,
+    fog: true,
     uniforms: {
       uTime: { value: 0 }
     },
     uniformValues: {
       diffuse: new Color(color)
     },
-    fog: true
+    vertexParameters: ["uniform float uTime;"],
+    vertexPosition: ["transformed.z *= uTime;", "transformed.y *= uTime;"],
+    fragmentParameters: ["uniform float uTime;"],
+    fragmentMap: ["diffuseColor.a *= uTime;"]
   });
 
   geometry.computeVertexNormals();
@@ -84,5 +89,12 @@ Object.defineProperty(Animation.prototype, "time", {
     this.material.uniforms["uTime"].value = v;
   }
 });
+
+// Animation.prototype.animate = function(duration, options) {
+//   options = options || {};
+//   options.time = this.totalDuration;
+
+//   return TweenMax.fromTo(this, duration, { time: 0.0, onUpdate: () => {} }, options);
+// };
 
 export default Animation;

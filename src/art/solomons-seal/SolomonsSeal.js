@@ -14,7 +14,7 @@ import {
   Shape,
   ShapeGeometry
 } from "three-full";
-import { TweenMax, Linear } from "gsap";
+import { TweenMax, Power2 } from "gsap";
 import BendModifier from "three/modifiers/BendModifier";
 import CurvePainter from "three/helpers/CurvePainter";
 import ColorSampler from "util/ColorSampler";
@@ -125,8 +125,8 @@ class SolomonsSeal extends BaseRenderable {
     });
     this.group.add(this.leavesMesh);
 
-    // this.currentTime = 0;
-    // this.animateLeaves({ delay });
+    this.currentTime = 0;
+    this.animateLeaves({ delay });
   };
 
   createStemGeometry = ({ height = 1, pointCount = 8 }) => {
@@ -417,7 +417,6 @@ class SolomonsSeal extends BaseRenderable {
 
     // 5. feed the geometry to the animation
     const leafAnimation = new LeafAnimation({ modelGeometry: geometry, color });
-
     return leafAnimation;
   }
 
@@ -427,10 +426,10 @@ class SolomonsSeal extends BaseRenderable {
       onUpdate: () => {
         this.update();
       },
-      ease: Linear.easeNone,
-      delay,
-      yoyo: true,
-      repeat: -1
+      ease: Power2.easeOut,
+      delay: delay + 0.5
+      // yoyo: true,
+      // repeat: -1
     });
   }
 
@@ -534,7 +533,7 @@ class SolomonsSeal extends BaseRenderable {
   render() {}
 
   update() {
-    this.leavesMesh.material.uniforms.time.value = this.currentTime;
+    this.leavesMesh.material.uniforms.uTime.value = this.currentTime;
   }
 }
 

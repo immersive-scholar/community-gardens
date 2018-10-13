@@ -26,7 +26,7 @@ export default ({ controls }) => {
       rotationStepY: 1.7,
       rotationStepZ: 0.2,
       sizeStepX: 0.12,
-      sizeStepY: 0.06,
+      sizeStepY: 0.12,
       color: new ColorSampler().getRandomColor()
     };
 
