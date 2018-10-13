@@ -70,12 +70,16 @@ function BaseAnimationMaterial(parameters, uniforms) {
         case SphericalReflectionMapping:
           envMapTypeDefine = "ENVMAP_TYPE_SPHERE";
           break;
+        default:
+          break;
       }
 
       switch (uniformValues.envMap.mapping) {
         case CubeRefractionMapping:
         case EquirectangularRefractionMapping:
           envMapModeDefine = "ENVMAP_MODE_REFRACTION";
+          break;
+        default:
           break;
       }
 
@@ -1723,7 +1727,9 @@ Timeline.register = function(key, definition) {
  */
 Timeline.prototype.add = function(duration, transitions, positionOffset) {
   // stop rollup from complaining about eval
+  /* eslint-disable no-eval */
   var _eval = eval;
+  /* eslint-enable */
 
   var start = this.duration;
 

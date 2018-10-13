@@ -3,7 +3,6 @@ import {
   Vector3,
   Vector4,
   Geometry,
-  Face3,
   Color,
   CatmullRomCurve3,
   InstancedBufferGeometry,
@@ -12,7 +11,6 @@ import {
   RawShaderMaterial,
   DoubleSide,
   Mesh,
-  _Math,
   Shape,
   ShapeGeometry
 } from "three-full";
@@ -28,8 +26,6 @@ import SolomonsSealLeaf from "./SolomonsSealLeaf";
 import fragmentShaderSource from "./FragmentShaderSource";
 import vertexShaderSource from "./VertexShaderSource";
 import LeafAnimation from "./LeafAnimation";
-
-const Delaunay = require("../crystals/Delaunay");
 
 class SolomonsSeal extends BaseRenderable {
   constructor(props, camera, R) {
@@ -60,8 +56,8 @@ class SolomonsSeal extends BaseRenderable {
       delay = 0,
       leafStartPoint = 0.3,
       leafEndPoint = 1,
-      rotationStep = new Vector3(0.5, 1.7, 0.2),
-      sizeStep = new Vector2(0.2, 0.1)
+      rotationStep = new Vector3(-1.5, 0.7, 0.2),
+      sizeStep = new Vector2(0.1, 0.05)
     } = this.state;
 
     // stem
@@ -344,12 +340,6 @@ class SolomonsSeal extends BaseRenderable {
     centerY = 0.5,
     leafMidPoint
   }) {
-    let vertices = [[centerX, centerY]],
-      TWO_PI = Math.PI * 2,
-      indices,
-      i,
-      j;
-
     // pinwheel
     // for (let i = 0, t, x, y, angle; i <= pointCount; i++) {
     //   angle = (TWO_PI / pointCount) * i;
@@ -360,14 +350,12 @@ class SolomonsSeal extends BaseRenderable {
     // }
 
     const geometry = new Geometry(),
-      curvePoints = mesh.curve.getPoints(pointCount),
-      leaves = [];
+      curvePoints = mesh.curve.getPoints(pointCount);
     curvePoints.reverse();
 
     for (
       let i = 0,
         ratio,
-        leaf,
         pos,
         length,
         width,
@@ -394,10 +382,22 @@ class SolomonsSeal extends BaseRenderable {
       // draw the shape
       shape = new Shape();
       shape.moveTo(0, 0);
-      shape.lineTo(lineIndex * width, leafMidPoint * length);
-      shape.lineTo(0, length);
-      shape.lineTo(-lineIndex * width, leafMidPoint * length);
-      shape.lineTo(0, 0);
+      shape.bezierCurveTo(
+        lineIndex * width,
+        leafMidPoint * length,
+        lineIndex * width,
+        leafMidPoint * length,
+        0,
+        length
+      );
+      shape.bezierCurveTo(
+        -lineIndex * width,
+        leafMidPoint * length,
+        -lineIndex * width,
+        leafMidPoint * length,
+        0,
+        0
+      );
 
       // use the shape to create a geometry
       shapeGeometry = new ShapeGeometry(shape);
@@ -409,24 +409,6 @@ class SolomonsSeal extends BaseRenderable {
       shapeGeometry.translate(pos.x, -pos.z, pos.y);
       shapeGeometry.rotateX(-Math.PI / 2);
 
-      // offset z vector components based on the two splines
-      // for (j = 0; j < shapeGeometry.vertices.length; j++) {
-      //   var v = shapeGeometry.vertices[j];
-      //   var ux = _Math.clamp(
-      //     _Math.mapLinear(v.x, -size, size, 0.0, 1.0),
-      //     0.0,
-      //     1.0
-      //   );
-      //   var uy = _Math.clamp(
-      //     _Math.mapLinear(v.y, -size, size, 0.0, 1.0),
-      //     0.0,
-      //     1.0
-      //   );
-
-      //   v.z += splineX.getPointAt(ux).z;
-      //   v.z += splineY.getPointAt(uy).z;
-      // }
-
       // merge into the whole
       geometry.merge(shapeGeometry);
     }
@@ -434,7 +416,7 @@ class SolomonsSeal extends BaseRenderable {
     // geometry.center();
 
     // 5. feed the geometry to the animation
-    const leafAnimation = new LeafAnimation(geometry);
+    const leafAnimation = new LeafAnimation({ modelGeometry: geometry, color });
 
     return leafAnimation;
   }
@@ -514,6 +496,12 @@ class SolomonsSeal extends BaseRenderable {
 
   setSizeStep(sizeStep) {
     this.setState({ sizeStep }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setColor(color) {
+    this.setState({ color }, isDirty => {
       isDirty && this.init();
     });
   }

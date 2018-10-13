@@ -1,10 +1,11 @@
 import * as dat from "dat.gui";
 import { Vector2, Vector3 } from "three-full";
+import ColorSampler from "util/ColorSampler";
 
 export default ({ controls }) => {
   let instance;
   const enable = () => {
-    var effectController = {
+    var config = {
       x: 0,
       y: 0,
       z: 0,
@@ -21,52 +22,44 @@ export default ({ controls }) => {
       pointCount: 50,
       leafStartPoint: 0.3,
       leafEndPoint: 1,
-      rotationStepX: 0.5,
+      rotationStepX: 1.5,
       rotationStepY: 1.7,
       rotationStepZ: 0.2,
       sizeStepX: 0.12,
-      sizeStepY: 0.06
+      sizeStepY: 0.06,
+      color: new ColorSampler().getRandomColor()
     };
 
     const onDataChange = function() {
       controls.enabled = false;
       try {
-        instance.group.position.set(
-          effectController.x,
-          effectController.y,
-          effectController.z
-        );
-        instance.setHeight(effectController.height);
+        instance.group.position.set(config.x, config.y, config.z);
+        instance.setHeight(config.height);
         instance.setOffset(
-          new Vector3(
-            effectController.offsetX,
-            effectController.offsetY,
-            effectController.offsetZ
-          )
+          new Vector3(config.offsetX, config.offsetY, config.offsetZ)
         );
         instance.setDisplacement(
           new Vector3(
-            effectController.displacementX,
-            effectController.displacementY,
-            effectController.displacementZ
+            config.displacementX,
+            config.displacementY,
+            config.displacementZ
           )
         );
-        instance.setAnimated(effectController.animated);
-        instance.setLeafCount(effectController.leafCount);
-        instance.setThickness(effectController.thickness);
-        instance.setPointCount(effectController.pointCount);
-        instance.setLeafStartPoint(effectController.leafStartPoint);
-        instance.setLeafEndPoint(effectController.leafEndPoint);
+        instance.setAnimated(config.animated);
+        instance.setLeafCount(config.leafCount);
+        instance.setThickness(config.thickness);
+        instance.setPointCount(config.pointCount);
+        instance.setLeafStartPoint(config.leafStartPoint);
+        instance.setLeafEndPoint(config.leafEndPoint);
         instance.setRotationStep(
           new Vector3(
-            effectController.rotationStepX,
-            effectController.rotationStepY,
-            effectController.rotationStepZ
+            config.rotationStepX,
+            config.rotationStepY,
+            config.rotationStepZ
           )
         );
-        instance.setSizeStep(
-          new Vector2(effectController.sizeStepX, effectController.sizeStepY)
-        );
+        instance.setSizeStep(new Vector2(config.sizeStepX, config.sizeStepY));
+        instance.setColor(config.color);
       } catch (error) {
         console.log("Instance required ", error);
       }
@@ -80,95 +73,99 @@ export default ({ controls }) => {
 
     const positionFolder = gui.addFolder("position");
     positionFolder
-      .add(effectController, "x", -5, 5, 0.01)
+      .add(config, "x", -5, 5, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     positionFolder
-      .add(effectController, "y", -5, 5, 0.01)
+      .add(config, "y", -5, 5, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     positionFolder
-      .add(effectController, "z", -5, 5, 0.01)
+      .add(config, "z", -5, 5, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 
     const offsetFolder = gui.addFolder("offset");
     offsetFolder
-      .add(effectController, "offsetX", -2, 2, 0.01)
+      .add(config, "offsetX", -2, 2, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     offsetFolder
-      .add(effectController, "offsetY", -2, 2, 0.01)
+      .add(config, "offsetY", -2, 2, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     offsetFolder
-      .add(effectController, "offsetZ", -2, 2, 0.01)
+      .add(config, "offsetZ", -2, 2, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 
     const displacementFolder = gui.addFolder("displacement");
     displacementFolder
-      .add(effectController, "displacementX", -1, 1, 0.01)
+      .add(config, "displacementX", -1, 1, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     displacementFolder
-      .add(effectController, "displacementY", -1, 1, 0.01)
+      .add(config, "displacementY", -1, 1, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     displacementFolder
-      .add(effectController, "displacementZ", -1, 1, 0.01)
+      .add(config, "displacementZ", -1, 1, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 
     const attributesFolder = gui.addFolder("Attributes");
     attributesFolder
-      .add(effectController, "height", 0.1, 4, 0.1)
+      .add(config, "height", 0.1, 4, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     attributesFolder
-      .add(effectController, "animated", true)
+      .add(config, "animated", true)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     attributesFolder
-      .add(effectController, "thickness", 0, 1, 0.01)
+      .add(config, "thickness", 0, 1, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     attributesFolder
-      .add(effectController, "pointCount", 4, 100)
+      .add(config, "pointCount", 4, 100)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 
     const leavesFolder = gui.addFolder("Leaves");
     leavesFolder
-      .add(effectController, "leafCount", 0, 48, 1)
+      .add(config, "leafCount", 0, 48, 1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(effectController, "leafStartPoint", 0.1, 1.0)
+      .add(config, "leafStartPoint", 0.1, 1.0)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(effectController, "leafEndPoint", 0.1, 1.0)
+      .add(config, "leafEndPoint", 0.1, 1.0)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(effectController, "rotationStepX", -5, 5, 0.1)
+      .add(config, "rotationStepX", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(effectController, "rotationStepY", -5, 5, 0.1)
+      .add(config, "rotationStepY", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(effectController, "rotationStepZ", -5, 5, 0.1)
+      .add(config, "rotationStepZ", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(effectController, "sizeStepX", 0.1, 2, 0.01)
+      .add(config, "sizeStepX", 0.1, 2, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(effectController, "sizeStepY", 0.1, 2, 0.01)
+      .add(config, "sizeStepY", 0.1, 2, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    leavesFolder
+      .addColor(config, "color")
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 

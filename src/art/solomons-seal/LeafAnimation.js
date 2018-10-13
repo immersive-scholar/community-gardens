@@ -1,11 +1,10 @@
 import { _Math, Mesh, Color, VertexColors, DoubleSide } from "three-full";
 import {
   ModelBufferGeometry,
-  LambertAnimationMaterial,
-  ShaderChunk
+  LambertAnimationMaterial
 } from "three/vendor/BAS";
 
-function Animation(modelGeometry) {
+function Animation({ modelGeometry, color }) {
   var geometry = new ModelBufferGeometry(modelGeometry);
 
   var i, j;
@@ -41,16 +40,16 @@ function Animation(modelGeometry) {
   }
 
   var aColor = geometry.createAttribute("color", 3);
-  var color = new Color();
+  var leafColor = new Color();
 
   for (i = 0; i < aColor.array.length; i += 18) {
     // 6 * 3
-    color.setHSL(0, 0, _Math.randFloat(0.5, 1.0));
+    leafColor.setHSL(1, 1, _Math.randFloat(0.5, 1.0));
 
     for (j = 0; j < 18; j += 3) {
-      aColor.array[i + j] = color.r;
-      aColor.array[i + j + 1] = color.g;
-      aColor.array[i + j + 2] = color.b;
+      aColor.array[i + j] = leafColor.r;
+      aColor.array[i + j + 1] = leafColor.g;
+      aColor.array[i + j + 2] = leafColor.b;
     }
   }
 
@@ -60,27 +59,12 @@ function Animation(modelGeometry) {
     transparent: true,
     side: DoubleSide,
     uniforms: {
-      uTime: { value: 0 },
-      uD: { value: 4.4 },
-      uA: { value: 3.2 }
+      uTime: { value: 0 }
     },
     uniformValues: {
-      diffuse: new Color(0x9b111e),
-      roughness: 0.2,
-      metalness: 0.1
+      diffuse: new Color(color)
     },
-    vertexFunctions: [ShaderChunk["ease_cubic_in_out"]],
-    vertexParameters: [
-      "uniform float uTime;",
-      "uniform float uD;",
-      "uniform float uA;",
-      "attribute vec2 aOffsetAmplitude;"
-    ],
-    vertexPosition: [
-      "float tProgress = sin(uTime + aOffsetAmplitude.x / uD);",
-      "tProgress = easeCubicInOut(tProgress);",
-      "transformed.z += aOffsetAmplitude.y * uA * tProgress;"
-    ]
+    fog: true
   });
 
   geometry.computeVertexNormals();
