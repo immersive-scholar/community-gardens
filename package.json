@@ -7,6 +7,7 @@
     "dat.gui": "^0.7.3",
     "downloadjs": "^1.4.7",
     "gsap": "^2.0.2",
+    "lodash": "^4.17.11",
     "pngjs": "^3.3.3",
     "prop-types": "^15.6.2",
     "random-seed": "^0.3.0",

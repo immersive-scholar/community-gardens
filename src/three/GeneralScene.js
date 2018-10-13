@@ -6,7 +6,7 @@ export default ({
 }) => {
   const scene = new Scene();
   scene.background = new Color(0xffffff);
-  scene.fog = new FogExp2(0xd7cbb1, 0.2);
+  scene.fog = new FogExp2(0xd7cbb1, 0.3);
   scene.position.y = -0.5;
 
   return scene;

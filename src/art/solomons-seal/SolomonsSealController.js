@@ -24,8 +24,8 @@ export default ({ controls }) => {
       rotationStepX: 0.5,
       rotationStepY: 1.7,
       rotationStepZ: 0.2,
-      sizeStepX: 0.2,
-      sizeStepY: 0.2
+      sizeStepX: 0.12,
+      sizeStepY: 0.06
     };
 
     const onDataChange = function() {
@@ -152,23 +152,23 @@ export default ({ controls }) => {
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(effectController, "rotationStepX", -3, 3, 0.1)
+      .add(effectController, "rotationStepX", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(effectController, "rotationStepY", -3, 3, 0.1)
+      .add(effectController, "rotationStepY", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(effectController, "rotationStepZ", -3, 3, 0.1)
+      .add(effectController, "rotationStepZ", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(effectController, "sizeStepX", 0.1, 2, 0.1)
+      .add(effectController, "sizeStepX", 0.1, 2, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(effectController, "sizeStepY", 0.1, 2, 0.1)
+      .add(effectController, "sizeStepY", 0.1, 2, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 

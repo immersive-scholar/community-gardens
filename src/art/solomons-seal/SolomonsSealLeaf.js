@@ -68,7 +68,7 @@ class SolomonsSealLeaf extends BaseRenderable {
       //   delay: i * 0.2,
       //   pointCount,
       //   thickness,
-      //   fogDensity: 0.2,
+      //   fogDensity: 0.3,
       //   camera
       // });
       // this.group.add(leaf.curvePainter.mesh);
@@ -91,7 +91,7 @@ class SolomonsSealLeaf extends BaseRenderable {
     lineIndex,
     geometry = new Geometry(),
     startPosition = new Vector3(0, 0, 0),
-    midPoint = 0.5
+    midPoint = 0.4
   }) => {
     let vertices;
 

@@ -4,8 +4,8 @@ import SceneManager from "./SceneManager";
 import GeneralCanvas from "./GeneralCanvas";
 
 export default container => {
-  // const seed = Math.random();
-  const seed = 0.42415009388616753;
+  const seed = Math.random();
+  // const seed = 0.42415009388616753;
   const R = RandomSeed.create(seed);
   console.log("Random seed: ", seed);
 

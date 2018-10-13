@@ -3,6 +3,7 @@ import {
   Vector3,
   Vector4,
   Geometry,
+  Face3,
   Color,
   CatmullRomCurve3,
   InstancedBufferGeometry,
@@ -10,7 +11,10 @@ import {
   Float32BufferAttribute,
   RawShaderMaterial,
   DoubleSide,
-  Mesh
+  Mesh,
+  _Math,
+  Shape,
+  ShapeGeometry
 } from "three-full";
 import { TweenMax, Linear } from "gsap";
 import BendModifier from "three/modifiers/BendModifier";
@@ -23,11 +27,15 @@ import BaseRenderable from "art/common/BaseRenderable";
 import SolomonsSealLeaf from "./SolomonsSealLeaf";
 import fragmentShaderSource from "./FragmentShaderSource";
 import vertexShaderSource from "./VertexShaderSource";
+import LeafAnimation from "./LeafAnimation";
+
+const Delaunay = require("../crystals/Delaunay");
 
 class SolomonsSeal extends BaseRenderable {
   constructor(props, camera, R) {
     super(props);
 
+    this.leaves = [];
     this.camera = camera;
     this.R = R;
 
@@ -53,7 +61,7 @@ class SolomonsSeal extends BaseRenderable {
       leafStartPoint = 0.3,
       leafEndPoint = 1,
       rotationStep = new Vector3(0.5, 1.7, 0.2),
-      sizeStep = new Vector2(0.2, 0.2)
+      sizeStep = new Vector2(0.2, 0.1)
     } = this.state;
 
     // stem
@@ -78,35 +86,48 @@ class SolomonsSeal extends BaseRenderable {
       delay,
       pointCount,
       thickness,
-      fogDensity: 0.2,
+      fogDensity: 0.3,
       animated
     });
     this.group.add(this.stem.curvePainter.mesh);
 
     // leaves
-    this.leaves = [];
-    this.leaves = this.createLeaves({
-      leafCount,
-      height,
-      mesh: this.stem,
-      color,
-      pointCount,
-      leafStartPoint,
-      leafEndPoint,
-      rotationStep,
-      sizeStep
-    });
-    this.addAll(this.leaves);
+    // this.leaves = this.createLeaves({
+    //   leafCount,
+    //   height,
+    //   mesh: this.stem,
+    //   color,
+    //   pointCount,
+    //   leafStartPoint,
+    //   leafEndPoint,
+    //   rotationStep,
+    //   sizeStep
+    // });
+    // this.addAll(this.leaves);
 
     // this.leavesMesh = this.createLeavesInstanced({
     //   leafCount,
     //   height,
-    //   mesh: stem,
-    //   color,
-    //   R,
-    //   camera
+    //   mesh: this.stem,
+    //   color
     // });
     // this.group.add(this.leavesMesh);
+
+    this.leavesMesh = this.createLeavesBAS({
+      leafCount,
+      size: 0.1,
+      centerX: 0,
+      centerY: 0,
+      mesh: this.stem,
+      color,
+      pointCount: pointCount * 3,
+      leafStartPoint,
+      leafEndPoint,
+      sizeStep,
+      rotationStep,
+      leafMidPoint: 0.4
+    });
+    this.group.add(this.leavesMesh);
 
     // this.currentTime = 0;
     // this.animateLeaves({ delay });
@@ -309,6 +330,115 @@ class SolomonsSeal extends BaseRenderable {
     return leavesMesh;
   }
 
+  createLeavesBAS({
+    leafCount,
+    mesh,
+    color,
+    pointCount = 24,
+    extrudeAmount = 0.001,
+    leafStartPoint,
+    leafEndPoint,
+    rotationStep,
+    sizeStep,
+    centerX = 0.5,
+    centerY = 0.5,
+    leafMidPoint
+  }) {
+    let vertices = [[centerX, centerY]],
+      TWO_PI = Math.PI * 2,
+      indices,
+      i,
+      j;
+
+    // pinwheel
+    // for (let i = 0, t, x, y, angle; i <= pointCount; i++) {
+    //   angle = (TWO_PI / pointCount) * i;
+    //   x = Math.cos(angle) * size;
+    //   y = Math.sin(angle) * size;
+
+    //   vertices.push([x, y]);
+    // }
+
+    const geometry = new Geometry(),
+      curvePoints = mesh.curve.getPoints(pointCount),
+      leaves = [];
+    curvePoints.reverse();
+
+    for (
+      let i = 0,
+        ratio,
+        leaf,
+        pos,
+        length,
+        width,
+        positionIndex,
+        lineIndex,
+        shape,
+        shapeGeometry;
+      i < leafCount;
+      i += this.R(2) + 1
+    ) {
+      ratio = i / leafCount;
+      length = (1 - ratio) * sizeStep.x;
+      width = (1 - ratio) * sizeStep.y;
+      lineIndex = ratio - 0.5;
+
+      positionIndex =
+        Math.ceil(leafStartPoint * pointCount) +
+        Math.floor(
+          (i / leafCount) * pointCount * (leafEndPoint - leafStartPoint)
+        ) -
+        1;
+      pos = curvePoints[positionIndex];
+
+      // draw the shape
+      shape = new Shape();
+      shape.moveTo(0, 0);
+      shape.lineTo(lineIndex * width, leafMidPoint * length);
+      shape.lineTo(0, length);
+      shape.lineTo(-lineIndex * width, leafMidPoint * length);
+      shape.lineTo(0, 0);
+
+      // use the shape to create a geometry
+      shapeGeometry = new ShapeGeometry(shape);
+
+      shapeGeometry.rotateX(rotationStep.x * ratio);
+      shapeGeometry.rotateY(rotationStep.y * ratio);
+      shapeGeometry.rotateZ(rotationStep.z * ratio);
+
+      shapeGeometry.translate(pos.x, -pos.z, pos.y);
+      shapeGeometry.rotateX(-Math.PI / 2);
+
+      // offset z vector components based on the two splines
+      // for (j = 0; j < shapeGeometry.vertices.length; j++) {
+      //   var v = shapeGeometry.vertices[j];
+      //   var ux = _Math.clamp(
+      //     _Math.mapLinear(v.x, -size, size, 0.0, 1.0),
+      //     0.0,
+      //     1.0
+      //   );
+      //   var uy = _Math.clamp(
+      //     _Math.mapLinear(v.y, -size, size, 0.0, 1.0),
+      //     0.0,
+      //     1.0
+      //   );
+
+      //   v.z += splineX.getPointAt(ux).z;
+      //   v.z += splineY.getPointAt(uy).z;
+      // }
+
+      // merge into the whole
+      geometry.merge(shapeGeometry);
+    }
+
+    // geometry.center();
+
+    // 5. feed the geometry to the animation
+    const leafAnimation = new LeafAnimation(geometry);
+
+    return leafAnimation;
+  }
+
   animateLeaves({ delay }) {
     TweenMax.to(this, 2, {
       currentTime: 1,
@@ -403,8 +533,14 @@ class SolomonsSeal extends BaseRenderable {
         leaf.clean();
       }
     }
-
     this.leaves = [];
+
+    if (this.leavesMesh) {
+      this.group.remove(this.leavesMesh);
+      this.leavesMesh.geometry.dispose();
+      this.leavesMesh.material.dispose();
+      this.leavesMesh = undefined;
+    }
   }
 
   render() {}
