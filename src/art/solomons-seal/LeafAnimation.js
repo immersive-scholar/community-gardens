@@ -2,7 +2,6 @@ import {
   _Math,
   Mesh,
   Color,
-  VertexColors,
   DoubleSide,
   TextureLoader,
   RepeatWrapping,
@@ -17,7 +16,8 @@ function Animation({
   modelGeometry,
   color,
   animated,
-  imagePath = "/img/patterns/pattern-1.png"
+  imagePath = "/img/patterns/leaf-1.png",
+  leafTextureSize = new Vector2(20, -10)
 }) {
   const geometry = new ModelBufferGeometry(modelGeometry);
 
@@ -47,6 +47,7 @@ function Animation({
     lights: true,
     uniforms: {
       uTime: { value: animated ? 0 : 1 },
+      uTextureSize: { value: new Vector2(10, 10) },
       color: color
     },
     uniformValues: {
@@ -55,16 +56,16 @@ function Animation({
     },
     vertexParameters: ["uniform float uTime;"],
     vertexPosition: ["transformed.z *= uTime;", "transformed.y *= uTime;"],
-    fragmentParameters: ["uniform float uTime;"],
+    fragmentParameters: ["uniform float uTime;", "uniform vec2 uTextureSize;"],
     fragmentMap: [
-      "vec4 texelColor = texture2D(map, vUv * 10.);",
-      "diffuseColor *= mapTexelToLinear(texelColor);"
-      // "diffuseColor = vec4(texelColor.rgb, uTime);"
-      // "diffuseColor *= vec4(texelColor.xyz, 1.);"
-      // "diffuseColor.a = uTime;"
-    ],
-    fragmentDiffuse: ["diffuseColor.a *= uTime;"]
+      "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
+      "diffuseColor *= texelColor;"
+      // "diffuseColor.a = 1.0;"
+    ]
+    // fragmentDiffuse: ["diffuseColor.a *= uTime;"]
   });
+
+  material.uniforms.uTextureSize.value = leafTextureSize;
 
   geometry.computeVertexNormals();
   geometry.bufferUVs();

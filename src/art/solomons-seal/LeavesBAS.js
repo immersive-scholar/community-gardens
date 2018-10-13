@@ -1,4 +1,4 @@
-import { Geometry, Shape, ShapeGeometry } from "three-full";
+import { Geometry, Shape, ShapeGeometry, Vector2 } from "three-full";
 import LeafAnimation from "./LeafAnimation";
 
 const LeavesBAS = ({
@@ -13,6 +13,7 @@ const LeavesBAS = ({
   sizeStart,
   sizeEnd,
   leafMidPoint,
+  leafTextureSize = new Vector2(20, -10),
   R,
   animated
 }) => {
@@ -105,7 +106,8 @@ const LeavesBAS = ({
   const leafAnimation = new LeafAnimation({
     modelGeometry: geometry,
     color,
-    animated
+    animated,
+    leafTextureSize
   });
   return leafAnimation;
 };
