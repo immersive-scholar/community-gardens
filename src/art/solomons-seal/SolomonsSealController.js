@@ -22,11 +22,16 @@ export default ({ controls }) => {
       pointCount: 50,
       leafStartPoint: 0.3,
       leafEndPoint: 1,
-      rotationStepX: 1.5,
-      rotationStepY: 1.7,
-      rotationStepZ: 0.2,
-      sizeStepX: 0.12,
-      sizeStepY: 0.12,
+      rotationStartX: 0,
+      rotationStartY: 0,
+      rotationStartZ: 0,
+      rotationEndX: 1.5,
+      rotationEndY: 1.7,
+      rotationEndZ: 0.2,
+      sizeStartX: 0.02,
+      sizeStartY: 0.01,
+      sizeEndX: 0.12,
+      sizeEndY: 0.06,
       color: new ColorSampler().getRandomColor()
     };
 
@@ -51,14 +56,24 @@ export default ({ controls }) => {
         instance.setPointCount(config.pointCount);
         instance.setLeafStartPoint(config.leafStartPoint);
         instance.setLeafEndPoint(config.leafEndPoint);
-        instance.setRotationStep(
+        instance.setRotationStart(
           new Vector3(
-            config.rotationStepX,
-            config.rotationStepY,
-            config.rotationStepZ
+            config.rotationStartX,
+            config.rotationStartY,
+            config.rotationStartZ
           )
         );
-        instance.setSizeStep(new Vector2(config.sizeStepX, config.sizeStepY));
+        instance.setRotationEnd(
+          new Vector3(
+            config.rotationEndX,
+            config.rotationEndY,
+            config.rotationEndZ
+          )
+        );
+        instance.setSizeStart(
+          new Vector2(config.sizeStartX, config.sizeStartY)
+        );
+        instance.setSizeEnd(new Vector2(config.sizeEndX, config.sizeEndY));
         instance.setColor(config.color);
       } catch (error) {
         console.log("Instance required ", error);
@@ -145,23 +160,43 @@ export default ({ controls }) => {
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(config, "rotationStepX", -5, 5, 0.1)
+      .add(config, "rotationStartX", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(config, "rotationStepY", -5, 5, 0.1)
+      .add(config, "rotationStartY", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(config, "rotationStepZ", -5, 5, 0.1)
+      .add(config, "rotationStartZ", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(config, "sizeStepX", 0.1, 2, 0.01)
+      .add(config, "rotationEndX", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(config, "sizeStepY", 0.1, 2, 0.01)
+      .add(config, "rotationEndY", -5, 5, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    leavesFolder
+      .add(config, "rotationEndZ", -5, 5, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    leavesFolder
+      .add(config, "sizeStartX", 0.1, 1, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    leavesFolder
+      .add(config, "sizeStartY", 0.1, 1, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    leavesFolder
+      .add(config, "sizeEndX", 0.1, 1, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    leavesFolder
+      .add(config, "sizeEndY", 0.1, 1, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder

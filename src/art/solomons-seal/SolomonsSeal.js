@@ -56,8 +56,10 @@ class SolomonsSeal extends BaseRenderable {
       delay = 0,
       leafStartPoint = 0.3,
       leafEndPoint = 1,
-      rotationStep = new Vector3(-1.5, 0.7, 0.2),
-      sizeStep = new Vector2(0.1, 0.05)
+      rotationStart = new Vector3(0, 0, 0),
+      rotationEnd = new Vector3(-1.5, 0.7, 0.2),
+      sizeStart = new Vector2(0.02, 0.01),
+      sizeEnd = new Vector2(0.1, 0.05)
     } = this.state;
 
     // stem
@@ -119,8 +121,10 @@ class SolomonsSeal extends BaseRenderable {
       pointCount: pointCount * 3,
       leafStartPoint,
       leafEndPoint,
-      sizeStep,
-      rotationStep,
+      sizeStart,
+      sizeEnd,
+      rotationStart,
+      rotationEnd,
       leafMidPoint: 0.4
     });
     this.group.add(this.leavesMesh);
@@ -213,8 +217,10 @@ class SolomonsSeal extends BaseRenderable {
     leafStartPoint,
     leafEndPoint,
     pointCount,
-    rotationStep,
-    sizeStep
+    sizeStart,
+    sizeEnd,
+    rotationStart,
+    rotationEnd
   }) {
     const curvePoints = mesh.curve.getPoints(pointCount),
       leaves = [];
@@ -228,8 +234,10 @@ class SolomonsSeal extends BaseRenderable {
     ) {
       // size = this.R.floatBetween(0.04, 0.12);
       ratio = i / leafCount;
-      length = (1 - ratio) * sizeStep.x;
-      width = (1 - ratio) * sizeStep.y;
+      // length = (1 - ratio) * sizeStep.x;
+      // width = (1 - ratio) * sizeStep.y;
+      length = sizeStart.x + (sizeEnd.x - sizeStart.x) * ratio;
+      width = sizeStart.y + (sizeEnd.y - sizeStart.y) * ratio;
       leaf = new SolomonsSealLeaf({
         color,
         length,
@@ -248,9 +256,9 @@ class SolomonsSeal extends BaseRenderable {
       leaf.group.position.x = pos.x;
       leaf.group.position.y = pos.y;
       leaf.group.position.z = pos.z;
-      leaf.group.rotation.x = rotationStep.x * ratio;
-      leaf.group.rotation.y = rotationStep.y * ratio;
-      leaf.group.rotation.z = rotationStep.z * ratio;
+      // leaf.group.rotation.x = rotationStep.x * ratio;
+      // leaf.group.rotation.y = rotationStep.y * ratio;
+      // leaf.group.rotation.z = rotationStep.z * ratio;
 
       this.group.add(leaf.group);
       leaves.push(leaf);
@@ -331,13 +339,12 @@ class SolomonsSeal extends BaseRenderable {
     mesh,
     color,
     pointCount = 24,
-    extrudeAmount = 0.001,
     leafStartPoint,
     leafEndPoint,
-    rotationStep,
-    sizeStep,
-    centerX = 0.5,
-    centerY = 0.5,
+    rotationStart,
+    rotationEnd,
+    sizeStart,
+    sizeEnd,
     leafMidPoint
   }) {
     // pinwheel
@@ -367,8 +374,8 @@ class SolomonsSeal extends BaseRenderable {
       i += this.R(2) + 1
     ) {
       ratio = i / leafCount;
-      length = (1 - ratio) * sizeStep.x;
-      width = (1 - ratio) * sizeStep.y;
+      length = sizeStart.x + (sizeEnd.x - sizeStart.x) * (1 - ratio);
+      width = sizeStart.y + (sizeEnd.y - sizeStart.y) * (1 - ratio);
       lineIndex = ratio - 0.5;
 
       positionIndex =
@@ -402,9 +409,19 @@ class SolomonsSeal extends BaseRenderable {
       // use the shape to create a geometry
       shapeGeometry = new ShapeGeometry(shape);
 
-      shapeGeometry.rotateX(rotationStep.x * ratio);
-      shapeGeometry.rotateY(rotationStep.y * ratio);
-      shapeGeometry.rotateZ(rotationStep.z * ratio);
+      // shapeGeometry.rotateX(rotationStep.x * ratio);
+      // shapeGeometry.rotateY(rotationStep.y * ratio);
+      // shapeGeometry.rotateZ(rotationStep.z * ratio);
+
+      shapeGeometry.rotateX(
+        rotationStart.x + (rotationEnd.x - rotationStart.x) * ratio
+      );
+      shapeGeometry.rotateY(
+        rotationStart.y + (rotationEnd.y - rotationStart.y) * ratio
+      );
+      shapeGeometry.rotateZ(
+        rotationStart.z + (rotationEnd.z - rotationStart.z) * ratio
+      );
 
       shapeGeometry.translate(pos.x, -pos.z, pos.y);
       shapeGeometry.rotateX(-Math.PI / 2);
@@ -421,7 +438,8 @@ class SolomonsSeal extends BaseRenderable {
   }
 
   animateLeaves({ delay }) {
-    TweenMax.to(this, 2, {
+    this.tween && this.tween.kill(null, this);
+    this.tween = TweenMax.to(this, 2, {
       currentTime: 1,
       onUpdate: () => {
         this.update();
@@ -487,14 +505,26 @@ class SolomonsSeal extends BaseRenderable {
     });
   }
 
-  setRotationStep(rotationStep) {
-    this.setState({ rotationStep }, isDirty => {
+  setRotationStart(rotationStart) {
+    this.setState({ rotationStart }, isDirty => {
       isDirty && this.init();
     });
   }
 
-  setSizeStep(sizeStep) {
-    this.setState({ sizeStep }, isDirty => {
+  setRotationEnd(rotationEnd) {
+    this.setState({ rotationEnd }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setSizeStart(sizeStart) {
+    this.setState({ sizeStart }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setSizeEnd(sizeEnd) {
+    this.setState({ sizeEnd }, isDirty => {
       isDirty && this.init();
     });
   }
