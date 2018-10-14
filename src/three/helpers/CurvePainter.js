@@ -74,7 +74,7 @@ const CurvePainter = ({
 
   this.tween && this.tween.kill(null, params);
   if (animated) {
-    this.tween = TweenMax.to(params, 4, {
+    this.tween = TweenMax.to(params, 3, {
       life: 1,
       onUpdate: render,
       ease: Power2.easeOut,
