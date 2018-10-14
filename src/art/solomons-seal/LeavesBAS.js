@@ -1,5 +1,15 @@
-import { Geometry, Shape, ShapeGeometry, Vector2 } from "three-full";
+import {
+  Geometry,
+  Shape,
+  ShapeGeometry,
+  Vector2,
+  MeshBasicMaterial,
+  Mesh,
+  Vector3
+} from "three-full";
+import isEqual from "lodash/isEqual";
 import LeafAnimation from "./LeafAnimation";
+import Modifiers from "three/vendor/Modifiers";
 
 const LeavesBAS = ({
   leafCount,
@@ -15,7 +25,9 @@ const LeavesBAS = ({
   leafMidPoint,
   leafTextureSize = new Vector2(20, -10),
   R,
-  animated
+  animated,
+  windForce = 0.1,
+  windDirection = new Vector3(2, 2, 0)
 }) => {
   // pinwheel
   // for (let i = 0, t, x, y, angle; i <= pointCount; i++) {
@@ -98,6 +110,22 @@ const LeavesBAS = ({
 
     // merge into the whole
     geometry.merge(shapeGeometry);
+  }
+
+  // bend
+  if (windForce) {
+    const temporaryMesh = new Mesh(geometry.clone(), null);
+    this.modifier = Modifiers.ModifierStack(temporaryMesh);
+    this.bend = Modifiers.Bend(
+      windDirection.x,
+      windDirection.y,
+      windDirection.z
+    );
+    this.bend.force = windForce;
+    this.bend.constraint = Modifiers.ModConstant().NONE;
+    this.modifier.addModifier(this.bend);
+    this.modifier.apply();
+    geometry.vertices = temporaryMesh.geometry.vertices;
   }
 
   // geometry.center();

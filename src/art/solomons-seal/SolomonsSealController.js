@@ -32,7 +32,11 @@ export default ({ controls }) => {
       sizeStartY: 0.01,
       sizeEndX: 0.12,
       sizeEndY: 0.06,
-      color: new ColorSampler().getRandomColor()
+      color: new ColorSampler().getRandomColor(),
+      windForce: 0,
+      windDirectionX: 0,
+      windDirectionY: 0,
+      windDirectionZ: 0
     };
 
     const onDataChange = function() {
@@ -75,6 +79,14 @@ export default ({ controls }) => {
         );
         instance.setSizeEnd(new Vector2(config.sizeEndX, config.sizeEndY));
         instance.setColor(config.color);
+        instance.setWindForce(config.windForce);
+        instance.setWindDirection(
+          new Vector3(
+            config.windDirectionX,
+            config.windDirectionY,
+            config.windDirectionZ
+          )
+        );
       } catch (error) {
         console.log("Instance required ", error);
       }
@@ -201,6 +213,24 @@ export default ({ controls }) => {
       .onFinishChange(onDataChangeComplete);
     leavesFolder
       .addColor(config, "color")
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+
+    const windFolder = gui.addFolder("Wind");
+    windFolder
+      .add(config, "windForce", -1, 1, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    windFolder
+      .add(config, "windDirectionX", -5, 5, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    windFolder
+      .add(config, "windDirectionY", -5, 5, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    windFolder
+      .add(config, "windDirectionZ", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 

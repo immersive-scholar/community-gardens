@@ -45,7 +45,9 @@ class SolomonsSeal extends BaseRenderable {
       rotationStart = new Vector3(0, 0, 0),
       rotationEnd = new Vector3(-1.5, 0.7, 0.2),
       sizeStart = new Vector2(0.02, 0.01),
-      sizeEnd = new Vector2(0.1, 0.05)
+      sizeEnd = new Vector2(0.1, 0.05),
+      windForce = 0,
+      windDirection = new Vector3(0, 0, 0)
     } = this.state;
 
     // stem
@@ -86,7 +88,9 @@ class SolomonsSeal extends BaseRenderable {
       rotationEnd,
       leafMidPoint: 0.4,
       R: this.R,
-      animated
+      animated,
+      windForce,
+      windDirection
     });
     this.group.add(this.leavesMesh);
 
@@ -139,62 +143,59 @@ class SolomonsSeal extends BaseRenderable {
     return { curvePainter, geometry, curve };
   };
 
-  createLeaves({
-    leafCount = 10,
-    mesh,
-    color,
-    height = 1,
-    leafStartPoint,
-    leafEndPoint,
-    pointCount,
-    sizeStart,
-    sizeEnd,
-    rotationStart,
-    rotationEnd
-  }) {
-    const curvePoints = mesh.curve.getPoints(pointCount),
-      leaves = [];
+  // createLeaves({
+  //   leafCount = 10,
+  //   mesh,
+  //   color,
+  //   height = 1,
+  //   leafStartPoint,
+  //   leafEndPoint,
+  //   pointCount,
+  //   sizeStart,
+  //   sizeEnd,
+  //   rotationStart,
+  //   rotationEnd
+  // }) {
+  //   const curvePoints = mesh.curve.getPoints(pointCount),
+  //     leaves = [];
 
-    curvePoints.reverse();
+  //   curvePoints.reverse();
 
-    for (
-      let i = 0, ratio, leaf, pos, length, width, positionIndex;
-      i < leafCount;
-      i += this.R(2) + 1
-    ) {
-      // size = this.R.floatBetween(0.04, 0.12);
-      ratio = i / leafCount;
-      // length = (1 - ratio) * sizeStep.x;
-      // width = (1 - ratio) * sizeStep.y;
-      length = sizeStart.x + (sizeEnd.x - sizeStart.x) * ratio;
-      width = sizeStart.y + (sizeEnd.y - sizeStart.y) * ratio;
-      leaf = new SolomonsSealLeaf({
-        color,
-        length,
-        width,
-        camera: this.camera,
-        lineCount: this.R.intBetween(3, 5)
-      });
+  //   for (
+  //     let i = 0, ratio, leaf, pos, length, width, positionIndex;
+  //     i < leafCount;
+  //     i += this.R(2) + 1
+  //   ) {
+  //     // size = this.R.floatBetween(0.04, 0.12);
+  //     ratio = i / leafCount;
+  //     // length = (1 - ratio) * sizeStep.x;
+  //     // width = (1 - ratio) * sizeStep.y;
+  //     length = sizeStart.x + (sizeEnd.x - sizeStart.x) * ratio;
+  //     width = sizeStart.y + (sizeEnd.y - sizeStart.y) * ratio;
+  //     leaf = new SolomonsSealLeaf({
+  //       color,
+  //       length,
+  //       width,
+  //       camera: this.camera,
+  //       lineCount: this.R.intBetween(3, 5)
+  //     });
 
-      positionIndex =
-        Math.ceil(leafStartPoint * pointCount) +
-        Math.floor(
-          (i / leafCount) * pointCount * (leafEndPoint - leafStartPoint)
-        ) -
-        1;
-      pos = curvePoints[positionIndex];
-      leaf.group.position.x = pos.x;
-      leaf.group.position.y = pos.y;
-      leaf.group.position.z = pos.z;
-      // leaf.group.rotation.x = rotationStep.x * ratio;
-      // leaf.group.rotation.y = rotationStep.y * ratio;
-      // leaf.group.rotation.z = rotationStep.z * ratio;
+  //     positionIndex =
+  //       Math.ceil(leafStartPoint * pointCount) +
+  //       Math.floor(
+  //         (i / leafCount) * pointCount * (leafEndPoint - leafStartPoint)
+  //       ) -
+  //       1;
+  //     pos = curvePoints[positionIndex];
+  //     leaf.group.position.x = pos.x;
+  //     leaf.group.position.y = pos.y;
+  //     leaf.group.position.z = pos.z;
 
-      this.group.add(leaf.group);
-      leaves.push(leaf);
-    }
-    return leaves;
-  }
+  //     this.group.add(leaf.group);
+  //     leaves.push(leaf);
+  //   }
+  //   return leaves;
+  // }
 
   animateLeaves({ delay }) {
     this.tween && this.tween.kill(null, this);
@@ -290,6 +291,18 @@ class SolomonsSeal extends BaseRenderable {
 
   setColor(color) {
     this.setState({ color }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setWindForce(windForce) {
+    this.setState({ windForce }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setWindDirection(windDirection) {
+    this.setState({ windDirection }, isDirty => {
       isDirty && this.init();
     });
   }

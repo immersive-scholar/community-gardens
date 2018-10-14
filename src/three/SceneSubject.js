@@ -12,7 +12,7 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
 
   let solomonsSeal,
     solomonsSealGroup = new Group(),
-    count = 10,
+    count = 1,
     solomonsSealInstances = [];
 
   solomonsSealGroup.position.y = 0;
@@ -22,7 +22,13 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
       solomonsSeal = new SolomonsSeal(
         {
           delay: i * 0.05,
-          leafCount: R.intBetween(10, 24)
+          leafCount: R.intBetween(10, 24),
+          windForce: R.floatBetween(0, 1),
+          windDirection: new Vector3(
+            0,
+            R.floatBetween(-1, 1),
+            R.floatBetween(-1, 1)
+          )
           // offset: new Vector3(x * 0.02, (x + y) * 0.02, y * 0.02)
         },
         camera,
@@ -42,8 +48,8 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
     group: solomonsSealGroup,
     rows: count,
     columns: count,
-    rowWidth: 0.15,
-    columnHeight: 0.15
+    rowWidth: 0.1,
+    columnHeight: 0.1
   });
 
   scene.add(solomonsSealGroup);
