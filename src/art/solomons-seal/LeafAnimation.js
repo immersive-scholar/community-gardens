@@ -5,20 +5,43 @@ import {
   DoubleSide,
   TextureLoader,
   RepeatWrapping,
-  Vector2
+  Vector2,
+  Vector3
 } from "three-full";
+import { TweenMax, Power2 } from "gsap";
 import {
   ModelBufferGeometry,
   LambertAnimationMaterial
 } from "three/vendor/BAS";
+import Modifiers from "three/vendor/Modifiers";
 
 function Animation({
   modelGeometry,
   color,
   animated,
   imagePath = "/img/patterns/leaf-1.png",
-  leafTextureSize = new Vector2(20, -10)
+  leafTextureSize = new Vector2(20, -10),
+  windForce,
+  windDirection
 }) {
+  // bend
+  // if (windForce) {
+  //   let temporaryMesh = new Mesh(modelGeometry.clone(), null);
+  //   this.modifier = Modifiers.ModifierStack(temporaryMesh);
+  //   this.bend = Modifiers.Bend(
+  //     windDirection.x,
+  //     windDirection.y,
+  //     windDirection.z
+  //   );
+  //   this.bend.force = windForce;
+  //   this.bend.constraint = Modifiers.ModConstant().NONE;
+  //   this.modifier.addModifier(this.bend);
+  //   this.modifier.apply();
+  //   modelGeometry.vertices = temporaryMesh.geometry.vertices;
+
+  //   temporaryMesh = undefined;
+  // }
+
   const geometry = new ModelBufferGeometry(modelGeometry);
 
   // var aColor = geometry.createAttribute("color", 3);
@@ -47,6 +70,8 @@ function Animation({
     lights: true,
     uniforms: {
       uTime: { value: animated ? 0 : 1 },
+      uWindForce: { value: windForce },
+      uWindDirection: { value: new Vector3(0.2, 0.2, 0.2) },
       uTextureSize: { value: new Vector2(10, 10) },
       color: color
     },
@@ -54,8 +79,20 @@ function Animation({
       map: leafTexture,
       diffuse: new Color(color)
     },
-    vertexParameters: ["uniform float uTime;"],
-    vertexPosition: ["transformed.z *= uTime;", "transformed.y *= uTime;"],
+    vertexParameters: [
+      "uniform float uTime;",
+      "uniform float uWindForce;",
+      "uniform vec3 uWindDirection;"
+    ],
+    // twist from https://github.com/marklundin/glsl-sdf-ops
+    vertexPosition: [
+      "float  c = cos(uWindForce * uWindDirection.z+uWindForce);",
+      "float  s = sin(uWindForce * uWindDirection.x+uWindForce);",
+      "mat2   m = mat2(c, -s, s, c);",
+      "transformed = vec3(m*transformed.xy, transformed.z);",
+      "transformed.z *= uTime;",
+      "transformed.y *= uTime;"
+    ],
     fragmentParameters: ["uniform float uTime;", "uniform vec2 uTextureSize;"],
     fragmentMap: [
       "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
@@ -66,6 +103,8 @@ function Animation({
   });
 
   material.uniforms.uTextureSize.value = leafTextureSize;
+  material.uniforms.uWindForce.value = windForce;
+  material.uniforms.uWindDirection.value = windDirection;
 
   geometry.computeVertexNormals();
   geometry.bufferUVs();

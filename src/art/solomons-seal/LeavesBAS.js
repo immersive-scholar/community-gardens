@@ -7,9 +7,7 @@ import {
   Mesh,
   Vector3
 } from "three-full";
-import isEqual from "lodash/isEqual";
 import LeafAnimation from "./LeafAnimation";
-import Modifiers from "three/vendor/Modifiers";
 
 const LeavesBAS = ({
   leafCount,
@@ -112,22 +110,6 @@ const LeavesBAS = ({
     geometry.merge(shapeGeometry);
   }
 
-  // bend
-  if (windForce) {
-    const temporaryMesh = new Mesh(geometry.clone(), null);
-    this.modifier = Modifiers.ModifierStack(temporaryMesh);
-    this.bend = Modifiers.Bend(
-      windDirection.x,
-      windDirection.y,
-      windDirection.z
-    );
-    this.bend.force = windForce;
-    this.bend.constraint = Modifiers.ModConstant().NONE;
-    this.modifier.addModifier(this.bend);
-    this.modifier.apply();
-    geometry.vertices = temporaryMesh.geometry.vertices;
-  }
-
   // geometry.center();
 
   // 5. feed the geometry to the animation
@@ -135,7 +117,9 @@ const LeavesBAS = ({
     modelGeometry: geometry,
     color,
     animated,
-    leafTextureSize
+    leafTextureSize,
+    windForce,
+    windDirection
   });
   return leafAnimation;
 };
