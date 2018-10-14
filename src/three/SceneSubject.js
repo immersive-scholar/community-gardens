@@ -50,9 +50,9 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
     }
   }
 
-  const solomonsSealController = new SolomonsSealController({ controls });
-  solomonsSealController.setInstance(solomonsSealInstances[0]);
-  solomonsSealController.enable();
+  // const solomonsSealController = new SolomonsSealController({ controls });
+  // solomonsSealController.setInstance(solomonsSealInstances[0]);
+  // solomonsSealController.enable();
 
   GridLayoutHelper({
     group: solomonsSealGroup,

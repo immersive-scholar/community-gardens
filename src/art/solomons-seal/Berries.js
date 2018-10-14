@@ -34,7 +34,6 @@ const Berries = ({
 
   // setup prefab geometry
   const geometry = new PrefabBufferGeometry(prefab, berryCount);
-  const berryColor = new Color(color);
 
   const timeline = new Timeline();
 
@@ -70,7 +69,11 @@ const Berries = ({
     geometry.setPrefabData(aDelayDuration, i, dataArray);
 
     // position
-    position = new Vector3(R.random(), R.random(), R.random());
+    position = new Vector3(
+      R.floatBetween(-0.2, 0.2),
+      R.floatBetween(-0.2, 0.2),
+      R.floatBetween(-0.2, 0.2)
+    );
 
     position.toArray(dataArray);
     geometry.setPrefabData(aPosition, i, dataArray);
@@ -85,6 +88,8 @@ const Berries = ({
   }
 
   // geometry.center();
+  geometry.computeBoundingSphere();
+  geometry.computeVertexNormals();
 
   // feed the geometry to the animation
   const berryAnimation = new BerryAnimation({

@@ -54,7 +54,7 @@ class SolomonsSeal extends BaseRenderable {
       glitchAmplitude = 0,
       glitchAngle = new Vector3(1, 1, 1),
       glitchThreshold = new Vector3(1, 1, 1),
-      berrySize = 0.1,
+      berrySize = 0.01,
       berryCount = 24,
       berryColor = 0xffffff
     } = this.state;
