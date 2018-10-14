@@ -7,7 +7,8 @@ import BaseRenderable from "art/common/BaseRenderable";
 
 import SolomonsSealLeaf from "./SolomonsSealLeaf";
 import StemGeometry from "./StemGeometry";
-import LeavesBAS from "./LeavesBAS";
+import Leaves from "./Leaves";
+import Berries from "./Berries";
 
 class SolomonsSeal extends BaseRenderable {
   constructor(props, camera, R) {
@@ -52,7 +53,10 @@ class SolomonsSeal extends BaseRenderable {
       hslRange = 0.2,
       glitchAmplitude = 0,
       glitchAngle = new Vector3(1, 1, 1),
-      glitchThreshold = new Vector3(1, 1, 1)
+      glitchThreshold = new Vector3(1, 1, 1),
+      berrySize = 0.1,
+      berryCount = 24,
+      berryColor = 0xffffff
     } = this.state;
 
     // stem
@@ -81,12 +85,24 @@ class SolomonsSeal extends BaseRenderable {
     });
     this.group.add(this.stem.curvePainter.mesh);
 
-    this.leavesMesh = new LeavesBAS({
+    this.berriesMesh = new Berries({
+      size: berrySize,
+      berryCount,
+      color: berryColor,
+      referenceMesh: this.stem,
+      R: this.R,
+      animated,
+      windForce,
+      windDirection
+    });
+    this.group.add(this.berriesMesh);
+
+    this.leavesMesh = new Leaves({
       leafCount,
       size: 0.1,
       centerX: 0,
       centerY: 0,
-      mesh: this.stem,
+      referenceMesh: this.stem,
       color,
       pointCount: pointCount * 3,
       leafStartPoint,
@@ -369,12 +385,20 @@ class SolomonsSeal extends BaseRenderable {
       this.leavesMesh.material.dispose();
       this.leavesMesh = undefined;
     }
+
+    if (this.berriesMesh) {
+      this.group.remove(this.berriesMesh);
+      this.berriesMesh.geometry.dispose();
+      this.berriesMesh.material.dispose();
+      this.berriesMesh = undefined;
+    }
   }
 
   render() {}
 
   update() {
     this.leavesMesh.material.uniforms.uTime.value = this.currentTime;
+    this.berriesMesh.material.uniforms.uTime.value = this.currentTime;
   }
 }
 

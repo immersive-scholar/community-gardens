@@ -9,9 +9,9 @@ import {
 } from "three-full";
 import LeafAnimation from "./LeafAnimation";
 
-const LeavesBAS = ({
+const Leaves = ({
   leafCount,
-  mesh,
+  referenceMesh,
   color,
   pointCount = 24,
   leafStartPoint,
@@ -42,7 +42,7 @@ const LeavesBAS = ({
   // }
 
   const geometry = new Geometry(),
-    curvePoints = mesh.curve.getPoints(pointCount);
+    curvePoints = referenceMesh.curve.getPoints(pointCount);
   curvePoints.reverse();
 
   for (
@@ -132,4 +132,4 @@ const LeavesBAS = ({
   return leafAnimation;
 };
 
-export default LeavesBAS;
+export default Leaves;

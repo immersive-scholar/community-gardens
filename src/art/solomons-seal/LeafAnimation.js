@@ -117,8 +117,8 @@ function Animation({
   geometry.bufferUVs();
 
   Mesh.call(this, geometry, material);
-  this.castShadow = true;
 
+  this.castShadow = true;
   this.frustumCulled = false;
 }
 Animation.prototype = Object.create(Mesh.prototype);
