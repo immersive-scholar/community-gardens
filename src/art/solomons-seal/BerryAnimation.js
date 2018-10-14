@@ -24,7 +24,10 @@ function BerryAnimation({
     flatShading: true,
     side: DoubleSide,
     fog: true,
-    lights: true,
+    // lights: true,
+    wireframe: !true,
+    transparent: true,
+    opacity: 0.5,
     uniforms: {
       uTime: { value: 0 },
       uWindForce: { value: windForce },
@@ -65,7 +68,6 @@ function BerryAnimation({
       "transformed += aPosition * uTime;"
     ]
   });
-  console.log(geometry, material);
 
   material.uniforms.uWindForce.value = windForce;
   material.uniforms.uWindDirection.value = windDirection;
@@ -74,7 +76,7 @@ function BerryAnimation({
 
   Mesh.call(this, geometry, material);
 
-  this.castShadow = true;
+  //   this.castShadow = true;
   this.frustumCulled = false;
 }
 

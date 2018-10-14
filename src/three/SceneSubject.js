@@ -12,7 +12,7 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
 
   let solomonsSeal,
     solomonsSealGroup = new Group(),
-    count = 1,
+    count = 8,
     solomonsSealInstances = [];
 
   solomonsSealGroup.position.y = 0;
@@ -50,9 +50,9 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
     }
   }
 
-  // const solomonsSealController = new SolomonsSealController({ controls });
-  // solomonsSealController.setInstance(solomonsSealInstances[0]);
-  // solomonsSealController.enable();
+  const solomonsSealController = new SolomonsSealController({ controls });
+  solomonsSealController.setInstance(solomonsSealInstances[0]);
+  solomonsSealController.enable();
 
   GridLayoutHelper({
     group: solomonsSealGroup,

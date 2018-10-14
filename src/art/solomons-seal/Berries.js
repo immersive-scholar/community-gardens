@@ -7,7 +7,8 @@ import {
   Mesh,
   Vector3,
   SphereGeometry,
-  Color
+  Color,
+  _Math
 } from "three-full";
 import { PrefabBufferGeometry, Timeline } from "three/vendor/BAS";
 import BerryAnimation from "./BerryAnimation";
@@ -20,7 +21,11 @@ const Berries = ({
   R,
   animated,
   windForce = 0.1,
-  windDirection = new Vector3(2, 2, 0)
+  windDirection = new Vector3(2, 2, 0),
+  berryStartPoint = 0.3,
+  berryEndPoint = 0.9,
+  pointCount = 100,
+  berryDisplacement = new Vector2(0.1, 0.1)
 }) => {
   const settings = {
     maxDelay: 0.0,
@@ -30,7 +35,7 @@ const Berries = ({
     elasticPeriod: 0.125
   };
   // calculate prefab size based on the number of prefabs to spread over the surface
-  const prefab = new SphereGeometry(size, 16, 16);
+  const prefab = new SphereGeometry(size, 4, 4);
 
   // setup prefab geometry
   const geometry = new PrefabBufferGeometry(prefab, berryCount);
@@ -62,17 +67,34 @@ const Berries = ({
 
   this.totalDuration = timeline.duration;
 
-  for (let i = 0, position; i < berryCount; i++) {
+  const curvePoints = referenceMesh.curve.getPoints(pointCount);
+  curvePoints.reverse();
+
+  for (
+    let i = 0, ratio, position, tangent, positionIndex, angle;
+    i < berryCount;
+    i++
+  ) {
+    ratio = i / berryCount;
     // animation
     dataArray[0] = settings.maxDelay * (i / berryCount);
     dataArray[1] = timeline.duration;
     geometry.setPrefabData(aDelayDuration, i, dataArray);
 
     // position
-    position = new Vector3(
-      R.floatBetween(-0.2, 0.2),
-      R.floatBetween(-0.2, 0.2),
-      R.floatBetween(-0.2, 0.2)
+    positionIndex =
+      Math.ceil(berryStartPoint * pointCount) +
+      Math.floor(ratio * pointCount * (berryEndPoint - berryStartPoint)) -
+      1;
+    position = curvePoints[positionIndex];
+    tangent = referenceMesh.curve.getTangent(positionIndex / berryCount);
+    angle = _Math.degToRad((1440 / pointCount) * i);
+    position.add(
+      new Vector3(
+        Math.cos(angle) * berryDisplacement.x * ratio,
+        0,
+        Math.sin(angle) * berryDisplacement.y * ratio
+      )
     );
 
     position.toArray(dataArray);

@@ -56,7 +56,11 @@ class SolomonsSeal extends BaseRenderable {
       glitchThreshold = new Vector3(1, 1, 1),
       berrySize = 0.01,
       berryCount = 24,
-      berryColor = 0xffffff
+      berryColor = 0xffffff,
+      berryDisplacement = new Vector2(
+        this.R.floatBetween(-0.4, 0.4),
+        this.R.floatBetween(-0.4, 0.4)
+      )
     } = this.state;
 
     // stem
@@ -88,6 +92,7 @@ class SolomonsSeal extends BaseRenderable {
     this.berriesMesh = new Berries({
       size: berrySize,
       berryCount,
+      berryDisplacement,
       color: berryColor,
       referenceMesh: this.stem,
       R: this.R,
