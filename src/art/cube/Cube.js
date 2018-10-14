@@ -1,10 +1,7 @@
-import { Mesh, BoxGeometry } from "three";
-import { MeshPhongMaterial } from "three-full";
+import { Mesh, BoxGeometry, MeshPhongMaterial } from "three-full";
 
-import Circle from "art/circle/Circle";
-
-const Cube = ({ size = 1 }) => {
-  const geometry = Cube.createGeometry(size);
+const Cube = ({ width = 1, height = 1, length = 1 }) => {
+  const geometry = Cube.createGeometry(width, height, length);
   const material = Cube.createMaterial();
 
   const mesh = new Mesh(geometry, material);
@@ -14,8 +11,8 @@ const Cube = ({ size = 1 }) => {
   };
 };
 
-Cube.createGeometry = size => {
-  return new BoxGeometry(size, size, size);
+Cube.createGeometry = (width, height, length) => {
+  return new BoxGeometry(width, length, height);
 };
 
 Cube.createMaterial = () => {
