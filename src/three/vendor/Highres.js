@@ -269,12 +269,7 @@ class Highres {
     const searchTexture = this.smaaPass.materialWeights.uniforms.tSearch.value;
 
     areaTexture.image.addEventListener("load", () => {
-      console.log(
-        "searchTexture.image.complete ",
-        searchTexture.image.complete
-      );
-      if (searchTexture.image.complete) {
-        console.log("DONE area");
+      if (searchTexture.image.complete && !areaTexture.image.complete) {
         done(this.smaaPass);
       }
     });
@@ -458,7 +453,7 @@ class Highres {
               const blob = new window.Blob([data], { type: "image/png" });
               const w = this.state.width * this.state.factor;
               const h = this.state.height * this.state.factor;
-              const filename = `hr-${w}x${h}-${Date.now()}`;
+              const filename = `hr-${Date.now()}-${w}x${h}`;
               download(blob, filename, "image/png");
 
               this.restorePreviousState();
@@ -579,8 +574,8 @@ class Highres {
       }-normal-mode-title">High resolution rendering</div>
           
           <div class="title mode" id="${
-  this.domId
-}-depth-mode-title">Depth rendering</div>
+            this.domId
+          }-depth-mode-title">Depth rendering</div>
         <br><br>
         WARNING: <i>This can take time. The browser tab will be busy for a few seconds (or more).</i>
         <ul>
@@ -612,11 +607,11 @@ class Highres {
       `<div class="title">Rendering</div>
       <br><br>
       Sit back and relax. A beautiful <span id="${
-  this.domId
-}-width"></span> x <span id="${this.domId}-height"></span> 
+        this.domId
+      }-width"></span> x <span id="${this.domId}-height"></span> 
       image (<span id="${
-  this.domId
-}-dpi"></span> inches at 300 dpi) is on the way<span id="loader-dots">...</span>
+        this.domId
+      }-dpi"></span> inches at 300 dpi) is on the way<span id="loader-dots">...</span>
       <br><br>
       The scene may resize and look distorted for a few seconds.
       `,
