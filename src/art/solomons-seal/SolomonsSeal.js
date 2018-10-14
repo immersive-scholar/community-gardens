@@ -49,7 +49,10 @@ class SolomonsSeal extends BaseRenderable {
       windForce = 0,
       windDirection = new Vector3(0, 0, 0),
       hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 1, 0.3),
-      hslRange = 0.2
+      hslRange = 0.2,
+      glitchAmplitude = 0,
+      glitchAngle = new Vector3(1, 1, 1),
+      glitchThreshold = new Vector3(1, 1, 1)
     } = this.state;
 
     // stem
@@ -58,7 +61,11 @@ class SolomonsSeal extends BaseRenderable {
       pointCount,
       displacement,
       scale,
-      offset
+      offset,
+      glitchAmplitude,
+      glitchThreshold,
+      glitchAngle,
+      R: this.R
     });
 
     // geometry.vertices = this.bendGeometry({ geometry, R });
@@ -319,6 +326,22 @@ class SolomonsSeal extends BaseRenderable {
 
   setHSLRange(hslRange) {
     this.setState({ hslRange }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setGlitchAmplitude(glitchAmplitude) {
+    this.setState({ glitchAmplitude }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setGlitchAngle(glitchAngle) {
+    this.setState({ glitchAngle }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setGlitchThreshold(glitchThreshold) {
+    this.setState({ glitchThreshold }, isDirty => {
       isDirty && this.init();
     });
   }

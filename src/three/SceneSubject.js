@@ -12,7 +12,7 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
 
   let solomonsSeal,
     solomonsSealGroup = new Group(),
-    count = 10,
+    count = 1,
     solomonsSealInstances = [];
 
   solomonsSealGroup.position.y = 0;

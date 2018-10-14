@@ -1,6 +1,7 @@
 import { Geometry, Vector3 } from "three-full";
 import { noise3D } from "util/NoiseFunctions";
 import { gradientTransform } from "util/GradientTransform";
+import Glitch from "art/effects/Glitch";
 import { Power2 } from "gsap";
 
 const StemGeometry = ({
@@ -8,7 +9,11 @@ const StemGeometry = ({
   pointCount = 8,
   scale,
   displacement,
-  offset
+  offset,
+  R,
+  glitchAmplitude = 0,
+  glitchAngle = new Vector3(1, 1, 1),
+  glitchThreshold = new Vector3(1, 1, 1)
 }) => {
   let x,
     y,
@@ -32,6 +37,17 @@ const StemGeometry = ({
   });
 
   geometry.vertices.reverse();
+
+  // apply glitch effect
+  if (glitchAmplitude) {
+    geometry.vertices = Glitch({
+      points: geometry.vertices,
+      angle: glitchAngle,
+      amplitude: glitchAmplitude,
+      threshold: glitchThreshold,
+      R
+    });
+  }
 
   // reduces noise at the bottom
   geometry.vertices = gradientTransform({

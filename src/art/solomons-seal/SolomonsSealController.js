@@ -42,7 +42,14 @@ export default ({ controls }) => {
       hslBaseL: 0.3,
       hslRangeH: 0.2,
       hslRangeS: 0,
-      hslRangeL: 0.2
+      hslRangeL: 0.2,
+      glitchAmplitude: 0,
+      glitchAngleX: 1,
+      glitchAngleY: 1,
+      glitchAngleZ: 1,
+      glitchThresholdX: 1,
+      glitchThresholdY: 1,
+      glitchThresholdZ: 1
     };
 
     const tempColorObject = {};
@@ -104,6 +111,21 @@ export default ({ controls }) => {
         instance.setHSLRange(
           new Vector3(config.hslRangeH, config.hslRangeS, config.hslRangeL)
         );
+        instance.setGlitchAmplitude(config.glitchAmplitude);
+        instance.setGlitchAngle(
+          new Vector3(
+            config.glitchAngleX,
+            config.glitchAngleY,
+            config.glitchAngleZ
+          )
+        );
+        instance.setGlitchThreshold(
+          new Vector3(
+            config.glitchThresholdX,
+            config.glitchThresholdY,
+            config.glitchThresholdZ
+          )
+        );
       } catch (error) {
         console.log("Instance required ", error);
       }
@@ -115,7 +137,7 @@ export default ({ controls }) => {
 
     const gui = new dat.GUI().getRoot();
 
-    const positionFolder = gui.addFolder("position");
+    const positionFolder = gui.addFolder("Position");
     positionFolder
       .add(config, "x", -5, 5, 0.01)
       .onChange(onDataChange)
@@ -129,7 +151,7 @@ export default ({ controls }) => {
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 
-    const offsetFolder = gui.addFolder("offset");
+    const offsetFolder = gui.addFolder("Offset");
     offsetFolder
       .add(config, "offsetX", -2, 2, 0.01)
       .onChange(onDataChange)
@@ -143,7 +165,7 @@ export default ({ controls }) => {
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 
-    const displacementFolder = gui.addFolder("displacement");
+    const displacementFolder = gui.addFolder("Displacement");
     displacementFolder
       .add(config, "displacementX", -1, 1, 0.01)
       .onChange(onDataChange)
@@ -177,7 +199,7 @@ export default ({ controls }) => {
 
     const leavesFolder = gui.addFolder("Leaves");
     leavesFolder
-      .add(config, "leafCount", 0, 48, 1)
+      .add(config, "leafCount", 0, 96, 1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
@@ -274,6 +296,36 @@ export default ({ controls }) => {
       .onFinishChange(onDataChangeComplete);
     windFolder
       .add(config, "windDirectionZ", -5, 5, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+
+    const glitchFolder = gui.addFolder("Glitch");
+    glitchFolder
+      .add(config, "glitchAmplitude", 0, 0.1, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    glitchFolder
+      .add(config, "glitchAngleX", 0, 1, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    glitchFolder
+      .add(config, "glitchAngleY", 0, 1, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    glitchFolder
+      .add(config, "glitchAngleZ", 0, 1, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    glitchFolder
+      .add(config, "glitchThresholdX", 0, 1, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    glitchFolder
+      .add(config, "glitchThresholdY", 0, 1, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    glitchFolder
+      .add(config, "glitchThresholdZ", 0, 1, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 
