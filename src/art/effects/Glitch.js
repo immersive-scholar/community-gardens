@@ -11,19 +11,14 @@ const Glitch = ({
   threshold = new Vector3(0.9, 0.9, 0.9)
 }) => {
   let percent,
-    newPoint = new Vector3(),
-    lastPoint = new Vector3();
+    newPoint = new Vector3();
   const pointCount = points.length;
   return map(points, (point, index) => {
     percent = 1 - ease.getRatio(index / pointCount);
     newPoint.copy(point);
-    if (R.random() > threshold.x)
-      newPoint.x = lastPoint.x + percent * amplitude * angle.x;
-    if (R.random() > threshold.y)
-      newPoint.y = lastPoint.y + percent * amplitude * angle.y;
-    if (R.random() > threshold.z)
-      newPoint.z = lastPoint.y + percent * amplitude * angle.z;
-    lastPoint.copy(newPoint);
+    if (R.random() > threshold.x) newPoint.x -= percent * amplitude * angle.x;
+    if (R.random() > threshold.y) newPoint.y -= percent * amplitude * angle.y;
+    if (R.random() > threshold.z) newPoint.z -= percent * amplitude * angle.z;
     return newPoint.clone();
   });
 };
