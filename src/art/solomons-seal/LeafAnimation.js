@@ -6,7 +6,8 @@ import {
   TextureLoader,
   RepeatWrapping,
   Vector2,
-  Vector3
+  Vector3,
+  VertexColors
 } from "three-full";
 import { TweenMax, Power2 } from "gsap";
 import {
@@ -16,13 +17,16 @@ import {
 import Modifiers from "three/vendor/Modifiers";
 
 function Animation({
+  R,
   modelGeometry,
   color,
   animated,
-  imagePath = "/img/patterns/leaf-1.png",
-  leafTextureSize = new Vector2(20, -10),
+  imagePath = "/img/patterns/diamonds-1.png",
+  leafTextureSize = new Vector2(20, -20),
   windForce,
-  windDirection
+  windDirection,
+  hslBase,
+  hslRange
 }) {
   // bend
   // if (windForce) {
@@ -43,27 +47,30 @@ function Animation({
   // }
 
   const geometry = new ModelBufferGeometry(modelGeometry);
+  const aColor = geometry.createAttribute("color", 3);
+  const leafColor = new Color(color);
 
-  // var aColor = geometry.createAttribute("color", 3);
-  // var leafColor = new Color(color);
+  for (let i = 0, j; i < aColor.array.length; i += 18) {
+    // 6 * 3
+    leafColor.setHSL(
+      hslBase.x + R.floatBetween(-hslRange.x, hslRange.x),
+      hslBase.y + R.floatBetween(-hslRange.y, hslRange.y),
+      hslBase.z + R.floatBetween(-hslRange.z, hslRange.z)
+    );
 
-  // for (i = 0; i < aColor.array.length; i += 18) {
-  //   // 6 * 3
-  //   leafColor.setHSL(1, 1, _Math.randFloat(0.5, 1.0));
-
-  //   for (j = 0; j < 18; j += 3) {
-  //     aColor.array[i + j] = leafColor.r;
-  //     aColor.array[i + j + 1] = leafColor.g;
-  //     aColor.array[i + j + 2] = leafColor.b;
-  //   }
-  // }
+    for (j = 0; j < 18; j += 3) {
+      aColor.array[i + j] = leafColor.r;
+      aColor.array[i + j + 1] = leafColor.g;
+      aColor.array[i + j + 2] = leafColor.b;
+    }
+  }
 
   const leafTexture = new TextureLoader().load(imagePath, texture => {
     texture.wrapS = texture.wrapT = RepeatWrapping;
   });
 
   const material = new LambertAnimationMaterial({
-    // vertexColors: VertexColors,
+    vertexColors: VertexColors,
     transparent: true,
     side: DoubleSide,
     fog: true,

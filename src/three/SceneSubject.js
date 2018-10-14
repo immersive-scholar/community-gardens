@@ -12,7 +12,7 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
 
   let solomonsSeal,
     solomonsSealGroup = new Group(),
-    count = 5,
+    count = 10,
     solomonsSealInstances = [];
 
   solomonsSealGroup.position.y = 0;
@@ -28,6 +28,16 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
             R.floatBetween(-0.5, 0.5),
             0,
             R.floatBetween(-0.5, 0.5)
+          ),
+          hslBase: new Vector3(
+            1,
+            R.floatBetween(0, 0.5),
+            R.floatBetween(0, 0.5)
+          ),
+          hslRange: new Vector3(
+            R.floatBetween(0, 0.2),
+            R.floatBetween(0.2, 0.4),
+            R.floatBetween(0.2, 0.5)
           )
           // offset: new Vector3(x * 0.02, (x + y) * 0.02, y * 0.02)
         },

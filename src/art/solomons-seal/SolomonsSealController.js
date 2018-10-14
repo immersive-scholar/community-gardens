@@ -1,5 +1,5 @@
 import * as dat from "dat.gui";
-import { Vector2, Vector3 } from "three-full";
+import { Vector2, Vector3, Color } from "three-full";
 import ColorSampler from "util/ColorSampler";
 
 export default ({ controls }) => {
@@ -32,12 +32,23 @@ export default ({ controls }) => {
       sizeStartY: 0.01,
       sizeEndX: 0.12,
       sizeEndY: 0.06,
-      color: new ColorSampler().getRandomColor(),
       windForce: 0,
       windDirectionX: 0,
       windDirectionY: 0,
-      windDirectionZ: 0
+      windDirectionZ: 0,
+      color: new ColorSampler().getRandomColor(),
+      hslBaseH: 1,
+      hslBaseS: 0.3,
+      hslBaseL: 0.3,
+      hslRangeH: 0.2,
+      hslRangeS: 0,
+      hslRangeL: 0.2
     };
+
+    const tempColorObject = {};
+    config.hslBaseH = new Color(config.color).getHSL(tempColorObject).h;
+    config.hslBaseS = tempColorObject.s;
+    config.hslBaseL = tempColorObject.l;
 
     const onDataChange = function() {
       controls.enabled = false;
@@ -78,7 +89,6 @@ export default ({ controls }) => {
           new Vector2(config.sizeStartX, config.sizeStartY)
         );
         instance.setSizeEnd(new Vector2(config.sizeEndX, config.sizeEndY));
-        instance.setColor(config.color);
         instance.setWindForce(config.windForce);
         instance.setWindDirection(
           new Vector3(
@@ -86,6 +96,13 @@ export default ({ controls }) => {
             config.windDirectionY,
             config.windDirectionZ
           )
+        );
+        instance.setColor(config.color);
+        instance.setHSLBase(
+          new Vector3(config.hslBaseH, config.hslBaseS, config.hslBaseL)
+        );
+        instance.setHSLRange(
+          new Vector3(config.hslRangeH, config.hslRangeS, config.hslRangeL)
         );
       } catch (error) {
         console.log("Instance required ", error);
@@ -196,23 +213,49 @@ export default ({ controls }) => {
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(config, "sizeStartX", 0.1, 1, 0.01)
+      .add(config, "sizeStartX", 0.01, 1, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(config, "sizeStartY", 0.1, 1, 0.01)
+      .add(config, "sizeStartY", 0.01, 1, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(config, "sizeEndX", 0.1, 1, 0.01)
+      .add(config, "sizeEndX", 0.01, 1, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     leavesFolder
-      .add(config, "sizeEndY", 0.1, 1, 0.01)
+      .add(config, "sizeEndY", 0.01, 1, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
-    leavesFolder
+
+    const leavesColor = gui.addFolder("Leaf Colors");
+    leavesColor
       .addColor(config, "color")
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    leavesColor
+      .add(config, "hslBaseH", 0, 1, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    leavesColor
+      .add(config, "hslBaseS", 0, 1, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    leavesColor
+      .add(config, "hslBaseL", 0, 1, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    leavesColor
+      .add(config, "hslRangeH", 0, 1, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    leavesColor
+      .add(config, "hslRangeS", 0, 1, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    leavesColor
+      .add(config, "hslRangeL", 0, 1, 0.01)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 

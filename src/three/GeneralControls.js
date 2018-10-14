@@ -1,7 +1,7 @@
 import { OrbitControls } from "three-full";
 
 export default ({ camera }) => {
-  var controls = new OrbitControls(camera);
+  const controls = new OrbitControls(camera);
   controls.enableDamping = true;
   controls.dampingFactor = 0.15;
   controls.enableKeys = true;
@@ -11,6 +11,9 @@ export default ({ camera }) => {
 
   camera.position.set(0.75, 0.45, 0.75);
   controls.update();
+
+  // enable for console control.
+  window.controls = controls;
 
   return controls;
 };

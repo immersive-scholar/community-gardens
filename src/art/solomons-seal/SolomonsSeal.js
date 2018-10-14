@@ -47,7 +47,9 @@ class SolomonsSeal extends BaseRenderable {
       sizeStart = new Vector2(0.02, 0.01),
       sizeEnd = new Vector2(0.1, 0.05),
       windForce = 0,
-      windDirection = new Vector3(0, 0, 0)
+      windDirection = new Vector3(0, 0, 0),
+      hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 1, 0.3),
+      hslRange = 0.2
     } = this.state;
 
     // stem
@@ -90,7 +92,9 @@ class SolomonsSeal extends BaseRenderable {
       R: this.R,
       animated,
       windForce,
-      windDirection
+      windDirection,
+      hslBase,
+      hslRange
     });
     this.group.add(this.leavesMesh);
 
@@ -303,6 +307,18 @@ class SolomonsSeal extends BaseRenderable {
 
   setWindDirection(windDirection) {
     this.setState({ windDirection }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setHSLBase(hslBase) {
+    this.setState({ hslBase }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setHSLRange(hslRange) {
+    this.setState({ hslRange }, isDirty => {
       isDirty && this.init();
     });
   }

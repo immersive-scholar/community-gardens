@@ -21,11 +21,16 @@ const LeavesBAS = ({
   sizeStart,
   sizeEnd,
   leafMidPoint,
-  leafTextureSize = new Vector2(20, -10),
+  leafTextureSize = new Vector2(
+    (1 / (1 - sizeStart.x * sizeEnd.x)) * 10,
+    (-1 / (1 - sizeStart.y * sizeEnd.y)) * 10
+  ),
   R,
   animated,
   windForce = 0.1,
-  windDirection = new Vector3(2, 2, 0)
+  windDirection = new Vector3(2, 2, 0),
+  hslBase,
+  hslRange
 }) => {
   // pinwheel
   // for (let i = 0, t, x, y, angle; i <= pointCount; i++) {
@@ -114,12 +119,15 @@ const LeavesBAS = ({
 
   // 5. feed the geometry to the animation
   const leafAnimation = new LeafAnimation({
+    R,
     modelGeometry: geometry,
     color,
     animated,
     leafTextureSize,
     windForce,
-    windDirection
+    windDirection,
+    hslBase,
+    hslRange
   });
   return leafAnimation;
 };
