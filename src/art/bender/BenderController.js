@@ -5,15 +5,10 @@ export default ({ controls }) => {
   let instance;
   const enable = () => {
     var config = {
-      directionX: 1,
-      directionY: 0.2,
-      directionZ: 3,
-      axisX: 0,
-      axisY: 0,
-      axisZ: 0,
-      angleX: 0,
-      angleY: 0,
-      angleZ: 0
+      directionX: 0,
+      directionY: 0,
+      directionZ: 0,
+      force: 1
     };
 
     const onDataChange = function() {
@@ -22,10 +17,7 @@ export default ({ controls }) => {
         instance.setDirection(
           new Vector3(config.directionX, config.directionY, config.directionZ)
         );
-        instance.setAxis(new Vector3(config.axisX, config.axisY, config.axisZ));
-        instance.setAngle(
-          new Vector3(config.angleX, config.angleY, config.angleZ)
-        );
+        instance.setForce(config.force);
       } catch (error) {
         console.log("Instance required ", error);
       }
@@ -48,6 +40,10 @@ export default ({ controls }) => {
       .onFinishChange(onDataChangeComplete);
     gui
       .add(config, "directionZ", -range, range, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    gui
+      .add(config, "force", -range, range, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 
