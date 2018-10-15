@@ -20,8 +20,8 @@ const Berries = ({
   berryStartPoint = 0.3,
   berryEndPoint = 0.9,
   pointCount = 100,
-  berryDisplacement = new Vector2(0.1, 0.1),
-  berryDistanceFromStem = 0.01
+  berryDisplacement = new Vector2(0.01, 0.01),
+  berryDistanceFromStem = 0.1
 }) => {
   const settings = {
     maxDelay: 0.0,
@@ -67,74 +67,66 @@ const Berries = ({
   curvePoints.reverse();
 
   // create a few spots to cluster berries at
-  const groupingCount = R.intBetween(1, 5);
+  const groupingCount = 2; //R.intBetween(1, 5);
   const groupings = [];
-  let grouping, positionIndex;
+  let origin, positionIndex, group;
   for (let i = 0; i < groupingCount; i++) {
-    grouping = curvePoints[
+    origin = curvePoints[
       R.intBetween(pointCount * berryStartPoint, pointCount * berryEndPoint)
     ].clone();
-    groupings.push({ origin: grouping, count: 0, current: 0 });
+    groupings.push({
+      origin,
+      total: 0,
+      current: 0,
+      angle: R.intBetween(90, 270)
+    });
   }
 
   // how many in each group?
   for (let i = 0; i < berryCount; i++) {
     positionIndex = R.range(groupingCount);
-    groupings[positionIndex].count++;
+    groupings[positionIndex].total++;
   }
 
-  for (let i = 0, ratio, position, angle; i < berryCount; i++) {
+  for (let i = 0, ratio, groupRatio, position, angle; i < berryCount; i++) {
     ratio = i / berryCount;
     // animation
     dataArray[0] = settings.maxDelay * (i / berryCount);
     dataArray[1] = timeline.duration;
     geometry.setPrefabData(aDelayDuration, i, dataArray);
 
-    // position
-    positionIndex =
-      Math.ceil(berryStartPoint * pointCount) +
-      Math.floor(ratio * pointCount * (berryEndPoint - berryStartPoint)) -
-      1;
-    position = curvePoints[positionIndex];
-    angle = _Math.degToRad((1440 / pointCount) * i);
-    position.add(
-      new Vector3(
-        Math.cos(angle) * berryDisplacement.x * ratio,
-        0,
-        Math.sin(angle) * berryDisplacement.y * ratio
-      )
-    );
-
-    // positionIndex = R.range(groupingCount);
-    // grouping = groupings[positionIndex];
-    // position = grouping.origin.clone();
-    // // push away from stem
-    // position.addScaledVector(
-    //   new Vector3(1 + berryDisplacement.x, 1, 1 + berryDisplacement.y),
-    //   berryDistanceFromStem * ratio
-    // );
-    // // arrange in circle
-    // angle = _Math.degToRad(
-    //   ((360 / grouping.count) * grouping.current) / grouping.count
-    // );
-    // const circleRadius = 0.2;
-    // console.log("angle ", angle);
+    // Spiral position
+    // positionIndex =
+    //   Math.ceil(berryStartPoint * pointCount) +
+    //   Math.floor(ratio * pointCount * (berryEndPoint - berryStartPoint)) -
+    //   1;
+    // position = curvePoints[positionIndex];
+    // angle = _Math.degToRad((1440 / pointCount) * i);
     // position.add(
     //   new Vector3(
-    //     Math.cos(angle) * circleRadius,
-    //     Math.sin(angle) * circleRadius,
-    //     0
-    //   ).normalize()
+    //     Math.cos(angle) * berryDisplacement.x * ratio,
+    //     0,
+    //     Math.sin(angle) * berryDisplacement.y * ratio
+    //   )
     // );
 
-    // grouping.count++;
+    // clustered position
+    positionIndex = R.range(groupingCount);
+    group = groupings[positionIndex];
+    position = group.origin.clone();
+    groupRatio = group.current / group.total;
 
-    position.add(
-      new Vector3(
-        Math.cos(berryDisplacement.y * positionIndex) / berryCount,
-        (berryDisplacement.x * positionIndex) / berryCount
-      )
-    );
+    // push away from stem
+    angle = _Math.degToRad(360 / group.total);
+    position.x += Math.cos(group.angle) * berryDistanceFromStem;
+    position.z += Math.sin(group.angle) * berryDistanceFromStem;
+
+    // arrange in circles
+    angle = _Math.degToRad(360 * groupRatio);
+    position.x += Math.cos(angle) * berryDisplacement.x;
+    position.y += Math.sin(angle) * berryDisplacement.y;
+
+    group.current++;
 
     position.toArray(dataArray);
     geometry.setPrefabData(aPosition, i, dataArray);

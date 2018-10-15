@@ -10,6 +10,7 @@ export default ({ camera }) => {
   controls.screenSpacePanning = false;
 
   camera.position.set(0.75, 0.45, 0.75);
+  // camera.position.set(0.1, 0.1, 0.1);
   controls.update();
 
   // enable for console control.

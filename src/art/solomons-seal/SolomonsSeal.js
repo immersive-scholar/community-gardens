@@ -54,10 +54,11 @@ class SolomonsSeal extends BaseRenderable {
       glitchAmplitude = 0,
       glitchAngle = new Vector3(1, 1, 1),
       glitchThreshold = new Vector3(1, 1, 1),
-      berrySize = 0.01,
-      berryCount = 24,
-      berryColor = 0xffffff,
-      berryDisplacement = new Vector2(0.04, 0.04)
+      berrySize = 0.005,
+      berryCount = this.R.intBetween(4, 24),
+      berryColor = new ColorSampler().getRandomColor(),
+      berryDisplacement = new Vector2(0.01, 0.01),
+      berryDistanceFromStem = 0.015
     } = this.state;
 
     // stem
@@ -90,12 +91,14 @@ class SolomonsSeal extends BaseRenderable {
       size: berrySize,
       berryCount,
       berryDisplacement,
+      berryDistanceFromStem,
       color: berryColor,
       referenceMesh: this.stem,
       R: this.R,
       animated,
       windForce,
-      windDirection
+      windDirection,
+      delay: 2
     });
     this.group.add(this.berriesMesh);
 
@@ -126,9 +129,11 @@ class SolomonsSeal extends BaseRenderable {
     this.tween && this.tween.kill(null, this);
     if (animated) {
       this.currentTime = 0;
+      this.berryTime = 0;
       this.animateLeaves({ delay });
     } else {
       this.currentTime = 1;
+      this.berryTime = 1;
     }
   };
 
@@ -228,13 +233,24 @@ class SolomonsSeal extends BaseRenderable {
 
   animateLeaves({ delay }) {
     this.tween && this.tween.kill(null, this);
-    this.tween = TweenMax.to(this, 2, {
+    this.berryTween && this.berryTween.kill(null, this);
+    this.tween = TweenMax.to(this, 3, {
       currentTime: 1,
       onUpdate: () => {
         this.update();
       },
       ease: Power2.easeOut,
       delay: delay + 0.5
+      // yoyo: true,
+      // repeat: -1
+    });
+    this.berryTween = TweenMax.to(this, 3, {
+      berryTime: 1,
+      onUpdate: () => {
+        this.update();
+      },
+      ease: Power2.easeOut,
+      delay: delay + 1.5
       // yoyo: true,
       // repeat: -1
     });
@@ -400,7 +416,7 @@ class SolomonsSeal extends BaseRenderable {
 
   update() {
     this.leavesMesh.material.uniforms.uTime.value = this.currentTime;
-    this.berriesMesh.material.uniforms.uTime.value = this.currentTime;
+    this.berriesMesh.material.uniforms.uTime.value = this.berryTime;
   }
 }
 

@@ -12,7 +12,7 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
 
   let solomonsSeal,
     solomonsSealGroup = new Group(),
-    count = 6,
+    count = 5,
     solomonsSealInstances = [];
 
   solomonsSealGroup.position.y = 0;
@@ -22,7 +22,7 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
       solomonsSeal = new SolomonsSeal(
         {
           delay: i * 0.05,
-          leafCount: R.intBetween(24, 48),
+          leafCount: R.intBetween(12, 24),
           windForce: R.floatBetween(0, 0.5),
           windDirection: new Vector3(
             R.floatBetween(-0.5, 0.5),
