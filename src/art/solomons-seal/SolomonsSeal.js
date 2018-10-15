@@ -96,6 +96,7 @@ class SolomonsSeal extends BaseRenderable {
       berryDistanceFromStem,
       berryRotation,
       berrySpiral,
+      // color,
       color: berryColor,
       referenceMesh: this.stem,
       R: this.R,

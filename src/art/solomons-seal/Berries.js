@@ -99,8 +99,8 @@ const Berries = ({
     // push away from stem
     if (berrySpiral) {
       angle = _Math.degToRad(berryRotation * ratio);
-      position.x += Math.cos(angle) * berryDistanceFromStem;
-      position.z += Math.sin(angle) * berryDistanceFromStem;
+      position.x += Math.cos(angle) * berryDistanceFromStem * ratio;
+      position.z += Math.sin(angle) * berryDistanceFromStem * ratio;
     }
 
     // arrange in circles
