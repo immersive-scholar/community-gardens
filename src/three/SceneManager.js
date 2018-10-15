@@ -24,6 +24,7 @@ export default ({ generalCanvas, R }) => {
   });
   const camera = new GeneralCamera(screenDimensions);
   const controls = new GeneralControls({ camera });
+  controls.animateChapter({});
   new GeneralLights({ scene, controls });
   // const lights = new GeneralLights({ scene, controls });
   // lights.createControls();
