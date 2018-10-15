@@ -70,11 +70,7 @@ const Berries = ({
   const curvePoints = referenceMesh.curve.getPoints(pointCount);
   curvePoints.reverse();
 
-  for (
-    let i = 0, ratio, position, tangent, positionIndex, angle;
-    i < berryCount;
-    i++
-  ) {
+  for (let i = 0, ratio, position, positionIndex, angle; i < berryCount; i++) {
     ratio = i / berryCount;
     // animation
     dataArray[0] = settings.maxDelay * (i / berryCount);
@@ -87,7 +83,6 @@ const Berries = ({
       Math.floor(ratio * pointCount * (berryEndPoint - berryStartPoint)) -
       1;
     position = curvePoints[positionIndex];
-    tangent = referenceMesh.curve.getTangent(positionIndex / berryCount);
     angle = _Math.degToRad((1440 / pointCount) * i);
     position.add(
       new Vector3(

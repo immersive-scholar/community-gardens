@@ -16,13 +16,13 @@ import {
 } from "three/vendor/BAS";
 import Modifiers from "three/vendor/Modifiers";
 
-function Animation({
+function LeafAnimation({
   R,
   modelGeometry,
   color,
   animated,
   imagePath = "/img/patterns/diamonds-2.png",
-  leafTextureSize = new Vector2(20, -20),
+  textureSize = new Vector2(20, -20),
   windForce,
   windDirection,
   hslBase,
@@ -65,7 +65,7 @@ function Animation({
     }
   }
 
-  const leafTexture = new TextureLoader().load(imagePath, texture => {
+  const texture = new TextureLoader().load(imagePath, texture => {
     texture.wrapS = texture.wrapT = RepeatWrapping;
   });
 
@@ -83,7 +83,7 @@ function Animation({
       color: color
     },
     uniformValues: {
-      map: leafTexture,
+      map: texture,
       diffuse: new Color(color)
     },
     vertexParameters: [
@@ -109,7 +109,7 @@ function Animation({
     // fragmentDiffuse: ["diffuseColor.a *= uTime;"]
   });
 
-  material.uniforms.uTextureSize.value = leafTextureSize;
+  material.uniforms.uTextureSize.value = textureSize;
   material.uniforms.uWindForce.value = windForce;
   material.uniforms.uWindDirection.value = windDirection;
 
@@ -121,9 +121,9 @@ function Animation({
   // this.castShadow = true;
   this.frustumCulled = false;
 }
-Animation.prototype = Object.create(Mesh.prototype);
-Animation.prototype.constructor = Animation;
-Object.defineProperty(Animation.prototype, "time", {
+LeafAnimation.prototype = Object.create(Mesh.prototype);
+LeafAnimation.prototype.constructor = LeafAnimation;
+Object.defineProperty(LeafAnimation.prototype, "time", {
   get: function() {
     return this.material.uniforms["uTime"].value;
   },
@@ -132,4 +132,4 @@ Object.defineProperty(Animation.prototype, "time", {
   }
 });
 
-export default Animation;
+export default LeafAnimation;

@@ -3,8 +3,11 @@ import {
   Mesh,
   Color,
   DoubleSide,
+  Vector2,
   Vector3,
-  VertexColors
+  VertexColors,
+  TextureLoader,
+  RepeatWrapping
 } from "three-full";
 import { TweenMax, Power2 } from "gsap";
 import { LambertAnimationMaterial, ShaderChunk } from "three/vendor/BAS";
@@ -17,8 +20,13 @@ function BerryAnimation({
   timeline,
   animated,
   windForce,
-  windDirection
+  windDirection,
+  imagePath = "/img/patterns/diamonds-2.png",
+  textureSize = new Vector2(20, 20)
 }) {
+  const texture = new TextureLoader().load(imagePath, texture => {
+    texture.wrapS = texture.wrapT = RepeatWrapping;
+  });
   const material = new LambertAnimationMaterial({
     // vertexColors: VertexColors,
     flatShading: true,
@@ -32,9 +40,11 @@ function BerryAnimation({
       uTime: { value: 0 },
       uWindForce: { value: windForce },
       uWindDirection: { value: new Vector3(0.2, 0.2, 0.2) },
-      color: color
+      color: color,
+      uTextureSize: { value: new Vector2(10, 10) }
     },
     uniformValues: {
+      map: texture,
       diffuse: new Color(color)
     },
     vertexFunctions: [
@@ -66,9 +76,15 @@ function BerryAnimation({
 
       // translate the vertex by prefab position
       "transformed += aPosition * uTime;"
+    ],
+    fragmentParameters: ["uniform float uTime;", "uniform vec2 uTextureSize;"],
+    fragmentMap: [
+      "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
+      "diffuseColor *= texelColor;"
     ]
   });
 
+  material.uniforms.uTextureSize.value = textureSize;
   material.uniforms.uWindForce.value = windForce;
   material.uniforms.uWindDirection.value = windDirection;
 
