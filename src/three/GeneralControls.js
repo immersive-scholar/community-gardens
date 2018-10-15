@@ -22,16 +22,18 @@ const Controls = ({ camera }) => {
   // enable for console control.
   window.controls = orbitControls;
 
-  function animateChapter({ delay = 0, duration = 10 }) {
+  function animateChapter({ delay = 0, duration = 10 } = {}) {
+    console.log("Animating... ", this);
+    killTweens();
+
     camera.position.set(12, 0, 12);
     cameraTweenParams.x = camera.position.x;
     cameraTweenParams.y = camera.position.y;
     cameraTweenParams.z = camera.position.z;
 
-    this.cameraTween && this.cameraTween.kill(null, this);
     this.cameraTween = TweenMax.to(cameraTweenParams, duration, {
       x: 0.5,
-      y: -0.1,
+      y: 0.05,
       z: 0.5,
       delay,
       ease: Power2.easeInOut,
@@ -40,14 +42,13 @@ const Controls = ({ camera }) => {
       }
     });
 
-    target.set(0, 0, 0);
+    target.set(0, 10, 0);
     targetTweenParams.x = target.x;
     targetTweenParams.y = target.y;
     targetTweenParams.z = target.z;
 
-    this.targetTween && this.targetTween.kill(null, this);
     this.targetTween = TweenMax.to(targetTweenParams, duration, {
-      y: 1,
+      y: 0.2,
       delay,
       ease: Power2.easeInOut
     });
@@ -62,10 +63,11 @@ const Controls = ({ camera }) => {
     orbitControls.target = targetTweenParams.clone();
   }
 
-  function resetCamera() {
+  const killTweens = () => {
     this.cameraTween && this.cameraTween.kill(null, this);
     this.targetTween && this.targetTween.kill(null, this);
-  }
+  };
+
   function update() {
     orbitControls.update();
   }

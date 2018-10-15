@@ -7,6 +7,7 @@ import GeneralRenderer from "./GeneralRenderer";
 import GeneralCamera from "./GeneralCamera";
 import GeneralControls from "./GeneralControls";
 import GeneralLights from "./GeneralLights";
+import CameraController from "./helpers/CameraController";
 
 export default ({ generalCanvas, R }) => {
   const clock = new Clock();
@@ -24,7 +25,10 @@ export default ({ generalCanvas, R }) => {
   });
   const camera = new GeneralCamera(screenDimensions);
   const controls = new GeneralControls({ camera });
-  controls.animateChapter({});
+  const cameraGUI = new CameraController({ camera, controls });
+  cameraGUI.enable();
+  // controls.animateChapter();
+
   new GeneralLights({ scene, controls });
   // const lights = new GeneralLights({ scene, controls });
   // lights.createControls();

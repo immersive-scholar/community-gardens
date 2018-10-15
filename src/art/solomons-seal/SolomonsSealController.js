@@ -64,7 +64,7 @@ export default ({ controls }) => {
     config.hslBaseL = tempColorObject.l;
 
     const onDataChange = function() {
-      controls.enabled = false;
+      controls.controls.enabled = false;
       try {
         instance.group.position.set(config.x, config.y, config.z);
         instance.setHeight(config.height);
@@ -144,7 +144,7 @@ export default ({ controls }) => {
     };
 
     const onDataChangeComplete = function() {
-      controls.enabled = true;
+      controls.controls.enabled = true;
     };
 
     const gui = new dat.GUI().getRoot();
