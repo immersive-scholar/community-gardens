@@ -9,7 +9,7 @@ import {
 import BaseRenderable from "art/common/BaseRenderable";
 import Animation from "./Animation";
 
-const Delaunay = require("./Delaunay");
+const Delaunay = require("util/Delaunay");
 
 class Crystals extends BaseRenderable {
   constructor(props, R) {

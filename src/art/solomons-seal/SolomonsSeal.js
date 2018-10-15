@@ -55,10 +55,12 @@ class SolomonsSeal extends BaseRenderable {
       glitchAngle = new Vector3(1, 1, 1),
       glitchThreshold = new Vector3(1, 1, 1),
       berrySize = 0.005,
-      berryCount = this.R.intBetween(4, 24),
-      berryColor = new ColorSampler().getRandomColor(),
+      berryCount = 24, //this.R.intBetween(4, 24),
+      berryColor = 0xffffff,
       berryDisplacement = new Vector2(0.01, 0.01),
-      berryDistanceFromStem = 0.015
+      berryDistanceFromStem = 0.015,
+      berryRotation = 720,
+      berrySpiral = true
     } = this.state;
 
     // stem
@@ -92,6 +94,8 @@ class SolomonsSeal extends BaseRenderable {
       berryCount,
       berryDisplacement,
       berryDistanceFromStem,
+      berryRotation,
+      berrySpiral,
       color: berryColor,
       referenceMesh: this.stem,
       R: this.R,
@@ -250,7 +254,7 @@ class SolomonsSeal extends BaseRenderable {
         this.update();
       },
       ease: Power2.easeOut,
-      delay: delay + 1.5
+      delay: delay + 2.5
       // yoyo: true,
       // repeat: -1
     });
@@ -376,6 +380,37 @@ class SolomonsSeal extends BaseRenderable {
   }
   setGlitchThreshold(glitchThreshold) {
     this.setState({ glitchThreshold }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setBerryCount(berryCount) {
+    this.setState({ berryCount }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setBerrySize(berrySize) {
+    this.setState({ berrySize }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setBerryRotation(berryRotation) {
+    this.setState({ berryRotation }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setBerryColor(berryColor) {
+    this.setState({ berryColor }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setBerryDistanceFromStem(berryDistanceFromStem) {
+    this.setState({ berryDistanceFromStem }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setBerrySpiral(berrySpiral) {
+    this.setState({ berrySpiral }, isDirty => {
       isDirty && this.init();
     });
   }

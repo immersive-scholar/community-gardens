@@ -25,7 +25,7 @@ function BerryAnimation({
     transparent: true,
     opacity: 0.5,
     uniforms: {
-      uTime: { value: 0 },
+      uTime: { value: animated ? 0 : 1 },
       uWindForce: { value: windForce },
       uWindDirection: { value: new Vector3(0.2, 0.2, 0.2) },
       color: color
@@ -64,12 +64,13 @@ function BerryAnimation({
 
       // translate the vertex by prefab position
       "transformed += aPosition * uTime;"
-    ]
+    ],
     // fragmentParameters: ["uniform float uTime;", "uniform vec2 uTextureSize;"],
-    // fragmentMap: [
-    //   "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
-    //   "diffuseColor *= texelColor;"
-    // ]
+    fragmentParameters: ["uniform float uTime;"],
+    fragmentMap: [
+      // "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
+      "diffuseColor.a *= uTime;"
+    ]
   });
 
   // material.uniforms.uTextureSize.value = textureSize;

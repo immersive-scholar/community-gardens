@@ -49,7 +49,13 @@ export default ({ controls }) => {
       glitchAngleZ: 1,
       glitchThresholdX: 1,
       glitchThresholdY: 1,
-      glitchThresholdZ: 1
+      glitchThresholdZ: 1,
+      berryCount: 24,
+      berrySize: 0.01,
+      berryColor: 0xffffff,
+      berryDistanceFromStem: 0.01,
+      berryRotation: 720,
+      berrySpiral: true
     };
 
     const tempColorObject = {};
@@ -126,6 +132,12 @@ export default ({ controls }) => {
             config.glitchThresholdZ
           )
         );
+        instance.setBerryCount(config.berryCount);
+        instance.setBerrySize(config.berrySize);
+        instance.setBerryRotation(config.berryRotation);
+        instance.setBerryColor(config.berryColor);
+        instance.setBerryDistanceFromStem(config.berryDistanceFromStem);
+        instance.setBerrySpiral(config.berrySpiral);
       } catch (error) {
         console.log("Instance required ", error);
       }
@@ -326,6 +338,32 @@ export default ({ controls }) => {
       .onFinishChange(onDataChangeComplete);
     glitchFolder
       .add(config, "glitchThresholdZ", 0, 1, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+
+    const berryFolder = gui.addFolder("Berries");
+    berryFolder
+      .addColor(config, "berryColor")
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    berryFolder
+      .add(config, "berryCount", 0, 48, 1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    berryFolder
+      .add(config, "berrySize", 0.01, 0.25, 0.001)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    berryFolder
+      .add(config, "berryDistanceFromStem", 0, 0.25, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    berryFolder
+      .add(config, "berryRotation", 0, 1440, 1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    berryFolder
+      .add(config, "berrySpiral", true)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 
