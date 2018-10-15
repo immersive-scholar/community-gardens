@@ -1,13 +1,8 @@
 import {
   Quaternion,
-  Shape,
-  ShapeGeometry,
   Vector2,
-  MeshBasicMaterial,
-  Mesh,
   Vector3,
   SphereGeometry,
-  Color,
   _Math
 } from "three-full";
 import { PrefabBufferGeometry, Timeline } from "three/vendor/BAS";
@@ -25,7 +20,8 @@ const Berries = ({
   berryStartPoint = 0.3,
   berryEndPoint = 0.9,
   pointCount = 100,
-  berryDisplacement = new Vector2(0.1, 0.1)
+  berryDisplacement = new Vector2(0.1, 0.1),
+  berryDistanceFromStem = 0.01
 }) => {
   const settings = {
     maxDelay: 0.0,
@@ -70,7 +66,24 @@ const Berries = ({
   const curvePoints = referenceMesh.curve.getPoints(pointCount);
   curvePoints.reverse();
 
-  for (let i = 0, ratio, position, positionIndex, angle; i < berryCount; i++) {
+  // create a few spots to cluster berries at
+  const groupingCount = R.intBetween(1, 5);
+  const groupings = [];
+  let grouping, positionIndex;
+  for (let i = 0; i < groupingCount; i++) {
+    grouping = curvePoints[
+      R.intBetween(pointCount * berryStartPoint, pointCount * berryEndPoint)
+    ].clone();
+    groupings.push({ origin: grouping, count: 0, current: 0 });
+  }
+
+  // how many in each group?
+  for (let i = 0; i < berryCount; i++) {
+    positionIndex = R.range(groupingCount);
+    groupings[positionIndex].count++;
+  }
+
+  for (let i = 0, ratio, position, angle; i < berryCount; i++) {
     ratio = i / berryCount;
     // animation
     dataArray[0] = settings.maxDelay * (i / berryCount);
@@ -89,6 +102,37 @@ const Berries = ({
         Math.cos(angle) * berryDisplacement.x * ratio,
         0,
         Math.sin(angle) * berryDisplacement.y * ratio
+      )
+    );
+
+    // positionIndex = R.range(groupingCount);
+    // grouping = groupings[positionIndex];
+    // position = grouping.origin.clone();
+    // // push away from stem
+    // position.addScaledVector(
+    //   new Vector3(1 + berryDisplacement.x, 1, 1 + berryDisplacement.y),
+    //   berryDistanceFromStem * ratio
+    // );
+    // // arrange in circle
+    // angle = _Math.degToRad(
+    //   ((360 / grouping.count) * grouping.current) / grouping.count
+    // );
+    // const circleRadius = 0.2;
+    // console.log("angle ", angle);
+    // position.add(
+    //   new Vector3(
+    //     Math.cos(angle) * circleRadius,
+    //     Math.sin(angle) * circleRadius,
+    //     0
+    //   ).normalize()
+    // );
+
+    // grouping.count++;
+
+    position.add(
+      new Vector3(
+        Math.cos(berryDisplacement.y * positionIndex) / berryCount,
+        (berryDisplacement.x * positionIndex) / berryCount
       )
     );
 

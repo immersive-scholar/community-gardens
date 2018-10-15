@@ -1,5 +1,4 @@
 import {
-  _Math,
   Mesh,
   Color,
   DoubleSide,
@@ -9,12 +8,10 @@ import {
   Vector3,
   VertexColors
 } from "three-full";
-import { TweenMax, Power2 } from "gsap";
 import {
   ModelBufferGeometry,
   LambertAnimationMaterial
 } from "three/vendor/BAS";
-import Modifiers from "three/vendor/Modifiers";
 
 function LeafAnimation({
   R,

@@ -57,10 +57,7 @@ class SolomonsSeal extends BaseRenderable {
       berrySize = 0.01,
       berryCount = 24,
       berryColor = 0xffffff,
-      berryDisplacement = new Vector2(
-        this.R.floatBetween(-0.4, 0.4),
-        this.R.floatBetween(-0.4, 0.4)
-      )
+      berryDisplacement = new Vector2(0.04, 0.04)
     } = this.state;
 
     // stem
