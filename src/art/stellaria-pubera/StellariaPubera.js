@@ -23,8 +23,9 @@ class StellariaPubera extends BaseRenderable {
     this.clean();
 
     const {
-      petalSize = 0.125,
-      petalCount = this.R.intBetween(16, 24),
+      width = 0.025,
+      length = 0.125,
+      petalCount = this.R.intBetween(10, 24),
       petalColor = 0xffffff,
       animated = true,
       imagePath = "/img/patterns/diamonds-2.png",
@@ -35,8 +36,9 @@ class StellariaPubera extends BaseRenderable {
     } = this.state;
 
     this.petals = new Petals({
-      size: petalSize,
       petalCount,
+      width,
+      length,
       color: petalColor,
       imagePath,
       textureSize,

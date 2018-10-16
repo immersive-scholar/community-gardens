@@ -22,9 +22,11 @@ import {
 
 function Petals({
   petalCount,
-  size,
+  width = 0.025,
+  length = 0.125,
+  leafMidPoint = 0.01,
   color,
-  distanceFromCenter = 0.02,
+  distanceFromCenter = 0.005,
   R,
   animated,
   imagePath = "/img/patterns/diamonds-2.png",
@@ -34,9 +36,6 @@ function Petals({
   startAngle = 0,
   endAngle = 0.9,
   displacement = new Vector2(0.01, 0.01),
-  width = 0.05,
-  length = 0.2,
-  leafMidPoint = 0.4,
   hslBase,
   hslRange
 }) {
@@ -56,8 +55,24 @@ function Petals({
     leafMidPoint * length,
     width,
     leafMidPoint * length,
+    width,
+    leafMidPoint * length
+  );
+  shape.bezierCurveTo(
+    width,
+    length,
+    width,
+    length,
     0,
-    length
+    (1 - leafMidPoint) * length
+  );
+  shape.bezierCurveTo(
+    -width,
+    leafMidPoint * length,
+    -width,
+    leafMidPoint * length,
+    -width,
+    leafMidPoint * length
   );
   shape.bezierCurveTo(
     -width,
@@ -89,7 +104,7 @@ function Petals({
     },
     scale: {
       from: { x: 0, y: 0, z: 0 },
-      to: { x: 1, y: 1.0, z: 1 },
+      to: { x: 1, y: 1, z: 1 },
       ease: "easeQuadOut"
       //   easeParams: [settings.backAmplitude]
     },
