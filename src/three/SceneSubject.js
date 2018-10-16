@@ -12,7 +12,7 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
 
   let solomonsSeal,
     solomonsSealGroup = new Group(),
-    count = 1,
+    count = 6,
     solomonsSealInstances = [];
 
   solomonsSealGroup.position.y = 0;
@@ -39,7 +39,7 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
             R.floatBetween(0.2, 0.4),
             R.floatBetween(0.2, 0.5)
           ),
-          berryCount: 0, //R.intBetween(24, 96),
+          berryCount: R.intBetween(24, 96),
           berryDistanceFromStem: R.floatBetween(0.015, 0.2)
           // berryDisplacement: new Vector2(
           //   R.floatBetween(-0.4, 0.4),
