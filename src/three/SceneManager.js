@@ -29,9 +29,9 @@ export default ({ generalCanvas, R }) => {
   // cameraGUI.enable();
   // controls.animateChapter();
 
-  new GeneralLights({ scene, controls });
-  // const lights = new GeneralLights({ scene, controls });
-  // lights.createControls();
+  // new GeneralLights({ scene, controls });
+  const lights = new GeneralLights({ scene, controls });
+  lights.createControls();
   const subject = new SceneSubject({ scene, camera, R, controls });
 
   function update() {

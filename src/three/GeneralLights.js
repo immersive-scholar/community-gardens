@@ -46,7 +46,7 @@ export default ({ scene, controls }) => {
     };
 
     const onDataChange = function() {
-      controls.enabled = false;
+      controls.controls.enabled = false;
       light2.position.set(
         effectController.x,
         effectController.y,
@@ -55,7 +55,7 @@ export default ({ scene, controls }) => {
     };
 
     const onDataChangeComplete = function() {
-      controls.enabled = true;
+      controls.controls.enabled = true;
     };
 
     var gui = new dat.GUI().getRoot();
