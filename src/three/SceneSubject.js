@@ -12,7 +12,7 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
 
   let solomonsSeal,
     solomonsSealGroup = new Group(),
-    count = 8,
+    count = 1,
     solomonsSealInstances = [];
 
   solomonsSealGroup.position.y = 0;
@@ -66,9 +66,9 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
 
   scene.add(solomonsSealGroup);
 
-  // const solomonsSealController = new SolomonsSealController({ controls });
-  // solomonsSealController.setInstance(solomonsSealInstances[0]);
-  // solomonsSealController.enable();
+  const solomonsSealController = new SolomonsSealController({ controls });
+  solomonsSealController.setInstance(solomonsSealInstances[0]);
+  solomonsSealController.enable();
 
   const plane = new Plane();
   scene.add(plane.group);
