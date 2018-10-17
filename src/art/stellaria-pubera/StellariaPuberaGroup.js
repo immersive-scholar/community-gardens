@@ -1,7 +1,7 @@
 import { Group, Vector3 } from "three-full";
 
 import StellariaPubera from "art/stellaria-pubera/StellariaPubera";
-// import SolomonsSealController from "art/solomons-seal/SolomonsSealController";
+import StellariaPuberaController from "art/stellaria-pubera/StellariaPuberaController";
 import GridLayoutHelper from "util/GridLayoutHelper";
 
 const StellariaPuberaGroup = ({ R, camera, controls }) => {
@@ -32,6 +32,7 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
             R.floatBetween(0.1, 0.2),
             R.floatBetween(0.1, 0.2)
           ),
+          openness: ((x * y) / (count * count)) * 2,
           pollenCount: R.intBetween(24, 96),
           pollenDistanceFromStem: R.floatBetween(0.015, 0.2)
         },
@@ -48,14 +49,12 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
     group: stellariaPuberaGroup,
     rows: count,
     columns: count,
-    rowWidth: 0.5,
-    columnHeight: 0.5
+    rowWidth: 0.25,
+    columnHeight: 0.25
   });
-  console.log("stellariaPuberaGroup.position ", stellariaPuberaGroup.position);
 
-  // const stellariaPuberaController = new StellariaPuberaController({ controls });
-  // stellariaPuberaController.setInstance(stellariaPuberaInstances[0]);
-  // stellariaPuberaController.enable();
+  const stellariaPuberaController = new StellariaPuberaController({ controls });
+  stellariaPuberaController.setInstance(instances[0]);
 
   return { group: stellariaPuberaGroup };
 };

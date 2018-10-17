@@ -30,6 +30,7 @@ function Petals({
   R,
   animated,
   maxDuration = 1,
+  openness = Math.PI / 2,
   imagePath = "/img/patterns/diamonds-2.png",
   textureSize = new Vector2(10, 10),
   windForce = 0.1,
@@ -67,7 +68,7 @@ function Petals({
   timeline.add(1.0, {
     rotate: {
       from: {
-        axis: new Vector3(1, 1, 0),
+        axis: new Vector3(openness, 1, 0),
         angle: 0
       },
       to: {

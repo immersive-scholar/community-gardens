@@ -25,13 +25,14 @@ export default ({ generalCanvas, R }) => {
   });
   const camera = new GeneralCamera(screenDimensions);
   const controls = new GeneralControls({ camera });
-  const cameraGUI = new CameraController({ camera, controls });
-  cameraGUI.enable();
+  // const cameraGUI = new CameraController({ camera, controls });
+  // cameraGUI.enable();
   // controls.animateChapter();
 
-  // new GeneralLights({ scene, controls });
-  const lights = new GeneralLights({ scene, controls });
-  lights.createControls();
+  new GeneralLights({ scene, controls });
+  // const lights = new GeneralLights({ scene, controls });
+  // lights.createControls();
+
   const subject = new SceneSubject({ scene, camera, R, controls });
 
   function update() {

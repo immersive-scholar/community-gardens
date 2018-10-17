@@ -32,6 +32,7 @@ class StellariaPubera extends BaseRenderable {
       textureSize = new Vector2(5, 5),
       animated = true,
       delay = 0,
+      openness,
       hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 0.5, 0.93),
       hslRange = 0.02,
       windForce = 0,
@@ -51,6 +52,7 @@ class StellariaPubera extends BaseRenderable {
       hslRange,
       animated,
       delay,
+      openness,
       windForce,
       windDirection
     });
