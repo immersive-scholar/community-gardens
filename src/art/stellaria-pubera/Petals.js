@@ -30,7 +30,6 @@ function Petals({
   R,
   animated,
   maxDuration = 1,
-  openness = Math.PI / 2,
   imagePath = "/img/patterns/diamonds-2.png",
   textureSize = new Vector2(10, 10),
   windForce = 0.1,
@@ -68,7 +67,7 @@ function Petals({
   timeline.add(1.0, {
     rotate: {
       from: {
-        axis: new Vector3(openness, 1, 0),
+        axis: new Vector3(1, 1, 0),
         angle: 0
       },
       to: {
@@ -137,7 +136,7 @@ function Petals({
     petalColor.setHSL(
       hslBase.x + R.floatBetween(-hslRange.x, hslRange.x),
       hslBase.y + R.floatBetween(-hslRange.y, hslRange.y),
-      hslBase.z + R.floatBetween(0, hslRange.z) // do not get less bright than the base value
+      hslBase.z + R.floatBetween(-hslRange.z, hslRange.z)
     );
 
     for (j = 0; j < 18; j += 3) {
@@ -221,7 +220,7 @@ function Petals({
   //   this.castShadow = true;
   this.frustumCulled = false;
 
-  this.clean = () => {
+  this.clean = function() {
     geometry && geometry.dispose();
     material && material.dispose();
   };

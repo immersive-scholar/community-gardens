@@ -7,7 +7,7 @@ import GridLayoutHelper from "util/GridLayoutHelper";
 const StellariaPuberaGroup = ({ R, camera, controls }) => {
   let stellariaPubera,
     stellariaPuberaGroup = new Group(),
-    count = 1,
+    count = 10,
     instances = [];
 
   for (let x = 0, i = 0; x < count; x++) {
@@ -15,7 +15,7 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
       stellariaPubera = new StellariaPubera(
         {
           delay: i * 0.05,
-          petalCount: 36, //R.intBetween(24, 48),
+          petalCount: 10, //36, //R.intBetween(24, 48),
           windForce: R.floatBetween(0, 0.5),
           windDirection: new Vector3(
             R.floatBetween(-0.5, 0.5),
@@ -32,6 +32,7 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
             R.floatBetween(0.1, 0.2),
             R.floatBetween(0.1, 0.2)
           ),
+          petalTarget: new Vector3(0, 10, 0),
           openness: ((x * y) / (count * count)) * 2,
           pollenCount: R.intBetween(24, 96),
           pollenDistanceFromStem: R.floatBetween(0.015, 0.2)
@@ -49,12 +50,14 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
     group: stellariaPuberaGroup,
     rows: count,
     columns: count,
-    rowWidth: 0.25,
-    columnHeight: 0.25
+    rowWidth: 0.15,
+    columnHeight: 0.15
   });
 
-  const stellariaPuberaController = new StellariaPuberaController({ controls });
-  stellariaPuberaController.setInstance(instances[0]);
+  const stellariaPuberaController = new StellariaPuberaController({
+    controls,
+    instance: instances[0]
+  });
 
   return { group: stellariaPuberaGroup };
 };

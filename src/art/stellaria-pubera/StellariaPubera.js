@@ -1,19 +1,14 @@
-import { Vector2, Vector3, CatmullRomCurve3 } from "three-full";
+import { Vector2, Vector3 } from "three-full";
 import { TweenMax, Power2 } from "gsap";
-import CurvePainter from "three/helpers/CurvePainter";
 import ColorSampler from "util/ColorSampler";
 import BaseRenderable from "art/common/BaseRenderable";
 
 // import StellariaPuberaPetal from "./StellariaPuberaPetal";
-import StemGeometry from "./StemGeometry";
 import Petals from "./Petals";
 
 class StellariaPubera extends BaseRenderable {
   constructor(props, camera, R) {
-    super(props);
-
-    this.camera = camera;
-    this.R = R;
+    super(props, camera, R);
 
     this.init(props);
   }
@@ -25,64 +20,57 @@ class StellariaPubera extends BaseRenderable {
 
     const {
       height = 0.25,
-      pointCount = height * 25,
-      displacement = new Vector3(0.2, 0.1, 0.2),
-      scale = new Vector3(2, 2, 4),
-      offset = new Vector3(
-        this.R.floatBetween(-0.5, 0.5),
-        this.R.floatBetween(-0.5, 0.5),
-        this.R.floatBetween(-0.5, 0.5)
-      ),
-      color = new ColorSampler().getRandomColor(),
-      thickness = 0.02,
-      width = 0.0125,
-      length = 0.125,
-      petalCount = 10, //this.R.intBetween(10, 24),
+      color = 0xffffff,
       petalColor = color,
-      distanceFromCenter = 0.015,
-      imagePath = "/img/patterns/lines-2.png",
+      rearPetalColor = new ColorSampler().getRandomColor(),
+      petalCount = 10, //this.R.intBetween(10, 24),
+      petalWidth = 0.0125,
+      petalLength = 0.125,
+      petalDistanceFromCenter = 0.015,
+      imagePath = "/img/patterns/diamonds-2.png",
       textureSize = new Vector2(5, 5),
       animated = true,
       delay = 0,
-      openness,
+      openness = 0.3,
+      petalTarget = new Vector3(0, -10, 0),
       hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 0.5, 0.93),
-      hslRange = 0.02,
+      hslRange = new Vector3(0, 0, 0.2),
       windForce = 0,
       windDirection = new Vector3(0, 0, 0)
     } = this.state;
 
     // stem
-    this.geometry = new StemGeometry({
-      height,
-      pointCount,
-      displacement,
-      scale,
-      offset,
-      R: this.R
-    });
+    // this.geometry = new StemGeometry({
+    //   height,
+    //   pointCount,
+    //   displacement,
+    //   scale,
+    //   offset,
+    //   R: this.R
+    // });
 
-    this.stem = this.toCurve({
-      geometry: this.geometry,
-      color,
-      delay,
-      pointCount,
-      thickness,
-      fogDensity: 0.3,
-      animated
-    });
-    this.group.add(this.stem.curvePainter.mesh);
+    // this.stem = this.toCurve({
+    //   geometry: this.geometry,
+    //   color,
+    //   delay,
+    //   pointCount,
+    //   thickness,
+    //   fogDensity: 0.3,
+    //   animated
+    // });
+    // this.group.add(this.stem.curvePainter.mesh);
 
     this.petals = new Petals({
       petalCount,
-      width,
-      length,
+      width: petalWidth,
+      length: petalLength,
       color: petalColor,
       imagePath,
       textureSize,
-      distanceFromCenter,
+      petalDistanceFromCenter,
       R: this.R,
-      hslBase,
-      hslRange,
+      hslBase: new Vector3(1, 1, 0.8),
+      hslRange: new Vector3(0, 0, 0.2),
       animated,
       delay,
       openness,
@@ -90,7 +78,30 @@ class StellariaPubera extends BaseRenderable {
       windDirection
     });
     this.petals.position.y = height;
+    this.petals.lookAt(petalTarget);
     this.group.add(this.petals);
+
+    // this.rearPetals = new Petals({
+    //   petalCount: petalCount >> 1,
+    //   width: petalWidth * 0.7,
+    //   length: petalLength,
+    //   color: rearPetalColor,
+    //   imagePath,
+    //   textureSize,
+    //   petalDistanceFromCenter: 0,
+    //   R: this.R,
+    //   hslBase,
+    //   hslRange,
+    //   animated,
+    //   delay,
+    //   openness,
+    //   windForce,
+    //   windDirection
+    // });
+    // this.rearPetals.position.y = height - 0.02;
+    // this.rearPetals.lookAt(petalTarget);
+    // this.rearPetals.renderOrder = -1;
+    // this.group.add(this.rearPetals);
 
     this.tween && this.tween.kill(null, this);
     if (animated) {
@@ -103,48 +114,34 @@ class StellariaPubera extends BaseRenderable {
     }
   };
 
-  toCurve = ({
-    geometry,
-    color,
-    delay = 0,
-    thickness = 2,
-    pointCount = 8,
-    fogColor,
-    fogDensity,
-    animated
-  }) => {
-    const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
+  //   toCurve = ({
+  //     geometry,
+  //     color,
+  //     delay = 0,
+  //     thickness = 2,
+  //     pointCount = 8,
+  //     fogColor,
+  //     fogDensity,
+  //     animated
+  //   }) => {
+  //     const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
 
-    const curvePainter = new CurvePainter({
-      camera: this.camera,
-      curve,
-      color,
-      pointCount,
-      lineWidth: thickness,
-      delay: delay,
-      fogColor,
-      fogDensity,
-      animated
-    });
+  //     const curvePainter = new CurvePainter({
+  //       camera: this.camera,
+  //       curve,
+  //       color,
+  //       pointCount,
+  //       lineWidth: thickness,
+  //       delay: delay,
+  //       fogColor,
+  //       fogDensity,
+  //       animated
+  //     });
 
-    curvePainter.mesh.matrixAutoUpdate = true;
+  //     curvePainter.mesh.matrixAutoUpdate = true;
 
-    return { curvePainter, geometry, curve };
-  };
-
-  animatePetals({ delay }) {
-    this.tween && this.tween.kill(null, this);
-    this.tween = TweenMax.to(this, 4, {
-      currentTime: 1,
-      onUpdate: () => {
-        this.update();
-      },
-      ease: Power2.easeOut,
-      delay: delay + 0.5
-      // yoyo: true,
-      // repeat: -1
-    });
-  }
+  //     return { curvePainter, geometry, curve };
+  //   };
 
   setHeight(height) {
     this.setState({ height }, isDirty => {
@@ -301,6 +298,39 @@ class StellariaPubera extends BaseRenderable {
     });
   }
 
+  setOpenness(openness) {
+    this.setState({ openness }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setPetalTarget(petalTarget) {
+    this.setState({ petalTarget }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setPetalCount(petalCount) {
+    this.setState({ petalCount }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setPetalWidth(petalWidth) {
+    this.setState({ petalWidth }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setPetalLength(petalLength) {
+    this.setState({ petalLength }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setPetalDistanceFromCenter(petalDistanceFromCenter) {
+    this.setState({ petalDistanceFromCenter }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
   setProps(props) {
     for (let prop in props) {
       this.setState({ prop: props[prop] }, isDirty => {
@@ -323,6 +353,12 @@ class StellariaPubera extends BaseRenderable {
       this.petals = undefined;
     }
 
+    if (this.rearPetals) {
+      this.group.remove(this.rearPetals);
+      this.rearPetals.clean();
+      this.rearPetals = undefined;
+    }
+
     if (this.pollenMesh) {
       this.group.remove(this.pollenMesh);
       this.pollenMesh.geometry.dispose();
@@ -331,10 +367,25 @@ class StellariaPubera extends BaseRenderable {
     }
   }
 
+  animatePetals({ delay }) {
+    this.tween && this.tween.kill(null, this);
+    this.tween = TweenMax.to(this, 4, {
+      currentTime: 1,
+      onUpdate: () => {
+        this.update();
+      },
+      ease: Power2.easeOut,
+      delay: delay + 0.5
+      // yoyo: true,
+      // repeat: -1
+    });
+  }
+
   render() {}
 
   update() {
     this.petals.material.uniforms.uTime.value = this.currentTime;
+    // this.rearPetals.material.uniforms.uTime.value = this.currentTime;
   }
 }
 

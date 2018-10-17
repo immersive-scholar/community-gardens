@@ -1,4 +1,4 @@
-import { Vector3, Vector2, Color } from "three-full";
+import { Vector3, Color } from "three-full";
 import ColorSampler from "util/ColorSampler";
 
 const LeafColorProps = () => {

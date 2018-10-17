@@ -7,7 +7,7 @@ import GeneralRenderer from "./GeneralRenderer";
 import GeneralCamera from "./GeneralCamera";
 import GeneralControls from "./GeneralControls";
 import GeneralLights from "./GeneralLights";
-import CameraController from "./helpers/CameraController";
+// import CameraController from "./helpers/CameraController";
 
 export default ({ generalCanvas, R }) => {
   const clock = new Clock();

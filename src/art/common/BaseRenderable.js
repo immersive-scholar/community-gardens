@@ -1,7 +1,10 @@
 import { Group } from "three-full";
 
 class BaseRenderable {
-  constructor(props) {
+  constructor(props, camera, R) {
+    this.camera = camera;
+    this.R = R;
+
     this.state = {};
     this.group = new Group();
     this.renderables = [];

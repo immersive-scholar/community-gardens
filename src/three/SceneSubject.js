@@ -1,8 +1,7 @@
-import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
+// import Garden from "art/garden/Garden";
+// import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
 import StellariaPuberaGroup from "art/stellaria-pubera/StellariaPuberaGroup";
 import Plane from "art/plane/Plane";
-
-// import Garden from "art/garden/Garden";
 
 const SceneSubject = ({ scene, camera, R, controls }) => {
   // const garden = new Garden({ R, camera });

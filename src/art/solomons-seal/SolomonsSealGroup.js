@@ -59,8 +59,10 @@ const SolomonsSealGroup = ({ R, camera, controls }) => {
     columnHeight: 0.1
   });
 
-  const solomonsSealController = new SolomonsSealController({ controls });
-  solomonsSealController.setInstance(instances[0]);
+  const solomonsSealController = new SolomonsSealController({
+    controls,
+    instance: instances[0]
+  });
 
   return { group: solomonsSealGroup, instances };
 };

@@ -3,7 +3,7 @@ import * as dat from "dat.gui";
 class BaseGUI {
   constructor(props) {
     this.gui = new dat.GUI().getRoot();
-    this.instance = null;
+    this.instance = props.instance;
     this.properties = {};
     this.controls = props.controls;
   }
@@ -16,6 +16,9 @@ class BaseGUI {
       onDataChange: () => this.onDataChange(),
       onDataChangeComplete: () => this.onDataChangeComplete()
     });
+
+    this.onDataChange();
+    this.onDataChangeComplete();
   }
 
   onDataChange() {
@@ -33,9 +36,7 @@ class BaseGUI {
     this.controls.controls.enabled = true;
   }
 
-  setInstance(i) {
-    this.instance = i;
-  }
+  setInstance(i) {}
 }
 
 export default BaseGUI;
