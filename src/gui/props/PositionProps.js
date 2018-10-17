@@ -42,6 +42,7 @@ const PositionProps = () => {
   };
 
   return {
+    name: "position",
     props,
     addFolder,
     update

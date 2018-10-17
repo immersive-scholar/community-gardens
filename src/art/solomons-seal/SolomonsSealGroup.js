@@ -61,7 +61,6 @@ const SolomonsSealGroup = ({ R, camera, controls }) => {
 
   const solomonsSealController = new SolomonsSealController({ controls });
   solomonsSealController.setInstance(instances[0]);
-  solomonsSealController.enable();
 
   return { group: solomonsSealGroup, instances };
 };
