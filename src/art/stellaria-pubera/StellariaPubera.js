@@ -5,6 +5,7 @@ import ColorSampler from "util/ColorSampler";
 import BaseRenderable from "art/common/BaseRenderable";
 
 // import StellariaPuberaPetal from "./StellariaPuberaPetal";
+import StemGeometry from "./StemGeometry";
 import Petals from "./Petals";
 
 class StellariaPubera extends BaseRenderable {
@@ -23,10 +24,21 @@ class StellariaPubera extends BaseRenderable {
     this.clean();
 
     const {
+      height = 0.25,
+      pointCount = height * 25,
+      displacement = new Vector3(0.2, 0.1, 0.2),
+      scale = new Vector3(2, 2, 4),
+      offset = new Vector3(
+        this.R.floatBetween(-0.5, 0.5),
+        this.R.floatBetween(-0.5, 0.5),
+        this.R.floatBetween(-0.5, 0.5)
+      ),
+      color = new ColorSampler().getRandomColor(),
+      thickness = 0.02,
       width = 0.0125,
       length = 0.125,
       petalCount = 10, //this.R.intBetween(10, 24),
-      petalColor = 0xffffff,
+      petalColor = color,
       distanceFromCenter = 0.015,
       imagePath = "/img/patterns/lines-2.png",
       textureSize = new Vector2(5, 5),
@@ -38,6 +50,27 @@ class StellariaPubera extends BaseRenderable {
       windForce = 0,
       windDirection = new Vector3(0, 0, 0)
     } = this.state;
+
+    // stem
+    this.geometry = new StemGeometry({
+      height,
+      pointCount,
+      displacement,
+      scale,
+      offset,
+      R: this.R
+    });
+
+    this.stem = this.toCurve({
+      geometry: this.geometry,
+      color,
+      delay,
+      pointCount,
+      thickness,
+      fogDensity: 0.3,
+      animated
+    });
+    this.group.add(this.stem.curvePainter.mesh);
 
     this.petals = new Petals({
       petalCount,
@@ -56,7 +89,7 @@ class StellariaPubera extends BaseRenderable {
       windForce,
       windDirection
     });
-    // this.petals.rotation.x = -Math.PI / 2;
+    this.petals.position.y = height;
     this.group.add(this.petals);
 
     this.tween && this.tween.kill(null, this);
@@ -68,6 +101,35 @@ class StellariaPubera extends BaseRenderable {
       this.currentTime = 1;
       this.berryTime = 1;
     }
+  };
+
+  toCurve = ({
+    geometry,
+    color,
+    delay = 0,
+    thickness = 2,
+    pointCount = 8,
+    fogColor,
+    fogDensity,
+    animated
+  }) => {
+    const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
+
+    const curvePainter = new CurvePainter({
+      camera: this.camera,
+      curve,
+      color,
+      pointCount,
+      lineWidth: thickness,
+      delay: delay,
+      fogColor,
+      fogDensity,
+      animated
+    });
+
+    curvePainter.mesh.matrixAutoUpdate = true;
+
+    return { curvePainter, geometry, curve };
   };
 
   animatePetals({ delay }) {
@@ -90,17 +152,171 @@ class StellariaPubera extends BaseRenderable {
     });
   }
 
+  setOffset(offset) {
+    this.setState({ offset }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setDisplacement(displacement) {
+    this.setState({ displacement }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setAnimated(animated) {
+    this.setState({ animated }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setLeafCount(leafCount) {
+    this.setState({ leafCount }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setThickness(thickness) {
+    this.setState({ thickness }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setPointCount(pointCount) {
+    this.setState({ pointCount }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setLeafStartPoint(leafStartPoint) {
+    this.setState({ leafStartPoint }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setLeafEndPoint(leafEndPoint) {
+    this.setState({ leafEndPoint }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setRotationStart(rotationStart) {
+    this.setState({ rotationStart }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setRotationEnd(rotationEnd) {
+    this.setState({ rotationEnd }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setSizeStart(sizeStart) {
+    this.setState({ sizeStart }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setSizeEnd(sizeEnd) {
+    this.setState({ sizeEnd }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setColor(color) {
+    this.setState({ color }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setWindForce(windForce) {
+    this.setState({ windForce }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setWindDirection(windDirection) {
+    this.setState({ windDirection }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setHSLBase(hslBase) {
+    this.setState({ hslBase }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setHSLRange(hslRange) {
+    this.setState({ hslRange }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setGlitchAmplitude(glitchAmplitude) {
+    this.setState({ glitchAmplitude }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setGlitchAngle(glitchAngle) {
+    this.setState({ glitchAngle }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setGlitchThreshold(glitchThreshold) {
+    this.setState({ glitchThreshold }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setBerryCount(berryCount) {
+    this.setState({ berryCount }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setBerrySize(berrySize) {
+    this.setState({ berrySize }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setBerryRotation(berryRotation) {
+    this.setState({ berryRotation }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setBerryColor(berryColor) {
+    this.setState({ berryColor }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setBerryDistanceFromStem(berryDistanceFromStem) {
+    this.setState({ berryDistanceFromStem }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+  setBerrySpiral(berrySpiral) {
+    this.setState({ berrySpiral }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
   setProps(props) {
-    for (let prop of props) {
-      console.log("props ", props);
-      console.log("prop ", prop, props[prop]);
-      //   this.setState({prop: props[prop]}, isDirty => {
-      //     isDirty && this.init();
-      //   });
+    for (let prop in props) {
+      this.setState({ prop: props[prop] }, isDirty => {
+        isDirty && this.init();
+      });
     }
   }
 
   clean() {
+    if (this.stem) {
+      this.group.remove(this.stem.curvePainter.mesh);
+      this.geometry.dispose();
+      this.stem.curvePainter.clean();
+      this.stem = undefined;
+    }
+
     if (this.petals) {
       this.group.remove(this.petals);
       this.petals.clean();
