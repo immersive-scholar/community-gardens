@@ -385,7 +385,7 @@ class StellariaPubera extends BaseRenderable {
 
   update() {
     this.petals.material.uniforms.uTime.value = this.currentTime;
-    this.rearPetals.material.uniforms.uTime.value = this.currentTime;
+    // this.rearPetals.material.uniforms.uTime.value = this.currentTime;
   }
 }
 
