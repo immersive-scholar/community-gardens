@@ -28,6 +28,7 @@ function Petals({
   color,
   distanceFromCenter = 0.01,
   R,
+  openness = 0,
   animated,
   maxDuration = 1,
   imagePath = "/img/patterns/diamonds-2.png",
@@ -64,6 +65,32 @@ function Petals({
   // 2 create the timeline animation
   const timeline = new Timeline();
 
+  // timeline.add(1.0, {
+  //   rotate: {
+  //     from: {
+  //       axis: new Vector3(1, 1, 0),
+  //       angle: 0
+  //     },
+  //     to: {
+  //       angle: Math.PI / 2
+  //     },
+  //     ease: "easeQuadOut"
+  //     //   easeParams: [settings.backAmplitude]
+  //   },
+  //   scale: {
+  //     from: { x: 0, y: 0, z: 0 },
+  //     to: { x: 1, y: 1, z: 1 },
+  //     ease: "easeQuadOut"
+  //     //   easeParams: [settings.backAmplitude]
+  //   },
+  //   translate: {
+  //     from: { x: 0, y: distanceFromCenter, z: 0 },
+  //     to: { x: 0, y: 0, z: 0 },
+  //     ease: "easeQuadOut"
+  //     //   easeParams: [settings.backAmplitude]
+  //   }
+  // });
+
   timeline.add(1.0, {
     rotate: {
       from: {
@@ -83,7 +110,8 @@ function Petals({
       //   easeParams: [settings.backAmplitude]
     },
     translate: {
-      to: { x: 0, y: distanceFromCenter, z: 0 },
+      from: { x: 0, y: distanceFromCenter, z: 0 },
+      to: { x: 0, y: 0, z: 0 },
       ease: "easeQuadOut"
       //   easeParams: [settings.backAmplitude]
     }

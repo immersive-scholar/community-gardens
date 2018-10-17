@@ -20,9 +20,9 @@ class StellariaPubera extends BaseRenderable {
 
     const {
       height = 0.25,
-      color = 0xffffff,
+      color = new ColorSampler().getRandomColor(),
       petalColor = color,
-      rearPetalColor = new ColorSampler().getRandomColor(),
+      rearPetalColor = color,
       petalCount = 10, //this.R.intBetween(10, 24),
       petalWidth = 0.0125,
       petalLength = 0.125,
@@ -33,8 +33,8 @@ class StellariaPubera extends BaseRenderable {
       delay = 0,
       openness = 0.3,
       petalTarget = new Vector3(0, -10, 0),
-      hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 0.5, 0.93),
-      hslRange = new Vector3(0, 0, 0.2),
+      hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 1, 0.3),
+      hslRange = new Vector3(0.12, 0.12, 0.2),
       windForce = 0,
       windDirection = new Vector3(0, 0, 0)
     } = this.state;
@@ -67,10 +67,10 @@ class StellariaPubera extends BaseRenderable {
       color: petalColor,
       imagePath,
       textureSize,
-      petalDistanceFromCenter,
+      distanceFromCenter: petalDistanceFromCenter,
       R: this.R,
-      hslBase: new Vector3(1, 1, 0.8),
-      hslRange: new Vector3(0, 0, 0.2),
+      hslBase,
+      hslRange,
       animated,
       delay,
       openness,
@@ -79,6 +79,7 @@ class StellariaPubera extends BaseRenderable {
     });
     this.petals.position.y = height;
     this.petals.lookAt(petalTarget);
+    this.petals.rotation.y = -Math.PI / 2;
     this.group.add(this.petals);
 
     // this.rearPetals = new Petals({
@@ -88,7 +89,7 @@ class StellariaPubera extends BaseRenderable {
     //   color: rearPetalColor,
     //   imagePath,
     //   textureSize,
-    //   petalDistanceFromCenter: 0,
+    //   distanceFromCenter: petalDistanceFromCenter,
     //   R: this.R,
     //   hslBase,
     //   hslRange,
@@ -98,7 +99,7 @@ class StellariaPubera extends BaseRenderable {
     //   windForce,
     //   windDirection
     // });
-    // this.rearPetals.position.y = height - 0.02;
+    // this.rearPetals.position.y = height - 0.2;
     // this.rearPetals.lookAt(petalTarget);
     // this.rearPetals.renderOrder = -1;
     // this.group.add(this.rearPetals);

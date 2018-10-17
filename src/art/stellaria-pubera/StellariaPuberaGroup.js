@@ -15,23 +15,23 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
       stellariaPubera = new StellariaPubera(
         {
           delay: i * 0.05,
-          petalCount: 10, //36, //R.intBetween(24, 48),
+          petalCount: R.intBetween(24, 48),
           windForce: R.floatBetween(0, 0.5),
           windDirection: new Vector3(
             R.floatBetween(-0.5, 0.5),
             0,
             R.floatBetween(-0.5, 0.5)
           ),
-          hslBase: new Vector3(
-            1,
-            R.floatBetween(0, 0.5),
-            R.floatBetween(0, 0.5)
-          ),
-          hslRange: new Vector3(
-            R.floatBetween(0, 0.05),
-            R.floatBetween(0.1, 0.2),
-            R.floatBetween(0.1, 0.2)
-          ),
+          // hslBase: new Vector3(
+          //   1,
+          //   R.floatBetween(0, 0.5),
+          //   R.floatBetween(0, 0.5)
+          // ),
+          // hslRange: new Vector3(
+          //   R.floatBetween(0, 0.05),
+          //   R.floatBetween(0.1, 0.2),
+          //   R.floatBetween(0.1, 0.2)
+          // ),
           petalTarget: new Vector3(0, 10, 0),
           openness: ((x * y) / (count * count)) * 2,
           pollenCount: R.intBetween(24, 96),
