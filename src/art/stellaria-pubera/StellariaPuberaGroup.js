@@ -15,7 +15,7 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
       stellariaPubera = new StellariaPubera(
         {
           delay: i * 0.05,
-          petalCount: R.intBetween(24, 48),
+          petalCount: 5, //R.intBetween(24, 48),
           windForce: R.floatBetween(0, 0.5),
           windDirection: new Vector3(
             R.floatBetween(-0.5, 0.5),
@@ -50,8 +50,8 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
     group: stellariaPuberaGroup,
     rows: count,
     columns: count,
-    rowWidth: 0.15,
-    columnHeight: 0.15
+    rowWidth: 0.25,
+    columnHeight: 0.25
   });
 
   const stellariaPuberaController = new StellariaPuberaController({

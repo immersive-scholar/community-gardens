@@ -21,11 +21,11 @@ class StellariaPubera extends BaseRenderable {
     const {
       height = 0.25,
       color = new ColorSampler().getRandomColor(),
-      petalColor = color,
+      petalColor = 0xffffff,
       rearPetalColor = color,
       petalCount = 10, //this.R.intBetween(10, 24),
-      petalWidth = 0.0125,
-      petalLength = 0.125,
+      petalWidth = this.R.floatBetween(0.02, 0.04), //0.025,
+      petalLength = this.R.floatBetween(0.1, 0.4), //0.125,
       petalDistanceFromCenter = 0.015,
       imagePath = "/img/patterns/diamonds-2.png",
       textureSize = new Vector2(5, 5),
@@ -33,7 +33,7 @@ class StellariaPubera extends BaseRenderable {
       delay = 0,
       openness = 0.3,
       petalTarget = new Vector3(0, -10, 0),
-      hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 1, 0.3),
+      hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 0.6, 0.3),
       hslRange = new Vector3(0.12, 0.12, 0.2),
       windForce = 0,
       windDirection = new Vector3(0, 0, 0)
@@ -69,8 +69,8 @@ class StellariaPubera extends BaseRenderable {
       textureSize,
       distanceFromCenter: petalDistanceFromCenter,
       R: this.R,
-      hslBase,
-      hslRange,
+      hslBase: new Vector3(1, 1, 1),
+      hslRange: new Vector3(0, 0, 0.1),
       animated,
       delay,
       openness,
@@ -83,9 +83,9 @@ class StellariaPubera extends BaseRenderable {
     this.group.add(this.petals);
 
     // this.rearPetals = new Petals({
-    //   petalCount: petalCount >> 1,
-    //   width: petalWidth * 0.7,
-    //   length: petalLength,
+    //   petalCount: 4,
+    //   width: petalWidth,
+    //   length: petalLength / 4,
     //   color: rearPetalColor,
     //   imagePath,
     //   textureSize,
@@ -94,24 +94,23 @@ class StellariaPubera extends BaseRenderable {
     //   hslBase,
     //   hslRange,
     //   animated,
-    //   delay,
+    //   delay: delay + 0.15,
     //   openness,
     //   windForce,
     //   windDirection
     // });
-    // this.rearPetals.position.y = height - 0.2;
+    // this.rearPetals.position.y = height;
     // this.rearPetals.lookAt(petalTarget);
-    // this.rearPetals.renderOrder = -1;
+    // this.rearPetals.rotation.y = -Math.PI / 2;
+    // this.rearPetals.position.x += 0.035;
     // this.group.add(this.rearPetals);
 
     this.tween && this.tween.kill(null, this);
     if (animated) {
       this.currentTime = 0;
-      this.berryTime = 0;
       this.animatePetals({ delay });
     } else {
       this.currentTime = 1;
-      this.berryTime = 1;
     }
   };
 
@@ -386,7 +385,7 @@ class StellariaPubera extends BaseRenderable {
 
   update() {
     this.petals.material.uniforms.uTime.value = this.currentTime;
-    // this.rearPetals.material.uniforms.uTime.value = this.currentTime;
+    this.rearPetals.material.uniforms.uTime.value = this.currentTime;
   }
 }
 
