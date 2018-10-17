@@ -3,7 +3,7 @@ import ColorSampler from "util/ColorSampler";
 
 const BerryProps = () => {
   const props = {
-    berryCount: 24,
+    berryCount: 0,
     berrySize: 0.01,
     berryColor: 0xffffff,
     berryDistanceFromStem: 0.01,

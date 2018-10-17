@@ -6,6 +6,7 @@ import StemProps from "gui/props/StemProps";
 import LeafProps from "gui/props/LeafProps";
 import LeafColorProps from "gui/props/LeafColorProps";
 import BerryProps from "gui/props/BerryProps";
+import WindProps from "gui/props/WindProps";
 
 class SolomonsSealController extends BaseGUI {
   constructor(props) {
@@ -22,6 +23,9 @@ class SolomonsSealController extends BaseGUI {
 
     const leafColorProps = new LeafColorProps();
     super.addProperty(leafColorProps);
+
+    const windProps = new WindProps();
+    super.addProperty(windProps);
 
     const berryProps = new BerryProps();
     super.addProperty(berryProps);
