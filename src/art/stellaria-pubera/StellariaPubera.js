@@ -23,16 +23,19 @@ class StellariaPubera extends BaseRenderable {
     this.clean();
 
     const {
-      width = 0.025,
+      width = 0.0125,
       length = 0.125,
-      petalCount = this.R.intBetween(10, 24),
+      petalCount = 10, //this.R.intBetween(10, 24),
       petalColor = 0xffffff,
-      animated = true,
-      imagePath = "/img/patterns/diamonds-2.png",
+      distanceFromCenter = 0.015,
+      imagePath = "/img/patterns/lines-2.png",
       textureSize = new Vector2(5, 5),
+      animated = true,
       delay = 0,
       hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 0.5, 0.93),
-      hslRange = 0.02
+      hslRange = 0.02,
+      windForce = 0,
+      windDirection = new Vector3(0, 0, 0)
     } = this.state;
 
     this.petals = new Petals({
@@ -42,19 +45,16 @@ class StellariaPubera extends BaseRenderable {
       color: petalColor,
       imagePath,
       textureSize,
-      // berryDisplacement,
-      // berryDistanceFromStem,
-      // berryRotation,
-      // berrySpiral,
-      // referenceMesh: this.stem,
+      distanceFromCenter,
       R: this.R,
-      animated,
       hslBase,
-      hslRange
-      // delay: 2
-      // windForce,
-      // windDirection,
+      hslRange,
+      animated,
+      delay,
+      windForce,
+      windDirection
     });
+    // this.petals.rotation.x = -Math.PI / 2;
     this.group.add(this.petals);
 
     this.tween && this.tween.kill(null, this);
@@ -70,7 +70,7 @@ class StellariaPubera extends BaseRenderable {
 
   animatePetals({ delay }) {
     this.tween && this.tween.kill(null, this);
-    this.tween = TweenMax.to(this, 3, {
+    this.tween = TweenMax.to(this, 4, {
       currentTime: 1,
       onUpdate: () => {
         this.update();

@@ -2,8 +2,8 @@ const GridLayoutHelper = ({ group, rows, columns, rowWidth, columnHeight }) => {
   let mesh;
 
   // center the group
-  group.position.x = (-rows >> 1) * rowWidth;
-  group.position.z = (-columns >> 1) * columnHeight;
+  group.position.x = (-rows >> 1) * rowWidth + rowWidth;
+  group.position.z = (-columns >> 1) * columnHeight + columnHeight;
 
   for (let x = 0, i = 0; x < rows; x++) {
     for (let y = 0; y < columns; y++) {

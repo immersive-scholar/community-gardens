@@ -3,7 +3,7 @@ import { PerspectiveCamera } from "three-full";
 export default ({ width, height }) => {
   const aspectRatio = width / height;
   const fieldOfView = 70;
-  const nearPlane = 0.01;
+  const nearPlane = 0.001;
   const farPlane = 100;
   const camera = new PerspectiveCamera(
     fieldOfView,

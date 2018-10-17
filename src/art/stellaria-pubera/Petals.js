@@ -24,11 +24,12 @@ function Petals({
   petalCount,
   width = 0.025,
   length = 0.125,
-  leafMidPoint = 0.01,
+  leafMidPoint = 0.4,
   color,
-  distanceFromCenter = 0.005,
+  distanceFromCenter = 0.01,
   R,
   animated,
+  maxDuration = 1,
   imagePath = "/img/patterns/diamonds-2.png",
   textureSize = new Vector2(10, 10),
   windForce = 0.1,
@@ -50,38 +51,11 @@ function Petals({
   // 1 draw the shape
   const shape = new Shape();
   shape.moveTo(0, 0);
-  shape.bezierCurveTo(
-    width,
-    leafMidPoint * length,
-    width,
-    leafMidPoint * length,
-    width,
-    leafMidPoint * length
-  );
-  shape.bezierCurveTo(
-    width,
-    length,
-    width,
-    length,
-    0,
-    (1 - leafMidPoint) * length
-  );
-  shape.bezierCurveTo(
-    -width,
-    leafMidPoint * length,
-    -width,
-    leafMidPoint * length,
-    -width,
-    leafMidPoint * length
-  );
-  shape.bezierCurveTo(
-    -width,
-    leafMidPoint * length,
-    -width,
-    leafMidPoint * length,
-    0,
-    0
-  );
+  shape.quadraticCurveTo(leafMidPoint * width, 0, width, leafMidPoint * length);
+  shape.lineTo(width, length - leafMidPoint * length);
+  shape.lineTo(0, length);
+  shape.lineTo(-width, length - leafMidPoint * length);
+  shape.lineTo(-width, leafMidPoint * length);
 
   // use the shape to create a geometry
   const shapeGeometry = new ShapeGeometry(shape);
@@ -109,7 +83,7 @@ function Petals({
       //   easeParams: [settings.backAmplitude]
     },
     translate: {
-      to: { x: 0, y: 0.2, z: 0 },
+      to: { x: 0, y: distanceFromCenter, z: 0 },
       ease: "easeQuadOut"
       //   easeParams: [settings.backAmplitude]
     }
@@ -122,18 +96,14 @@ function Petals({
 
   const aPosition = geometry.createAttribute("aPosition", 3);
   const aDelayDuration = geometry.createAttribute("aDelayDuration", 3);
-  const duration = 1.0;
-  const maxPrefabDelay = 0.5;
 
   const aQuaternion = geometry.createAttribute("aQuaternion", 4);
-
-  this.totalDuration = timeline.duration + settings.maxDelay;
 
   for (let i = 0, ratio, position, rotation, angle; i < petalCount; i++) {
     ratio = i / petalCount;
 
     // delay
-    geometry.setPrefabData(aDelayDuration, i, [ratio * 0.25, 2]);
+    geometry.setPrefabData(aDelayDuration, i, [ratio * 0.25, maxDuration]);
 
     // position
     position = new Vector3(0, 0, 0);
@@ -148,7 +118,8 @@ function Petals({
     geometry.setPrefabData(aPosition, i, dataArray);
 
     // rotation
-    normal.copy(position);
+    // normal.copy(position);
+    normal.set(Math.cos(angle), Math.sin(angle), 0);
     normal.normalize();
 
     quaternion.setFromUnitVectors(up, normal);

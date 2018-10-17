@@ -9,6 +9,9 @@ const Controls = ({ camera }) => {
   orbitControls.autoRotate = !true;
   orbitControls.autoRotateSpeed = 0.2;
   orbitControls.screenSpacePanning = false;
+  orbitControls.panSpeed = 0.1;
+  orbitControls.rotateSpeed = 0.1;
+  orbitControls.zoomSpeed = 0.1;
 
   const cameraTweenParams = new Vector3(),
     targetTweenParams = new Vector3();

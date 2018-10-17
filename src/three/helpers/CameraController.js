@@ -5,13 +5,13 @@ export default ({ controls, camera }) => {
   const enable = () => {
     const config = {
       sx: 0.75,
-      sy: 0.45,
+      sy: -5.5,
       sz: 0.75,
       x: 0.75,
       y: 0.45,
       z: 0.75,
       rx: 0,
-      ry: 0,
+      ry: -0.4,
       rz: 0,
       reset: () => {
         config.x = config.sx;
