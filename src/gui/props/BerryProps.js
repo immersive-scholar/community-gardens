@@ -54,7 +54,7 @@ const BerryProps = () => {
   };
 
   return {
-    name: "leafColor",
+    name: "berries",
     props,
     addFolder,
     update

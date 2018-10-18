@@ -24,7 +24,7 @@ function Petals({
   petalCount,
   width = 0.025,
   length = 0.125,
-  leafMidPoint = 0.4,
+  leafMidPoint = 0.25,
   color,
   distanceFromCenter = 0.01,
   R,
@@ -39,7 +39,10 @@ function Petals({
   endAngle = 0.9,
   displacement = new Vector2(0.01, 0.01),
   hslBase,
-  hslRange
+  hslRange,
+  rotationAxis = new Vector3(1, 1, 0),
+  rotationAngle = Math.PI / 2,
+  translateToY = 0
 }) {
   const settings = {
     maxDelay: 0.0,
@@ -94,11 +97,15 @@ function Petals({
   timeline.add(1.0, {
     rotate: {
       from: {
-        axis: new Vector3(1, 1, 0),
+        axis: new Vector3(
+          rotationAxis.x + openness,
+          rotationAxis.y,
+          rotationAxis.z
+        ),
         angle: 0
       },
       to: {
-        angle: Math.PI / 2
+        angle: rotationAngle + openness
       },
       ease: "easeQuadOut"
       //   easeParams: [settings.backAmplitude]
@@ -110,8 +117,8 @@ function Petals({
       //   easeParams: [settings.backAmplitude]
     },
     translate: {
-      from: { x: 0, y: distanceFromCenter, z: 0 },
-      to: { x: 0, y: 0, z: 0 },
+      from: { x: 0, y: 0, z: 0 },
+      to: { x: 0, y: translateToY, z: 0 },
       ease: "easeQuadOut"
       //   easeParams: [settings.backAmplitude]
     }
@@ -131,7 +138,7 @@ function Petals({
     ratio = i / petalCount;
 
     // delay
-    geometry.setPrefabData(aDelayDuration, i, [ratio * 0.25, maxDuration]);
+    geometry.setPrefabData(aDelayDuration, i, [ratio * 0.5, maxDuration]);
 
     // position
     position = new Vector3(0, 0, 0);
@@ -196,7 +203,7 @@ function Petals({
     uniformValues: {
       map: texture,
       diffuse: new Color(color),
-      reflectivity: 75
+      reflectivity: 100
     },
     vertexFunctions: [
       // the eases used by the timeline defined above

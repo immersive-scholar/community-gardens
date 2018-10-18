@@ -269,6 +269,7 @@ class SolomonsSeal extends BaseRenderable {
   }
 
   setDisplacement(displacement) {
+    console.log("displacement ", displacement);
     this.setState({ displacement }, isDirty => {
       isDirty && this.init();
     });

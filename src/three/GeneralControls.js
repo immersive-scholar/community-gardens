@@ -26,7 +26,6 @@ const Controls = ({ camera }) => {
   window.controls = orbitControls;
 
   function animateChapter({ delay = 0, duration = 10 } = {}) {
-    console.log("Animating... ", this);
     killTweens();
 
     camera.position.set(12, 0, 12);

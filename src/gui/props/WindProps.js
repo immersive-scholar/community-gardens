@@ -1,6 +1,6 @@
 import { Vector3 } from "three-full";
 
-const StemProps = () => {
+const WindProps = () => {
   const props = {
     windForce: 0,
     windDirectionX: 0,
@@ -40,11 +40,11 @@ const StemProps = () => {
   };
 
   return {
-    name: "stem",
+    name: "wind",
     props,
     addFolder,
     update
   };
 };
 
-export default StemProps;
+export default WindProps;

@@ -243,7 +243,6 @@ class Highres {
         console.log(
           `Highres (${w * factor} x ${h * factor}) rendering started.`
         );
-        // console.log(this.state)
 
         // Wait
         this.onRendered = filename => resolve(filename);

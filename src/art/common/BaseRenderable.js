@@ -49,7 +49,6 @@ class BaseRenderable {
   promiseRequestAnimationFrame(isDirty) {
     new Promise(resolve =>
       window.requestAnimationFrame(() => {
-        console.log("DONE TIMEOUT");
         return resolve(isDirty);
       })
     );

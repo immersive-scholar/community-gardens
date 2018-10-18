@@ -15,25 +15,25 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
       stellariaPubera = new StellariaPubera(
         {
           delay: i * 0.05,
-          petalCount: 5, //R.intBetween(24, 48),
+          petalCount: 10, //R.intBetween(24, 48),
           windForce: R.floatBetween(0, 0.5),
           windDirection: new Vector3(
             R.floatBetween(-0.5, 0.5),
             0,
             R.floatBetween(-0.5, 0.5)
           ),
-          // hslBase: new Vector3(
-          //   1,
-          //   R.floatBetween(0, 0.5),
-          //   R.floatBetween(0, 0.5)
-          // ),
-          // hslRange: new Vector3(
-          //   R.floatBetween(0, 0.05),
-          //   R.floatBetween(0.1, 0.2),
-          //   R.floatBetween(0.1, 0.2)
-          // ),
+          hslBase: new Vector3(
+            1,
+            R.floatBetween(0, 0.5),
+            R.floatBetween(0, 0.5)
+          ),
+          hslRange: new Vector3(
+            R.floatBetween(0, 0.05),
+            R.floatBetween(0.1, 0.25),
+            R.floatBetween(0.1, 0.25)
+          ),
           petalTarget: new Vector3(0, 10, 0),
-          openness: ((x * y) / (count * count)) * 2,
+          openness: R.floatBetween(0, 2),
           pollenCount: R.intBetween(24, 96),
           pollenDistanceFromStem: R.floatBetween(0.015, 0.2)
         },
@@ -50,8 +50,8 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
     group: stellariaPuberaGroup,
     rows: count,
     columns: count,
-    rowWidth: 0.25,
-    columnHeight: 0.25
+    rowWidth: 0.5,
+    columnHeight: 0.5
   });
 
   const stellariaPuberaController = new StellariaPuberaController({
