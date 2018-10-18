@@ -76,32 +76,6 @@ function Petals({
   // 2 create the timeline animation
   const timeline = new Timeline();
 
-  // timeline.add(1.0, {
-  //   rotate: {
-  //     from: {
-  //       axis: new Vector3(1, 1, 0),
-  //       angle: 0
-  //     },
-  //     to: {
-  //       angle: Math.PI / 2
-  //     },
-  //     ease: "easeQuadOut"
-  //     //   easeParams: [settings.backAmplitude]
-  //   },
-  //   scale: {
-  //     from: { x: 0, y: 0, z: 0 },
-  //     to: { x: 1, y: 1, z: 1 },
-  //     ease: "easeQuadOut"
-  //     //   easeParams: [settings.backAmplitude]
-  //   },
-  //   translate: {
-  //     from: { x: 0, y: distanceFromCenter, z: 0 },
-  //     to: { x: 0, y: 0, z: 0 },
-  //     ease: "easeQuadOut"
-  //     //   easeParams: [settings.backAmplitude]
-  //   }
-  // });
-
   timeline.add(1.0, {
     rotate: {
       from: {
@@ -142,14 +116,18 @@ function Petals({
 
   const aQuaternion = geometry.createAttribute("aQuaternion", 4);
 
-  for (let i = 0, ratio, position, rotation, angle; i < petalCount; i++) {
+  for (
+    let i = 0, ratio, position = new Vector3(), rotation, angle;
+    i < petalCount;
+    i++
+  ) {
     ratio = i / petalCount;
 
     // delay
     geometry.setPrefabData(aDelayDuration, i, [ratio * 0.5, maxDuration]);
 
     // position
-    position = new Vector3(0, 0, 0);
+    position.set(0, 0, 0);
     rotation = (360 / petalCount) * i;
 
     // push away from stem in an increasing spiral pattern
@@ -260,7 +238,7 @@ function Petals({
 
   Mesh.call(this, geometry, material);
 
-  //   this.castShadow = true;
+  // this.castShadow = true;
   this.frustumCulled = false;
 
   this.clean = function() {

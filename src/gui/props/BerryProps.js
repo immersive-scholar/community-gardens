@@ -1,12 +1,9 @@
-import { Vector3, Vector2, Color } from "three-full";
-import ColorSampler from "util/ColorSampler";
-
 const BerryProps = () => {
   const props = {
-    berryCount: 0,
+    berryCount: 10,
     berrySize: 0.01,
-    berryColor: 0xffffff,
-    berryDistanceFromStem: 0.01,
+    berryColor: 0xff9900,
+    berryDistanceFromStem: 0.05,
     berryRotation: 720,
     berrySpiral: true
   };

@@ -4,8 +4,9 @@ import ColorSampler from "util/ColorSampler";
 import BaseRenderable from "art/common/BaseRenderable";
 
 // import StellariaPuberaPetal from "./StellariaPuberaPetal";
-import Petals from "./Petals";
 import StellariaPuberaPetalShape from "./StellariaPuberaPetalShape";
+import Petals from "./Petals";
+import Pollen from "./Pollen";
 
 class StellariaPubera extends BaseRenderable {
   constructor(props, camera, R) {
@@ -21,6 +22,7 @@ class StellariaPubera extends BaseRenderable {
 
     const {
       height = 0.25,
+      pointCount = 24,
       color = new ColorSampler().getRandomColor(),
       petalColor = color,
       rearPetalColor = color,
@@ -44,7 +46,16 @@ class StellariaPubera extends BaseRenderable {
       windDirection = new Vector3(0, 0, 0),
       rotationAxis = new Vector3(0, 0, Math.PI),
       rotationAngle = 0.4,
-      translateToY = 0
+      translateToY = 0,
+      berrySize = 0.0025,
+      berryCount = 24, //this.R.intBetween(4, 24),
+      // berryColor = 0xffffff,
+      berryColor = color,
+      berryDisplacement = new Vector2(0.01, 0.01),
+      berryDistanceFromStem = 0.002,
+      berryRotation = 360,
+      berrySpiral = true,
+      berrySpiralDepth = 0.1
     } = this.state;
 
     // stem
@@ -99,7 +110,7 @@ class StellariaPubera extends BaseRenderable {
     });
     this.petals.position.y = height;
     this.petals.lookAt(petalTarget);
-    // this.petals.rotation.y = -Math.PI / 2;
+    this.petals.rotation.y = -Math.PI / 2;
     this.group.add(this.petals);
 
     const rearPetalShapeGeometry = new StellariaPuberaPetalShape({
@@ -136,9 +147,32 @@ class StellariaPubera extends BaseRenderable {
     });
     this.rearPetals.position.y = height;
     this.rearPetals.lookAt(petalTarget);
-    // this.rearPetals.rotation.y = -Math.PI / 2;
-    this.rearPetals.position.x += 0.005;
+    this.rearPetals.rotation.y = -Math.PI / 2;
+    this.rearPetals.position.x += 0.01;
     this.group.add(this.rearPetals);
+
+    // pollen
+    this.pollen = new Pollen({
+      size: berrySize,
+      count: berryCount,
+      displacement: berryDisplacement,
+      distanceFromCenter: berryDistanceFromStem,
+      rotation: berryRotation,
+      spiral: berrySpiral,
+      spiralDepth: berrySpiralDepth,
+      // color,
+      color: berryColor,
+      R: this.R,
+      animated,
+      windForce,
+      windDirection,
+      delay: 0
+    });
+    this.pollen.position.y = height;
+    this.pollen.lookAt(petalTarget);
+    this.pollen.position.x -= 0.005;
+    this.pollen.rotation.y = -Math.PI / 2;
+    this.group.add(this.pollen);
 
     this.tween && this.tween.kill(null, this);
     if (animated) {
@@ -408,11 +442,11 @@ class StellariaPubera extends BaseRenderable {
       this.rearPetals = undefined;
     }
 
-    if (this.pollenMesh) {
-      this.group.remove(this.pollenMesh);
-      this.pollenMesh.geometry.dispose();
-      this.pollenMesh.material.dispose();
-      this.pollenMesh = undefined;
+    if (this.pollen) {
+      this.group.remove(this.pollen);
+      this.pollen.geometry.dispose();
+      this.pollen.material.dispose();
+      this.pollen = undefined;
     }
   }
 
@@ -435,6 +469,7 @@ class StellariaPubera extends BaseRenderable {
   update() {
     this.petals.material.uniforms.uTime.value = this.currentTime;
     this.rearPetals.material.uniforms.uTime.value = this.currentTime;
+    this.pollen.material.uniforms.uTime.value = this.currentTime;
   }
 }
 

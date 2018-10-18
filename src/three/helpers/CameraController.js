@@ -13,6 +13,7 @@ export default ({ controls, camera }) => {
       rx: 0,
       ry: -0.4,
       rz: 0,
+      autoRotate: false,
       reset: () => {
         config.x = config.sx;
         config.y = config.sy;
@@ -31,6 +32,7 @@ export default ({ controls, camera }) => {
         camera.position.set(config.x, config.y, config.z);
         // controls.lookAt(new Vector3(config.rx, config.ry, config.rz));
         controls.controls.target = new Vector3(config.rx, config.ry, config.rz);
+        controls.controls.autoRotate = config.autoRotate;
 
         controls.update();
       } catch (error) {
@@ -74,6 +76,10 @@ export default ({ controls, camera }) => {
 
     const animationsFolder = gui.addFolder("Animations");
     animationsFolder.add(config, "animateChapter");
+    animationsFolder
+      .add(config, "autoRotate")
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
 
     // gui.close();
 

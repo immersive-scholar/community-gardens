@@ -4,8 +4,8 @@ import PositionProps from "gui/props/PositionProps";
 import LeafColorProps from "gui/props/LeafColorProps";
 import PetalProps from "gui/props/PetalProps";
 import WindProps from "gui/props/WindProps";
+import BerryProps from "gui/props/BerryProps";
 // import StemProps from "gui/props/StemProps";
-// import LeafProps from "gui/props/LeafProps";
 // import WindProps from "gui/props/WindProps";
 
 class StellariaPuberaController extends BaseGUI {
@@ -18,14 +18,14 @@ class StellariaPuberaController extends BaseGUI {
     const positionProps = new PositionProps();
     super.addProperty(positionProps);
 
-    // const leafProps = new LeafProps();
-    // super.addProperty(leafProps);
-
     const leafColorProps = new LeafColorProps();
     super.addProperty(leafColorProps);
 
     const petalProps = new PetalProps();
     super.addProperty(petalProps);
+
+    const berryProps = new BerryProps();
+    super.addProperty(berryProps);
 
     const windProps = new WindProps();
     super.addProperty(windProps);
