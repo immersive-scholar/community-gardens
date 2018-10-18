@@ -10,6 +10,7 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
     count = 10,
     instances = [];
 
+  stellariaPuberaGroup.rotation.x = -Math.PI / 2;
   for (let x = 0, i = 0; x < count; x++) {
     for (let y = 0; y < count; y++) {
       stellariaPubera = new StellariaPubera(
@@ -32,7 +33,7 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
             R.floatBetween(0.1, 0.25),
             R.floatBetween(0.1, 0.25)
           ),
-          petalTarget: new Vector3(0, 10, 0),
+          petalTarget: new Vector3(0, 10, -10),
           openness: R.floatBetween(0, 2),
           berryCount: R.intBetween(16, 32),
           berryDistanceFromStem: R.floatBetween(0.002, 0.08),
@@ -41,6 +42,7 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
         camera,
         R
       );
+      stellariaPubera.group.rotation.z = Math.PI / 2;
       stellariaPuberaGroup.add(stellariaPubera.group);
       instances.push(stellariaPubera);
       i++;
@@ -55,10 +57,10 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
     columnHeight: 0.5
   });
 
-  const stellariaPuberaController = new StellariaPuberaController({
-    controls,
-    instance: instances[0]
-  });
+  // const stellariaPuberaController = new StellariaPuberaController({
+  //   controls,
+  //   instance: instances[0]
+  // });
 
   return { group: stellariaPuberaGroup };
 };
