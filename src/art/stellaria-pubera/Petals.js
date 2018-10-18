@@ -20,14 +20,11 @@ import {
   PrefabBufferGeometry
 } from "three/vendor/BAS";
 
+import Modifiers from "three/vendor/Modifiers";
+
 function Petals({
   petalCount,
   petalShapeGeometry,
-  petalWidth = 0.025,
-  petalLength = 0.125,
-  petalMidPointRatio = 0.5,
-  petalLowerMidPointRatio = 0.2,
-  petalUpperMidPointRatio = 0.8,
   color,
   distanceFromCenter = 0.01,
   R,
@@ -54,6 +51,24 @@ function Petals({
     elasticAmplitude: 1.0,
     elasticPeriod: 0.125
   };
+
+  // bend
+  if (windForce) {
+    let temporaryMesh = new Mesh(petalShapeGeometry.clone(), null);
+    this.modifier = Modifiers.ModifierStack(temporaryMesh);
+    this.bend = Modifiers.Bend(
+      windDirection.x,
+      windDirection.y,
+      windDirection.z
+    );
+    this.bend.force = windForce;
+    this.bend.constraint = Modifiers.ModConstant().NONE;
+    this.modifier.addModifier(this.bend);
+    this.modifier.apply();
+    petalShapeGeometry.vertices = temporaryMesh.geometry.vertices;
+
+    temporaryMesh = undefined;
+  }
 
   // 1 use the shape to create a geometry
   const geometry = new PrefabBufferGeometry(petalShapeGeometry, petalCount);

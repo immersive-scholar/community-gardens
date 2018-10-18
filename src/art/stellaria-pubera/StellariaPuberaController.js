@@ -3,6 +3,7 @@ import AnimatedProps from "gui/props/AnimatedProps";
 import PositionProps from "gui/props/PositionProps";
 import LeafColorProps from "gui/props/LeafColorProps";
 import PetalProps from "gui/props/PetalProps";
+import WindProps from "gui/props/WindProps";
 // import StemProps from "gui/props/StemProps";
 // import LeafProps from "gui/props/LeafProps";
 // import WindProps from "gui/props/WindProps";
@@ -26,8 +27,8 @@ class StellariaPuberaController extends BaseGUI {
     const petalProps = new PetalProps();
     super.addProperty(petalProps);
 
-    // const windProps = new WindProps();
-    // super.addProperty(windProps);
+    const windProps = new WindProps();
+    super.addProperty(windProps);
   }
 }
 

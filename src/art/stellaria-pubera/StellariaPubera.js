@@ -99,7 +99,7 @@ class StellariaPubera extends BaseRenderable {
     });
     this.petals.position.y = height;
     this.petals.lookAt(petalTarget);
-    this.petals.rotation.y = -Math.PI / 2;
+    // this.petals.rotation.y = -Math.PI / 2;
     this.group.add(this.petals);
 
     const rearPetalShapeGeometry = new StellariaPuberaPetalShape({
@@ -136,7 +136,7 @@ class StellariaPubera extends BaseRenderable {
     });
     this.rearPetals.position.y = height;
     this.rearPetals.lookAt(petalTarget);
-    this.rearPetals.rotation.y = -Math.PI / 2;
+    // this.rearPetals.rotation.y = -Math.PI / 2;
     this.rearPetals.position.x += 0.005;
     this.group.add(this.rearPetals);
 

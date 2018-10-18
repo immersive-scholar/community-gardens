@@ -16,11 +16,11 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
         {
           delay: i * 0.05,
           petalCount: 10, //R.intBetween(24, 48),
-          windForce: R.floatBetween(0, 0.5),
+          windForce: R.floatBetween(-0.5, 0),
           windDirection: new Vector3(
-            R.floatBetween(-0.5, 0.5),
-            0,
-            R.floatBetween(-0.5, 0.5)
+            R.floatBetween(-2.5, 2.5),
+            R.floatBetween(-2.5, 2.5),
+            R.floatBetween(-2.5, 2.5)
           ),
           hslBase: new Vector3(
             1,
