@@ -5,6 +5,7 @@ import BaseRenderable from "art/common/BaseRenderable";
 
 // import StellariaPuberaPetal from "./StellariaPuberaPetal";
 import Petals from "./Petals";
+import StellariaPuberaPetalShape from "./StellariaPuberaPetalShape";
 
 class StellariaPubera extends BaseRenderable {
   constructor(props, camera, R) {
@@ -27,6 +28,9 @@ class StellariaPubera extends BaseRenderable {
       rearPetalCount = 6,
       petalWidth = 0.025,
       petalLength = 0.25,
+      petalMidPointRatio = 0.5,
+      petalLowerMidPointRatio = 0.2,
+      petalUpperMidPointRatio = 0.8,
       petalDistanceFromCenter = 0,
       imagePath = "/img/patterns/diamonds-2.png",
       textureSize = new Vector2(5, 5),
@@ -64,9 +68,17 @@ class StellariaPubera extends BaseRenderable {
     // });
     // this.group.add(this.stem.curvePainter.mesh);
 
+    const petalShapeGeometry = new StellariaPuberaPetalShape({
+      width: petalWidth,
+      length: petalLength,
+      petalMidPointRatio,
+      petalLowerMidPointRatio,
+      petalUpperMidPointRatio
+    });
+
     this.petals = new Petals({
       petalCount,
-      rearPetalCount,
+      petalShapeGeometry: petalShapeGeometry.clone(),
       width: petalWidth,
       length: petalLength,
       color: 0xffffff,
@@ -90,11 +102,22 @@ class StellariaPubera extends BaseRenderable {
     this.petals.rotation.y = -Math.PI / 2;
     this.group.add(this.petals);
 
+    const rearPetalShapeGeometry = new StellariaPuberaPetalShape({
+      width: petalWidth * 2.5,
+      length: petalLength * 0.5,
+      petalMidPointRatio,
+      petalLowerMidPointRatio,
+      petalUpperMidPointRatio
+    });
+
     this.rearPetals = new Petals({
       petalCount: rearPetalCount,
+      petalShapeGeometry: rearPetalShapeGeometry.clone(),
       width: petalWidth * 2,
       length: petalLength / 2,
-      leafMidPoint: 0.4,
+      petalMidPointRatio: 0.5,
+      petalLowerMidPointRatio: 0.2,
+      petalUpperMidPointRatio: 0.8,
       color: rearPetalColor,
       imagePath,
       textureSize,
@@ -179,12 +202,6 @@ class StellariaPubera extends BaseRenderable {
     });
   }
 
-  setLeafCount(leafCount) {
-    this.setState({ leafCount }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
   setThickness(thickness) {
     this.setState({ thickness }, isDirty => {
       isDirty && this.init();
@@ -197,14 +214,14 @@ class StellariaPubera extends BaseRenderable {
     });
   }
 
-  setLeafStartPoint(leafStartPoint) {
-    this.setState({ leafStartPoint }, isDirty => {
+  setPetalStartPoint(petalStartPoint) {
+    this.setState({ petalStartPoint }, isDirty => {
       isDirty && this.init();
     });
   }
 
-  setLeafEndPoint(leafEndPoint) {
-    this.setState({ leafEndPoint }, isDirty => {
+  setPetalEndPoint(petalEndPoint) {
+    this.setState({ petalEndPoint }, isDirty => {
       isDirty && this.init();
     });
   }

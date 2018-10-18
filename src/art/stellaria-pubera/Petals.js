@@ -22,9 +22,12 @@ import {
 
 function Petals({
   petalCount,
-  width = 0.025,
-  length = 0.125,
-  leafMidPoint = 0.25,
+  petalShapeGeometry,
+  petalWidth = 0.025,
+  petalLength = 0.125,
+  petalMidPointRatio = 0.5,
+  petalLowerMidPointRatio = 0.2,
+  petalUpperMidPointRatio = 0.8,
   color,
   distanceFromCenter = 0.01,
   R,
@@ -52,18 +55,8 @@ function Petals({
     elasticPeriod: 0.125
   };
 
-  // 1 draw the shape
-  const shape = new Shape();
-  shape.moveTo(0, 0);
-  shape.quadraticCurveTo(leafMidPoint * width, 0, width, leafMidPoint * length);
-  shape.lineTo(width, length - leafMidPoint * length);
-  shape.lineTo(0, length);
-  shape.lineTo(-width, length - leafMidPoint * length);
-  shape.lineTo(-width, leafMidPoint * length);
-
-  // use the shape to create a geometry
-  const shapeGeometry = new ShapeGeometry(shape);
-  const geometry = new PrefabBufferGeometry(shapeGeometry, petalCount);
+  // 1 use the shape to create a geometry
+  const geometry = new PrefabBufferGeometry(petalShapeGeometry, petalCount);
 
   // 2 create the timeline animation
   const timeline = new Timeline();
