@@ -23,7 +23,6 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
   // scene.add(solomonsSealGroup.group);
 
   const plane = new Plane();
-  plane.group.position.y = -0.2;
   scene.add(plane.group);
 
   function update() {}

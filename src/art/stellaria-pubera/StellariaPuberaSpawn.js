@@ -10,8 +10,6 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
     count = 5,
     instances = [];
 
-  stellariaPuberaGroup.rotation.x = -Math.PI / 2;
-
   createNewStellariaPubera({ count });
   setInterval(() => cleanInstances(), 500);
 
@@ -20,7 +18,7 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
       for (let y = 0; y < count; y++) {
         stellariaPubera = new StellariaPubera(
           {
-            delay: i * 0.5,
+            delay: i * 0.05,
             petalCount: 10, //R.intBetween(24, 48),
             windForce: R.floatBetween(-0.3, 0),
             windDirection: new Vector3(
@@ -47,22 +45,26 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
           camera,
           R
         );
-        stellariaPuberaGroup.position.x = -0.25;
-        stellariaPuberaGroup.position.y = 0.25;
-        stellariaPuberaGroup.rotation.y = -Math.PI / 2;
-        stellariaPuberaGroup.rotation.z = -Math.PI / 2;
         stellariaPuberaGroup.add(stellariaPubera.group);
         instances.push(stellariaPubera);
         i++;
       }
     }
+
+    const rowWidth = 0.5,
+      columnHeight = 0.5;
+
+    // arrange layout
     GridLayoutHelper({
       group: stellariaPuberaGroup,
       rows: count,
       columns: count,
-      rowWidth: 0.5,
-      columnHeight: 0.5
+      rowWidth,
+      columnHeight,
+      layoutAxis: GridLayoutHelper.LAYOUT_WALL
     });
+
+    stellariaPuberaGroup.position.y = 0.25;
   }
 
   const stellariaPuberaController = new StellariaPuberaController({

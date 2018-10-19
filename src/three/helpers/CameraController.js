@@ -6,7 +6,7 @@ export default ({ controls, camera }) => {
     const config = {
       x: 0,
       y: 0,
-      z: -0.5,
+      z: -2,
       rx: 0,
       ry: 0,
       rz: 1,

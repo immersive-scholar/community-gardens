@@ -6,16 +6,21 @@ import {
 } from "three-full";
 
 import BaseRenderable from "art/common/BaseRenderable";
+import Cube from "../cube/Cube";
 
 class Plane extends BaseRenderable {
   constructor(props) {
     super(props);
 
     const plane = this.createPlane();
-    // const grid = this.createGrid();
-
     this.group.add(plane);
+
+    // const grid = this.createGrid();
+    // grid.position.y = 0.001;
     // this.group.add(grid);
+
+    // const cube = new Cube({});
+    // this.group.add(cube.mesh);
   }
 
   createPlane() {
@@ -31,9 +36,7 @@ class Plane extends BaseRenderable {
   }
 
   createGrid() {
-    var grid = new GridHelper(250, 25, 0x000000, 0x000000);
-    grid.material.opacity = 0.5;
-    grid.material.transparent = true;
+    var grid = new GridHelper(25, 25);
     return grid;
   }
 
