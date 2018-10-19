@@ -34,7 +34,7 @@ class StellariaPubera extends BaseRenderable {
       petalLowerMidPointRatio = 0.2,
       petalUpperMidPointRatio = 0.8,
       petalDistanceFromCenter = 0,
-      imagePath = "/img/patterns/diamonds-2.png",
+      imagePath = "/img/patterns/hex-1.png",
       textureSize = new Vector2(5, 5),
       animated = true,
       delay = 0,

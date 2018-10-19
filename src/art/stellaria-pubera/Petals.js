@@ -31,7 +31,7 @@ function Petals({
   openness = 0,
   animated,
   maxDuration = 1,
-  imagePath = "/img/patterns/diamonds-2.png",
+  imagePath = "/img/patterns/hex-1.png",
   textureSize = new Vector2(10, 10),
   windForce = 0.1,
   windDirection = new Vector3(2, 2, 0),

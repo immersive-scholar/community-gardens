@@ -1,5 +1,5 @@
 import * as dat from "dat.gui";
-import { Vector2, Vector3, Color } from "three-full";
+import { Vector3 } from "three-full";
 
 export default ({ controls, camera }) => {
   const enable = () => {
@@ -8,7 +8,7 @@ export default ({ controls, camera }) => {
       y: 0,
       z: -0.5,
       rx: 0,
-      ry: -0.5,
+      ry: 0,
       rz: 1,
       autoRotate: false,
       reset: () => {

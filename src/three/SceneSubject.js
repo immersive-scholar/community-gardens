@@ -1,6 +1,7 @@
 // import Garden from "art/garden/Garden";
-import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
-import StellariaPuberaGroup from "art/stellaria-pubera/StellariaPuberaGroup";
+// import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
+// import StellariaPuberaGroup from "art/stellaria-pubera/StellariaPuberaGroup";
+import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 // import Sky from "art/sky/Sky";
 import Plane from "art/plane/Plane";
 
@@ -11,15 +12,15 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
   // const sky = new Sky({}, camera, R);
   // scene.add(sky.group);
 
-  // const stellariaPuberaGroup = new StellariaPuberaGroup({
-  //   R,
-  //   camera,
-  //   controls
-  // });
-  // scene.add(stellariaPuberaGroup.group);
+  const stellariaPuberaSpawn = new StellariaPuberaSpawn({
+    R,
+    camera,
+    controls
+  });
+  scene.add(stellariaPuberaSpawn.group);
 
-  const solomonsSealGroup = new SolomonsSealGroup({ R, camera, controls });
-  scene.add(solomonsSealGroup.group);
+  // const solomonsSealGroup = new SolomonsSealGroup({ R, camera, controls });
+  // scene.add(solomonsSealGroup.group);
 
   const plane = new Plane();
   plane.group.position.y = -0.2;

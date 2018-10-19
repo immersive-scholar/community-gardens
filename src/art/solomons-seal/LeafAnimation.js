@@ -18,7 +18,7 @@ function LeafAnimation({
   modelGeometry,
   color,
   animated,
-  imagePath = "/img/patterns/diamonds-2.png",
+  imagePath = "/img/patterns/hex-1.png",
   textureSize = new Vector2(20, -20),
   windForce,
   windDirection,

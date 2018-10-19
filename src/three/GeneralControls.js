@@ -56,7 +56,7 @@ const Controls = ({ camera }) => {
     });
   }
 
-  function animateChapter2({ delay = 0, duration = 20 } = {}) {
+  function animateChapter2({ delay = 0, duration = 5 } = {}) {
     killTweens();
 
     camera.position.set(0, 1, 10);
@@ -75,14 +75,14 @@ const Controls = ({ camera }) => {
       }
     });
 
-    target.set(0, 1, -10);
+    target.set(0, 1, -1);
     targetTweenParams.x = target.x;
     targetTweenParams.y = target.y;
     targetTweenParams.z = target.z;
 
     this.targetTween = TweenMax.to(targetTweenParams, duration, {
-      y: 1.2,
-      z: -10,
+      y: 1,
+      z: 0,
       delay,
       ease: Power2.easeInOut
     });
