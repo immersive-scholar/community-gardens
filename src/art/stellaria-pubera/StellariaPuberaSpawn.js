@@ -10,10 +10,10 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
     count = 5,
     instances = [];
 
-  createNewStellariaPubera({ count });
-  setInterval(() => cleanInstances(), 500);
+  createStellariaPubera({ count });
+  const intervalID = setInterval(() => cleanInstances(), 500);
 
-  function createNewStellariaPubera({ count }) {
+  function createStellariaPubera({ count }) {
     for (let x = 0, i = 0; x < count; x++) {
       for (let y = 0; y < count; y++) {
         stellariaPubera = new StellariaPubera(
@@ -72,6 +72,10 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
     instance: instances[0]
   });
 
+  function clean() {
+    intervalID && clearInterval(intervalID);
+  }
+
   function cleanInstances() {
     const removeMe = [];
     const cameraPosition = new Vector3().setFromMatrixPosition(
@@ -118,7 +122,7 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
     instance = undefined;
   }
 
-  return { group: stellariaPuberaGroup };
+  return { group: stellariaPuberaGroup, createStellariaPubera };
 };
 
 export default StellariaPuberaSpawn;

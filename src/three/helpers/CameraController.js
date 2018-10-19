@@ -5,24 +5,24 @@ export default ({ controls, camera }) => {
   const enable = () => {
     const config = {
       x: 0,
-      y: 0,
+      y: 1,
       z: -2,
-      rx: 0,
-      ry: 0,
-      rz: 1,
+      tx: 0,
+      ty: 1,
+      tz: 1,
       autoRotate: false,
       reset: () => {
         const { original } = config;
         configXSlider.setValue(original.x);
         configYSlider.setValue(original.y);
         configZSlider.setValue(original.z);
-        configRXSlider.setValue(original.rx);
-        configRYSlider.setValue(original.ry);
-        configRZSlider.setValue(original.rz);
+        configTargetXSlider.setValue(original.tx);
+        configTargetYSlider.setValue(original.ty);
+        configTargetZSlider.setValue(original.tz);
         onDataChangeComplete();
       },
-      animateChapter: () => {
-        controls.animateChapter();
+      animateChapter1: () => {
+        controls.animateChapter1();
       },
       animateChapter2: () => {
         controls.animateChapter2();
@@ -31,9 +31,9 @@ export default ({ controls, camera }) => {
         configXSlider.setValue(camera.position.x);
         configYSlider.setValue(camera.position.y);
         configZSlider.setValue(camera.position.z);
-        configRXSlider.setValue(camera.rotation.x);
-        configRYSlider.setValue(camera.rotation.y);
-        configRZSlider.setValue(camera.rotation.z);
+        configTargetXSlider.setValue(camera.rotation.x);
+        configTargetYSlider.setValue(camera.rotation.y);
+        configTargetZSlider.setValue(camera.rotation.z);
         onDataChange();
         onDataChangeComplete();
       }
@@ -43,17 +43,17 @@ export default ({ controls, camera }) => {
       x: config.x,
       y: config.y,
       z: config.z,
-      rx: config.rx,
-      ry: config.ry,
-      rz: config.rz
+      tx: config.tx,
+      ty: config.ry,
+      tz: config.tz
     };
 
     const onDataChange = function() {
       controls.enabled = false;
       try {
         camera.position.set(config.x, config.y, config.z);
-        // controls.lookAt(new Vector3(config.rx, config.ry, config.rz));
-        controls.controls.target = new Vector3(config.rx, config.ry, config.rz);
+        // controls.lookAt(new Vector3(config.tx, config.ty, config.tz));
+        controls.controls.target = new Vector3(config.tx, config.ty, config.tz);
         controls.controls.autoRotate = config.autoRotate;
 
         controls.update();
@@ -83,22 +83,22 @@ export default ({ controls, camera }) => {
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 
-    const configRXSlider = positionFolder
-      .add(config, "rx", -5, 5, 0.1)
+    const configTargetXSlider = positionFolder
+      .add(config, "tx", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
-    const configRYSlider = positionFolder
-      .add(config, "ry", -5, 5, 0.1)
+    const configTargetYSlider = positionFolder
+      .add(config, "ty", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
-    const configRZSlider = positionFolder
-      .add(config, "rz", -5, 5, 0.1)
+    const configTargetZSlider = positionFolder
+      .add(config, "tz", -5, 5, 0.1)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     positionFolder.add(config, "getCameraPosition");
 
     const animationsFolder = gui.addFolder("Animations");
-    animationsFolder.add(config, "animateChapter");
+    animationsFolder.add(config, "animateChapter1");
     animationsFolder.add(config, "animateChapter2");
     animationsFolder
       .add(config, "autoRotate")

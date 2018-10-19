@@ -25,7 +25,40 @@ const Controls = ({ camera }) => {
   // enable for console control.
   window.controls = orbitControls;
 
-  function animateChapter({ delay = 0, duration = 10 } = {}) {
+  function animate({ from, to, delay = 0, duration = 10 } = {}) {
+    killTweens();
+
+    camera.position.set(from.x, from.y, from.z);
+    cameraTweenParams.x = camera.position.x;
+    cameraTweenParams.y = camera.position.y;
+    cameraTweenParams.z = camera.position.z;
+
+    this.cameraTween = TweenMax.to(cameraTweenParams, duration, {
+      x: to.x,
+      y: to.y,
+      z: to.z,
+      delay,
+      ease: Power2.easeInOut,
+      onUpdate: () => {
+        onCameraMoveUpdate();
+      }
+    });
+
+    target.set(from.tx, from.ty, from.tz);
+    targetTweenParams.x = target.x;
+    targetTweenParams.y = target.y;
+    targetTweenParams.z = target.z;
+
+    this.targetTween = TweenMax.to(targetTweenParams, duration, {
+      x: to.tx,
+      y: to.ty,
+      z: to.tz,
+      delay,
+      ease: Power2.easeInOut
+    });
+  }
+
+  function animateChapter1({ delay = 0, duration = 10 } = {}) {
     killTweens();
 
     camera.position.set(12, 0, 12);
@@ -98,7 +131,6 @@ const Controls = ({ camera }) => {
   }
 
   const killTweens = () => {
-    console.log("Killing...", this);
     this.cameraTween && this.cameraTween.kill(null, this);
     this.targetTween && this.targetTween.kill(null, this);
   };
@@ -110,7 +142,8 @@ const Controls = ({ camera }) => {
   return {
     controls: orbitControls,
     update,
-    animateChapter,
+    animate,
+    animateChapter1,
     animateChapter2,
     killTweens
   };
