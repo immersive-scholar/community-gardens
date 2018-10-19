@@ -7,7 +7,7 @@ import GridLayoutHelper from "util/GridLayoutHelper";
 const StellariaPuberaGroup = ({ R, camera, controls }) => {
   let stellariaPubera,
     stellariaPuberaGroup = new Group(),
-    count = 10,
+    count = 4,
     instances = [];
 
   stellariaPuberaGroup.rotation.x = -Math.PI / 2;
@@ -15,7 +15,7 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
     for (let y = 0; y < count; y++) {
       stellariaPubera = new StellariaPubera(
         {
-          delay: i * 0.05,
+          delay: i * 1.5,
           petalCount: 10, //R.intBetween(24, 48),
           windForce: R.floatBetween(-0.3, 0),
           windDirection: new Vector3(

@@ -56,6 +56,38 @@ const Controls = ({ camera }) => {
     });
   }
 
+  function animateChapter2({ delay = 0, duration = 20 } = {}) {
+    killTweens();
+
+    camera.position.set(0, 1, 10);
+    cameraTweenParams.x = camera.position.x;
+    cameraTweenParams.y = camera.position.y;
+    cameraTweenParams.z = camera.position.z;
+
+    this.cameraTween = TweenMax.to(cameraTweenParams, duration, {
+      x: 0,
+      y: 1,
+      z: 0.25,
+      delay,
+      ease: Power2.easeInOut,
+      onUpdate: () => {
+        onCameraMoveUpdate();
+      }
+    });
+
+    target.set(0, 1, -10);
+    targetTweenParams.x = target.x;
+    targetTweenParams.y = target.y;
+    targetTweenParams.z = target.z;
+
+    this.targetTween = TweenMax.to(targetTweenParams, duration, {
+      y: 1.2,
+      z: -10,
+      delay,
+      ease: Power2.easeInOut
+    });
+  }
+
   function onCameraMoveUpdate() {
     camera.position.set(
       cameraTweenParams.x,
@@ -66,6 +98,7 @@ const Controls = ({ camera }) => {
   }
 
   const killTweens = () => {
+    console.log("Killing...", this);
     this.cameraTween && this.cameraTween.kill(null, this);
     this.targetTween && this.targetTween.kill(null, this);
   };
@@ -74,7 +107,13 @@ const Controls = ({ camera }) => {
     orbitControls.update();
   }
 
-  return { controls: orbitControls, update, animateChapter };
+  return {
+    controls: orbitControls,
+    update,
+    animateChapter,
+    animateChapter2,
+    killTweens
+  };
 };
 
 export default Controls;

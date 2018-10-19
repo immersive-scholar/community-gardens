@@ -13,7 +13,6 @@ export default ({ controls, camera }) => {
       autoRotate: false,
       reset: () => {
         const { original } = config;
-        console.log("original ", original);
         configXSlider.setValue(original.x);
         configYSlider.setValue(original.y);
         configZSlider.setValue(original.z);
@@ -24,6 +23,9 @@ export default ({ controls, camera }) => {
       },
       animateChapter: () => {
         controls.animateChapter();
+      },
+      animateChapter2: () => {
+        controls.animateChapter2();
       },
       getCameraPosition: () => {
         configXSlider.setValue(camera.position.x);
@@ -97,6 +99,7 @@ export default ({ controls, camera }) => {
 
     const animationsFolder = gui.addFolder("Animations");
     animationsFolder.add(config, "animateChapter");
+    animationsFolder.add(config, "animateChapter2");
     animationsFolder
       .add(config, "autoRotate")
       .onChange(onDataChange)
