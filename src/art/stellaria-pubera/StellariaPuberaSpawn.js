@@ -1,4 +1,5 @@
 import { Group, Vector3, Box3 } from "three-full";
+import sample from "lodash/sample";
 
 import StellariaPubera from "art/stellaria-pubera/StellariaPubera";
 import StellariaPuberaController from "art/stellaria-pubera/StellariaPuberaController";
@@ -6,19 +7,20 @@ import GridLayoutHelper from "util/GridLayoutHelper";
 
 const StellariaPuberaSpawn = ({ R, camera, controls }) => {
   let stellariaPubera,
+    intervalID,
     stellariaPuberaGroup = new Group(),
-    count = 5,
+    count = 8,
     instances = [];
 
   createStellariaPubera({ count });
-  const intervalID = setInterval(() => cleanInstances(), 500);
+  //   const intervalID = setInterval(() => cleanInstances(), 500);
 
   function createStellariaPubera({ count }) {
     for (let x = 0, i = 0; x < count; x++) {
       for (let y = 0; y < count; y++) {
         stellariaPubera = new StellariaPubera(
           {
-            delay: i * 0.05,
+            delay: i * 0.25,
             petalCount: 10, //R.intBetween(24, 48),
             windForce: R.floatBetween(-0.3, 0),
             windDirection: new Vector3(
@@ -122,7 +124,15 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
     instance = undefined;
   }
 
-  return { group: stellariaPuberaGroup, createStellariaPubera };
+  function getRandomInstance() {
+    return sample(instances);
+  }
+
+  return {
+    group: stellariaPuberaGroup,
+    createStellariaPubera,
+    getRandomInstance
+  };
 };
 
 export default StellariaPuberaSpawn;

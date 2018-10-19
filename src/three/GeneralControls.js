@@ -25,8 +25,22 @@ const Controls = ({ camera }) => {
   // enable for console control.
   window.controls = orbitControls;
 
-  function animate({ from, to, delay = 0, duration = 10 } = {}) {
+  function animate({
+    from = {},
+    to = {},
+    delay = 0,
+    duration = 10,
+    callback = () => console.log("done")
+  } = {}) {
     killTweens();
+
+    // defaults
+    from.x = from.x || camera.position.x;
+    from.y = from.y || camera.position.y;
+    from.z = from.z || camera.position.z;
+    from.tx = from.tx || target.x;
+    from.ty = from.ty || target.y;
+    from.tz = from.tz || target.z;
 
     camera.position.set(from.x, from.y, from.z);
     cameraTweenParams.x = camera.position.x;
@@ -41,6 +55,9 @@ const Controls = ({ camera }) => {
       ease: Power2.easeInOut,
       onUpdate: () => {
         onCameraMoveUpdate();
+      },
+      onComplete: () => {
+        callback();
       }
     });
 

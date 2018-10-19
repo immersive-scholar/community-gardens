@@ -22,6 +22,10 @@ class BaseChapter {
     this.R = R;
   }
 
+  focusElement({ element }) {
+    console.log("element ", element);
+  }
+
   promiseRequestAnimationFrame(isDirty) {
     new Promise(resolve =>
       window.requestAnimationFrame(() => {

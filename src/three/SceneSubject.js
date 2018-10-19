@@ -1,5 +1,5 @@
 // import Garden from "art/garden/Garden";
-// import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
+import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
 // import StellariaPuberaGroup from "art/stellaria-pubera/StellariaPuberaGroup";
 import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 // import Sky from "art/sky/Sky";
