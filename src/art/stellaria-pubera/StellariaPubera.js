@@ -423,6 +423,8 @@ class StellariaPubera extends BaseRenderable {
   }
 
   clean() {
+    this.tween && this.tween.kill(null, this);
+
     if (this.stem) {
       this.group.remove(this.stem.curvePainter.mesh);
       this.geometry.dispose();

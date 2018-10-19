@@ -7,7 +7,7 @@ import GridLayoutHelper from "util/GridLayoutHelper";
 const StellariaPuberaSpawn = ({ R, camera, controls }) => {
   let stellariaPubera,
     stellariaPuberaGroup = new Group(),
-    count = 1,
+    count = 5,
     instances = [];
 
   stellariaPuberaGroup.rotation.x = -Math.PI / 2;
@@ -49,21 +49,21 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
         );
         stellariaPuberaGroup.position.x = -0.25;
         stellariaPuberaGroup.position.y = 0.25;
+        stellariaPuberaGroup.rotation.y = -Math.PI / 2;
         stellariaPuberaGroup.rotation.z = -Math.PI / 2;
         stellariaPuberaGroup.add(stellariaPubera.group);
         instances.push(stellariaPubera);
         i++;
       }
     }
+    GridLayoutHelper({
+      group: stellariaPuberaGroup,
+      rows: count,
+      columns: count,
+      rowWidth: 0.5,
+      columnHeight: 0.5
+    });
   }
-
-  //   GridLayoutHelper({
-  //     group: stellariaPuberaGroup,
-  //     rows: count,
-  //     columns: count,
-  //     rowWidth: 0.5,
-  //     columnHeight: 0.5
-  //   });
 
   const stellariaPuberaController = new StellariaPuberaController({
     controls,
@@ -71,30 +71,49 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
   });
 
   function cleanInstances() {
+    const removeMe = [];
+    const cameraPosition = new Vector3().setFromMatrixPosition(
+      camera.matrixWorld
+    );
+    const lookAt = new Vector3();
+    camera.getWorldDirection(lookAt);
+
     for (
       let i = 0,
         instance,
         coordinates = new Vector3(),
-        boundingBox = new Box3();
+        boundingBox = new Box3(),
+        behind = false,
+        pos;
       i < instances.length;
       i++
     ) {
       instance = instances[i];
-      boundingBox = new Box3().setFromObject(instance.group);
-      coordinates.copy(boundingBox.max).sub(camera.position);
-      if (coordinates.z < -0.1) {
-        removeInstance(instance, i);
+      //   boundingBox = new Box3().setFromObject(instance.group);
+      //   coordinates.copy(boundingBox.max).sub(camera.position);
+      //   if (coordinates.z < -0.1) {
+      //     removeMe.push({ instance, index: i });
+      //   }
+      coordinates.setFromMatrixPosition(instance.group.matrixWorld);
+      coordinates.sub(cameraPosition);
+      behind = coordinates.angleTo(lookAt) > Math.PI / 2;
+      if (behind) {
+        removeMe.push({ instance, index: i });
       }
+    }
+
+    for (let i = removeMe.length - 1, data; i >= 0; i--) {
+      data = removeMe[i];
+      removeInstance(data.instance, data.index);
     }
   }
 
-  function removeInstance(instance, i) {
-    if (instance) {
-      instance.clean();
-      stellariaPuberaGroup.remove(instance.group);
-      instances.splice(i, 1);
-      instance = undefined;
-    }
+  function removeInstance(instance, index) {
+    console.log("Removing: ", instance, index);
+    instance.clean();
+    stellariaPuberaGroup.remove(instance.group);
+    instances.splice(index, 1);
+    instance = undefined;
   }
 
   return { group: stellariaPuberaGroup };

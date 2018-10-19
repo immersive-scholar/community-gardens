@@ -27,7 +27,6 @@ export default ({ generalCanvas, R }) => {
   const controls = new GeneralControls({ camera });
   const cameraGUI = new CameraController({ camera, controls });
   cameraGUI.enable();
-  console.log(camera.position);
   // controls.animateChapter2();
   // controls.controls.autoRotate = true;
 
