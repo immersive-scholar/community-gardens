@@ -75,8 +75,6 @@ const LeafProps = () => {
 
   const update = instance => {
     instance.setLeafCount(props.leafCount);
-    instance.setThickness(props.thickness);
-    instance.setPointCount(props.pointCount);
     instance.setLeafStartPoint(props.leafStartPoint);
     instance.setLeafEndPoint(props.leafEndPoint);
     instance.setRotationStart(

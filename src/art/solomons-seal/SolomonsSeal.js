@@ -36,6 +36,7 @@ class SolomonsSeal extends BaseRenderable {
       pointCount = height * 25,
       thickness = 0.02,
       color = new ColorSampler().getRandomColor(),
+      imagePath = "img/strokes/watercolor-3.png",
       delay = 0,
       leafStartPoint = 0.3,
       leafEndPoint = 1,
@@ -76,6 +77,7 @@ class SolomonsSeal extends BaseRenderable {
     this.stem = this.toCurve({
       geometry: this.geometry,
       color,
+      imagePath,
       delay,
       pointCount,
       thickness,
@@ -151,6 +153,7 @@ class SolomonsSeal extends BaseRenderable {
   toCurve = ({
     geometry,
     color,
+    imagePath,
     delay = 0,
     thickness = 2,
     pointCount = 8,
@@ -159,10 +162,10 @@ class SolomonsSeal extends BaseRenderable {
     animated
   }) => {
     const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
-
     const curvePainter = new CurvePainter({
       camera: this.camera,
       curve,
+      imagePath,
       color,
       pointCount,
       lineWidth: thickness,
@@ -269,7 +272,6 @@ class SolomonsSeal extends BaseRenderable {
   }
 
   setDisplacement(displacement) {
-    console.log("displacement ", displacement);
     this.setState({ displacement }, isDirty => {
       isDirty && this.init();
     });

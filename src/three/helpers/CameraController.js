@@ -4,12 +4,12 @@ import { Vector2, Vector3, Color } from "three-full";
 export default ({ controls, camera }) => {
   const enable = () => {
     const config = {
-      x: 0.01,
-      y: -5.5,
-      z: 0.75,
+      x: 0,
+      y: 0,
+      z: -0.5,
       rx: 0,
-      ry: -0.4,
-      rz: 0,
+      ry: -0.5,
+      rz: 1,
       autoRotate: false,
       reset: () => {
         const { original } = config;

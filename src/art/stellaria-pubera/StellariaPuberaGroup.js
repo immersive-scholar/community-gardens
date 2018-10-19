@@ -42,7 +42,7 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
         camera,
         R
       );
-      stellariaPubera.group.rotation.z = Math.PI / 2;
+      stellariaPubera.group.rotation.z = -Math.PI / 2;
       stellariaPuberaGroup.add(stellariaPubera.group);
       instances.push(stellariaPubera);
       i++;
