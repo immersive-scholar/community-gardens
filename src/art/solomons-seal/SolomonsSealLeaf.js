@@ -11,7 +11,7 @@ import {
 } from "three-full";
 // import BendModifier from "three/modifiers/BendModifier";
 import CurvePainter from "three/helpers/CurvePainter";
-import ColorSampler from "util/ColorSampler";
+import ColorFactory from "util/ColorFactory";
 import BaseRenderable from "art/common/BaseRenderable";
 
 class SolomonsSealLeaf extends BaseRenderable {
@@ -25,7 +25,7 @@ class SolomonsSealLeaf extends BaseRenderable {
       midPoint = 0.4,
       lineCount = 5,
       camera,
-      color = ColorSampler.getRandomColor()
+      color = ColorFactory.getRandomColor()
     } = props;
 
     this.lines = [];

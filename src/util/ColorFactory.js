@@ -1,13 +1,13 @@
 import RandomSeed from "random-seed";
 import find from "lodash/find";
 
-class ColorSampler {
+class ColorFactory {
   static seed = Math.random();
   static R = RandomSeed.create(this.seed);
   static colorSeasons = {};
-  static samples = [0xf74633, 0xca7e5e, 0x821b24, 0xe87e83];
+  // static samples = [0xf74633, 0xca7e5e, 0x821b24, 0xe87e83];
 
-  static async loadColorSeasons(seasons) {
+  static async load(seasons) {
     const onDataComplete = season => {
       // function to be called when all ajax requests complete.
       console.log("data complete ", this.colorSeasons);
@@ -56,8 +56,8 @@ class ColorSampler {
   }
 
   static getRandomColor(
-    seasonName = ColorSampler.SUMMER,
-    familyName = ColorSampler.LEAF
+    seasonName = ColorFactory.SUMMER,
+    familyName = ColorFactory.LEAF
   ) {
     seasonName = seasonName.toUpperCase();
     familyName = familyName.toUpperCase();
@@ -89,13 +89,13 @@ class ColorSampler {
   }
 }
 
-ColorSampler.SUMMER = "SUMMER";
-ColorSampler.FALL = "FALL";
-ColorSampler.WINTER = "WINTER";
+ColorFactory.SUMMER = "SUMMER";
+ColorFactory.FALL = "FALL";
+ColorFactory.WINTER = "WINTER";
 
-ColorSampler.LEAF = "LEAF";
-ColorSampler.BARK = "BARK";
-ColorSampler.GREENERY = "GREENERY";
-ColorSampler.GROUND = "GROUND";
+ColorFactory.LEAF = "LEAF";
+ColorFactory.BARK = "BARK";
+ColorFactory.GREENERY = "GREENERY";
+ColorFactory.GROUND = "GROUND";
 
-export default ColorSampler;
+export default ColorFactory;

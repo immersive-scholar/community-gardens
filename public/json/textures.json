@@ -1,0 +1,29 @@
+{
+  "texturesByType": [
+    {
+      "type": "pattern",
+      "baseUri": "/img/patterns/",
+      "textures": [
+        "diamonds-1.png",
+        "diamonds-2.png",
+        "hex-1.png",
+        "leaf-2.png",
+        "lines-1.png",
+        "lines-2.png"
+      ]
+    },
+    {
+      "type": "strokes",
+      "textures": [
+        "crosshatch-1.png",
+        "stroke.png",
+        "stroke-2.png",
+        "stroke-3.png",
+        "watercolor-1.png",
+        "watercolor-2.png",
+        "watercolor-3.png",
+        "wax-and-oil-3.png"
+      ]
+    }
+  ]
+}

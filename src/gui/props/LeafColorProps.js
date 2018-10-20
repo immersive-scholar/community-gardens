@@ -1,9 +1,9 @@
 import { Vector3, Color } from "three-full";
-import ColorSampler from "util/ColorSampler";
+import ColorFactory from "util/ColorFactory";
 
 const LeafColorProps = () => {
   const props = {
-    color: ColorSampler.getRandomColor(),
+    color: ColorFactory.getRandomColor(),
     hslBaseH: 1,
     hslBaseS: 0.3,
     hslBaseL: 0.3,

@@ -1,7 +1,7 @@
 import { Vector2, Vector3, CatmullRomCurve3 } from "three-full";
 import { TweenMax, Power2 } from "gsap";
 import CurvePainter from "three/helpers/CurvePainter";
-import ColorSampler from "util/ColorSampler";
+import ColorFactory from "util/ColorFactory";
 import BaseRenderable from "art/common/BaseRenderable";
 
 import StemGeometry from "./StemGeometry";
@@ -35,7 +35,7 @@ class SolomonsSeal extends BaseRenderable {
       leafCount = 10,
       pointCount = height * 25,
       thickness = 0.02,
-      color = ColorSampler.getRandomColor(),
+      color = ColorFactory.getRandomColor(),
       imagePath = "img/strokes/watercolor-3.png",
       delay = 0,
       leafStartPoint = 0.3,

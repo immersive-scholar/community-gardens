@@ -1,6 +1,6 @@
 import { Vector2, Vector3 } from "three-full";
 import { TweenMax, Power2 } from "gsap";
-import ColorSampler from "util/ColorSampler";
+import ColorFactory from "util/ColorFactory";
 import BaseRenderable from "art/common/BaseRenderable";
 
 // import StellariaPuberaPetal from "./StellariaPuberaPetal";
@@ -23,7 +23,7 @@ class StellariaPubera extends BaseRenderable {
     const {
       height = 0.25,
       pointCount = 24,
-      color = ColorSampler.getRandomColor(),
+      color = ColorFactory.getRandomColor(),
       petalColor = color,
       rearPetalColor = color,
       petalCount = 10, //this.R.intBetween(10, 24),

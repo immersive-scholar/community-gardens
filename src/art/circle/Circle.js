@@ -9,7 +9,7 @@ import {
 import { TweenMax, Back } from "gsap";
 import BendModifier from "three/modifiers/BendModifier";
 import CurvePainter from "three/helpers/CurvePainter";
-import ColorSampler from "util/ColorSampler";
+import ColorFactory from "util/ColorFactory";
 import { noise3D } from "util/NoiseFunctions";
 import { gradientTransform } from "util/GradientTransform";
 
@@ -22,7 +22,7 @@ const Circle = ({
   radius = 0.5,
   pointCount = R.floatBetween(8, 64),
   thickness = R.floatBetween(0.1, 1),
-  color = ColorSampler.getRandomColor()
+  color = ColorFactory.getRandomColor()
 }) => {
   // stem
   const geometry = createGeometry({

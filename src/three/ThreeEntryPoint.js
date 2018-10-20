@@ -2,7 +2,8 @@ import RandomSeed from "random-seed";
 import HighresExport from "three/vendor/Highres";
 import SceneManager from "./SceneManager";
 import GeneralCanvas from "./GeneralCanvas";
-import ColorSampler from "../util/ColorSampler";
+import ColorFactory from "util/ColorFactory";
+import TextureFactory from "util/TextureFactory";
 
 export default container => {
   const seed = Math.random();
@@ -10,18 +11,14 @@ export default container => {
   const R = RandomSeed.create(seed);
   console.log("Random seed: ", seed);
 
-  function createColorSampler() {
-    ColorSampler.setSeed(seed);
-    return ColorSampler.loadColorSeasons({
-      summer: "/json/colors/raleigh-summer.json",
-      fall: "/json/colors/raleigh-fall.json"
-    }).then(result => {
-      console.log("FAMILY DONE");
+  ColorFactory.setSeed(seed);
+  ColorFactory.load({
+    summer: "/json/colors-raleigh-summer.json",
+    fall: "/json/colors-raleigh-fall.json"
+  }).then(result => {
+    TextureFactory.load("/json/textures.json").then(result => {
+      onDataReady();
     });
-  }
-
-  createColorSampler().then(result => {
-    onDataReady();
   });
 
   function onDataReady() {

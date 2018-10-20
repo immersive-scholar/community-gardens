@@ -1,5 +1,5 @@
 import { Vector2, Vector3, Color } from "three-full";
-import ColorSampler from "util/ColorSampler";
+import ColorFactory from "util/ColorFactory";
 import BaseGUI from "gui/BaseGUI";
 import PositionProps from "gui/props/PositionProps";
 import StemProps from "gui/props/StemProps";

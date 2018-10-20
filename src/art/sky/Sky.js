@@ -1,7 +1,7 @@
 import { Vector3, CatmullRomCurve3 } from "three-full";
 import { TweenMax, Power2 } from "gsap";
 import CurvePainter from "three/helpers/CurvePainter";
-import ColorSampler from "util/ColorSampler";
+import ColorFactory from "util/ColorFactory";
 import BaseRenderable from "art/common/BaseRenderable";
 
 import SkyGeometry from "./SkyGeometry";
@@ -33,7 +33,7 @@ class Sky extends BaseRenderable {
       animated = true,
       pointCount = width * 25,
       thickness = 15,
-      color = ColorSampler.getRandomColor(),
+      color = ColorFactory.getRandomColor(),
       delay = 0
     } = this.state;
 
