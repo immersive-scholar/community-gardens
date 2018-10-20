@@ -12,18 +12,16 @@ export default container => {
   console.log("Random seed: ", seed);
 
   ColorFactory.setSeed(seed);
-  ColorFactory.load({
-    summer: "/json/colors-raleigh-summer.json",
-    fall: "/json/colors-raleigh-fall.json"
-  }).then(result => {
-    TextureFactory.load("/json/textures.json").then(result => {
-      onDataReady();
-    });
-  });
 
-  function onDataReady() {
+  Promise.all([
+    ColorFactory.load({
+      summer: "/json/colors-raleigh-summer.json",
+      fall: "/json/colors-raleigh-fall.json"
+    }),
+    TextureFactory.load("/json/textures.json")
+  ]).then(result => {
     sceneManager.subject.createScene();
-  }
+  });
 
   // State
   const state = {
