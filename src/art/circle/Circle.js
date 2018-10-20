@@ -22,7 +22,7 @@ const Circle = ({
   radius = 0.5,
   pointCount = R.floatBetween(8, 64),
   thickness = R.floatBetween(0.1, 1),
-  color = new ColorSampler().getRandomColor()
+  color = ColorSampler.getRandomColor()
 }) => {
   // stem
   const geometry = createGeometry({

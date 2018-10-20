@@ -25,7 +25,7 @@ class SolomonsSealLeaf extends BaseRenderable {
       midPoint = 0.4,
       lineCount = 5,
       camera,
-      color = new ColorSampler().getRandomColor()
+      color = ColorSampler.getRandomColor()
     } = props;
 
     this.lines = [];

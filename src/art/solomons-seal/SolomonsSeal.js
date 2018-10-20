@@ -35,7 +35,7 @@ class SolomonsSeal extends BaseRenderable {
       leafCount = 10,
       pointCount = height * 25,
       thickness = 0.02,
-      color = new ColorSampler().getRandomColor(),
+      color = ColorSampler.getRandomColor(),
       imagePath = "img/strokes/watercolor-3.png",
       delay = 0,
       leafStartPoint = 0.3,

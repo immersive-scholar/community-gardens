@@ -33,7 +33,7 @@ class Sky extends BaseRenderable {
       animated = true,
       pointCount = width * 25,
       thickness = 15,
-      color = new ColorSampler().getRandomColor(),
+      color = ColorSampler.getRandomColor(),
       delay = 0
     } = this.state;
 

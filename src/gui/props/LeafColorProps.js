@@ -3,7 +3,7 @@ import ColorSampler from "util/ColorSampler";
 
 const LeafColorProps = () => {
   const props = {
-    color: new ColorSampler().getRandomColor(),
+    color: ColorSampler.getRandomColor(),
     hslBaseH: 1,
     hslBaseS: 0.3,
     hslBaseL: 0.3,

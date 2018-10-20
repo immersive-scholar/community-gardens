@@ -38,11 +38,11 @@ class SummerGardenChapter extends BaseChapter {
         ty: 1,
         tz: 1
       };
-    this.controls.animate({
-      from,
-      to,
-      callback: () => this.onTransitionComplete()
-    });
+    // this.controls.animate({
+    //   from,
+    //   to,
+    //   callback: () => this.onTransitionComplete()
+    // });
   }
 
   onTransitionComplete() {

@@ -2,12 +2,31 @@ import RandomSeed from "random-seed";
 import HighresExport from "three/vendor/Highres";
 import SceneManager from "./SceneManager";
 import GeneralCanvas from "./GeneralCanvas";
+import ColorSampler from "../util/ColorSampler";
 
 export default container => {
   const seed = Math.random();
   // const seed = 0.42415009388616753;
   const R = RandomSeed.create(seed);
   console.log("Random seed: ", seed);
+
+  function createColorSampler() {
+    ColorSampler.setSeed(seed);
+    return ColorSampler.loadColorSeasons({
+      summer: "/json/colors/raleigh-summer.json",
+      fall: "/json/colors/raleigh-fall.json"
+    }).then(result => {
+      console.log("FAMILY DONE");
+    });
+  }
+
+  createColorSampler().then(result => {
+    onDataReady();
+  });
+
+  function onDataReady() {
+    sceneManager.subject.createScene();
+  }
 
   // State
   const state = {
