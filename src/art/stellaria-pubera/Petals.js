@@ -21,6 +21,7 @@ import {
 } from "three/vendor/BAS";
 
 import Modifiers from "three/vendor/Modifiers";
+import TextureFactory from "../../util/TextureFactory";
 
 function Petals({
   petalCount,
@@ -31,7 +32,7 @@ function Petals({
   openness = 0,
   animated,
   maxDuration = 1,
-  imagePath = "/img/patterns/hex-1.png",
+  imagePath = TextureFactory.getPattern(),
   textureSize = new Vector2(10, 10),
   windForce = 0.1,
   windDirection = new Vector3(2, 2, 0),

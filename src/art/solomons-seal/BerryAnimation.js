@@ -9,7 +9,7 @@ function BerryAnimation({
   animated,
   windForce,
   windDirection
-  // imagePath = "/img/patterns/diamonds-2.png",
+  // imagePath = TextureFactory.getPattern(),
   // textureSize = new Vector2(20, 20)
 }) {
   // const texture = new TextureLoader().load(imagePath, texture => {

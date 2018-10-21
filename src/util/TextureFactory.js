@@ -8,9 +8,9 @@ class TextureFactory {
   //   static samples = [0xf74633, 0xca7e5e, 0x821b24, 0xe87e83];
 
   static async load(texturesUri) {
-    const onDataComplete = textures => {
+    const onDataComplete = () => {
       // function to be called when all ajax requests complete.
-      console.log("data complete ", this.textures);
+      console.log("Texture Factory data complete ", this.textures);
     };
     const onDataError = () => {
       // function to be called when data fetching fails
@@ -52,6 +52,14 @@ class TextureFactory {
     }); // catch rejected promise
   }
 
+  static getStroke() {
+    return this.getRandomTexture(TextureFactory.STROKE);
+  }
+
+  static getPattern() {
+    return this.getRandomTexture(TextureFactory.PATTERN);
+  }
+
   static getRandomTexture(typeName = TextureFactory.PATTERN) {
     typeName = typeName.toUpperCase();
     let textureType, textureGroup;
@@ -59,12 +67,11 @@ class TextureFactory {
       textureType = find(this.textures, t => t.type.toUpperCase() === typeName);
     } catch (e) {
       throw new Error(
-        `Unknown texture name. Try PATTERN or STROKES instead of ${typeName}.`
+        `Unknown texture name. Try PATTERN or STROKE instead of ${typeName}.`
       );
     }
 
     textureGroup = textureType.textures;
-    console.log("textureGroup ", textureGroup);
     const index = this.R.intBetween(0, textureGroup.length - 1);
     return textureType.baseUri + textureGroup[index];
   }
@@ -75,6 +82,6 @@ class TextureFactory {
 }
 
 TextureFactory.PATTERN = "PATTERN";
-TextureFactory.STROKES = "STROKES";
+TextureFactory.STROKE = "STROKE";
 
 export default TextureFactory;

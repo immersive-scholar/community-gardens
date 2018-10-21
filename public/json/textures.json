@@ -4,16 +4,24 @@
       "type": "pattern",
       "baseUri": "/img/patterns/",
       "textures": [
-        "diamonds-1.png",
+        "bisecting-circles-2.png",
+        "bisecting-circles-3.png",
+        "cache-monet.png",
+        "circle-dither.png",
+        "circle-dither-2.png",
+        "circles-1.png",
         "diamonds-2.png",
         "hex-1.png",
+        "hex-2.png",
         "leaf-2.png",
-        "lines-1.png",
-        "lines-2.png"
+        "lines-2.png",
+        "maze.png",
+        "polka-dots.png",
+        "topography.png"
       ]
     },
     {
-      "type": "strokes",
+      "type": "stroke",
       "textures": [
         "crosshatch-1.png",
         "stroke.png",

@@ -12,13 +12,14 @@ import {
   ModelBufferGeometry,
   LambertAnimationMaterial
 } from "three/vendor/BAS";
+import TextureFactory from "../../util/TextureFactory";
 
 function LeafAnimation({
   R,
   modelGeometry,
   color,
   animated,
-  imagePath = "/img/patterns/hex-1.png",
+  imagePath = TextureFactory.getPattern(),
   textureSize = new Vector2(20, -20),
   windForce,
   windDirection,

@@ -7,6 +7,7 @@ import BaseRenderable from "art/common/BaseRenderable";
 import StemGeometry from "./StemGeometry";
 import Leaves from "./Leaves";
 import Berries from "./Berries";
+import TextureFactory from "../../util/TextureFactory";
 
 class SolomonsSeal extends BaseRenderable {
   constructor(props, camera, R) {
@@ -36,7 +37,7 @@ class SolomonsSeal extends BaseRenderable {
       pointCount = height * 25,
       thickness = 0.02,
       color = ColorFactory.getRandomColor(),
-      imagePath = "img/strokes/watercolor-3.png",
+      imagePath = TextureFactory.getStroke(),
       delay = 0,
       leafStartPoint = 0.3,
       leafEndPoint = 1,

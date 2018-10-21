@@ -1,6 +1,7 @@
 import { Group, Vector3, Box3, Object3D } from "three-full";
 
 import BaseChapter from "./BaseChapter";
+import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
 import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 import Cube from "../art/cube/Cube";
 
@@ -11,6 +12,13 @@ class SummerGardenChapter extends BaseChapter {
 
   init(props) {
     this.group = new Group();
+
+    // this.solomonsSealGroup = new SolomonsSealGroup({
+    //   R: this.R,
+    //   camera: this.camera,
+    //   controls: this.controls
+    // });
+    // this.group.add(this.solomonsSealGroup.group);
 
     this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
       R: this.R,
@@ -38,11 +46,11 @@ class SummerGardenChapter extends BaseChapter {
         ty: 1,
         tz: 1
       };
-    // this.controls.animate({
-    //   from,
-    //   to,
-    //   callback: () => this.onTransitionComplete()
-    // });
+    this.controls.animate({
+      from,
+      to,
+      callback: () => this.onTransitionComplete()
+    });
   }
 
   onTransitionComplete() {

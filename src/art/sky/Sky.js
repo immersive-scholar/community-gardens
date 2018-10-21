@@ -5,6 +5,7 @@ import ColorFactory from "util/ColorFactory";
 import BaseRenderable from "art/common/BaseRenderable";
 
 import SkyGeometry from "./SkyGeometry";
+import TextureFactory from "../../util/TextureFactory";
 
 class Sky extends BaseRenderable {
   constructor(props, camera, R) {
@@ -22,7 +23,7 @@ class Sky extends BaseRenderable {
 
     const {
       width = 100,
-      imagePath = "img/strokes/wax-and-oil-1.png",
+      imagePath = TextureFactory.getStroke(),
       displacement = new Vector3(0.2, 0.1, 0.2),
       scale = new Vector3(2, 2, 4),
       offset = new Vector3(

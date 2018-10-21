@@ -10,6 +10,7 @@ import {
 import { TweenMax, Power2 } from "gsap/TweenMax";
 
 import { MeshLine, MeshLineMaterial } from "three/helpers/MeshLine";
+import TextureFactory from "../../util/TextureFactory";
 
 const CurvePainter = ({
   curve,
@@ -20,7 +21,7 @@ const CurvePainter = ({
   delay = 0,
   fogColor = new Color(0xd7cbb1),
   fogDensity = 0.3,
-  imagePath = "/img/strokes/stroke.png",
+  imagePath = TextureFactory.getStroke(),
   animated = false
 }) => {
   let life = 0;

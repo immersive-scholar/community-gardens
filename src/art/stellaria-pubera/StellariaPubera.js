@@ -7,6 +7,7 @@ import BaseRenderable from "art/common/BaseRenderable";
 import StellariaPuberaPetalShape from "./StellariaPuberaPetalShape";
 import Petals from "./Petals";
 import Pollen from "./Pollen";
+import TextureFactory from "../../util/TextureFactory";
 
 class StellariaPubera extends BaseRenderable {
   constructor(props, camera, R) {
@@ -34,7 +35,7 @@ class StellariaPubera extends BaseRenderable {
       petalLowerMidPointRatio = 0.2,
       petalUpperMidPointRatio = 0.8,
       petalDistanceFromCenter = 0,
-      imagePath = "/img/patterns/hex-1.png",
+      imagePath = TextureFactory.getPattern(),
       textureSize = new Vector2(5, 5),
       animated = true,
       delay = 0,
