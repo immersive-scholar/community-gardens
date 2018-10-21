@@ -2,7 +2,7 @@ import { AmbientLight, DirectionalLight } from "three-full";
 import * as dat from "dat.gui";
 
 export default ({ scene, controls }) => {
-  const ambientLight = new AmbientLight(0xffffff, 0.9);
+  const ambientLight = new AmbientLight(0x000000, 0.9);
   scene.add(ambientLight);
 
   // const pointLight = new SpotLight(0xffffff, 0.5);

@@ -28,8 +28,9 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
     // const solomonsSealGroup = new SolomonsSealGroup({ R, camera, controls });
     // scene.add(solomonsSealGroup.group);
 
-    // const plane = new Plane();
-    // scene.add(plane.group);
+    // something about disabling this messes with transparencies in both MeshLine and Three.bas
+    const plane = new Plane();
+    scene.add(plane.group);
   }
 
   function update() {}

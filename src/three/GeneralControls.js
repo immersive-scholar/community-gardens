@@ -47,10 +47,23 @@ const Controls = ({ camera }) => {
     cameraTweenParams.y = camera.position.y;
     cameraTweenParams.z = camera.position.z;
 
+    this.zoomTween = TweenMax.to(cameraTweenParams, duration / 2, {
+      z: to.z - 1,
+      ease: Power2.easeInOut,
+      delay,
+      duration
+    });
+
+    this.zoomTween2 = TweenMax.to(cameraTweenParams, duration / 2, {
+      z: to.z,
+      ease: Power2.easeInOut,
+      delay: delay + duration / 2
+    });
+
     this.cameraTween = TweenMax.to(cameraTweenParams, duration, {
       x: to.x,
       y: to.y,
-      z: to.z,
+      // z: to.z,
       delay,
       ease: Power2.easeInOut,
       onUpdate: () => {
@@ -150,6 +163,8 @@ const Controls = ({ camera }) => {
   const killTweens = () => {
     this.cameraTween && this.cameraTween.kill(null, this);
     this.targetTween && this.targetTween.kill(null, this);
+    this.zoomTween && this.zoomTween.kill(null, this);
+    this.zoomTween2 && this.zoomTween2.kill(null, this);
   };
 
   function update() {
