@@ -11,6 +11,9 @@ export default ({ controls, camera }) => {
       ty: 1,
       tz: 1,
       autoRotate: false,
+      kill: () => {
+        controls.killTweens();
+      },
       reset: () => {
         const { original } = config;
         configXSlider.setValue(original.x);
@@ -67,6 +70,7 @@ export default ({ controls, camera }) => {
     };
 
     const gui = new dat.GUI().getRoot();
+    gui.add(config, "kill");
     gui.add(config, "reset");
 
     const positionFolder = gui.addFolder("Position");
