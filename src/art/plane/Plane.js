@@ -13,12 +13,11 @@ class Plane extends BaseRenderable {
     super(props);
 
     const plane = this.createPlane();
-    plane.position.y = -100;
     this.group.add(plane);
 
-    // const grid = this.createGrid();
-    // grid.position.y = 0.001;
-    // this.group.add(grid);
+    const grid = this.createGrid();
+    grid.position.y = 0.001;
+    this.group.add(grid);
 
     // const cube = new Cube({});
     // this.group.add(cube.mesh);

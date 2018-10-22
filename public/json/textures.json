@@ -17,22 +17,15 @@
         "leaf-2.png",
         "lines-2.png",
         "maze.png",
+        "morocco.png",
         "polka-dots.png",
         "topography.png"
       ]
     },
     {
       "type": "stroke",
-      "textures": [
-        "crosshatch-1.png",
-        "stroke.png",
-        "stroke-2.png",
-        "stroke-3.png",
-        "watercolor-1.png",
-        "watercolor-2.png",
-        "watercolor-3.png",
-        "wax-and-oil-3.png"
-      ]
+      "baseUri": "/img/patterns/",
+      "textures": ["stroke.png"]
     }
   ]
 }

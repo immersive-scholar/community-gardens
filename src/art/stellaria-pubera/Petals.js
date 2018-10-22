@@ -180,6 +180,7 @@ function Petals({
     wireframe: !true,
     transparent: true,
     lights: true,
+    wireframe: !true,
     uniforms: {
       uTime: { value: animated ? 0 : 1 },
       uWindForce: { value: windForce },

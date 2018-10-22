@@ -163,6 +163,7 @@ class SolomonsSeal extends BaseRenderable {
     animated
   }) => {
     const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
+    console.log("this.camera ", this.camera);
     const curvePainter = new CurvePainter({
       camera: this.camera,
       curve,

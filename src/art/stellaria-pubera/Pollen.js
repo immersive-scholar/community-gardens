@@ -103,7 +103,7 @@ function Pollen({
     flatShading: !true,
     side: DoubleSide,
     fog: true,
-    // lights: true,
+    lights: true,
     wireframe: !true,
     transparent: true,
     opacity: 0.5,
