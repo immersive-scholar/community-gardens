@@ -50,7 +50,7 @@ export default ({ controls }) => {
       glitchThresholdX: 1,
       glitchThresholdY: 1,
       glitchThresholdZ: 1,
-      berryCount: 24,
+      berryCount: 0,
       berrySize: 0.01,
       berryColor: 0xffffff,
       berryDistanceFromStem: 0.01,
