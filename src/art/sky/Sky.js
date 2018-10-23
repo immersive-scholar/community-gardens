@@ -5,7 +5,7 @@ import {
   Mesh,
   Quaternion,
   SphereGeometry,
-  TetrahedronGeometry,
+  PlaneGeometry,
   TextureLoader,
   Vector2,
   Vector3,
@@ -46,7 +46,7 @@ function Sky({
   translateToY = 0
 }) {
   // calculate prefab size based on the number of prefabs to spread over the surface
-  var prefabGeometry = new TetrahedronGeometry(size);
+  var prefabGeometry = new PlaneGeometry(size, size);
 
   // the number of times the prefabGeometry will be repeated
   var prefabCount = count;
@@ -164,6 +164,7 @@ function Sky({
   }
 
   const texture = new TextureLoader().load(imagePath);
+  const opacity = 1;
 
   // StandardAnimationMaterial uses the data in the buffer geometry to calculate the animation state
   // this calculation is performed in the vertex shader
@@ -177,13 +178,14 @@ function Sky({
     lights: true,
     fog: true,
     transparent: true,
-    opacity: 0.01,
+    opacity,
     // custom uniform definitions
     uniforms: {
       // uTime is updated every frame, and is used to calculate the current animation state
       // this is the only value that changes, which is the reason we can animate so many objects at the same time
       uTime: { value: 0 },
-      color
+      color,
+      opacity
     },
     // uniform *values* of the material we are extending go here
     uniformValues: {

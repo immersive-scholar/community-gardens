@@ -1,4 +1,4 @@
-import { AmbientLight, DirectionalLight } from "three-full";
+import { AmbientLight, DirectionalLight, PointLight } from "three-full";
 import * as dat from "dat.gui";
 
 export default ({ scene, controls }) => {
@@ -13,9 +13,9 @@ export default ({ scene, controls }) => {
   // pointLight.shadow.camera.far = 500;
   // scene.add(pointLight);
 
-  // const pointLight2 = new PointLight(0xffffff, 1);
-  // pointLight2.position.set(10, 20, 10);
-  // scene.add(pointLight2);
+  const pointLight2 = new PointLight(0xffffff, 0.5);
+  pointLight2.position.set(-10, -20, 10);
+  scene.add(pointLight2);
 
   // const pointLight3 = new PointLight(0xffffff, 1);
   // pointLight3.position.set(-10, -20, -10);

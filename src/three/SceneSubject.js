@@ -3,7 +3,6 @@ import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
 // import StellariaPuberaGroup from "art/stellaria-pubera/StellariaPuberaGroup";
 import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 // import Sky from "art/sky/Sky";
-import Plane from "art/plane/Plane";
 import SummerGardenChapter from "chapters/SummerGardenChapter";
 
 const SceneSubject = ({ scene, camera, R, controls }) => {
@@ -27,10 +26,6 @@ const SceneSubject = ({ scene, camera, R, controls }) => {
 
     // const solomonsSealGroup = new SolomonsSealGroup({ R, camera, controls });
     // scene.add(solomonsSealGroup.group);
-
-    // something about disabling this messes with transparencies in both MeshLine and Three.bas
-    const plane = new Plane();
-    scene.add(plane.group);
   }
 
   function update() {}

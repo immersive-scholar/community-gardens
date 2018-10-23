@@ -5,7 +5,6 @@ import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
 import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 import Cube from "../art/cube/Cube";
 import Background from "../art/background/Background";
-import Sky from "../art/sky/Sky";
 
 class SummerGardenChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
@@ -15,11 +14,8 @@ class SummerGardenChapter extends BaseChapter {
   init(props) {
     this.group = new Group();
 
-    // this.background = new Background();
-    // this.group.add(this.background.mesh);
-
-    this.sky = new Sky({ R: this.R });
-    this.group.add(this.sky);
+    this.background = new Background();
+    this.group.add(this.background.mesh);
 
     this.solomonsSealGroup = new SolomonsSealGroup({
       R: this.R,
