@@ -5,6 +5,7 @@
   "dependencies": {
     "browserify-fs": "^1.0.0",
     "dat.gui": "^0.7.3",
+    "detect-gpu": "^0.0.34",
     "downloadjs": "^1.4.7",
     "gsap": "^2.0.2",
     "lodash": "^4.17.11",

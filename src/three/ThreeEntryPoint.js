@@ -4,8 +4,11 @@ import SceneManager from "./SceneManager";
 import GeneralCanvas from "./GeneralCanvas";
 import ColorFactory from "util/ColorFactory";
 import TextureFactory from "util/TextureFactory";
+import Settings from "util/Settings";
 
 export default container => {
+  const settings = new Settings();
+
   const seed = Math.random();
   // const seed = 0.42415009388616753;
   const R = RandomSeed.create(seed);
