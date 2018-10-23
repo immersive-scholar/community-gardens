@@ -84,7 +84,8 @@ function Pollen({
     angle = _Math.degToRad(rotationStep);
     position.x = Math.cos(angle) * distanceFromCenter;
     position.y = Math.sin(angle) * distanceFromCenter;
-    position.z = ratio * spiralDepth;
+    // position.z = ratio * spiralDepth;
+    position.z = spiralDepth;
 
     position.toArray(dataArray);
     geometry.setPrefabData(aPosition, i, dataArray);
