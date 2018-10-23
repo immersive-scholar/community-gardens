@@ -3,8 +3,10 @@ import { Group, Vector3, Box3, Object3D } from "three-full";
 import BaseChapter from "./BaseChapter";
 import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
 import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
-import Cube from "../art/cube/Cube";
+import Plane from "../art/plane/Plane";
 import Background from "../art/background/Background";
+import Ground from "../art/ground/Ground";
+import ColorFactory from "util/ColorFactory";
 
 class SummerGardenChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
@@ -14,15 +16,24 @@ class SummerGardenChapter extends BaseChapter {
   init(props) {
     this.group = new Group();
 
-    this.background = new Background();
+    const color = ColorFactory.getRandomColor();
+
+    this.background = new Background({ color });
     this.group.add(this.background.mesh);
 
-    this.solomonsSealGroup = new SolomonsSealGroup({
-      R: this.R,
-      camera: this.camera,
-      controls: this.controls
-    });
-    this.group.add(this.solomonsSealGroup.group);
+    this.ground = new Ground({ camera: this.camera, color });
+    this.group.add(this.ground.mesh);
+    this.ground.mesh.position.set(0, -10, 10);
+
+    this.plane = new Plane({ color });
+    this.group.add(this.plane.group);
+
+    // this.solomonsSealGroup = new SolomonsSealGroup({
+    //   R: this.R,
+    //   camera: this.camera,
+    //   controls: this.controls
+    // });
+    // this.group.add(this.solomonsSealGroup.group);
 
     this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
       R: this.R,
@@ -50,11 +61,11 @@ class SummerGardenChapter extends BaseChapter {
         ty: 1,
         tz: 1
       };
-    // this.controls.animate({
-    //   from,
-    //   to
-    //   // callback: () => this.onTransitionComplete()
-    // });
+    this.controls.animate({
+      from,
+      to,
+      callback: () => this.onTransitionComplete()
+    });
   }
 
   onTransitionComplete() {
@@ -84,8 +95,8 @@ class SummerGardenChapter extends BaseChapter {
     };
 
     this.controls.animate({
-      to
-      // callback: () => this.onTransitionComplete()
+      to,
+      callback: () => this.onTransitionComplete()
     });
   }
 }

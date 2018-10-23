@@ -14,23 +14,19 @@ import {
 } from "three-full";
 import ColorFactory from "util/ColorFactory";
 
-const Background = ({} = {}) => {
+const Background = ({ color } = {}) => {
   // const loader = new CubeTextureLoader();
   // loader.setPath("/img/skybox/watercolor/");
   // loader.load(["px.jpg", "nx.jpg", "py.jpg", "ny.jpg", "pz.jpg", "nz.jpg"]);
 
-  const loader = new TextureLoader().load("/img/skybox/watercolor/ao.jpg");
+  // const loader = new TextureLoader().load("/img/skybox/watercolor/ao.jpg");
 
-  const color = ColorFactory.getRandomColor(
-    ColorFactory.FALL,
-    ColorFactory.GREENERY
-  );
-  const tempColorObject = {};
   const c = new Color(color);
-  c.getHSL(tempColorObject);
-  c.setHSL(tempColorObject.h, tempColorObject.s / 2, 0.002);
+  // const tempColorObject = {};
+  // c.getHSL(tempColorObject);
+  // c.setHSL(tempColorObject.h, tempColorObject.s, 0.02);
 
-  var geometry = new TetrahedronGeometry(10);
+  var geometry = new TetrahedronGeometry(75);
 
   var material = new MeshPhongMaterial({
     flatShading: !true,

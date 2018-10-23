@@ -11,3 +11,7 @@ body {
 #root {
   overflow: hidden;
 }
+
+canvas {
+  display: block;
+}

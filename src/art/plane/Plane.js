@@ -1,8 +1,8 @@
 import {
   Mesh,
-  MeshLambertMaterial,
+  MeshPhongMaterial,
   GridHelper,
-  PlaneBufferGeometry
+  CircleBufferGeometry
 } from "three-full";
 
 import BaseRenderable from "art/common/BaseRenderable";
@@ -12,7 +12,9 @@ class Plane extends BaseRenderable {
   constructor(props) {
     super(props);
 
-    const plane = this.createPlane();
+    const { color } = props;
+
+    const plane = this.createPlane(color);
     plane.position.y = -1;
     this.group.add(plane);
 
@@ -24,11 +26,12 @@ class Plane extends BaseRenderable {
     // this.group.add(cube.mesh);
   }
 
-  createPlane() {
-    var planeGeometry = new PlaneBufferGeometry(5, 5, 1, 1);
-    var planeMaterial = new MeshLambertMaterial({
-      color: 0x000000,
-      wireframe: !true
+  createPlane(color) {
+    var planeGeometry = new CircleBufferGeometry(32, 32);
+    var planeMaterial = new MeshPhongMaterial({
+      color,
+      wireframe: !true,
+      shininess: 30
     });
     var plane = new Mesh(planeGeometry, planeMaterial);
     plane.rotation.x = -Math.PI / 2;
