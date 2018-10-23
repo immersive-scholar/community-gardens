@@ -158,7 +158,7 @@ class Crystals extends BaseRenderable {
     //   //   this.animation.material.uniforms["metalness"].value = py;
     // });
 
-    this.update();
+    // this.update();
   };
 
   clean() {}

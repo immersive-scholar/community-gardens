@@ -15,11 +15,11 @@ class SummerGardenChapter extends BaseChapter {
   init(props) {
     this.group = new Group();
 
-    this.background = new Background();
-    this.group.add(this.background.mesh);
+    // this.background = new Background();
+    // this.group.add(this.background.mesh);
 
-    // this.sky = new Sky({}, this.camera, this.R);
-    // this.group.add(this.sky.group);
+    this.sky = new Sky({ R: this.R });
+    this.group.add(this.sky);
 
     this.solomonsSealGroup = new SolomonsSealGroup({
       R: this.R,
