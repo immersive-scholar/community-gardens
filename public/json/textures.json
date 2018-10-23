@@ -24,7 +24,7 @@
     },
     {
       "type": "stroke",
-      "baseUri": "/img/patterns/",
+      "baseUri": "/img/strokes/",
       "textures": ["stroke.png"]
     }
   ]
