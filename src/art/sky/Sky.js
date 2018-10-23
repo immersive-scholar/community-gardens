@@ -5,162 +5,54 @@ import ColorFactory from "util/ColorFactory";
 import BaseRenderable from "art/common/BaseRenderable";
 
 import SkyGeometry from "./SkyGeometry";
-import TextureFactory from "../../util/TextureFactory";
+import TextureFactory from "util/TextureFactory";
+import Circle from "art/circle/Circle";
 
 class Sky extends BaseRenderable {
   constructor(props, camera, R) {
     super(props, camera, R);
 
+    this.circles = [];
+
     this.init(props);
   }
 
   init = (props = {}) => {
+    const { count = 10, height = 10, radius = 10, thickness = 1 } = props;
+
     this.leaves = [];
 
     this.setState(props);
 
     this.clean();
 
-    const {
-      width = 100,
-      imagePath = TextureFactory.getStroke(),
-      displacement = new Vector3(0.2, 0.1, 0.2),
-      scale = new Vector3(2, 2, 4),
-      offset = new Vector3(
-        this.R.floatBetween(-0.5, 0.5),
-        this.R.floatBetween(-0.5, 0.5),
-        this.R.floatBetween(-0.5, 0.5)
-      ),
-      animated = true,
-      pointCount = width * 25,
-      thickness = 15,
-      color = ColorFactory.getRandomColor(),
-      delay = 0
-    } = this.state;
+    for (let i = 0, circle, ratio; i < count; i++) {
+      ratio = i / count;
+      circle = new Circle({
+        radius: radius + ratio,
+        thickness,
+        totalRotation: 180,
+        camera: this.camera,
+        R: this.R
+      });
+      circle.group.position.z = 5;
+      circle.group.rotation.x = Math.PI / 2;
+      circle.group.position.y = ratio * height;
+      this.group.add(circle.group);
 
-    // sky
-    this.geometry = new SkyGeometry({
-      width,
-      pointCount,
-      displacement,
-      scale,
-      offset,
-      R: this.R
-    });
-
-    this.skyMesh = this.toCurve({
-      geometry: this.geometry,
-      color,
-      imagePath,
-      delay,
-      pointCount,
-      thickness,
-      fogDensity: 0.003,
-      animated
-    });
-    // this.skyMesh.curvePainter.mesh.frustumCulled = false;
-    this.skyMesh.curvePainter.mesh.position.z = 10;
-    this.group.add(this.skyMesh.curvePainter.mesh);
-
-    this.tween && this.tween.kill(null, this);
-    if (animated) {
-      this.currentTime = 0;
-      this.animate({ delay });
-    } else {
-      this.currentTime = 1;
+      this.circles.push(circle);
     }
   };
-
-  toCurve = ({
-    geometry,
-    color,
-    imagePath,
-    delay = 0,
-    thickness,
-    pointCount,
-    fogColor,
-    fogDensity,
-    animated
-  }) => {
-    const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
-
-    const curvePainter = new CurvePainter({
-      camera: this.camera,
-      curve,
-      color,
-      imagePath,
-      pointCount,
-      lineWidth: thickness,
-      delay: delay,
-      fogColor,
-      fogDensity,
-      animated
-    });
-
-    curvePainter.mesh.matrixAutoUpdate = true;
-
-    return { curvePainter, geometry, curve };
-  };
-
-  setWidth(width) {
-    this.setState({ width }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setOffset(offset) {
-    this.setState({ offset }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setDisplacement(displacement) {
-    console.log("displacement ", displacement);
-    this.setState({ displacement }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setAnimated(animated) {
-    this.setState({ animated }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setThickness(thickness) {
-    this.setState({ thickness }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setPointCount(pointCount) {
-    this.setState({ pointCount }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setColor(color) {
-    this.setState({ color }, isDirty => {
-      isDirty && this.init();
-    });
-  }
 
   clean() {
-    if (this.stem) {
-      this.group.remove(this.stem.curvePainter.mesh);
-      this.geometry.dispose();
-      this.stem.curvePainter.clean();
-      this.stem = undefined;
-    }
-
-    if (this.leaves) {
-      for (let i = 0, iL = this.leaves.length, leaf; i < iL; i++) {
-        leaf = this.leaves[i];
-        this.group.remove(leaf.group);
-        leaf.clean();
-      }
-    }
-    this.leaves = [];
+    // if (this.leaves) {
+    //   for (let i = 0, iL = this.leaves.length, leaf; i < iL; i++) {
+    //     leaf = this.leaves[i];
+    //     this.group.remove(leaf.group);
+    //     leaf.clean();
+    //   }
+    // }
+    // this.leaves = [];
 
     if (this.skyMesh) {
       this.group.remove(this.skyMesh);
@@ -185,7 +77,7 @@ class Sky extends BaseRenderable {
   render() {}
 
   update() {
-    this.skyMesh.curvePainter.mesh.material.uniforms.revealProgress.value = this.currentTime;
+    // this.skyMesh.curvePainter.mesh.material.uniforms.revealProgress.value = this.currentTime;
   }
 }
 

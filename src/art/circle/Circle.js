@@ -20,6 +20,7 @@ const Circle = ({
   ry = R.random(),
   camera,
   radius = 0.5,
+  totalRotation = 360,
   pointCount = R.floatBetween(8, 64),
   thickness = R.floatBetween(0.1, 1),
   color = ColorFactory.getRandomColor()
@@ -43,6 +44,7 @@ const Circle = ({
     delay,
     pointCount,
     thickness,
+    totalRotation,
     fogDensity: 0.3,
     camera
   });
@@ -56,7 +58,7 @@ const Circle = ({
       point = new Vector3(),
       geometry = new Geometry();
     for (var i = 0; i < pointCount; i++) {
-      angle = _Math.degToRad((360 / pointCount) * i);
+      angle = _Math.degToRad((totalRotation / pointCount) * i);
       x = Math.cos(angle) * radius;
       y = Math.sin(angle) * radius;
       z = 0;
@@ -64,6 +66,7 @@ const Circle = ({
       point = point.set(x, y, z);
       geometry.vertices.push(point.clone());
     }
+    geometry.vertices.reverse();
     return geometry;
   }
 
