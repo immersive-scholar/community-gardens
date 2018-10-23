@@ -7,7 +7,7 @@ import GridLayoutHelper from "util/GridLayoutHelper";
 const SolomonsSealGroup = ({ R, camera, controls }) => {
   let solomonsSeal,
     solomonsSealGroup = new Group(),
-    count = 5,
+    count = 1,
     instances = [];
 
   solomonsSealGroup.position.y = 0;

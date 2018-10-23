@@ -56,7 +56,7 @@ class ColorFactory {
   }
 
   static getRandomColor(
-    seasonName = ColorFactory.SUMMER,
+    seasonName = ColorFactory.DEFAULT,
     familyName = ColorFactory.LEAF
   ) {
     seasonName = seasonName.toUpperCase();
@@ -92,6 +92,7 @@ class ColorFactory {
 ColorFactory.SUMMER = "SUMMER";
 ColorFactory.FALL = "FALL";
 ColorFactory.WINTER = "WINTER";
+ColorFactory.DEFAULT = ColorFactory.FALL;
 
 ColorFactory.LEAF = "LEAF";
 ColorFactory.BARK = "BARK";

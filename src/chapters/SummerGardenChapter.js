@@ -13,19 +13,19 @@ class SummerGardenChapter extends BaseChapter {
   init(props) {
     this.group = new Group();
 
-    // this.solomonsSealGroup = new SolomonsSealGroup({
-    //   R: this.R,
-    //   camera: this.camera,
-    //   controls: this.controls
-    // });
-    // this.group.add(this.solomonsSealGroup.group);
-
-    this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
+    this.solomonsSealGroup = new SolomonsSealGroup({
       R: this.R,
       camera: this.camera,
       controls: this.controls
     });
-    this.group.add(this.stellariaPuberaSpawn.group);
+    this.group.add(this.solomonsSealGroup.group);
+
+    // this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
+    //   R: this.R,
+    //   camera: this.camera,
+    //   controls: this.controls
+    // });
+    // this.group.add(this.stellariaPuberaSpawn.group);
 
     // this.cube = new Cube({ size: 0.25 });
     // this.group.add(this.cube.mesh);
@@ -46,11 +46,11 @@ class SummerGardenChapter extends BaseChapter {
         ty: 1,
         tz: 1
       };
-    this.controls.animate({
-      from,
-      to,
-      callback: () => this.onTransitionComplete()
-    });
+    // this.controls.animate({
+    //   from,
+    //   to
+    //   // callback: () => this.onTransitionComplete()
+    // });
   }
 
   onTransitionComplete() {

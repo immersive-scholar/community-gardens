@@ -9,7 +9,7 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
   let stellariaPubera,
     intervalID,
     stellariaPuberaGroup = new Group(),
-    count = 8,
+    count = 5,
     instances = [];
 
   createStellariaPubera({ count });
