@@ -2,12 +2,25 @@ import RandomSeed from "random-seed";
 import HighresExport from "three/vendor/Highres";
 import SceneManager from "./SceneManager";
 import GeneralCanvas from "./GeneralCanvas";
+import ColorFactory from "util/ColorFactory";
+import TextureFactory from "util/TextureFactory";
 
 export default container => {
   const seed = Math.random();
   // const seed = 0.42415009388616753;
   const R = RandomSeed.create(seed);
   console.log("Random seed: ", seed);
+
+  ColorFactory.setSeed(seed);
+  Promise.all([
+    ColorFactory.load({
+      summer: "/json/colors-raleigh-summer.json",
+      fall: "/json/colors-raleigh-fall.json"
+    }),
+    TextureFactory.load("/json/textures.json")
+  ]).then(result => {
+    sceneManager.subject.createScene();
+  });
 
   // State
   const state = {

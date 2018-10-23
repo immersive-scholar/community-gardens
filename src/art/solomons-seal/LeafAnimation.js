@@ -12,13 +12,14 @@ import {
   ModelBufferGeometry,
   LambertAnimationMaterial
 } from "three/vendor/BAS";
+import TextureFactory from "../../util/TextureFactory";
 
 function LeafAnimation({
   R,
   modelGeometry,
   color,
   animated,
-  imagePath = "/img/patterns/diamonds-2.png",
+  imagePath = TextureFactory.getPattern(),
   textureSize = new Vector2(20, -20),
   windForce,
   windDirection,
@@ -52,7 +53,7 @@ function LeafAnimation({
     leafColor.setHSL(
       hslBase.x + R.floatBetween(-hslRange.x, hslRange.x),
       hslBase.y + R.floatBetween(-hslRange.y, hslRange.y),
-      hslBase.z + R.floatBetween(-hslRange.z, hslRange.z)
+      hslBase.z + R.floatBetween(0, hslRange.z) // do not get less bright than the base value
     );
 
     for (j = 0; j < 18; j += 3) {

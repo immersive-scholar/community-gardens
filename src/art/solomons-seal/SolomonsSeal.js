@@ -1,20 +1,18 @@
 import { Vector2, Vector3, CatmullRomCurve3 } from "three-full";
 import { TweenMax, Power2 } from "gsap";
-// import BendModifier from "three/modifiers/BendModifier";
 import CurvePainter from "three/helpers/CurvePainter";
-import ColorSampler from "util/ColorSampler";
+import ColorFactory from "util/ColorFactory";
 import BaseRenderable from "art/common/BaseRenderable";
 
-import SolomonsSealLeaf from "./SolomonsSealLeaf";
 import StemGeometry from "./StemGeometry";
 import Leaves from "./Leaves";
 import Berries from "./Berries";
+import TextureFactory from "../../util/TextureFactory";
 
 class SolomonsSeal extends BaseRenderable {
   constructor(props, camera, R) {
-    super(props);
+    super(props, camera, R);
 
-    this.leaves = [];
     this.camera = camera;
     this.R = R;
 
@@ -22,6 +20,8 @@ class SolomonsSeal extends BaseRenderable {
   }
 
   init = (props = {}) => {
+    this.leaves = [];
+
     this.setState(props);
 
     this.clean();
@@ -39,7 +39,8 @@ class SolomonsSeal extends BaseRenderable {
       leafCount = 10,
       pointCount = height * 25,
       thickness = 0.02,
-      color = new ColorSampler().getRandomColor(),
+      color = ColorFactory.getRandomColor(),
+      imagePath = TextureFactory.getStroke(),
       delay = 0,
       leafStartPoint = 0.3,
       leafEndPoint = 1,
@@ -50,7 +51,7 @@ class SolomonsSeal extends BaseRenderable {
       windForce = 0,
       windDirection = new Vector3(0, 0, 0),
       hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 1, 0.3),
-      hslRange = 0.2,
+      hslRange = new Vector3(0, 0, 0.2),
       glitchAmplitude = 0,
       glitchAngle = new Vector3(1, 1, 1),
       glitchThreshold = new Vector3(1, 1, 1),
@@ -77,11 +78,10 @@ class SolomonsSeal extends BaseRenderable {
       R: this.R
     });
 
-    // geometry.vertices = this.bendGeometry({ geometry, R });
-
     this.stem = this.toCurve({
       geometry: this.geometry,
       color,
+      imagePath,
       delay,
       pointCount,
       thickness,
@@ -157,6 +157,7 @@ class SolomonsSeal extends BaseRenderable {
   toCurve = ({
     geometry,
     color,
+    imagePath,
     delay = 0,
     thickness = 2,
     pointCount = 8,
@@ -165,10 +166,11 @@ class SolomonsSeal extends BaseRenderable {
     animated
   }) => {
     const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
-
+    console.log("this.camera ", this.camera);
     const curvePainter = new CurvePainter({
       camera: this.camera,
       curve,
+      imagePath,
       color,
       pointCount,
       lineWidth: thickness,

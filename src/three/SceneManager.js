@@ -63,6 +63,7 @@ export default ({ generalCanvas, R }) => {
     onWindowResize,
     renderer,
     scene,
-    camera
+    camera,
+    subject
   };
 };
