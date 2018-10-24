@@ -149,7 +149,7 @@ class StellariaPubera extends BaseRenderable {
     this.rearPetals.position.y = height;
     this.rearPetals.lookAt(petalTarget);
     // this.rearPetals.rotation.y = -Math.PI / 2;
-    this.rearPetals.position.x += 0.01;
+    this.rearPetals.position.z += 0.002;
     this.group.add(this.rearPetals);
 
     // pollen
@@ -171,7 +171,7 @@ class StellariaPubera extends BaseRenderable {
     });
     this.pollen.position.y = height;
     this.pollen.lookAt(petalTarget);
-    this.pollen.position.x -= 0.005;
+    this.pollen.position.z -= 0.002;
     // this.pollen.rotation.y = -Math.PI / 2;
     this.group.add(this.pollen);
 

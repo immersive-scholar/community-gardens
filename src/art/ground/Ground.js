@@ -7,11 +7,13 @@ import {
   ImprovedNoise,
   Vector3,
   FrontSide,
-  Color
+  Color,
+  Group
 } from "three-full";
 import ColorFactory from "util/ColorFactory";
 
 const Ground = ({ camera, color = ColorFactory.getRandomColor() } = {}) => {
+  const group = new Group();
   const worldWidth = 64,
     worldDepth = 64;
   const data = generateHeight(worldWidth, worldDepth);
@@ -42,6 +44,20 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor() } = {}) => {
     })
   );
   mesh.rotation.y = -Math.PI / 2;
+
+  const wireframe = new Mesh(
+    geometry,
+    new MeshBasicMaterial({
+      color,
+      wireframe: true,
+      //   side: FrontSide,
+      flatShading: true
+    })
+  );
+  wireframe.rotation.y = -Math.PI / 2;
+
+  group.add(mesh);
+  group.add(wireframe);
 
   function generateHeight(width, height) {
     let size = width * height,
@@ -112,7 +128,7 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor() } = {}) => {
     return canvasScaled;
   }
 
-  return { mesh };
+  return { mesh: group };
 };
 
 export default Ground;
