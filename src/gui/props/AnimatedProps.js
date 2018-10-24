@@ -1,6 +1,6 @@
-const Animated = () => {
+const Animated = ({ animated = true } = {}) => {
   const props = {
-    animated: true
+    animated
   };
 
   const addFolder = ({ gui, onDataChange, onDataChangeComplete }) => {

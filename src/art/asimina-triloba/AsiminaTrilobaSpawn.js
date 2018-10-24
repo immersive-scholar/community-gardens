@@ -20,29 +20,27 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls }) => {
       for (let y = 0; y < count; y++) {
         asiminaTriloba = new AsiminaTriloba(
           {
-            delay: i * 0.25,
-            petalCount: 10, //R.intBetween(24, 48),
-            windForce: R.floatBetween(-0.3, 0),
-            windDirection: new Vector3(
-              R.floatBetween(-1.5, 1.5),
-              R.floatBetween(-1.5, 1.5),
-              R.floatBetween(-1.5, 1.5)
-            ),
-            hslBase: new Vector3(
-              1,
-              R.floatBetween(0, 0.5),
-              R.floatBetween(0, 0.5)
-            ),
-            hslRange: new Vector3(
-              R.floatBetween(0, 0.05),
-              R.floatBetween(0.1, 0.25),
-              R.floatBetween(0.1, 0.25)
-            ),
-            petalTarget: new Vector3(0, 10, -10),
-            openness: R.floatBetween(0, 2),
-            // berryCount: R.intBetween(16, 32),
-            berryDistanceFromStem: R.floatBetween(0.01, 0.08),
-            berrySpiralDepth: R.floatBetween(0.01, 0.15)
+            delay: i * 0.25
+            // petalCount: 10, //R.intBetween(24, 48),
+            // windForce: R.floatBetween(-0.3, 0),
+            // windDirection: new Vector3(
+            //   R.floatBetween(-1.5, 1.5),
+            //   R.floatBetween(-1.5, 1.5),
+            //   R.floatBetween(-1.5, 1.5)
+            // ),
+            // hslBase: new Vector3(
+            //   1,
+            //   R.floatBetween(0, 0.5),
+            //   R.floatBetween(0, 0.5)
+            // ),
+            // hslRange: new Vector3(
+            //   R.floatBetween(0, 0.05),
+            //   R.floatBetween(0.1, 0.25),
+            //   R.floatBetween(0.1, 0.25)
+            // ),
+            // petalTarget: new Vector3(0, 10, -10),
+            // openness: R.floatBetween(0, 2),
+            // berryDistanceFromStem: R.floatBetween(0.01, 0.08),
           },
           camera,
           R

@@ -25,7 +25,6 @@ class AsiminaTriloba extends BaseRenderable {
       height = 0.25,
       pointCount = 24,
       color = ColorFactory.getRandomColor(),
-      petalColor = color,
       petalCount = 10, //this.R.intBetween(10, 24),
       petalWidth = 0.025,
       petalLength = 0.25,
@@ -43,8 +42,8 @@ class AsiminaTriloba extends BaseRenderable {
       hslRange = new Vector3(0.12, 0.12, 0.2),
       windForce = 0,
       windDirection = new Vector3(0, 0, 0),
-      rotationAxis = new Vector3(0, 0, Math.PI),
-      rotationAngle = 0.4,
+      rotationAxis = new Vector3(0.8, 1.4, 0.4),
+      rotationAngle = -0.3,
       translateToY = 0,
       berrySize = 0.025,
       berryCount = 1,
@@ -292,7 +291,6 @@ class AsiminaTriloba extends BaseRenderable {
   }
 
   setBerryCount(berryCount) {
-    console.log("setBerryCount berryCount ", berryCount);
     this.setState({ berryCount }, isDirty => {
       isDirty && this.init();
     });
@@ -339,6 +337,10 @@ class AsiminaTriloba extends BaseRenderable {
     this.setState({ petalCount }, isDirty => {
       isDirty && this.init();
     });
+  }
+
+  setRearPetalCount(rearPetalCount) {
+    // this plant does not support rearPetalCount
   }
 
   setPetalWidth(petalWidth) {

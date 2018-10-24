@@ -1,11 +1,16 @@
 import { Vector3 } from "three-full";
 
-const WindProps = () => {
+const WindProps = ({
+  windForce = 0,
+  windDirectionX = 0,
+  windDirectionY = 0,
+  windDirectionZ = 0
+} = {}) => {
   const props = {
-    windForce: 0,
-    windDirectionX: 0,
-    windDirectionY: 0,
-    windDirectionZ: 0
+    windForce,
+    windDirectionX,
+    windDirectionY,
+    windDirectionZ
   };
 
   const addFolder = ({ gui, onDataChange, onDataChangeComplete }) => {

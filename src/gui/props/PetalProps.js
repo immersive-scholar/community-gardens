@@ -1,18 +1,30 @@
 import { Vector3 } from "three-full";
 
-const PetalProps = () => {
+const PetalProps = ({
+  openness = 0,
+  petalCount = 10,
+  rearPetalCount = 6,
+  petalWidth = 0.025,
+  petalLength = 0.25,
+  petalDistanceFromCenter = 0.015,
+  rotationAxisX = 0,
+  rotationAxisY = 0,
+  rotationAxisZ = Math.PI / 2,
+  rotationAngle = 0.4,
+  translateToY = 0
+} = {}) => {
   const props = {
-    openness: 0,
-    petalCount: 10,
-    rearPetalCount: 6,
-    petalWidth: 0.025,
-    petalLength: 0.25,
-    petalDistanceFromCenter: 0.015,
-    rotationAxisX: 0,
-    rotationAxisY: 0,
-    rotationAxisZ: Math.PI / 2,
-    rotationAngle: 0.4,
-    translateToY: 0
+    openness,
+    petalCount,
+    rearPetalCount,
+    petalWidth,
+    petalLength,
+    petalDistanceFromCenter,
+    rotationAxisX,
+    rotationAxisY,
+    rotationAxisZ,
+    rotationAngle,
+    translateToY
   };
 
   const addFolder = ({ gui, onDataChange, onDataChangeComplete }) => {

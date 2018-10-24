@@ -24,8 +24,13 @@ class AsiminaTrilobaController extends BaseGUI {
     const leafColorProps = new LeafColorProps();
     super.addProperty(leafColorProps);
 
-    // const petalProps = new PetalProps();
-    // super.addProperty(petalProps);
+    const petalProps = new PetalProps({
+      rotationAxisX: 0.8,
+      rotationAxisY: 1.4,
+      rotationAxisZ: 0.4,
+      rotationAngle: 0.4
+    });
+    super.addProperty(petalProps);
 
     const windProps = new WindProps();
     super.addProperty(windProps);

@@ -1,15 +1,23 @@
 import { Vector3, Color } from "three-full";
 import ColorFactory from "util/ColorFactory";
 
-const LeafColorProps = () => {
+const LeafColorProps = ({
+  color = ColorFactory.getRandomColor(),
+  hslBaseH = 1,
+  hslBaseS = 0.3,
+  hslBaseL = 0.3,
+  hslRangeH = 0.2,
+  hslRangeS = 0,
+  hslRangeL = 0.2
+} = {}) => {
   const props = {
-    color: ColorFactory.getRandomColor(),
-    hslBaseH: 1,
-    hslBaseS: 0.3,
-    hslBaseL: 0.3,
-    hslRangeH: 0.2,
-    hslRangeS: 0,
-    hslRangeL: 0.2
+    color,
+    hslBaseH,
+    hslBaseS,
+    hslBaseL,
+    hslRangeH,
+    hslRangeS,
+    hslRangeL
   };
 
   const tempColorObject = {};

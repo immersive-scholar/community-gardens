@@ -1,13 +1,19 @@
-const BerryProps = (
-  props = {
-    berryCount: 10,
-    berrySize: 0.01,
-    berryColor: 0xff9900,
-    berryDistanceFromStem: 0.05,
-    berryRotation: 720,
-    berrySpiral: true
-  }
-) => {
+const BerryProps = ({
+  berryCount = 10,
+  berrySize = 0.01,
+  berryColor = 0xff9900,
+  berryDistanceFromStem = 0.05,
+  berryRotation = 720,
+  berrySpiral = true
+} = {}) => {
+  const props = {
+    berryCount,
+    berrySize,
+    berryColor,
+    berryDistanceFromStem,
+    berryRotation,
+    berrySpiral
+  };
   //   const tempColorObject = {};
   //   props.hslBaseH = new Color(props.color).getHSL(tempColorObject).h;
   //   props.hslBaseS = tempColorObject.s;

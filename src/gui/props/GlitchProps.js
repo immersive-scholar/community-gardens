@@ -1,14 +1,22 @@
 import { Vector3, Vector2 } from "three-full";
 
-const GlitchProps = () => {
+const GlitchProps = ({
+  glitchAmplitude = 0,
+  glitchAngleX = 1,
+  glitchAngleY = 1,
+  glitchAngleZ = 1,
+  glitchThresholdX = 1,
+  glitchThresholdY = 1,
+  glitchThresholdZ = 1
+} = {}) => {
   const props = {
-    glitchAmplitude: 0,
-    glitchAngleX: 1,
-    glitchAngleY: 1,
-    glitchAngleZ: 1,
-    glitchThresholdX: 1,
-    glitchThresholdY: 1,
-    glitchThresholdZ: 1
+    glitchAmplitude,
+    glitchAngleX,
+    glitchAngleY,
+    glitchAngleZ,
+    glitchThresholdX,
+    glitchThresholdY,
+    glitchThresholdZ
   };
 
   const addFolder = ({ gui, onDataChange, onDataChangeComplete }) => {

@@ -1,27 +1,32 @@
 import { Vector3 } from "three-full";
 
-const StemProps = () => {
+const StemProps = ({
+  height = 0.5,
+  displacementX = 0,
+  displacementY = 0,
+  displacementZ = 0,
+  offsetX = 0,
+  offsetY = 0,
+  offsetZ = 0,
+  thickness = 0.02,
+  pointCount = 50
+} = {}) => {
   const props = {
-    height: 0.5,
-    displacementX: 0,
-    displacementY: 0,
-    displacementZ: 0,
-    offsetX: 0,
-    offsetY: 0,
-    offsetZ: 0,
-    animated: true,
-    thickness: 0.02,
-    pointCount: 50
+    height,
+    displacementX,
+    displacementY,
+    displacementZ,
+    offsetX,
+    offsetY,
+    offsetZ,
+    thickness,
+    pointCount
   };
 
   const addFolder = ({ gui, onDataChange, onDataChangeComplete }) => {
     this.folder = gui.addFolder("Stem");
     this.folder
       .add(props, "height", 0.1, 4, 0.1)
-      .onChange(onDataChange)
-      .onFinishChange(onDataChangeComplete);
-    this.folder
-      .add(props, "animated", true)
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
     this.folder
@@ -60,7 +65,6 @@ const StemProps = () => {
 
   const update = instance => {
     instance.setHeight(props.height);
-    instance.setAnimated(props.animated);
     instance.setThickness(props.thickness);
     instance.setPointCount(props.pointCount);
     instance.setOffset(

@@ -1,20 +1,34 @@
 import { Vector3, Vector2 } from "three-full";
 
-const LeafProps = () => {
+const LeafProps = ({
+  leafCount = 10,
+  leafStartPoint = 0.3,
+  leafEndPoint = 1,
+  rotationStartX = 0,
+  rotationStartY = 0,
+  rotationStartZ = 0,
+  rotationEndX = 1.5,
+  rotationEndY = 1.7,
+  rotationEndZ = 0.2,
+  sizeStartX = 0.02,
+  sizeStartY = 0.01,
+  sizeEndX = 0.12,
+  sizeEndY = 0.06
+} = {}) => {
   const props = {
-    leafCount: 10,
-    leafStartPoint: 0.3,
-    leafEndPoint: 1,
-    rotationStartX: 0,
-    rotationStartY: 0,
-    rotationStartZ: 0,
-    rotationEndX: 1.5,
-    rotationEndY: 1.7,
-    rotationEndZ: 0.2,
-    sizeStartX: 0.02,
-    sizeStartY: 0.01,
-    sizeEndX: 0.12,
-    sizeEndY: 0.06
+    leafCount,
+    leafStartPoint,
+    leafEndPoint,
+    rotationStartX,
+    rotationStartY,
+    rotationStartZ,
+    rotationEndX,
+    rotationEndY,
+    rotationEndZ,
+    sizeStartX,
+    sizeStartY,
+    sizeEndX,
+    sizeEndY
   };
 
   const addFolder = ({ gui, onDataChange, onDataChangeComplete }) => {
