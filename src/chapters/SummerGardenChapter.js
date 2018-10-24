@@ -3,6 +3,7 @@ import { Group, Vector3, Box3, Object3D } from "three-full";
 import BaseChapter from "./BaseChapter";
 import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
 import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
+import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import Plane from "../art/plane/Plane";
 import Background from "../art/background/Background";
 import Ground from "../art/ground/Ground";
@@ -35,37 +36,47 @@ class SummerGardenChapter extends BaseChapter {
     // });
     // this.group.add(this.solomonsSealGroup.group);
 
-    this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
+    // this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
+    //   R: this.R,
+    //   camera: this.camera,
+    //   controls: this.controls
+    // });
+    // this.group.add(this.stellariaPuberaSpawn.group);
+
+    this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
       R: this.R,
       camera: this.camera,
       controls: this.controls
     });
-    this.group.add(this.stellariaPuberaSpawn.group);
+    this.group.add(this.asiminaTrilobaSpawn.group);
 
     // this.cube = new Cube({ size: 0.25 });
     // this.group.add(this.cube.mesh);
 
     const from = {
         x: 0,
-        y: 1,
+        y: 0.25,
         z: -10,
         tx: 0,
-        ty: 1,
+        ty: 0.25,
         tz: 1
       },
       to = {
         x: 0,
-        y: 1,
+        y: 0.25,
         z: -0.25,
         tx: 0,
-        ty: 1,
+        ty: 0.25,
         tz: 1
       };
-    this.controls.animate({
-      from,
-      to,
-      // callback: () => this.onTransitionComplete()
-    });
+
+    this.controls.set({ x: 0, y: 0.25, z: -0.25, tx: 0, ty: 0.25, tz: 1 });
+
+    // this.controls.animate({
+    //   from,
+    //   to
+    //   // callback: () => this.onTransitionComplete()
+    // });
   }
 
   onTransitionComplete() {

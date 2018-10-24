@@ -88,6 +88,19 @@ const Controls = ({ camera }) => {
     });
   }
 
+  function set({ x, y, z, tx, ty, tz }) {
+    cameraTweenParams.x = x;
+    cameraTweenParams.y = y;
+    cameraTweenParams.z = z;
+    targetTweenParams.x = tx;
+    targetTweenParams.y = ty;
+    targetTweenParams.z = tz;
+
+    killTweens();
+
+    onCameraMoveUpdate();
+  }
+
   function animateChapter1({ delay = 0, duration = 10 } = {}) {
     killTweens();
 
@@ -177,7 +190,8 @@ const Controls = ({ camera }) => {
     animate,
     animateChapter1,
     animateChapter2,
-    killTweens
+    killTweens,
+    set
   };
 };
 

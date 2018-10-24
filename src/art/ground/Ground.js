@@ -55,6 +55,7 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor() } = {}) => {
     })
   );
   wireframe.rotation.y = -Math.PI / 2;
+  wireframe.position.z = -0.001;
 
   group.add(mesh);
   group.add(wireframe);
