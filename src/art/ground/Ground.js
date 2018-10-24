@@ -24,6 +24,7 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor() } = {}) => {
     worldWidth - 1,
     worldDepth - 1
   );
+  console.log("GROUND color ", color);
   geometry.rotateX(-Math.PI / 2);
   const vertices = geometry.attributes.position.array;
   for (let i = 0, j = 0, l = vertices.length; i < l; i++, j += 3) {

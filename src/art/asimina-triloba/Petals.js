@@ -20,14 +20,14 @@ import {
   PrefabBufferGeometry
 } from "three/vendor/BAS";
 
-import Modifiers from "three/vendor/Modifiers";
+import Wind from "art/effects/Wind";
 import TextureFactory from "../../util/TextureFactory";
 
 function Petals({
   petalCount,
   petalShapeGeometry,
   color,
-  distanceFromCenter = 0.01,
+  distanceFromCenter = 0.005,
   R,
   openness = 0,
   animated,
@@ -36,11 +36,10 @@ function Petals({
   textureSize = new Vector2(10, 10),
   windForce = 0.1,
   windDirection = new Vector3(2, 2, 0),
-  startAngle = 0,
-  endAngle = 0.9,
-  displacement = new Vector2(0.01, 0.01),
   hslBase,
   hslRange,
+  rotation = 720,
+  spiralDepth = 0.01,
   rotationAxis = new Vector3(1, 1, 0),
   rotationAngle = Math.PI / 2,
   translateToY = 0
@@ -53,22 +52,12 @@ function Petals({
     elasticPeriod: 0.125
   };
 
-  // bend
   if (windForce) {
-    let temporaryMesh = new Mesh(petalShapeGeometry.clone(), null);
-    this.modifier = Modifiers.ModifierStack(temporaryMesh);
-    this.bend = Modifiers.Bend(
-      windDirection.x,
-      windDirection.y,
-      windDirection.z
-    );
-    this.bend.force = windForce;
-    this.bend.constraint = Modifiers.ModConstant().NONE;
-    this.modifier.addModifier(this.bend);
-    this.modifier.apply();
-    petalShapeGeometry.vertices = temporaryMesh.geometry.vertices;
-
-    temporaryMesh = undefined;
+    petalShapeGeometry = new Wind({
+      geometry: petalShapeGeometry,
+      windForce,
+      windDirection
+    });
   }
 
   // 1 use the shape to create a geometry
@@ -91,19 +80,20 @@ function Petals({
         angle: rotationAngle + openness
       },
       ease: "easeQuadOut"
-      //   easeParams: [settings.backAmplitude]
     },
     scale: {
-      from: { x: 0, y: 0, z: 0 },
-      to: { x: 1, y: 1, z: 1 },
+      from: { x: 0.0, y: 0.0, z: 0.0 },
+      to: { x: 1.0, y: 1.0, z: 1.0 },
       ease: "easeQuadOut"
-      //   easeParams: [settings.backAmplitude]
     },
     translate: {
-      from: { x: 0, y: 0, z: 0 },
-      to: { x: 0, y: translateToY, z: 0 },
+      from: { x: 0.0, y: 0.0, z: 0.0 },
+      to: {
+        x: windForce * windDirection.x,
+        y: windForce * windDirection.y,
+        z: windForce * windDirection.z
+      },
       ease: "easeQuadOut"
-      //   easeParams: [settings.backAmplitude]
     }
   });
 
@@ -118,30 +108,32 @@ function Petals({
   const aQuaternion = geometry.createAttribute("aQuaternion", 4);
 
   for (
-    let i = 0, ratio, position = new Vector3(), rotation, angle;
+    let i = 0, ratio, position = new Vector3(), angle, rotationStep;
     i < petalCount;
     i++
   ) {
     ratio = i / petalCount;
 
-    // delay
-    geometry.setPrefabData(aDelayDuration, i, [ratio * 0.5, maxDuration]);
+    // animation
+    dataArray[0] = ratio;
+    dataArray[1] = timeline.duration;
+    geometry.setPrefabData(aDelayDuration, i, dataArray);
 
-    // position
-    position.set(0, 0, 0);
-    rotation = (360 / petalCount) * i;
+    // position + rotation
+    rotationStep = (rotation / petalCount) * i;
 
     // push away from stem in an increasing spiral pattern
-    angle = _Math.degToRad(rotation);
+    angle = _Math.degToRad(rotationStep);
     position.x = Math.cos(angle) * distanceFromCenter;
     position.z = Math.sin(angle) * distanceFromCenter;
+    position.y = -ratio * spiralDepth;
+    // position.y = -spiralDepth;
 
     position.toArray(dataArray);
     geometry.setPrefabData(aPosition, i, dataArray);
 
     // rotation
-    // normal.copy(position);
-    normal.set(Math.cos(angle), Math.sin(angle), 0);
+    normal.copy(position);
     normal.normalize();
 
     quaternion.setFromUnitVectors(up, normal);
@@ -168,16 +160,15 @@ function Petals({
     }
   }
 
-  const texture = new TextureLoader().load(imagePath, texture => {
-    texture.wrapS = texture.wrapT = RepeatWrapping;
-  });
+  //   const texture = new TextureLoader().load(imagePath, texture => {
+  //     texture.wrapS = texture.wrapT = RepeatWrapping;
+  //   });
 
   const material = new LambertAnimationMaterial({
     vertexColors: VertexColors,
     // flatShading: true,
     side: DoubleSide,
     fog: true,
-    wireframe: !true,
     transparent: true,
     lights: true,
     wireframe: !true,
@@ -189,7 +180,7 @@ function Petals({
       uTextureSize: { value: textureSize }
     },
     uniformValues: {
-      map: texture,
+      //   map: texture,
       diffuse: new Color(color),
       reflectivity: 100
     },
@@ -224,8 +215,8 @@ function Petals({
     ],
     fragmentParameters: ["uniform float uTime;", "uniform vec2 uTextureSize;"],
     fragmentMap: [
-      "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
-      "diffuseColor *= texelColor;",
+      //   "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
+      //   "diffuseColor *= texelColor;",
       "diffuseColor.a *= uTime;"
     ]
   });

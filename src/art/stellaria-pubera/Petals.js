@@ -20,8 +20,8 @@ import {
   PrefabBufferGeometry
 } from "three/vendor/BAS";
 
-import Modifiers from "three/vendor/Modifiers";
-import TextureFactory from "../../util/TextureFactory";
+import Wind from "art/effects/Wind";
+import TextureFactory from "util/TextureFactory";
 
 function Petals({
   petalCount,
@@ -55,20 +55,11 @@ function Petals({
 
   // bend
   if (windForce) {
-    let temporaryMesh = new Mesh(petalShapeGeometry.clone(), null);
-    this.modifier = Modifiers.ModifierStack(temporaryMesh);
-    this.bend = Modifiers.Bend(
-      windDirection.x,
-      windDirection.y,
-      windDirection.z
-    );
-    this.bend.force = windForce;
-    this.bend.constraint = Modifiers.ModConstant().NONE;
-    this.modifier.addModifier(this.bend);
-    this.modifier.apply();
-    petalShapeGeometry.vertices = temporaryMesh.geometry.vertices;
-
-    temporaryMesh = undefined;
+    petalShapeGeometry = new Wind({
+      geometry: petalShapeGeometry,
+      windForce,
+      windDirection
+    });
   }
 
   // 1 use the shape to create a geometry

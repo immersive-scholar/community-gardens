@@ -18,15 +18,19 @@ class SummerGardenChapter extends BaseChapter {
     this.group = new Group();
 
     const color = ColorFactory.getRandomColor();
+    const bgColor = ColorFactory.getRandomColor(
+      ColorFactory.FALL,
+      ColorFactory.GROUND
+    );
 
-    this.background = new Background({ color });
+    this.background = new Background({ color: bgColor });
     this.group.add(this.background.mesh);
 
-    this.ground = new Ground({ camera: this.camera, color });
+    this.ground = new Ground({ camera: this.camera, color: bgColor });
     this.group.add(this.ground.mesh);
     this.ground.mesh.position.set(0, -10, 10);
 
-    this.plane = new Plane({ color });
+    this.plane = new Plane({ color: bgColor });
     this.group.add(this.plane.group);
 
     // this.solomonsSealGroup = new SolomonsSealGroup({

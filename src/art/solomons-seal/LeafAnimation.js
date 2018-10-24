@@ -12,6 +12,7 @@ import {
   ModelBufferGeometry,
   LambertAnimationMaterial
 } from "three/vendor/BAS";
+import Wind from "art/effects/Wind";
 import TextureFactory from "../../util/TextureFactory";
 
 function LeafAnimation({
@@ -26,23 +27,13 @@ function LeafAnimation({
   hslBase,
   hslRange
 }) {
-  // bend
-  // if (windForce) {
-  //   let temporaryMesh = new Mesh(modelGeometry.clone(), null);
-  //   this.modifier = Modifiers.ModifierStack(temporaryMesh);
-  //   this.bend = Modifiers.Bend(
-  //     windDirection.x,
-  //     windDirection.y,
-  //     windDirection.z
-  //   );
-  //   this.bend.force = windForce;
-  //   this.bend.constraint = Modifiers.ModConstant().NONE;
-  //   this.modifier.addModifier(this.bend);
-  //   this.modifier.apply();
-  //   modelGeometry.vertices = temporaryMesh.geometry.vertices;
-
-  //   temporaryMesh = undefined;
-  // }
+  if (windForce) {
+    modelGeometry = new Wind({
+      geometry: modelGeometry,
+      windForce,
+      windDirection
+    });
+  }
 
   const geometry = new ModelBufferGeometry(modelGeometry);
   const aColor = geometry.createAttribute("color", 3);

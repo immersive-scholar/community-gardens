@@ -1,11 +1,11 @@
 import { Vector2, Shape, ShapeGeometry } from "three-full";
 
 const AsiminTrilobaPetalSHape = ({
-  width = 0.025,
-  length = 0.125,
+  width = 0.1,
+  length = 0.25,
   petalMidPointRatio = 0.5,
-  petalLowerMidPointRatio = 0.2,
-  petalUpperMidPointRatio = 0.8
+  petalLowerMidPointRatio = 0.3,
+  petalUpperMidPointRatio = 0.9
 }) => {
   // 1 draw the shape
   const shape = new Shape();
