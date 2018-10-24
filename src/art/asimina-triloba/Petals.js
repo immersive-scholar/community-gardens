@@ -40,18 +40,10 @@ function Petals({
   hslRange,
   rotation = 720,
   spiralDepth = 0.01,
-  rotationAxis = new Vector3(1, 1, 0),
-  rotationAngle = Math.PI / 2,
-  translateToY = 0
+  rotationAxis = new Vector3(0, 0, Math.PI / 2),
+  rotationAngle = 0.4,
+  diminishFactor = 0.75
 }) {
-  const settings = {
-    maxDelay: 0.0,
-    timeScale: 1.0,
-    backAmplitude: 2.0,
-    elasticAmplitude: 1.0,
-    elasticPeriod: 0.125
-  };
-
   if (windForce) {
     petalShapeGeometry = new Wind({
       geometry: petalShapeGeometry,
@@ -160,9 +152,9 @@ function Petals({
     }
   }
 
-  //   const texture = new TextureLoader().load(imagePath, texture => {
-  //     texture.wrapS = texture.wrapT = RepeatWrapping;
-  //   });
+  const texture = new TextureLoader().load(imagePath, texture => {
+    texture.wrapS = texture.wrapT = RepeatWrapping;
+  });
 
   const material = new LambertAnimationMaterial({
     vertexColors: VertexColors,
@@ -177,10 +169,11 @@ function Petals({
       uWindForce: { value: windForce },
       uWindDirection: { value: windDirection },
       color: color,
-      uTextureSize: { value: textureSize }
+      uTextureSize: { value: textureSize },
+      uDiminishFactor: { value: diminishFactor }
     },
     uniformValues: {
-      //   map: texture,
+      map: texture,
       diffuse: new Color(color),
       reflectivity: 100
     },
@@ -196,11 +189,12 @@ function Petals({
       "attribute vec4 aQuaternion;",
       "attribute vec2 aDelayDuration;",
       "uniform float uWindForce;",
-      "uniform vec3 uWindDirection;"
+      "uniform vec3 uWindDirection;",
+      "uniform float uDiminishFactor;"
     ],
     vertexPosition: [
       // calculate animation time for the prefab
-      "float tTime = clamp(uTime - aDelayDuration.x, 0.0, aDelayDuration.y);",
+      "float tTime = clamp(uTime - aDelayDuration.x * uDiminishFactor, 0.0, aDelayDuration.y);",
 
       // apply timeline transformations based on 'tTime'
       timeline.getTransformCalls("scale"),
@@ -215,13 +209,14 @@ function Petals({
     ],
     fragmentParameters: ["uniform float uTime;", "uniform vec2 uTextureSize;"],
     fragmentMap: [
-      //   "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
-      //   "diffuseColor *= texelColor;",
+      "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
+      "diffuseColor *= texelColor;",
       "diffuseColor.a *= uTime;"
     ]
   });
 
   material.uniforms.uTextureSize.value = textureSize;
+  material.uniforms.uDiminishFactor.value = diminishFactor;
   material.uniforms.uWindForce.value = windForce;
   material.uniforms.uWindDirection.value = windDirection;
 

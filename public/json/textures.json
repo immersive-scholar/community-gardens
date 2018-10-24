@@ -25,7 +25,7 @@
     {
       "type": "stroke",
       "baseUri": "/img/strokes/",
-      "textures": ["stroke.png"]
+      "textures": ["ddw-watercolor-1.png"]
     }
   ]
 }

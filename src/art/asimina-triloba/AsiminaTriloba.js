@@ -25,13 +25,13 @@ class AsiminaTriloba extends BaseRenderable {
       height = 0.25,
       pointCount = 24,
       color = ColorFactory.getRandomColor(),
-      petalCount = this.R.intBetween(10, 24),
-      petalWidth = 0.1,
+      petalCount = this.R.intBetween(14, 48),
+      petalWidth = 0.2,
       petalLength = 0.25,
       petalMidPointRatio = 0.6,
       petalLowerMidPointRatio = 0.2,
       petalUpperMidPointRatio = 0.9,
-      petalDistanceFromCenter = 0,
+      petalDistanceFromCenter = 0.01,
       imagePath = TextureFactory.getPattern(),
       textureSize = new Vector2(5, 5),
       animated = true,
@@ -42,8 +42,9 @@ class AsiminaTriloba extends BaseRenderable {
       hslRange = new Vector3(0.12, 0.12, 0.2),
       windForce = 0,
       windDirection = new Vector3(0, 0, 0),
-      rotationAxis = new Vector3(0.8, 1.4, 0.4),
-      rotationAngle = -0.3,
+      rotationAxis = new Vector3(0, 0, 0),
+      rotationAngle = 0.4,
+      petalRotation = 360,
       translateToY = 0,
       berrySize = 0.025,
       berryCount = 1,
@@ -55,6 +56,9 @@ class AsiminaTriloba extends BaseRenderable {
       berrySpiral = true,
       berrySpiralDepth = 0.1
     } = this.state;
+
+    console.log("rotationAxis ", rotationAxis);
+    console.log("rotationAngle ", rotationAngle);
 
     // stem
     // this.geometry = new StemGeometry({
@@ -87,6 +91,7 @@ class AsiminaTriloba extends BaseRenderable {
 
     this.petals = new Petals({
       petalCount,
+      rotation: petalRotation,
       petalShapeGeometry: petalShapeGeometry.clone(),
       width: petalWidth,
       length: petalLength,
@@ -370,6 +375,12 @@ class AsiminaTriloba extends BaseRenderable {
   }
   setTranslateToY(translateToY) {
     this.setState({ translateToY }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setPetalRotation(petalRotation) {
+    this.setState({ petalRotation }, isDirty => {
       isDirty && this.init();
     });
   }

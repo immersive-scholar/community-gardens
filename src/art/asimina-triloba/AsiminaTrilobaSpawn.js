@@ -9,7 +9,7 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls }) => {
   let asiminaTriloba,
     intervalID,
     asiminaTrilobaGroup = new Group(),
-    count = 1,
+    count = 4,
     instances = [];
 
   createAsiminaTriloba({ count });
@@ -20,8 +20,9 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls }) => {
       for (let y = 0; y < count; y++) {
         asiminaTriloba = new AsiminaTriloba(
           {
-            delay: i * 0.25
-            // petalCount: 10, //R.intBetween(24, 48),
+            delay: i * 0.25,
+            petalCount: R.intBetween(24, 48),
+            petalRotation: R.intBetween(360, 720)
             // windForce: R.floatBetween(-0.3, 0),
             // windDirection: new Vector3(
             //   R.floatBetween(-1.5, 1.5),

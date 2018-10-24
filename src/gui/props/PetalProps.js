@@ -83,11 +83,7 @@ const PetalProps = ({
     instance.setPetalLength(props.petalLength);
     instance.setPetalDistanceFromCenter(props.petalDistanceFromCenter);
     instance.setRotationAxis(
-      new Vector3(
-        props.rotationAxisX,
-        props.rotationAxisY,
-        props.rotationAngleZ
-      )
+      new Vector3(props.rotationAxisX, props.rotationAxisY, props.rotationAxisZ)
     );
     instance.setRotationAngle(props.rotationAngle);
     instance.setTranslateToY(props.translateToY);

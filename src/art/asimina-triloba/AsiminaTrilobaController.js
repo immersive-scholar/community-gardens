@@ -18,19 +18,18 @@ class AsiminaTrilobaController extends BaseGUI {
     const positionProps = new PositionProps();
     super.addProperty(positionProps);
 
-    const stemProps = new StemProps();
-    super.addProperty(stemProps);
+    // const stemProps = new StemProps();
+    // super.addProperty(stemProps);
 
     const leafColorProps = new LeafColorProps();
     super.addProperty(leafColorProps);
 
     const petalProps = new PetalProps({
-      petalCount: 50,
       petalWidth: 0.1,
       petalLength: 0.25,
-      rotationAxisX: 0.8,
-      rotationAxisY: 1.4,
-      rotationAxisZ: 0.4,
+      rotationAxisX: 0,
+      rotationAxisY: 0,
+      rotationAxisZ: 0,
       rotationAngle: 0.4
     });
     super.addProperty(petalProps);
