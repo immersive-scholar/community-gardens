@@ -1,4 +1,4 @@
-import { Vector2, Vector3 } from "three-full";
+import { Vector2, Vector3, CatmullRomCurve3 } from "three-full";
 import { TweenMax, Power2 } from "gsap";
 import ColorFactory from "util/ColorFactory";
 import BaseRenderable from "art/common/BaseRenderable";
@@ -7,7 +7,9 @@ import BaseRenderable from "art/common/BaseRenderable";
 import AsiminaTrilobaPetalShape from "./AsiminaTrilobaPetalShape";
 import Petals from "./Petals";
 import Pollen from "./Pollen";
-import TextureFactory from "../../util/TextureFactory";
+import TextureFactory from "util/TextureFactory";
+import StemGeometry from "./StemGeometry";
+import CurvePainter from "three/helpers/CurvePainter";
 
 class AsiminaTriloba extends BaseRenderable {
   constructor(props, camera, R) {
@@ -22,11 +24,19 @@ class AsiminaTriloba extends BaseRenderable {
     this.clean();
 
     const {
-      height = 0.25,
+      height = this.R.floatBetween(0.25, 0.75),
       pointCount = 24,
       color = ColorFactory.getRandomColor(),
+      displacement = new Vector3(0.2, 0.1, 0.2),
+      scale = new Vector3(2, 2, 4),
+      offset = new Vector3(
+        this.R.floatBetween(-0.5, 0.5),
+        this.R.floatBetween(-0.5, 0.5),
+        this.R.floatBetween(-0.5, 0.5)
+      ),
+      thickness = 0.02,
       petalCount = this.R.intBetween(14, 48),
-      petalWidth = 0.2,
+      petalWidth = 0.1,
       petalLength = 0.25,
       petalMidPointRatio = 0.6,
       petalLowerMidPointRatio = 0.2,
@@ -42,9 +52,9 @@ class AsiminaTriloba extends BaseRenderable {
       hslRange = new Vector3(0.12, 0.12, 0.2),
       windForce = 0,
       windDirection = new Vector3(0, 0, 0),
-      rotationAxis = new Vector3(0, 0, 0),
+      rotationAxis = new Vector3(0, 0, 0.4),
       rotationAngle = 0.4,
-      petalRotation = 360,
+      petalRotation = 720,
       translateToY = 0,
       berrySize = 0.025,
       berryCount = 1,
@@ -57,29 +67,30 @@ class AsiminaTriloba extends BaseRenderable {
       berrySpiralDepth = 0.1
     } = this.state;
 
-    console.log("rotationAxis ", rotationAxis);
-    console.log("rotationAngle ", rotationAngle);
-
     // stem
-    // this.geometry = new StemGeometry({
-    //   height,
-    //   pointCount,
-    //   displacement,
-    //   scale,
-    //   offset,
-    //   R: this.R
-    // });
+    this.geometry = new StemGeometry({
+      height,
+      pointCount,
+      displacement,
+      scale,
+      offset,
+      R: this.R
+    });
 
-    // this.stem = this.toCurve({
-    //   geometry: this.geometry,
-    //   color,
-    //   delay,
-    //   pointCount,
-    //   thickness,
-    //   fogDensity: 0.3,
-    //   animated
-    // });
-    // this.group.add(this.stem.curvePainter.mesh);
+    this.stem = this.toCurve({
+      geometry: this.geometry,
+      color,
+      delay,
+      pointCount,
+      thickness,
+      fogDensity: 0.3,
+      animated
+    });
+    this.group.add(this.stem.curvePainter.mesh);
+
+    //get top point
+    console.log("this.stem ", this.stem);
+    const stemTopPoint = this.stem.geometry.vertices[0];
 
     const petalShapeGeometry = new AsiminaTrilobaPetalShape({
       width: petalWidth,
@@ -111,7 +122,7 @@ class AsiminaTriloba extends BaseRenderable {
       rotationAngle,
       translateToY
     });
-    this.petals.position.y = height;
+    this.petals.position.copy(stemTopPoint);
     this.petals.lookAt(petalTarget);
     // this.petals.rotation.y = -Math.PI / 2;
     this.group.add(this.petals);
@@ -133,9 +144,7 @@ class AsiminaTriloba extends BaseRenderable {
       windDirection,
       delay: 0
     });
-    this.pollen.position.y = height;
-    this.pollen.lookAt(petalTarget);
-    this.pollen.position.z -= 0.002;
+    this.pollen.position.copy(stemTopPoint);
     // this.pollen.rotation.y = -Math.PI / 2;
     this.group.add(this.pollen);
 
@@ -148,34 +157,34 @@ class AsiminaTriloba extends BaseRenderable {
     }
   };
 
-  //   toCurve = ({
-  //     geometry,
-  //     color,
-  //     delay = 0,
-  //     thickness = 2,
-  //     pointCount = 8,
-  //     fogColor,
-  //     fogDensity,
-  //     animated
-  //   }) => {
-  //     const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
+  toCurve = ({
+    geometry,
+    color,
+    delay = 0,
+    thickness = 2,
+    pointCount = 8,
+    fogColor,
+    fogDensity,
+    animated
+  }) => {
+    const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
 
-  //     const curvePainter = new CurvePainter({
-  //       camera: this.camera,
-  //       curve,
-  //       color,
-  //       pointCount,
-  //       lineWidth: thickness,
-  //       delay: delay,
-  //       fogColor,
-  //       fogDensity,
-  //       animated
-  //     });
+    const curvePainter = new CurvePainter({
+      camera: this.camera,
+      curve,
+      color,
+      pointCount,
+      lineWidth: thickness,
+      delay: delay,
+      fogColor,
+      fogDensity,
+      animated
+    });
 
-  //     curvePainter.mesh.matrixAutoUpdate = true;
+    curvePainter.mesh.matrixAutoUpdate = true;
 
-  //     return { curvePainter, geometry, curve };
-  //   };
+    return { curvePainter, geometry, curve };
+  };
 
   setHeight(height) {
     this.setState({ height }, isDirty => {

@@ -40,7 +40,7 @@ function Petals({
   hslRange,
   rotation = 720,
   spiralDepth = 0.01,
-  rotationAxis = new Vector3(0, 0, Math.PI / 2),
+  rotationAxis = new Vector3(0, 0, 0),
   rotationAngle = 0.4,
   diminishFactor = 0.75
 }) {
