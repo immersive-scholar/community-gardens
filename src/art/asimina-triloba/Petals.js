@@ -127,7 +127,7 @@ function Petals({
     // rotation
     normal.copy(position);
     normal.x = Math.cos(angle);
-    normal.y = -Math.sin(angle);
+    normal.y = Math.sin(angle);
     normal.z = ratio * spiralDepth;
     normal.normalize();
 

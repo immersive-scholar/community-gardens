@@ -24,7 +24,6 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor() } = {}) => {
     worldWidth - 1,
     worldDepth - 1
   );
-  console.log("GROUND color ", color);
   geometry.rotateX(-Math.PI / 2);
   const vertices = geometry.attributes.position.array;
   for (let i = 0, j = 0, l = vertices.length; i < l; i++, j += 3) {
@@ -45,6 +44,7 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor() } = {}) => {
     })
   );
   mesh.rotation.y = -Math.PI / 2;
+  group.add(mesh);
 
   const wireframe = new Mesh(
     geometry,
@@ -58,7 +58,6 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor() } = {}) => {
   wireframe.rotation.y = -Math.PI / 2;
   wireframe.position.z = -0.001;
 
-  group.add(mesh);
   group.add(wireframe);
 
   function generateHeight(width, height) {
