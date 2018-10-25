@@ -5,6 +5,7 @@ import GeneralCanvas from "./GeneralCanvas";
 import DataFactory from "util/DataFactory";
 import ColorFactory from "util/ColorFactory";
 import TextureFactory from "util/TextureFactory";
+import InsecurityCalculator from "util/InsecurityCalculator";
 import Settings from "util/Settings";
 
 export default container => {
@@ -18,15 +19,20 @@ export default container => {
   ColorFactory.setSeed(seed);
 
   Promise.all([
-    DataFactory.load("/json/data.json.zip"),
+    DataFactory.load("/json/data.json.zip", "data.json"),
     ColorFactory.load({
       summer: "/json/colors-raleigh-summer.json",
       fall: "/json/colors-raleigh-fall.json"
     }),
     TextureFactory.load("/json/textures.json")
-  ]).then(() => {
-    sceneManager.subject.createScene();
-  });
+  ])
+    .then(() => {
+      InsecurityCalculator.parse(DataFactory.data);
+    })
+    .then(() => {
+      console.log("BUILD");
+      sceneManager.subject.createScene();
+    });
 
   // State
   const state = {
