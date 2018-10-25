@@ -7,12 +7,12 @@ class InsecurityCalculator {
         data[i].communityFitness = this.calculateCommunityFitness(data[i]);
         data[i].personalScarcity = this.calculatePersonalScarcity(data[i]);
         data[i].health = this.calculateHealth(data[i]);
-        console.log(data[i].resourcesIncoming);
       }
       resolve(data);
     });
   }
 
+  // a high resourcesIncoming score is good.
   static calculateResourcesIncoming(d) {
     let resourcesIncoming = 0;
 
@@ -46,8 +46,11 @@ class InsecurityCalculator {
         break;
     }
 
+    // depending on how much sleep is obtained,
     const sleep = d.sleep ? parseInt(d.sleep, 10) : 0;
     switch (true) {
+      case sleep === 0:
+        break;
       case sleep <= 4:
         resourcesIncoming += -4;
         break;
@@ -69,31 +72,185 @@ class InsecurityCalculator {
       case sleep >= 10:
         resourcesIncoming += 2;
         break;
-      case sleep === 0:
-        break;
       default:
         console.log("unknown sleep ", sleep);
         break;
     }
 
-    if (resourcesIncoming < 0) {
-      console.log(d);
-    }
-
     return resourcesIncoming;
   }
+
+  // a high energyOutgoing score is bad
   static calculateEnergyOutgoing(d) {
-    const energyOutgoing = 1;
+    let energyOutgoing = 0;
+
+    // if the user is searching for a job, it consumes energy
+    const jobSearch = parseInt(d.Job_search, 10);
+    if (jobSearch === 1) {
+      energyOutgoing += 2;
+    }
+
+    // if the student is fulltime, then working more takes more energy
+    let workhours = parseInt(d.workhours, 10);
+    let workCost = 0;
+    switch (true) {
+      case workhours > 30:
+        workCost += 4;
+        break;
+      case workhours > 20:
+        workCost += 3;
+        break;
+      case workhours > 10:
+        workCost += 2;
+        break;
+      case workhours > 0:
+        workCost += 1;
+        break;
+      default:
+        break;
+    }
+
+    // If the individual works full-time, their workhours ‘cost’ twice as much energy as if they are part-time
+    const fullTime = parseInt(d.FT_PT, 10) === 1;
+    energyOutgoing += fullTime ? workCost * 2 : workCost;
+
+    // some degrees take more energy to pursue than others
+    const degree = parseInt(d.Degree, 10);
+    switch (true) {
+      // Associates
+      case degree === 1:
+        break;
+      // Bachelors
+      case degree === 2:
+        energyOutgoing += 2;
+        break;
+      // Masters, Doctoral
+      case degree === 3:
+        energyOutgoing += 4;
+        break;
+      default:
+        break;
+    }
+
+    // any temporary housing, by Month or Year
+    const sleptInShelterM = parseInt(d.sleep51, 10) === 1;
+    const sleptInShelterY = parseInt(d.sleep52, 10) === 1;
+    energyOutgoing += sleptInShelterM * 3 + sleptInShelterY;
+
+    const couchSurfM = parseInt(d.sleep71, 10) === 1;
+    const couchSurfY = parseInt(d.sleep72, 10) === 1;
+    energyOutgoing += couchSurfM * 3 + couchSurfY;
+
+    const tempHotelM = parseInt(d.sleep81, 10) === 1;
+    const tempHotelY = parseInt(d.sleep82, 10) === 1;
+    energyOutgoing += tempHotelM * 3 + tempHotelY;
+
+    // if you are sleeping outside you spend a lot of energy
+    // just by being alert
+    const outdoorsM = parseInt(d.sleep121, 10) === 1;
+    const outdoorsY = parseInt(d.sleep122, 10) === 1;
+    energyOutgoing += (outdoorsM * 4 + outdoorsY) * 2;
+
+    // if you are sleeping in an inhabitable space you spend a lot of energy
+    // hoping you don't die
+    const inhabitableSpaceM = parseInt(d.sleep131, 10) === 1;
+    const inhabitableSpaceY = parseInt(d.sleep132, 10) === 1;
+    energyOutgoing += (inhabitableSpaceM * 4 + inhabitableSpaceY) * 2;
+
+    // if you have children
+    const hasChildren = parseInt(d.Children, 10) === 1;
+    energyOutgoing += hasChildren ? 4 : 0;
+
     return energyOutgoing;
   }
+
+  // a high communityFitness score is good
   static calculateCommunityFitness(d) {
-    const communityFitness = 1;
+    let communityFitness = 0;
+
+    let servicesUsed = 0;
+    servicesUsed += parseInt(d.SNAP, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.WIC, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.TANF, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.SSI, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.SSDI, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.Medicaid, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.foodBank, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.subsidy, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.unemploymt, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.utility, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.Section8, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.transport, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.taxRefund, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.EITC, 10) ? 1 : 0;
+    servicesUsed += parseInt(d.VetBen, 10) ? 1 : 0;
+    communityFitness += servicesUsed;
+
+    // mealplans are good...
+    let mealPlan = 0;
+    mealPlan += parseInt(d.MealPlan, 10) ? 2 : 0;
+    // ...unless they are too expensive...
+    mealPlan += parseInt(d.mealplan_4, 10) ? -2 : 0;
+    // ...or they make you ineligible for SNAP benefits
+    mealPlan += parseInt(d.mealplan_5, 10) ? -2 : 0;
+    // if your meal plan is not sufficient
+    mealPlan += parseInt(d.mealplan_suf, 10) === 2 ? -1 : 0;
+    communityFitness += mealPlan;
+
+    // if someone knows about the pantry, it is a good thing
+    let pantry = 0;
+    pantry += parseInt(d.pantry, 10) ? 1 : 0;
+    communityFitness += pantry;
+
+    let feelsSafe = parseInt(d.FeelSafe, 10);
+    switch (true) {
+      case feelsSafe === 1:
+        communityFitness -= 5;
+        break;
+      case feelsSafe === 2:
+        communityFitness -= 2;
+        break;
+      case feelsSafe === 3:
+        // no change
+        break;
+      case feelsSafe === 4:
+        communityFitness += 1;
+        break;
+      case feelsSafe === 5:
+        communityFitness += 2;
+        break;
+      default:
+        break;
+    }
+
     return communityFitness;
   }
+
+  // a high personalScarcity score is bad
   static calculatePersonalScarcity(d) {
-    const personalScarcity = 1;
+    let personalScarcity = 0;
+
+    personalScarcity += parseInt(d.seekfreefood, 10) ? 1 : 0;
+    personalScarcity += parseInt(d.gohungry, 10) ? 2 : 0;
+    personalScarcity += parseInt(d.underpay, 10) ? 1 : 0;
+    personalScarcity += parseInt(d.evicted, 10) ? 4 : 0;
+    personalScarcity += parseInt(d.summons, 10) ? 2 : 0;
+    personalScarcity += parseInt(d.gasbill, 10) ? 1 : 0;
+    personalScarcity += parseInt(d.borrow, 10) ? 1 : 0;
+    personalScarcity += parseInt(d.default, 10) ? 1 : 0;
+    personalScarcity += parseInt(d.notknowsleeping, 10) ? 2 : 0;
+    personalScarcity += parseInt(d.unsafe, 10) ? 3 : 0;
+    personalScarcity += parseInt(d.thrownout, 10) ? 1 : 0;
+
+    // giving
+    personalScarcity += parseInt(d.givemoney, 10) ? -1 : 0;
+    personalScarcity += parseInt(d.letstay, 10) ? -1 : 0;
+    personalScarcity += parseInt(d.givefood, 10) ? -1 : 0;
+    personalScarcity += parseInt(d.sharemeals, 10) ? -1 : 0;
+
     return personalScarcity;
   }
+
   static calculateHealth(d) {
     const health =
       d.resourcesIncoming -
