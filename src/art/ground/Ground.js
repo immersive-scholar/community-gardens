@@ -12,7 +12,7 @@ import {
 } from "three-full";
 import ColorFactory from "util/ColorFactory";
 
-const Ground = ({ camera, color = ColorFactory.getRandomColor() } = {}) => {
+const Ground = ({ camera, color = ColorFactory.getRandomColor(), R } = {}) => {
   const group = new Group();
   const worldWidth = 64,
     worldDepth = 64;
@@ -65,7 +65,7 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor() } = {}) => {
       data = new Uint8Array(size),
       perlin = new ImprovedNoise(),
       quality = 1,
-      z = Math.random();
+      z = R.random();
     for (let j = 0; j < 4; j++) {
       for (let i = 0; i < size; i++) {
         let x = i % width,
@@ -120,7 +120,7 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor() } = {}) => {
     image = context.getImageData(0, 0, canvasScaled.width, canvasScaled.height);
     imageData = image.data;
     for (let i = 0, l = imageData.length; i < l; i += 4) {
-      let v = ~~(Math.random() * 5);
+      let v = ~~(R.random() * 5);
       imageData[i] += v;
       imageData[i + 1] += v;
       imageData[i + 2] += v;

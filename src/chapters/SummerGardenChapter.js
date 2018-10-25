@@ -26,7 +26,11 @@ class SummerGardenChapter extends BaseChapter {
     this.background = new Background({ color: bgColor });
     this.group.add(this.background.mesh);
 
-    this.ground = new Ground({ camera: this.camera, color: bgColor });
+    this.ground = new Ground({
+      camera: this.camera,
+      color: bgColor,
+      R: this.R
+    });
     this.group.add(this.ground.mesh);
     this.ground.mesh.position.set(0, -10, 10);
 

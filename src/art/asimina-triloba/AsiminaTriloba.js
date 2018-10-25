@@ -35,9 +35,9 @@ class AsiminaTriloba extends BaseRenderable {
         this.R.floatBetween(-0.5, 0.5)
       ),
       thickness = 0.02,
-      petalCount = this.R.intBetween(14, 48),
-      petalWidth = 0.1,
-      petalLength = 0.25,
+      petalCount = this.R.intBetween(6, 12),
+      petalWidth = 0.25,
+      petalLength = 0.15,
       petalMidPointRatio = 0.6,
       petalLowerMidPointRatio = 0.2,
       petalUpperMidPointRatio = 0.9,

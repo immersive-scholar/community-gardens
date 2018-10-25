@@ -44,6 +44,13 @@ function Petals({
   rotationAngle = 0.4,
   diminishFactor = 0.75
 }) {
+  // 'curl' all the leaves
+  petalShapeGeometry = new Wind({
+    geometry: petalShapeGeometry,
+    windForce: 0.1,
+    windDirection: new Vector3(0.05, 0, 0)
+  });
+
   if (windForce) {
     petalShapeGeometry = new Wind({
       geometry: petalShapeGeometry,

@@ -25,8 +25,8 @@ class AsiminaTrilobaController extends BaseGUI {
     super.addProperty(leafColorProps);
 
     const petalProps = new PetalProps({
-      petalWidth: 0.1,
-      petalLength: 0.25,
+      petalWidth: 0.25,
+      petalLength: 0.15,
       rotationAxisX: 0,
       rotationAxisY: 0,
       rotationAxisZ: 0,
