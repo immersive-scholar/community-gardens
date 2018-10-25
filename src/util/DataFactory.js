@@ -1,6 +1,7 @@
 const fs = require("browserify-fs");
 const path = require("path");
-const JSZIP = require("jszip");
+const JSZip = require("jszip");
+const JSZipUtils = require("jszip-utils");
 const download = require("downloadjs");
 
 class DataFactory {
@@ -16,6 +17,29 @@ class DataFactory {
       console.log("Failed to fetch the data");
     };
 
+    const loadZip = uri => {
+      return new JSZip.external.Promise(function(resolve, reject) {
+        JSZipUtils.getBinaryContent(uri, function(err, data) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+        });
+      })
+        .then(function(data) {
+          return JSZip.loadAsync(data);
+        })
+        .then(function(zip) {
+          return zip.file("data.json").async("string");
+        })
+        .then(function(contents) {
+          var responseJSON = JSON.parse(contents);
+          DataFactory.data = responseJSON;
+          return responseJSON;
+        });
+    };
+
     const ajaxRequestWithPromise = uri => {
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
@@ -26,10 +50,8 @@ class DataFactory {
         // });
         xhr.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-            console.log("this.responseText ", this.responseText);
             DataFactory.responseText = this.responseText;
             var responseJSON = JSON.parse(this.responseText);
-            console.log("responseJSON ", responseJSON);
             resolve(responseJSON);
           }
         };
@@ -44,8 +66,8 @@ class DataFactory {
     };
 
     const request = async () => {
-      const response = await ajaxRequestWithPromise(jsonUri);
-      console.log("response ", response);
+      //   const response = await ajaxRequestWithPromise(jsonUri);
+      const response = await loadZip(jsonUri);
       this.data = response.data;
       onDataComplete();
     };

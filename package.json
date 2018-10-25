@@ -9,6 +9,7 @@
     "downloadjs": "^1.4.7",
     "gsap": "^2.0.2",
     "jszip": "^3.1.5",
+    "jszip-utils": "^0.0.2",
     "lodash": "^4.17.11",
     "pngjs": "^3.3.3",
     "prop-types": "^15.6.2",

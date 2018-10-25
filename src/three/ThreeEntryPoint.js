@@ -18,16 +18,13 @@ export default container => {
   ColorFactory.setSeed(seed);
 
   Promise.all([
-    DataFactory.load("/json/data.json"),
+    DataFactory.load("/json/data.json.zip"),
     ColorFactory.load({
       summer: "/json/colors-raleigh-summer.json",
       fall: "/json/colors-raleigh-fall.json"
     }),
     TextureFactory.load("/json/textures.json")
-  ]).then(result => {
-    DataFactory.JSON_to_ZIP("/json/data.json", () =>
-      console.log("DONE ZIPPING ", arguments)
-    );
+  ]).then(() => {
     sceneManager.subject.createScene();
   });
 
