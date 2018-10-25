@@ -55,7 +55,7 @@ class AsiminaTriloba extends BaseRenderable {
       windDirection = new Vector3(0, 0, 0),
       rotationAxis = new Vector3(0, 0, 0.4),
       rotationAngle = 0.4,
-      petalRotation = 720,
+      petalRotation = this.R.intBetween(360, 720),
       translateToY = 0,
       berrySize = 0.025,
       berryCount = 1,

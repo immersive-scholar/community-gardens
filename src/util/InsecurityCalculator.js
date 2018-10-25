@@ -10,6 +10,7 @@ class InsecurityCalculator {
         data[i].energyOutgoing = this.calculateEnergyOutgoing(data[i]);
         data[i].communityFitness = this.calculateCommunityFitness(data[i]);
         data[i].personalScarcity = this.calculatePersonalScarcity(data[i]);
+        data[i].emotionalHealth = this.calculateEmotionalHealth(data[i]);
         data[i].health = this.calculateHealth(data[i]);
 
         if (data[i].health < min) {
@@ -409,12 +410,49 @@ class InsecurityCalculator {
     return personalScarcity;
   }
 
+  static calculateEmotionalHealth(d) {
+    let emotionalHealth = 0;
+
+    let feelsCheerful = parseInt(d.Q33_Cheerful, 10);
+    if (feelsCheerful === 99) feelsCheerful = 3;
+
+    // the formula is the same for all these questions
+    // range is 1 (always) to 6 (never)
+    // 1 gives 4 points,
+    // 2 gives 2 points,
+    // 3 gives 0 points,
+    // 4 gives -2 points,
+    // 5 gives -4 points,
+    // 6 gives -6 points,
+    emotionalHealth += (3 - feelsCheerful) * 2;
+
+    let feelsCalm = parseInt(d.Q33_Calm, 10);
+    if (feelsCalm === 99) feelsCalm = 3;
+
+    emotionalHealth += (3 - feelsCalm) * 2;
+
+    let feelsActive = parseInt(d.Q33_Active, 10);
+    if (feelsActive === 99) feelsActive = 3;
+    emotionalHealth += (3 - feelsActive) * 2;
+
+    let feelsRested = parseInt(d.Q33_Rested, 10);
+    if (feelsRested === 99) feelsRested = 3;
+    emotionalHealth += (3 - feelsRested) * 2;
+
+    let feelsInterest = parseInt(d.Q33_Interest, 10);
+    if (feelsInterest === 99) feelsInterest = 3;
+    emotionalHealth += (3 - feelsInterest) * 2;
+
+    return emotionalHealth;
+  }
+
   static calculateHealth(d) {
     const health =
       d.resourcesIncoming -
       d.energyOutgoing +
       d.communityFitness -
-      d.personalScarcity;
+      d.personalScarcity +
+      d.emotionalHealth;
     return health;
   }
 }
