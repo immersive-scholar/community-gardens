@@ -2,6 +2,7 @@ import RandomSeed from "random-seed";
 import HighresExport from "three/vendor/Highres";
 import SceneManager from "./SceneManager";
 import GeneralCanvas from "./GeneralCanvas";
+import DataFactory from "util/DataFactory";
 import ColorFactory from "util/ColorFactory";
 import TextureFactory from "util/TextureFactory";
 import Settings from "util/Settings";
@@ -17,12 +18,16 @@ export default container => {
   ColorFactory.setSeed(seed);
 
   Promise.all([
+    DataFactory.load("/json/data.json"),
     ColorFactory.load({
       summer: "/json/colors-raleigh-summer.json",
       fall: "/json/colors-raleigh-fall.json"
     }),
     TextureFactory.load("/json/textures.json")
   ]).then(result => {
+    DataFactory.JSON_to_ZIP("/json/data.json", () =>
+      console.log("DONE ZIPPING ", arguments)
+    );
     sceneManager.subject.createScene();
   });
 
