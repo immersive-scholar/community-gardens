@@ -116,9 +116,9 @@ function Petals({
 
     // push away from stem in an increasing spiral pattern
     angle = _Math.degToRad(rotationStep);
-    position.x = Math.cos(angle) * distanceFromCenter;
-    position.z = Math.sin(angle) * distanceFromCenter;
-    position.y = -ratio * spiralDepth;
+    // position.x = Math.cos(angle) * distanceFromCenter;
+    // position.z = Math.sin(angle) * distanceFromCenter;
+    position.z = -ratio * spiralDepth;
     // position.y = -spiralDepth;
 
     position.toArray(dataArray);
@@ -126,6 +126,9 @@ function Petals({
 
     // rotation
     normal.copy(position);
+    normal.x = Math.cos(angle);
+    normal.y = -Math.sin(angle);
+    normal.z = ratio * spiralDepth;
     normal.normalize();
 
     quaternion.setFromUnitVectors(up, normal);

@@ -42,12 +42,13 @@ class AsiminaTriloba extends BaseRenderable {
       petalLowerMidPointRatio = 0.2,
       petalUpperMidPointRatio = 0.9,
       petalDistanceFromCenter = 0.01,
-      imagePath = TextureFactory.getPattern(),
+      // imagePath = TextureFactory.getPattern(),
+      imagePath = "/img/strokes/ddw-watercolor-1.png",
       textureSize = new Vector2(5, 5),
       animated = true,
       delay = 0,
       openness = 0.3,
-      petalTarget = new Vector3(0, -10, 0),
+      petalTarget = new Vector3(0, 2, 0),
       hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 0.6, 0.3),
       hslRange = new Vector3(0.12, 0.12, 0.2),
       windForce = 0,
@@ -89,7 +90,6 @@ class AsiminaTriloba extends BaseRenderable {
     this.group.add(this.stem.curvePainter.mesh);
 
     //get top point
-    console.log("this.stem ", this.stem);
     const stemTopPoint = this.stem.geometry.vertices[0];
 
     const petalShapeGeometry = new AsiminaTrilobaPetalShape({
@@ -123,9 +123,10 @@ class AsiminaTriloba extends BaseRenderable {
       translateToY
     });
     this.petals.position.copy(stemTopPoint);
-    this.petals.lookAt(petalTarget);
-    // this.petals.rotation.y = -Math.PI / 2;
+    // this.petals.lookAt(petalTarget);
+    this.petals.rotation.z = Math.PI / 2;
     this.group.add(this.petals);
+    window.mesh = this.petals;
 
     // pollen
     this.pollen = new Pollen({
