@@ -26,7 +26,7 @@ class ColorFactory {
         //   resolve(JSON.parse(xhr.responseText));
         // });
         xhr.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
+          if (this.readyState === 4 && this.status === 200) {
             var seasonJSON = JSON.parse(this.responseText);
             resolve(seasonJSON);
           }

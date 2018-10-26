@@ -1,18 +1,10 @@
 import {
-  CubeTextureLoader,
   DoubleSide,
-  LineBasicMaterial,
   Mesh,
-  MeshBasicMaterial,
   MeshPhongMaterial,
-  Sky,
-  SphereBufferGeometry,
   TetrahedronGeometry,
-  TextureLoader,
-  VertexColors,
   Color
 } from "three-full";
-import ColorFactory from "util/ColorFactory";
 
 const Background = ({ color } = {}) => {
   // const loader = new CubeTextureLoader();

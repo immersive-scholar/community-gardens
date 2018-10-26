@@ -7,8 +7,8 @@ export default Settings => {
   const GPUTier = getGPUTier();
   console.log("GPUTier ", GPUTier);
 
-  let renderQuality = 1,
-    antiAlias = true;
+  // let renderQuality = 1,
+  //   antiAlias = true;
 
   // const settings = {
   //   dpr: Math.min(1.5, window.devicePixelRatio || 1),

@@ -6,7 +6,6 @@ import {
 } from "three-full";
 
 import BaseRenderable from "art/common/BaseRenderable";
-import Cube from "../cube/Cube";
 
 class Plane extends BaseRenderable {
   constructor(props) {
@@ -21,9 +20,6 @@ class Plane extends BaseRenderable {
     // const grid = this.createGrid();
     // grid.position.y = 0.001;
     // this.group.add(grid);
-
-    // const cube = new Cube({});
-    // this.group.add(cube.mesh);
   }
 
   createPlane(color) {

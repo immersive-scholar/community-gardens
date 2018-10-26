@@ -4,16 +4,14 @@ const AsiminTrilobaPetalSHape = ({
   width = 0.1,
   length = 0.25,
   petalMidPointRatio = 0.5,
-  petalLowerMidPointRatio = 0.3,
-  petalUpperMidPointRatio = 0.9
+  petalLowerMidPointRatio = 0.3
 }) => {
   // 1 draw the shape
   const shape = new Shape();
 
   const halfWidth = width / 2,
     petalMidPoint = petalMidPointRatio * length,
-    petalLowerMidPoint = petalLowerMidPointRatio * length,
-    petalUpperMidPoint = petalUpperMidPointRatio * length;
+    petalLowerMidPoint = petalLowerMidPointRatio * length;
   let anchor1 = new Vector2(0, petalLowerMidPoint);
   let anchor2 = new Vector2(halfWidth, petalLowerMidPoint);
   let endPoint = new Vector2(halfWidth, petalMidPoint);

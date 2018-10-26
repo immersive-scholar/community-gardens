@@ -1,4 +1,4 @@
-import { Vector3, _Math, Mesh } from "three-full";
+import { Vector3, Mesh } from "three-full";
 
 import Modifiers from "three/vendor/Modifiers";
 

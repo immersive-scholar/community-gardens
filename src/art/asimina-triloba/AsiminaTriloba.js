@@ -42,13 +42,11 @@ class AsiminaTriloba extends BaseRenderable {
       petalLowerMidPointRatio = 0.2,
       petalUpperMidPointRatio = 0.9,
       petalDistanceFromCenter = 0.01,
-      // imagePath = TextureFactory.getPattern(),
-      imagePath = "/img/strokes/ddw-watercolor-1.png",
+      imagePath = TextureFactory.getPattern(),
       textureSize = new Vector2(5, 5),
       animated = true,
       delay = 0,
       openness = 0.3,
-      petalTarget = new Vector3(0, 2, 0),
       hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 0.6, 0.3),
       hslRange = new Vector3(0.12, 0.12, 0.2),
       windForce = 0,
@@ -123,7 +121,6 @@ class AsiminaTriloba extends BaseRenderable {
       translateToY
     });
     this.petals.position.copy(stemTopPoint);
-    // this.petals.lookAt(petalTarget);
     this.petals.rotation.z = Math.PI / 2;
     this.group.add(this.petals);
     window.mesh = this.petals;
@@ -338,12 +335,6 @@ class AsiminaTriloba extends BaseRenderable {
 
   setOpenness(openness) {
     this.setState({ openness }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setPetalTarget(petalTarget) {
-    this.setState({ petalTarget }, isDirty => {
       isDirty && this.init();
     });
   }

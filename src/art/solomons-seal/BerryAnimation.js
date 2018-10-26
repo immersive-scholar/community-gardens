@@ -1,4 +1,4 @@
-import { _Math, Mesh, Color, DoubleSide, Vector3 } from "three-full";
+import { Mesh, Color, DoubleSide, Vector3 } from "three-full";
 import { LambertAnimationMaterial, ShaderChunk } from "three/vendor/BAS";
 
 function BerryAnimation({

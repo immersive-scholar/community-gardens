@@ -1,8 +1,6 @@
 import { Mesh, BoxGeometry } from "three";
 import { MeshPhongMaterial } from "three-full";
 
-import Circle from "art/circle/Circle";
-
 const Cube = ({ size = 1 }) => {
   const geometry = Cube.createGeometry(size);
   const material = Cube.createMaterial();

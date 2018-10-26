@@ -42,8 +42,8 @@ class InsecurityCalculator {
         }
         total++;
       }
-      // console.log("min ", min, minData);
-      // console.log("max ", max, maxData);
+      console.log("min ", min, minData);
+      console.log("max ", max, maxData);
 
       // this could be more efficient as each Stat requires looping
       // over the entire array

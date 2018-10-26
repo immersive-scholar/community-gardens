@@ -1,4 +1,4 @@
-import { Group, Vector3, Box3 } from "three-full";
+import { Group, Vector3 } from "three-full";
 import sample from "lodash/sample";
 
 import AsiminaTriloba from "art/asimina-triloba/AsiminaTriloba";
@@ -67,7 +67,7 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls }) => {
     asiminaTrilobaGroup.position.y = 0.25;
   }
 
-  const asiminaTrilobaController = new AsiminaTrilobaController({
+  new AsiminaTrilobaController({
     controls,
     instance: instances[0]
   });
@@ -88,9 +88,8 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls }) => {
       let i = 0,
         instance,
         coordinates = new Vector3(),
-        boundingBox = new Box3(),
-        behind = false,
-        pos;
+        // boundingBox = new Box3(),
+        behind = false;
       i < instances.length;
       i++
     ) {
@@ -129,7 +128,9 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls }) => {
   return {
     group: asiminaTrilobaGroup,
     createAsiminaTriloba,
-    getRandomInstance
+    getRandomInstance,
+    clean,
+    cleanInstances
   };
 };
 

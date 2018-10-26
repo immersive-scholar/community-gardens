@@ -4,9 +4,6 @@ import PositionProps from "gui/props/PositionProps";
 import LeafColorProps from "gui/props/LeafColorProps";
 import PetalProps from "gui/props/PetalProps";
 import WindProps from "gui/props/WindProps";
-import BerryProps from "gui/props/BerryProps";
-import StemProps from "gui/props/StemProps";
-// import WindProps from "gui/props/WindProps";
 
 class AsiminaTrilobaController extends BaseGUI {
   constructor(props) {

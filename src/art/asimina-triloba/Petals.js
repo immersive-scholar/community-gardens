@@ -2,13 +2,10 @@ import {
   Quaternion,
   Vector2,
   Vector3,
-  Geometry,
   _Math,
   Mesh,
   Color,
   DoubleSide,
-  Shape,
-  ShapeGeometry,
   TextureLoader,
   RepeatWrapping,
   VertexColors

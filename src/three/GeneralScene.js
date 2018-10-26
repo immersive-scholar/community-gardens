@@ -1,5 +1,4 @@
 import { Color, Scene, FogExp2 } from "three-full";
-import Background from "art/background/Background";
 
 export default ({
   backgroundColor = new Color(0xffffff),

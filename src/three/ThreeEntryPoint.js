@@ -9,7 +9,7 @@ import Settings from "util/Settings";
 import InsecurityCalculator from "data/InsecurityCalculator";
 
 export default container => {
-  const settings = new Settings();
+  new Settings();
 
   const seed = Math.random();
   // const seed = 0.42415009388616753;

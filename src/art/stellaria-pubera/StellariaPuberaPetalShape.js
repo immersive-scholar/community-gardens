@@ -4,16 +4,14 @@ const StellaPuberaPetalSHape = ({
   width = 0.025,
   length = 0.125,
   petalMidPointRatio = 0.5,
-  petalLowerMidPointRatio = 0.2,
-  petalUpperMidPointRatio = 0.8
+  petalLowerMidPointRatio = 0.2
 }) => {
   // 1 draw the shape
   const shape = new Shape();
 
   const halfWidth = width / 2,
     petalMidPoint = petalMidPointRatio * length,
-    petalLowerMidPoint = petalLowerMidPointRatio * length,
-    petalUpperMidPoint = petalUpperMidPointRatio * length;
+    petalLowerMidPoint = petalLowerMidPointRatio * length;
   let anchor1 = new Vector2(0, petalLowerMidPoint);
   let anchor2 = new Vector2(halfWidth, petalLowerMidPoint);
   let endPoint = new Vector2(halfWidth, petalMidPoint);

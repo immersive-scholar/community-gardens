@@ -6,7 +6,6 @@ import {
   ClampToEdgeWrapping,
   ImprovedNoise,
   Vector3,
-  FrontSide,
   Color,
   Group
 } from "three-full";
@@ -82,7 +81,7 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor(), R } = {}) => {
     let color = new Color(hexColor),
       hsl = new Color();
     hsl = color.getHSL(hsl);
-    let canvas, canvasScaled, context, image, imageData, vector3, sun, shade;
+    let canvas, canvasScaled, context, image, imageData, vector3, sun;
     vector3 = new Vector3(0, 0, 0);
     sun = new Vector3(0, 1, 0);
     sun.normalize();
@@ -99,7 +98,7 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor(), R } = {}) => {
       vector3.y = 2;
       vector3.z = data[j - width * 2] - data[j + width * 2];
       vector3.normalize();
-      shade = vector3.dot(sun);
+      // shade = vector3.dot(sun);
       color.setHSL(hsl.h, data[j], data[j]);
       //   imageData[i] = (96 + shade * 128) * (0.5 + data[j] * 0.007);
       //   imageData[i + 1] = (32 + shade * 96) * (0.5 + data[j] * 0.007);

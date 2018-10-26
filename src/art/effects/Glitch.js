@@ -1,6 +1,6 @@
 import { Vector3 } from "three-full";
 import { map } from "lodash";
-import { Linear, Power2 } from "gsap";
+import { Linear } from "gsap";
 
 const Glitch = ({
   points,

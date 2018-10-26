@@ -1,5 +1,4 @@
 import {
-  _Math,
   Color,
   DoubleSide,
   Mesh,

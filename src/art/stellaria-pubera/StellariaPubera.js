@@ -23,9 +23,7 @@ class StellariaPubera extends BaseRenderable {
 
     const {
       height = 0.25,
-      pointCount = 24,
       color = ColorFactory.getRandomColor(),
-      petalColor = color,
       rearPetalColor = color,
       petalCount = 10, //this.R.intBetween(10, 24),
       rearPetalCount = 6,

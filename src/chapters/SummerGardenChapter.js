@@ -1,8 +1,8 @@
 import { Group, Vector3, Box3, Object3D } from "three-full";
 
 import BaseChapter from "./BaseChapter";
-import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
-import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
+// import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
+// import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import Plane from "../art/plane/Plane";
 import Background from "../art/background/Background";
@@ -17,7 +17,7 @@ class SummerGardenChapter extends BaseChapter {
   init(props) {
     this.group = new Group();
 
-    const color = ColorFactory.getRandomColor();
+    // const color = ColorFactory.getRandomColor();
     const bgColor = ColorFactory.getRandomColor(
       ColorFactory.FALL,
       ColorFactory.GROUND
@@ -61,24 +61,24 @@ class SummerGardenChapter extends BaseChapter {
     // this.cube = new Cube({ size: 0.25 });
     // this.group.add(this.cube.mesh);
 
-    const from = {
-        x: 0,
-        y: 0.25,
-        z: -10,
-        tx: 0,
-        ty: 0.25,
-        tz: 1
-      },
-      to = {
-        x: 0,
-        y: 0.25,
-        z: -0.25,
-        tx: 0,
-        ty: 0.25,
-        tz: 1
-      };
+    // const from = {
+    //     x: 0,
+    //     y: 0.25,
+    //     z: -10,
+    //     tx: 0,
+    //     ty: 0.25,
+    //     tz: 1
+    //   },
+    //   to = {
+    //     x: 0,
+    //     y: 0.25,
+    //     z: -0.25,
+    //     tx: 0,
+    //     ty: 0.25,
+    //     tz: 1
+    //   };
 
-    this.controls.set({ x: 0, y: 0.25, z: -0.25, tx: 0, ty: 0.25, tz: 1 });
+    // this.controls.set({ x: 0, y: 0.25, z: -0.25, tx: 0, ty: 0.25, tz: 1 });
 
     // this.controls.animate({
     //   from,
