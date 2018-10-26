@@ -1,12 +1,16 @@
+import map from "lodash/map";
 import PellGrantFilter from "data/filters/PellGrantFilter";
 
 const PellGrant = data => {
-  const count = PellGrantFilter(data).length;
+  const rows = PellGrantFilter(data);
+  const count = rows.length;
+  const ids = map(rows, row => row.ID);
 
   return {
     id: "pellGrant",
     label: `There are ${count} students who received a Pell Grant.`,
-    count
+    count,
+    ids
   };
 };
 

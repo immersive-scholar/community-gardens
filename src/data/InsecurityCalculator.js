@@ -45,6 +45,11 @@ class InsecurityCalculator {
       // console.log("min ", min, minData);
       // console.log("max ", max, maxData);
 
+      // this could be more efficient as each Stat requires looping
+      // over the entire array
+      // but the trade-off is
+      // it's easier to combine Filters
+      // see WorkALotAndAreHungry for an example.
       const stats = {};
       stats.sleptOutside = SleptOutside(data);
       stats.inhabitable = Inhabitable(data);
