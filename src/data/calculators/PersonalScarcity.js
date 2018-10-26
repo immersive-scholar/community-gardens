@@ -23,21 +23,6 @@ const PersonalScarcity = d => {
   // a healthy community
   personalScarcity += parseInt(d.sharemeals, 10) === 1 ? 1 : 0;
 
-  // "We worried whether our food would run out before we got money to buy more."
-  const worry = parseInt(d.Q36_1, 10);
-  switch (true) {
-    // 1 is often
-    case worry === 1:
-      personalScarcity += 2;
-      break;
-    // 2 is sometimes
-    case worry === 2:
-      personalScarcity += 1;
-      break;
-    default:
-      break;
-  }
-
   // We worried whether our food would run out before we got money to buy more.
   const last = parseInt(d.Q36_1, 10);
   switch (true) {

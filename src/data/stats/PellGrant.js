@@ -1,8 +1,7 @@
+import PellGrantFilter from "data/filters/PellGrantFilter";
+
 const PellGrant = data => {
-  let count = 0;
-  for (var i in data) {
-    count += parseInt(data[i]["Pell"], 10) === 1 ? 1 : 0;
-  }
+  const count = PellGrantFilter(data).length;
 
   return {
     id: "pellGrant",

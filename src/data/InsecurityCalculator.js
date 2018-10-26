@@ -9,6 +9,11 @@ import SleptOutside from "./stats/SleptOutside";
 import Inhabitable from "./stats/Inhabitable";
 import HousingInsecurity from "./stats/HousingInsecurity";
 import PellGrant from "./stats/PellGrant";
+import ExperienceHunger from "./stats/ExperienceHunger";
+import WorkALotAndAreHungry from "./stats/WorkALotAndAreHungry";
+import EarnALotAndAreHungry from "./stats/EarnALotAndAreHungry";
+import DidNotEatForADay from "./stats/DidNotEatForADay";
+import SkipMeals from "./stats/SkipMeals";
 
 class InsecurityCalculator {
   static async parse(data) {
@@ -45,6 +50,11 @@ class InsecurityCalculator {
       stats.inhabitable = Inhabitable(data);
       stats.housingInsecurity = HousingInsecurity(data, total);
       stats.pellGrant = PellGrant(data);
+      stats.experienceHunger = ExperienceHunger(data, total);
+      stats.workALotAndAreHungry = WorkALotAndAreHungry(data);
+      stats.earnALotAndAreHungry = EarnALotAndAreHungry(data);
+      stats.didNotEatForADay = DidNotEatForADay(data, total);
+      stats.skipMeals = SkipMeals(data);
 
       console.log("stats ", stats);
 
