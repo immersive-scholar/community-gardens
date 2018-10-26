@@ -5,8 +5,8 @@ import GeneralCanvas from "./GeneralCanvas";
 import DataFactory from "util/DataFactory";
 import ColorFactory from "util/ColorFactory";
 import TextureFactory from "util/TextureFactory";
-import InsecurityCalculator from "util/InsecurityCalculator";
 import Settings from "util/Settings";
+import InsecurityCalculator from "data/InsecurityCalculator";
 
 export default container => {
   const settings = new Settings();
