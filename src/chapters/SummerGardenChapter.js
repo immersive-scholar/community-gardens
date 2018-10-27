@@ -16,9 +16,8 @@ class SummerGardenChapter extends BaseChapter {
   init(props) {
     this.group = new Group();
 
-    // const color = ColorFactory.getRandomColor();
     const bgColor = ColorFactory.getRandomColor();
-
+    console.log("background color ", bgColor);
     this.background = new BackgroundBAS({ color: bgColor });
     this.group.add(this.background);
 
@@ -56,30 +55,30 @@ class SummerGardenChapter extends BaseChapter {
     // this.cube = new Cube({ size: 0.25 });
     // this.group.add(this.cube.mesh);
 
-    // const from = {
-    //     x: 0,
-    //     y: 0.25,
-    //     z: -10,
-    //     tx: 0,
-    //     ty: 0.25,
-    //     tz: 1
-    //   },
-    //   to = {
-    //     x: 0,
-    //     y: 0.25,
-    //     z: -0.25,
-    //     tx: 0,
-    //     ty: 0.25,
-    //     tz: 1
-    //   };
+    const from = {
+        x: 0,
+        y: 0.25,
+        z: -10,
+        tx: 0,
+        ty: 0.25,
+        tz: 1
+      },
+      to = {
+        x: 0,
+        y: 0.25,
+        z: -0.25,
+        tx: 0,
+        ty: 0.25,
+        tz: 1
+      };
 
     // this.controls.set({ x: 0, y: 0.25, z: -0.25, tx: 0, ty: 0.25, tz: 1 });
 
-    // this.controls.animate({
-    //   from,
-    //   to
-    //   // callback: () => this.onTransitionComplete()
-    // });
+    this.controls.animate({
+      from,
+      to,
+      callback: () => this.onTransitionComplete()
+    });
 
     this.background.animateIn();
     this.ground.animateIn({ duration: 5, delay: 0.5 });

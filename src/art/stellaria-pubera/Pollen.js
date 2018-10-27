@@ -73,7 +73,7 @@ function Pollen({
   ) {
     ratio = i / count;
     // animation
-    dataArray[0] = maxDelay * (i / count);
+    dataArray[0] = maxDelay * ratio;
     dataArray[1] = timeline.duration;
     geometry.setPrefabData(aDelayDuration, i, dataArray);
 

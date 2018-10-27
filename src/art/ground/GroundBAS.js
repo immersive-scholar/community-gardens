@@ -9,15 +9,8 @@ import {
 import { PrefabBufferGeometry, BasicAnimationMaterial } from "three/vendor/BAS";
 import { TweenMax, Power2 } from "gsap";
 
-function GroundBAS({
-  R,
-  currentTime = 0,
-  cliff = 0,
-  color,
-  animated = true,
-  delay = 0
-}) {
-  this.currentTime = 1;
+function GroundBAS({ R, currentTime = 0, cliff = 0, color, animated = true }) {
+  this.currentTime = currentTime;
   this.cliff = 0;
 
   const worldWidth = 64,
