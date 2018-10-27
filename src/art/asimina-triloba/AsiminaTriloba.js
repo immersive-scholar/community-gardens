@@ -67,28 +67,29 @@ class AsiminaTriloba extends BaseRenderable {
     } = this.state;
 
     // stem
-    this.geometry = new StemGeometry({
-      height,
-      pointCount,
-      displacement,
-      scale,
-      offset,
-      R: this.R
-    });
+    // this.geometry = new StemGeometry({
+    //   height,
+    //   pointCount,
+    //   displacement,
+    //   scale,
+    //   offset,
+    //   R: this.R
+    // });
 
-    this.stem = this.toCurve({
-      geometry: this.geometry,
-      color,
-      delay,
-      pointCount,
-      thickness,
-      fogDensity: 0.3,
-      animated
-    });
-    this.group.add(this.stem.curvePainter.mesh);
+    // this.stem = this.toCurve({
+    //   geometry: this.geometry,
+    //   color,
+    //   delay,
+    //   pointCount,
+    //   thickness,
+    //   fogDensity: 0.3,
+    //   animated
+    // });
+    // this.group.add(this.stem.curvePainter.mesh);
 
     //get top point
-    const stemTopPoint = this.stem.geometry.vertices[0];
+    // const stemTopPoint = this.stem.geometry.vertices[0];
+    const stemTopPoint = new Vector3(0, 0, 0);
 
     const petalShapeGeometry = new AsiminaTrilobaPetalShape({
       width: petalWidth,

@@ -38,20 +38,24 @@ function BackgroundBAS({
 
   this.frustumCulled = false;
 
-  this.tween && this.tween.kill(null, this);
-  if (animated) {
-    this.currentTime = 0;
-    TweenMax.to(this, 5, {
-      currentTime: 1,
-      onUpdate: () => {
-        this.update();
-      },
-      delay,
-      ease: Power2.easeInOut
-    });
-  } else {
-    this.currentTime = 1;
-  }
+  window.bg = this;
+
+  this.animateIn = function({ duration = 5, delay = 0 } = {}) {
+    this.tween && this.tween.kill(null, this);
+    if (animated) {
+      this.currentTime = 0;
+      this.tween = TweenMax.to(this, 5, {
+        currentTime: 1,
+        onUpdate: () => {
+          this.update();
+        },
+        delay,
+        ease: Power2.easeInOut
+      });
+    } else {
+      this.currentTime = 1;
+    }
+  };
 
   this.clean = function() {
     geometry && geometry.dispose();

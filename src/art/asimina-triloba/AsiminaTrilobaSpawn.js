@@ -5,7 +5,7 @@ import AsiminaTriloba from "art/asimina-triloba/AsiminaTriloba";
 import AsiminaTrilobaController from "art/asimina-triloba/AsiminaTrilobaController";
 import GridLayoutHelper from "util/GridLayoutHelper";
 
-const AsiminaTrilobaSpawn = ({ R, camera, controls }) => {
+const AsiminaTrilobaSpawn = ({ R, camera, controls, delay = 0 }) => {
   let asiminaTriloba,
     intervalID,
     asiminaTrilobaGroup = new Group(),
@@ -20,14 +20,15 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls }) => {
       for (let y = 0; y < count; y++) {
         asiminaTriloba = new AsiminaTriloba(
           {
-            delay: i * 0.25,
-            petalCount: R.intBetween(6, 12)
-            // windForce: R.floatBetween(-0.1, 0),
-            // windDirection: new Vector3(
-            //   R.floatBetween(-1.5, 1.5),
-            //   R.floatBetween(-1.5, 1.5),
-            //   R.floatBetween(-1.5, 1.5)
-            // )
+            delay: delay + i * 0.25,
+            petalCount: R.intBetween(6, 12),
+            windForce: R.floatBetween(-0.1, 0),
+            windDirection: new Vector3(
+              R.floatBetween(-1.5, 1.5),
+              R.floatBetween(-1.5, 1.5),
+              R.floatBetween(-1.5, 1.5)
+            ),
+            openness: R.floatBetween(0, 2)
             // hslBase: new Vector3(
             //   1,
             //   R.floatBetween(0, 0.5),
@@ -39,7 +40,6 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls }) => {
             //   R.floatBetween(0.1, 0.25)
             // ),
             // petalTarget: new Vector3(0, 10, -10),
-            // openness: R.floatBetween(0, 2),
             // berryDistanceFromStem: R.floatBetween(0.01, 0.08),
           },
           camera,
@@ -61,7 +61,7 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls }) => {
       columns: count,
       rowWidth,
       columnHeight,
-      layoutAxis: GridLayoutHelper.LAYOUT_FLOOR
+      layoutAxis: GridLayoutHelper.LAYOUT_WALL
     });
 
     asiminaTrilobaGroup.position.y = 0.25;

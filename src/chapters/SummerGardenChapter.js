@@ -5,7 +5,7 @@ import BaseChapter from "./BaseChapter";
 // import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import BackgroundBAS from "../art/background/BackgroundBAS";
-import Ground from "../art/ground/Ground";
+import GroundBAS from "../art/ground/GroundBAS";
 import ColorFactory from "util/ColorFactory";
 
 class SummerGardenChapter extends BaseChapter {
@@ -17,20 +17,17 @@ class SummerGardenChapter extends BaseChapter {
     this.group = new Group();
 
     // const color = ColorFactory.getRandomColor();
-    const bgColor = ColorFactory.getRandomColor(
-      ColorFactory.FALL,
-      ColorFactory.GROUND
-    );
+    const bgColor = ColorFactory.getRandomColor();
 
     this.background = new BackgroundBAS({ color: bgColor });
     this.group.add(this.background);
 
-    this.ground = new Ground({
+    this.ground = new GroundBAS({
       color: bgColor,
       R: this.R
     });
-    this.group.add(this.ground.group);
-    // this.ground.group.position.set(0, -10, 10);
+    this.group.add(this.ground);
+    // this.ground.position.set(0, -10, 10);
 
     // this.plane = new Plane({ color: bgColor });
     // this.group.add(this.plane.group);
@@ -83,6 +80,10 @@ class SummerGardenChapter extends BaseChapter {
     //   to
     //   // callback: () => this.onTransitionComplete()
     // });
+
+    this.background.animateIn();
+    this.ground.animateIn({ duration: 5, delay: 0.5 });
+    this.ground.animateCliff({ cliff: 1, duration: 3, delay: 1 });
   }
 
   onTransitionComplete() {
