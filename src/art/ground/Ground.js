@@ -64,13 +64,21 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor(), R } = {}) => {
       data = new Uint8Array(size),
       perlin = new ImprovedNoise(),
       quality = 1,
-      z = R.random();
+      z = R.random(),
+      cx = width * 0.5,
+      cy = height * 0.5,
+      distanceFromCenter,
+      x,
+      y;
     for (let j = 0; j < 4; j++) {
       for (let i = 0; i < size; i++) {
-        let x = i % width,
-          y = ~~(i / width);
+        x = i % width;
+        y = ~~(i / width);
+        distanceFromCenter = 1 - (Math.abs(x - cx) * Math.abs(y - cy)) / size;
         data[i] += Math.abs(
-          perlin.noise(x / quality, y / quality, z) * quality
+          perlin.noise(x / quality, y / quality, z) *
+            quality *
+            distanceFromCenter
         );
       }
       quality *= 5;
@@ -128,7 +136,7 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor(), R } = {}) => {
     return canvasScaled;
   }
 
-  return { mesh: group };
+  return { group };
 };
 
 export default Ground;

@@ -12,7 +12,7 @@ export default container => {
   new Settings();
 
   const seed = Math.random();
-  // const seed = 0.42415009388616753;
+  // const seed = 0.033023315120814356;
   const R = RandomSeed.create(seed);
   console.log("Random seed: ", seed);
 

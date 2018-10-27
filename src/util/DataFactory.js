@@ -32,7 +32,6 @@ class DataFactory {
         .then(file => {
           var dataJson = JSON.parse(file);
           DataFactory.data = dataJson;
-          console.log("dataJson ", dataJson);
           return dataJson;
         });
     };

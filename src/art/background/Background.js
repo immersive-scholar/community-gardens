@@ -30,7 +30,7 @@ const Background = ({ color } = {}) => {
   });
   const mesh = new Mesh(geometry, material);
 
-  return { mesh };
+  return { group: mesh };
 };
 
 export default Background;

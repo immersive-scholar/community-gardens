@@ -8,7 +8,7 @@ const Cube = ({ size = 1 }) => {
   const mesh = new Mesh(geometry, material);
 
   return {
-    mesh
+    group: mesh
   };
 };
 
