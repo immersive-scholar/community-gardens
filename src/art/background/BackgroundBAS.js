@@ -26,8 +26,10 @@ function BackgroundBAS({
     uniformValues: {
       diffuse: new Color(color)
     },
-    fragmentParameters: ["uniform float uTime;"],
-    fragmentDiffuse: ["diffuseColor.rgb *= uTime;"]
+    vertexParameters: ["uniform float uTime;"],
+    vertexPosition: ["transformed *= uTime;"]
+    // fragmentParameters: ["uniform float uTime;"],
+    // fragmentDiffuse: ["diffuseColor.rgb *= uTime;"]
   });
 
   geometry.computeVertexNormals();
