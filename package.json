@@ -1,5 +1,6 @@
 {
   "name": "communitygardens.com",
+  "homepage": "https://lucastswick.github.io/community-gardens/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,6 +8,7 @@
     "dat.gui": "^0.7.3",
     "detect-gpu": "^0.0.34",
     "downloadjs": "^1.4.7",
+    "gh-pages": "^2.0.1",
     "gsap": "^2.0.2",
     "jszip": "^3.1.5",
     "jszip-utils": "^0.0.2",
@@ -26,14 +28,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && aws --profile communitygardens s3 sync build/ s3://communitygardens.com --size-only"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",
-    "not dead",
     "not ie <= 11",
     "not op_mini all"
   ]
