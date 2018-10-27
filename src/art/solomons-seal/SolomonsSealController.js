@@ -1,5 +1,6 @@
 import BaseGUI from "gui/BaseGUI";
 import AnimatedProps from "gui/props/AnimatedProps";
+import RandomSeedProps from "gui/props/RandomSeedProps";
 import PositionProps from "gui/props/PositionProps";
 import StemProps from "gui/props/StemProps";
 import LeafProps from "gui/props/LeafProps";
@@ -13,6 +14,9 @@ class SolomonsSealController extends BaseGUI {
 
     const animatedProps = new AnimatedProps();
     super.addProperty(animatedProps);
+
+    const randomSeedProps = new RandomSeedProps();
+    super.addProperty(randomSeedProps);
 
     const positionProps = new PositionProps();
     super.addProperty(positionProps);

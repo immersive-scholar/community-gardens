@@ -1,9 +1,12 @@
+import RandomSeed from "random-seed";
+
 import { Group } from "three-full";
 
 class BaseRenderable {
   constructor(props, camera, R) {
     this.camera = camera;
-    this.R = R;
+    this.randomSeed = props.randomSeed;
+    this.R = R || RandomSeed.create(this.randomSeed);
 
     this.state = { visible: false, animated: true, delay: 0, duration: 1 };
     this.group = new Group();
@@ -109,6 +112,14 @@ class BaseRenderable {
 
   setDelay(delay) {
     this.setState({ delay }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setRandomSeed(randomSeed) {
+    this.randomSeed = randomSeed;
+    this.R = RandomSeed.create(randomSeed);
+    this.setState({ randomSeed }, isDirty => {
       isDirty && this.init();
     });
   }
