@@ -1,5 +1,4 @@
 import { Vector2, Vector3 } from "three-full";
-import { TweenMax, Power2 } from "gsap";
 import ColorFactory from "util/ColorFactory";
 import BaseRenderable from "art/common/BaseRenderable";
 
@@ -398,8 +397,6 @@ class StellariaPubera extends BaseRenderable {
     this.state.duration = duration;
     this.state.delay = delay;
     this.state.animated = animated;
-
-    console.log("AnimateIn ", duration, delay, animated);
 
     this.rearPetals.animateIn({ duration, delay, animated });
     this.petals.animateIn({ duration, delay: delay + 1, animated });

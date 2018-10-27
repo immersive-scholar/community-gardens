@@ -56,30 +56,30 @@ class SummerGardenChapter extends BaseChapter {
     // this.cube = new Cube({ size: 0.25 });
     // this.group.add(this.cube.mesh);
 
-    // const from = {
-    //     x: 0,
-    //     y: 0.25,
-    //     z: -10,
-    //     tx: 0,
-    //     ty: 0.25,
-    //     tz: 1
-    //   },
-    //   to = {
-    //     x: 0,
-    //     y: 0.25,
-    //     z: -0.25,
-    //     tx: 0,
-    //     ty: 0.25,
-    //     tz: 1
-    //   };
+    const from = {
+        x: 0,
+        y: 0.25,
+        z: -10,
+        tx: 0,
+        ty: 0.25,
+        tz: 1
+      },
+      to = {
+        x: 0,
+        y: 0.25,
+        z: -0.25,
+        tx: 0,
+        ty: 0.25,
+        tz: 1
+      };
 
     // this.controls.set({ x: 0, y: 0.25, z: -0.25, tx: 0, ty: 0.25, tz: 1 });
 
-    // this.controls.animate({
-    //   from,
-    //   to
-    //   // callback: () => this.onTransitionComplete()
-    // });
+    this.controls.animate({
+      from,
+      to,
+      callback: () => this.onTransitionComplete()
+    });
 
     this.background.animateIn();
     this.ground.animateIn({ duration: 5, delay: 0.5 });
@@ -95,7 +95,8 @@ class SummerGardenChapter extends BaseChapter {
     if (!element) return null;
 
     let boundingBox = new Box3().setFromObject(element.group);
-    let center = boundingBox.getCenter();
+    let center = new Vector3();
+    boundingBox.getCenter(center);
     let tempObject = new Object3D();
     tempObject.position.set(center);
     let position = new Vector3(center.x, center.y, center.z);

@@ -2,13 +2,10 @@ import {
   Quaternion,
   Vector2,
   Vector3,
-  Geometry,
   _Math,
   Mesh,
   Color,
   DoubleSide,
-  Shape,
-  ShapeGeometry,
   TextureLoader,
   RepeatWrapping,
   VertexColors
@@ -46,14 +43,6 @@ function Petals({
   rotationAngle = Math.PI / 2,
   translateToY = 0
 }) {
-  const settings = {
-    maxDelay: 0.0,
-    timeScale: 1.0,
-    backAmplitude: 2.0,
-    elasticAmplitude: 1.0,
-    elasticPeriod: 0.125
-  };
-
   // bend
   if (windForce) {
     petalShapeGeometry = new Wind({
@@ -83,19 +72,16 @@ function Petals({
         angle: rotationAngle + openness
       },
       ease: "easeQuadOut"
-      //   easeParams: [settings.backAmplitude]
     },
     scale: {
       from: { x: 0, y: 0, z: 0 },
       to: { x: 1, y: 1, z: 1 },
       ease: "easeQuadOut"
-      //   easeParams: [settings.backAmplitude]
     },
     translate: {
       from: { x: 0, y: 0, z: 0 },
       to: { x: 0, y: translateToY, z: 0 },
       ease: "easeQuadOut"
-      //   easeParams: [settings.backAmplitude]
     }
   });
 
@@ -172,7 +158,6 @@ function Petals({
     wireframe: !true,
     transparent: true,
     lights: true,
-    wireframe: !true,
     uniforms: {
       uTime: { value: animated ? 0 : 1 },
       uWindForce: { value: windForce },
@@ -217,9 +202,9 @@ function Petals({
     fragmentParameters: ["uniform float uTime;", "uniform vec2 uTextureSize;"],
     fragmentMap: [
       "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
-      "diffuseColor *= texelColor;"
-    ],
-    fragmentMap: ["diffuseColor.a *= uTime;"]
+      "diffuseColor *= texelColor;",
+      "diffuseColor.a *= uTime;"
+    ]
   });
 
   material.uniforms.uTextureSize.value = textureSize;

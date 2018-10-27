@@ -1,4 +1,4 @@
-import { Group, Vector3, Box3 } from "three-full";
+import { Group, Vector3 } from "three-full";
 import sample from "lodash/sample";
 
 import StellariaPubera from "art/stellaria-pubera/StellariaPubera";
@@ -74,7 +74,7 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
     }
   }
 
-  const stellariaPuberaController = new StellariaPuberaController({
+  new StellariaPuberaController({
     controls,
     instance: instances[0]
   });
@@ -92,21 +92,11 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
     camera.getWorldDirection(lookAt);
 
     for (
-      let i = 0,
-        instance,
-        coordinates = new Vector3(),
-        boundingBox = new Box3(),
-        behind = false,
-        pos;
+      let i = 0, instance, coordinates = new Vector3(), behind = false;
       i < instances.length;
       i++
     ) {
       instance = instances[i];
-      //   boundingBox = new Box3().setFromObject(instance.group);
-      //   coordinates.copy(boundingBox.max).sub(camera.position);
-      //   if (coordinates.z < -0.1) {
-      //     removeMe.push({ instance, index: i });
-      //   }
       coordinates.setFromMatrixPosition(instance.group.matrixWorld);
       coordinates.sub(cameraPosition);
       behind = coordinates.angleTo(lookAt) > Math.PI / 2;

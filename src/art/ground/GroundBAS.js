@@ -3,8 +3,7 @@ import {
   ImprovedNoise,
   Mesh,
   PlaneBufferGeometry,
-  FrontSide,
-  MeshBasicMaterial
+  FrontSide
 } from "three-full";
 import { PrefabBufferGeometry, BasicAnimationMaterial } from "three/vendor/BAS";
 import { TweenMax, Power2 } from "gsap";
@@ -66,7 +65,6 @@ function GroundBAS({
     wireframe: true,
     lights: !true,
     fog: !true,
-    color,
 
     uniforms: {
       uTime: { value: animated ? 0 : 1 },
