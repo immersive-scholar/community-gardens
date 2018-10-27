@@ -34,17 +34,17 @@ class AsiminaTrilobaSpawn extends BaseSpawn {
               R.floatBetween(0, 0.3),
               R.floatBetween(0, 0.3)
             ),
-            openness: R.floatBetween(0, 0.1)
-            // hslBase: new Vector3(
-            //   1,
-            //   R.floatBetween(0, 0.5),
-            //   R.floatBetween(0, 0.5)
-            // ),
-            // hslRange: new Vector3(
-            //   R.floatBetween(0, 0.05),
-            //   R.floatBetween(0.1, 0.25),
-            //   R.floatBetween(0.1, 0.25)
-            // ),
+            openness: R.floatBetween(0, 0.1),
+            hslBase: new Vector3(
+              1,
+              R.floatBetween(0, 0.5),
+              R.floatBetween(0, 0.5)
+            ),
+            hslRange: new Vector3(
+              R.floatBetween(0, 0.05),
+              R.floatBetween(0.1, 0.25),
+              R.floatBetween(0.1, 0.25)
+            )
             // petalTarget: new Vector3(0, 10, -10),
             // berryDistanceFromStem: R.floatBetween(0.01, 0.08),
           },
