@@ -97,44 +97,6 @@ class BaseRenderable {
       }
     }
   }
-
-  setAnimated(animated) {
-    this.setState({ animated }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setDuration(duration) {
-    this.setState({ duration }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setDelay(delay) {
-    this.setState({ delay }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setRandomSeed(randomSeed) {
-    this.randomSeed = randomSeed;
-    this.R = RandomSeed.create(randomSeed);
-    this.setState({ randomSeed }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setWindForce(windForce) {
-    this.setState({ windForce }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setWindDirection(windDirection) {
-    this.setState({ windDirection }, isDirty => {
-      isDirty && this.init();
-    });
-  }
 }
 
 export default BaseRenderable;

@@ -1,4 +1,4 @@
-import { Group, Vector3, Box3 } from "three-full";
+import { Group, Vector3 } from "three-full";
 import sample from "lodash/sample";
 
 import SolomonsSeal from "art/solomons-seal/SolomonsSeal";
@@ -9,7 +9,7 @@ const SolomonsSealSpawn = ({ R, camera, controls }) => {
   let solomonsSeal,
     intervalID,
     solomonsSealGroup = new Group(),
-    count = 10,
+    count = 4,
     instances = [];
 
   createSolomonsSeal({ count });
@@ -75,7 +75,7 @@ const SolomonsSealSpawn = ({ R, camera, controls }) => {
     }
   }
 
-  const solomonsSealController = new SolomonsSealController({
+  new SolomonsSealController({
     controls,
     instance: instances[0]
   });

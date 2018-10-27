@@ -1,14 +1,13 @@
 import { Vector2, Vector3 } from "three-full";
 import ColorFactory from "util/ColorFactory";
-import BaseRenderable from "art/common/BaseRenderable";
+import BasePlant from "art/common/BasePlant";
 
-// import StellariaPuberaPetal from "./StellariaPuberaPetal";
 import StellariaPuberaPetalShape from "./StellariaPuberaPetalShape";
 import Petals from "./Petals";
 import Pollen from "./Pollen";
 import TextureFactory from "../../util/TextureFactory";
 
-class StellariaPubera extends BaseRenderable {
+class StellariaPubera extends BasePlant {
   constructor(props, camera, R) {
     super(props, camera, R);
 
@@ -164,210 +163,6 @@ class StellariaPubera extends BaseRenderable {
     this.group.add(this.pollen);
   };
 
-  setHeight(height) {
-    this.setState({ height }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setOffset(offset) {
-    this.setState({ offset }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setDisplacement(displacement) {
-    this.setState({ displacement }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setThickness(thickness) {
-    this.setState({ thickness }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setPointCount(pointCount) {
-    this.setState({ pointCount }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setPetalStartPoint(petalStartPoint) {
-    this.setState({ petalStartPoint }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setPetalEndPoint(petalEndPoint) {
-    this.setState({ petalEndPoint }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setRotationStart(rotationStart) {
-    this.setState({ rotationStart }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setRotationEnd(rotationEnd) {
-    this.setState({ rotationEnd }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setSizeStart(sizeStart) {
-    this.setState({ sizeStart }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setSizeEnd(sizeEnd) {
-    this.setState({ sizeEnd }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setColor(color) {
-    this.setState({ color }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setWindForce(windForce) {
-    this.setState({ windForce }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setWindDirection(windDirection) {
-    this.setState({ windDirection }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setHSLBase(hslBase) {
-    this.setState({ hslBase }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setHSLRange(hslRange) {
-    this.setState({ hslRange }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setGlitchAmplitude(glitchAmplitude) {
-    this.setState({ glitchAmplitude }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setGlitchAngle(glitchAngle) {
-    this.setState({ glitchAngle }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setGlitchThreshold(glitchThreshold) {
-    this.setState({ glitchThreshold }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setBerryCount(berryCount) {
-    this.setState({ berryCount }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setBerrySize(berrySize) {
-    this.setState({ berrySize }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setBerryRotation(berryRotation) {
-    this.setState({ berryRotation }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setBerryColor(berryColor) {
-    this.setState({ berryColor }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setBerryDistanceFromStem(berryDistanceFromStem) {
-    this.setState({ berryDistanceFromStem }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setBerrySpiral(berrySpiral) {
-    this.setState({ berrySpiral }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setOpenness(openness) {
-    this.setState({ openness }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setPetalTarget(petalTarget) {
-    this.setState({ petalTarget }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setPetalCount(petalCount) {
-    this.setState({ petalCount }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setRearPetalCount(rearPetalCount) {
-    this.setState({ rearPetalCount }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setPetalWidth(petalWidth) {
-    this.setState({ petalWidth }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setPetalLength(petalLength) {
-    this.setState({ petalLength }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setPetalDistanceFromCenter(petalDistanceFromCenter) {
-    this.setState({ petalDistanceFromCenter }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setRotationAxis(rotationAxis) {
-    this.setState({ rotationAxis }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setRotationAngle(rotationAngle) {
-    this.setState({ rotationAngle }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-  setTranslateToY(translateToY) {
-    this.setState({ translateToY }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setProps(props) {
-    for (let prop in props) {
-      this.setState({ prop: props[prop] }, isDirty => {
-        isDirty && this.init();
-      });
-    }
-  }
-
   clean() {
     this.tween && this.tween.kill(null, this);
 
@@ -402,10 +197,6 @@ class StellariaPubera extends BaseRenderable {
     this.petals.animateIn({ duration, delay: delay + 1, animated });
     this.pollen.animateIn({ duration, delay: delay + 4, animated });
   };
-
-  render() {}
-
-  update() {}
 }
 
 export default StellariaPubera;
