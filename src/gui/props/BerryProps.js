@@ -1,7 +1,7 @@
 const BerryProps = ({
   berryCount = 10,
   berrySize = 0.01,
-  berryColor = 0xff9900,
+  berryColor = 0xefefef,
   berryDistanceFromStem = 0.05,
   berryRotation = 720,
   berrySpiral = true

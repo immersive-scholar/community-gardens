@@ -1,9 +1,9 @@
 import { Group, Vector3, Box3, Object3D } from "three-full";
 
 import BaseChapter from "./BaseChapter";
-// import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
+import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
 // import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
-import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
+// import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import BackgroundBAS from "../art/background/BackgroundBAS";
 import GroundBAS from "../art/ground/GroundBAS";
 import ColorFactory from "util/ColorFactory";
@@ -32,12 +32,12 @@ class SummerGardenChapter extends BaseChapter {
     // this.plane = new Plane({ color: bgColor });
     // this.group.add(this.plane.group);
 
-    // this.solomonsSealGroup = new SolomonsSealGroup({
-    //   R: this.R,
-    //   camera: this.camera,
-    //   controls: this.controls
-    // });
-    // this.group.add(this.solomonsSealGroup.group);
+    this.solomonsSealGroup = new SolomonsSealGroup({
+      R: this.R,
+      camera: this.camera,
+      controls: this.controls
+    });
+    this.group.add(this.solomonsSealGroup.group);
 
     // this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
     //   R: this.R,
@@ -46,12 +46,12 @@ class SummerGardenChapter extends BaseChapter {
     // });
     // this.group.add(this.stellariaPuberaSpawn.group);
 
-    this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
-      R: this.R,
-      camera: this.camera,
-      controls: this.controls
-    });
-    this.group.add(this.asiminaTrilobaSpawn.group);
+    // this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
+    //   R: this.R,
+    //   camera: this.camera,
+    //   controls: this.controls
+    // });
+    // this.group.add(this.asiminaTrilobaSpawn.group);
 
     // this.cube = new Cube({ size: 0.25 });
     // this.group.add(this.cube.mesh);

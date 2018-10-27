@@ -1,6 +1,8 @@
-const Animated = ({ animated = true } = {}) => {
+const Animated = ({ animated = true, delay = 0, duration = 1 } = {}) => {
   const props = {
-    animated
+    animated,
+    delay,
+    duration
   };
 
   const addFolder = ({ gui, onDataChange, onDataChangeComplete }) => {
@@ -9,10 +11,20 @@ const Animated = ({ animated = true } = {}) => {
       .add(props, "animated")
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
+    this.folder
+      .add(props, "duration", 0, 10, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
+    this.folder
+      .add(props, "delay", 0, 5, 0.1)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
   };
 
   const update = instance => {
     instance.setAnimated(props.animated);
+    instance.setDuration(props.duration);
+    instance.setDelay(props.delay);
   };
 
   return {

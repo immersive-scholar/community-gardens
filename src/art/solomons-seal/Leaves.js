@@ -1,12 +1,4 @@
-import {
-  Geometry,
-  Shape,
-  ShapeGeometry,
-  Vector2,
-  MeshBasicMaterial,
-  Mesh,
-  Vector3
-} from "three-full";
+import { Geometry, Shape, ShapeGeometry, Vector2, Vector3 } from "three-full";
 import LeafAnimation from "./LeafAnimation";
 
 const Leaves = ({

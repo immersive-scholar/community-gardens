@@ -1,4 +1,5 @@
 import BaseGUI from "gui/BaseGUI";
+import AnimatedProps from "gui/props/AnimatedProps";
 import PositionProps from "gui/props/PositionProps";
 import StemProps from "gui/props/StemProps";
 import LeafProps from "gui/props/LeafProps";
@@ -9,6 +10,9 @@ import WindProps from "gui/props/WindProps";
 class SolomonsSealController extends BaseGUI {
   constructor(props) {
     super(props);
+
+    const animatedProps = new AnimatedProps();
+    super.addProperty(animatedProps);
 
     const positionProps = new PositionProps();
     super.addProperty(positionProps);

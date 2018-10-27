@@ -13,14 +13,22 @@ class SolomonsSeal extends BaseRenderable {
   constructor(props, camera, R) {
     super(props, camera, R);
 
-    this.init(props);
+    if (!props.lazy) {
+      this.init(props);
+      this.createChildren();
+    }
   }
 
   init = (props = {}) => {
-    this.leaves = [];
+    if (!this.state.lazy || this.isDirty) {
+      this.createChildren();
+      if (this.state.visible) {
+        this.animateIn(this.state);
+      }
+    }
+  };
 
-    this.setState(props);
-
+  createChildren = () => {
     this.clean();
 
     const {
@@ -79,7 +87,6 @@ class SolomonsSeal extends BaseRenderable {
       geometry: this.geometry,
       color,
       imagePath,
-      delay,
       pointCount,
       thickness,
       fogDensity: 0.3,
@@ -100,8 +107,7 @@ class SolomonsSeal extends BaseRenderable {
       R: this.R,
       animated,
       windForce,
-      windDirection,
-      delay: 2
+      windDirection
     });
     this.group.add(this.berriesMesh);
 
@@ -128,15 +134,33 @@ class SolomonsSeal extends BaseRenderable {
       hslRange
     });
     this.group.add(this.leavesMesh);
+  };
+
+  animateIn = ({ duration = 1, delay = 0, animated = true } = {}) => {
+    this.state.lazy = false;
+    this.state.visible = true;
+    this.state.duration = duration;
+    this.state.delay = delay;
+    this.state.animated = animated;
 
     this.tween && this.tween.kill(null, this);
+
     if (animated) {
       this.currentTime = 0;
-      this.berryTime = 0;
-      this.animateLeaves({ delay });
+      this.tween && this.tween.kill(null, this);
+      this.tween = TweenMax.to(this, duration, {
+        currentTime: 2,
+        onUpdate: () => {
+          this.update();
+        },
+        ease: Power2.easeOut,
+        delay: delay + 0.5
+        // yoyo: true,
+        // repeat: -1
+      });
     } else {
-      this.currentTime = 1;
-      this.berryTime = 1;
+      this.currentTime = 2;
+      this.update();
     }
   };
 
@@ -181,85 +205,6 @@ class SolomonsSeal extends BaseRenderable {
     return { curvePainter, geometry, curve };
   };
 
-  // createLeaves({
-  //   leafCount = 10,
-  //   mesh,
-  //   color,
-  //   height = 1,
-  //   leafStartPoint,
-  //   leafEndPoint,
-  //   pointCount,
-  //   sizeStart,
-  //   sizeEnd,
-  //   rotationStart,
-  //   rotationEnd
-  // }) {
-  //   const curvePoints = mesh.curve.getPoints(pointCount),
-  //     leaves = [];
-
-  //   curvePoints.reverse();
-
-  //   for (
-  //     let i = 0, ratio, leaf, pos, length, width, positionIndex;
-  //     i < leafCount;
-  //     i += this.R(2) + 1
-  //   ) {
-  //     // size = this.R.floatBetween(0.04, 0.12);
-  //     ratio = i / leafCount;
-  //     // length = (1 - ratio) * sizeStep.x;
-  //     // width = (1 - ratio) * sizeStep.y;
-  //     length = sizeStart.x + (sizeEnd.x - sizeStart.x) * ratio;
-  //     width = sizeStart.y + (sizeEnd.y - sizeStart.y) * ratio;
-  //     leaf = new SolomonsSealLeaf({
-  //       color,
-  //       length,
-  //       width,
-  //       camera: this.camera,
-  //       lineCount: this.R.intBetween(3, 5)
-  //     });
-
-  //     positionIndex =
-  //       Math.ceil(leafStartPoint * pointCount) +
-  //       Math.floor(
-  //         (i / leafCount) * pointCount * (leafEndPoint - leafStartPoint)
-  //       ) -
-  //       1;
-  //     pos = curvePoints[positionIndex];
-  //     leaf.group.position.x = pos.x;
-  //     leaf.group.position.y = pos.y;
-  //     leaf.group.position.z = pos.z;
-
-  //     this.group.add(leaf.group);
-  //     leaves.push(leaf);
-  //   }
-  //   return leaves;
-  // }
-
-  animateLeaves({ delay }) {
-    this.tween && this.tween.kill(null, this);
-    this.berryTween && this.berryTween.kill(null, this);
-    this.tween = TweenMax.to(this, 3, {
-      currentTime: 1,
-      onUpdate: () => {
-        this.update();
-      },
-      ease: Power2.easeOut,
-      delay: delay + 0.5
-      // yoyo: true,
-      // repeat: -1
-    });
-    this.berryTween = TweenMax.to(this, 3, {
-      berryTime: 1,
-      onUpdate: () => {
-        this.update();
-      },
-      ease: Power2.easeOut,
-      delay: delay + 2.5
-      // yoyo: true,
-      // repeat: -1
-    });
-  }
-
   setHeight(height) {
     this.setState({ height }, isDirty => {
       isDirty && this.init();
@@ -274,12 +219,6 @@ class SolomonsSeal extends BaseRenderable {
 
   setDisplacement(displacement) {
     this.setState({ displacement }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setAnimated(animated) {
-    this.setState({ animated }, isDirty => {
       isDirty && this.init();
     });
   }
@@ -423,15 +362,6 @@ class SolomonsSeal extends BaseRenderable {
       this.stem = undefined;
     }
 
-    if (this.leaves) {
-      for (let i = 0, iL = this.leaves.length, leaf; i < iL; i++) {
-        leaf = this.leaves[i];
-        this.group.remove(leaf.group);
-        leaf.clean();
-      }
-    }
-    this.leaves = [];
-
     if (this.leavesMesh) {
       this.group.remove(this.leavesMesh);
       this.leavesMesh.geometry.dispose();
@@ -450,8 +380,14 @@ class SolomonsSeal extends BaseRenderable {
   render() {}
 
   update() {
-    this.leavesMesh.material.uniforms.uTime.value = this.currentTime;
-    this.berriesMesh.material.uniforms.uTime.value = this.berryTime;
+    // build in a slight half-second delay for each type of object
+    this.stem.curvePainter.update(Math.min(1, this.currentTime));
+
+    const leafTime = Math.min(1, Math.max(0, this.currentTime - 0.5));
+    this.leavesMesh.time = leafTime;
+
+    const berryTime = Math.min(1, Math.max(0, this.currentTime - 1.0));
+    this.berriesMesh.time = berryTime;
   }
 }
 

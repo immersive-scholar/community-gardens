@@ -352,7 +352,7 @@ const Wrapper = function() {
       "uniform vec3 fogColor;",
       "varying float fogDepth;",
       "uniform float fogDensity;",
-      "uniform float revealProgress;",
+      "uniform float uTime;",
       "",
       "void main() {",
       "",
@@ -364,7 +364,7 @@ const Wrapper = function() {
       "        c.a *= ceil(mod(vCounters + dashOffset, dashArray) - (dashArray * dashRatio));",
       "    }",
       "    gl_FragColor = c;",
-      "    gl_FragColor.a *= revealProgress * (1. / vUV.x) * (vUV.x - (1. - revealProgress));",
+      "    gl_FragColor.a *= uTime * (1. / vUV.x) * (vUV.x - (1. - uTime));",
       "    gl_FragColor.a *= step(vCounters, visibility);",
       "    float fogFactor = whiteCompliment( exp2( - fogDensity * fogDensity * fogDepth * fogDepth * LOG2 ) );",
       "    gl_FragColor.rgb = mix( gl_FragColor.rgb, fogColor, fogFactor );",
@@ -400,7 +400,7 @@ const Wrapper = function() {
     this.repeat = check(parameters.repeat, new Vector2(1, 1));
     this.fogColor = check(parameters.fogColor, new Color(0xd7cbb1));
     this.fogDensity = check(parameters.fogDensity, 0.0025);
-    this.revealProgress = check(parameters.revealProgress, 1);
+    this.time = check(parameters.time, 0);
 
     var material = new RawShaderMaterial({
       uniforms: {
@@ -424,7 +424,7 @@ const Wrapper = function() {
         repeat: { type: "v2", value: this.repeat },
         fogColor: { type: "c", value: this.fogColor },
         fogDensity: { type: "f", value: this.fogDensity },
-        revealProgress: { type: "f", value: this.revealProgress }
+        uTime: { type: "f", value: this.time }
       },
       vertexShader: vertexShaderSource.join("\r\n"),
       fragmentShader: fragmentShaderSource.join("\r\n")
@@ -449,7 +449,7 @@ const Wrapper = function() {
     delete parameters.repeat;
     delete parameters.fogColor;
     delete parameters.fogDensity;
-    delete parameters.revealProgress;
+    delete parameters.time;
 
     material.type = "MeshLineMaterial";
 
@@ -484,7 +484,7 @@ const Wrapper = function() {
     this.repeat.copy(source.repeat);
     this.fogColor.copy(source.fogColor);
     this.fogDensity = source.fogDensity;
-    this.revealProgress = source.revealProgress;
+    this.time = source.time;
 
     return this;
   };

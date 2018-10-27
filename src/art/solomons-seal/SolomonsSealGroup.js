@@ -4,7 +4,7 @@ import SolomonsSeal from "art/solomons-seal/SolomonsSeal";
 import SolomonsSealController from "art/solomons-seal/SolomonsSealController";
 import GridLayoutHelper from "util/GridLayoutHelper";
 
-const SolomonsSealGroup = ({ R, camera, controls }) => {
+const SolomonsSealGroup = ({ R, camera, controls, delay }) => {
   let solomonsSeal,
     solomonsSealGroup = new Group(),
     count = 1,
@@ -16,6 +16,7 @@ const SolomonsSealGroup = ({ R, camera, controls }) => {
     for (let y = 0; y < count; y++) {
       solomonsSeal = new SolomonsSeal(
         {
+          lazy: true,
           delay: i * 0.05,
           leafCount: R.intBetween(12, 24),
           windForce: R.floatBetween(0, 0.5),
@@ -63,6 +64,11 @@ const SolomonsSealGroup = ({ R, camera, controls }) => {
     controls,
     instance: instances[0]
   });
+
+  for (let i = 0, iL = instances.length; i < iL; i++) {
+    instances[i].createChildren();
+    instances[i].animateIn({ delay: 5 });
+  }
 
   return { group: solomonsSealGroup, instances };
 };

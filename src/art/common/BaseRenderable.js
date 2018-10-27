@@ -5,7 +5,7 @@ class BaseRenderable {
     this.camera = camera;
     this.R = R;
 
-    this.state = {};
+    this.state = { visible: false, animated: true, delay: 0, duration: 1 };
     this.group = new Group();
     this.renderables = [];
   }
@@ -93,6 +93,24 @@ class BaseRenderable {
         this.remove(renderable);
       }
     }
+  }
+
+  setAnimated(animated) {
+    this.setState({ animated }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setDuration(duration) {
+    this.setState({ duration }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setDelay(delay) {
+    this.setState({ delay }, isDirty => {
+      isDirty && this.init();
+    });
   }
 }
 

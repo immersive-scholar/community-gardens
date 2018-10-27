@@ -7,7 +7,6 @@ import {
   TextureLoader,
   RepeatWrapping
 } from "three-full";
-import { TweenMax, Power2 } from "gsap/TweenMax";
 
 import { MeshLine, MeshLineMaterial } from "three/helpers/MeshLine";
 import TextureFactory from "../../util/TextureFactory";
@@ -24,7 +23,7 @@ const CurvePainter = ({
   imagePath = TextureFactory.getStroke(),
   animated = false
 }) => {
-  let life = 0;
+  let time = 0;
 
   // create the geometry
   const points = curve.getPoints(pointCount);
@@ -63,36 +62,15 @@ const CurvePainter = ({
     side: DoubleSide,
     fogColor,
     fogDensity,
-    revealProgress: life
+    time
   });
 
   let mesh = new Mesh(line.geometry, material);
   mesh.frustumCulled = false;
 
-  const params = {
-    life
-  };
-
-  this.tween && this.tween.kill(null, params);
-  if (animated) {
-    this.tween = TweenMax.to(params, 3, {
-      life: 1,
-      onUpdate: render,
-      ease: Power2.easeOut,
-      delay
-    });
-  } else {
-    params.life = 1;
-    render();
-  }
-
-  function update() {}
-
-  function render() {
-    const { life } = params;
-
+  function update(time) {
     if (material) {
-      material.uniforms.revealProgress.value = life;
+      material.uniforms.uTime.value = time;
     }
   }
 
