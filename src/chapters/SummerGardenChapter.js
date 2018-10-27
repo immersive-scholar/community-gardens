@@ -1,12 +1,13 @@
 import { Group, Vector3, Box3, Object3D } from "three-full";
 
 import BaseChapter from "./BaseChapter";
-import SolomonsSealSpawn from "art/solomons-seal/SolomonsSealSpawn";
-import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
+// import SolomonsSealSpawn from "art/solomons-seal/SolomonsSealSpawn";
+// import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import BackgroundBAS from "../art/background/BackgroundBAS";
 import GroundBAS from "../art/ground/GroundBAS";
 import ColorFactory from "util/ColorFactory";
+import Cube from "art/cube/Cube";
 
 class SummerGardenChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
@@ -32,19 +33,19 @@ class SummerGardenChapter extends BaseChapter {
     // this.plane = new Plane({ color: bgColor });
     // this.group.add(this.plane.group);
 
-    this.solomonsSealSpawn = new SolomonsSealSpawn({
-      R: this.R,
-      camera: this.camera,
-      controls: this.controls
-    });
-    this.group.add(this.solomonsSealSpawn.group);
+    // this.solomonsSealSpawn = new SolomonsSealSpawn({
+    //   R: this.R,
+    //   camera: this.camera,
+    //   controls: this.controls
+    // });
+    // this.group.add(this.solomonsSealSpawn.group);
 
-    this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
-      R: this.R,
-      camera: this.camera,
-      controls: this.controls
-    });
-    this.group.add(this.stellariaPuberaSpawn.group);
+    // this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
+    //   R: this.R,
+    //   camera: this.camera,
+    //   controls: this.controls
+    // });
+    // this.group.add(this.stellariaPuberaSpawn.group);
 
     this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
       R: this.R,
@@ -84,6 +85,7 @@ class SummerGardenChapter extends BaseChapter {
     this.background.animateIn();
     this.ground.animateIn({ duration: 5, delay: 0.5 });
     this.ground.animateCliff({ cliff: 1, duration: 3, delay: 1 });
+    this.asiminaTrilobaSpawn.animateIn({ delay: 2 });
   }
 
   onTransitionComplete() {
