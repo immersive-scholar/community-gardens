@@ -30,13 +30,13 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
             ),
             hslBase: new Vector3(
               1,
-              R.floatBetween(0, 0.1),
-              R.floatBetween(0, 0.1)
+              R.floatBetween(0, 0.5),
+              R.floatBetween(0, 0.5)
             ),
             hslRange: new Vector3(
-              R.floatBetween(0, 0.01),
-              R.floatBetween(0, 0.01),
-              R.floatBetween(0, 0.01)
+              R.floatBetween(0, 0.05),
+              R.floatBetween(0.1, 0.25),
+              R.floatBetween(0.1, 0.25)
             ),
             petalTarget: new Vector3(0, 10, -10),
             openness: R.floatBetween(0, 2),
@@ -67,6 +67,11 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
     });
 
     stellariaPuberaGroup.position.y = 0.25;
+
+    for (let i = 0, iL = instances.length; i < iL; i++) {
+      instances[i].createChildren();
+      instances[i].animateIn({ delay: i * 0.5 });
+    }
   }
 
   const stellariaPuberaController = new StellariaPuberaController({

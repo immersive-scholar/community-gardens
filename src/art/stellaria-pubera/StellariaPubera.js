@@ -13,12 +13,24 @@ class StellariaPubera extends BaseRenderable {
   constructor(props, camera, R) {
     super(props, camera, R);
 
-    this.init(props);
+    this.setState(props);
+
+    if (!props.lazy) {
+      this.init(props);
+      this.createChildren();
+    }
   }
 
   init = (props = {}) => {
-    this.setState(props);
+    if (!this.state.lazy || this.isDirty) {
+      this.createChildren(props);
+      if (this.state.visible) {
+        this.animateIn(this.state);
+      }
+    }
+  };
 
+  createChildren = () => {
     this.clean();
 
     const {
@@ -56,27 +68,6 @@ class StellariaPubera extends BaseRenderable {
       berrySpiral = true,
       berrySpiralDepth = 0.1
     } = this.state;
-
-    // stem
-    // this.geometry = new StemGeometry({
-    //   height,
-    //   pointCount,
-    //   displacement,
-    //   scale,
-    //   offset,
-    //   R: this.R
-    // });
-
-    // this.stem = this.toCurve({
-    //   geometry: this.geometry,
-    //   color,
-    //   delay,
-    //   pointCount,
-    //   thickness,
-    //   fogDensity: 0.3,
-    //   animated
-    // });
-    // this.group.add(this.stem.curvePainter.mesh);
 
     const petalShapeGeometry = new StellariaPuberaPetalShape({
       width: petalWidth,
@@ -172,44 +163,7 @@ class StellariaPubera extends BaseRenderable {
     this.pollen.position.z -= 0.002;
     // this.pollen.rotation.y = -Math.PI / 2;
     this.group.add(this.pollen);
-
-    this.tween && this.tween.kill(null, this);
-    if (animated) {
-      this.currentTime = 0;
-      this.animatePetals({ delay });
-    } else {
-      this.currentTime = 1;
-    }
   };
-
-  //   toCurve = ({
-  //     geometry,
-  //     color,
-  //     delay = 0,
-  //     thickness = 2,
-  //     pointCount = 8,
-  //     fogColor,
-  //     fogDensity,
-  //     animated
-  //   }) => {
-  //     const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
-
-  //     const curvePainter = new CurvePainter({
-  //       camera: this.camera,
-  //       curve,
-  //       color,
-  //       pointCount,
-  //       lineWidth: thickness,
-  //       delay: delay,
-  //       fogColor,
-  //       fogDensity,
-  //       animated
-  //     });
-
-  //     curvePainter.mesh.matrixAutoUpdate = true;
-
-  //     return { curvePainter, geometry, curve };
-  //   };
 
   setHeight(height) {
     this.setState({ height }, isDirty => {
@@ -225,12 +179,6 @@ class StellariaPubera extends BaseRenderable {
 
   setDisplacement(displacement) {
     this.setState({ displacement }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setAnimated(animated) {
-    this.setState({ animated }, isDirty => {
       isDirty && this.init();
     });
   }
@@ -424,13 +372,6 @@ class StellariaPubera extends BaseRenderable {
   clean() {
     this.tween && this.tween.kill(null, this);
 
-    if (this.stem) {
-      this.group.remove(this.stem.curvePainter.mesh);
-      this.geometry.dispose();
-      this.stem.curvePainter.clean();
-      this.stem = undefined;
-    }
-
     if (this.petals) {
       this.group.remove(this.petals);
       this.petals.clean();
@@ -451,27 +392,25 @@ class StellariaPubera extends BaseRenderable {
     }
   }
 
-  animatePetals({ delay }) {
-    this.tween && this.tween.kill(null, this);
-    this.tween = TweenMax.to(this, 4, {
-      currentTime: 1,
-      onUpdate: () => {
-        this.update();
-      },
-      ease: Power2.easeOut,
-      delay: delay + 0.5
-      // yoyo: true,
-      // repeat: -1
-    });
-  }
+  animateIn = ({ duration = 1, delay = 0, animated = true } = {}) => {
+    this.state.lazy = false;
+    this.state.visible = true;
+    this.state.duration = duration;
+    this.state.delay = delay;
+    this.state.animated = animated;
+
+    console.log("AnimateIn ", duration, delay, animated);
+
+    this.rearPetals.animateIn({ duration, delay, animated });
+    this.petals.animateIn({ duration, delay: delay + 1, animated });
+    this.pollen.animateIn({ duration, delay: delay + 4, animated });
+  };
 
   render() {}
 
-  update() {
-    this.petals.material.uniforms.uTime.value = this.currentTime;
-    this.rearPetals.material.uniforms.uTime.value = this.currentTime;
-    this.pollen.material.uniforms.uTime.value = this.currentTime;
-  }
+  update() {}
 }
+
+Object.setPrototypeOf(StellariaPubera, BaseRenderable);
 
 export default StellariaPubera;

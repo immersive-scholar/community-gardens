@@ -14,6 +14,7 @@ import {
   Timeline,
   PrefabBufferGeometry
 } from "three/vendor/BAS";
+import { TweenMax, Power2 } from "gsap";
 
 function Pollen({
   count,
@@ -148,12 +149,8 @@ function Pollen({
       // translate the vertex by prefab position
       "transformed += aPosition * uTime;"
     ],
-    // fragmentParameters: ["uniform float uTime;", "uniform vec2 uTextureSize;"],
     fragmentParameters: ["uniform float uTime;"],
-    fragmentMap: [
-      // "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
-      "diffuseColor.a *= uTime;"
-    ]
+    fragmentMap: ["diffuseColor.a *= uTime;"]
   });
 
   material.uniforms.uWindForce.value = windForce;
@@ -170,6 +167,22 @@ function Pollen({
   this.clean = function() {
     geometry && geometry.dispose();
     material && material.dispose();
+  };
+
+  this.animateIn = ({ delay = 0, duration = 1, animated = true }) => {
+    this.tween && this.tween.kill(null, this);
+
+    if (animated) {
+      this.time = 0;
+      this.tween && this.tween.kill(null, this);
+      this.tween = TweenMax.to(this, duration, {
+        time: 1,
+        ease: Power2.easeOut,
+        delay
+      });
+    } else {
+      this.time = 1;
+    }
   };
 
   return this;

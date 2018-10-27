@@ -19,6 +19,7 @@ import {
   Timeline,
   PrefabBufferGeometry
 } from "three/vendor/BAS";
+import { TweenMax, Power2 } from "gsap";
 
 import Wind from "art/effects/Wind";
 import TextureFactory from "util/TextureFactory";
@@ -216,9 +217,9 @@ function Petals({
     fragmentParameters: ["uniform float uTime;", "uniform vec2 uTextureSize;"],
     fragmentMap: [
       "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
-      "diffuseColor *= texelColor;",
-      "diffuseColor.a *= uTime;"
-    ]
+      "diffuseColor *= texelColor;"
+    ],
+    fragmentMap: ["diffuseColor.a *= uTime;"]
   });
 
   material.uniforms.uTextureSize.value = textureSize;
@@ -237,6 +238,22 @@ function Petals({
   this.clean = function() {
     geometry && geometry.dispose();
     material && material.dispose();
+  };
+
+  this.animateIn = ({ delay = 0, duration = 1, animated = true }) => {
+    this.tween && this.tween.kill(null, this);
+
+    if (animated) {
+      this.time = 0;
+      this.tween && this.tween.kill(null, this);
+      this.tween = TweenMax.to(this, duration, {
+        time: 1,
+        ease: Power2.easeOut,
+        delay
+      });
+    } else {
+      this.time = 1;
+    }
   };
 
   return this;

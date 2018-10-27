@@ -137,18 +137,6 @@ class SolomonsSeal extends BaseRenderable {
     this.group.add(this.leavesMesh);
   };
 
-  animateIn = ({ duration = 1, delay = 0, animated = true } = {}) => {
-    this.state.lazy = false;
-    this.state.visible = true;
-    this.state.duration = duration;
-    this.state.delay = delay;
-    this.state.animated = animated;
-
-    this.stem.curvePainter.animateIn({ duration, delay, animated });
-    this.leavesMesh.animateIn({ duration, delay: delay + 2, animated });
-    this.berriesMesh.animateIn({ duration, delay: delay + 4, animated });
-  };
-
   // bendGeometry = ({ geometry, R }) => {
   //   var direction = new Vector3(0, 0, -this.R.random());
   //   var axis = new Vector3(this.R.random(), this.R.random(), 0);
@@ -350,16 +338,21 @@ class SolomonsSeal extends BaseRenderable {
     }
   }
 
+  animateIn = ({ duration = 1, delay = 0, animated = true } = {}) => {
+    this.state.lazy = false;
+    this.state.visible = true;
+    this.state.duration = duration;
+    this.state.delay = delay;
+    this.state.animated = animated;
+
+    this.stem.curvePainter.animateIn({ duration, delay, animated });
+    this.leavesMesh.animateIn({ duration, delay: delay + 2, animated });
+    this.berriesMesh.animateIn({ duration, delay: delay + 4, animated });
+  };
+
   render() {}
 
-  update() {
-    // build in a slight half-second delay for each type of object
-    // this.stem.curvePainter.update(Math.min(1, this.currentTime));
-    // const leafTime = Math.min(1, Math.max(0, this.currentTime - 0.5));
-    // this.leavesMesh.time = leafTime;
-    // const berryTime = Math.min(1, Math.max(0, this.currentTime - 1.0));
-    // this.berriesMesh.time = berryTime;
-  }
+  update() {}
 }
 
 export default SolomonsSeal;
