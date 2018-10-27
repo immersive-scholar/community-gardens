@@ -1,4 +1,4 @@
-import { Group, Vector3, Box3 } from "three-full";
+import { Group, Vector3 } from "three-full";
 import sample from "lodash/sample";
 
 import StellariaPubera from "art/stellaria-pubera/StellariaPubera";

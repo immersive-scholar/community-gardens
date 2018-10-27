@@ -94,7 +94,8 @@ class SummerGardenChapter extends BaseChapter {
     if (!element) return null;
 
     let boundingBox = new Box3().setFromObject(element.group);
-    let center = boundingBox.getCenter();
+    let center = new Vector3();
+    boundingBox.getCenter(center);
     let tempObject = new Object3D();
     tempObject.position.set(center);
     let position = new Vector3(center.x, center.y, center.z);

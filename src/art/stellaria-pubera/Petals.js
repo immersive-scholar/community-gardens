@@ -72,19 +72,16 @@ function Petals({
         angle: rotationAngle + openness
       },
       ease: "easeQuadOut"
-      //   easeParams: [settings.backAmplitude]
     },
     scale: {
       from: { x: 0, y: 0, z: 0 },
       to: { x: 1, y: 1, z: 1 },
       ease: "easeQuadOut"
-      //   easeParams: [settings.backAmplitude]
     },
     translate: {
       from: { x: 0, y: 0, z: 0 },
       to: { x: 0, y: translateToY, z: 0 },
       ease: "easeQuadOut"
-      //   easeParams: [settings.backAmplitude]
     }
   });
 
