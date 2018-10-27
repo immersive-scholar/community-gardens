@@ -1,10 +1,4 @@
-import {
-  _Math,
-  Color,
-  DoubleSide,
-  Mesh,
-  TetrahedronGeometry
-} from "three-full";
+import { Color, DoubleSide, Mesh, TetrahedronGeometry } from "three-full";
 import { ModelBufferGeometry, PhongAnimationMaterial } from "three/vendor/BAS";
 import { TweenMax, Power2 } from "gsap";
 
@@ -51,7 +45,7 @@ function BackgroundBAS({
         this.update();
       },
       delay,
-      ease: Power2.easeOut
+      ease: Power2.easeInOut
     });
   } else {
     this.currentTime = 1;
