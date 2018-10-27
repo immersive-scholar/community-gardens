@@ -1,24 +1,32 @@
-import { Group, Vector3 } from "three-full";
-import sample from "lodash/sample";
+import { Vector3 } from "three-full";
 
 import SolomonsSeal from "art/solomons-seal/SolomonsSeal";
 import SolomonsSealController from "art/solomons-seal/SolomonsSealController";
 import GridLayoutHelper from "util/GridLayoutHelper";
+import BaseSpawn from "art/common/BaseSpawn";
 
-const SolomonsSealSpawn = ({ R, camera, controls }) => {
-  let solomonsSeal,
-    intervalID,
-    solomonsSealGroup = new Group(),
-    count = 4,
-    instances = [];
+class SolomonsSealSpawn extends BaseSpawn {
+  init() {
+    const { count, group, instances, controls, delay } = this;
 
-  createSolomonsSeal({ count });
-  //   intervalID = setInterval(() => cleanInstances(), 500);
+    this.createChildren({ count, delay });
+    this.layout({
+      group,
+      rowWidth: 0.1,
+      columnHeight: 0.1,
+      position: new Vector3(0, 0.25, 0),
+      axis: GridLayoutHelper.LAYOUT_WALL
+    });
+    this.createController({ instances, controls });
+  }
 
-  function createSolomonsSeal({ count }) {
+  createChildren({ count, delay }) {
+    const { R, camera } = this;
+
+    let instance;
     for (let x = 0, i = 0; x < count; x++) {
       for (let y = 0; y < count; y++) {
-        solomonsSeal = new SolomonsSeal(
+        instance = new SolomonsSeal(
           {
             lazy: true,
             delay: i * 0.05,
@@ -50,85 +58,19 @@ const SolomonsSealSpawn = ({ R, camera, controls }) => {
           camera,
           R
         );
-        solomonsSealGroup.add(solomonsSeal.group);
-        instances.push(solomonsSeal);
+        this.group.add(instance.group);
+        this.instances.push(instance);
         i++;
       }
     }
+  }
 
-    const rowWidth = 0.1,
-      columnHeight = 0.1;
-
-    // arrange layout
-    GridLayoutHelper({
-      group: solomonsSealGroup,
-      rows: count,
-      columns: count,
-      rowWidth,
-      columnHeight,
-      layoutAxis: GridLayoutHelper.LAYOUT_FLOOR
+  createController() {
+    new SolomonsSealController({
+      controls: this.controls,
+      instance: this.instances[0]
     });
-
-    for (let i = 0, iL = instances.length; i < iL; i++) {
-      instances[i].createChildren();
-      instances[i].animateIn({ delay: i * 0.5 });
-    }
   }
-
-  new SolomonsSealController({
-    controls,
-    instance: instances[0]
-  });
-
-  function clean() {
-    intervalID && clearInterval(intervalID);
-  }
-
-  function cleanInstances() {
-    const removeMe = [];
-    const cameraPosition = new Vector3().setFromMatrixPosition(
-      camera.matrixWorld
-    );
-    const lookAt = new Vector3();
-    camera.getWorldDirection(lookAt);
-
-    for (
-      let i = 0, instance, coordinates = new Vector3(), behind = false;
-      i < instances.length;
-      i++
-    ) {
-      instance = instances[i];
-      coordinates.setFromMatrixPosition(instance.group.matrixWorld);
-      coordinates.sub(cameraPosition);
-      behind = coordinates.angleTo(lookAt) > Math.PI / 2;
-      if (behind) {
-        removeMe.push({ instance, index: i });
-      }
-    }
-
-    for (let i = removeMe.length - 1, data; i >= 0; i--) {
-      data = removeMe[i];
-      removeInstance(data.instance, data.index);
-    }
-  }
-
-  function removeInstance(instance, index) {
-    console.log("Removing: ", instance, index);
-    instance.clean();
-    solomonsSealGroup.remove(instance.group);
-    instances.splice(index, 1);
-    instance = undefined;
-  }
-
-  function getRandomInstance() {
-    return sample(instances);
-  }
-
-  return {
-    group: solomonsSealGroup,
-    createSolomonsSeal,
-    getRandomInstance
-  };
-};
+}
 
 export default SolomonsSealSpawn;

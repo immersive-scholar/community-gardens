@@ -53,6 +53,7 @@ class SummerGardenChapter extends BaseChapter {
       controls: this.controls
     });
     this.group.add(this.asiminaTrilobaSpawn.group);
+    this.asiminaTrilobaSpawn.autoClean();
 
     // this.cube = new Cube({ size: 0.25 });
     // this.group.add(this.cube.mesh);

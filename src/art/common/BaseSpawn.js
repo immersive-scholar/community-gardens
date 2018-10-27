@@ -22,8 +22,6 @@ class BaseSpawn {
     this.createController();
   }
 
-  //   const intervalID = setInterval(() => cleanInstances(), 500);
-
   createChildren({ count = 1 } = {}) {
     // for (let x = 0, i = 0; x < count; x++) {
     //   for (let y = 0; y < count; y++) {
@@ -58,7 +56,6 @@ class BaseSpawn {
   }
 
   animateIn({ duration = 1, delay = 0 } = {}) {
-    console.log("this.instances ", this.instances);
     for (let i = 0, iL = this.instances.length; i < iL; i++) {
       this.instances[i].createChildren();
       this.instances[i].animateIn({ duration, delay: delay + i * 0.5 });
@@ -71,6 +68,11 @@ class BaseSpawn {
     //     controls,
     //     instance: this.instances[0]
     //   });
+  }
+
+  autoClean() {
+    this.clean();
+    this.intervalID = setInterval(() => this.cleanInstances(), 500);
   }
 
   clean() {
@@ -107,10 +109,10 @@ class BaseSpawn {
 
   removeInstance(instance, index) {
     console.log("Removing: ", instance, index);
-    this.instance.clean();
-    this.group.remove(this.instance.group);
+    instance.clean();
+    this.group.remove(instance.group);
     this.instances.splice(index, 1);
-    this.instance = undefined;
+    instance = undefined;
   }
 
   getRandomInstance() {
