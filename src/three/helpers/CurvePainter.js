@@ -7,6 +7,7 @@ import {
   TextureLoader,
   RepeatWrapping
 } from "three-full";
+import { TweenMax, Power2 } from "gsap";
 
 import { MeshLine, MeshLineMaterial } from "three/helpers/MeshLine";
 import TextureFactory from "../../util/TextureFactory";
@@ -74,16 +75,37 @@ const CurvePainter = ({
     }
   }
 
-  const clean = () => {
+  function clean() {
     geometry.dispose();
     material.dispose();
     mesh = undefined;
-  };
+  }
+
+  function animateIn({ delay = 0, duration = 1, animated = true }) {
+    this.tween && this.tween.kill(null, this);
+
+    if (animated) {
+      this.time = 0;
+      this.tween && this.tween.kill(null, this);
+      this.tween = TweenMax.to(this, duration, {
+        time: 1,
+        ease: Power2.easeOut,
+        delay: delay + 0.5,
+        onUpdate: () => {
+          update(this.time);
+        }
+      });
+    } else {
+      this.time = 1;
+      update();
+    }
+  }
 
   return {
     update,
     mesh,
-    clean
+    clean,
+    animateIn
   };
 };
 

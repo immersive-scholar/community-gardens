@@ -1,7 +1,7 @@
 import { Group, Vector3, Box3, Object3D } from "three-full";
 
 import BaseChapter from "./BaseChapter";
-import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
+import SolomonsSealSpawn from "art/solomons-seal/SolomonsSealSpawn";
 // import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 // import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import BackgroundBAS from "../art/background/BackgroundBAS";
@@ -31,13 +31,12 @@ class SummerGardenChapter extends BaseChapter {
 
     // this.plane = new Plane({ color: bgColor });
     // this.group.add(this.plane.group);
-
-    this.solomonsSealGroup = new SolomonsSealGroup({
+    this.solomonsSealSpawn = new SolomonsSealSpawn({
       R: this.R,
       camera: this.camera,
       controls: this.controls
     });
-    this.group.add(this.solomonsSealGroup.group);
+    this.group.add(this.solomonsSealSpawn.group);
 
     // this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
     //   R: this.R,

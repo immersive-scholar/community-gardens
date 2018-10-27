@@ -1,5 +1,6 @@
 import { Mesh, Color, DoubleSide, Vector3 } from "three-full";
 import { LambertAnimationMaterial, ShaderChunk } from "three/vendor/BAS";
+import { TweenMax, Power2 } from "gsap";
 
 function BerryAnimation({
   R,
@@ -83,6 +84,22 @@ function BerryAnimation({
 
   //   this.castShadow = true;
   this.frustumCulled = false;
+
+  this.animateIn = ({ delay = 0, duration = 1, animated = true }) => {
+    this.tween && this.tween.kill(null, this);
+
+    if (animated) {
+      this.time = 0;
+      this.tween && this.tween.kill(null, this);
+      this.tween = TweenMax.to(this, duration, {
+        time: 1,
+        ease: Power2.easeOut,
+        delay
+      });
+    } else {
+      this.time = 1;
+    }
+  };
 }
 
 BerryAnimation.prototype = Object.create(Mesh.prototype);

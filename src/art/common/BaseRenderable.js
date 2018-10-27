@@ -123,6 +123,18 @@ class BaseRenderable {
       isDirty && this.init();
     });
   }
+
+  setWindForce(windForce) {
+    this.setState({ windForce }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setWindDirection(windDirection) {
+    this.setState({ windDirection }, isDirty => {
+      isDirty && this.init();
+    });
+  }
 }
 
 export default BaseRenderable;

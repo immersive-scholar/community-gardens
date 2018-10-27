@@ -13,6 +13,8 @@ class SolomonsSeal extends BaseRenderable {
   constructor(props, camera, R) {
     super(props, camera, R);
 
+    this.setState(props);
+
     if (!props.lazy) {
       this.init(props);
       this.createChildren();
@@ -21,7 +23,7 @@ class SolomonsSeal extends BaseRenderable {
 
   init = (props = {}) => {
     if (!this.state.lazy || this.isDirty) {
-      this.createChildren();
+      this.createChildren(props);
       if (this.state.visible) {
         this.animateIn(this.state);
       }
@@ -46,7 +48,6 @@ class SolomonsSeal extends BaseRenderable {
       thickness = 0.02,
       color = ColorFactory.getRandomColor(),
       imagePath = TextureFactory.getStroke(),
-      delay = 0,
       leafStartPoint = 0.3,
       leafEndPoint = 1,
       rotationStart = new Vector3(0, 0, 0),
@@ -143,25 +144,9 @@ class SolomonsSeal extends BaseRenderable {
     this.state.delay = delay;
     this.state.animated = animated;
 
-    this.tween && this.tween.kill(null, this);
-
-    if (animated) {
-      this.currentTime = 0;
-      this.tween && this.tween.kill(null, this);
-      this.tween = TweenMax.to(this, duration, {
-        currentTime: 2,
-        onUpdate: () => {
-          this.update();
-        },
-        ease: Power2.easeOut,
-        delay: delay + 0.5
-        // yoyo: true,
-        // repeat: -1
-      });
-    } else {
-      this.currentTime = 2;
-      this.update();
-    }
+    this.stem.curvePainter.animateIn({ duration, delay, animated });
+    this.leavesMesh.animateIn({ duration, delay: delay + 2, animated });
+    this.berriesMesh.animateIn({ duration, delay: delay + 4, animated });
   };
 
   // bendGeometry = ({ geometry, R }) => {
@@ -283,18 +268,6 @@ class SolomonsSeal extends BaseRenderable {
     });
   }
 
-  setWindForce(windForce) {
-    this.setState({ windForce }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
-  setWindDirection(windDirection) {
-    this.setState({ windDirection }, isDirty => {
-      isDirty && this.init();
-    });
-  }
-
   setHSLBase(hslBase) {
     this.setState({ hslBase }, isDirty => {
       isDirty && this.init();
@@ -381,13 +354,11 @@ class SolomonsSeal extends BaseRenderable {
 
   update() {
     // build in a slight half-second delay for each type of object
-    this.stem.curvePainter.update(Math.min(1, this.currentTime));
-
-    const leafTime = Math.min(1, Math.max(0, this.currentTime - 0.5));
-    this.leavesMesh.time = leafTime;
-
-    const berryTime = Math.min(1, Math.max(0, this.currentTime - 1.0));
-    this.berriesMesh.time = berryTime;
+    // this.stem.curvePainter.update(Math.min(1, this.currentTime));
+    // const leafTime = Math.min(1, Math.max(0, this.currentTime - 0.5));
+    // this.leavesMesh.time = leafTime;
+    // const berryTime = Math.min(1, Math.max(0, this.currentTime - 1.0));
+    // this.berriesMesh.time = berryTime;
   }
 }
 

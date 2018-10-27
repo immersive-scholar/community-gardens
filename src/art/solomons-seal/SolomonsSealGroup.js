@@ -10,8 +10,6 @@ const SolomonsSealGroup = ({ R, camera, controls, delay }) => {
     count = 1,
     instances = [];
 
-  solomonsSealGroup.position.y = 0;
-
   for (let x = 0, i = 0; x < count; x++) {
     for (let y = 0; y < count; y++) {
       solomonsSeal = new SolomonsSeal(

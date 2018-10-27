@@ -12,6 +12,8 @@ import {
   ModelBufferGeometry,
   LambertAnimationMaterial
 } from "three/vendor/BAS";
+import { TweenMax, Power2 } from "gsap";
+
 import Wind from "art/effects/Wind";
 import TextureFactory from "../../util/TextureFactory";
 
@@ -109,6 +111,22 @@ function LeafAnimation({
 
   // this.castShadow = true;
   this.frustumCulled = false;
+
+  this.animateIn = ({ delay = 0, duration = 1, animated = true }) => {
+    this.tween && this.tween.kill(null, this);
+
+    if (animated) {
+      this.time = 0;
+      this.tween && this.tween.kill(null, this);
+      this.tween = TweenMax.to(this, duration, {
+        time: 1,
+        ease: Power2.easeOut,
+        delay: delay
+      });
+    } else {
+      this.time = 1;
+    }
+  };
 }
 LeafAnimation.prototype = Object.create(Mesh.prototype);
 LeafAnimation.prototype.constructor = LeafAnimation;
