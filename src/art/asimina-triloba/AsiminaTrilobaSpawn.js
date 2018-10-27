@@ -9,7 +9,7 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls }) => {
   let asiminaTriloba,
     intervalID,
     asiminaTrilobaGroup = new Group(),
-    count = 1,
+    count = 10,
     instances = [];
 
   createAsiminaTriloba({ count });

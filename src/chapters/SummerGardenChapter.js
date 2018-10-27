@@ -4,7 +4,7 @@ import BaseChapter from "./BaseChapter";
 // import SolomonsSealGroup from "art/solomons-seal/SolomonsSealGroup";
 // import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
-import Background from "../art/background/Background";
+import BackgroundBAS from "../art/background/BackgroundBAS";
 import Ground from "../art/ground/Ground";
 import ColorFactory from "util/ColorFactory";
 
@@ -22,15 +22,15 @@ class SummerGardenChapter extends BaseChapter {
       ColorFactory.GROUND
     );
 
-    // this.background = new Background({ color: bgColor });
-    // this.group.add(this.background.group);
+    this.background = new BackgroundBAS({ color: bgColor });
+    this.group.add(this.background);
 
     this.ground = new Ground({
       color: bgColor,
       R: this.R
     });
     this.group.add(this.ground.group);
-    // this.ground.mesh.position.set(0, -10, 10);
+    // this.ground.group.position.set(0, -10, 10);
 
     // this.plane = new Plane({ color: bgColor });
     // this.group.add(this.plane.group);

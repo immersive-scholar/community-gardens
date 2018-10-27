@@ -30,7 +30,6 @@ export default container => {
       InsecurityCalculator.parse(DataFactory.data);
     })
     .then(() => {
-      console.log("BUILD");
       sceneManager.subject.createScene();
     });
 

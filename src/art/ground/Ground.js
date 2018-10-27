@@ -11,12 +11,11 @@ import {
 } from "three-full";
 import ColorFactory from "util/ColorFactory";
 
-const Ground = ({ camera, color = ColorFactory.getRandomColor(), R } = {}) => {
+const Ground = ({ color = ColorFactory.getRandomColor(), R } = {}) => {
   const group = new Group();
   const worldWidth = 64,
     worldDepth = 64;
   const data = generateHeight(worldWidth, worldDepth);
-  //   camera.position.y = data[worldHalfWidth + worldHalfDepth * worldWidth] * 10 + 500;
   const geometry = new PlaneBufferGeometry(
     32,
     32,
@@ -69,12 +68,14 @@ const Ground = ({ camera, color = ColorFactory.getRandomColor(), R } = {}) => {
       cy = height * 0.5,
       distanceFromCenter,
       x,
-      y;
+      y,
+      halfSize = size / 2;
     for (let j = 0; j < 4; j++) {
       for (let i = 0; i < size; i++) {
         x = i % width;
         y = ~~(i / width);
-        distanceFromCenter = 1 - (Math.abs(x - cx) * Math.abs(y - cy)) / size;
+        distanceFromCenter =
+          1 - (Math.abs(x - cx) * Math.abs(y - cy)) / halfSize;
         data[i] += Math.abs(
           perlin.noise(x / quality, y / quality, z) *
             quality *
