@@ -408,6 +408,4 @@ class StellariaPubera extends BaseRenderable {
   update() {}
 }
 
-Object.setPrototypeOf(StellariaPubera, BaseRenderable);
-
 export default StellariaPubera;

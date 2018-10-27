@@ -22,11 +22,11 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls, delay = 0 }) => {
           {
             delay: delay + i * 0.25,
             petalCount: R.intBetween(6, 12),
-            windForce: R.floatBetween(-0.1, 0),
+            windForce: R.floatBetween(-0.3, 0),
             windDirection: new Vector3(
-              R.floatBetween(-1.5, 1.5),
-              R.floatBetween(-1.5, 1.5),
-              R.floatBetween(-1.5, 1.5)
+              R.floatBetween(-0.3, 0.3),
+              R.floatBetween(-0.3, 0.3),
+              R.floatBetween(-0.3, 0.3)
             ),
             openness: R.floatBetween(0, 2)
             // hslBase: new Vector3(
@@ -65,6 +65,11 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls, delay = 0 }) => {
     });
 
     asiminaTrilobaGroup.position.y = 0.25;
+
+    for (let i = 0, iL = instances.length; i < iL; i++) {
+      instances[i].createChildren();
+      instances[i].animateIn({ delay: i * 0.5 });
+    }
   }
 
   new AsiminaTrilobaController({
@@ -85,20 +90,11 @@ const AsiminaTrilobaSpawn = ({ R, camera, controls, delay = 0 }) => {
     camera.getWorldDirection(lookAt);
 
     for (
-      let i = 0,
-        instance,
-        coordinates = new Vector3(),
-        // boundingBox = new Box3(),
-        behind = false;
+      let i = 0, instance, coordinates = new Vector3(), behind = false;
       i < instances.length;
       i++
     ) {
       instance = instances[i];
-      //   boundingBox = new Box3().setFromObject(instance.group);
-      //   coordinates.copy(boundingBox.max).sub(camera.position);
-      //   if (coordinates.z < -0.1) {
-      //     removeMe.push({ instance, index: i });
-      //   }
       coordinates.setFromMatrixPosition(instance.group.matrixWorld);
       coordinates.sub(cameraPosition);
       behind = coordinates.angleTo(lookAt) > Math.PI / 2;

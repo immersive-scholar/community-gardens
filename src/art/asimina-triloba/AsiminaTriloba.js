@@ -8,18 +8,32 @@ import AsiminaTrilobaPetalShape from "./AsiminaTrilobaPetalShape";
 import Petals from "./Petals";
 import Pollen from "./Pollen";
 import TextureFactory from "util/TextureFactory";
-import StemGeometry from "./StemGeometry";
+// import StemGeometry from "./StemGeometry";
 import CurvePainter from "three/helpers/CurvePainter";
 
 class AsiminaTriloba extends BaseRenderable {
   constructor(props, camera, R) {
     super(props, camera, R);
 
-    this.init(props);
+    this.setState(props);
+
+    if (!props.lazy) {
+      this.init(props);
+      this.createChildren();
+    }
   }
 
   init = (props = {}) => {
-    this.setState(props);
+    if (!this.state.lazy || this.isDirty) {
+      this.createChildren(props);
+      if (this.state.visible) {
+        this.animateIn(this.state);
+      }
+    }
+  };
+
+  createChildren = () => {
+    this.clean();
 
     this.clean();
 
@@ -146,14 +160,6 @@ class AsiminaTriloba extends BaseRenderable {
     this.pollen.position.copy(stemTopPoint);
     // this.pollen.rotation.y = -Math.PI / 2;
     this.group.add(this.pollen);
-
-    this.tween && this.tween.kill(null, this);
-    if (animated) {
-      this.currentTime = 0;
-      this.animatePetals({ delay });
-    } else {
-      this.currentTime = 1;
-    }
   };
 
   toCurve = ({
@@ -419,25 +425,22 @@ class AsiminaTriloba extends BaseRenderable {
     }
   }
 
-  animatePetals({ delay }) {
-    this.tween && this.tween.kill(null, this);
-    this.tween = TweenMax.to(this, 4, {
-      currentTime: 1,
-      onUpdate: () => {
-        this.update();
-      },
-      ease: Power2.easeOut,
-      delay: delay + 0.5
-      // yoyo: true,
-      // repeat: -1
-    });
-  }
+  animateIn = ({ duration = 2, delay = 0, animated = true } = {}) => {
+    this.state.lazy = false;
+    this.state.visible = true;
+    this.state.duration = duration;
+    this.state.delay = delay;
+    this.state.animated = animated;
+
+    this.petals.animateIn({ duration, delay: delay + 1, animated });
+    this.pollen.animateIn({ duration, delay: delay + 2, animated });
+  };
 
   render() {}
 
   update() {
-    this.petals.material.uniforms.uTime.value = this.currentTime;
-    this.pollen.material.uniforms.uTime.value = this.currentTime;
+    // this.petals.material.uniforms.uTime.value = this.currentTime;
+    // this.pollen.material.uniforms.uTime.value = this.currentTime;
   }
 }
 
