@@ -1,24 +1,32 @@
-import { Group, Vector3 } from "three-full";
-import sample from "lodash/sample";
+import { Vector3 } from "three-full";
 
 import StellariaPubera from "art/stellaria-pubera/StellariaPubera";
 import StellariaPuberaController from "art/stellaria-pubera/StellariaPuberaController";
 import GridLayoutHelper from "util/GridLayoutHelper";
+import BaseSpawn from "art/common/BaseSpawn";
 
-const StellariaPuberaSpawn = ({ R, camera, controls }) => {
-  let stellariaPubera,
-    intervalID,
-    stellariaPuberaGroup = new Group(),
-    count = 4,
-    instances = [];
+class StellariaPuberaSpawn extends BaseSpawn {
+  init() {
+    const { count, group, instances, controls, delay } = this;
 
-  createStellariaPubera({ count });
-  //   const intervalID = setInterval(() => cleanInstances(), 500);
+    this.createChildren({ count, delay });
+    this.layout({
+      group,
+      rowWidth: 0.5,
+      columnHeight: 0.5,
+      position: new Vector3(0, 0.25, 0),
+      axis: GridLayoutHelper.LAYOUT_WALL
+    });
+    this.createController({ instances, controls });
+  }
 
-  function createStellariaPubera({ count }) {
+  createChildren({ count, delay }) {
+    const { R, camera } = this;
+
+    let instance;
     for (let x = 0, i = 0; x < count; x++) {
       for (let y = 0; y < count; y++) {
-        stellariaPubera = new StellariaPubera(
+        instance = new StellariaPubera(
           {
             delay: i * 0.25,
             petalCount: 10, //R.intBetween(24, 48),
@@ -47,87 +55,19 @@ const StellariaPuberaSpawn = ({ R, camera, controls }) => {
           camera,
           R
         );
-        stellariaPuberaGroup.add(stellariaPubera.group);
-        instances.push(stellariaPubera);
+        this.group.add(instance.group);
+        this.instances.push(instance);
         i++;
       }
     }
+  }
 
-    const rowWidth = 0.5,
-      columnHeight = 0.5;
-
-    // arrange layout
-    GridLayoutHelper({
-      group: stellariaPuberaGroup,
-      rows: count,
-      columns: count,
-      rowWidth,
-      columnHeight,
-      layoutAxis: GridLayoutHelper.LAYOUT_WALL
+  createController() {
+    new StellariaPuberaController({
+      controls: this.controls,
+      instance: this.instances[0]
     });
-
-    stellariaPuberaGroup.position.y = 0.25;
-
-    for (let i = 0, iL = instances.length; i < iL; i++) {
-      instances[i].createChildren();
-      instances[i].animateIn({ delay: i * 0.5 });
-    }
   }
-
-  new StellariaPuberaController({
-    controls,
-    instance: instances[0]
-  });
-
-  function clean() {
-    intervalID && clearInterval(intervalID);
-  }
-
-  function cleanInstances() {
-    const removeMe = [];
-    const cameraPosition = new Vector3().setFromMatrixPosition(
-      camera.matrixWorld
-    );
-    const lookAt = new Vector3();
-    camera.getWorldDirection(lookAt);
-
-    for (
-      let i = 0, instance, coordinates = new Vector3(), behind = false;
-      i < instances.length;
-      i++
-    ) {
-      instance = instances[i];
-      coordinates.setFromMatrixPosition(instance.group.matrixWorld);
-      coordinates.sub(cameraPosition);
-      behind = coordinates.angleTo(lookAt) > Math.PI / 2;
-      if (behind) {
-        removeMe.push({ instance, index: i });
-      }
-    }
-
-    for (let i = removeMe.length - 1, data; i >= 0; i--) {
-      data = removeMe[i];
-      removeInstance(data.instance, data.index);
-    }
-  }
-
-  function removeInstance(instance, index) {
-    console.log("Removing: ", instance, index);
-    instance.clean();
-    stellariaPuberaGroup.remove(instance.group);
-    instances.splice(index, 1);
-    instance = undefined;
-  }
-
-  function getRandomInstance() {
-    return sample(instances);
-  }
-
-  return {
-    group: stellariaPuberaGroup,
-    createStellariaPubera,
-    getRandomInstance
-  };
-};
+}
 
 export default StellariaPuberaSpawn;
