@@ -55,13 +55,14 @@ class ColorFactory {
     }); // catch rejected promise
   }
 
-  static getRandomColor(
+  static getColors(
     seasonName = ColorFactory.DEFAULT,
     familyName = ColorFactory.LEAF
   ) {
     seasonName = seasonName.toUpperCase();
     familyName = familyName.toUpperCase();
     let season, family;
+
     try {
       season = this.colorSeasons[seasonName];
     } catch (e) {
@@ -75,13 +76,73 @@ class ColorFactory {
         season.samplesByColorFamily,
         f => f.color.toUpperCase() === familyName
       ).samples;
-      const index = this.R.intBetween(0, family.length - 1);
-      return family[index];
+      return family;
     } catch (e) {
       throw new Error(
-        `Unknown color family name. Try LEAF, BARK, GREENERY, or GROUND instead of ${familyName}.`
+        `Unknown color family name. Try LEAF, BARK, GREENERY, GROUND, or SKY instead of ${familyName}.`
       );
     }
+  }
+
+  static getRandomColor(
+    seasonName = ColorFactory.DEFAULT,
+    familyName = ColorFactory.LEAF
+  ) {
+    let family = this.getColors(seasonName, familyName);
+    const index = this.R.intBetween(0, family.length - 1);
+    return family[index];
+  }
+
+  static debug() {
+    this.createSwatches(ColorFactory.SUMMER, ColorFactory.LEAF, 0);
+    this.createSwatches(ColorFactory.SUMMER, ColorFactory.GROUND, 1);
+    this.createSwatches(ColorFactory.SUMMER, ColorFactory.GREENERY, 2);
+    this.createSwatches(ColorFactory.SUMMER, ColorFactory.BARK, 3);
+    this.createSwatches(ColorFactory.SUMMER, ColorFactory.SKY, 4);
+  }
+
+  static createSwatches(
+    seasonName = ColorFactory.DEFAULT,
+    familyName = ColorFactory.LEAF,
+    offsetY
+  ) {
+    const div = document.createElement("div");
+
+    div.style.position = "absolute";
+    div.style.display = "grid";
+    div.style.gridTemplateColumns = "repeat( auto-fit, minmax(1px, 1fr) )";
+    div.style.bottom = `${offsetY * 20}px`;
+    div.style.left = 0;
+    div.style.width = "200px";
+    div.style.height = "20px";
+    div.style.zIndex = 101;
+    div.style.border = "2px solid white";
+
+    const colors = ColorFactory.getColors(seasonName, familyName);
+    let color, colorDiv;
+    for (let c in colors) {
+      color = colors[c];
+      colorDiv = document.createElement("div");
+      colorDiv.style.height = "20px";
+      colorDiv.style.background = color;
+
+      colorDiv.setAttribute("color", color);
+      colorDiv.setAttribute("color-index", c);
+      colorDiv.setAttribute("color-season", seasonName);
+      colorDiv.setAttribute("color-family", familyName);
+      colorDiv.onclick = function() {
+        let c = this.getAttribute("color");
+        let i = this.getAttribute("color-index");
+        let s = this.getAttribute("color-season");
+        let f = this.getAttribute("color-family");
+        console.log("%c color", `background: ${c}`);
+        console.log(`Color ${c} (index ${i}) is from ${s} ${f}.`);
+      };
+
+      div.appendChild(colorDiv);
+    }
+
+    document.body.appendChild(div);
   }
 
   static setSeed(seed) {
@@ -98,5 +159,6 @@ ColorFactory.LEAF = "LEAF";
 ColorFactory.BARK = "BARK";
 ColorFactory.GREENERY = "GREENERY";
 ColorFactory.GROUND = "GROUND";
+ColorFactory.SKY = "SKY";
 
 export default ColorFactory;

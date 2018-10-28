@@ -27,6 +27,9 @@ export default container => {
     TextureFactory.load("/json/textures.json")
   ])
     .then(() => {
+      ColorFactory.debug();
+    })
+    .then(() => {
       InsecurityCalculator.parse(DataFactory.data);
     })
     .then(() => {
