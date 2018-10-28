@@ -183,7 +183,9 @@ const Controls = ({ camera, velocity = 1 }) => {
   }
 
   function setVelocity(v) {
+    // we can affect just the camera movement
     // velocity = v;
+    // or we can affect _all_ of the animations
     TweenMax.globalTimeScale(v);
   }
 
