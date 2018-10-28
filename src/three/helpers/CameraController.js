@@ -4,6 +4,7 @@ import { Vector3 } from "three-full";
 export default ({ controls, camera }) => {
   const enable = () => {
     const config = {
+      velocity: 1,
       x: 0,
       y: 1,
       z: -2,
@@ -58,6 +59,7 @@ export default ({ controls, camera }) => {
         // controls.lookAt(new Vector3(config.tx, config.ty, config.tz));
         controls.controls.target = new Vector3(config.tx, config.ty, config.tz);
         controls.controls.autoRotate = config.autoRotate;
+        controls.setVelocity(config.velocity);
 
         controls.update();
       } catch (error) {
@@ -72,6 +74,10 @@ export default ({ controls, camera }) => {
     const gui = new dat.GUI().getRoot();
     gui.add(config, "kill");
     gui.add(config, "reset");
+    gui
+      .add(config, "velocity", 0, 2, 0.01)
+      .onChange(onDataChange)
+      .onFinishChange(onDataChangeComplete);
 
     const positionFolder = gui.addFolder("Position");
     const configXSlider = positionFolder

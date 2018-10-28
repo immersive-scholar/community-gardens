@@ -1,7 +1,7 @@
 import { OrbitControls, Vector3 } from "three-full";
 import { TweenMax, Power2, Power3, Back } from "gsap";
 
-const Controls = ({ camera }) => {
+const Controls = ({ camera, velocity = 1 }) => {
   const orbitControls = new OrbitControls(camera);
   orbitControls.enableDamping = true;
   orbitControls.dampingFactor = 0.15;
@@ -49,20 +49,20 @@ const Controls = ({ camera }) => {
     cameraTweenParams.y = camera.position.y;
     cameraTweenParams.z = camera.position.z;
 
-    zoomTween = TweenMax.to(cameraTweenParams, duration / 2, {
+    zoomTween = TweenMax.to(cameraTweenParams, (duration / 2) * velocity, {
       z: to.z - 1,
       ease: Power3.easeInOut,
       delay,
       duration
     });
 
-    zoomTween2 = TweenMax.to(cameraTweenParams, duration / 2, {
+    zoomTween2 = TweenMax.to(cameraTweenParams, (duration / 2) * velocity, {
       z: to.z,
       ease: Power3.easeInOut,
       delay: delay + duration / 2
     });
 
-    cameraTween = TweenMax.to(cameraTweenParams, duration, {
+    cameraTween = TweenMax.to(cameraTweenParams, duration * velocity, {
       x: to.x,
       y: to.y,
       // z: to.z, // handled by 'zoom' tweens above
@@ -81,7 +81,7 @@ const Controls = ({ camera }) => {
     targetTweenParams.y = target.y;
     targetTweenParams.z = target.z;
 
-    targetTween = TweenMax.to(targetTweenParams, duration * 0.9, {
+    targetTween = TweenMax.to(targetTweenParams, duration * velocity * 0.9, {
       x: to.tx,
       y: to.ty,
       z: to.tz,
@@ -111,7 +111,7 @@ const Controls = ({ camera }) => {
     cameraTweenParams.y = camera.position.y;
     cameraTweenParams.z = camera.position.z;
 
-    cameraTween = TweenMax.to(cameraTweenParams, duration, {
+    cameraTween = TweenMax.to(cameraTweenParams, duration * velocity, {
       x: 0.5,
       y: 0.05,
       z: 0.5,
@@ -127,7 +127,7 @@ const Controls = ({ camera }) => {
     targetTweenParams.y = target.y;
     targetTweenParams.z = target.z;
 
-    targetTween = TweenMax.to(targetTweenParams, duration, {
+    targetTween = TweenMax.to(targetTweenParams, duration * velocity, {
       y: 0.2,
       delay,
       ease: Power2.easeInOut
@@ -142,7 +142,7 @@ const Controls = ({ camera }) => {
     cameraTweenParams.y = camera.position.y;
     cameraTweenParams.z = camera.position.z;
 
-    cameraTween = TweenMax.to(cameraTweenParams, duration, {
+    cameraTween = TweenMax.to(cameraTweenParams, duration * velocity, {
       x: 0,
       y: 1,
       z: 0.25,
@@ -158,7 +158,7 @@ const Controls = ({ camera }) => {
     targetTweenParams.y = target.y;
     targetTweenParams.z = target.z;
 
-    targetTween = TweenMax.to(targetTweenParams, duration, {
+    targetTween = TweenMax.to(targetTweenParams, duration * velocity, {
       y: 1,
       z: 0,
       delay,
@@ -182,6 +182,11 @@ const Controls = ({ camera }) => {
     zoomTween2 && zoomTween2.kill();
   }
 
+  function setVelocity(v) {
+    // velocity = v;
+    TweenMax.globalTimeScale(v);
+  }
+
   function update() {
     orbitControls.update();
   }
@@ -193,7 +198,8 @@ const Controls = ({ camera }) => {
     animateChapter1,
     animateChapter2,
     killTweens,
-    set
+    set,
+    setVelocity
   };
 };
 
