@@ -16,7 +16,6 @@ class SummerGardenChapter extends BaseChapter {
   init(props) {
     this.group = new Group();
 
-    // const color = ColorFactory.getRandomColor();
     const bgColor = ColorFactory.getRandomColor();
 
     this.background = new BackgroundBAS({ color: bgColor });
@@ -55,30 +54,30 @@ class SummerGardenChapter extends BaseChapter {
     });
     this.group.add(this.asiminaTrilobaSpawn.group);
 
-    // const from = {
-    //     x: 0,
-    //     y: 0.25,
-    //     z: -10,
-    //     tx: 0,
-    //     ty: 0.25,
-    //     tz: 1
-    //   },
-    //   to = {
-    //     x: 0,
-    //     y: 0.25,
-    //     z: -0.25,
-    //     tx: 0,
-    //     ty: 0.25,
-    //     tz: 1
-    //   };
+    const from = {
+        x: 0,
+        y: 0.25,
+        z: -10,
+        tx: 0,
+        ty: 0.25,
+        tz: 1
+      },
+      to = {
+        x: 0,
+        y: 0.25,
+        z: -0.25,
+        tx: 0,
+        ty: 0.25,
+        tz: 1
+      };
 
     // this.controls.set({ x: 0, y: 0.25, z: -0.25, tx: 0, ty: 0.25, tz: 1 });
 
-    // this.controls.animate({
-    //   from,
-    //   to,
-    //   callback: () => this.onTransitionComplete()
-    // });
+    this.controls.animate({
+      from,
+      to,
+      callback: () => this.onTransitionComplete()
+    });
 
     this.background.animateIn();
     this.ground.animateIn({ duration: 5, delay: 0.5 });
