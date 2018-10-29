@@ -2,6 +2,7 @@ import { Group } from "three-full";
 
 class BaseChapter {
   constructor(props, camera, controls, R) {
+    this.settings = props.settings;
     this.camera = camera;
     this.controls = controls;
     this.R = R;

@@ -1,10 +1,11 @@
 import * as dat from "dat.gui";
 import { Vector3 } from "three-full";
 
-export default ({ controls, camera }) => {
+export default ({ controls, camera, settings }) => {
+  const { timeMultiplier } = settings;
   const enable = () => {
     const config = {
-      velocity: 1,
+      velocity: timeMultiplier,
       x: 0,
       y: 1,
       z: -2,
@@ -60,6 +61,8 @@ export default ({ controls, camera }) => {
         controls.controls.target = new Vector3(config.tx, config.ty, config.tz);
         controls.controls.autoRotate = config.autoRotate;
         controls.setVelocity(config.velocity);
+
+        settings.setTimeMultiplier(config.velocity);
 
         controls.update();
       } catch (error) {

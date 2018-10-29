@@ -37,7 +37,7 @@ class AsiminaTriloba extends BasePlant {
       thickness = 0.02,
       petalCount = this.R.intBetween(6, 12),
       petalWidth = 0.25,
-      petalLength = 0.15,
+      petalLength = 0.2,
       petalMidPointRatio = 0.6,
       petalLowerMidPointRatio = 0.2,
       petalUpperMidPointRatio = 0.9,

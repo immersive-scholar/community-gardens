@@ -47,7 +47,7 @@ class SummerGardenChapter extends BaseChapter {
     // this.group.add(this.stellariaPuberaSpawn.group);
 
     this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
-      count: 5,
+      count: 1,
       R: this.R,
       camera: this.camera,
       controls: this.controls

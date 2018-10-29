@@ -9,7 +9,7 @@ import GeneralControls from "./GeneralControls";
 import GeneralLights from "./GeneralLights";
 import CameraController from "./helpers/CameraController";
 
-export default ({ generalCanvas, R }) => {
+export default ({ generalCanvas, R, settings }) => {
   const clock = new Clock();
 
   const stats = new Stats();
@@ -25,7 +25,7 @@ export default ({ generalCanvas, R }) => {
   });
   const camera = new GeneralCamera(screenDimensions);
   const controls = new GeneralControls({ camera });
-  const cameraGUI = new CameraController({ camera, controls });
+  const cameraGUI = new CameraController({ camera, controls, settings });
   cameraGUI.enable();
   // controls.animateChapter2();
   // controls.controls.autoRotate = true;
@@ -34,7 +34,7 @@ export default ({ generalCanvas, R }) => {
   // const lights = new GeneralLights({ scene, controls });
   // lights.createControls();
 
-  const subject = new SceneSubject({ scene, camera, R, controls });
+  const subject = new SceneSubject({ scene, camera, R, controls, settings });
 
   function update() {
     stats.begin();

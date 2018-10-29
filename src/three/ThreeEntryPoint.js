@@ -8,7 +8,8 @@ import TextureFactory from "util/TextureFactory";
 import Settings from "util/Settings";
 import InsecurityCalculator from "data/InsecurityCalculator";
 
-export default container => {
+export default (container, settings) => {
+  console.log("settings ", settings);
   new Settings();
 
   const seed = Math.random();
@@ -43,7 +44,7 @@ export default container => {
   };
 
   const generalCanvas = new GeneralCanvas(document, container);
-  const sceneManager = new SceneManager({ generalCanvas, R });
+  const sceneManager = new SceneManager({ generalCanvas, R, settings });
 
   createExporter(
     sceneManager.renderer,
@@ -80,6 +81,11 @@ export default container => {
     highresExport.enable();
   }
 
+  function setSettings(settings) {
+    console.log(this);
+    console.log("got settings ", settings);
+  }
+
   function render() {
     requestAnimationFrame(render);
 
@@ -91,4 +97,8 @@ export default container => {
     //     renderer.render(scene, camera)
     // }
   }
+
+  return {
+    setSettings
+  };
 };
