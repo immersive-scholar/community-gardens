@@ -4,7 +4,7 @@ const queryString = require("query-string");
 const location = window.location;
 
 const parsed = queryString.parse(location.search);
-const timeMultiplier = parseFloat(parsed.timeMultiplier);
+const timeMultiplier = parseFloat(parsed.timeMultiplier) || 1;
 
 const initialState = { timeMultiplier };
 
