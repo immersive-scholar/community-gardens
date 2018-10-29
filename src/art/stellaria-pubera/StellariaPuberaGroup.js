@@ -2,7 +2,7 @@ import { Group, Vector3 } from "three-full";
 
 import StellariaPubera from "art/stellaria-pubera/StellariaPubera";
 import StellariaPuberaController from "art/stellaria-pubera/StellariaPuberaController";
-import GridLayoutHelper from "util/GridLayoutHelper";
+import GridLayout from "art/layouts/GridLayout";
 
 const StellariaPuberaGroup = ({ R, camera, controls }) => {
   let stellariaPubera,
@@ -49,7 +49,7 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
     }
   }
 
-  GridLayoutHelper({
+  GridLayout({
     group: stellariaPuberaGroup,
     rows: count,
     columns: count,

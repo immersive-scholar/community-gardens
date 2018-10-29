@@ -2,7 +2,7 @@ import { Vector3 } from "three-full";
 
 import SolomonsSeal from "art/solomons-seal/SolomonsSeal";
 import SolomonsSealController from "art/solomons-seal/SolomonsSealController";
-import GridLayoutHelper from "util/GridLayoutHelper";
+import GridLayoutHelper from "art/layouts/GridLayoutHelper";
 import BaseSpawn from "art/common/BaseSpawn";
 
 class SolomonsSealSpawn extends BaseSpawn {

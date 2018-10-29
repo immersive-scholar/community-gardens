@@ -1,0 +1,4 @@
+// LAYOUT CONSTANTS
+export const LAYOUT_FLOOR = "LAYOUT_FLOOR";
+export const LAYOUT_WALL = "LAYOUT_WALL";
+export const LAYOUT_RANDOM = "LAYOUT_RANDOM";

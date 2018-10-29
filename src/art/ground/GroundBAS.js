@@ -16,7 +16,7 @@ function GroundBAS({
   animated = true,
   delay = 0
 }) {
-  this.currentTime = 1;
+  this.currentTime = 0;
   this.cliff = 0;
 
   const worldWidth = 64,
@@ -38,7 +38,7 @@ function GroundBAS({
 
   const material = new BasicAnimationMaterial({
     flatShading: true,
-    transparent: !true, // required for diffuseColor.a to have an effect
+    transparent: true, // required for diffuseColor.a to have an effect
     side: FrontSide,
     wireframe: !true,
     lights: true,
@@ -51,10 +51,10 @@ function GroundBAS({
     uniformValues: {
       diffuse: new Color(color)
     },
-    vertexParameters: ["uniform float uTime;", "uniform float uCliff;"],
-    vertexPosition: ["transformed.y *= uCliff;", "transformed *= uTime;"]
-    // fragmentParameters: ["uniform float uTime;"],
-    // fragmentDiffuse: ["diffuseColor.rgb *= uTime;"]
+    vertexParameters: ["uniform float uCliff;"],
+    vertexPosition: ["transformed.y *= uCliff;"],
+    fragmentParameters: ["uniform float uTime;"],
+    fragmentDiffuse: ["diffuseColor.a *= uTime;"]
   });
 
   geometry.computeVertexNormals();
@@ -65,6 +65,7 @@ function GroundBAS({
     wireframe: true,
     lights: !true,
     fog: !true,
+    transparent: !true,
 
     uniforms: {
       uTime: { value: animated ? 0 : 1 },
@@ -73,10 +74,11 @@ function GroundBAS({
     uniformValues: {
       diffuse: new Color(color)
     },
-    vertexParameters: ["uniform float uTime;", "uniform float uCliff;"],
-    vertexPosition: ["transformed.y *= uCliff;", "transformed *= uTime;"]
+
+    vertexParameters: ["uniform float uCliff;", "uniform float uTime;"],
+    vertexPosition: ["transformed.y *= uCliff;", "transformed.xyz *= uTime;"]
     // fragmentParameters: ["uniform float uTime;"],
-    // fragmentDiffuse: ["diffuseColor.rgb *= uTime;"]
+    // fragmentDiffuse: ["diffuseColor.a *= uTime;"]
   });
 
   const wireframe = new Mesh(geometry, wireframeMaterial);
@@ -86,28 +88,43 @@ function GroundBAS({
 
   window.bg = this;
 
-  this.animateIn = function({ duration = 5, delay = 0 } = {}) {
+  this.animateIn = function({ duration = 5, delay = 0, animated = true } = {}) {
     this.tween && this.tween.kill(null, this);
-    this.tween = TweenMax.to(this, duration, {
-      currentTime: 1,
-      onUpdate: () => {
-        this.update();
-      },
-      delay,
-      ease: Power2.easeInOut
-    });
+    if (animated) {
+      this.tween = TweenMax.to(this, duration, {
+        currentTime: 1,
+        onUpdate: () => {
+          this.update();
+        },
+        delay,
+        ease: Power2.easeInOut
+      });
+    } else {
+      this.currentTime = 1;
+      this.update();
+    }
   };
 
-  this.animateCliff = function({ cliff = 1, duration = 5, delay = 0 }) {
+  this.animateCliff = function({
+    cliff = 1,
+    duration = 5,
+    delay = 0,
+    animated = true
+  }) {
     this.cliffTween && this.cliffTween.kill(null, this);
-    this.cliffTween = TweenMax.to(this, duration, {
-      cliff,
-      onUpdate: () => {
-        this.update();
-      },
-      delay: delay + 5,
-      ease: Power2.easeInOut
-    });
+    if (animated) {
+      this.cliffTween = TweenMax.to(this, duration, {
+        cliff,
+        onUpdate: () => {
+          this.update();
+        },
+        delay: delay + 5,
+        ease: Power2.easeInOut
+      });
+    } else {
+      this.cliff = 1;
+      this.udpate();
+    }
   };
 
   function generateHeight(width, height) {

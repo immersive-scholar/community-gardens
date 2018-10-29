@@ -2,7 +2,7 @@ import { Vector3 } from "three-full";
 
 import StellariaPubera from "art/stellaria-pubera/StellariaPubera";
 import StellariaPuberaController from "art/stellaria-pubera/StellariaPuberaController";
-import GridLayoutHelper from "util/GridLayoutHelper";
+import GridLayoutHelper from "art/layouts/GridLayoutHelper";
 import BaseSpawn from "art/common/BaseSpawn";
 
 class StellariaPuberaSpawn extends BaseSpawn {

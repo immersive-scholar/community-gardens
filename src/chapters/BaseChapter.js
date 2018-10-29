@@ -1,4 +1,4 @@
-import { Group } from "three-full";
+import { Group, Vector3, Box3, Object3D } from "three-full";
 
 class BaseChapter {
   constructor(props, camera, controls, R) {
@@ -21,10 +21,6 @@ class BaseChapter {
 
   setR(R) {
     this.R = R;
-  }
-
-  focusElement({ element }) {
-    console.log("element ", element);
   }
 
   promiseRequestAnimationFrame(isDirty) {
@@ -63,6 +59,48 @@ class BaseChapter {
     };
 
     return await this.promiseTimeoutWithCancel(50, isDirty, callback);
+  }
+
+  onTransitionComplete() {
+    const element = this.asiminaTrilobaSpawn.getRandomInstance();
+    this.focusElement({ element, delay: 2 });
+  }
+
+  animate({ to, delay = 2, duration = 10 }) {
+    this.controls.animate({
+      to,
+      delay,
+      duration,
+      callback: () => this.onTransitionComplete()
+    });
+  }
+
+  focusElement({ element, delay = 2, duration }) {
+    if (!element) return null;
+
+    let boundingBox = new Box3().setFromObject(element.group);
+    let center = new Vector3();
+    boundingBox.getCenter(center);
+    let tempObject = new Object3D();
+    tempObject.position.set(center);
+    let position = new Vector3(center.x, center.y, center.z);
+    tempObject.localToWorld(position);
+
+    const to = {
+      x: position.x,
+      y: position.y,
+      z: position.z - 0.5,
+      tx: position.x,
+      ty: position.y,
+      tz: position.z
+    };
+
+    this.controls.animate({
+      to,
+      delay,
+      duration,
+      callback: () => this.onTransitionComplete()
+    });
   }
 }
 

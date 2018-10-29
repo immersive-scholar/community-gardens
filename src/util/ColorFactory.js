@@ -153,7 +153,7 @@ class ColorFactory {
 ColorFactory.SUMMER = "SUMMER";
 ColorFactory.FALL = "FALL";
 ColorFactory.WINTER = "WINTER";
-ColorFactory.DEFAULT = ColorFactory.FALL;
+ColorFactory.DEFAULT = ColorFactory.SUMMER;
 
 ColorFactory.LEAF = "LEAF";
 ColorFactory.BARK = "BARK";

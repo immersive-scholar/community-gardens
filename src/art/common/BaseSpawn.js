@@ -1,24 +1,46 @@
 import { Group, Vector3 } from "three-full";
 import sample from "lodash/sample";
-import GridLayoutHelper from "util/GridLayoutHelper";
+import GridLayout from "art/layouts/GridLayout";
+import RandomLayout from "art/layouts/RandomLayout";
+import {
+  LAYOUT_RANDOM,
+  LAYOUT_FLOOR,
+  LAYOUT_WALL
+} from "art/layouts/LayoutConstants";
 
 class BaseSpawn {
-  constructor({ R, camera, controls, delay = 0, count = 1 } = {}) {
+  constructor({
+    R,
+    camera,
+    controls,
+    delay = 0,
+    instanceDelay = 0.5,
+    count = 1,
+    bounds = new Vector3(1, 1, 1),
+    position = new Vector3(),
+    layoutType = LAYOUT_RANDOM,
+    imagePath
+  } = {}) {
     this.R = R;
     this.camera = camera;
     this.controls = controls;
     this.intervalID = 0;
     this.delay = delay;
+    this.instanceDelay = instanceDelay;
     this.group = new Group();
     this.count = count;
+    this.bounds = bounds;
+    this.position = position;
+    this.layoutType = layoutType;
     this.instances = [];
+    this.imagePath = imagePath;
 
     this.init();
   }
 
   init() {
     this.createChildren({ count: this.count });
-    this.layout();
+    this.layout({ layoutType: this.layoutType });
     this.createController();
   }
 
@@ -37,28 +59,48 @@ class BaseSpawn {
   }
 
   layout({
+    layoutType = LAYOUT_RANDOM,
     rowWidth = 0.5,
     columnHeight = 0.5,
-    layoutAxis = GridLayoutHelper.LAYOUT_WALL,
+    layoutAxis = GridLayout.LAYOUT_WALL,
+    bounds = new Vector3(1, 1, 1),
     position = new Vector3()
   } = {}) {
-    // arrange layout
-    GridLayoutHelper({
-      group: this.group,
-      rows: this.count,
-      columns: this.count,
-      rowWidth,
-      columnHeight,
-      layoutAxis
-    });
-
-    this.group.position.copy(position);
+    switch (layoutType) {
+      case LAYOUT_RANDOM:
+        RandomLayout({
+          R: this.R,
+          group: this.group,
+          bounds,
+          position
+        });
+        break;
+      case LAYOUT_WALL:
+      case LAYOUT_FLOOR:
+        // arrange layout
+        GridLayout({
+          layoutType,
+          group: this.group,
+          rows: Math.sqrt(this.count),
+          columns: Math.sqrt(this.count),
+          rowWidth,
+          columnHeight,
+          layoutAxis
+        });
+        this.group.position.copy(position);
+        break;
+      default:
+        break;
+    }
   }
 
-  animateIn({ duration = 1, delay = 0 } = {}) {
+  animateIn({ duration = 1, delay = 0, instanceDelay = 0.5 } = {}) {
     for (let i = 0, iL = this.instances.length; i < iL; i++) {
       this.instances[i].createChildren();
-      this.instances[i].animateIn({ duration, delay: delay + i * 0.5 });
+      this.instances[i].animateIn({
+        duration,
+        delay: delay + i * instanceDelay
+      });
     }
   }
 

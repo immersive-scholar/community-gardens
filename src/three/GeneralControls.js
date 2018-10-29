@@ -17,17 +17,18 @@ const Controls = ({ camera, velocity = 1 }) => {
 
   const cameraTweenParams = new Vector3(),
     targetTweenParams = new Vector3();
-  camera.position.set(0.75, 0.45, 0.75);
-  // camera.position.set(0.1, 0.1, 0.1);
+  // camera.position.set(0.75, 0.45, 0.75);
+  camera.position.set(0, 0, -1);
   update();
 
-  const target = new Vector3(0, 0, 0);
+  const target = new Vector3(0, 0, 1);
   orbitControls.target = target.clone();
 
   // enable for console control.
   window.controls = orbitControls;
 
-  function animate({
+  // pulls back before focusing
+  function walkabout({
     from = {},
     to = {},
     delay = 0,
@@ -87,6 +88,56 @@ const Controls = ({ camera, velocity = 1 }) => {
       z: to.tz,
       delay,
       ease: Back.easeOut
+    });
+  }
+
+  // direct line to end position
+  function animate({
+    from = {},
+    to = {},
+    delay = 0,
+    duration = 10,
+    callback = () => console.log("done")
+  } = {}) {
+    // defaults
+    from.x = from.x || camera.position.x;
+    from.y = from.y || camera.position.y;
+    from.z = from.z || camera.position.z;
+    from.tx = from.tx || orbitControls.target.x;
+    from.ty = from.ty || orbitControls.target.y;
+    from.tz = from.tz || orbitControls.target.z;
+
+    killTweens();
+
+    camera.position.set(from.x, from.y, from.z);
+    cameraTweenParams.x = camera.position.x;
+    cameraTweenParams.y = camera.position.y;
+    cameraTweenParams.z = camera.position.z;
+    cameraTween = TweenMax.to(cameraTweenParams, duration * velocity, {
+      x: to.x,
+      y: to.y,
+      z: to.z,
+      delay,
+      ease: Power2.easeInOut,
+      onUpdate: () => {
+        onCameraMoveUpdate();
+      },
+      onComplete: () => {
+        callback();
+      }
+    });
+
+    target.set(from.tx, from.ty, from.tz);
+    targetTweenParams.x = target.x;
+    targetTweenParams.y = target.y;
+    targetTweenParams.z = target.z;
+
+    targetTween = TweenMax.to(targetTweenParams, duration * velocity, {
+      x: to.tx,
+      y: to.ty,
+      z: to.tz,
+      delay,
+      ease: Power2.easeInOut
     });
   }
 
