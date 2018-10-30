@@ -138,16 +138,16 @@ class RandomGardenChapter extends BaseChapter {
     this.ground.animateIn({ duration: 5, delay: 4 });
     this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
 
-    this.stellariaPuberaSpawn.animateIn({ delay: 0, instanceDelay: 0.05 });
-    this.asiminaTrilobaSpawn.animateIn({ delay: 1, instanceDelay: 0.05 });
-    this.solomonsSealSpawn.animateIn({ delay: 2, instanceDelay: 0.05 });
+    this.stellariaPuberaSpawn.animateIn({ delay: 6, instanceDelay: 0.3 });
+    this.asiminaTrilobaSpawn.animateIn({ delay: 8, instanceDelay: 0.3 });
+    this.solomonsSealSpawn.animateIn({ delay: 10, instanceDelay: 0.3 });
 
     const element = this.getRandomInstance();
     element.createChildren();
     element.animateIn({ delay: 8, duration: 7 });
     this.focusElement({
       element,
-      delay: 2,
+      delay: 15,
       duration: 10
       // offset: LookDownOffset(this.R)
     });
