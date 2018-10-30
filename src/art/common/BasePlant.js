@@ -374,8 +374,19 @@ class BasePlant extends BaseRenderable {
     this.state.delay = delay;
     this.state.animated = animated;
 
-    this.petals.animateIn({ duration, delay: delay + 1, animated });
-    this.pollen.animateIn({ duration, delay: delay + 2, animated });
+    // this.petals.animateIn({ duration, delay: delay + 1, animated });
+    // this.pollen.animateIn({ duration, delay: delay + 2, animated });
+  };
+
+  animateOut = ({ duration = 2, delay = 0, animated = true } = {}) => {
+    this.state.lazy = false;
+    this.state.visible = true;
+    this.state.duration = duration;
+    this.state.delay = delay;
+    this.state.animated = animated;
+
+    // this.petals.animateOut({ duration, delay: delay + 1, animated });
+    // this.pollen.animateOut({ duration, delay: delay + 2, animated });
   };
 
   render() {}

@@ -90,7 +90,6 @@ function BerryAnimation({
 
     if (animated) {
       this.time = 0;
-      this.tween && this.tween.kill(null, this);
       this.tween = TweenMax.to(this, duration, {
         time: 1,
         ease: Power2.easeOut,
