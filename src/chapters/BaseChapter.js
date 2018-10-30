@@ -108,7 +108,7 @@ class BaseChapter {
   }) {
     if (!element) return null;
 
-    let boundingBox = new Box3().setFromObject(element.group);
+    let boundingBox = new Box3().setFromObject(element.focalPoint);
     let center = new Vector3();
     boundingBox.getCenter(center);
     let tempObject = new Object3D();

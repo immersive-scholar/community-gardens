@@ -10,6 +10,11 @@ class BasePlant extends BaseRenderable {
 
     this.setState(props);
 
+    // focalPoint must be accessible event before initialization
+    // in case the camera pans to the object
+    // prior to its init method being summoned
+    this.focalPoint = this.group;
+
     if (!props.lazy) {
       this.init(props);
       this.createChildren();
@@ -18,7 +23,6 @@ class BasePlant extends BaseRenderable {
 
   // boilerplate
   init = (props = {}) => {
-    this.focalPoint = this.group;
     if (!this.state.lazy || this.isDirty) {
       this.createChildren(props);
       if (this.state.visible) {
