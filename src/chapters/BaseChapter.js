@@ -7,7 +7,7 @@ class BaseChapter {
     this.controls = controls;
     this.R = R;
 
-    this.state = {};
+    this.state = { currentFocusCount: 0, focusTotal: 10 };
     this.group = new Group();
     this.instances = [];
   }
@@ -84,8 +84,8 @@ class BaseChapter {
   onTransitionComplete() {
     const element = this.getRandomInstance();
     this.focusElement({ element, delay: 1 });
-    element.createChildren();
-    element.animateIn({ duration: 10, delay: 1 });
+    // element.createChildren();
+    // element.animateIn({ duration: 10, delay: 1 });
   }
 
   animate({ to, delay = 0, duration = 10, onComplete = () => {} }) {
@@ -100,13 +100,15 @@ class BaseChapter {
     });
   }
 
-  focusElement({
+  focusElement = ({
     element,
     delay = 1,
     duration = 1,
     offset = { x: 0, y: 0, z: 0, tx: 0, ty: 0, tz: 0 }
-  }) {
+  }) => {
     if (!element) return null;
+
+    this.state.currentFocusCount++;
 
     let boundingBox = new Box3().setFromObject(element.focalPoint);
     let center = new Vector3();
@@ -131,7 +133,7 @@ class BaseChapter {
       duration,
       callback: () => this.onTransitionComplete()
     });
-  }
+  };
 }
 
 export default BaseChapter;

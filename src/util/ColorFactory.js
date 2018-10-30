@@ -10,7 +10,7 @@ class ColorFactory {
   static async load(seasons) {
     const onDataComplete = () => {
       // function to be called when all ajax requests complete.
-      console.log("Color Factory data complete ", this.colorSeasons);
+      // console.log("Color Factory data complete ", this.colorSeasons);
     };
     const onDataError = () => {
       // function to be called when data fetching fails

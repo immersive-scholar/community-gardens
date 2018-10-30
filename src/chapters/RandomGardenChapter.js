@@ -1,4 +1,4 @@
-import { Group, Vector3 } from "three-full";
+import { Vector3 } from "three-full";
 
 import BaseChapter from "./BaseChapter";
 import BackgroundBAS from "art/background/BackgroundBAS";
@@ -16,9 +16,7 @@ class RandomGardenChapter extends BaseChapter {
     super(props, camera, controls, R);
   }
 
-  init(props) {
-    this.group = new Group();
-
+  init = props => {
     const bgColor = ColorFactory.getRandomColor(
       ColorFactory.SUMMER,
       ColorFactory.SKY
@@ -104,80 +102,93 @@ class RandomGardenChapter extends BaseChapter {
 
     this.group.add(this.asiminaTrilobaSpawn.group);
     this.addInstances(this.asiminaTrilobaSpawn.instances);
+  };
 
-    // const from = {
-    //     x: 0,
-    //     y: 0.25,
-    //     z: -10,
-    //     tx: 0,
-    //     ty: 0.25,
-    //     tz: 1
-    //   },
-    //   to = {
-    //     x: 0,
-    //     y: 0.25,
-    //     z: -0.25,
-    //     tx: 0,
-    //     ty: 0.25,
-    //     tz: 1
-    //   };
+  animateIn = ({ delay = 0 } = {}) => {
+    return new Promise((resolve, reject) => {
+      // We need to resolve the animateIn once a bunch of animations have run
+      // so we're storing these for later retrieval.
+      this.resolve = resolve;
+      this.reject = reject;
+      // const from = {
+      //     x: 0,
+      //     y: 0.25,
+      //     z: -10,
+      //     tx: 0,
+      //     ty: 0.25,
+      //     tz: 1
+      //   },
+      //   to = {
+      //     x: 0,
+      //     y: 0.25,
+      //     z: -0.25,
+      //     tx: 0,
+      //     ty: 0.25,
+      //     tz: 1
+      //   };
 
-    // this.controls.set({ x: 0, y: -0.75, z: -1.5, tx: 0, ty: 0.25, tz: 1 });
+      // this.controls.set({ x: 0, y: -0.75, z: -1.5, tx: 0, ty: 0.25, tz: 1 });
 
-    // this.controls.animate({
-    //   from,
-    //   to,
-    //   callback: () => this.onTransitionComplete()
-    // });
+      // this.controls.animate({
+      //   from,
+      //   to,
+      //   callback: () => this.onTransitionComplete()
+      // });
 
-    this.background.animateIn({ duration: 10, delay: 0.5 });
-    this.ground.animateIn({ duration: 5, delay: 4 });
-    this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
+      this.background.animateIn({ duration: 10, delay: 0.5 });
+      this.ground.animateIn({ duration: 5, delay: 4 });
+      this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
 
-    this.stellariaPuberaSpawn.animateIn({ delay: 6, instanceDelay: 0.3 });
-    this.asiminaTrilobaSpawn.animateIn({ delay: 8, instanceDelay: 0.3 });
-    this.solomonsSealSpawn.animateIn({ delay: 10, instanceDelay: 0.3 });
+      this.stellariaPuberaSpawn.animateIn({ delay: 6, instanceDelay: 0.3 });
+      this.asiminaTrilobaSpawn.animateIn({ delay: 8, instanceDelay: 0.3 });
+      this.solomonsSealSpawn.animateIn({ delay: 10, instanceDelay: 0.3 });
 
-    const element = this.getRandomInstance();
-    element.createChildren();
-    element.animateIn({ delay: 8, duration: 7 });
-    this.focusElement({
-      element,
-      delay: 15,
-      duration: 10
-      // offset: LookDownOffset(this.R)
+      const element = this.getRandomInstance();
+      element.createChildren();
+      element.animateIn({ delay: 8, duration: 7 });
+      this.focusElement({
+        element,
+        delay: 15,
+        duration: 10
+        // offset: LookDownOffset(this.R)
+      });
+
+      // const to = {
+      //   x: 0,
+      //   y: 1,
+      //   z: -1,
+      //   tx: 0,
+      //   ty: 1,
+      //   tz: 0
+      // };
+
+      // this.animate({
+      //   to,
+      //   delay: 10,
+      //   duration: 10,
+      //   onComplete: () => {
+      //     // this.controls.controls.autoRotate = true;
+      //   }
+      // });
+      // setTimeout(() => resolve("done"), 8000);
     });
+  };
 
-    // const to = {
-    //   x: 0,
-    //   y: 1,
-    //   z: -1,
-    //   tx: 0,
-    //   ty: 1,
-    //   tz: 0
-    // };
-
-    // this.animate({
-    //   to,
-    //   delay: 10,
-    //   duration: 10,
-    //   onComplete: () => {
-    //     // this.controls.controls.autoRotate = true;
-    //   }
-    // });
-  }
-
-  onTransitionComplete() {
+  onTransitionComplete = () => {
     const element = this.getRandomInstance();
-    element.createChildren();
-    element.animateIn({ delay: 8, duration: 7 });
+    // element.createChildren();
+    // element.animateIn({ delay: 8, duration: 7 });
     this.focusElement({
       element,
       delay: 2,
       duration: 10
       // offset: new LookDownOffset(this.R)
     });
-  }
+
+    if (this.state.currentFocusCount >= this.state.focusTotal) {
+      this.resolve("done");
+    }
+  };
 }
 
 export default RandomGardenChapter;

@@ -5,7 +5,7 @@ import BasePlant from "art/common/BasePlant";
 import Leaves from "./Leaves";
 import Berries from "./Berries";
 import StemGeometry from "./StemGeometry";
-import TextureFactory from "../../util/TextureFactory";
+// import TextureFactory from "../../util/TextureFactory";
 
 class SolomonsSeal extends BasePlant {
   createChildren = () => {

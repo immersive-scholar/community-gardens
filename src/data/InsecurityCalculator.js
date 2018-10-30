@@ -20,8 +20,8 @@ class InsecurityCalculator {
     return new Promise(resolve => {
       let max = 0,
         min = 0,
-        minData,
-        maxData,
+        // minData,
+        // maxData,
         total = 0;
       for (var i in data) {
         data[i].resourcesIncoming = ResourcesIncomingCalculator(data[i]);
@@ -31,19 +31,19 @@ class InsecurityCalculator {
         data[i].emotionalHealth = EmotionalHealthCalculator(data[i]);
         data[i].health = HealthCalculator(data[i]);
 
-        if (data[i].health < min) {
-          minData = data[i];
-          min = data[i].health;
-        }
+        // if (data[i].health < min) {
+        //   minData = data[i];
+        //   min = data[i].health;
+        // }
 
-        if (data[i].health > max) {
-          maxData = data[i];
-          max = data[i].health;
-        }
+        // if (data[i].health > max) {
+        //   maxData = data[i];
+        //   max = data[i].health;
+        // }
         total++;
       }
-      console.log("min ", min, minData);
-      console.log("max ", max, maxData);
+      // console.log("min ", min, minData);
+      // console.log("max ", max, maxData);
 
       // this could be more efficient as each Stat requires looping
       // over the entire array
@@ -61,7 +61,7 @@ class InsecurityCalculator {
       stats.didNotEatForADay = DidNotEatForADay(data, total);
       stats.skipMeals = SkipMeals(data);
 
-      console.log("stats ", stats);
+      // console.log("stats ", stats);
 
       data.stats = stats;
       resolve(data);

@@ -49,7 +49,7 @@ class StellariaPubera extends BasePlant {
       animated = true,
       delay = 0,
       openness = 0.3,
-      petalTarget = new Vector3(0, 0, -1),
+      petalTarget = new Vector3(0, 1, -1),
       hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 0.6, 0.3),
       hslRange = new Vector3(0.12, 0.12, 0.2),
       windForce = 0,
@@ -167,9 +167,9 @@ class StellariaPubera extends BasePlant {
     });
     // this.rearPetals.position.y = height;
     this.rearPetals.position.copy(stemTopPoint);
+    this.rearPetals.position.z += 0.002;
     this.rearPetals.lookAt(petalTarget);
     // this.rearPetals.rotation.y = -Math.PI / 2;
-    this.rearPetals.position.z += 0.002;
     this.group.add(this.rearPetals);
 
     // pollen
