@@ -31,12 +31,12 @@ class AsiminaTrilobaSpawn extends BaseSpawn {
           hslBase: new Vector3(
             1,
             R.floatBetween(0.6, 0.95),
-            R.floatBetween(0.1, 0.95)
+            R.floatBetween(0.8, 0.95)
           ),
           hslRange: new Vector3(
-            R.floatBetween(0, 0.05),
-            R.floatBetween(0.01, 0.025),
-            R.floatBetween(0.01, 0.05)
+            R.floatBetween(0, 0.1),
+            R.floatBetween(0.02, 0.05),
+            R.floatBetween(0.02, 0.05)
           ),
           petalWidth: R.floatBetween(0.15, 0.5),
           petalLength: R.floatBetween(0.1, 0.3)

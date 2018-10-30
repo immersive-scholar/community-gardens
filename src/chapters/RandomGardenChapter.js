@@ -3,14 +3,15 @@ import { Group, Vector3 } from "three-full";
 import BaseChapter from "./BaseChapter";
 import BackgroundBAS from "art/background/BackgroundBAS";
 import GroundBAS from "art/ground/GroundBAS";
-// import SolomonsSealSpawn from "art/solomons-seal/SolomonsSealSpawn";
+import SolomonsSealSpawn from "art/solomons-seal/SolomonsSealSpawn";
 // import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 // import TextureFactory from "util/TextureFactory";
 import ColorFactory from "util/ColorFactory";
 import { LAYOUT_FLOOR } from "art/layouts/LayoutConstants";
 import RandomLayout from "art/layouts/RandomLayout";
-// import GridLayout from "art/layouts/GridLayout";
+import GridLayout from "art/layouts/GridLayout";
+import { LookUpOffset } from "three/helpers/CameraOffsets";
 
 class RandomGardenChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
@@ -39,15 +40,28 @@ class RandomGardenChapter extends BaseChapter {
     // this.plane = new Plane({ color: bgColor });
     // this.group.add(this.plane.group);
 
-    // this.solomonsSealSpawn = new SolomonsSealSpawn({
-    //   count: 100,
-    //   R: this.R,
-    //   camera: this.camera,
-    //   controls: this.controls,
-    //   columnWidth: 0.2,
-    //   rowHeight: 0.2
-    // });
-    // this.group.add(this.solomonsSealSpawn.group);
+    let layoutType = LAYOUT_FLOOR,
+      bounds = new Vector3(1, 1, 1),
+      position = new Vector3();
+
+    this.solomonsSealSpawn = new SolomonsSealSpawn({
+      count: 50,
+      R: this.R,
+      camera: this.camera,
+      controls: this.controls
+    });
+    this.group.add(this.solomonsSealSpawn.group);
+
+    layoutType = LAYOUT_FLOOR;
+    bounds.set(2, 0, 2);
+    position.set(0, 2, 1);
+    new GridLayout({
+      instances: this.solomonsSealSpawn.instances,
+      group: this.solomonsSealSpawn.group,
+      R: this.R,
+      bounds,
+      position
+    });
 
     // this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
     //   count: 5,
@@ -58,18 +72,16 @@ class RandomGardenChapter extends BaseChapter {
     // this.group.add(this.stellariaPuberaSpawn.group);
 
     this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
-      count: 50,
+      count: 25,
       R: this.R,
       camera: this.camera,
       controls: this.controls
     });
 
-    const layoutType = LAYOUT_FLOOR,
-      bounds = new Vector3(4, 1.5, 1),
-      position = new Vector3(-2, 0.5, -0.5);
-    const { R } = this;
+    bounds.set(4, 1.5, 1);
+    position.set(-2, 0.5, -0.5);
     new RandomLayout({
-      R,
+      R: this.R,
       instances: this.asiminaTrilobaSpawn.instances,
       layoutType,
       bounds,
@@ -108,11 +120,12 @@ class RandomGardenChapter extends BaseChapter {
     this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
 
     // this.stellariaPuberaSpawn.animateIn({ delay: 7, instanceDelay: 2 });
-    this.asiminaTrilobaSpawn.animateIn({ delay: 7, instanceDelay: 2 });
-    // this.solomonsSealSpawn.animateIn({ delay: 7, instanceDelay: 2 });
+    this.asiminaTrilobaSpawn.animateIn({ delay: 7, instanceDelay: 0.5 });
+    this.solomonsSealSpawn.animateIn({ delay: 7, instanceDelay: 0.5 });
 
-    const element = this.asiminaTrilobaSpawn.getRandomInstance();
-    this.focusElement({ element, delay: 115 });
+    // const element = this.asiminaTrilobaSpawn.getRandomInstance();
+    const element = this.solomonsSealSpawn.getRandomInstance();
+    this.focusElement({ element, delay: 115, offset: LookUpOffset(this.R) });
 
     const to = {
       x: 0,
@@ -134,8 +147,8 @@ class RandomGardenChapter extends BaseChapter {
   }
 
   onTransitionComplete() {
-    const element = this.asiminaTrilobaSpawn.getRandomInstance();
-    this.focusElement({ element, delay: 2 });
+    const element = this.solomonsSealSpawn.getRandomInstance();
+    this.focusElement({ element, delay: 2, offset: new LookUpOffset(this.R) });
   }
 }
 

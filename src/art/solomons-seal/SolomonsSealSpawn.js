@@ -8,25 +8,10 @@ import { LAYOUT_WALL } from "art/layouts/LayoutConstants";
 
 class SolomonsSealSpawn extends BaseSpawn {
   init() {
-    const {
-      count,
-      group,
-      instances,
-      controls,
-      delay,
-      instanceDelay,
-      layoutType
-    } = this;
+    const { count, delay, instanceDelay } = this;
 
     this.createChildren({ count, delay, instanceDelay });
-    this.layout({
-      group,
-      rowWidth: 0.25,
-      columnHeight: 0.25,
-      position: new Vector3(-0.5, 1, -1.25),
-      layoutType
-    });
-    // this.createController({ instances, controls });
+    // this.createController({ instances: this.instances, controls: this.controls });
   }
 
   createChildren({ count, delay = 0, instanceDelay = 0.5 }) {
@@ -68,7 +53,6 @@ class SolomonsSealSpawn extends BaseSpawn {
       );
       this.group.add(instance.group);
       this.instances.push(instance);
-      i++;
     }
   }
 

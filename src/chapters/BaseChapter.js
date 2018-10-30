@@ -78,7 +78,12 @@ class BaseChapter {
     });
   }
 
-  focusElement({ element, delay = 2, duration }) {
+  focusElement({
+    element,
+    delay = 2,
+    duration,
+    offset = { x: 0, y: 0, z: 0, tx: 0, ty: 0, tz: 0 }
+  }) {
     if (!element) return null;
 
     let boundingBox = new Box3().setFromObject(element.group);
@@ -90,12 +95,12 @@ class BaseChapter {
     tempObject.localToWorld(position);
 
     const to = {
-      x: position.x,
-      y: position.y,
-      z: position.z - 0.5,
-      tx: position.x,
-      ty: position.y,
-      tz: position.z
+      x: position.x + offset.x,
+      y: position.y + offset.y,
+      z: position.z - 0.5 + offset.z,
+      tx: position.x + offset.tx,
+      ty: position.y + offset.ty,
+      tz: position.z + offset.tz
     };
 
     this.controls.animate({
