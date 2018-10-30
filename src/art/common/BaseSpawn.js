@@ -9,6 +9,7 @@ class BaseSpawn {
     delay = 0,
     instanceDelay = 0.5,
     count = 1,
+    data = [],
     bounds = new Vector3(1, 1, 1),
     position = new Vector3(),
     imagePath
@@ -21,6 +22,7 @@ class BaseSpawn {
     this.instanceDelay = instanceDelay;
     this.group = new Group();
     this.count = count;
+    this.data = data;
     this.instances = [];
     this.imagePath = imagePath;
 
