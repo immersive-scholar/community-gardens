@@ -9,6 +9,7 @@ class BaseChapter {
 
     this.state = {};
     this.group = new Group();
+    this.instances = [];
   }
 
   setCamera(camera) {
@@ -61,12 +62,33 @@ class BaseChapter {
     return await this.promiseTimeoutWithCancel(50, isDirty, callback);
   }
 
-  onTransitionComplete() {
-    // const element = this.asiminaTrilobaSpawn.getRandomInstance();
-    // this.focusElement({ element, delay: 2 });
+  addInstances(instances) {
+    for (var i = 0, iL = instances.length; i < iL; i++) {
+      this.instances.push(instances[i]);
+    }
+
+    return this.instances;
   }
 
-  animate({ to, delay = 2, duration = 10, onComplete = () => {} }) {
+  getRandomInstance() {
+    for (var i = 0; i < 1000; i++) {
+      if (this.R.range(1) >= 0.99) {
+        console.log("CLOSE CALL");
+      }
+    }
+    const index = this.R.range(this.instances.length);
+
+    return this.instances[index];
+  }
+
+  onTransitionComplete() {
+    const element = this.getRandomInstance();
+    this.focusElement({ element, delay: 0 });
+    element.createChildren();
+    element.animateIn({ duration: 10, delay: 0 });
+  }
+
+  animate({ to, delay = 0, duration = 10, onComplete = () => {} }) {
     this.controls.animate({
       to,
       delay,
@@ -80,8 +102,8 @@ class BaseChapter {
 
   focusElement({
     element,
-    delay = 2,
-    duration,
+    delay = 0,
+    duration = 1,
     offset = { x: 0, y: 0, z: 0, tx: 0, ty: 0, tz: 0 }
   }) {
     if (!element) return null;

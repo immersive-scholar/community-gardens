@@ -209,8 +209,8 @@ class AsiminaTriloba extends BasePlant {
     this.state.delay = delay;
     this.state.animated = animated;
 
-    this.petals.animateIn({ duration, delay: delay + 1, animated });
-    this.pollen.animateIn({ duration, delay: delay + 2, animated });
+    this.petals.animateIn({ duration, delay, animated });
+    this.pollen.animateIn({ duration, delay: delay + 1, animated });
   };
 }
 

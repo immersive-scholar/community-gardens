@@ -12,7 +12,7 @@ class SolomonsSeal extends BasePlant {
     this.clean();
 
     const {
-      height = this.R.floatBetween(0.24, 0.96),
+      height = this.R.floatBetween(0.5, 2),
       displacement = new Vector3(0.2, 0.1, 0.2),
       scale = new Vector3(2, 2, 4),
       offset = new Vector3(
@@ -30,8 +30,8 @@ class SolomonsSeal extends BasePlant {
       leafEndPoint = 1,
       rotationStart = new Vector3(0, 0, 0),
       rotationEnd = new Vector3(-1.5, 0.7, 0.2),
-      sizeStart = new Vector2(0.02, 0.01),
-      sizeEnd = new Vector2(0.1, 0.05),
+      sizeStart = new Vector2(0.05, 0.02),
+      sizeEnd = new Vector2(0.2, 0.1),
       windForce = 0,
       windDirection = new Vector3(0, 0, 0),
       hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 1, 0.3),

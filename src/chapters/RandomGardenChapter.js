@@ -53,6 +53,7 @@ class RandomGardenChapter extends BaseChapter {
       controls: this.controls
     });
     this.group.add(this.solomonsSealSpawn.group);
+    this.addInstances(this.solomonsSealSpawn.instances);
 
     bounds.set(4, 0, 2);
     position.set(-2, 0, 0.5);
@@ -67,7 +68,7 @@ class RandomGardenChapter extends BaseChapter {
     // Stellaria Pubera
 
     this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
-      count: 25,
+      count: 50,
       R: this.R,
       camera: this.camera,
       controls: this.controls
@@ -84,11 +85,12 @@ class RandomGardenChapter extends BaseChapter {
     });
 
     this.group.add(this.stellariaPuberaSpawn.group);
+    this.addInstances(this.stellariaPuberaSpawn.instances);
 
     // Asimina Triloba
 
     this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
-      count: 25,
+      count: 50,
       R: this.R,
       camera: this.camera,
       controls: this.controls
@@ -105,6 +107,7 @@ class RandomGardenChapter extends BaseChapter {
     });
 
     this.group.add(this.asiminaTrilobaSpawn.group);
+    this.addInstances(this.asiminaTrilobaSpawn.instances);
 
     // const from = {
     //     x: 0,
@@ -135,39 +138,48 @@ class RandomGardenChapter extends BaseChapter {
     this.ground.animateIn({ duration: 5, delay: 4 });
     this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
 
-    this.stellariaPuberaSpawn.animateIn({ delay: 7, instanceDelay: 2 });
-    this.asiminaTrilobaSpawn.animateIn({ delay: 7, instanceDelay: 0.5 });
-    this.solomonsSealSpawn.animateIn({ delay: 7, instanceDelay: 0.5 });
+    this.stellariaPuberaSpawn.animateIn({ delay: 0, instanceDelay: 0.05 });
+    this.asiminaTrilobaSpawn.animateIn({ delay: 1, instanceDelay: 0.05 });
+    this.solomonsSealSpawn.animateIn({ delay: 2, instanceDelay: 0.05 });
 
-    // const element = this.asiminaTrilobaSpawn.getRandomInstance();
-    const element = this.stellariaPuberaSpawn.getRandomInstance();
-    this.focusElement({ element, delay: 115, offset: LookDownOffset(this.R) });
-
-    const to = {
-      x: 0,
-      y: 1,
-      z: -1,
-      tx: 0,
-      ty: 1,
-      tz: 0
-    };
-
-    this.animate({
-      to,
-      delay: 10,
-      duration: 10,
-      onComplete: () => {
-        // this.controls.controls.autoRotate = true;
-      }
-    });
-  }
-
-  onTransitionComplete() {
-    const element = this.stellariaPuberaSpawn.getRandomInstance();
+    const element = this.getRandomInstance();
+    element.createChildren();
+    element.animateIn({ delay: 8, duration: 7 });
     this.focusElement({
       element,
       delay: 2,
-      offset: new LookDownOffset(this.R)
+      duration: 10
+      // offset: LookDownOffset(this.R)
+    });
+
+    // const to = {
+    //   x: 0,
+    //   y: 1,
+    //   z: -1,
+    //   tx: 0,
+    //   ty: 1,
+    //   tz: 0
+    // };
+
+    // this.animate({
+    //   to,
+    //   delay: 10,
+    //   duration: 10,
+    //   onComplete: () => {
+    //     // this.controls.controls.autoRotate = true;
+    //   }
+    // });
+  }
+
+  onTransitionComplete() {
+    const element = this.getRandomInstance();
+    element.createChildren();
+    element.animateIn({ delay: 8, duration: 7 });
+    this.focusElement({
+      element,
+      delay: 2,
+      duration: 10
+      // offset: new LookDownOffset(this.R)
     });
   }
 }

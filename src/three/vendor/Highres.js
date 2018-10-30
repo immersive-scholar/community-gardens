@@ -13,6 +13,7 @@ import {
   RenderPass,
   SMAAPass
 } from "three-full";
+import { TweenMax } from "gsap";
 
 const download = require("downloadjs");
 const PNG = require("pngjs").PNG;
@@ -97,6 +98,9 @@ class Highres {
     // Activate resize event
     window.addEventListener("resize", this.onResize.bind(this));
 
+    // pause all Tweens
+    TweenMax.pauseAll();
+
     console.log("Highres active.");
   }
 
@@ -109,6 +113,9 @@ class Highres {
 
     // Remove resize event
     window.removeEventListener("resize", this.onResize.bind(this));
+
+    // resume all tweens.
+    TweenMax.resumeAll();
 
     console.info("Highres inactive.");
   }
