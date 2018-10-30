@@ -48,7 +48,7 @@ class StellariaPubera extends BasePlant {
       animated = true,
       delay = 0,
       openness = 0.3,
-      petalTarget = new Vector3(0, -10, 0),
+      petalTarget = new Vector3(0, 1, 0),
       hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 0.6, 0.3),
       hslRange = new Vector3(0.12, 0.12, 0.2),
       windForce = 0,

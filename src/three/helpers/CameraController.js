@@ -61,7 +61,6 @@ export default ({ controls, camera, settings }) => {
         controls.controls.target = new Vector3(config.tx, config.ty, config.tz);
         controls.controls.autoRotate = config.autoRotate;
         controls.setGlobalTimeScale(config.velocity);
-        console.log("config.velocity ", config.velocity);
 
         settings.setTimeMultiplier(config.velocity);
 

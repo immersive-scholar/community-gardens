@@ -8,28 +8,10 @@ import { LAYOUT_WALL } from "art/layouts/LayoutConstants";
 
 class StellariaPuberaSpawn extends BaseSpawn {
   init() {
-    const {
-      count,
-      group,
-      instances,
-      controls,
-      delay,
-      instanceDelay,
-      layoutType = LAYOUT_WALL,
-      bounds = new Vector3(1, 1, 1),
-      position = new Vector3()
-    } = this;
+    const { count, controls, delay, instanceDelay } = this;
 
     this.createChildren({ count, delay, instanceDelay });
-    this.layout({
-      group,
-      rowWidth: 0.5,
-      columnHeight: 0.5,
-      position: new Vector3(0, 0.25, 0),
-      layoutType
-    });
-
-    this.createController({ instances, controls });
+    // this.createController({ instances, controls });
   }
 
   createChildren({ count, delay }) {

@@ -29,20 +29,7 @@ const GridLayoutHelper = ({
       break;
   }
 
-  // center the group
-  switch (layoutType) {
-    case LAYOUT_WALL:
-      group.position.x = position.x + (-rows / 2) * rowWidth + rowWidth / 2;
-      group.position.y =
-        position.y + (-columns / 2) * columnHeight + columnHeight / 2;
-      break;
-    case LAYOUT_FLOOR:
-    default:
-      group.position.x = position.x + (-rows / 2) * rowWidth + rowWidth / 2;
-      group.position.z =
-        position.z + (-columns / 2) * columnHeight + columnHeight / 2;
-      break;
-  }
+  group.position.copy(position);
 
   for (let x = 0, i = 0; x < rows; x++) {
     for (let y = 0; y < columns; y++) {
