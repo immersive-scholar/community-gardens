@@ -54,11 +54,9 @@ class RandomGardenChapter extends BaseChapter {
     });
     this.group.add(this.solomonsSealSpawn.group);
 
-    layoutType = LAYOUT_FLOOR;
-    bounds.set(2, 0, 2);
-    position.set(0, 0, 1);
-    new GridLayout({
-      layoutType,
+    bounds.set(4, 0, 2);
+    position.set(-2, 0, 0.5);
+    new RandomLayout({
       instances: this.solomonsSealSpawn.instances,
       group: this.solomonsSealSpawn.group,
       R: this.R,
@@ -75,11 +73,9 @@ class RandomGardenChapter extends BaseChapter {
       controls: this.controls
     });
 
-    layoutType = LAYOUT_WALL;
-    bounds.set(4, 2, 2);
-    position.set(0, 1, 1);
-    new GridLayout({
-      layoutType,
+    bounds.set(4, 1.5, 2);
+    position.set(-2, 0.5, 0.5);
+    new RandomLayout({
       instances: this.stellariaPuberaSpawn.instances,
       group: this.stellariaPuberaSpawn.group,
       R: this.R,

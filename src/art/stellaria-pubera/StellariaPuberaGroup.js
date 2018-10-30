@@ -33,7 +33,7 @@ const StellariaPuberaGroup = ({ R, camera, controls }) => {
             R.floatBetween(0.1, 0.25),
             R.floatBetween(0.1, 0.25)
           ),
-          petalTarget: new Vector3(0, 10, -10),
+          // petalTarget: new Vector3(0, 10, -10),
           openness: R.floatBetween(0, 2),
           berryCount: R.intBetween(16, 32),
           berryDistanceFromStem: R.floatBetween(0.002, 0.08),

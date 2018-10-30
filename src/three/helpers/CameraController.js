@@ -49,7 +49,7 @@ export default ({ controls, camera, settings }) => {
       y: config.y,
       z: config.z,
       tx: config.tx,
-      ty: config.ry,
+      ty: config.ty,
       tz: config.tz
     };
 
