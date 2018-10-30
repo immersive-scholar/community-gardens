@@ -2,13 +2,11 @@ import { Vector3 } from "three-full";
 
 import StellariaPubera from "art/stellaria-pubera/StellariaPubera";
 import StellariaPuberaController from "art/stellaria-pubera/StellariaPuberaController";
-import GridLayout from "art/layouts/GridLayout";
 import BaseSpawn from "art/common/BaseSpawn";
-import { LAYOUT_WALL } from "art/layouts/LayoutConstants";
 
 class StellariaPuberaSpawn extends BaseSpawn {
   init() {
-    const { count, controls, delay, instanceDelay } = this;
+    const { count, delay, instanceDelay } = this;
 
     this.createChildren({ count, delay, instanceDelay });
     // this.createController({ instances, controls });

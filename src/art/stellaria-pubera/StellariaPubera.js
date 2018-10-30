@@ -3,6 +3,7 @@ import ColorFactory from "util/ColorFactory";
 import BasePlant from "art/common/BasePlant";
 
 import StellariaPuberaPetalShape from "./StellariaPuberaPetalShape";
+import StemGeometry from "art/solomons-seal/StemGeometry";
 import Petals from "./Petals";
 import Pollen from "./Pollen";
 import TextureFactory from "../../util/TextureFactory";
@@ -32,10 +33,10 @@ class StellariaPubera extends BasePlant {
     this.clean();
 
     const {
-      height = 0.25,
+      height = this.R.floatBetween(0.25, 1.5),
       color = ColorFactory.getRandomColor(),
       rearPetalColor = color,
-      petalCount = 10, //this.R.intBetween(10, 24),
+      petalCount = this.R.intBetween(10, 24),
       rearPetalCount = 6,
       petalWidth = 0.025,
       petalLength = 0.25,
@@ -64,8 +65,38 @@ class StellariaPubera extends BasePlant {
       berryDistanceFromStem = 0.002,
       berryRotation = 360,
       berrySpiral = true,
-      berrySpiralDepth = 0.1
+      berrySpiralDepth = 0.1,
+      thickness = 0.02,
+      pointCount = height * 25,
+      displacement = new Vector3(0.2, 0.1, 0.2),
+      scale = new Vector3(2, 2, 4),
+      offset = new Vector3(
+        this.R.floatBetween(-0.5, 0.5),
+        this.R.floatBetween(-0.5, 0.5),
+        this.R.floatBetween(-0.5, 0.5)
+      )
     } = this.state;
+
+    const stemProps = {
+      height,
+      color,
+      thickness,
+      pointCount,
+      scale,
+      displacement,
+      offset,
+      R: this.R,
+      glitchAmplitude: 0,
+      glitchAngle: new Vector3(1, 1, 1),
+      glitchThreshold: new Vector3(1, 1, 1),
+      fogDensity: 0.3,
+      animated
+    };
+    const geometry = new StemGeometry(stemProps);
+    stemProps.geometry = geometry;
+    this.createStem(stemProps);
+
+    const stemTopPoint = this.stem.geometry.vertices[0];
 
     const petalShapeGeometry = new StellariaPuberaPetalShape({
       width: petalWidth,
@@ -96,7 +127,8 @@ class StellariaPubera extends BasePlant {
       rotationAngle,
       translateToY
     });
-    this.petals.position.y = height;
+    // this.petals.position.y = height;
+    this.petals.position.copy(stemTopPoint);
     this.petals.lookAt(petalTarget);
     // this.petals.rotation.y = -Math.PI / 2;
     this.group.add(this.petals);
@@ -133,7 +165,8 @@ class StellariaPubera extends BasePlant {
       rotationAngle,
       translateToY
     });
-    this.rearPetals.position.y = height;
+    // this.rearPetals.position.y = height;
+    this.rearPetals.position.copy(stemTopPoint);
     this.rearPetals.lookAt(petalTarget);
     // this.rearPetals.rotation.y = -Math.PI / 2;
     this.rearPetals.position.z += 0.002;
@@ -161,30 +194,9 @@ class StellariaPubera extends BasePlant {
     this.pollen.position.z -= 0.002;
     // this.pollen.rotation.y = -Math.PI / 2;
     this.group.add(this.pollen);
+
+    this.focalPoint = this.pollen;
   };
-
-  clean() {
-    this.tween && this.tween.kill(null, this);
-
-    if (this.petals) {
-      this.group.remove(this.petals);
-      this.petals.clean();
-      this.petals = undefined;
-    }
-
-    if (this.rearPetals) {
-      this.group.remove(this.rearPetals);
-      this.rearPetals.clean();
-      this.rearPetals = undefined;
-    }
-
-    if (this.pollen) {
-      this.group.remove(this.pollen);
-      this.pollen.geometry.dispose();
-      this.pollen.material.dispose();
-      this.pollen = undefined;
-    }
-  }
 
   animateIn = ({ duration = 1, delay = 0, animated = true } = {}) => {
     this.state.lazy = false;
@@ -193,9 +205,10 @@ class StellariaPubera extends BasePlant {
     this.state.delay = delay;
     this.state.animated = animated;
 
-    this.rearPetals.animateIn({ duration, delay, animated });
-    this.petals.animateIn({ duration, delay: delay + 1, animated });
-    this.pollen.animateIn({ duration, delay: delay + 4, animated });
+    this.stem.curvePainter.animateIn({ duration, delay, animated });
+    this.rearPetals.animateIn({ duration, delay: delay + 2, animated });
+    this.petals.animateIn({ duration, delay: delay + 2.5, animated });
+    this.pollen.animateIn({ duration, delay: delay + 3, animated });
   };
 }
 

@@ -83,9 +83,9 @@ class BaseChapter {
 
   onTransitionComplete() {
     const element = this.getRandomInstance();
-    this.focusElement({ element, delay: 0 });
+    this.focusElement({ element, delay: 1 });
     element.createChildren();
-    element.animateIn({ duration: 10, delay: 0 });
+    element.animateIn({ duration: 10, delay: 1 });
   }
 
   animate({ to, delay = 0, duration = 10, onComplete = () => {} }) {
@@ -102,7 +102,7 @@ class BaseChapter {
 
   focusElement({
     element,
-    delay = 0,
+    delay = 1,
     duration = 1,
     offset = { x: 0, y: 0, z: 0, tx: 0, ty: 0, tz: 0 }
   }) {

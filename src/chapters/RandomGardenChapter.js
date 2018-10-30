@@ -6,12 +6,10 @@ import GroundBAS from "art/ground/GroundBAS";
 import SolomonsSealSpawn from "art/solomons-seal/SolomonsSealSpawn";
 import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
-// import TextureFactory from "util/TextureFactory";
 import ColorFactory from "util/ColorFactory";
-import { LAYOUT_FLOOR, LAYOUT_WALL } from "art/layouts/LayoutConstants";
 import RandomLayout from "art/layouts/RandomLayout";
-import GridLayout from "art/layouts/GridLayout";
-import { LookUpOffset, LookDownOffset } from "three/helpers/CameraOffsets";
+// import TextureFactory from "util/TextureFactory";
+// import { LookUpOffset, LookDownOffset } from "three/helpers/CameraOffsets";
 
 class RandomGardenChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
@@ -40,14 +38,13 @@ class RandomGardenChapter extends BaseChapter {
     // this.plane = new Plane({ color: bgColor });
     // this.group.add(this.plane.group);
 
-    let layoutType = LAYOUT_FLOOR,
-      bounds = new Vector3(1, 1, 1),
+    let bounds = new Vector3(1, 1, 1),
       position = new Vector3();
 
     // Solomon's Seal
 
     this.solomonsSealSpawn = new SolomonsSealSpawn({
-      count: 50,
+      count: 25,
       R: this.R,
       camera: this.camera,
       controls: this.controls
@@ -68,14 +65,14 @@ class RandomGardenChapter extends BaseChapter {
     // Stellaria Pubera
 
     this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
-      count: 50,
+      count: 25,
       R: this.R,
       camera: this.camera,
       controls: this.controls
     });
 
-    bounds.set(4, 1.5, 2);
-    position.set(-2, 0.5, 0.5);
+    bounds.set(4, 0, 2);
+    position.set(-2, 0, 0.5);
     new RandomLayout({
       instances: this.stellariaPuberaSpawn.instances,
       group: this.stellariaPuberaSpawn.group,
@@ -90,18 +87,17 @@ class RandomGardenChapter extends BaseChapter {
     // Asimina Triloba
 
     this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
-      count: 50,
+      count: 25,
       R: this.R,
       camera: this.camera,
       controls: this.controls
     });
 
-    bounds.set(4, 1.5, 1);
-    position.set(-2, 0.5, 0.5);
+    bounds.set(4, 0, 1);
+    position.set(-2, 0, 0.5);
     new RandomLayout({
       R: this.R,
       instances: this.asiminaTrilobaSpawn.instances,
-      layoutType,
       bounds,
       position
     });

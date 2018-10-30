@@ -1,4 +1,4 @@
-import { Vector2, Vector3, CatmullRomCurve3 } from "three-full";
+import { Vector2, Vector3 } from "three-full";
 import ColorFactory from "util/ColorFactory";
 import BasePlant from "art/common/BasePlant";
 
@@ -7,8 +7,7 @@ import AsiminaTrilobaPetalShape from "./AsiminaTrilobaPetalShape";
 import Petals from "./Petals";
 import Pollen from "./Pollen";
 import TextureFactory from "util/TextureFactory";
-// import StemGeometry from "./StemGeometry";
-import CurvePainter from "three/helpers/CurvePainter";
+import StemGeometry from "./StemGeometry";
 
 class AsiminaTriloba extends BasePlant {
   init = (props = {}) => {
@@ -24,16 +23,16 @@ class AsiminaTriloba extends BasePlant {
     this.clean();
 
     const {
-      // height = this.R.floatBetween(0.25, 0.75),
-      // pointCount = 24,
-      // displacement = new Vector3(0.2, 0.1, 0.2),
-      // scale = new Vector3(2, 2, 4),
-      // offset = new Vector3(
-      //   this.R.floatBetween(-0.5, 0.5),
-      //   this.R.floatBetween(-0.5, 0.5),
-      //   this.R.floatBetween(-0.5, 0.5)
-      // ),
-      // thickness = 0.02,
+      height = this.R.floatBetween(0.25, 0.75),
+      pointCount = 24,
+      displacement = new Vector3(0.2, 0.1, 0.2),
+      scale = new Vector3(2, 2, 4),
+      offset = new Vector3(
+        this.R.floatBetween(-0.5, 0.5),
+        this.R.floatBetween(-0.5, 0.5),
+        this.R.floatBetween(-0.5, 0.5)
+      ),
+      thickness = 0.02,
       color = ColorFactory.getRandomColor(),
       petalCount = this.R.intBetween(6, 12),
       petalWidth = 0.25,
@@ -67,30 +66,28 @@ class AsiminaTriloba extends BasePlant {
       berrySpiralDepth = 0.1
     } = this.state;
 
-    // stem
-    // this.geometry = new StemGeometry({
-    //   height,
-    //   pointCount,
-    //   displacement,
-    //   scale,
-    //   offset,
-    //   R: this.R
-    // });
-
-    // this.stem = this.toCurve({
-    //   geometry: this.geometry,
-    //   color,
-    //   delay,
-    //   pointCount,
-    //   thickness,
-    //   fogDensity: 0.3,
-    //   animated
-    // });
-    // this.group.add(this.stem.curvePainter.mesh);
+    const stemProps = {
+      height,
+      thickness,
+      color,
+      pointCount,
+      scale,
+      displacement,
+      offset,
+      R: this.R,
+      glitchAmplitude: 0,
+      glitchAngle: new Vector3(1, 1, 1),
+      glitchThreshold: new Vector3(1, 1, 1),
+      fogDensity: 0.3,
+      animated
+    };
+    const geometry = new StemGeometry(stemProps);
+    stemProps.geometry = geometry;
+    this.createStem(stemProps);
 
     //get top point
-    // const stemTopPoint = this.stem.geometry.vertices[0];
-    const stemTopPoint = new Vector3(0, 0, 0);
+    const stemTopPoint = this.stem.geometry.vertices[0];
+    // const stemTopPoint = new Vector3(0, 0, 0);
 
     const petalShapeGeometry = new AsiminaTrilobaPetalShape({
       width: petalWidth,
@@ -147,60 +144,9 @@ class AsiminaTriloba extends BasePlant {
     this.pollen.position.copy(stemTopPoint);
     // this.pollen.rotation.y = -Math.PI / 2;
     this.group.add(this.pollen);
+
+    this.focalPoint = this.pollen;
   };
-
-  toCurve = ({
-    geometry,
-    color,
-    delay = 0,
-    thickness = 2,
-    pointCount = 8,
-    fogColor,
-    fogDensity,
-    animated
-  }) => {
-    const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
-
-    const curvePainter = new CurvePainter({
-      camera: this.camera,
-      curve,
-      color,
-      pointCount,
-      lineWidth: thickness,
-      delay: delay,
-      fogColor,
-      fogDensity,
-      animated
-    });
-
-    curvePainter.mesh.matrixAutoUpdate = true;
-
-    return { curvePainter, geometry, curve };
-  };
-
-  clean() {
-    this.tween && this.tween.kill(null, this);
-
-    if (this.stem) {
-      this.group.remove(this.stem.curvePainter.mesh);
-      this.geometry.dispose();
-      this.stem.curvePainter.clean();
-      this.stem = undefined;
-    }
-
-    if (this.petals) {
-      this.group.remove(this.petals);
-      this.petals.clean();
-      this.petals = undefined;
-    }
-
-    if (this.pollen) {
-      this.group.remove(this.pollen);
-      this.pollen.geometry.dispose();
-      this.pollen.material.dispose();
-      this.pollen = undefined;
-    }
-  }
 
   animateIn = ({ duration = 2, delay = 0, animated = true } = {}) => {
     this.state.lazy = false;
@@ -209,8 +155,9 @@ class AsiminaTriloba extends BasePlant {
     this.state.delay = delay;
     this.state.animated = animated;
 
-    this.petals.animateIn({ duration, delay, animated });
-    this.pollen.animateIn({ duration, delay: delay + 1, animated });
+    this.stem.curvePainter.animateIn({ duration, delay, animated });
+    this.petals.animateIn({ duration, delay: delay + 1, animated });
+    this.pollen.animateIn({ duration, delay: delay + 2, animated });
   };
 }
 

@@ -2,9 +2,9 @@ import { Vector2, Vector3 } from "three-full";
 import ColorFactory from "util/ColorFactory";
 import BasePlant from "art/common/BasePlant";
 
-import StemGeometry from "./StemGeometry";
 import Leaves from "./Leaves";
 import Berries from "./Berries";
+import StemGeometry from "./StemGeometry";
 import TextureFactory from "../../util/TextureFactory";
 
 class SolomonsSeal extends BasePlant {
@@ -25,7 +25,7 @@ class SolomonsSeal extends BasePlant {
       pointCount = height * 25,
       thickness = 0.02,
       color = ColorFactory.getRandomColor(),
-      imagePath = TextureFactory.getStroke(),
+      // imagePath = TextureFactory.getStroke(),
       leafStartPoint = 0.3,
       leafEndPoint = 1,
       rotationStart = new Vector3(0, 0, 0),
@@ -36,9 +36,6 @@ class SolomonsSeal extends BasePlant {
       windDirection = new Vector3(0, 0, 0),
       hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 1, 0.3),
       hslRange = new Vector3(0, 0, 0.2),
-      glitchAmplitude = 0,
-      glitchAngle = new Vector3(1, 1, 1),
-      glitchThreshold = new Vector3(1, 1, 1),
       berrySize = 0.005,
       berryCount = 24, //this.R.intBetween(4, 24),
       berryColor = 0xffffff,
@@ -47,31 +44,29 @@ class SolomonsSeal extends BasePlant {
       berryDistanceFromStem = 0.015,
       berryRotation = 720,
       berrySpiral = true
+      // glitchAmplitude = 0,
+      // glitchAngle = new Vector3(1, 1, 1),
+      // glitchThreshold = new Vector3(1, 1, 1),
     } = this.state;
 
-    // stem
-    this.geometry = new StemGeometry({
+    const stemProps = {
       height,
-      pointCount,
-      displacement,
-      scale,
-      offset,
-      glitchAmplitude,
-      glitchThreshold,
-      glitchAngle,
-      R: this.R
-    });
-
-    this.stem = this.toCurve({
-      geometry: this.geometry,
-      color,
-      imagePath,
-      pointCount,
       thickness,
+      color,
+      pointCount,
+      scale,
+      displacement,
+      offset,
+      R: this.R,
+      glitchAmplitude: 0,
+      glitchAngle: new Vector3(1, 1, 1),
+      glitchThreshold: new Vector3(1, 1, 1),
       fogDensity: 0.3,
       animated
-    });
-    this.group.add(this.stem.curvePainter.mesh);
+    };
+    const geometry = new StemGeometry(stemProps);
+    stemProps.geometry = geometry;
+    this.createStem(stemProps);
 
     this.berriesMesh = new Berries({
       size: berrySize,
@@ -125,29 +120,6 @@ class SolomonsSeal extends BasePlant {
 
   //   return geometry.vertices;
   // };
-
-  clean() {
-    if (this.stem) {
-      this.group.remove(this.stem.curvePainter.mesh);
-      this.geometry.dispose();
-      this.stem.curvePainter.clean();
-      this.stem = undefined;
-    }
-
-    if (this.leavesMesh) {
-      this.group.remove(this.leavesMesh);
-      this.leavesMesh.geometry.dispose();
-      this.leavesMesh.material.dispose();
-      this.leavesMesh = undefined;
-    }
-
-    if (this.berriesMesh) {
-      this.group.remove(this.berriesMesh);
-      this.berriesMesh.geometry.dispose();
-      this.berriesMesh.material.dispose();
-      this.berriesMesh = undefined;
-    }
-  }
 
   animateIn = ({ duration = 1, delay = 0, animated = true } = {}) => {
     this.state.lazy = false;

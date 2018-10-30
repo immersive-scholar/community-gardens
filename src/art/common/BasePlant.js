@@ -18,6 +18,7 @@ class BasePlant extends BaseRenderable {
 
   // boilerplate
   init = (props = {}) => {
+    this.focalPoint = this.group;
     if (!this.state.lazy || this.isDirty) {
       this.createChildren(props);
       if (this.state.visible) {
@@ -28,23 +29,17 @@ class BasePlant extends BaseRenderable {
 
   createChildren = () => {
     this.clean();
+  };
 
-    // get props out of state, with defaults
-    // const {
-    //   height = this.R.floatBetween(0.25, 0.75)
-    // } = this.state;
-
+  createStem = (props = this.state) => {
     // build objects
-    // this.geometry = new StemGeometry({
-    //   height,
-    // });
+    this.geometry = props.geometry;
+    // this.geometry = new StemGeometry(props);
 
-    // this.stem = this.toCurve({
-    //   geometry: this.geometry,
-    // });
+    this.stem = this.toCurve(props);
 
     // add to group
-    // this.group.add(this.stem.curvePainter.mesh);
+    this.group.add(this.stem.curvePainter.mesh);
   };
 
   toCurve = ({
@@ -340,11 +335,31 @@ class BasePlant extends BaseRenderable {
       this.petals = undefined;
     }
 
+    if (this.rearPetals) {
+      this.group.remove(this.rearPetals);
+      this.rearPetals.clean();
+      this.rearPetals = undefined;
+    }
+
     if (this.pollen) {
       this.group.remove(this.pollen);
       this.pollen.geometry.dispose();
       this.pollen.material.dispose();
       this.pollen = undefined;
+    }
+
+    if (this.leavesMesh) {
+      this.group.remove(this.leavesMesh);
+      this.leavesMesh.geometry.dispose();
+      this.leavesMesh.material.dispose();
+      this.leavesMesh = undefined;
+    }
+
+    if (this.berriesMesh) {
+      this.group.remove(this.berriesMesh);
+      this.berriesMesh.geometry.dispose();
+      this.berriesMesh.material.dispose();
+      this.berriesMesh = undefined;
     }
   }
 
