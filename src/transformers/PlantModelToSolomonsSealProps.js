@@ -1,12 +1,19 @@
 import { Vector3 } from "three-full";
+import { HOUSING_INSECURITY, DID_NOT_EAT_FOR_A_DAY } from "constants/Stats";
 
 const PlantModelToSolomonsSealProps = ({
   model,
+  stats,
   i,
   delay = 0,
   instanceDelay = 0.5,
   R
 }) => {
+  const isHousingInsecure = model[HOUSING_INSECURITY];
+  const didNotEatForADay = model[DID_NOT_EAT_FOR_A_DAY];
+
+  console.log("isHousingInsecure ", isHousingInsecure);
+  console.log("didNotEatForADay ", didNotEatForADay);
   const props = {
     lazy: true,
     delay: delay + i * instanceDelay,

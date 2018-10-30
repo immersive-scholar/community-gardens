@@ -2,6 +2,7 @@ import SolomonsSeal from "art/solomons-seal/SolomonsSeal";
 import SolomonsSealController from "art/solomons-seal/SolomonsSealController";
 import BaseSpawn from "art/common/BaseSpawn";
 import PlantModelToSolomonsSealProps from "transformers/PlantModelToSolomonsSealProps";
+import InsecurityCalculator from "data/InsecurityCalculator";
 
 class SolomonsSealSpawn extends BaseSpawn {
   init() {
@@ -14,11 +15,16 @@ class SolomonsSealSpawn extends BaseSpawn {
   createChildren({ data, count, delay = 0, instanceDelay = 0.5 }) {
     const { R, camera } = this;
 
-    let instance, plantModel, props;
+    let instance,
+      plantModel,
+      props,
+      stats = InsecurityCalculator.stats;
+    console.log("stats.housingInsecurity ", stats.housingInsecurity);
     for (let i = 0; i < count; i++) {
       plantModel = data[i];
       props = PlantModelToSolomonsSealProps({
         model: plantModel,
+        stats,
         i,
         delay,
         instanceDelay,

@@ -1,5 +1,6 @@
 import map from "lodash/map";
 import uniqBy from "lodash/uniqBy";
+import { HOUSING_INSECURITY } from "constants/Stats";
 
 const HousingInsecurity = (data, total) => {
   const labels = [
@@ -21,7 +22,10 @@ const HousingInsecurity = (data, total) => {
     label = labels[l];
     for (var i in data) {
       match = parseInt(data[i][label], 10) === 1;
-      if (match) rows.push(data[i]);
+      if (match) {
+        data[i][HOUSING_INSECURITY] = true;
+        rows.push(data[i]);
+      }
     }
   }
 
@@ -31,7 +35,7 @@ const HousingInsecurity = (data, total) => {
   const ids = map(uniq, row => row.ID);
 
   return {
-    id: "housingInsecurity",
+    id: HOUSING_INSECURITY,
     label: `${pct}% of students experienced homelessness over the last 12 months`,
     count,
     ids
