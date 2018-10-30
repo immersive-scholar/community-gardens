@@ -11,9 +11,10 @@ const LookUpOffset = R => {
     tz: -z
   };
 };
+
 const LookDownOffset = R => {
   const x = R.floatBetween(-0.25, 0.25);
-  const y = R.floatBetween(0, 0.5);
+  const y = R.floatBetween(0, 0.25);
   const z = 0;
   return {
     x,

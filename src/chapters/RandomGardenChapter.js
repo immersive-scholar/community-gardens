@@ -9,7 +9,7 @@ import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import ColorFactory from "util/ColorFactory";
 import RandomLayout from "art/layouts/RandomLayout";
 // import TextureFactory from "util/TextureFactory";
-// import { LookUpOffset, LookDownOffset } from "three/helpers/CameraOffsets";
+import { LookUpOffset, LookDownOffset } from "three/helpers/CameraOffsets";
 
 class RandomGardenChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
@@ -42,7 +42,7 @@ class RandomGardenChapter extends BaseChapter {
     // Solomon's Seal
 
     this.solomonsSealSpawn = new SolomonsSealSpawn({
-      count: 25,
+      count: 1,
       R: this.R,
       camera: this.camera,
       controls: this.controls
@@ -63,7 +63,7 @@ class RandomGardenChapter extends BaseChapter {
     // Stellaria Pubera
 
     this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
-      count: 25,
+      count: 1,
       R: this.R,
       camera: this.camera,
       controls: this.controls
@@ -85,7 +85,7 @@ class RandomGardenChapter extends BaseChapter {
     // Asimina Triloba
 
     this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
-      count: 25,
+      count: 1,
       R: this.R,
       camera: this.camera,
       controls: this.controls
@@ -149,8 +149,8 @@ class RandomGardenChapter extends BaseChapter {
       this.focusElement({
         element,
         delay: 15,
-        duration: 10
-        // offset: LookDownOffset(this.R)
+        duration: 10,
+        offset: LookDownOffset(this.R)
       });
 
       // const to = {
@@ -175,18 +175,25 @@ class RandomGardenChapter extends BaseChapter {
   };
 
   onTransitionComplete = () => {
-    const element = this.getRandomInstance();
-    // element.createChildren();
-    // element.animateIn({ delay: 8, duration: 7 });
-    this.focusElement({
-      element,
-      delay: 2,
-      duration: 10
-      // offset: new LookDownOffset(this.R)
-    });
-
+    // if we have focused on the desired number of elements
     if (this.state.currentFocusCount >= this.state.focusTotal) {
-      this.resolve("done");
+      // let's pan the camera away from the scene
+      // as a signal that the chapter is complete
+      // we will also resolve the promise
+      // so the sceneSubject knows to go on to the next chapter.
+      this.animateOut({ onComplete: () => this.resolve("done") });
+
+      // otherwise, we're going to select an item and focus on it
+    } else {
+      const element = this.getRandomInstance();
+      // element.createChildren();
+      // element.animateIn({ delay: 8, duration: 7 });
+      this.focusElement({
+        element,
+        delay: 2,
+        duration: 10,
+        offset: new LookDownOffset(this.R)
+      });
     }
   };
 }

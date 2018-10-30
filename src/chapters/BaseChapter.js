@@ -7,7 +7,7 @@ class BaseChapter {
     this.controls = controls;
     this.R = R;
 
-    this.state = { currentFocusCount: 0, focusTotal: 10 };
+    this.state = { currentFocusCount: 0, focusTotal: 3 };
     this.group = new Group();
     this.instances = [];
   }
@@ -71,33 +71,18 @@ class BaseChapter {
   }
 
   getRandomInstance() {
-    for (var i = 0; i < 1000; i++) {
-      if (this.R.range(1) >= 0.99) {
-        console.log("CLOSE CALL");
-      }
-    }
     const index = this.R.range(this.instances.length);
 
-    return this.instances[index];
-  }
+    // ensure we don't select the currently selected element
+    // this would mean the camera doesn't move.
+    // boooooring.
+    if (index === this.state.currentFocusIndex) {
+      return this.getRandomInstance();
+    }
 
-  onTransitionComplete() {
-    const element = this.getRandomInstance();
-    this.focusElement({ element, delay: 1 });
-    // element.createChildren();
-    // element.animateIn({ duration: 10, delay: 1 });
-  }
-
-  animate({ to, delay = 0, duration = 10, onComplete = () => {} }) {
-    this.controls.animate({
-      to,
-      delay,
-      duration,
-      callback: () => {
-        onComplete();
-        this.onTransitionComplete();
-      }
-    });
+    this.state.currentFocusIndex = index;
+    const instance = this.instances[index];
+    return instance;
   }
 
   focusElement = ({
@@ -132,6 +117,43 @@ class BaseChapter {
       delay,
       duration,
       callback: () => this.onTransitionComplete()
+    });
+  };
+
+  onTransitionComplete() {
+    const element = this.getRandomInstance();
+    this.focusElement({ element, delay: 1 });
+    // element.createChildren();
+    // element.animateIn({ duration: 10, delay: 1 });
+  }
+
+  animateIn = ({ to, delay = 0, duration = 10, onComplete = () => {} }) => {
+    this.controls.animate({
+      to,
+      delay,
+      duration,
+      callback: () => {
+        onComplete();
+        this.onTransitionComplete();
+      }
+    });
+  };
+
+  animateOut = ({ delay = 0, duration = 15, onComplete = () => {} }) => {
+    const to = {
+      x: 0,
+      y: -3,
+      z: -20,
+      tx: 0,
+      ty: 1,
+      tz: 1
+    };
+
+    this.controls.animate({
+      to,
+      delay,
+      duration,
+      callback: onComplete
     });
   };
 }
