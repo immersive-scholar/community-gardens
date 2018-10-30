@@ -233,7 +233,7 @@ const Controls = ({ camera, velocity = 1 }) => {
     zoomTween2 && zoomTween2.kill();
   }
 
-  function setVelocity(v) {
+  function setGlobalTimeScale(v) {
     // we can affect just the camera movement
     // velocity = v;
     // or we can affect _all_ of the animations
@@ -252,7 +252,8 @@ const Controls = ({ camera, velocity = 1 }) => {
     animateChapter2,
     killTweens,
     set,
-    setVelocity
+    setGlobalTimeScale,
+    walkabout
   };
 };
 

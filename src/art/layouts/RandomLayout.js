@@ -1,8 +1,7 @@
 import { Vector3 } from "three-full";
-import { LAYOUT_RANDOM } from "./LayoutConstants";
 
 const RandomLayout = ({
-  group,
+  instances = [],
   bounds = new Vector3(10, 10, 10),
   position = new Vector3(0, 0, 0),
   R
@@ -10,7 +9,7 @@ const RandomLayout = ({
   for (
     let i = 0,
       mesh,
-      iL = group.children.length,
+      iL = instances.length,
       randomPosition = new Vector3(),
       x,
       y,
@@ -18,14 +17,16 @@ const RandomLayout = ({
     i < iL;
     i++
   ) {
-    mesh = group.children[i];
+    mesh = instances[i];
     x = R.random();
     y = R.random();
     z = R.random();
-    randomPosition.set(x, y, z).multiply(bounds);
-    mesh.position.copy(randomPosition);
+    randomPosition
+      .set(x, y, z)
+      .multiply(bounds)
+      .add(position.clone());
+    mesh.group.position.copy(randomPosition);
   }
-  group.position.copy(position);
 };
 
 export default RandomLayout;

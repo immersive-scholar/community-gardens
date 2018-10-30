@@ -2,21 +2,33 @@ import { Vector3 } from "three-full";
 
 import StellariaPubera from "art/stellaria-pubera/StellariaPubera";
 import StellariaPuberaController from "art/stellaria-pubera/StellariaPuberaController";
-import GridLayoutHelper from "art/layouts/GridLayoutHelper";
+import GridLayout from "art/layouts/GridLayout";
 import BaseSpawn from "art/common/BaseSpawn";
+import { LAYOUT_WALL } from "art/layouts/LayoutConstants";
 
 class StellariaPuberaSpawn extends BaseSpawn {
   init() {
-    const { count, group, instances, controls, delay } = this;
+    const {
+      count,
+      group,
+      instances,
+      controls,
+      delay,
+      instanceDelay,
+      layoutType = LAYOUT_WALL,
+      bounds = new Vector3(1, 1, 1),
+      position = new Vector3()
+    } = this;
 
-    this.createChildren({ count, delay });
+    this.createChildren({ count, delay, instanceDelay });
     this.layout({
       group,
       rowWidth: 0.5,
       columnHeight: 0.5,
       position: new Vector3(0, 0.25, 0),
-      axis: GridLayoutHelper.LAYOUT_WALL
+      layoutType
     });
+
     this.createController({ instances, controls });
   }
 

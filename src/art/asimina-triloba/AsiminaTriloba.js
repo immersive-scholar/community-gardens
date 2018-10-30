@@ -24,17 +24,17 @@ class AsiminaTriloba extends BasePlant {
     this.clean();
 
     const {
-      height = this.R.floatBetween(0.25, 0.75),
-      pointCount = 24,
+      // height = this.R.floatBetween(0.25, 0.75),
+      // pointCount = 24,
+      // displacement = new Vector3(0.2, 0.1, 0.2),
+      // scale = new Vector3(2, 2, 4),
+      // offset = new Vector3(
+      //   this.R.floatBetween(-0.5, 0.5),
+      //   this.R.floatBetween(-0.5, 0.5),
+      //   this.R.floatBetween(-0.5, 0.5)
+      // ),
+      // thickness = 0.02,
       color = ColorFactory.getRandomColor(),
-      displacement = new Vector3(0.2, 0.1, 0.2),
-      scale = new Vector3(2, 2, 4),
-      offset = new Vector3(
-        this.R.floatBetween(-0.5, 0.5),
-        this.R.floatBetween(-0.5, 0.5),
-        this.R.floatBetween(-0.5, 0.5)
-      ),
-      thickness = 0.02,
       petalCount = this.R.intBetween(6, 12),
       petalWidth = 0.25,
       petalLength = 0.2,
@@ -42,8 +42,8 @@ class AsiminaTriloba extends BasePlant {
       petalLowerMidPointRatio = 0.2,
       petalUpperMidPointRatio = 0.9,
       petalDistanceFromCenter = 0.01,
-      // imagePath = TextureFactory.getStroke(),
-      imagePath = TextureFactory.getPattern(),
+      imagePath = TextureFactory.getStroke(),
+      // imagePath = TextureFactory.getPattern(),
       textureSize = new Vector2(5, 5),
       animated = true,
       delay = 0,

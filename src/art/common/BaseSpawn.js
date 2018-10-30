@@ -1,12 +1,5 @@
 import { Group, Vector3 } from "three-full";
 import sample from "lodash/sample";
-import GridLayout from "art/layouts/GridLayout";
-import RandomLayout from "art/layouts/RandomLayout";
-import {
-  LAYOUT_RANDOM,
-  LAYOUT_FLOOR,
-  LAYOUT_WALL
-} from "art/layouts/LayoutConstants";
 
 class BaseSpawn {
   constructor({
@@ -18,7 +11,6 @@ class BaseSpawn {
     count = 1,
     bounds = new Vector3(1, 1, 1),
     position = new Vector3(),
-    layoutType = LAYOUT_RANDOM,
     imagePath
   } = {}) {
     this.R = R;
@@ -29,9 +21,6 @@ class BaseSpawn {
     this.instanceDelay = instanceDelay;
     this.group = new Group();
     this.count = count;
-    this.bounds = bounds;
-    this.position = position;
-    this.layoutType = layoutType;
     this.instances = [];
     this.imagePath = imagePath;
 
@@ -40,7 +29,6 @@ class BaseSpawn {
 
   init() {
     this.createChildren({ count: this.count });
-    this.layout({ layoutType: this.layoutType });
     this.createController();
   }
 
@@ -56,42 +44,6 @@ class BaseSpawn {
     //     i++;
     //   }
     // }
-  }
-
-  layout({
-    layoutType = LAYOUT_RANDOM,
-    rowWidth = 0.5,
-    columnHeight = 0.5,
-    layoutAxis = GridLayout.LAYOUT_WALL,
-    bounds = new Vector3(1, 1, 1),
-    position = new Vector3()
-  } = {}) {
-    switch (layoutType) {
-      case LAYOUT_RANDOM:
-        RandomLayout({
-          R: this.R,
-          group: this.group,
-          bounds,
-          position
-        });
-        break;
-      case LAYOUT_WALL:
-      case LAYOUT_FLOOR:
-        // arrange layout
-        GridLayout({
-          layoutType,
-          group: this.group,
-          rows: Math.sqrt(this.count),
-          columns: Math.sqrt(this.count),
-          rowWidth,
-          columnHeight,
-          layoutAxis
-        });
-        this.group.position.copy(position);
-        break;
-      default:
-        break;
-    }
   }
 
   animateIn({ duration = 1, delay = 0, instanceDelay = 0.5 } = {}) {

@@ -1,3 +1,4 @@
+import { LAYOUT_FLOOR, LAYOUT_WALL } from "art/layouts/LayoutConstants";
 import { Vector3 } from "three-full";
 
 const GridLayoutHelper = ({
@@ -6,25 +7,33 @@ const GridLayoutHelper = ({
   columns,
   rowWidth,
   columnHeight,
-  layoutAxis = GridLayoutHelper.LAYOUT_FLOOR
+  layoutAxis = LAYOUT_FLOOR,
+  position = new Vector3()
 }) => {
   let mesh;
 
+  rows = rows || Math.floor(Math.sqrt(group.children.length));
+  columns = columns || Math.floor(Math.sqrt(group.children.length));
+  console.log("rows ", rows, columns, group.children.length);
+
   // center the group
   switch (layoutAxis) {
-    case GridLayoutHelper.LAYOUT_WALL:
-      group.position.x = (-rows / 2) * rowWidth + rowWidth / 2;
-      group.position.y = (-columns / 2) * columnHeight + columnHeight / 2;
+    case LAYOUT_WALL:
+      group.position.x = position.x + (-rows / 2) * rowWidth + rowWidth / 2;
+      group.position.y =
+        position.y + (-columns / 2) * columnHeight + columnHeight / 2;
       break;
-    case GridLayoutHelper.LAYOUT_FLOOR:
+    case LAYOUT_FLOOR:
     default:
-      group.position.x = (-rows / 2) * rowWidth + rowWidth / 2;
-      group.position.z = (-columns / 2) * columnHeight + columnHeight / 2;
+      group.position.x = position.x + (-rows / 2) * rowWidth + rowWidth / 2;
+      group.position.z =
+        position.z + (-columns / 2) * columnHeight + columnHeight / 2;
       break;
   }
 
   for (let x = 0, i = 0; x < rows; x++) {
     for (let y = 0; y < columns; y++) {
+      console.log("i ", i, x, y);
       mesh = group.children[i];
       if (!mesh) {
         console.error(
@@ -33,11 +42,11 @@ const GridLayoutHelper = ({
         return;
       }
       switch (layoutAxis) {
-        case GridLayoutHelper.LAYOUT_WALL:
+        case LAYOUT_WALL:
           mesh.position.x = x * rowWidth;
           mesh.position.y = y * columnHeight;
           break;
-        case GridLayoutHelper.LAYOUT_FLOOR:
+        case LAYOUT_FLOOR:
         default:
           mesh.position.x = x * rowWidth;
           mesh.position.z = y * columnHeight;
@@ -47,8 +56,5 @@ const GridLayoutHelper = ({
     }
   }
 };
-
-GridLayoutHelper.LAYOUT_FLOOR = new Vector3(1, 0, 1);
-GridLayoutHelper.LAYOUT_WALL = new Vector3(1, 1, 0);
 
 export default GridLayoutHelper;

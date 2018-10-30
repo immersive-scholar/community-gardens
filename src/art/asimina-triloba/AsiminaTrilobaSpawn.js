@@ -3,26 +3,11 @@ import { Vector3 } from "three-full";
 import AsiminaTriloba from "art/asimina-triloba/AsiminaTriloba";
 import AsiminaTrilobaController from "art/asimina-triloba/AsiminaTrilobaController";
 import BaseSpawn from "art/common/BaseSpawn";
-import { LAYOUT_RANDOM } from "art/layouts/LayoutConstants";
 
 class AsiminaTrilobaSpawn extends BaseSpawn {
   init() {
-    const {
-      count,
-      group,
-      delay,
-      instanceDelay,
-      layoutType = LAYOUT_RANDOM,
-      bounds = new Vector3(1, 1, 1),
-      position = new Vector3()
-    } = this;
+    const { count, delay, instanceDelay } = this;
     this.createChildren({ count, delay, instanceDelay });
-    this.layout({
-      group,
-      layoutType,
-      position,
-      bounds
-    });
     // this.createController({ instances, controls });
   }
 

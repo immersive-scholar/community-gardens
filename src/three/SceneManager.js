@@ -25,6 +25,7 @@ export default ({ generalCanvas, R, settings }) => {
   });
   const camera = new GeneralCamera(screenDimensions);
   const controls = new GeneralControls({ camera });
+
   const cameraGUI = new CameraController({ camera, controls, settings });
   cameraGUI.enable();
 

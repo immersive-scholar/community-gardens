@@ -157,8 +157,8 @@ class SolomonsSeal extends BasePlant {
     this.state.animated = animated;
 
     this.stem.curvePainter.animateIn({ duration, delay, animated });
-    this.leavesMesh.animateIn({ duration, delay: delay + 2, animated });
-    this.berriesMesh.animateIn({ duration, delay: delay + 4, animated });
+    this.leavesMesh.animateIn({ duration, delay: delay + 0.25, animated });
+    this.berriesMesh.animateIn({ duration, delay: delay + 0.5, animated });
   };
 
   render() {}

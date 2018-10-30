@@ -62,16 +62,19 @@ class BaseChapter {
   }
 
   onTransitionComplete() {
-    const element = this.asiminaTrilobaSpawn.getRandomInstance();
-    this.focusElement({ element, delay: 2 });
+    // const element = this.asiminaTrilobaSpawn.getRandomInstance();
+    // this.focusElement({ element, delay: 2 });
   }
 
-  animate({ to, delay = 2, duration = 10 }) {
+  animate({ to, delay = 2, duration = 10, onComplete = () => {} }) {
     this.controls.animate({
       to,
       delay,
       duration,
-      callback: () => this.onTransitionComplete()
+      callback: () => {
+        onComplete();
+        this.onTransitionComplete();
+      }
     });
   }
 

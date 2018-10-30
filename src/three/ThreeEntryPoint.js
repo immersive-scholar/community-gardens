@@ -1,5 +1,6 @@
 import RandomSeed from "random-seed";
 import HighresExport from "three/vendor/Highres";
+import { TweenMax } from "gsap";
 import SceneManager from "./SceneManager";
 import GeneralCanvas from "./GeneralCanvas";
 import DataFactory from "util/DataFactory";
@@ -10,10 +11,12 @@ import InsecurityCalculator from "data/InsecurityCalculator";
 
 export default (container, settings) => {
   console.log("settings ", settings);
+  TweenMax.globalTimeScale(settings.timeMultiplier);
+
   new Settings();
 
-  // const seed = Math.random();
-  const seed = 0.4865584781852079;
+  const seed = Math.random();
+  // const seed = 0.4865584781852079;
   const R = RandomSeed.create(seed);
   console.log("Random seed: ", seed);
 
