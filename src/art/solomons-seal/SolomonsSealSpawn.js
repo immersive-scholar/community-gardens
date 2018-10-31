@@ -16,10 +16,9 @@ class SolomonsSealSpawn extends BaseSpawn {
     const { R, camera } = this;
 
     let instance,
-      plantModel,
-      props,
       stats = InsecurityCalculator.stats;
-    for (let i = 0; i < count; i++) {
+
+    for (let i = 0, plantModel, props; i < count; i++) {
       plantModel = data[i];
       props = PlantModelToSolomonsSealProps({
         model: plantModel,
@@ -29,6 +28,7 @@ class SolomonsSealSpawn extends BaseSpawn {
         instanceDelay,
         R
       });
+
       instance = new SolomonsSeal(props, camera, R);
       this.group.add(instance.group);
       this.instances.push(instance);
