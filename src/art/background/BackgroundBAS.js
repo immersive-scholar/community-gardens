@@ -57,6 +57,7 @@ function BackgroundBAS({
   };
 
   this.clean = function() {
+    this.tween && this.tween.kill(null, this);
     geometry && geometry.dispose();
     material && material.dispose();
   };

@@ -157,6 +157,7 @@ function GroundBAS({
   }
 
   this.clean = function() {
+    this.tween && this.tween.kill(null, this);
     geometry && geometry.dispose();
     material && material.dispose();
     wireframeMaterial && wireframeMaterial.dispose();

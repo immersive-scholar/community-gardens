@@ -12,6 +12,7 @@ class BaseChapter {
     this.state = { currentFocusCount: 0, focusTotal };
     this.group = new Group();
     this.instances = [];
+    this.cleanables = [];
   }
 
   setCamera(camera) {
@@ -62,6 +63,11 @@ class BaseChapter {
     };
 
     return await this.promiseTimeoutWithCancel(50, isDirty, callback);
+  }
+
+  addCleanable(cleanable) {
+    this.group.add(cleanable);
+    this.cleanables.push(cleanable);
   }
 
   addInstances(instances) {
@@ -157,6 +163,29 @@ class BaseChapter {
       duration,
       callback: onComplete
     });
+  };
+
+  clean = () => {
+    console.log("cleaning ", this);
+    for (let i = 0, iL = this.instances.length, instance; i < iL; i++) {
+      instance = this.instances[i];
+      instance.clean();
+      this.group.remove(instance.group);
+    }
+    this.instances = [];
+
+    for (let i = 0, iL = this.cleanables.length, cleanable; i < iL; i++) {
+      cleanable = this.cleanables[i];
+      cleanable.clean();
+      this.group.remove(cleanable);
+    }
+    this.cleanables = [];
+
+    for (let i = 0, iL = this.group.children.length, instance; i < iL; i++) {
+      instance = this.group.children[i];
+      this.group.remove(instance);
+    }
+    this.group = undefined;
   };
 }
 

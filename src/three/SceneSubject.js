@@ -12,7 +12,8 @@ class SceneSubject {
   }
 
   createScene() {
-    this.createRandomChapter();
+    const chapter = this.createRandomChapter();
+    this.setCurrentChapter(chapter);
   }
 
   createRandomChapter() {
@@ -23,15 +24,10 @@ class SceneSubject {
       controls,
       R
     );
-    scene.add(chapter.group);
-    chapter.init();
-    chapter.animateIn().then(() => this.playNextChapter());
-
-    this.currentChapter = chapter;
+    return chapter;
   }
 
   createDidNotEatForADayChapter() {
-    console.log("createDidNotEatForADayChapter.");
     const { settings, camera, controls, R, scene } = this;
     const chapter = new DidNotEatForADayChapter(
       { settings, focusTotal: 1 },
@@ -39,18 +35,29 @@ class SceneSubject {
       controls,
       R
     );
-    scene.add(chapter.group);
+    return chapter;
+  }
+
+  setCurrentChapter(chapter) {
+    this.currentChapter && this.cleanChapter(this.currentChapter);
+
+    this.scene.add(chapter.group);
     chapter.init();
     chapter.animateIn().then(() => this.playNextChapter());
 
     this.currentChapter = chapter;
   }
 
+  cleanChapter(chapter) {
+    this.scene.remove(chapter.group);
+    chapter.clean();
+    chapter = undefined;
+  }
+
   playNextChapter() {
     this.chapterIndex++;
-    console.log("this.currentChapter ", this.currentChapter);
-    console.log("this.chapterIndex ", this.chapterIndex);
-    this.createDidNotEatForADayChapter();
+    const chapter = this.createDidNotEatForADayChapter();
+    this.setCurrentChapter(chapter);
   }
 
   update() {}

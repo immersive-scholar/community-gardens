@@ -26,13 +26,13 @@ class DidNotEatForADayChapter extends BaseChapter {
     console.log("bgColor ", bgColor);
 
     this.background = new BackgroundBAS({ color: bgColor });
-    this.group.add(this.background);
+    this.addCleanable(this.background);
 
     this.ground = new GroundBAS({
       color: bgColor,
       R: this.R
     });
-    this.group.add(this.ground);
+    this.addCleanable(this.ground);
     // this.ground.position.set(0, -10, 10);
 
     // this.plane = new Plane({ color: bgColor });
