@@ -1,5 +1,5 @@
 import { Vector3 } from "three-full";
-import { HOUSING_INSECURITY, DID_NOT_EAT_FOR_A_DAY } from "constants/Stats";
+import * as STATS from "constants/Stats";
 
 const PlantModelToSolomonsSealProps = ({
   model,
@@ -9,6 +9,8 @@ const PlantModelToSolomonsSealProps = ({
   instanceDelay = 0.5,
   R
 }) => {
+  // these are the default props
+  // which result in a pleasing amount of variety within each plant
   const props = {
     lazy: true,
     delay: delay + i * instanceDelay,
@@ -28,10 +30,19 @@ const PlantModelToSolomonsSealProps = ({
     // offset: new Vector3(x * 0.02, (x + y) * 0.02, y * 0.02)
   };
 
-  const isHousingInsecure = model[HOUSING_INSECURITY];
-  const didNotEatForADay = model[DID_NOT_EAT_FOR_A_DAY];
+  // if any of these triggers are true,
+  // we will adjust the props accordingly
+  const didNotEatForADay = model[STATS.DID_NOT_EAT_FOR_A_DAY];
+  const housingInsecurity = model[STATS.HOUSING_INSECURITY];
+  const earnALotAndAreHungry = model[STATS.EARN_A_LOT_AND_ARE_HUNGRY];
+  const experienceHunger = model[STATS.EXPERIENCE_HUNGER];
+  const inhabitable = model[STATS.INHABITABLE];
+  const pellGrant = model[STATS.PELL_GRANT];
+  const skipMeals = model[STATS.SKIP_MEALS];
+  const sleptOutside = model[STATS.SLEPT_OUTSIDE];
+  const workALotAndAreHungry = model[STATS.WORK_A_LOT_AND_ARE_HUNGRY];
 
-  if (isHousingInsecure) {
+  if (housingInsecurity) {
     props.windForce = R.floatBetween(0.2, 0.5);
     props.windDirection = new Vector3(
       R.floatBetween(-0.5, 0.5),
