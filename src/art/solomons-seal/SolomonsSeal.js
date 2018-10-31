@@ -39,6 +39,8 @@ class SolomonsSeal extends BasePlant {
       berrySize = 0.005,
       berryCount = 24, //this.R.intBetween(4, 24),
       berryColor = 0xffffff,
+      berryStartPoint = 0.3,
+      berryEndPoint = 0.9,
       // berryColor = color,
       berryDisplacement = new Vector2(0.01, 0.01),
       berryDistanceFromStem = 0.015,
@@ -75,6 +77,8 @@ class SolomonsSeal extends BasePlant {
       berryDistanceFromStem,
       berryRotation,
       berrySpiral,
+      berryStartPoint,
+      berryEndPoint,
       // color,
       color: berryColor,
       referenceMesh: this.stem,
@@ -120,6 +124,50 @@ class SolomonsSeal extends BasePlant {
 
   //   return geometry.vertices;
   // };
+
+  clean() {
+    this.tween && this.tween.kill(null, this);
+
+    if (this.stem) {
+      this.group.remove(this.stem.curvePainter.mesh);
+      this.geometry.dispose();
+      this.stem.curvePainter.clean();
+      this.stem = undefined;
+    }
+
+    if (this.petals) {
+      this.group.remove(this.petals);
+      this.petals.clean();
+      this.petals = undefined;
+    }
+
+    if (this.rearPetals) {
+      this.group.remove(this.rearPetals);
+      this.rearPetals.clean();
+      this.rearPetals = undefined;
+    }
+
+    if (this.pollen) {
+      this.group.remove(this.pollen);
+      this.pollen.geometry.dispose();
+      this.pollen.material.dispose();
+      this.pollen = undefined;
+    }
+
+    if (this.leavesMesh) {
+      this.group.remove(this.leavesMesh);
+      this.leavesMesh.geometry.dispose();
+      this.leavesMesh.material.dispose();
+      this.leavesMesh = undefined;
+    }
+
+    if (this.berriesMesh) {
+      this.group.remove(this.berriesMesh);
+      this.berriesMesh.geometry.dispose();
+      this.berriesMesh.material.dispose();
+      this.berriesMesh = undefined;
+    }
+  }
 
   animateIn = ({ duration = 1, delay = 0, animated = true } = {}) => {
     this.state.lazy = false;

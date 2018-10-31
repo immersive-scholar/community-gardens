@@ -19,7 +19,6 @@ class SolomonsSealSpawn extends BaseSpawn {
       plantModel,
       props,
       stats = InsecurityCalculator.stats;
-    console.log("stats.housingInsecurity ", stats.housingInsecurity);
     for (let i = 0; i < count; i++) {
       plantModel = data[i];
       props = PlantModelToSolomonsSealProps({

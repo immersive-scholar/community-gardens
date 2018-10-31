@@ -10,7 +10,6 @@ export default (document, container) => {
     canvas.height = canvas.offsetHeight;
 
     // sceneManager.onWindowResize();
-    // postprocessing.composer.setSize(canvas.offsetWidth, canvas.offsetHeight);
   }
 
   function getDimensions() {

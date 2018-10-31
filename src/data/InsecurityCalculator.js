@@ -84,13 +84,25 @@ class InsecurityCalculator {
     });
   }
 
-  static getRandomRows = function({ R, count = 1, statName = "" }) {
+  static getRandomRows = function({ R, count = 1, key = "" }) {
     const rows = [];
-    for (let i = 0, randomIndex, row; i < count; i++) {
-      randomIndex = R.intBetween(0, this.total);
-      row = this.data[this.keys[randomIndex]];
-      rows.push(row);
+
+    if (!key) {
+      for (let i = 0, randomIndex, row; i < count; i++) {
+        randomIndex = R.intBetween(0, this.total - 1);
+        row = this.data[this.keys[randomIndex]];
+        rows.push(row);
+      }
+    } else {
+      const ids = this.stats[key].ids;
+      const total = ids.length;
+      for (let i = 0, randomIndex, row; i < count; i++) {
+        randomIndex = R.intBetween(0, total - 1);
+        row = this.data[ids[randomIndex]];
+        rows.push(row);
+      }
     }
+
     return rows;
   };
 }
