@@ -22,13 +22,18 @@ export default (container, settings) => {
 
   ColorFactory.setSeed(seed);
 
+  console.log("URL ", process.env.PUBLIC_URL);
+
   Promise.all([
-    DataFactory.load("/json/data.json.zip", "data.json"),
+    DataFactory.load(
+      `${process.env.PUBLIC_URL}/json/data.json.zip`,
+      "data.json"
+    ),
     ColorFactory.load({
-      summer: "/json/colors-raleigh-summer.json",
-      fall: "/json/colors-raleigh-fall.json"
+      summer: `${process.env.PUBLIC_URL}/json/colors-raleigh-summer.json`,
+      fall: `${process.env.PUBLIC_URL}/json/colors-raleigh-fall.json`
     }),
-    TextureFactory.load("/json/textures.json")
+    TextureFactory.load(`${process.env.PUBLIC_URL}/json/textures.json`)
   ])
     .then(() => {
       ColorFactory.debug();
