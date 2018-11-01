@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <Router>{/* <Settings /> */}</Router>
+        <Router basename={process.env.PUBLIC_URL}>{/* <Settings /> */}</Router>
         <ThreeContainer />
       </Fragment>
     );
