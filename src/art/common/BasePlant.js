@@ -10,6 +10,11 @@ class BasePlant extends BaseRenderable {
 
     this.setState(props);
 
+    // focalPoint must be accessible event before initialization
+    // in case the camera pans to the object
+    // prior to its init method being summoned
+    this.focalPoint = this.group;
+
     if (!props.lazy) {
       this.init(props);
       this.createChildren();
@@ -28,23 +33,17 @@ class BasePlant extends BaseRenderable {
 
   createChildren = () => {
     this.clean();
+  };
 
-    // get props out of state, with defaults
-    // const {
-    //   height = this.R.floatBetween(0.25, 0.75)
-    // } = this.state;
-
+  createStem = (props = this.state) => {
     // build objects
-    // this.geometry = new StemGeometry({
-    //   height,
-    // });
+    this.geometry = props.geometry;
+    // this.geometry = new StemGeometry(props);
 
-    // this.stem = this.toCurve({
-    //   geometry: this.geometry,
-    // });
+    this.stem = this.toCurve(props);
 
     // add to group
-    // this.group.add(this.stem.curvePainter.mesh);
+    this.group.add(this.stem.curvePainter.mesh);
   };
 
   toCurve = ({
@@ -340,11 +339,31 @@ class BasePlant extends BaseRenderable {
       this.petals = undefined;
     }
 
+    if (this.rearPetals) {
+      this.group.remove(this.rearPetals);
+      this.rearPetals.clean();
+      this.rearPetals = undefined;
+    }
+
     if (this.pollen) {
       this.group.remove(this.pollen);
       this.pollen.geometry.dispose();
       this.pollen.material.dispose();
       this.pollen = undefined;
+    }
+
+    if (this.leavesMesh) {
+      this.group.remove(this.leavesMesh);
+      this.leavesMesh.geometry.dispose();
+      this.leavesMesh.material.dispose();
+      this.leavesMesh = undefined;
+    }
+
+    if (this.berriesMesh) {
+      this.group.remove(this.berriesMesh);
+      this.berriesMesh.geometry.dispose();
+      this.berriesMesh.material.dispose();
+      this.berriesMesh = undefined;
     }
   }
 
@@ -355,8 +374,19 @@ class BasePlant extends BaseRenderable {
     this.state.delay = delay;
     this.state.animated = animated;
 
-    this.petals.animateIn({ duration, delay: delay + 1, animated });
-    this.pollen.animateIn({ duration, delay: delay + 2, animated });
+    // this.petals.animateIn({ duration, delay: delay + 1, animated });
+    // this.pollen.animateIn({ duration, delay: delay + 2, animated });
+  };
+
+  animateOut = ({ duration = 2, delay = 0, animated = true } = {}) => {
+    this.state.lazy = false;
+    this.state.visible = true;
+    this.state.duration = duration;
+    this.state.delay = delay;
+    this.state.animated = animated;
+
+    // this.petals.animateOut({ duration, delay: delay + 1, animated });
+    // this.pollen.animateOut({ duration, delay: delay + 2, animated });
   };
 
   render() {}

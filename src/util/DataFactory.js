@@ -7,7 +7,7 @@ class DataFactory {
   static async load(jsonUri, filename) {
     const onDataComplete = () => {
       // Called when all requests complete.
-      console.log("Data Factory data complete");
+      // console.log("Data Factory data complete");
     };
     const onDataError = () => {
       console.log("Failed to fetch the data");

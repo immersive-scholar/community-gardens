@@ -1,5 +1,6 @@
 import RandomSeed from "random-seed";
 import HighresExport from "three/vendor/Highres";
+import { TweenMax } from "gsap";
 import SceneManager from "./SceneManager";
 import GeneralCanvas from "./GeneralCanvas";
 import DataFactory from "util/DataFactory";
@@ -8,11 +9,14 @@ import TextureFactory from "util/TextureFactory";
 import Settings from "util/Settings";
 import InsecurityCalculator from "data/InsecurityCalculator";
 
-export default container => {
+export default (container, settings) => {
+  console.log("settings ", settings);
+  TweenMax.globalTimeScale(settings.timeMultiplier);
+
   new Settings();
 
   const seed = Math.random();
-  // const seed = 0.033023315120814356;
+  // const seed = 0.4865584781852079;
   const R = RandomSeed.create(seed);
   console.log("Random seed: ", seed);
 
@@ -27,6 +31,9 @@ export default container => {
     TextureFactory.load("/json/textures.json")
   ])
     .then(() => {
+      ColorFactory.debug();
+    })
+    .then(() => {
       InsecurityCalculator.parse(DataFactory.data);
     })
     .then(() => {
@@ -40,7 +47,7 @@ export default container => {
   };
 
   const generalCanvas = new GeneralCanvas(document, container);
-  const sceneManager = new SceneManager({ generalCanvas, R });
+  const sceneManager = new SceneManager({ generalCanvas, R, settings });
 
   createExporter(
     sceneManager.renderer,
@@ -77,6 +84,11 @@ export default container => {
     highresExport.enable();
   }
 
+  function setSettings(settings) {
+    console.log(this);
+    console.log("got settings ", settings);
+  }
+
   function render() {
     requestAnimationFrame(render);
 
@@ -88,4 +100,8 @@ export default container => {
     //     renderer.render(scene, camera)
     // }
   }
+
+  return {
+    setSettings
+  };
 };

@@ -1,24 +1,36 @@
 import { Group, Vector3 } from "three-full";
 import sample from "lodash/sample";
-import GridLayoutHelper from "util/GridLayoutHelper";
 
 class BaseSpawn {
-  constructor({ R, camera, controls, delay = 0, count = 1 } = {}) {
+  constructor({
+    R,
+    camera,
+    controls,
+    delay = 0,
+    instanceDelay = 0.5,
+    count = 1,
+    data = [],
+    bounds = new Vector3(1, 1, 1),
+    position = new Vector3(),
+    imagePath
+  } = {}) {
     this.R = R;
     this.camera = camera;
     this.controls = controls;
     this.intervalID = 0;
     this.delay = delay;
+    this.instanceDelay = instanceDelay;
     this.group = new Group();
     this.count = count;
+    this.data = data;
     this.instances = [];
+    this.imagePath = imagePath;
 
     this.init();
   }
 
   init() {
     this.createChildren({ count: this.count });
-    this.layout();
     this.createController();
   }
 
@@ -36,29 +48,13 @@ class BaseSpawn {
     // }
   }
 
-  layout({
-    rowWidth = 0.5,
-    columnHeight = 0.5,
-    layoutAxis = GridLayoutHelper.LAYOUT_WALL,
-    position = new Vector3()
-  } = {}) {
-    // arrange layout
-    GridLayoutHelper({
-      group: this.group,
-      rows: this.count,
-      columns: this.count,
-      rowWidth,
-      columnHeight,
-      layoutAxis
-    });
-
-    this.group.position.copy(position);
-  }
-
-  animateIn({ duration = 1, delay = 0 } = {}) {
+  animateIn({ duration = 1, delay = 0, instanceDelay = 0.5 } = {}) {
     for (let i = 0, iL = this.instances.length; i < iL; i++) {
       this.instances[i].createChildren();
-      this.instances[i].animateIn({ duration, delay: delay + i * 0.5 });
+      this.instances[i].animateIn({
+        duration,
+        delay: delay + i * instanceDelay
+      });
     }
   }
 

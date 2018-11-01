@@ -18,11 +18,11 @@ import SkipMeals from "./stats/SkipMeals";
 class InsecurityCalculator {
   static async parse(data) {
     return new Promise(resolve => {
-      let max = 0,
-        min = 0,
-        minData,
-        maxData,
-        total = 0;
+      // let max = 0,
+      // min = 0,
+      // minData,
+      // maxData;
+      let total = 0;
       for (var i in data) {
         data[i].resourcesIncoming = ResourcesIncomingCalculator(data[i]);
         data[i].energyOutgoing = EnergyOutgoingCalculator(data[i]);
@@ -31,19 +31,28 @@ class InsecurityCalculator {
         data[i].emotionalHealth = EmotionalHealthCalculator(data[i]);
         data[i].health = HealthCalculator(data[i]);
 
-        if (data[i].health < min) {
-          minData = data[i];
-          min = data[i].health;
-        }
+        // if (data[i].health < min) {
+        //   minData = data[i];
+        //   min = data[i].health;
+        // }
 
-        if (data[i].health > max) {
-          maxData = data[i];
-          max = data[i].health;
-        }
+        // if (data[i].health > max) {
+        //   maxData = data[i];
+        //   max = data[i].health;
+        // }
         total++;
       }
-      console.log("min ", min, minData);
-      console.log("max ", max, maxData);
+      // console.log("min ", min, minData);
+      // console.log("max ", max, maxData);
+
+      // store keys as array for easier selection of elements by index
+      // remember data is an object, with IDs as keys
+      const keys = [];
+      for (let ID in data) {
+        if (data.hasOwnProperty(ID)) {
+          keys.push(ID);
+        }
+      }
 
       // this could be more efficient as each Stat requires looping
       // over the entire array
@@ -61,12 +70,41 @@ class InsecurityCalculator {
       stats.didNotEatForADay = DidNotEatForADay(data, total);
       stats.skipMeals = SkipMeals(data);
 
-      console.log("stats ", stats);
+      // console.log("stats ", stats);
 
-      data.stats = stats;
+      // store staticly, so data is accessible via
+      // `InsecurityCalculator.data` and
+      // `InsecurityCalculator.stats`
+      InsecurityCalculator.data = data;
+      InsecurityCalculator.stats = stats;
+      InsecurityCalculator.total = total;
+      InsecurityCalculator.keys = keys;
+
       resolve(data);
     });
   }
+
+  static getRandomRows = function({ R, count = 1, key = "" }) {
+    const rows = [];
+
+    if (!key) {
+      for (let i = 0, randomIndex, row; i < count; i++) {
+        randomIndex = R.intBetween(0, this.total - 1);
+        row = this.data[this.keys[randomIndex]];
+        rows.push(row);
+      }
+    } else {
+      const ids = this.stats[key].ids;
+      const total = ids.length;
+      for (let i = 0, randomIndex, row; i < count; i++) {
+        randomIndex = R.intBetween(0, total - 1);
+        row = this.data[ids[randomIndex]];
+        rows.push(row);
+      }
+    }
+
+    return rows;
+  };
 }
 
 export default InsecurityCalculator;

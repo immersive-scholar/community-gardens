@@ -73,6 +73,10 @@
     {
       "color": "ground",
       "samples": ["#e8df81", "#d8c862", "#8b7473", "#a58883"]
+    },
+    {
+      "color": "sky",
+      "samples": ["#e06b1c", "#dd4f90", "#3a54a1", "#bf1229"]
     }
   ]
 }

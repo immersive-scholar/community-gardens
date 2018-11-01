@@ -19,6 +19,7 @@ function BackgroundBAS({
     flatShading: !true,
     side: DoubleSide,
     transparent: !true, // required for diffuseColor.a to have an effect
+    opacity: 1,
 
     uniforms: {
       uTime: { value: animated ? 0 : 1 }
@@ -26,10 +27,10 @@ function BackgroundBAS({
     uniformValues: {
       diffuse: new Color(color)
     },
-    vertexParameters: ["uniform float uTime;"],
-    vertexPosition: ["transformed *= uTime;"]
-    // fragmentParameters: ["uniform float uTime;"],
-    // fragmentDiffuse: ["diffuseColor.rgb *= uTime;"]
+    // vertexParameters: ["uniform float uTime;"],
+    // vertexPosition: ["transformed *= uTime;"]
+    fragmentParameters: ["uniform float uTime;"],
+    fragmentDiffuse: ["diffuseColor.rgb *= uTime;"]
   });
 
   geometry.computeVertexNormals();
@@ -38,13 +39,11 @@ function BackgroundBAS({
 
   this.frustumCulled = false;
 
-  window.bg = this;
-
-  this.animateIn = function({ duration = 5, delay = 0 } = {}) {
+  this.animateIn = function({ duration = 5, delay = 0, animated = true } = {}) {
     this.tween && this.tween.kill(null, this);
     if (animated) {
       this.currentTime = 0;
-      this.tween = TweenMax.to(this, 5, {
+      this.tween = TweenMax.to(this, duration, {
         currentTime: 1,
         onUpdate: () => {
           this.update();
@@ -58,6 +57,7 @@ function BackgroundBAS({
   };
 
   this.clean = function() {
+    this.tween && this.tween.kill(null, this);
     geometry && geometry.dispose();
     material && material.dispose();
   };

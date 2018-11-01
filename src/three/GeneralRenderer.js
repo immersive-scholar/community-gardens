@@ -14,6 +14,7 @@ export default ({ canvas, width, height }) => {
   renderer.gammaInput = true;
   renderer.gammaOutput = true;
   renderer.shadowMap.enabled = true;
+  // renderer.autoClear = false;
 
   return renderer;
 };

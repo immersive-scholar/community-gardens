@@ -2,7 +2,7 @@ import { Group, Vector3 } from "three-full";
 
 import SolomonsSeal from "art/solomons-seal/SolomonsSeal";
 import SolomonsSealController from "art/solomons-seal/SolomonsSealController";
-import GridLayoutHelper from "util/GridLayoutHelper";
+import GridLayout from "art/layouts/GridLayout";
 
 const SolomonsSealGroup = ({ R, camera, controls, delay }) => {
   let solomonsSeal,
@@ -50,7 +50,7 @@ const SolomonsSealGroup = ({ R, camera, controls, delay }) => {
     }
   }
 
-  GridLayoutHelper({
+  GridLayout({
     group: solomonsSealGroup,
     rows: count,
     columns: count,

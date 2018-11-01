@@ -1,18 +1,66 @@
-import SummerGardenChapter from "chapters/SummerGardenChapter";
+import RandomGardenChapter from "chapters/RandomGardenChapter";
+import DidNotEatForADayChapter from "chapters/DidNotEatForADayChapter";
 
-const SceneSubject = ({ scene, camera, R, controls }) => {
-  function createScene() {
-    const chapter1 = new SummerGardenChapter({}, camera, controls, R);
-    chapter1.init();
-    scene.add(chapter1.group);
+class SceneSubject {
+  constructor({ scene, camera, R, controls, settings }) {
+    this.scene = scene;
+    this.camera = camera;
+    this.R = R;
+    this.controls = controls;
+    this.settings = settings;
+    this.chapterIndex = 0;
   }
 
-  function update() {}
+  createScene() {
+    const chapter = this.createRandomChapter();
+    this.setCurrentChapter(chapter);
+  }
 
-  return {
-    update,
-    createScene
-  };
-};
+  createRandomChapter() {
+    const { settings, camera, controls, R, scene } = this;
+    const chapter = new RandomGardenChapter(
+      { settings, focusTotal: 1 },
+      camera,
+      controls,
+      R
+    );
+    return chapter;
+  }
+
+  createDidNotEatForADayChapter() {
+    const { settings, camera, controls, R, scene } = this;
+    const chapter = new DidNotEatForADayChapter(
+      { settings, focusTotal: 1 },
+      camera,
+      controls,
+      R
+    );
+    return chapter;
+  }
+
+  setCurrentChapter(chapter) {
+    this.currentChapter && this.cleanChapter(this.currentChapter);
+
+    this.scene.add(chapter.group);
+    chapter.init();
+    chapter.animateIn().then(() => this.playNextChapter());
+
+    this.currentChapter = chapter;
+  }
+
+  cleanChapter(chapter) {
+    this.scene.remove(chapter.group);
+    chapter.clean();
+    chapter = undefined;
+  }
+
+  playNextChapter() {
+    this.chapterIndex++;
+    const chapter = this.createDidNotEatForADayChapter();
+    this.setCurrentChapter(chapter);
+  }
+
+  update() {}
+}
 
 export default SceneSubject;

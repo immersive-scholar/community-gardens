@@ -10,7 +10,7 @@ class TextureFactory {
   static async load(texturesUri) {
     const onDataComplete = () => {
       // function to be called when all ajax requests complete.
-      console.log("Texture Factory data complete ", this.textures);
+      // console.log("Texture Factory data complete ", this.textures);
     };
     const onDataError = () => {
       // function to be called when data fetching fails

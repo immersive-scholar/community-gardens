@@ -2,17 +2,17 @@ import { Vector2, Vector3 } from "three-full";
 import ColorFactory from "util/ColorFactory";
 import BasePlant from "art/common/BasePlant";
 
-import StemGeometry from "./StemGeometry";
 import Leaves from "./Leaves";
 import Berries from "./Berries";
-import TextureFactory from "../../util/TextureFactory";
+import StemGeometry from "./StemGeometry";
+// import TextureFactory from "../../util/TextureFactory";
 
 class SolomonsSeal extends BasePlant {
   createChildren = () => {
     this.clean();
 
     const {
-      height = this.R.floatBetween(0.24, 0.96),
+      height = this.R.floatBetween(0.5, 2),
       displacement = new Vector3(0.2, 0.1, 0.2),
       scale = new Vector3(2, 2, 4),
       offset = new Vector3(
@@ -25,53 +25,50 @@ class SolomonsSeal extends BasePlant {
       pointCount = height * 25,
       thickness = 0.02,
       color = ColorFactory.getRandomColor(),
-      imagePath = TextureFactory.getStroke(),
+      // imagePath = TextureFactory.getStroke(),
       leafStartPoint = 0.3,
       leafEndPoint = 1,
       rotationStart = new Vector3(0, 0, 0),
       rotationEnd = new Vector3(-1.5, 0.7, 0.2),
-      sizeStart = new Vector2(0.02, 0.01),
-      sizeEnd = new Vector2(0.1, 0.05),
+      sizeStart = new Vector2(0.05, 0.02),
+      sizeEnd = new Vector2(0.2, 0.1),
       windForce = 0,
       windDirection = new Vector3(0, 0, 0),
       hslBase = new Vector3(this.R.floatBetween(0.5, 1.0), 1, 0.3),
       hslRange = new Vector3(0, 0, 0.2),
-      glitchAmplitude = 0,
-      glitchAngle = new Vector3(1, 1, 1),
-      glitchThreshold = new Vector3(1, 1, 1),
       berrySize = 0.005,
       berryCount = 24, //this.R.intBetween(4, 24),
-      // berryColor = 0xffffff,
-      berryColor = color,
+      berryColor = 0xffffff,
+      berryStartPoint = 0.3,
+      berryEndPoint = 0.9,
+      // berryColor = color,
       berryDisplacement = new Vector2(0.01, 0.01),
       berryDistanceFromStem = 0.015,
       berryRotation = 720,
       berrySpiral = true
+      // glitchAmplitude = 0,
+      // glitchAngle = new Vector3(1, 1, 1),
+      // glitchThreshold = new Vector3(1, 1, 1),
     } = this.state;
 
-    // stem
-    this.geometry = new StemGeometry({
+    const stemProps = {
       height,
-      pointCount,
-      displacement,
-      scale,
-      offset,
-      glitchAmplitude,
-      glitchThreshold,
-      glitchAngle,
-      R: this.R
-    });
-
-    this.stem = this.toCurve({
-      geometry: this.geometry,
-      color,
-      imagePath,
-      pointCount,
       thickness,
+      color,
+      pointCount,
+      scale,
+      displacement,
+      offset,
+      R: this.R,
+      glitchAmplitude: 0,
+      glitchAngle: new Vector3(1, 1, 1),
+      glitchThreshold: new Vector3(1, 1, 1),
       fogDensity: 0.3,
       animated
-    });
-    this.group.add(this.stem.curvePainter.mesh);
+    };
+    const geometry = new StemGeometry(stemProps);
+    stemProps.geometry = geometry;
+    this.createStem(stemProps);
 
     this.berriesMesh = new Berries({
       size: berrySize,
@@ -80,6 +77,8 @@ class SolomonsSeal extends BasePlant {
       berryDistanceFromStem,
       berryRotation,
       berrySpiral,
+      berryStartPoint,
+      berryEndPoint,
       // color,
       color: berryColor,
       referenceMesh: this.stem,
@@ -127,11 +126,32 @@ class SolomonsSeal extends BasePlant {
   // };
 
   clean() {
+    this.tween && this.tween.kill(null, this);
+
     if (this.stem) {
       this.group.remove(this.stem.curvePainter.mesh);
       this.geometry.dispose();
       this.stem.curvePainter.clean();
       this.stem = undefined;
+    }
+
+    if (this.petals) {
+      this.group.remove(this.petals);
+      this.petals.clean();
+      this.petals = undefined;
+    }
+
+    if (this.rearPetals) {
+      this.group.remove(this.rearPetals);
+      this.rearPetals.clean();
+      this.rearPetals = undefined;
+    }
+
+    if (this.pollen) {
+      this.group.remove(this.pollen);
+      this.pollen.geometry.dispose();
+      this.pollen.material.dispose();
+      this.pollen = undefined;
     }
 
     if (this.leavesMesh) {
@@ -157,8 +177,8 @@ class SolomonsSeal extends BasePlant {
     this.state.animated = animated;
 
     this.stem.curvePainter.animateIn({ duration, delay, animated });
-    this.leavesMesh.animateIn({ duration, delay: delay + 2, animated });
-    this.berriesMesh.animateIn({ duration, delay: delay + 4, animated });
+    this.leavesMesh.animateIn({ duration, delay: delay + 0.25, animated });
+    this.berriesMesh.animateIn({ duration, delay: delay + 0.5, animated });
   };
 
   render() {}
