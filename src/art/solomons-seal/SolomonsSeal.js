@@ -12,7 +12,7 @@ class SolomonsSeal extends BasePlant {
     this.clean();
 
     const {
-      height = this.R.floatBetween(0.5, 2),
+      height = this.R.floatBetween(0.5, 1),
       displacement = new Vector3(0.2, 0.1, 0.2),
       scale = new Vector3(2, 2, 4),
       offset = new Vector3(
@@ -41,6 +41,7 @@ class SolomonsSeal extends BasePlant {
       berryColor = 0xffffff,
       berryStartPoint = 0.3,
       berryEndPoint = 0.9,
+      berryWireframe = !true,
       // berryColor = color,
       berryDisplacement = new Vector2(0.01, 0.01),
       berryDistanceFromStem = 0.015,
@@ -79,6 +80,7 @@ class SolomonsSeal extends BasePlant {
       berrySpiral,
       berryStartPoint,
       berryEndPoint,
+      berryWireframe,
       // color,
       color: berryColor,
       referenceMesh: this.stem,
@@ -177,8 +179,8 @@ class SolomonsSeal extends BasePlant {
     this.state.animated = animated;
 
     this.stem.curvePainter.animateIn({ duration, delay, animated });
-    this.leavesMesh.animateIn({ duration, delay: delay + 0.25, animated });
-    this.berriesMesh.animateIn({ duration, delay: delay + 0.5, animated });
+    this.leavesMesh.animateIn({ duration, delay: delay + 1.5, animated });
+    this.berriesMesh.animateIn({ duration, delay: delay + 2.5, animated });
   };
 
   render() {}

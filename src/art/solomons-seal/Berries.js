@@ -23,7 +23,8 @@ const Berries = ({
   berryDisplacement = new Vector2(0.01, 0.01),
   berryDistanceFromStem = 0.1,
   berryRotation = 360,
-  berrySpiral = true
+  berrySpiral = true,
+  berryWireframe = !true
 }) => {
   const settings = {
     maxDelay: 0.0,
@@ -133,6 +134,7 @@ const Berries = ({
     animated,
     windForce,
     windDirection,
+    berryWireframe,
     settings
   });
   return berryAnimation;

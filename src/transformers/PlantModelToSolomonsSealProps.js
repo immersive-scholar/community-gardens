@@ -1,4 +1,4 @@
-import { Vector3 } from "three-full";
+import { Vector2, Vector3 } from "three-full";
 import * as STATS from "constants/Stats";
 
 const PlantModelToSolomonsSealProps = ({
@@ -32,33 +32,42 @@ const PlantModelToSolomonsSealProps = ({
 
   // if any of these triggers are true,
   // we will adjust the props accordingly
-  const didNotEatForADay = model[STATS.DID_NOT_EAT_FOR_A_DAY];
-  const housingInsecurity = model[STATS.HOUSING_INSECURITY];
-  const earnALotAndAreHungry = model[STATS.EARN_A_LOT_AND_ARE_HUNGRY];
-  const experienceHunger = model[STATS.EXPERIENCE_HUNGER];
+  const didNotEatForADay = 0; //model[STATS.DID_NOT_EAT_FOR_A_DAY];
+  const experienceHunger = 0; //model[STATS.EXPERIENCE_HUNGER];
+  const housingInsecurity = 0; //model[STATS.HOUSING_INSECURITY];
+  const earnALot = 1; //model[STATS.EARN_A_LOT];
+  const earnALotAndAreHungry = 1; //model[STATS.EARN_A_LOT_AND_ARE_HUNGRY];
+  const workALotAndAreHungry = model[STATS.WORK_A_LOT_AND_ARE_HUNGRY];
   const inhabitable = model[STATS.INHABITABLE];
   const pellGrant = model[STATS.PELL_GRANT];
   const skipMeals = model[STATS.SKIP_MEALS];
   const sleptOutside = model[STATS.SLEPT_OUTSIDE];
-  const workALotAndAreHungry = model[STATS.WORK_A_LOT_AND_ARE_HUNGRY];
+
+  if (didNotEatForADay) {
+    // props.pointCount = 10;
+    // props.displacement = new Vector3(1, 0.5, 1); // anxious
+    // props.scale = new Vector3(8, 8, 16);
+    props.berryCount = 0;
+  }
+
+  if (experienceHunger) {
+    props.berryWireframe = true;
+  }
 
   if (housingInsecurity) {
-    props.windForce = R.floatBetween(0.2, 0.5);
+    props.windForce = R.floatBetween(0.25, 0.75);
     props.windDirection = new Vector3(
       R.floatBetween(-0.5, 0.5),
-      0,
+      R.floatBetween(-0.5, 0.5),
       R.floatBetween(-0.5, 0.5)
     );
   }
 
-  if (didNotEatForADay) {
-    props.pointCount = 10;
-    // props.displacement = new Vector3(1, 0.5, 1); // anxious
-    // props.scale = new Vector3(8, 8, 16);
-    // props.berryCount = 10;
-    props.berryStartPoint = 0.1;
-    props.berryEndPoint = 0.3;
-    props.berrySpiral = 360;
+  if (earnALot) {
+    props.height = R.floatBetween(1, 2);
+    props.leafCount = props.height * 15;
+    props.sizeStart = new Vector2(0.05, 0.03);
+    props.sizeEnd = new Vector2(0.2, 0.15);
   }
 
   return props;

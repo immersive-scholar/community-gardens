@@ -185,7 +185,10 @@ class DidNotEatForADayChapter extends BaseChapter {
 
   onTransitionComplete = () => {
     // if we have focused on the desired number of elements
-    if (this.state.currentFocusCount >= this.state.focusTotal) {
+    if (
+      this.state.focusTotal &&
+      this.state.currentFocusCount >= this.state.focusTotal
+    ) {
       // let's pan the camera away from the scene
       // as a signal that the chapter is complete
       // we will also resolve the promise

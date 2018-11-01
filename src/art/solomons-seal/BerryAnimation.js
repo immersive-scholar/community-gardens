@@ -1,5 +1,5 @@
 import { Mesh, Color, DoubleSide, Vector3 } from "three-full";
-import { LambertAnimationMaterial, ShaderChunk } from "three/vendor/BAS";
+import { BasicAnimationMaterial, ShaderChunk } from "three/vendor/BAS";
 import { TweenMax, Power2 } from "gsap";
 
 function BerryAnimation({
@@ -9,22 +9,23 @@ function BerryAnimation({
   timeline,
   animated,
   windForce,
-  windDirection
+  windDirection,
+  berryWireframe = !true
   // imagePath = TextureFactory.getPattern(),
   // textureSize = new Vector2(20, 20)
 }) {
   // const texture = new TextureLoader().load(imagePath, texture => {
   //   texture.wrapS = texture.wrapT = RepeatWrapping;
   // });
-  const material = new LambertAnimationMaterial({
+  const material = new BasicAnimationMaterial({
     // vertexColors: VertexColors,
-    flatShading: true,
+    flatShading: !true,
     side: DoubleSide,
     fog: true,
-    // lights: true,
-    wireframe: !true,
+    lights: true,
+    wireframe: berryWireframe,
     transparent: true,
-    opacity: 0.5,
+    opacity: 1,
     uniforms: {
       uTime: { value: animated ? 0 : 1 },
       uWindForce: { value: windForce },
@@ -84,6 +85,10 @@ function BerryAnimation({
 
   //   this.castShadow = true;
   this.frustumCulled = false;
+
+  this.clean = () => {
+    this.tween && this.tween.kill(null, this);
+  };
 
   this.animateIn = ({ delay = 0, duration = 1, animated = true }) => {
     this.tween && this.tween.kill(null, this);

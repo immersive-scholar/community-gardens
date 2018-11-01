@@ -7,7 +7,7 @@ class BaseChapter {
     this.controls = controls;
     this.R = R;
 
-    const { focusTotal = 3 } = props;
+    const { focusTotal = 0 } = props;
 
     this.state = { currentFocusCount: 0, focusTotal };
     this.group = new Group();

@@ -12,7 +12,8 @@ class SceneSubject {
   }
 
   createScene() {
-    const chapter = this.createRandomChapter();
+    const chapter = this.createDidNotEatForADayChapter();
+    // const chapter = this.createRandomChapter();
     this.setCurrentChapter(chapter);
   }
 
@@ -30,7 +31,7 @@ class SceneSubject {
   createDidNotEatForADayChapter() {
     const { settings, camera, controls, R, scene } = this;
     const chapter = new DidNotEatForADayChapter(
-      { settings, focusTotal: 1 },
+      { settings, focusTotal: 10 },
       camera,
       controls,
       R
