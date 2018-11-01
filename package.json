@@ -1,6 +1,5 @@
 {
   "name": "communitygardens.com",
-  "homepage": "https://lucastswick.github.io/community-gardens/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

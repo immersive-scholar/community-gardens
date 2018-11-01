@@ -22,8 +22,6 @@ export default (container, settings) => {
 
   ColorFactory.setSeed(seed);
 
-  console.log("URL ", process.env.PUBLIC_URL);
-
   Promise.all([
     DataFactory.load(
       `${process.env.PUBLIC_URL}/json/data.json.zip`,

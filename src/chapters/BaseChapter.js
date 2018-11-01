@@ -166,7 +166,6 @@ class BaseChapter {
   };
 
   clean = () => {
-    console.log("cleaning ", this);
     for (let i = 0, iL = this.instances.length, instance; i < iL; i++) {
       instance = this.instances[i];
       instance.clean();
