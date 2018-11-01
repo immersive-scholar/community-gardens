@@ -73,7 +73,7 @@ class TextureFactory {
 
     textureGroup = textureType.textures;
     const index = this.R.intBetween(0, textureGroup.length - 1);
-    return textureType.baseUri + textureGroup[index];
+    return process.env.PUBLIC_URL + textureType.baseUri + textureGroup[index];
   }
 
   static setSeed(seed) {

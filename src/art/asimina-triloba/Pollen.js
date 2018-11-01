@@ -21,7 +21,7 @@ function Pollen({
   count,
   size,
   color,
-  imagePath = "/img/strokes/crosshatch-1.png",
+  imagePath = `${process.env.PUBLIC_URL}/img/strokes/crosshatch-1.png`,
   textureSize = new Vector2(1, 1),
   R,
   animated,
