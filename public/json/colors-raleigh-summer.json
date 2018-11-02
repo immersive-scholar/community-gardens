@@ -76,7 +76,7 @@
     },
     {
       "color": "sky",
-      "samples": ["#e06b1c", "#dd4f90", "#3a54a1", "#bf1229"]
+      "samples": ["#e06b1c", "#dd4f90", "#fbd58e", "#bf1229"]
     }
   ]
 }

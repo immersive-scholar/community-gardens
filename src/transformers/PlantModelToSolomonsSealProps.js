@@ -57,8 +57,14 @@ const PlantModelToSolomonsSealProps = ({
   const age = model.Age;
   const gpa = model.GPA;
   const degree = model.Degree;
+  const firstGen = model.FirstGen;
+  const outOfState = model.OutofState;
 
+  // health changes color from summer to fall
+  // and also makes the leaves darker.
+  // and make the leaves point down towards the bottom of the stem.
   let color,
+    droop,
     hslBase = {},
     hslRange = new Vector3();
   switch (true) {
@@ -68,6 +74,8 @@ const PlantModelToSolomonsSealProps = ({
         ColorFactory.LEAF
       );
       props.hslRange = new Vector3(0.1, 0.1, 0.2);
+      droop = (Math.PI / 2) * health * 0.03;
+      props.rotationStart = new Vector3(droop, 0, 0);
       break;
     case health > 0:
       props.color = ColorFactory.getRandomColor(
@@ -80,27 +88,32 @@ const PlantModelToSolomonsSealProps = ({
       break;
   }
 
-  // TODO find different patterns for different energy outgoing
-  if (energyOutgoing < 0) {
-    props.stemImagePath = `${
-      process.env.PUBLIC_URL
-    }/img/strokes/crosshatch-1.png`;
+  // If energy outgoing is high, the berries are displaced further from the stem
+  if (energyOutgoing > 0) {
+    props.berryDistanceFromStem = energyOutgoing * 0.02;
   }
 
   //
   if (personalScarcity) {
+    // props.stemImagePath = `${process.env.PUBLIC_URL}/img/strokes/stroke-4.png`;
   }
 
   // TODO add bees
   if (communityFitness) {
   }
 
+  // Different types of leaves for specific attributes
+  if (outOfState) {
+    props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/topography.png`;
+  }
+  if (firstGen) {
+    props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/maze.png`;
+  }
+
   // TODO give food get mushrooms
   // "letstay": 1,
   // "givefood": 1,
   // "sharemeals": 2,
-
-  // TODO different types of leaves
 
   if (emotionalHealth < 0) {
     props.pointCount = Math.max(10, 10 + emotionalHealth);
@@ -111,6 +124,7 @@ const PlantModelToSolomonsSealProps = ({
     );
   }
 
+  // the more resources Incoming you have, the more berries are created.
   props.berryCount = Math.max(0, resourcesIncoming * 2);
 
   if (experienceHunger) {

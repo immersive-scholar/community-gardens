@@ -22,7 +22,7 @@ function BerryAnimation({
     flatShading: true,
     side: DoubleSide,
     fog: true,
-    lights: true,
+    lights: !true,
     wireframe: berryWireframe,
     transparent: true,
     opacity: 1,
@@ -30,7 +30,8 @@ function BerryAnimation({
       uTime: { value: animated ? 0 : 1 },
       uWindForce: { value: windForce },
       uWindDirection: { value: new Vector3(0.2, 0.2, 0.2) },
-      color: color
+      color: color,
+      fog: true
       // uTextureSize: { value: new Vector2(10, 10) }
     },
     uniformValues: {

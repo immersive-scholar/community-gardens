@@ -12,8 +12,8 @@ class SceneSubject {
   }
 
   createScene() {
-    // const chapter = this.createDidNotEatForADayChapter();
-    const chapter = this.createRandomChapter();
+    const chapter = this.createDidNotEatForADayChapter();
+    // const chapter = this.createRandomChapter();
     this.setCurrentChapter(chapter);
   }
 
