@@ -29,7 +29,8 @@ export default (container, settings) => {
     ),
     ColorFactory.load({
       summer: `${process.env.PUBLIC_URL}/json/colors-raleigh-summer.json`,
-      fall: `${process.env.PUBLIC_URL}/json/colors-raleigh-fall.json`
+      fall: `${process.env.PUBLIC_URL}/json/colors-raleigh-fall.json`,
+      winter: `${process.env.PUBLIC_URL}/json/colors-raleigh-winter.json`
     }),
     TextureFactory.load(`${process.env.PUBLIC_URL}/json/textures.json`)
   ])

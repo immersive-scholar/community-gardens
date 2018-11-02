@@ -20,7 +20,7 @@ class DidNotEatForADayChapter extends BaseChapter {
 
   init = props => {
     const bgColor = ColorFactory.getRandomColor(
-      ColorFactory.SUMMER,
+      ColorFactory.WINTER,
       ColorFactory.SKY
     );
     console.log("bgColor ", bgColor);

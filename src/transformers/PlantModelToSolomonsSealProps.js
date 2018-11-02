@@ -68,6 +68,20 @@ const PlantModelToSolomonsSealProps = ({
     hslBase = {},
     hslRange = new Vector3();
   switch (true) {
+    case health <= -10:
+      props.color = ColorFactory.getRandomColor(
+        ColorFactory.WINTER,
+        ColorFactory.LEAF
+      );
+      props.leafColor = ColorFactory.getRandomColor(
+        ColorFactory.WINTER,
+        ColorFactory.SKY
+      );
+      // props.berryColor = props.leafColor;
+      props.hslRange = new Vector3(0.1, 0.1, -0.5);
+      droop = (Math.PI / 2) * health * 0.03;
+      props.rotationStart = new Vector3(droop, 0, 0);
+      break;
     case health <= 0:
       props.color = ColorFactory.getRandomColor(
         ColorFactory.SUMMER,
@@ -88,6 +102,16 @@ const PlantModelToSolomonsSealProps = ({
       break;
   }
 
+  if (pellGrant) {
+    props.color = 0xfbd58e;
+    props.leafColor = 0xffffff;
+    const color = new Color(props.color);
+    let hsl = {};
+    color.getHSL(hsl);
+    props.hslBase = new Vector3(hsl.h, hsl.s, hsl.l);
+    props.hslRange = new Vector3(0, 0.1, 0.2);
+  }
+
   // If energy outgoing is high, the berries are displaced further from the stem
   if (energyOutgoing > 0) {
     props.berryDistanceFromStem = energyOutgoing * 0.02;
@@ -102,6 +126,16 @@ const PlantModelToSolomonsSealProps = ({
   if (communityFitness) {
   }
 
+  // TODO give food get mushrooms
+  // "letstay": 1,
+  // "givefood": 1,
+  // "sharemeals": 2,
+
+  // berries are not 'full' if food insecure
+  if (foodInsecurity) {
+    props.berryWireframe = true;
+  }
+
   // Different types of leaves for specific attributes
   if (outOfState) {
     props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/topography.png`;
@@ -110,11 +144,7 @@ const PlantModelToSolomonsSealProps = ({
     props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/maze.png`;
   }
 
-  // TODO give food get mushrooms
-  // "letstay": 1,
-  // "givefood": 1,
-  // "sharemeals": 2,
-
+  // render low emotional health scores with sharper angles
   if (emotionalHealth < 0) {
     props.pointCount = Math.max(10, 10 + emotionalHealth);
     props.scale = new Vector3(
@@ -127,10 +157,7 @@ const PlantModelToSolomonsSealProps = ({
   // the more resources Incoming you have, the more berries are created.
   props.berryCount = Math.max(0, resourcesIncoming * 2);
 
-  if (experienceHunger) {
-    props.berryWireframe = true;
-  }
-
+  // housing insecurity displaces leaves from stems
   if (housingInsecurity) {
     props.windForce = housingInsecurityScore * 0.05;
     props.windDirection = new Vector3(
@@ -140,22 +167,28 @@ const PlantModelToSolomonsSealProps = ({
     );
   }
 
+  // camera looks up at food insecure or housing insecure
   if (foodInsecurity || housingInsecurity) {
     props.lookUpAt = true;
   }
 
+  // bigger leaves for those who earn a lot but are not hungry
   if (earnALot && !earnALotAndAreHungry) {
     props.sizeStart = new Vector2(0.2, 0.05);
     props.sizeEnd = new Vector2(0.3, 0.01);
   }
 
-  if (belowPovertyLine) {
-    new Color(props.color).getHSL(hslBase);
-    props.hslBase = new Vector3(hslBase, 0.1, 0.2);
-  }
+  // dark colors if below poverty line
+  // if (belowPovertyLine) {
+  //   new Color(props.color).getHSL(hslBase);
+  //   props.hslBase = new Vector3(hslBase.h, 0.1, 0.2);
+  // }
 
+  // more leaves the older you are
   props.leafCount = age;
+  props.thickness = age * 0.001;
 
+  // taller plants represent more senior Degrees
   switch (true) {
     case degree === 3:
       props.height = R.floatBetween(1, 2);

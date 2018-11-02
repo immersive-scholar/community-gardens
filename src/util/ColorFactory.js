@@ -105,6 +105,12 @@ class ColorFactory {
     this.createSwatches(ColorFactory.FALL, ColorFactory.GREENERY, 7);
     this.createSwatches(ColorFactory.FALL, ColorFactory.BARK, 8);
     this.createSwatches(ColorFactory.FALL, ColorFactory.SKY, 9);
+
+    this.createSwatches(ColorFactory.WINTER, ColorFactory.LEAF, 10);
+    this.createSwatches(ColorFactory.WINTER, ColorFactory.GROUND, 11);
+    this.createSwatches(ColorFactory.WINTER, ColorFactory.GREENERY, 12);
+    this.createSwatches(ColorFactory.WINTER, ColorFactory.BARK, 13);
+    this.createSwatches(ColorFactory.WINTER, ColorFactory.SKY, 14);
   }
 
   static createSwatches(
@@ -117,7 +123,7 @@ class ColorFactory {
     div.style.position = "absolute";
     div.style.display = "grid";
     div.style.gridTemplateColumns = "repeat( auto-fit, minmax(1px, 1fr) )";
-    div.style.bottom = `${offsetY * 20}px`;
+    div.style.bottom = `${offsetY * 15}px`;
     div.style.left = 0;
     div.style.width = "200px";
     div.style.height = "20px";

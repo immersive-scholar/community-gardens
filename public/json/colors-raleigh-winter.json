@@ -1,0 +1,47 @@
+{
+  "samplesByColorFamily": [
+    {
+      "color": "leaf",
+      "samples": ["#ecfcf4", "#dddae8", "#9c9cba", "#b6c6d6", "#dbe3e7"]
+    },
+    {
+      "color": "ground",
+      "samples": [
+        "#323641",
+        "#292420",
+        "#6b5341",
+        "#b08157",
+        "#ad9f8c",
+        "#6b7074",
+        "#daa09f",
+        "#c1ab92",
+        "#737782",
+        "#6f7074"
+      ]
+    },
+    {
+      "color": "greenery",
+      "samples": [
+        "#4b8263",
+        "#355d43",
+        "#b3bc9e",
+        "#9a9b7b",
+        "#e6c79b",
+        "#969f9d",
+        "#8b96a3",
+        "#0f300c",
+        "#e6d8e3",
+        "#2e462e",
+        "#698c78"
+      ]
+    },
+    {
+      "color": "bark",
+      "samples": ["#14161F", "#453c5b", "#4f5468"]
+    },
+    {
+      "color": "sky",
+      "samples": ["#b6a5be", "#14161F", "#32394F"]
+    }
+  ]
+}
