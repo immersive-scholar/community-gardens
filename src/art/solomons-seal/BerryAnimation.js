@@ -19,7 +19,7 @@ function BerryAnimation({
   // });
   const material = new BasicAnimationMaterial({
     // vertexColors: VertexColors,
-    flatShading: !true,
+    flatShading: true,
     side: DoubleSide,
     fog: true,
     lights: true,
@@ -80,6 +80,8 @@ function BerryAnimation({
   material.uniforms.uWindDirection.value = windDirection;
 
   geometry.computeBoundingSphere();
+  geometry.computeVertexNormals();
+  geometry.bufferUvs();
 
   Mesh.call(this, geometry, material);
 

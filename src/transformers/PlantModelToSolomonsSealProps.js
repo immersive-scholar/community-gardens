@@ -35,8 +35,9 @@ const PlantModelToSolomonsSealProps = ({
   const didNotEatForADay = 0; //model[STATS.DID_NOT_EAT_FOR_A_DAY];
   const experienceHunger = 0; //model[STATS.EXPERIENCE_HUNGER];
   const housingInsecurity = 0; //model[STATS.HOUSING_INSECURITY];
+  const belowPovertyLine = 0; //model[STATS.BELOW_POVERTY_LINE];
   const earnALot = 1; //model[STATS.EARN_A_LOT];
-  const earnALotAndAreHungry = 1; //model[STATS.EARN_A_LOT_AND_ARE_HUNGRY];
+  const earnALotAndAreHungry = 0; //model[STATS.EARN_A_LOT_AND_ARE_HUNGRY];
   const workALotAndAreHungry = model[STATS.WORK_A_LOT_AND_ARE_HUNGRY];
   const inhabitable = model[STATS.INHABITABLE];
   const pellGrant = model[STATS.PELL_GRANT];
@@ -63,11 +64,16 @@ const PlantModelToSolomonsSealProps = ({
     );
   }
 
-  if (earnALot) {
+  if (earnALot && !earnALotAndAreHungry) {
+    console.log("model ", model);
+    props.thickness = 0.08;
     props.height = R.floatBetween(1, 2);
     props.leafCount = props.height * 15;
-    props.sizeStart = new Vector2(0.05, 0.03);
-    props.sizeEnd = new Vector2(0.2, 0.15);
+    props.sizeStart = new Vector2(0.1, 0.05);
+    props.sizeEnd = new Vector2(0.3, 0.2);
+  }
+
+  if (belowPovertyLine) {
   }
 
   return props;
