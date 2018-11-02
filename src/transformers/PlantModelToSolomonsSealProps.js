@@ -1,5 +1,6 @@
-import { Vector2, Vector3 } from "three-full";
+import { Vector2, Vector3, Color } from "three-full";
 import * as STATS from "constants/Stats";
+import ColorFactory from "../util/ColorFactory";
 
 const PlantModelToSolomonsSealProps = ({
   model,
@@ -32,31 +33,60 @@ const PlantModelToSolomonsSealProps = ({
 
   // if any of these triggers are true,
   // we will adjust the props accordingly
-  const didNotEatForADay = 0; //model[STATS.DID_NOT_EAT_FOR_A_DAY];
-  const experienceHunger = 0; //model[STATS.EXPERIENCE_HUNGER];
-  const housingInsecurity = 0; //model[STATS.HOUSING_INSECURITY];
-  const belowPovertyLine = 0; //model[STATS.BELOW_POVERTY_LINE];
-  const earnALot = 1; //model[STATS.EARN_A_LOT];
-  const earnALotAndAreHungry = 0; //model[STATS.EARN_A_LOT_AND_ARE_HUNGRY];
+  const resourcesIncoming = model.resourcesIncoming;
+  const energyOutgoing = model.energyOutgoing;
+  const communityFitness = model.communityFitness;
+  const personalScarcity = model.personalScarcity;
+  const emotionalHealth = model.emotionalHealth;
+  const health = model.health;
+
+  const didNotEatForADay = model[STATS.DID_NOT_EAT_FOR_A_DAY];
+  const experienceHunger = model[STATS.EXPERIENCE_HUNGER];
+  const housingInsecurity = model[STATS.HOUSING_INSECURITY];
+  const belowPovertyLine = model[STATS.BELOW_POVERTY_LINE];
+  const earnALot = model[STATS.EARN_A_LOT];
+  const earnALotAndAreHungry = model[STATS.EARN_A_LOT_AND_ARE_HUNGRY];
   const workALotAndAreHungry = model[STATS.WORK_A_LOT_AND_ARE_HUNGRY];
   const inhabitable = model[STATS.INHABITABLE];
   const pellGrant = model[STATS.PELL_GRANT];
   const skipMeals = model[STATS.SKIP_MEALS];
   const sleptOutside = model[STATS.SLEPT_OUTSIDE];
+  const housingInsecurityScore = model[STATS.HOUSING_INSECURITY_SCORE];
 
-  if (didNotEatForADay) {
-    // props.pointCount = 10;
-    // props.displacement = new Vector3(1, 0.5, 1); // anxious
-    // props.scale = new Vector3(8, 8, 16);
-    props.berryCount = 0;
+  const age = model.Age;
+  const gpa = model.GPA;
+  const degree = model.Degree;
+
+  let color,
+    hslBase = {},
+    hslRange = new Vector3();
+  switch (true) {
+    case health <= 0:
+      props.color = ColorFactory.getRandomColor(
+        ColorFactory.SUMMER,
+        ColorFactory.LEAF
+      );
+      props.hslRange = new Vector3(0.1, 0.1, 0.2);
+      break;
+    case health > 0:
+      props.color = ColorFactory.getRandomColor(
+        ColorFactory.FALL,
+        ColorFactory.LEAF
+      );
+      props.hslRange = new Vector3(0.1, 0.1, health / 100);
+      break;
+    default:
+      break;
   }
+
+  props.berryCount = Math.max(0, resourcesIncoming * 2);
 
   if (experienceHunger) {
     props.berryWireframe = true;
   }
 
   if (housingInsecurity) {
-    props.windForce = R.floatBetween(0.25, 0.75);
+    props.windForce = housingInsecurityScore * 0.05;
     props.windDirection = new Vector3(
       R.floatBetween(-0.5, 0.5),
       R.floatBetween(-0.5, 0.5),
@@ -65,16 +95,31 @@ const PlantModelToSolomonsSealProps = ({
   }
 
   if (earnALot && !earnALotAndAreHungry) {
-    console.log("model ", model);
-    props.thickness = 0.08;
-    props.height = R.floatBetween(1, 2);
-    props.leafCount = props.height * 15;
-    props.sizeStart = new Vector2(0.1, 0.05);
-    props.sizeEnd = new Vector2(0.3, 0.2);
+    props.sizeStart = new Vector2(0.2, 0.05);
+    props.sizeEnd = new Vector2(0.3, 0.01);
   }
 
   if (belowPovertyLine) {
+    new Color(props.color).getHSL(hslBase);
+    props.hslBase = new Vector3(hslBase, 0.1, 0.2);
   }
+
+  props.leafCount = age;
+
+  switch (true) {
+    case degree === 3:
+      props.height = R.floatBetween(1, 2);
+      break;
+    case degree === 2:
+      props.height = R.floatBetween(0.5, 1.5);
+      break;
+    case degree === 1:
+    default:
+      props.height = R.floatBetween(0.25, 1);
+      break;
+  }
+
+  // make taller based on resources incoming
 
   return props;
 };

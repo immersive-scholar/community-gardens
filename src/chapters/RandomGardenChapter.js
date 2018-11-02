@@ -69,54 +69,54 @@ class RandomGardenChapter extends BaseChapter {
 
     // Stellaria Pubera
 
-    data = InsecurityCalculator.getRandomRows({
-      R: this.R,
-      count: 50
-    });
-    this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
-      count: 50,
-      R: this.R,
-      camera: this.camera,
-      controls: this.controls
-    });
+    // data = InsecurityCalculator.getRandomRows({
+    //   R: this.R,
+    //   count: 50
+    // });
+    // this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
+    //   count: 50,
+    //   R: this.R,
+    //   camera: this.camera,
+    //   controls: this.controls
+    // });
 
-    bounds.set(4, 0, 2);
-    position.set(-2, 0, 0.5);
-    new RandomLayout({
-      instances: this.stellariaPuberaSpawn.instances,
-      group: this.stellariaPuberaSpawn.group,
-      R: this.R,
-      bounds,
-      position
-    });
+    // bounds.set(4, 0, 2);
+    // position.set(-2, 0, 0.5);
+    // new RandomLayout({
+    //   instances: this.stellariaPuberaSpawn.instances,
+    //   group: this.stellariaPuberaSpawn.group,
+    //   R: this.R,
+    //   bounds,
+    //   position
+    // });
 
-    this.group.add(this.stellariaPuberaSpawn.group);
-    this.addInstances(this.stellariaPuberaSpawn.instances);
+    // this.group.add(this.stellariaPuberaSpawn.group);
+    // this.addInstances(this.stellariaPuberaSpawn.instances);
 
     // Asimina Triloba
-    data = InsecurityCalculator.getRandomRows({
-      R: this.R,
-      count: 50
-    });
+    // data = InsecurityCalculator.getRandomRows({
+    //   R: this.R,
+    //   count: 50
+    // });
 
-    this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
-      count: 50,
-      R: this.R,
-      camera: this.camera,
-      controls: this.controls
-    });
+    // this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
+    //   count: 50,
+    //   R: this.R,
+    //   camera: this.camera,
+    //   controls: this.controls
+    // });
 
-    bounds.set(4, 0, 1);
-    position.set(-2, 0, 0.5);
-    new RandomLayout({
-      R: this.R,
-      instances: this.asiminaTrilobaSpawn.instances,
-      bounds,
-      position
-    });
+    // bounds.set(4, 0, 1);
+    // position.set(-2, 0, 0.5);
+    // new RandomLayout({
+    //   R: this.R,
+    //   instances: this.asiminaTrilobaSpawn.instances,
+    //   bounds,
+    //   position
+    // });
 
-    this.group.add(this.asiminaTrilobaSpawn.group);
-    this.addInstances(this.asiminaTrilobaSpawn.instances);
+    // this.group.add(this.asiminaTrilobaSpawn.group);
+    // this.addInstances(this.asiminaTrilobaSpawn.instances);
   };
 
   animateIn = ({ delay = 0 } = {}) => {
@@ -155,8 +155,8 @@ class RandomGardenChapter extends BaseChapter {
       this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
 
       this.solomonsSealSpawn.animateIn({ delay: 6, instanceDelay: 0.3 });
-      this.stellariaPuberaSpawn.animateIn({ delay: 8, instanceDelay: 0.3 });
-      this.asiminaTrilobaSpawn.animateIn({ delay: 10, instanceDelay: 0.3 });
+      // this.stellariaPuberaSpawn.animateIn({ delay: 8, instanceDelay: 0.3 });
+      // this.asiminaTrilobaSpawn.animateIn({ delay: 10, instanceDelay: 0.3 });
 
       const element = this.getRandomInstance();
       element.createChildren();

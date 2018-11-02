@@ -79,7 +79,7 @@ class ColorFactory {
       return family;
     } catch (e) {
       throw new Error(
-        `Unknown color family name. Try LEAF, BARK, GREENERY, GROUND, or SKY instead of ${familyName}.`
+        `Unknown color family name. Try LEAF, BARK, GREENERY, GROUND, or SKY instead of ${familyName} in ${seasonName}.`
       );
     }
   }
@@ -99,6 +99,12 @@ class ColorFactory {
     this.createSwatches(ColorFactory.SUMMER, ColorFactory.GREENERY, 2);
     this.createSwatches(ColorFactory.SUMMER, ColorFactory.BARK, 3);
     this.createSwatches(ColorFactory.SUMMER, ColorFactory.SKY, 4);
+
+    this.createSwatches(ColorFactory.FALL, ColorFactory.LEAF, 5);
+    this.createSwatches(ColorFactory.FALL, ColorFactory.GROUND, 6);
+    this.createSwatches(ColorFactory.FALL, ColorFactory.GREENERY, 7);
+    this.createSwatches(ColorFactory.FALL, ColorFactory.BARK, 8);
+    this.createSwatches(ColorFactory.FALL, ColorFactory.SKY, 9);
   }
 
   static createSwatches(
