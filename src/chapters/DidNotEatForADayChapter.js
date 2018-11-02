@@ -6,6 +6,7 @@ import GroundBAS from "art/ground/GroundBAS";
 import SolomonsSealSpawn from "art/solomons-seal/SolomonsSealSpawn";
 import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
+import ChapterPlate from "art/chapter-plate/ChapterPlate";
 import ColorFactory from "util/ColorFactory";
 import InsecurityCalculator from "data/InsecurityCalculator";
 import RandomLayout from "art/layouts/RandomLayout";
@@ -37,6 +38,17 @@ class DidNotEatForADayChapter extends BaseChapter {
 
     // this.plane = new Plane({ color: bgColor });
     // this.group.add(this.plane.group);
+
+    this.chapterPlate = new ChapterPlate({
+      color: 0xffffff,
+      textColor: bgColor,
+      textArray: [
+        { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.4 },
+        { size: 0.25, text: "Who Did Not", offsetY: 1 },
+        { size: 0.25, text: "Eat For a Day.", offsetY: 0.6 }
+      ]
+    });
+    this.addCleanable(this.chapterPlate.group);
 
     let bounds = new Vector3(1, 1, 1),
       position = new Vector3();
@@ -143,6 +155,9 @@ class DidNotEatForADayChapter extends BaseChapter {
       //   to,
       //   callback: () => this.onTransitionComplete()
       // });
+
+      this.chapterPlate.animateIn();
+      this.chapterPlate.animateOut({ delay: 5 });
 
       this.background.animateIn({ duration: 10, delay: 0.5 });
       this.ground.animateIn({ duration: 5, delay: 4 });
