@@ -7,6 +7,7 @@ import {
   Vector2,
   Vector3,
   VertexColors
+  // CubeTextureLoader
 } from "three-full";
 import {
   ModelBufferGeometry,
@@ -60,6 +61,10 @@ function LeafAnimation({
     texture.wrapS = texture.wrapT = RepeatWrapping;
   });
 
+  // const envMap = new CubeTextureLoader()
+  //   .setPath(`${process.env.PUBLIC_URL}/img/skybox/`)
+  //   .load(["px.jpg", "nx.jpg", "py.jpg", "ny.jpg", "pz.jpg", "nz.jpg"]);
+
   const material = new LambertAnimationMaterial({
     vertexColors: VertexColors,
     transparent: true,
@@ -72,6 +77,7 @@ function LeafAnimation({
       uWindDirection: { value: new Vector3(0.2, 0.2, 0.2) },
       uTextureSize: { value: new Vector2(10, 10) },
       color: color
+      // envMap
     },
     uniformValues: {
       map: texture,
