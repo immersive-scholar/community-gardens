@@ -54,7 +54,8 @@ class BasePlant extends BaseRenderable {
     pointCount = 8,
     fogColor,
     fogDensity,
-    animated
+    animated,
+    stemImagePath
   }) => {
     const curve = new CatmullRomCurve3(geometry.vertices, false, "catmullrom");
 
@@ -67,7 +68,8 @@ class BasePlant extends BaseRenderable {
       delay: delay,
       fogColor,
       fogDensity,
-      animated
+      animated,
+      imagePath: stemImagePath
     });
 
     curvePainter.mesh.matrixAutoUpdate = true;

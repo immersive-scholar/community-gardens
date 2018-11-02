@@ -80,6 +80,37 @@ const PlantModelToSolomonsSealProps = ({
       break;
   }
 
+  // TODO find different patterns for different energy outgoing
+  if (energyOutgoing < 0) {
+    props.stemImagePath = `${
+      process.env.PUBLIC_URL
+    }/img/strokes/crosshatch-1.png`;
+  }
+
+  //
+  if (personalScarcity) {
+  }
+
+  // TODO add bees
+  if (communityFitness) {
+  }
+
+  // TODO give food get mushrooms
+  // "letstay": 1,
+  // "givefood": 1,
+  // "sharemeals": 2,
+
+  // TODO different types of leaves
+
+  if (emotionalHealth < 0) {
+    props.pointCount = Math.max(10, 10 + emotionalHealth);
+    props.scale = new Vector3(
+      -emotionalHealth,
+      -emotionalHealth,
+      -emotionalHealth
+    );
+  }
+
   props.berryCount = Math.max(0, resourcesIncoming * 2);
 
   if (experienceHunger) {

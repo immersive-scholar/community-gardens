@@ -64,7 +64,7 @@ const EnergyOutgoing = d => {
 
   // if you are a FirstGen, you have to learn everything on your own
   const isFirstGen = d.FirstGen === "Y";
-  energyOutgoing = isFirstGen ? 2 : 0;
+  energyOutgoing += isFirstGen ? 2 : 0;
 
   return energyOutgoing;
 };

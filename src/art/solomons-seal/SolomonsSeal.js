@@ -5,7 +5,7 @@ import BasePlant from "art/common/BasePlant";
 import Leaves from "./Leaves";
 import Berries from "./Berries";
 import StemGeometry from "./StemGeometry";
-// import TextureFactory from "../../util/TextureFactory";
+import TextureFactory from "util/TextureFactory";
 
 class SolomonsSeal extends BasePlant {
   createChildren = () => {
@@ -25,6 +25,7 @@ class SolomonsSeal extends BasePlant {
       pointCount = height * 25,
       thickness = 0.02,
       color = ColorFactory.getRandomColor(),
+      stemImagePath = TextureFactory.getStroke(),
       // imagePath = TextureFactory.getStroke(),
       leafStartPoint = 0.3,
       leafEndPoint = 1,
@@ -66,7 +67,8 @@ class SolomonsSeal extends BasePlant {
       glitchAngle: new Vector3(1, 1, 1),
       glitchThreshold: new Vector3(1, 1, 1),
       fogDensity: 0.3,
-      animated
+      animated,
+      stemImagePath
     };
     const geometry = new StemGeometry(stemProps);
     stemProps.geometry = geometry;
