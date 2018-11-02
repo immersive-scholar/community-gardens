@@ -46,10 +46,11 @@ class SolomonsSeal extends BasePlant {
       berryDisplacement = new Vector2(0.01, 0.01),
       berryDistanceFromStem = 0.015,
       berryRotation = 720,
-      berrySpiral = true
+      berrySpiral = true,
       // glitchAmplitude = 0,
       // glitchAngle = new Vector3(1, 1, 1),
       // glitchThreshold = new Vector3(1, 1, 1),
+      lookUpAt = false
     } = this.state;
 
     const stemProps = {

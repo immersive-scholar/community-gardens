@@ -3,6 +3,7 @@ import { Vector3 } from "three-full";
 import BaseChapter from "./BaseChapter";
 import BackgroundBAS from "art/background/BackgroundBAS";
 import GroundBAS from "art/ground/GroundBAS";
+// import Plane from "art/plane/Plane";
 import SolomonsSealSpawn from "art/solomons-seal/SolomonsSealSpawn";
 import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
@@ -34,8 +35,8 @@ class RandomGardenChapter extends BaseChapter {
     this.addCleanable(this.ground);
     // this.ground.position.set(0, -10, 10);
 
-    // this.plane = new Plane({ color: bgColor });
-    // this.addCleanable(this.plane.group);
+    // this.plane = new Plane({ color: 0xffffff });
+    // this.group.add(this.plane.group);
 
     let bounds = new Vector3(1, 1, 1),
       position = new Vector3();
@@ -69,54 +70,54 @@ class RandomGardenChapter extends BaseChapter {
 
     // Stellaria Pubera
 
-    // data = InsecurityCalculator.getRandomRows({
-    //   R: this.R,
-    //   count: 50
-    // });
-    // this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
-    //   count: 50,
-    //   R: this.R,
-    //   camera: this.camera,
-    //   controls: this.controls
-    // });
+    data = InsecurityCalculator.getRandomRows({
+      R: this.R,
+      count: 50
+    });
+    this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
+      count: 50,
+      R: this.R,
+      camera: this.camera,
+      controls: this.controls
+    });
 
-    // bounds.set(4, 0, 2);
-    // position.set(-2, 0, 0.5);
-    // new RandomLayout({
-    //   instances: this.stellariaPuberaSpawn.instances,
-    //   group: this.stellariaPuberaSpawn.group,
-    //   R: this.R,
-    //   bounds,
-    //   position
-    // });
+    bounds.set(4, 0, 2);
+    position.set(-2, 0, 0.5);
+    new RandomLayout({
+      instances: this.stellariaPuberaSpawn.instances,
+      group: this.stellariaPuberaSpawn.group,
+      R: this.R,
+      bounds,
+      position
+    });
 
-    // this.group.add(this.stellariaPuberaSpawn.group);
-    // this.addInstances(this.stellariaPuberaSpawn.instances);
+    this.group.add(this.stellariaPuberaSpawn.group);
+    this.addInstances(this.stellariaPuberaSpawn.instances);
 
     // Asimina Triloba
-    // data = InsecurityCalculator.getRandomRows({
-    //   R: this.R,
-    //   count: 50
-    // });
+    data = InsecurityCalculator.getRandomRows({
+      R: this.R,
+      count: 50
+    });
 
-    // this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
-    //   count: 50,
-    //   R: this.R,
-    //   camera: this.camera,
-    //   controls: this.controls
-    // });
+    this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
+      count: 50,
+      R: this.R,
+      camera: this.camera,
+      controls: this.controls
+    });
 
-    // bounds.set(4, 0, 1);
-    // position.set(-2, 0, 0.5);
-    // new RandomLayout({
-    //   R: this.R,
-    //   instances: this.asiminaTrilobaSpawn.instances,
-    //   bounds,
-    //   position
-    // });
+    bounds.set(4, 0, 1);
+    position.set(-2, 0, 0.5);
+    new RandomLayout({
+      R: this.R,
+      instances: this.asiminaTrilobaSpawn.instances,
+      bounds,
+      position
+    });
 
-    // this.group.add(this.asiminaTrilobaSpawn.group);
-    // this.addInstances(this.asiminaTrilobaSpawn.instances);
+    this.group.add(this.asiminaTrilobaSpawn.group);
+    this.addInstances(this.asiminaTrilobaSpawn.instances);
   };
 
   animateIn = ({ delay = 0 } = {}) => {
@@ -155,8 +156,8 @@ class RandomGardenChapter extends BaseChapter {
       this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
 
       this.solomonsSealSpawn.animateIn({ delay: 6, instanceDelay: 0.3 });
-      // this.stellariaPuberaSpawn.animateIn({ delay: 8, instanceDelay: 0.3 });
-      // this.asiminaTrilobaSpawn.animateIn({ delay: 10, instanceDelay: 0.3 });
+      this.stellariaPuberaSpawn.animateIn({ delay: 8, instanceDelay: 0.3 });
+      this.asiminaTrilobaSpawn.animateIn({ delay: 10, instanceDelay: 0.3 });
 
       const element = this.getRandomInstance();
       element.createChildren();
@@ -165,7 +166,9 @@ class RandomGardenChapter extends BaseChapter {
         element,
         delay: 15,
         duration: 10,
-        offset: LookDownOffset(this.R)
+        offset: element.state.lookUpAt
+          ? LookUpOffset(this.R)
+          : LookDownOffset(this.R)
       });
 
       // const to = {
@@ -210,7 +213,9 @@ class RandomGardenChapter extends BaseChapter {
         element,
         delay: 2,
         duration: 10,
-        offset: new LookDownOffset(this.R)
+        offset: element.state.lookUpAt
+          ? new LookUpOffset(this.R)
+          : new LookDownOffset(this.R)
       });
     }
   };

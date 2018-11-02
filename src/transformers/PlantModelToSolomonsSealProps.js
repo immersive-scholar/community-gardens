@@ -42,6 +42,7 @@ const PlantModelToSolomonsSealProps = ({
 
   const didNotEatForADay = model[STATS.DID_NOT_EAT_FOR_A_DAY];
   const experienceHunger = model[STATS.EXPERIENCE_HUNGER];
+  const foodInsecurity = model[STATS.FOOD_INSECURITY];
   const housingInsecurity = model[STATS.HOUSING_INSECURITY];
   const belowPovertyLine = model[STATS.BELOW_POVERTY_LINE];
   const earnALot = model[STATS.EARN_A_LOT];
@@ -94,6 +95,10 @@ const PlantModelToSolomonsSealProps = ({
     );
   }
 
+  if (foodInsecurity || housingInsecurity) {
+    props.lookUpAt = true;
+  }
+
   if (earnALot && !earnALotAndAreHungry) {
     props.sizeStart = new Vector2(0.2, 0.05);
     props.sizeEnd = new Vector2(0.3, 0.01);
@@ -118,8 +123,6 @@ const PlantModelToSolomonsSealProps = ({
       props.height = R.floatBetween(0.25, 1);
       break;
   }
-
-  // make taller based on resources incoming
 
   return props;
 };

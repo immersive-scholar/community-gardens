@@ -20,7 +20,7 @@ class SceneSubject {
   createRandomChapter() {
     const { settings, camera, controls, R, scene } = this;
     const chapter = new RandomGardenChapter(
-      { settings, focusTotal: 1 },
+      { settings, focusTotal: 10 },
       camera,
       controls,
       R
