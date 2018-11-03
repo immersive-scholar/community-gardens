@@ -11,19 +11,18 @@ import { TweenMax, Power2 } from "gsap";
 
 import BaseRenderable from "art/common/BaseRenderable";
 
-class ChapterPlate extends BaseRenderable {
+class ChapterTitle extends BaseRenderable {
   constructor(props = {}) {
     super(props);
 
-    const { color = 0xff9900, text = "Text", textArray, camera } = props;
+    const { color = 0xff9900, text = "Text", textArray } = props;
 
     this.text = text;
     this.color = color;
     this.textArray = textArray;
-    this.camera = camera;
 
     // start location
-    this.group.position.y = -0.5;
+    this.group.position.y = 0;
     this.group.position.z = 1;
     this.group.visible = true;
 
@@ -198,4 +197,4 @@ class ChapterPlate extends BaseRenderable {
   }
 }
 
-export default ChapterPlate;
+export default ChapterTitle;

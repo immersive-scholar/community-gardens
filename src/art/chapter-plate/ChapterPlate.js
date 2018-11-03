@@ -19,14 +19,10 @@ class ChapterPlate extends BaseRenderable {
       color = 0xffffff,
       text = "Text",
       textColor = 0xff9900,
-      textArray,
       camera
     } = props;
 
     this.camera = camera;
-    this.text = text;
-    this.textColor = textColor;
-    this.textArray = textArray;
 
     this.group.position.y = 0.5;
     this.group.rotation.x = 0;
@@ -38,37 +34,11 @@ class ChapterPlate extends BaseRenderable {
     this.textGroup = new Group();
     this.group.add(this.textGroup);
 
-    // const grid = this.createGrid();
-    // grid.position.y = 0.001;
-    // this.group.add(grid);
-  }
-
-  createChildren() {
-    return new Promise((resolve, reject) => {
-      // We need to resolve the animateIn once a bunch of animations have run
-      // so we're storing these for later retrieval.
-      this.resolve = resolve;
-      this.reject = reject;
-
-      this.group.position.z = this.camera.position.z + 2;
-
-      const { textArray, textColor } = this;
-
-      this.linesOfText = [];
-      for (let i = 0, iL = textArray.length, t; i < iL; i++) {
-        t = textArray[i];
-        this.createPlate({
-          text: t.text,
-          color: textColor,
-          offsetY: t.offsetY || -i * 0.3,
-          size: t.size || 0.2
-        });
-      }
-    });
+    this.group.position.z = this.camera.position.z + 0.25;
   }
 
   createPlane(color, camera) {
-    const dist = camera.position.distanceTo(new Vector3(0, 1, 0));
+    const dist = camera.position.distanceTo(new Vector3(0, 0.5, 0.25));
     const vFOV = _Math.degToRad(camera.fov); // convert vertical fov to radians
     const height = 2 * Math.tan(vFOV / 2) * dist; // visible height
     const width = height * camera.aspect;

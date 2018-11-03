@@ -18,10 +18,10 @@ const Controls = ({ camera, velocity = 1 }) => {
   const cameraTweenParams = new Vector3(),
     targetTweenParams = new Vector3();
   // camera.position.set(0.75, 0.45, 0.75);
-  camera.position.set(0, 0, -1);
+  camera.position.set(0, 0.5, -1);
   update();
 
-  const target = new Vector3(0, 0, 1);
+  const target = new Vector3(0, 0.5, 1);
   orbitControls.target = target.clone();
 
   // enable for console control.
