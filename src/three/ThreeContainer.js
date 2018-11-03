@@ -5,11 +5,13 @@ import { bindActionCreators } from "redux";
 
 import threeEntryPoint from "three/ThreeEntryPoint";
 import { settings } from "actions";
+import { stat } from "fs";
 
 class ThreeContainer extends Component {
   static propTypes = {
     timeMultiplier: PropTypes.number,
-    quantityMultiplier: PropTypes.number
+    quantityMultiplier: PropTypes.number,
+    seed: PropTypes.number
   };
 
   componentDidMount() {
@@ -29,9 +31,10 @@ class ThreeContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  timeMultiplier: state.settings.timeMultiplier,
-  quantityMultiplier: state.settings.quantityMultiplier
+const mapStateToProps = ({ settings }) => ({
+  timeMultiplier: settings.timeMultiplier,
+  quantityMultiplier: settings.quantityMultiplier,
+  seed: settings.seed
 });
 
 const mapDispatchToProps = dispatch => ({
