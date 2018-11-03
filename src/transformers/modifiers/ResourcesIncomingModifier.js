@@ -7,6 +7,8 @@ const ResourcesIncomingModifier = ({ props, resourcesIncoming }) => {
     props.thickness += resourcesIncoming * 0.05;
   }
 
+  props.berryCount = Math.max(0, resourcesIncoming * 2);
+
   return props;
 };
 

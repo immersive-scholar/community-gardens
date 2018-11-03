@@ -1,6 +1,6 @@
-import { Vector2, Vector3, Color } from "three-full";
+import { Vector3, Vector2 } from "three-full";
 import * as STATS from "constants/Stats";
-import ColorFactory from "../util/ColorFactory";
+import Modifiers from "./modifiers/";
 
 const PlantModelToSolomonsSealProps = ({
   model,
@@ -12,7 +12,7 @@ const PlantModelToSolomonsSealProps = ({
 }) => {
   // these are the default props
   // which result in a pleasing amount of variety within each plant
-  const props = {
+  let props = {
     lazy: true,
     delay: delay + i * instanceDelay,
     leafCount: R.intBetween(12, 24),
@@ -59,105 +59,39 @@ const PlantModelToSolomonsSealProps = ({
   const degree = model.Degree;
   const firstGen = model.FirstGen;
   const outOfState = model.OutofState;
+  const shares = model.sharemeals || model.givefood || model.sharemeals;
 
-  // health changes color from summer to fall
-  // and also makes the leaves darker.
-  // and make the leaves point down towards the bottom of the stem.
-  let color,
-    droop,
-    hslBase = {},
-    hslRange = new Vector3();
-  switch (true) {
-    case health <= -10:
-      props.color = ColorFactory.getRandomColor(
-        ColorFactory.WINTER,
-        ColorFactory.LEAF
-      );
-      props.leafColor = ColorFactory.getRandomColor(
-        ColorFactory.WINTER,
-        ColorFactory.SKY
-      );
-      // props.berryColor = props.leafColor;
-      props.hslRange = new Vector3(0.1, 0.1, -0.5);
-      droop = (Math.PI / 2) * health * 0.03;
-      props.rotationStart = new Vector3(droop, 0, 0);
-      break;
-    case health <= 0:
-      props.color = ColorFactory.getRandomColor(
-        ColorFactory.SUMMER,
-        ColorFactory.LEAF
-      );
-      props.hslRange = new Vector3(0.1, 0.1, 0.2);
-      droop = (Math.PI / 2) * health * 0.03;
-      props.rotationStart = new Vector3(droop, 0, 0);
-      break;
-    case health > 0:
-      props.color = ColorFactory.getRandomColor(
-        ColorFactory.FALL,
-        ColorFactory.LEAF
-      );
-      props.hslRange = new Vector3(0.1, 0.1, health / 100);
-      break;
-    default:
-      break;
-  }
+  props = Modifiers.PersonalScarcityModifier({ props, personalScarcity });
+  props = Modifiers.ResourcesIncomingModifier({ props, resourcesIncoming });
+  props = Modifiers.CommunityFitnessModifier({ props, communityFitness });
+  props = Modifiers.EnergyOutgoingModifier({ props, energyOutgoing });
+  props = Modifiers.HealthModifier({ props, health });
+  props = Modifiers.PellGrantModifier({ props, pellGrant });
+  props = Modifiers.GPAModifier({ props, gpa });
+  props = Modifiers.OutOfStateModifier({ props, outOfState });
+  props = Modifiers.FirstGenModifier({ props, firstGen });
+  props = Modifiers.EmotionalHealthModifier({ props, emotionalHealth });
+  props = Modifiers.HousingInsecurityModifier({
+    props,
+    housingInsecurity,
+    housingInsecurityScore
+  });
+  props = Modifiers.AgeModifier({ props, age });
+  props = Modifiers.DegreeModifier({ props, degree, R });
+  props = Modifiers.BelowPovertyLineModifier({ props, belowPovertyLine });
+  props = Modifiers.InsecurityModifier({
+    props,
+    foodInsecurity,
+    housingInsecurity
+  });
+  props = Modifiers.ShareModifier({ props, shares });
 
-  if (pellGrant) {
-    props.color = 0xfbd58e;
-    props.leafColor = 0xffffff;
-    const color = new Color(props.color);
-    let hsl = {};
-    color.getHSL(hsl);
-    props.hslBase = new Vector3(hsl.h, hsl.s, hsl.l);
-    props.hslRange = new Vector3(0, 0.1, 0.2);
-  }
-
-  // If energy outgoing is high, the berries are displaced further from the stem
-  if (energyOutgoing > 0) {
-    props.berryDistanceFromStem = energyOutgoing * 0.02;
-  }
-
-  //
-  if (personalScarcity) {
-    // props.stemImagePath = `${process.env.PUBLIC_URL}/img/strokes/stroke-4.png`;
-  }
-
-  // TODO add bees
-  if (communityFitness) {
-  }
-
-  // TODO give food get mushrooms
-  // "letstay": 1,
-  // "givefood": 1,
-  // "sharemeals": 2,
-
-  // berries are not 'full' if food insecure
-  if (foodInsecurity) {
-    props.berryWireframe = true;
-  }
-
-  // Different types of leaves for specific attributes
-  if (outOfState) {
-    props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/topography.png`;
-  }
-  if (firstGen) {
-    props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/maze.png`;
-  }
-
-  // render low emotional health scores with sharper angles
-  if (emotionalHealth < 0) {
-    props.pointCount = Math.max(10, 10 + emotionalHealth);
-    props.scale = new Vector3(
-      -emotionalHealth,
-      -emotionalHealth,
-      -emotionalHealth
-    );
-  }
-
-  // the more resources Incoming you have, the more berries are created.
-  props.berryCount = Math.max(0, resourcesIncoming * 2);
+  // CUSTOM MODIFIERS
 
   // housing insecurity displaces leaves from stems
+  // there is a housingInsecurityModifier but the values are different
+  // it's harder to follow when extending a modifier to accept a bunch of props
+  // IMHO that is :)
   if (housingInsecurity) {
     props.windForce = housingInsecurityScore * 0.05;
     props.windDirection = new Vector3(
@@ -167,39 +101,10 @@ const PlantModelToSolomonsSealProps = ({
     );
   }
 
-  // camera looks up at food insecure or housing insecure
-  if (foodInsecurity || housingInsecurity) {
-    props.lookUpAt = true;
-  }
-
   // bigger leaves for those who earn a lot but are not hungry
   if (earnALot && !earnALotAndAreHungry) {
     props.sizeStart = new Vector2(0.2, 0.05);
     props.sizeEnd = new Vector2(0.3, 0.01);
-  }
-
-  // dark colors if below poverty line
-  // if (belowPovertyLine) {
-  //   new Color(props.color).getHSL(hslBase);
-  //   props.hslBase = new Vector3(hslBase.h, 0.1, 0.2);
-  // }
-
-  // more leaves the older you are
-  props.leafCount = age;
-  props.thickness = age * 0.001;
-
-  // taller plants represent more senior Degrees
-  switch (true) {
-    case degree === 3:
-      props.height = R.floatBetween(1, 2);
-      break;
-    case degree === 2:
-      props.height = R.floatBetween(0.5, 1.5);
-      break;
-    case degree === 1:
-    default:
-      props.height = R.floatBetween(0.25, 1);
-      break;
   }
 
   return props;

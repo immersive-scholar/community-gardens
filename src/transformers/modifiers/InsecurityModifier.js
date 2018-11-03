@@ -3,6 +3,10 @@ const InsecurityModifier = ({ props, foodInsecurity, housingInsecurity }) => {
     props.lookUpAt = true;
   }
 
+  if (foodInsecurity) {
+    props.berryWireframe = true;
+  }
+
   return props;
 };
 

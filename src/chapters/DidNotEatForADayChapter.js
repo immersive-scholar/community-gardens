@@ -64,33 +64,33 @@ class DidNotEatForADayChapter extends BaseChapter {
 
     const count = 10 * quantityMultiplier;
 
-    // Solomon's Seal
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
       count,
       key: DID_NOT_EAT_FOR_A_DAY
     });
 
-    // this.solomonsSealSpawn = new SolomonsSealSpawn({
-    //   data: data,
-    //   count,
-    //   R: this.R,
-    //   camera: this.camera,
-    //   controls: this.controls
-    // });
-    // this.group.add(this.solomonsSealSpawn.group);
-    // this.addInstances(this.solomonsSealSpawn.instances);
-    // this.spawns.push(this.solomonsSealSpawn);
+    // Solomon's Seal
+    this.solomonsSealSpawn = new SolomonsSealSpawn({
+      data: data,
+      count,
+      R: this.R,
+      camera: this.camera,
+      controls: this.controls
+    });
+    this.group.add(this.solomonsSealSpawn.group);
+    this.addInstances(this.solomonsSealSpawn.instances);
+    this.spawns.push(this.solomonsSealSpawn);
 
-    // bounds.set(4, 0, 2);
-    // position.set(-2, 0, 0.5);
-    // new RandomLayout({
-    //   instances: this.solomonsSealSpawn.instances,
-    //   group: this.solomonsSealSpawn.group,
-    //   R: this.R,
-    //   bounds,
-    //   position
-    // });
+    bounds.set(4, 0, 2);
+    position.set(-2, 0, 0.5);
+    new RandomLayout({
+      instances: this.solomonsSealSpawn.instances,
+      group: this.solomonsSealSpawn.group,
+      R: this.R,
+      bounds,
+      position
+    });
 
     // Stellaria Pubera
 

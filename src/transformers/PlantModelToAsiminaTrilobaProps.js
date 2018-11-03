@@ -1,4 +1,4 @@
-import { Vector3, Color } from "three-full";
+import { Vector3 } from "three-full";
 import * as STATS from "constants/Stats";
 import TextureFactory from "util/TextureFactory";
 import Modifiers from "./modifiers/";
@@ -67,9 +67,11 @@ const PlantModelToAsiminaTrilobaProps = ({
   const degree = model.Degree;
   const firstGen = model.FirstGen;
   const outOfState = model.OutofState;
+  const shares = model.sharemeals || model.givefood || model.sharemeals;
 
   props = Modifiers.PersonalScarcityModifier({ props, personalScarcity });
   props = Modifiers.ResourcesIncomingModifier({ props, resourcesIncoming });
+  props = Modifiers.CommunityFitnessModifier({ props, communityFitness });
   props = Modifiers.HealthModifier({ props, health });
   props = Modifiers.PellGrantModifier({ props, pellGrant });
   props = Modifiers.GPAModifier({ props, gpa });
@@ -89,17 +91,9 @@ const PlantModelToAsiminaTrilobaProps = ({
     foodInsecurity,
     housingInsecurity
   });
+  props = Modifiers.ShareModifier({ props, shares });
 
   //
-
-  // TODO add bees
-  if (communityFitness) {
-  }
-
-  // TODO give food get mushrooms
-  // "letstay": 1,
-  // "givefood": 1,
-  // "sharemeals": 2,
 
   // berries are not 'full' if food insecure
 

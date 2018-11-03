@@ -1,7 +1,9 @@
 import AgeModifier from "./AgeModifier";
 import BelowPovertyLineModifier from "./BelowPovertyLineModifier";
+import CommunityFitnessModifier from "./CommunityFitnessModifier";
 import DegreeModifier from "./DegreeModifier";
 import EmotionalHealthModifier from "./EmotionalHealthModifier";
+import EnergyOutgoingModifier from "./EnergyOutgoingModifier";
 import FirstGenModifier from "./FirstGenModifier";
 import GPAModifier from "./GPAModifier";
 import InsecurityModifier from "./InsecurityModifier";
@@ -11,12 +13,15 @@ import OutOfStateModifier from "./OutOfStateModifier";
 import PellGrantModifier from "./PellGrantModifier";
 import PersonalScarcityModifier from "./PersonalScarcityModifier";
 import ResourcesIncomingModifier from "./ResourcesIncomingModifier";
+import ShareModifier from "./ShareModifier";
 
 export default {
   AgeModifier,
   BelowPovertyLineModifier,
+  CommunityFitnessModifier,
   DegreeModifier,
   EmotionalHealthModifier,
+  EnergyOutgoingModifier,
   FirstGenModifier,
   GPAModifier,
   InsecurityModifier,
@@ -25,5 +30,6 @@ export default {
   OutOfStateModifier,
   PellGrantModifier,
   PersonalScarcityModifier,
-  ResourcesIncomingModifier
+  ResourcesIncomingModifier,
+  ShareModifier
 };
