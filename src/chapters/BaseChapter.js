@@ -1,5 +1,4 @@
 import { Group, Vector3, Box3, Object3D } from "three-full";
-import { LookUpOffset, LookDownOffset } from "three/helpers/CameraOffsets";
 
 class BaseChapter {
   constructor(props, camera, controls, R) {

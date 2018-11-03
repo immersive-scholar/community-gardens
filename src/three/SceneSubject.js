@@ -30,7 +30,7 @@ class SceneSubject {
   }
 
   createRandomChapter() {
-    const { settings, camera, controls, R, scene } = this;
+    const { settings, camera, controls, R } = this;
     const chapter = new RandomGardenChapter(
       { settings, focusTotal: 1 },
       camera,
@@ -41,7 +41,7 @@ class SceneSubject {
   }
 
   createDidNotEatForADayChapter() {
-    const { settings, camera, controls, R, scene } = this;
+    const { settings, camera, controls, R } = this;
     const chapter = new DidNotEatForADayChapter(
       { settings, focusTotal: 1 },
       camera,

@@ -52,7 +52,9 @@ class SolomonsSeal extends BasePlant {
       // glitchAmplitude = 0,
       // glitchAngle = new Vector3(1, 1, 1),
       // glitchThreshold = new Vector3(1, 1, 1),
+      /* eslint-disable no-unused-vars */
       lookUpAt = false
+      /* eslint-ensable no-unused-vars */
     } = this.state;
 
     const stemProps = {

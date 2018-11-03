@@ -4,11 +4,11 @@ import Stats from "stats.js";
 import SceneSubject from "./SceneSubject";
 import GeneralScene from "./GeneralScene";
 import GeneralRenderer from "./GeneralRenderer";
-import PostProcessing from "./PostProcessing";
 import GeneralCamera from "./GeneralCamera";
 import GeneralControls from "./GeneralControls";
 import GeneralLights from "./GeneralLights";
-import CameraController from "./helpers/CameraController";
+// import PostProcessing from "./PostProcessing";
+// import CameraController from "./helpers/CameraController";
 
 export default ({ generalCanvas, R, settings }) => {
   const clock = new Clock();

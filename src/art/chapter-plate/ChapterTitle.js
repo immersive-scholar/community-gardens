@@ -1,5 +1,4 @@
 import {
-  _Math,
   BufferGeometry,
   FontLoader,
   GeometryUtils,
@@ -78,7 +77,7 @@ class ChapterTitle extends BaseRenderable {
         var triangleAreaHeuristics = 0.1 * (height * size);
         for (var i = 0; i < geometry.faces.length; i++) {
           var face = geometry.faces[i];
-          if (face.materialIndex == 1) {
+          if (face.materialIndex === 1) {
             for (var j = 0; j < face.vertexNormals.length; j++) {
               face.vertexNormals[j].z = 0;
               face.vertexNormals[j].normalize();
@@ -88,7 +87,7 @@ class ChapterTitle extends BaseRenderable {
             var vc = geometry.vertices[face.c];
             var s = GeometryUtils.triangleArea(va, vb, vc);
             if (s > triangleAreaHeuristics) {
-              for (var j = 0; j < face.vertexNormals.length; j++) {
+              for (j = 0; j < face.vertexNormals.length; j++) {
                 face.vertexNormals[j].copy(face.normal);
               }
             }

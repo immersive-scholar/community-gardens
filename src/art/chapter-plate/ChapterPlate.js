@@ -1,7 +1,6 @@
 import {
   _Math,
   BackSide,
-  Group,
   Mesh,
   MeshLambertMaterial,
   PlaneBufferGeometry,
@@ -15,12 +14,7 @@ class ChapterPlate extends BaseRenderable {
   constructor(props = {}) {
     super(props);
 
-    const {
-      color = 0xffffff,
-      text = "Text",
-      textColor = 0xff9900,
-      camera
-    } = props;
+    const { color = 0xffffff, camera } = props;
 
     this.camera = camera;
 
@@ -30,9 +24,6 @@ class ChapterPlate extends BaseRenderable {
 
     this.plane = this.createPlane(color, camera);
     this.group.add(this.plane);
-
-    this.textGroup = new Group();
-    this.group.add(this.textGroup);
 
     this.group.position.z = this.camera.position.z + 0.25;
   }
