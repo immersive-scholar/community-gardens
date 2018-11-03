@@ -60,6 +60,10 @@ class TextureFactory {
     return this.getRandomTexture(TextureFactory.PATTERN);
   }
 
+  static getLine() {
+    return this.getRandomTexture(TextureFactory.LINE);
+  }
+
   static getRandomTexture(typeName = TextureFactory.PATTERN) {
     typeName = typeName.toUpperCase();
     let textureType, textureGroup;
@@ -67,7 +71,7 @@ class TextureFactory {
       textureType = find(this.textures, t => t.type.toUpperCase() === typeName);
     } catch (e) {
       throw new Error(
-        `Unknown texture name. Try PATTERN or STROKE instead of ${typeName}.`
+        `Unknown texture name. Try PATTERN, LINE or STROKE instead of ${typeName}.`
       );
     }
 
@@ -83,5 +87,6 @@ class TextureFactory {
 
 TextureFactory.PATTERN = "PATTERN";
 TextureFactory.STROKE = "STROKE";
+TextureFactory.LINE = "LINE";
 
 export default TextureFactory;

@@ -59,7 +59,7 @@ if (device.mobile) {
 
 // slow it down on large displays
 const width = window.innerWidth;
-if (width > 1200) {
+if (width > 5200) {
   timeMultiplier = 0.3;
 }
 

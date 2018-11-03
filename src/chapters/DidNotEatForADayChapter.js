@@ -20,7 +20,7 @@ class DidNotEatForADayChapter extends BaseChapter {
   }
 
   init = props => {
-    const stat = InsecurityCalculator.stats[DID_NOT_EAT_FOR_A_DAY];
+    // const stat = InsecurityCalculator.stats[DID_NOT_EAT_FOR_A_DAY];
     const { quantityMultiplier } = this.settings;
 
     const bgColor = ColorFactory.getRandomColor(
@@ -62,63 +62,64 @@ class DidNotEatForADayChapter extends BaseChapter {
     let bounds = new Vector3(1, 1, 1),
       position = new Vector3();
 
-    // Solomon's Seal
-
     const count = 10 * quantityMultiplier;
 
+    // Solomon's Seal
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
       count,
       key: DID_NOT_EAT_FOR_A_DAY
     });
 
-    this.solomonsSealSpawn = new SolomonsSealSpawn({
+    // this.solomonsSealSpawn = new SolomonsSealSpawn({
+    //   data: data,
+    //   count,
+    //   R: this.R,
+    //   camera: this.camera,
+    //   controls: this.controls
+    // });
+    // this.group.add(this.solomonsSealSpawn.group);
+    // this.addInstances(this.solomonsSealSpawn.instances);
+    // this.spawns.push(this.solomonsSealSpawn);
+
+    // bounds.set(4, 0, 2);
+    // position.set(-2, 0, 0.5);
+    // new RandomLayout({
+    //   instances: this.solomonsSealSpawn.instances,
+    //   group: this.solomonsSealSpawn.group,
+    //   R: this.R,
+    //   bounds,
+    //   position
+    // });
+
+    // Stellaria Pubera
+
+    this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
       data: data,
       count,
       R: this.R,
       camera: this.camera,
       controls: this.controls
     });
-    this.group.add(this.solomonsSealSpawn.group);
-    this.addInstances(this.solomonsSealSpawn.instances);
-    this.spawns.push(this.solomonsSealSpawn);
 
     bounds.set(4, 0, 2);
     position.set(-2, 0, 0.5);
     new RandomLayout({
-      instances: this.solomonsSealSpawn.instances,
-      group: this.solomonsSealSpawn.group,
+      instances: this.stellariaPuberaSpawn.instances,
+      group: this.stellariaPuberaSpawn.group,
       R: this.R,
       bounds,
       position
     });
 
-    // Stellaria Pubera
-
-    // this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
-    //   count,
-    //   R: this.R,
-    //   camera: this.camera,
-    //   controls: this.controls
-    // });
-
-    // bounds.set(4, 0, 2);
-    // position.set(-2, 0, 0.5);
-    // new RandomLayout({
-    //   instances: this.stellariaPuberaSpawn.instances,
-    //   group: this.stellariaPuberaSpawn.group,
-    //   R: this.R,
-    //   bounds,
-    //   position
-    // });
-
-    // this.group.add(this.stellariaPuberaSpawn.group);
-    // this.addInstances(this.stellariaPuberaSpawn.instances);
-    // this.spawns.push(this.stellariaPuberaSpawn);
+    this.group.add(this.stellariaPuberaSpawn.group);
+    this.addInstances(this.stellariaPuberaSpawn.instances);
+    this.spawns.push(this.stellariaPuberaSpawn);
 
     // Asimina Triloba
 
     // this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
+    // data: data,
     //   count,
     //   R: this.R,
     //   camera: this.camera,

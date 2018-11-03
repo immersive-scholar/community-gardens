@@ -7,7 +7,7 @@ const LookUpOffset = R => {
     y,
     z,
     tx: -x,
-    ty: -y,
+    ty: 0,
     tz: -z
   };
 };

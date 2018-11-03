@@ -3,8 +3,7 @@ import {
   BackSide,
   Mesh,
   MeshLambertMaterial,
-  PlaneBufferGeometry,
-  Vector3
+  PlaneBufferGeometry
 } from "three-full";
 import { TweenMax, Power2 } from "gsap";
 

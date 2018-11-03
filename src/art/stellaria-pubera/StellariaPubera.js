@@ -61,6 +61,7 @@ class StellariaPubera extends BasePlant {
       berryCount = 24, //this.R.intBetween(4, 24),
       // berryColor = 0xffffff,
       berryColor = color,
+      berryWireframe = false,
       berryDisplacement = new Vector2(0.01, 0.01),
       berryDistanceFromStem = 0.002,
       berryRotation = 360,
@@ -109,8 +110,6 @@ class StellariaPubera extends BasePlant {
     this.petals = new Petals({
       petalCount,
       petalShapeGeometry: petalShapeGeometry.clone(),
-      width: petalWidth,
-      length: petalLength,
       color: 0xffffff,
       imagePath,
       textureSize,
@@ -144,8 +143,6 @@ class StellariaPubera extends BasePlant {
     this.rearPetals = new Petals({
       petalCount: rearPetalCount,
       petalShapeGeometry: rearPetalShapeGeometry.clone(),
-      width: petalWidth * 2,
-      length: petalLength / 2,
       petalMidPointRatio: 0.5,
       petalLowerMidPointRatio: 0.2,
       petalUpperMidPointRatio: 0.8,
@@ -183,19 +180,20 @@ class StellariaPubera extends BasePlant {
       spiralDepth: berrySpiralDepth,
       // color,
       color: berryColor,
+      wireframe: berryWireframe,
       R: this.R,
       animated,
       windForce,
       windDirection,
       delay: 0
     });
-    this.pollen.position.y = height;
+    this.pollen.position.copy(stemTopPoint);
     this.pollen.lookAt(petalTarget);
     this.pollen.position.z -= 0.002;
     // this.pollen.rotation.y = -Math.PI / 2;
     this.group.add(this.pollen);
 
-    this.focalPoint = this.pollen;
+    this.focalPoint = this.petals;
   };
 
   animateIn = ({ duration = 1, delay = 0, animated = true } = {}) => {

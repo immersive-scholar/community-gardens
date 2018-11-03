@@ -21,6 +21,7 @@ function Pollen({
   count,
   size,
   color,
+  wireframe,
   imagePath = `${process.env.PUBLIC_URL}/img/strokes/crosshatch-1.png`,
   textureSize = new Vector2(1, 1),
   R,
@@ -94,7 +95,7 @@ function Pollen({
     side: DoubleSide,
     fog: true,
     lights: true,
-    wireframe: !true,
+    wireframe,
     transparent: false,
     opacity: 1.0,
     uniforms: {
