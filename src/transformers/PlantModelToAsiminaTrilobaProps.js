@@ -138,9 +138,11 @@ const PlantModelToAsiminaTrilobaProps = ({
   // "sharemeals": 2,
 
   // berries are not 'full' if food insecure
-  // if (foodInsecurity) {
-  //    props.wireframe = true;
-  // }
+  if (resourcesIncoming > 1) {
+    props.petalLength += resourcesIncoming * 0.05;
+    props.petalWidth += resourcesIncoming * 0.05;
+    props.thickness += resourcesIncoming * 0.05;
+  }
 
   // Different types of leaves for specific attributes
   props.imagePath = TextureFactory.getStroke();
@@ -163,9 +165,6 @@ const PlantModelToAsiminaTrilobaProps = ({
       -emotionalHealth
     );
   }
-
-  // the more resources Incoming you have, the more berries are created.
-  props.berryCount = Math.max(10, resourcesIncoming * 5);
 
   // housing insecurity displaces leaves from stems
   if (housingInsecurity) {
@@ -196,7 +195,7 @@ const PlantModelToAsiminaTrilobaProps = ({
 
   // more leaves the older you are
   props.petalCount = age;
-  props.thickness = age * 0.001;
+  //   props.thickness = age * 0.001;
 
   // taller plants represent more senior Degrees
   switch (true) {
