@@ -17,7 +17,8 @@ const parsed = queryString.parse(location.search);
 let timeMultiplier = parseFloat(parsed.timeMultiplier) || 1;
 let quantityMultiplier = parseFloat(parsed.quantityMultiplier) || 1;
 let seed = parseFloat(parsed.seed) || Math.random();
-let debug = parseFloat(parsed.debug) === 1;
+let debug =
+  parseFloat(parsed.debug) === 1 || window.location.hostname === "localhost";
 
 // 2. Sniff GPU to derive default performance options
 const gpu = new GPU();
