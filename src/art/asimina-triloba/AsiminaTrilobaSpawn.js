@@ -1,5 +1,3 @@
-import { Vector3 } from "three-full";
-
 import AsiminaTriloba from "art/asimina-triloba/AsiminaTriloba";
 import AsiminaTrilobaController from "art/asimina-triloba/AsiminaTrilobaController";
 import PlantModelToAsiminaTrilobaProps from "transformers/PlantModelToAsiminaTrilobaProps";
