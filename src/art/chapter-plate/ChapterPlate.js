@@ -228,7 +228,9 @@ class ChapterPlate extends BaseRenderable {
         this.group.position.y = 0.5;
         this.group.rotation.x = 0;
         this.visible = true;
-        resolve();
+
+        this.timeoutID && clearTimeout(this.timeoutID);
+        this.timeoutID = setTimeout(() => resolve(), 1000);
       }
     });
   }

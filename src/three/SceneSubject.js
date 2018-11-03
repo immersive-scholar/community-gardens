@@ -60,7 +60,7 @@ class SceneSubject {
 
     this.currentChapter = chapter;
 
-    this.chapterPlate.animateOut();
+    this.chapterPlate.animateOut({ delay: 1 });
   }
 
   cleanChapter(chapter) {
