@@ -6,7 +6,8 @@ export default ({ canvas, width, height, dpr, antiAlias }) => {
     antialias: antiAlias,
     alpha: !true,
     logarithmicDepthBuffer: false,
-    preserveDrawingBuffer: true
+    preserveDrawingBuffer: true,
+    powerPreference: "high-performance"
   });
   renderer.setPixelRatio(dpr);
   renderer.setSize(width, height);

@@ -11,10 +11,13 @@ import GeneralLights from "./GeneralLights";
 import CameraController from "./helpers/CameraController";
 
 export default ({ generalCanvas, R, settings }) => {
+  const { debug } = settings;
   const clock = new Clock();
 
   const stats = new Stats();
-  document.body.appendChild(stats.dom);
+  if (debug) {
+    document.body.appendChild(stats.dom);
+  }
 
   const screenDimensions = generalCanvas.getDimensions();
 
@@ -30,8 +33,10 @@ export default ({ generalCanvas, R, settings }) => {
   const controls = new GeneralControls({ camera });
   // const postProcessing = new PostProcessing({ scene, camera, renderer });
 
-  const cameraGUI = new CameraController({ camera, controls, settings });
-  cameraGUI.enable();
+  if (settings.debug) {
+    const cameraGUI = new CameraController({ camera, controls, settings });
+    cameraGUI.enable();
+  }
 
   // controls.animateChapter2();
   // controls.controls.autoRotate = true;
@@ -71,12 +76,21 @@ export default ({ generalCanvas, R, settings }) => {
     // postProcessing.composer.setSize(width, height);
   }
 
+  function setDebug(d) {
+    if (d) {
+      document.body.appendChild(stats.dom);
+    } else {
+      document.body.removeChild(stats.dom);
+    }
+  }
+
   return {
     update,
     onWindowResize,
     renderer,
     scene,
     camera,
-    subject
+    subject,
+    setDebug
   };
 };

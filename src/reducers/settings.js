@@ -3,7 +3,8 @@ import {
   SET_QUANTITY_MULTIPLIER,
   SET_RANDOM_SEED,
   SET_DPR,
-  SET_ANTI_ALIAS
+  SET_ANTI_ALIAS,
+  SET_DEBUG
 } from "constants/Constants";
 import { TweenMax } from "gsap";
 import GPU from "util/GPU";
@@ -16,6 +17,7 @@ const parsed = queryString.parse(location.search);
 let timeMultiplier = parseFloat(parsed.timeMultiplier) || 1;
 let quantityMultiplier = parseFloat(parsed.quantityMultiplier) || 1;
 let seed = parseFloat(parsed.seed) || Math.random();
+let debug = parseFloat(parsed.debug) === 1;
 
 // 2. Sniff GPU to derive default performance options
 const gpu = new GPU();
@@ -24,7 +26,6 @@ const { antiAlias, dpr } = gpu.config;
 
 // 3. Adjust values based on environment app is running within
 // fast computer gets many more plants
-console.log("tierIndex ", tierIndex);
 switch (true) {
   case tierIndex === 3:
     quantityMultiplier = 10;
@@ -57,7 +58,7 @@ if (device.mobile) {
 
 // slow it down on large displays
 const width = window.innerWidth;
-if (width > 5200) {
+if (width > 1200) {
   timeMultiplier = 0.3;
 }
 
@@ -66,7 +67,8 @@ const initialState = {
   quantityMultiplier,
   seed,
   antiAlias,
-  dpr
+  dpr,
+  debug
 };
 
 export default (state = initialState, action) => {
@@ -106,6 +108,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         antiAlias
+      };
+    case SET_DEBUG:
+      const { debug } = action.payload.data;
+
+      return {
+        ...state,
+        debug
       };
     default:
       return state;

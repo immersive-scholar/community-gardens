@@ -3,7 +3,8 @@ import {
   SET_QUANTITY_MULTIPLIER,
   SET_RANDOM_SEED,
   SET_DPR,
-  SET_ANTI_ALIAS
+  SET_ANTI_ALIAS,
+  SET_DEBUG
 } from "constants/Constants";
 
 const settings = {};
@@ -31,6 +32,11 @@ settings.setDPR = dpr => ({
 settings.setAntiAlias = antiAlias => ({
   type: SET_ANTI_ALIAS,
   payload: { data: { antiAlias } }
+});
+
+settings.setDebug = debug => ({
+  type: SET_DEBUG,
+  payload: { data: { debug } }
 });
 
 export default settings;

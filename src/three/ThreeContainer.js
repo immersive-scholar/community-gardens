@@ -47,7 +47,8 @@ const mapStateToProps = ({ settings }) => ({
   quantityMultiplier: settings.quantityMultiplier,
   seed: settings.seed,
   dpr: settings.dpr,
-  antiAlias: settings.antiAlias
+  antiAlias: settings.antiAlias,
+  debug: settings.debug
 });
 
 const mapDispatchToProps = dispatch => ({

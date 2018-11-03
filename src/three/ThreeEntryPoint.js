@@ -10,7 +10,7 @@ import InsecurityCalculator from "data/InsecurityCalculator";
 export default (container, settings) => {
   console.log("settings ", settings);
 
-  const { seed, dpr, antiAlias } = settings;
+  const { seed } = settings;
 
   // const seed = Math.random();
   // const seed = 0.4865584781852079;
@@ -31,9 +31,9 @@ export default (container, settings) => {
     }),
     TextureFactory.load(`${process.env.PUBLIC_URL}/json/textures.json`)
   ])
-    // .then(() => {
-    //   ColorFactory.debug();
-    // })
+    .then(() => {
+      settings.debug && ColorFactory.debug();
+    })
     .then(() => {
       InsecurityCalculator.parse(DataFactory.data);
     })
@@ -90,8 +90,10 @@ export default (container, settings) => {
   // when redux dispatches a settings change event,
   // this function is summoned with the new settings object
   function setSettings(settings) {
-    const { quantityMultiplier } = settings;
+    const { quantityMultiplier, debug } = settings;
     sceneManager.subject.setQuantityMultiplier(quantityMultiplier);
+
+    sceneManager.setDebug(debug);
   }
 
   function render() {

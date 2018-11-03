@@ -16,7 +16,6 @@ const GPU = () => {
 
   if (tierIndex <= 2) {
     // config.dpr = Math.min(1, config.dpr);
-    config.shadowSize = 512;
   }
 
   if (tierIndex <= 1) {
@@ -25,6 +24,10 @@ const GPU = () => {
   }
 
   if (tierIndex === 0) {
+    config.dpr = Math.min(1, config.dpr);
+  }
+
+  if (device.mobile) {
     config.dpr = Math.min(1, config.dpr);
   }
 
