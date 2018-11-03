@@ -1,15 +1,10 @@
 import {
   _Math,
-  Box3,
-  BufferGeometry,
-  DoubleSide,
-  FontLoader,
-  GeometryUtils,
+  BackSide,
   Group,
   Mesh,
   MeshLambertMaterial,
   PlaneBufferGeometry,
-  TextGeometry,
   Vector3
 } from "three-full";
 import { TweenMax, Power2 } from "gsap";
@@ -33,9 +28,8 @@ class ChapterPlate extends BaseRenderable {
     this.textColor = textColor;
     this.textArray = textArray;
 
-    // start location
-    this.group.position.y = 5;
-    this.group.rotation.x = Math.PI / 2;
+    this.group.position.y = 0.5;
+    this.group.rotation.x = 0;
     this.group.visible = false;
 
     this.plane = this.createPlane(color, camera);
@@ -83,122 +77,24 @@ class ChapterPlate extends BaseRenderable {
     const planeMaterial = new MeshLambertMaterial({
       color,
       wireframe: !true,
-      fog: true,
-      side: DoubleSide,
+      fog: !true,
+      side: BackSide,
       transparent: true,
-      opacity: 1
+      opacity: 0.5
     });
     var plane = new Mesh(planeGeometry, planeMaterial);
-    // plane.rotation.x = -Math.PI / 2;
     plane.position.y = camera.position.y;
     return plane;
   }
 
-  createPlate({ text = "!", color = 0xff9900, size = 0.2, offsetY = 0 }) {
-    const loader = new FontLoader();
-    let geometry,
-      height = 0.05;
-
-    loader.load(
-      //   `${process.env.PUBLIC_URL}/fonts/helvetiker_regular.typeface.json`,
-      `${process.env.PUBLIC_URL}/fonts/droid/droid_serif_regular.typeface.json`,
-      font => {
-        geometry = new TextGeometry(text, {
-          font: font,
-          size,
-          height,
-          curveSegments: 12
-        });
-
-        geometry.computeBoundingBox();
-        geometry.computeVertexNormals();
-
-        var triangleAreaHeuristics = 0.1 * (height * size);
-        for (var i = 0; i < geometry.faces.length; i++) {
-          var face = geometry.faces[i];
-          if (face.materialIndex == 1) {
-            for (var j = 0; j < face.vertexNormals.length; j++) {
-              face.vertexNormals[j].z = 0;
-              face.vertexNormals[j].normalize();
-            }
-            var va = geometry.vertices[face.a];
-            var vb = geometry.vertices[face.b];
-            var vc = geometry.vertices[face.c];
-            var s = GeometryUtils.triangleArea(va, vb, vc);
-            if (s > triangleAreaHeuristics) {
-              for (var j = 0; j < face.vertexNormals.length; j++) {
-                face.vertexNormals[j].copy(face.normal);
-              }
-            }
-          }
-        }
-
-        var centerOffset =
-          -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
-
-        const bufferGeometry = new BufferGeometry().fromGeometry(geometry);
-
-        const material = new MeshLambertMaterial({
-          color,
-          reflectivity: 50,
-          emissive: 0x000000,
-          wireframe: true
-        });
-        let mesh = new Mesh(bufferGeometry, material);
-        mesh.position.x = -centerOffset;
-        mesh.position.y = offsetY;
-        mesh.rotation.y = Math.PI;
-        mesh.position.z = -0.01;
-
-        this.textGroup.add(mesh);
-
-        this.linesOfText.push(mesh);
-
-        if (this.textGroup.children.length === this.textArray.length) {
-          this.resolve();
-        }
-
-        // this.centerText();
-      }
-    );
-  }
-
-  //   centerText() {
-  //     // center the text
-  //     let boundingBox = new Box3().setFromObject(this.textGroup);
-  //     let center = new Vector3();
-  //     boundingBox.getCenter(center);
-  //     console.log("center ", center);
-  //     this.textGroup.position.y = -center.y + 1;
-  //   }
-
   clean() {
     this.tween && this.tween.kill(null, this);
-    this.tween2 && this.tween2.kill(null, this);
 
     if (this.plane) {
       this.plane.geometry.dispose();
       this.plane.material.dispose();
       this.group.remove(this.plane);
       this.plane = undefined;
-    }
-
-    for (let i = 0, iL = this.linesOfText.length, line; i < iL; i++) {
-      line = this.linesOfText[i];
-      if (line) {
-        line.geometry.dispose();
-        line.material.dispose();
-        this.textGroup.remove(line);
-        line = undefined;
-      }
-    }
-    this.linesOfText = [];
-
-    if (this.mesh) {
-      this.mesh.geometry.dispose();
-      this.mesh.material.dispose();
-      this.group.remove(this.mesh);
-      this.mesh = undefined;
     }
   }
 
@@ -211,25 +107,12 @@ class ChapterPlate extends BaseRenderable {
 
   animateIn({ duration = 2, delay = 0, animated = true } = {}) {
     this.tween && this.tween.kill(null, this);
-    this.tween2 && this.tween2.kill(null, this);
-    this.tween3 && this.tween3.kill(null, this);
 
     this.group.visible = true;
 
     return new Promise((resolve, reject) => {
       if (animated) {
-        // this.tween = TweenMax.to(this.group.position, duration, {
-        //   y: 0.5,
-        //   ease: Power2.easeOut,
-        //   delay,
-        //   onComplete: () => resolve()
-        // });
-        // this.tween2 = TweenMax.to(this.group.rotation, duration, {
-        //   x: 0,
-        //   ease: Power2.easeOut,
-        //   delay
-        // });
-        this.tween3 = TweenMax.to(this.plane.material, duration, {
+        this.tween = TweenMax.to(this.plane.material, duration, {
           opacity: 1,
           ease: Power2.easeOut,
           delay,
@@ -238,9 +121,8 @@ class ChapterPlate extends BaseRenderable {
           }
         });
       } else {
-        this.group.position.y = 0.5;
-        this.group.rotation.x = 0;
-        this.visible = true;
+        this.plane.material.opacity = 1;
+        this.group.visible = true;
 
         this.timeoutID && clearTimeout(this.timeoutID);
         this.timeoutID = setTimeout(() => resolve(), 1000);
@@ -251,32 +133,14 @@ class ChapterPlate extends BaseRenderable {
   animateOut({ duration = 5, delay = 0 } = {}) {
     return new Promise((resolve, reject) => {
       this.tween && this.tween.kill(null, this);
-      this.tween2 && this.tween2.kill(null, this);
-      this.tween3 && this.tween3.kill(null, this);
 
-      //   this.tween = TweenMax.to(this.group.position, duration, {
-      //     y: 5,
-      //     ease: Power2.easeOut,
-      //     delay,
-      //     onComplete: () => {
-      //       resolve();
-      //       this.group.visible = false;
-      //     }
-      //   });
-
-      //   this.tween2 = TweenMax.to(this.group.rotation, duration, {
-      //     x: Math.PI / 2,
-      //     ease: Power2.easeOut,
-      //     delay
-      //   });
-
-      this.tween3 = TweenMax.to(this.plane.material, duration, {
+      this.tween = TweenMax.to(this.plane.material, duration, {
         opacity: 0,
         ease: Power2.easeOut,
         delay,
         onComplete: () => {
-          resolve();
           this.group.visible = false;
+          resolve();
         }
       });
     });

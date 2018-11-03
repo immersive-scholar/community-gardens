@@ -7,6 +7,7 @@ import SolomonsSealSpawn from "art/solomons-seal/SolomonsSealSpawn";
 import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import ChapterPlate from "art/chapter-plate/ChapterPlate";
+import ChapterTitle from "art/chapter-plate/ChapterTitle";
 import ColorFactory from "util/ColorFactory";
 import InsecurityCalculator from "data/InsecurityCalculator";
 import RandomLayout from "art/layouts/RandomLayout";
@@ -41,17 +42,22 @@ class DidNotEatForADayChapter extends BaseChapter {
     // this.plane = new Plane({ color: bgColor });
     // this.group.add(this.plane.group);
 
-    // this.chapterPlate = new ChapterPlate({
-    //   camera: this.camera,
-    //   color: 0xffffff,
-    //   textColor: 0x32394f,
-    //   textArray: [
-    //     { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.4 },
-    //     { size: 0.25, text: "Who Did Not", offsetY: 1 },
-    //     { size: 0.25, text: "Eat For a Day.", offsetY: 0.6 }
-    //   ]
-    // });
-    // this.addCleanable(this.chapterPlate, this.chapterPlate.group);
+    this.chapterPlate = new ChapterPlate({
+      camera: this.camera,
+      color: bgColor
+    });
+    this.addCleanable(this.chapterPlate, this.chapterPlate.group);
+
+    this.chapterTitle = new ChapterTitle({
+      color: 0xffffff,
+      textArray: [
+        { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.4 },
+        { size: 0.25, text: "Who Did Not", offsetY: 1 },
+        { size: 0.25, text: "Eat For a Day.", offsetY: 0.6 }
+      ]
+    });
+    this.chapterTitle.createChildren();
+    this.addCleanable(this.chapterTitle, this.chapterTitle.group);
 
     let bounds = new Vector3(1, 1, 1),
       position = new Vector3();
@@ -128,6 +134,34 @@ class DidNotEatForADayChapter extends BaseChapter {
     // this.addInstances(this.asiminaTrilobaSpawn.instances);
   };
 
+  onTransitionComplete = () => {
+    // if we have focused on the desired number of elements
+    if (
+      this.state.focusTotal &&
+      this.state.currentFocusCount >= this.state.focusTotal
+    ) {
+      // let's pan the camera away from the scene
+      // as a signal that the chapter is complete
+      // we will also resolve the promise
+      // so the sceneSubject knows to go on to the next chapter.
+      this.animateOut({
+        onComplete: () => this.resolve("done")
+      });
+
+      // otherwise, we're going to select an item and focus on it
+    } else {
+      const element = this.getRandomInstance();
+      this.focusElement({
+        element,
+        delay: 2,
+        duration: 10,
+        offset: element.state.lookUpAt
+          ? LookUpOffset(this.R)
+          : LookDownOffset(this.R)
+      });
+    }
+  };
+
   animateIn = ({ delay = 0 } = {}) => {
     return new Promise((resolve, reject) => {
       // We need to resolve the animateIn once a bunch of animations have run
@@ -135,13 +169,17 @@ class DidNotEatForADayChapter extends BaseChapter {
       this.resolve = resolve;
       this.reject = reject;
 
-      // this.ground.animateIn({ duration: 5, delay: 4 });
+      this.chapterTitle.animateIn();
+      this.chapterTitle.animateOut({ delay: 15, duration: 10 });
+
+      // this.background.animateIn({ duraction: 5, delay: 4 });
+      // this.ground.animateIn({ duration: 5, delay: 2 });
       // this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
 
       this.background.time = 1;
       this.background.update();
       this.ground.time = 1;
-      this.ground.cliff = 1;
+      this.ground.cliff = 0.5;
       this.ground.update();
 
       this.solomonsSealSpawn.animateIn({ delay: 2, instanceDelay: 0.3 });
@@ -159,6 +197,25 @@ class DidNotEatForADayChapter extends BaseChapter {
           ? LookUpOffset(this.R)
           : LookDownOffset(this.R)
       });
+    });
+  };
+
+  animateOut = ({ delay = 0, duration = 15, onComplete = () => {} } = {}) => {
+    // this.chapterTitle.animateOut();
+    const to = {
+      x: 0,
+      y: 0,
+      z: -1,
+      tx: 0,
+      ty: 0,
+      tz: 1
+    };
+
+    this.controls.animate({
+      to,
+      delay,
+      duration,
+      callback: onComplete
     });
   };
 }

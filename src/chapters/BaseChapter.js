@@ -129,34 +129,6 @@ class BaseChapter {
     });
   };
 
-  onTransitionComplete = () => {
-    // if we have focused on the desired number of elements
-    if (
-      this.state.focusTotal &&
-      this.state.currentFocusCount >= this.state.focusTotal
-    ) {
-      // let's pan the camera away from the scene
-      // as a signal that the chapter is complete
-      // we will also resolve the promise
-      // so the sceneSubject knows to go on to the next chapter.
-      this.animateOut({
-        onComplete: () => this.resolve("done")
-      });
-
-      // otherwise, we're going to select an item and focus on it
-    } else {
-      const element = this.getRandomInstance();
-      this.focusElement({
-        element,
-        delay: 2,
-        duration: 10,
-        offset: element.state.lookUpAt
-          ? LookUpOffset(this.R)
-          : LookDownOffset(this.R)
-      });
-    }
-  };
-
   animateIn = ({ to, delay = 0, duration = 10, onComplete = () => {} }) => {
     this.controls.animate({
       to,
@@ -166,24 +138,6 @@ class BaseChapter {
         onComplete();
         this.onTransitionComplete();
       }
-    });
-  };
-
-  animateOut = ({ delay = 0, duration = 15, onComplete = () => {} }) => {
-    const to = {
-      x: 0,
-      y: 0,
-      z: -1,
-      tx: 0,
-      ty: 0,
-      tz: 1
-    };
-
-    this.controls.animate({
-      to,
-      delay,
-      duration,
-      callback: onComplete
     });
   };
 

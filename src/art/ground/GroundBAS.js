@@ -38,7 +38,7 @@ function GroundBAS({
 
   const material = new BasicAnimationMaterial({
     flatShading: true,
-    transparent: true, // required for diffuseColor.a to have an effect
+    // transparent: true, // required for diffuseColor.a to have an effect
     side: FrontSide,
     wireframe: !true,
     lights: true,
@@ -52,9 +52,9 @@ function GroundBAS({
       diffuse: new Color(color)
     },
     vertexParameters: ["uniform float uCliff;"],
-    vertexPosition: ["transformed.y *= uCliff;"],
-    fragmentParameters: ["uniform float uTime;"],
-    fragmentDiffuse: ["diffuseColor.a *= uTime;"]
+    vertexPosition: ["transformed.y *= 1.0 - uCliff;"]
+    // fragmentParameters: ["uniform float uTime;"],
+    // fragmentDiffuse: ["diffuseColor.a *= uTime;"]
   });
 
   geometry.computeVertexNormals();
@@ -75,8 +75,8 @@ function GroundBAS({
       diffuse: new Color(color)
     },
 
-    vertexParameters: ["uniform float uCliff;", "uniform float uTime;"],
-    vertexPosition: ["transformed.y *= uCliff;", "transformed.xyz *= uTime;"]
+    vertexParameters: ["uniform float uCliff;"],
+    vertexPosition: ["transformed.y *= 1.0 - uCliff;"]
     // fragmentParameters: ["uniform float uTime;"],
     // fragmentDiffuse: ["diffuseColor.a *= uTime;"]
   });
