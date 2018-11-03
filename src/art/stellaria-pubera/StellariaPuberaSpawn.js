@@ -6,20 +6,20 @@ import InsecurityCalculator from "data/InsecurityCalculator";
 
 class StellariaPuberaSpawn extends BaseSpawn {
   init() {
-    const { data, count, delay, instanceDelay } = this;
+    const { data, count, delay, instanceDelay, dataOffset } = this;
 
-    this.createChildren({ data, count, delay, instanceDelay });
+    this.createChildren({ data, count, delay, instanceDelay, dataOffset });
     // this.createController({ instances: this.instances, controls: this.controls });
   }
 
-  createChildren({ data, count, delay = 0, instanceDelay = 0.5 }) {
+  createChildren({ data, count, delay = 0, instanceDelay = 0.5, dataOffset }) {
     const { R, camera } = this;
 
     let instance,
       stats = InsecurityCalculator.stats;
 
     for (let i = 0, plantModel, props; i < count; i++) {
-      plantModel = data[i];
+      plantModel = data[i + dataOffset];
       props = PlantModelToStellariaPuberaProps({
         model: plantModel,
         stats,

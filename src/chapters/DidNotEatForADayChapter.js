@@ -20,14 +20,16 @@ class DidNotEatForADayChapter extends BaseChapter {
   }
 
   init = props => {
-    // const stat = InsecurityCalculator.stats[DID_NOT_EAT_FOR_A_DAY];
+    const stat = InsecurityCalculator.stats[DID_NOT_EAT_FOR_A_DAY];
     const { quantityMultiplier } = this.settings;
+    const count = Math.min(stat.count, 10 * quantityMultiplier);
+    const plantTypeCount = 3;
+    const plantCount = Math.floor(count / plantTypeCount);
 
     const bgColor = ColorFactory.getRandomColor(
       ColorFactory.WINTER,
       ColorFactory.SKY
     );
-    console.log("bgColor ", bgColor);
 
     this.background = new BackgroundBAS({ color: bgColor });
     this.addCleanable(this.background);
@@ -48,21 +50,16 @@ class DidNotEatForADayChapter extends BaseChapter {
     });
     this.addCleanable(this.chapterPlate, this.chapterPlate.group);
 
+    const { color, textArray } = stat;
     this.chapterTitle = new ChapterTitle({
-      color: 0xffffff,
-      textArray: [
-        { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.4 },
-        { size: 0.25, text: "Who Did Not", offsetY: 1 },
-        { size: 0.25, text: "Eat For a Day", offsetY: 0.6 }
-      ]
+      color,
+      textArray
     });
     this.chapterTitle.createChildren();
     this.addCleanable(this.chapterTitle, this.chapterTitle.group);
 
     let bounds = new Vector3(1, 1, 1),
       position = new Vector3();
-
-    const count = 10 * quantityMultiplier;
 
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
@@ -73,7 +70,8 @@ class DidNotEatForADayChapter extends BaseChapter {
     // Solomon's Seal
     this.solomonsSealSpawn = new SolomonsSealSpawn({
       data: data,
-      count,
+      dataOffset: this.instances.length,
+      count: plantCount,
       R: this.R,
       camera: this.camera,
       controls: this.controls
@@ -96,7 +94,8 @@ class DidNotEatForADayChapter extends BaseChapter {
 
     this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
       data: data,
-      count,
+      dataOffset: this.instances.length,
+      count: plantCount,
       R: this.R,
       camera: this.camera,
       controls: this.controls
@@ -120,7 +119,8 @@ class DidNotEatForADayChapter extends BaseChapter {
 
     this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
       data: data,
-      count,
+      dataOffset: this.instances.length,
+      count: plantCount,
       R: this.R,
       camera: this.camera,
       controls: this.controls

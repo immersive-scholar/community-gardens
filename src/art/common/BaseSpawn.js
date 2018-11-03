@@ -12,7 +12,8 @@ class BaseSpawn {
     data = [],
     bounds = new Vector3(1, 1, 1),
     position = new Vector3(),
-    imagePath
+    imagePath,
+    dataOffset = 0
   } = {}) {
     this.R = R;
     this.camera = camera;
@@ -23,6 +24,7 @@ class BaseSpawn {
     this.group = new Group();
     this.count = count;
     this.data = data;
+    this.dataOffset = dataOffset;
     this.instances = [];
     this.imagePath = imagePath;
 
