@@ -84,7 +84,9 @@ class ChapterPlate extends BaseRenderable {
       color,
       wireframe: !true,
       fog: true,
-      side: DoubleSide
+      side: DoubleSide,
+      transparent: true,
+      opacity: 1
     });
     var plane = new Mesh(planeGeometry, planeMaterial);
     // plane.rotation.x = -Math.PI / 2;
@@ -210,19 +212,30 @@ class ChapterPlate extends BaseRenderable {
   animateIn({ duration = 2, delay = 0, animated = true } = {}) {
     this.tween && this.tween.kill(null, this);
     this.tween2 && this.tween2.kill(null, this);
+    this.tween3 && this.tween3.kill(null, this);
+
     this.group.visible = true;
+
     return new Promise((resolve, reject) => {
       if (animated) {
-        this.tween = TweenMax.to(this.group.position, duration, {
-          y: 0.5,
+        // this.tween = TweenMax.to(this.group.position, duration, {
+        //   y: 0.5,
+        //   ease: Power2.easeOut,
+        //   delay,
+        //   onComplete: () => resolve()
+        // });
+        // this.tween2 = TweenMax.to(this.group.rotation, duration, {
+        //   x: 0,
+        //   ease: Power2.easeOut,
+        //   delay
+        // });
+        this.tween3 = TweenMax.to(this.plane.material, duration, {
+          opacity: 1,
           ease: Power2.easeOut,
           delay,
-          onComplete: () => resolve()
-        });
-        this.tween2 = TweenMax.to(this.group.rotation, duration, {
-          x: 0,
-          ease: Power2.easeOut,
-          delay
+          onComplete: () => {
+            resolve();
+          }
         });
       } else {
         this.group.position.y = 0.5;
@@ -239,21 +252,32 @@ class ChapterPlate extends BaseRenderable {
     return new Promise((resolve, reject) => {
       this.tween && this.tween.kill(null, this);
       this.tween2 && this.tween2.kill(null, this);
+      this.tween3 && this.tween3.kill(null, this);
 
-      this.tween = TweenMax.to(this.group.position, duration, {
-        y: 5,
+      //   this.tween = TweenMax.to(this.group.position, duration, {
+      //     y: 5,
+      //     ease: Power2.easeOut,
+      //     delay,
+      //     onComplete: () => {
+      //       resolve();
+      //       this.group.visible = false;
+      //     }
+      //   });
+
+      //   this.tween2 = TweenMax.to(this.group.rotation, duration, {
+      //     x: Math.PI / 2,
+      //     ease: Power2.easeOut,
+      //     delay
+      //   });
+
+      this.tween3 = TweenMax.to(this.plane.material, duration, {
+        opacity: 0,
         ease: Power2.easeOut,
         delay,
         onComplete: () => {
           resolve();
           this.group.visible = false;
         }
-      });
-
-      this.tween2 = TweenMax.to(this.group.rotation, duration, {
-        x: Math.PI / 2,
-        ease: Power2.easeOut,
-        delay
       });
     });
   }
