@@ -12,7 +12,6 @@ import ColorFactory from "util/ColorFactory";
 import InsecurityCalculator from "data/InsecurityCalculator";
 import RandomLayout from "art/layouts/RandomLayout";
 // import TextureFactory from "util/TextureFactory";
-import { LookUpOffset, LookDownOffset } from "three/helpers/CameraOffsets";
 import { DID_NOT_EAT_FOR_A_DAY } from "../constants/Stats";
 
 class DidNotEatForADayChapter extends BaseChapter {
@@ -79,6 +78,7 @@ class DidNotEatForADayChapter extends BaseChapter {
     });
     this.group.add(this.solomonsSealSpawn.group);
     this.addInstances(this.solomonsSealSpawn.instances);
+    this.spawns.push(this.solomonsSealSpawn);
 
     bounds.set(4, 0, 2);
     position.set(-2, 0, 0.5);
@@ -111,6 +111,7 @@ class DidNotEatForADayChapter extends BaseChapter {
 
     // this.group.add(this.stellariaPuberaSpawn.group);
     // this.addInstances(this.stellariaPuberaSpawn.instances);
+    // this.spawns.push(this.stellariaPuberaSpawn);
 
     // Asimina Triloba
 
@@ -132,91 +133,7 @@ class DidNotEatForADayChapter extends BaseChapter {
 
     // this.group.add(this.asiminaTrilobaSpawn.group);
     // this.addInstances(this.asiminaTrilobaSpawn.instances);
-  };
-
-  onTransitionComplete = () => {
-    // if we have focused on the desired number of elements
-    if (
-      this.state.focusTotal &&
-      this.state.currentFocusCount >= this.state.focusTotal
-    ) {
-      // let's pan the camera away from the scene
-      // as a signal that the chapter is complete
-      // we will also resolve the promise
-      // so the sceneSubject knows to go on to the next chapter.
-      this.animateOut({
-        onComplete: () => this.resolve("done")
-      });
-
-      // otherwise, we're going to select an item and focus on it
-    } else {
-      const element = this.getRandomInstance();
-      this.focusElement({
-        element,
-        delay: 2,
-        duration: 10,
-        offset: element.state.lookUpAt
-          ? LookUpOffset(this.R)
-          : LookDownOffset(this.R)
-      });
-    }
-  };
-
-  animateIn = ({ delay = 0 } = {}) => {
-    return new Promise((resolve, reject) => {
-      // We need to resolve the animateIn once a bunch of animations have run
-      // so we're storing these for later retrieval.
-      this.resolve = resolve;
-      this.reject = reject;
-
-      this.chapterTitle.animateIn();
-      this.chapterTitle.animateOut({ delay: 15, duration: 10 });
-
-      // this.background.animateIn({ duraction: 5, delay: 4 });
-      // this.ground.animateIn({ duration: 5, delay: 2 });
-      // this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
-
-      this.background.time = 1;
-      this.background.update();
-      this.ground.time = 1;
-      this.ground.cliff = 0.5;
-      this.ground.update();
-
-      this.solomonsSealSpawn.animateIn({ delay: 2, instanceDelay: 0.3 });
-      // this.stellariaPuberaSpawn.animateIn({ delay: 4, instanceDelay: 0.3 });
-      // this.asiminaTrilobaSpawn.animateIn({ delay: 6, instanceDelay: 0.3 });
-
-      const element = this.getRandomInstance();
-      element.createChildren();
-      element.animateIn({ delay: 8, duration: 7 });
-      this.focusElement({
-        element,
-        delay: 15,
-        duration: 10,
-        offset: element.state.lookUpAt
-          ? LookUpOffset(this.R)
-          : LookDownOffset(this.R)
-      });
-    });
-  };
-
-  animateOut = ({ delay = 0, duration = 15, onComplete = () => {} } = {}) => {
-    // this.chapterTitle.animateOut();
-    const to = {
-      x: 0,
-      y: 0.5,
-      z: -1,
-      tx: 0,
-      ty: 0.5,
-      tz: 1
-    };
-
-    this.controls.animate({
-      to,
-      delay,
-      duration,
-      callback: onComplete
-    });
+    // this.spawns.push(this.asiminaTrilobaSpawn);
   };
 }
 

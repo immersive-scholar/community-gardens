@@ -1,4 +1,5 @@
 import { Group, Vector3, Box3, Object3D } from "three-full";
+import { LookUpOffset, LookDownOffset } from "three/helpers/CameraOffsets";
 
 class BaseChapter {
   constructor(props, camera, controls, R) {
@@ -13,6 +14,7 @@ class BaseChapter {
     this.group = new Group();
     this.instances = [];
     this.cleanables = [];
+    this.spawns = [];
   }
 
   setCamera(camera) {
@@ -128,15 +130,88 @@ class BaseChapter {
     });
   };
 
-  animateIn = ({ to, delay = 0, duration = 10, onComplete = () => {} }) => {
+  onTransitionComplete = () => {
+    // if we have focused on the desired number of elements
+    if (
+      this.state.focusTotal &&
+      this.state.currentFocusCount >= this.state.focusTotal
+    ) {
+      // let's pan the camera away from the scene
+      // as a signal that the chapter is complete
+      // we will also resolve the promise
+      // so the sceneSubject knows to go on to the next chapter.
+      this.animateOut({
+        onComplete: () => this.resolve("done")
+      });
+
+      // otherwise, we're going to select an item and focus on it
+    } else {
+      const element = this.getRandomInstance();
+      this.focusElement({
+        element,
+        delay: 2,
+        duration: 10,
+        offset: element.state.lookUpAt
+          ? LookUpOffset(this.R)
+          : LookDownOffset(this.R)
+      });
+    }
+  };
+
+  animateIn = ({ delay = 0 } = {}) => {
+    return new Promise((resolve, reject) => {
+      // We need to resolve the animateIn once a bunch of animations have run
+      // so we're storing these for later retrieval.
+      this.resolve = resolve;
+      this.reject = reject;
+
+      this.chapterTitle.animateIn();
+      this.chapterTitle.animateOut({ delay: 15, duration: 10 });
+
+      // this.background.animateIn({ duraction: 5, delay: 4 });
+      // this.ground.animateIn({ duration: 5, delay: 2 });
+      // this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
+
+      this.background.time = 1;
+      this.background.update();
+      this.ground.time = 1;
+      this.ground.cliff = 0.5;
+      this.ground.update();
+
+      for (let i = 0, iL = this.spawns.length; i < iL; i++) {
+        this.spawns[i].animateIn({ delay: i * 2, instanceDelay: 0.3 });
+      }
+
+      const element = this.getRandomInstance();
+      element.createChildren();
+      element.animateIn({ delay: 8, duration: 7 });
+      this.focusElement({
+        element,
+        delay: 15,
+        duration: 10,
+        offset: element.state.lookUpAt
+          ? LookUpOffset(this.R)
+          : LookDownOffset(this.R)
+      });
+    });
+  };
+
+  animateOut = ({ delay = 0, duration = 15, onComplete = () => {} } = {}) => {
+    // this.chapterTitle.animateOut();
+    const to = {
+      x: 0,
+      y: 0.5,
+      z: -1,
+      tx: 0,
+      ty: 0.5,
+      tz: 1
+    };
+
     this.controls.animate({
       to,
       delay,
       duration,
-      callback: () => {
-        onComplete();
-        this.onTransitionComplete();
-      }
+      callback: onComplete
     });
   };
 
