@@ -1,4 +1,5 @@
 import { Group, Vector3, Box3, Object3D } from "three-full";
+import { LookUpOffset, LookDownOffset } from "three/helpers/CameraOffsets";
 
 class BaseChapter {
   constructor(props, camera, controls, R) {
@@ -65,8 +66,8 @@ class BaseChapter {
     return await this.promiseTimeoutWithCancel(50, isDirty, callback);
   }
 
-  addCleanable(cleanable) {
-    this.group.add(cleanable);
+  addCleanable(cleanable, group = cleanable) {
+    this.group.add(group);
     this.cleanables.push(cleanable);
   }
 
@@ -128,12 +129,33 @@ class BaseChapter {
     });
   };
 
-  onTransitionComplete() {
-    const element = this.getRandomInstance();
-    this.focusElement({ element, delay: 1 });
-    // element.createChildren();
-    // element.animateIn({ duration: 10, delay: 1 });
-  }
+  onTransitionComplete = () => {
+    // if we have focused on the desired number of elements
+    if (
+      this.state.focusTotal &&
+      this.state.currentFocusCount >= this.state.focusTotal
+    ) {
+      // let's pan the camera away from the scene
+      // as a signal that the chapter is complete
+      // we will also resolve the promise
+      // so the sceneSubject knows to go on to the next chapter.
+      this.animateOut({
+        onComplete: () => this.resolve("done")
+      });
+
+      // otherwise, we're going to select an item and focus on it
+    } else {
+      const element = this.getRandomInstance();
+      this.focusElement({
+        element,
+        delay: 2,
+        duration: 10,
+        offset: element.state.lookUpAt
+          ? LookUpOffset(this.R)
+          : LookDownOffset(this.R)
+      });
+    }
+  };
 
   animateIn = ({ to, delay = 0, duration = 10, onComplete = () => {} }) => {
     this.controls.animate({
@@ -150,10 +172,10 @@ class BaseChapter {
   animateOut = ({ delay = 0, duration = 15, onComplete = () => {} }) => {
     const to = {
       x: 0,
-      y: -3,
-      z: -20,
+      y: 0,
+      z: -1,
       tx: 0,
-      ty: 1,
+      ty: 0,
       tz: 1
     };
 

@@ -10,13 +10,13 @@ import { TweenMax, Power2 } from "gsap";
 
 function GroundBAS({
   R,
-  currentTime = 0,
+  time = 0,
   cliff = 0,
   color,
   animated = true,
   delay = 0
 }) {
-  this.currentTime = 0;
+  this.time = 0;
   this.cliff = 0;
 
   const worldWidth = 64,
@@ -92,7 +92,7 @@ function GroundBAS({
     this.tween && this.tween.kill(null, this);
     if (animated) {
       this.tween = TweenMax.to(this, duration, {
-        currentTime: 1,
+        time: 1,
         onUpdate: () => {
           this.update();
         },
@@ -100,7 +100,7 @@ function GroundBAS({
         ease: Power2.easeInOut
       });
     } else {
-      this.currentTime = 1;
+      this.time = 1;
       this.update();
     }
   };
@@ -164,10 +164,9 @@ function GroundBAS({
   };
 
   this.update = function() {
-    material.uniforms["uTime"].value = this.currentTime;
+    material.uniforms["uTime"].value = this.time;
     material.uniforms["uCliff"].value = this.cliff;
-
-    wireframeMaterial.uniforms["uTime"].value = this.currentTime;
+    wireframeMaterial.uniforms["uTime"].value = this.time;
     wireframeMaterial.uniforms["uCliff"].value = this.cliff;
   };
 }
@@ -180,6 +179,16 @@ GroundBAS.prototype.constructor = GroundBAS;
 //   },
 //   set: function(v) {
 //     this.material.uniforms["uTime"].value = v;
+//     this.wireframeMaterial.uniforms["uTime"].value = this.time;
+//   }
+// });
+// Object.defineProperty(GroundBAS.prototype, "cliff", {
+//   get: function() {
+//     return this.material.uniforms["uCliff"].value;
+//   },
+//   set: function(v) {
+//     this.material.uniforms["uCliff"].value = v;
+//     this.wireframeMaterial.uniforms["uCliff"].value = v;
 //   }
 // });
 

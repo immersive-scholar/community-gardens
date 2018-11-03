@@ -28,8 +28,8 @@ export default ({ generalCanvas, R, settings }) => {
   const controls = new GeneralControls({ camera });
   // const postProcessing = new PostProcessing({ scene, camera, renderer });
 
-  const cameraGUI = new CameraController({ camera, controls, settings });
-  cameraGUI.enable();
+  // const cameraGUI = new CameraController({ camera, controls, settings });
+  // cameraGUI.enable();
 
   // controls.animateChapter2();
   // controls.controls.autoRotate = true;

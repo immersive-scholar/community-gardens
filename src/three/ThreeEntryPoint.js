@@ -34,9 +34,9 @@ export default (container, settings) => {
     }),
     TextureFactory.load(`${process.env.PUBLIC_URL}/json/textures.json`)
   ])
-    .then(() => {
-      ColorFactory.debug();
-    })
+    // .then(() => {
+    //   ColorFactory.debug();
+    // })
     .then(() => {
       InsecurityCalculator.parse(DataFactory.data);
     })

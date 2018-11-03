@@ -20,6 +20,8 @@ class DidNotEatForADayChapter extends BaseChapter {
   }
 
   init = props => {
+    const stat = InsecurityCalculator.stats[DID_NOT_EAT_FOR_A_DAY];
+
     const bgColor = ColorFactory.getRandomColor(
       ColorFactory.WINTER,
       ColorFactory.SKY
@@ -39,16 +41,17 @@ class DidNotEatForADayChapter extends BaseChapter {
     // this.plane = new Plane({ color: bgColor });
     // this.group.add(this.plane.group);
 
-    this.chapterPlate = new ChapterPlate({
-      color: 0xffffff,
-      textColor: bgColor,
-      textArray: [
-        { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.4 },
-        { size: 0.25, text: "Who Did Not", offsetY: 1 },
-        { size: 0.25, text: "Eat For a Day.", offsetY: 0.6 }
-      ]
-    });
-    this.addCleanable(this.chapterPlate.group);
+    // this.chapterPlate = new ChapterPlate({
+    //   camera: this.camera,
+    //   color: 0xffffff,
+    //   textColor: 0x32394f,
+    //   textArray: [
+    //     { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.4 },
+    //     { size: 0.25, text: "Who Did Not", offsetY: 1 },
+    //     { size: 0.25, text: "Eat For a Day.", offsetY: 0.6 }
+    //   ]
+    // });
+    // this.addCleanable(this.chapterPlate, this.chapterPlate.group);
 
     let bounds = new Vector3(1, 1, 1),
       position = new Vector3();
@@ -131,41 +134,19 @@ class DidNotEatForADayChapter extends BaseChapter {
       // so we're storing these for later retrieval.
       this.resolve = resolve;
       this.reject = reject;
-      // const from = {
-      //     x: 0,
-      //     y: 0.25,
-      //     z: -10,
-      //     tx: 0,
-      //     ty: 0.25,
-      //     tz: 1
-      //   },
-      //   to = {
-      //     x: 0,
-      //     y: 0.25,
-      //     z: -0.25,
-      //     tx: 0,
-      //     ty: 0.25,
-      //     tz: 1
-      //   };
 
-      // this.controls.set({ x: 0, y: -0.75, z: -1.5, tx: 0, ty: 0.25, tz: 1 });
+      // this.ground.animateIn({ duration: 5, delay: 4 });
+      // this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
 
-      // this.controls.animate({
-      //   from,
-      //   to,
-      //   callback: () => this.onTransitionComplete()
-      // });
+      this.background.time = 1;
+      this.background.update();
+      this.ground.time = 1;
+      this.ground.cliff = 1;
+      this.ground.update();
 
-      this.chapterPlate.animateIn();
-      this.chapterPlate.animateOut({ delay: 5 });
-
-      this.background.animateIn({ duration: 10, delay: 0.5 });
-      this.ground.animateIn({ duration: 5, delay: 4 });
-      this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
-
-      this.solomonsSealSpawn.animateIn({ delay: 6, instanceDelay: 0.3 });
-      // this.stellariaPuberaSpawn.animateIn({ delay: 8, instanceDelay: 0.3 });
-      // this.asiminaTrilobaSpawn.animateIn({ delay: 10, instanceDelay: 0.3 });
+      this.solomonsSealSpawn.animateIn({ delay: 2, instanceDelay: 0.3 });
+      // this.stellariaPuberaSpawn.animateIn({ delay: 4, instanceDelay: 0.3 });
+      // this.asiminaTrilobaSpawn.animateIn({ delay: 6, instanceDelay: 0.3 });
 
       const element = this.getRandomInstance();
       element.createChildren();
@@ -174,54 +155,11 @@ class DidNotEatForADayChapter extends BaseChapter {
         element,
         delay: 15,
         duration: 10,
-        offset: LookDownOffset(this.R)
+        offset: element.state.lookUpAt
+          ? LookUpOffset(this.R)
+          : LookDownOffset(this.R)
       });
-
-      // const to = {
-      //   x: 0,
-      //   y: 1,
-      //   z: -1,
-      //   tx: 0,
-      //   ty: 1,
-      //   tz: 0
-      // };
-
-      // this.animate({
-      //   to,
-      //   delay: 10,
-      //   duration: 10,
-      //   onComplete: () => {
-      //     // this.controls.controls.autoRotate = true;
-      //   }
-      // });
-      // setTimeout(() => resolve("done"), 8000);
     });
-  };
-
-  onTransitionComplete = () => {
-    // if we have focused on the desired number of elements
-    if (
-      this.state.focusTotal &&
-      this.state.currentFocusCount >= this.state.focusTotal
-    ) {
-      // let's pan the camera away from the scene
-      // as a signal that the chapter is complete
-      // we will also resolve the promise
-      // so the sceneSubject knows to go on to the next chapter.
-      this.animateOut({ onComplete: () => this.resolve("done") });
-
-      // otherwise, we're going to select an item and focus on it
-    } else {
-      const element = this.getRandomInstance();
-      // element.createChildren();
-      // element.animateIn({ delay: 8, duration: 7 });
-      this.focusElement({
-        element,
-        delay: 2,
-        duration: 10,
-        offset: new LookDownOffset(this.R)
-      });
-    }
   };
 }
 

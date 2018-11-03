@@ -118,7 +118,7 @@ export default ({ controls, camera, settings }) => {
       .onChange(onDataChange)
       .onFinishChange(onDataChangeComplete);
 
-    // gui.close();
+    gui.close();
 
     onDataChange();
     onDataChangeComplete();

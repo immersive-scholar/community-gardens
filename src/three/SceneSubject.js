@@ -1,5 +1,6 @@
 import RandomGardenChapter from "chapters/RandomGardenChapter";
 import DidNotEatForADayChapter from "chapters/DidNotEatForADayChapter";
+import ChapterPlate from "art/chapter-plate/ChapterPlate";
 
 class SceneSubject {
   constructor({ scene, camera, R, controls, settings }) {
@@ -9,6 +10,17 @@ class SceneSubject {
     this.controls = controls;
     this.settings = settings;
     this.chapterIndex = 0;
+
+    this.createChapterPlate();
+    this.chapterPlate.animateIn({ animated: false });
+  }
+
+  createChapterPlate() {
+    this.chapterPlate = new ChapterPlate({
+      camera: this.camera,
+      color: 0xffffff
+    });
+    this.scene.add(this.chapterPlate.group);
   }
 
   createScene() {
@@ -20,7 +32,7 @@ class SceneSubject {
   createRandomChapter() {
     const { settings, camera, controls, R, scene } = this;
     const chapter = new RandomGardenChapter(
-      { settings, focusTotal: 10 },
+      { settings, focusTotal: 1 },
       camera,
       controls,
       R
@@ -31,7 +43,7 @@ class SceneSubject {
   createDidNotEatForADayChapter() {
     const { settings, camera, controls, R, scene } = this;
     const chapter = new DidNotEatForADayChapter(
-      { settings, focusTotal: 10 },
+      { settings, focusTotal: 1 },
       camera,
       controls,
       R
@@ -47,6 +59,8 @@ class SceneSubject {
     chapter.animateIn().then(() => this.playNextChapter());
 
     this.currentChapter = chapter;
+
+    this.chapterPlate.animateOut();
   }
 
   cleanChapter(chapter) {
@@ -56,9 +70,11 @@ class SceneSubject {
   }
 
   playNextChapter() {
-    this.chapterIndex++;
-    const chapter = this.createDidNotEatForADayChapter();
-    this.setCurrentChapter(chapter);
+    this.chapterPlate.animateIn().then(() => {
+      this.chapterIndex++;
+      const chapter = this.createDidNotEatForADayChapter();
+      this.setCurrentChapter(chapter);
+    });
   }
 
   update() {}

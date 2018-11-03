@@ -2,13 +2,7 @@ import { Color, DoubleSide, Mesh, TetrahedronGeometry } from "three-full";
 import { ModelBufferGeometry, PhongAnimationMaterial } from "three/vendor/BAS";
 import { TweenMax, Power2 } from "gsap";
 
-function BackgroundBAS({
-  R,
-  currentTime = 0,
-  color,
-  animated = true,
-  delay = 0
-}) {
+function BackgroundBAS({ R, time = 0, color, animated = true, delay = 0 }) {
   // 4. generate geometry (maybe find a cheaper way to do this)
   const modelGeometry = new TetrahedronGeometry(75);
 
@@ -42,9 +36,9 @@ function BackgroundBAS({
   this.animateIn = function({ duration = 5, delay = 0, animated = true } = {}) {
     this.tween && this.tween.kill(null, this);
     if (animated) {
-      this.currentTime = 0;
+      this.time = 0;
       this.tween = TweenMax.to(this, duration, {
-        currentTime: 1,
+        time: 1,
         onUpdate: () => {
           this.update();
         },
@@ -52,7 +46,7 @@ function BackgroundBAS({
         ease: Power2.easeInOut
       });
     } else {
-      this.currentTime = 1;
+      this.time = 1;
     }
   };
 
@@ -63,7 +57,7 @@ function BackgroundBAS({
   };
 
   this.update = function() {
-    material.uniforms["uTime"].value = this.currentTime;
+    material.uniforms["uTime"].value = this.time;
   };
 }
 
