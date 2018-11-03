@@ -3,7 +3,7 @@ import * as STATS from "constants/Stats";
 import TextureFactory from "util/TextureFactory";
 import ColorFactory from "util/ColorFactory";
 
-const PlantModelToStellariaPuberaProps = ({
+const PlantModelToAsiminaTrilobaProps = ({
   model,
   stats,
   i,
@@ -144,10 +144,9 @@ const PlantModelToStellariaPuberaProps = ({
   if (firstGen) {
     props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/maze.png`;
   }
-  // if (gpa >= 3) {
-  //   props.imagePath = TextureFactory.getLine();
-  // }
-  // props.imagePath = `${process.env.PUBLIC_URL}/img/strokes/lines-3.png`;
+  if (gpa > 3) {
+    props.imagePath = TextureFactory.getLine();
+  }
 
   // render low emotional health scores with sharper angles
   if (emotionalHealth < 0) {
@@ -210,4 +209,4 @@ const PlantModelToStellariaPuberaProps = ({
   return props;
 };
 
-export default PlantModelToStellariaPuberaProps;
+export default PlantModelToAsiminaTrilobaProps;

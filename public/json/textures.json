@@ -21,12 +21,19 @@
     {
       "type": "stroke",
       "baseUri": "/img/strokes/",
-      "textures": ["ddw-watercolor-1.png"]
+      "textures": ["watercolor-1.png"]
     },
     {
       "type": "line",
       "baseUri": "/img/strokes/",
-      "textures": ["crosshatch-1.png", "crosshatch-2.png", "crosshatch-3.png"]
+      "textures": [
+        "crosshatch-1.png",
+        "crosshatch-2.png",
+        "crosshatch-3.png",
+        "lines-1.png",
+        "lines-2.png",
+        "waves.png"
+      ]
     }
   ]
 }

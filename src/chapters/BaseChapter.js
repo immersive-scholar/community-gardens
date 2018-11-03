@@ -113,8 +113,6 @@ class BaseChapter {
     let position = new Vector3(center.x, center.y, center.z);
     tempObject.localToWorld(position);
 
-    console.log("offset ", offset);
-
     const to = {
       x: position.x + offset.x,
       y: position.y + offset.y,
