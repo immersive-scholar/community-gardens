@@ -124,7 +124,6 @@ class AsiminaTriloba extends BasePlant {
     this.petals.position.copy(stemTopPoint);
     this.petals.rotation.z = Math.PI / 2;
     this.group.add(this.petals);
-    window.mesh = this.petals;
 
     // pollen
     this.pollen = new Pollen({

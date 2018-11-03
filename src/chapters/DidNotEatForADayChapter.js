@@ -94,27 +94,27 @@ class DidNotEatForADayChapter extends BaseChapter {
 
     // Stellaria Pubera
 
-    // this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
-    //   data: data,
-    //   count,
-    //   R: this.R,
-    //   camera: this.camera,
-    //   controls: this.controls
-    // });
+    this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
+      data: data,
+      count,
+      R: this.R,
+      camera: this.camera,
+      controls: this.controls
+    });
 
-    // bounds.set(4, 0, 2);
-    // position.set(-2, 0, 0.5);
-    // new RandomLayout({
-    //   instances: this.stellariaPuberaSpawn.instances,
-    //   group: this.stellariaPuberaSpawn.group,
-    //   R: this.R,
-    //   bounds,
-    //   position
-    // });
+    bounds.set(4, 0, 2);
+    position.set(-2, 0, 0.5);
+    new RandomLayout({
+      instances: this.stellariaPuberaSpawn.instances,
+      group: this.stellariaPuberaSpawn.group,
+      R: this.R,
+      bounds,
+      position
+    });
 
-    // this.group.add(this.stellariaPuberaSpawn.group);
-    // this.addInstances(this.stellariaPuberaSpawn.instances);
-    // this.spawns.push(this.stellariaPuberaSpawn);
+    this.group.add(this.stellariaPuberaSpawn.group);
+    this.addInstances(this.stellariaPuberaSpawn.instances);
+    this.spawns.push(this.stellariaPuberaSpawn);
 
     // Asimina Triloba
 

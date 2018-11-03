@@ -87,11 +87,12 @@ const PlantModelToSolomonsSealProps = ({
   props = Modifiers.ShareModifier({ props, shares });
 
   // CUSTOM MODIFIERS
+  // it's harder to follow extending a modifier to accept a bunch of params
+  // than to just apply params here
+  // IMHO that is :)
 
   // housing insecurity displaces leaves from stems
   // there is a housingInsecurityModifier but the values are different
-  // it's harder to follow when extending a modifier to accept a bunch of props
-  // IMHO that is :)
   if (housingInsecurity) {
     props.windForce = housingInsecurityScore * 0.05;
     props.windDirection = new Vector3(
