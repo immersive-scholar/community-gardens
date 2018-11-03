@@ -7,10 +7,10 @@ export default ({ controls, camera, settings }) => {
     const config = {
       velocity: timeMultiplier,
       x: 0,
-      y: 1,
-      z: -2,
+      y: 0.5,
+      z: -1,
       tx: 0,
-      ty: 1,
+      ty: 0.5,
       tz: 1,
       autoRotate: false,
       kill: () => {

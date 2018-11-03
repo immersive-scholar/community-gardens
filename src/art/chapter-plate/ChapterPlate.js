@@ -25,11 +25,12 @@ class ChapterPlate extends BaseRenderable {
     this.plane = this.createPlane(color, camera);
     this.group.add(this.plane);
 
-    this.group.position.z = this.camera.position.z + 0.25;
+    this.group.position.z = this.camera.position.z + 0.5;
   }
 
   createPlane(color, camera) {
-    const dist = camera.position.distanceTo(new Vector3(0, 0.5, 0.25));
+    // const dist = camera.position.distanceTo(new Vector3(0, 0.5, 0.5));
+    const dist = camera.position.distanceTo(this.group.position);
     const vFOV = _Math.degToRad(camera.fov); // convert vertical fov to radians
     const height = 2 * Math.tan(vFOV / 2) * dist; // visible height
     const width = height * camera.aspect;
