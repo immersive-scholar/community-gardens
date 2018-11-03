@@ -19,6 +19,8 @@ class RandomGardenChapter extends BaseChapter {
   }
 
   init = props => {
+    const { quantityMultiplier } = this.settings;
+
     const bgColor = ColorFactory.getRandomColor(
       ColorFactory.SUMMER,
       ColorFactory.SKY
@@ -41,16 +43,18 @@ class RandomGardenChapter extends BaseChapter {
     let bounds = new Vector3(1, 1, 1),
       position = new Vector3();
 
+    const count = 10 * quantityMultiplier;
+
     // Solomon's Seal
 
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
-      count: 50
+      count
     });
 
     this.solomonsSealSpawn = new SolomonsSealSpawn({
       data: data,
-      count: 50,
+      count,
       R: this.R,
       camera: this.camera,
       controls: this.controls
@@ -72,10 +76,10 @@ class RandomGardenChapter extends BaseChapter {
 
     data = InsecurityCalculator.getRandomRows({
       R: this.R,
-      count: 50
+      count
     });
     this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
-      count: 50,
+      count,
       R: this.R,
       camera: this.camera,
       controls: this.controls
@@ -97,11 +101,11 @@ class RandomGardenChapter extends BaseChapter {
     // Asimina Triloba
     data = InsecurityCalculator.getRandomRows({
       R: this.R,
-      count: 50
+      count
     });
 
     this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
-      count: 50,
+      count,
       R: this.R,
       camera: this.camera,
       controls: this.controls

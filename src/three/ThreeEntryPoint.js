@@ -11,7 +11,6 @@ import InsecurityCalculator from "data/InsecurityCalculator";
 
 export default (container, settings) => {
   console.log("settings ", settings);
-  TweenMax.globalTimeScale(settings.timeMultiplier);
 
   new Settings();
 
@@ -41,6 +40,8 @@ export default (container, settings) => {
       InsecurityCalculator.parse(DataFactory.data);
     })
     .then(() => {
+      const { quantityMultiplier } = settings;
+      sceneManager.subject.setQuantityMultiplier(quantityMultiplier);
       sceneManager.subject.createScene();
     });
 
@@ -88,9 +89,11 @@ export default (container, settings) => {
     highresExport.enable();
   }
 
+  // when redux dispatches a settings change event,
+  // this function is summoned with the new settings object
   function setSettings(settings) {
-    console.log(this);
-    console.log("got settings ", settings);
+    const { quantityMultiplier } = settings;
+    sceneManager.subject.setQuantityMultiplier(quantityMultiplier);
   }
 
   function render() {

@@ -8,7 +8,7 @@ class SceneSubject {
     this.camera = camera;
     this.R = R;
     this.controls = controls;
-    this.settings = settings;
+    this.settings = { ...settings };
     this.chapterIndex = 0;
 
     this.createChapterPlate();
@@ -78,6 +78,10 @@ class SceneSubject {
   }
 
   update() {}
+
+  setQuantityMultiplier(quantityMultipler) {
+    this.settings.quantityMultipler = quantityMultipler;
+  }
 }
 
 export default SceneSubject;

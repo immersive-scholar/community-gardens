@@ -21,6 +21,7 @@ class DidNotEatForADayChapter extends BaseChapter {
 
   init = props => {
     const stat = InsecurityCalculator.stats[DID_NOT_EAT_FOR_A_DAY];
+    const { quantityMultiplier } = this.settings;
 
     const bgColor = ColorFactory.getRandomColor(
       ColorFactory.WINTER,
@@ -63,15 +64,17 @@ class DidNotEatForADayChapter extends BaseChapter {
 
     // Solomon's Seal
 
+    const count = 10 * quantityMultiplier;
+
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
-      count: 100,
+      count,
       key: DID_NOT_EAT_FOR_A_DAY
     });
 
     this.solomonsSealSpawn = new SolomonsSealSpawn({
       data: data,
-      count: 100,
+      count,
       R: this.R,
       camera: this.camera,
       controls: this.controls
@@ -93,7 +96,7 @@ class DidNotEatForADayChapter extends BaseChapter {
     // Stellaria Pubera
 
     // this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
-    //   count: 25,
+    //   count,
     //   R: this.R,
     //   camera: this.camera,
     //   controls: this.controls
@@ -116,7 +119,7 @@ class DidNotEatForADayChapter extends BaseChapter {
     // Asimina Triloba
 
     // this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
-    //   count: 25,
+    //   count,
     //   R: this.R,
     //   camera: this.camera,
     //   controls: this.controls

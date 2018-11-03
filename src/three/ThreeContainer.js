@@ -8,7 +8,8 @@ import { settings } from "actions";
 
 class ThreeContainer extends Component {
   static propTypes = {
-    timeMultiplier: PropTypes.number
+    timeMultiplier: PropTypes.number,
+    quantityMultiplier: PropTypes.number
   };
 
   componentDidMount() {
@@ -29,11 +30,16 @@ class ThreeContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  timeMultiplier: state.settings.timeMultiplier
+  timeMultiplier: state.settings.timeMultiplier,
+  quantityMultiplier: state.settings.quantityMultiplier
 });
 
 const mapDispatchToProps = dispatch => ({
-  setTimeMultiplier: bindActionCreators(settings.setTimeMultiplier, dispatch)
+  setTimeMultiplier: bindActionCreators(settings.setTimeMultiplier, dispatch),
+  setQuantityMultiplier: bindActionCreators(
+    settings.setQuantityMultiplier,
+    dispatch
+  )
 });
 
 export default connect(
