@@ -16,13 +16,19 @@ const PlantModelToAsiminaTrilobaProps = ({
   const props = {
     lazy: true,
     delay: delay + i * instanceDelay,
-    petalCount: R.intBetween(12, 24),
-    hslBase: new Vector3(1, R.floatBetween(0, 0.5), R.floatBetween(0, 0.5)),
-    hslRange: new Vector3(
-      R.floatBetween(0, 0.05),
-      R.floatBetween(0.1, 0.25),
-      R.floatBetween(0.1, 0.25)
+    petalCount: R.intBetween(6, 12),
+    hslBase: new Vector3(
+      1,
+      R.floatBetween(0.6, 0.95),
+      R.floatBetween(0.8, 0.95)
     ),
+    hslRange: new Vector3(
+      R.floatBetween(0, 0.1),
+      R.floatBetween(0.02, 0.05),
+      R.floatBetween(0.02, 0.05)
+    ),
+    petalWidth: R.floatBetween(0.1, 0.3),
+    petalLength: R.floatBetween(0.05, 0.15),
     berryCount: R.intBetween(16, 32),
     berryDistanceFromStem: R.floatBetween(0.015, 0.05)
     // openness: 0,
@@ -132,9 +138,9 @@ const PlantModelToAsiminaTrilobaProps = ({
   // "sharemeals": 2,
 
   // berries are not 'full' if food insecure
-  if (foodInsecurity) {
-    props.berryWireframe = true;
-  }
+  // if (foodInsecurity) {
+  //    props.wireframe = true;
+  // }
 
   // Different types of leaves for specific attributes
   props.imagePath = TextureFactory.getStroke();
@@ -165,9 +171,9 @@ const PlantModelToAsiminaTrilobaProps = ({
   if (housingInsecurity) {
     props.windForce = -housingInsecurityScore * 0.05;
     props.windDirection = new Vector3(
-      R.floatBetween(-1.5, 1.5),
-      R.floatBetween(-1.5, 1.5),
-      R.floatBetween(-1.5, 1.5)
+      R.floatBetween(0, 0.3),
+      R.floatBetween(0, 0.3),
+      0 //R.floatBetween(0, 0.3)
     );
   }
 
@@ -178,8 +184,8 @@ const PlantModelToAsiminaTrilobaProps = ({
 
   // bigger leaves for those who earn a lot but are not hungry
   if (earnALot && !earnALotAndAreHungry) {
-    props.petalWidth = 0.05;
-    props.petalLength = 0.25;
+    // props.petalWidth = props.petalWidth * 1.5;
+    // props.petalLength = 0.25;
   }
 
   // dark colors if below poverty line
@@ -189,7 +195,7 @@ const PlantModelToAsiminaTrilobaProps = ({
   // }
 
   // more leaves the older you are
-  props.leafCount = age;
+  props.petalCount = age;
   props.thickness = age * 0.001;
 
   // taller plants represent more senior Degrees

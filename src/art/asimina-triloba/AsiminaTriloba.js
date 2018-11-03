@@ -63,7 +63,8 @@ class AsiminaTriloba extends BasePlant {
       berryDistanceFromStem = 0.002,
       berryRotation = 360,
       berrySpiral = true,
-      berrySpiralDepth = 0.1
+      berrySpiralDepth = 0.1,
+      wireframe = !true
     } = this.state;
 
     const stemProps = {
@@ -105,6 +106,7 @@ class AsiminaTriloba extends BasePlant {
       length: petalLength,
       color,
       imagePath,
+      wireframe,
       textureSize,
       distanceFromCenter: petalDistanceFromCenter,
       R: this.R,

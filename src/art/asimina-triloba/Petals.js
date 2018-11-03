@@ -25,6 +25,7 @@ function Petals({
   petalCount,
   petalShapeGeometry,
   color,
+  wireframe = !true,
   distanceFromCenter = 0.005,
   R,
   openness = 0,
@@ -171,7 +172,7 @@ function Petals({
     fog: true,
     transparent: true,
     lights: true,
-    wireframe: !true,
+    wireframe,
     uniforms: {
       uTime: { value: animated ? 0 : 1 },
       uWindForce: { value: windForce },
