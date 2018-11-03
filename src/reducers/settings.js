@@ -1,19 +1,73 @@
 import {
   SET_TIME_MULTIPLIER,
   SET_QUANTITY_MULTIPLIER,
-  SET_RANDOM_SEED
+  SET_RANDOM_SEED,
+  SET_DPR,
+  SET_ANTI_ALIAS
 } from "constants/Constants";
 import { TweenMax } from "gsap";
-const queryString = require("query-string");
+import GPU from "util/GPU";
 
+// 1. Derive values from query string if available
+const queryString = require("query-string");
 const location = window.location;
 
 const parsed = queryString.parse(location.search);
-const timeMultiplier = parseFloat(parsed.timeMultiplier) || 1;
-const quantityMultiplier = parseFloat(parsed.quantityMultiplier) || 1;
-const seed = parseFloat(parsed.seed) || Math.random();
+let timeMultiplier = parseFloat(parsed.timeMultiplier) || 1;
+let quantityMultiplier = parseFloat(parsed.quantityMultiplier) || 1;
+let seed = parseFloat(parsed.seed) || Math.random();
 
-const initialState = { timeMultiplier, quantityMultiplier, seed };
+// 2. Sniff GPU to derive default performance options
+const gpu = new GPU();
+const { tierIndex, device } = gpu;
+const { antiAlias, dpr } = gpu.config;
+
+// 3. Adjust values based on environment app is running within
+// fast computer gets many more plants
+console.log("tierIndex ", tierIndex);
+switch (true) {
+  case tierIndex === 3:
+    quantityMultiplier = 10;
+    break;
+  case tierIndex === 2:
+    quantityMultiplier = 5;
+    break;
+  case tierIndex === 1:
+    quantityMultiplier = 2;
+    break;
+  default:
+    break;
+}
+
+if (device.mobile) {
+  switch (true) {
+    case tierIndex === 3:
+      quantityMultiplier = 5;
+      break;
+    case tierIndex === 2:
+      quantityMultiplier = 4;
+      break;
+    case tierIndex === 1:
+      quantityMultiplier = 2;
+      break;
+    default:
+      break;
+  }
+}
+
+// slow it down on large displays
+const width = window.innerWidth;
+if (width > 5200) {
+  timeMultiplier = 0.3;
+}
+
+const initialState = {
+  timeMultiplier,
+  quantityMultiplier,
+  seed,
+  antiAlias,
+  dpr
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -38,6 +92,20 @@ export default (state = initialState, action) => {
       return {
         ...state,
         seed
+      };
+    case SET_DPR:
+      const { dpr } = action.payload.data;
+
+      return {
+        ...state,
+        dpr
+      };
+    case SET_ANTI_ALIAS:
+      const { antiAlias } = action.payload.data;
+
+      return {
+        ...state,
+        antiAlias
       };
     default:
       return state;

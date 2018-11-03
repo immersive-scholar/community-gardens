@@ -1,7 +1,7 @@
 const LookUpOffset = R => {
-  const x = R.floatBetween(-0.25, 0.25);
+  const x = R.floatBetween(-0.1, 0.1);
   const y = R.floatBetween(-0.2, 0);
-  const z = R.floatBetween(-0.25, 0);
+  const z = R.floatBetween(-0.1, 0);
   return {
     x,
     y,

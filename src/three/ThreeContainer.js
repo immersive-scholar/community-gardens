@@ -5,19 +5,30 @@ import { bindActionCreators } from "redux";
 
 import threeEntryPoint from "three/ThreeEntryPoint";
 import { settings } from "actions";
-import { stat } from "fs";
 
 class ThreeContainer extends Component {
   static propTypes = {
     timeMultiplier: PropTypes.number,
     quantityMultiplier: PropTypes.number,
-    seed: PropTypes.number
+    seed: PropTypes.number,
+    dpr: PropTypes.number,
+    antiAlias: PropTypes.bool
   };
 
   componentDidMount() {
+    document.addEventListener("gesturestart", this.preventScroll);
+
     // by passing props down to threeEntryPoint, we can leverage anything in our redux store during initialization.
     this.threeEntryPoint = threeEntryPoint(this.threeRootElement, this.props);
   }
+
+  componnetWillUnmount() {
+    document.removeEventListener("gesturestart", this.preventScroll);
+  }
+
+  preventScroll = e => {
+    e.preventDefault();
+  };
 
   shouldComponentUpdate(nextProps) {
     this.threeEntryPoint.setSettings(nextProps);
@@ -34,7 +45,9 @@ class ThreeContainer extends Component {
 const mapStateToProps = ({ settings }) => ({
   timeMultiplier: settings.timeMultiplier,
   quantityMultiplier: settings.quantityMultiplier,
-  seed: settings.seed
+  seed: settings.seed,
+  dpr: settings.dpr,
+  antiAlias: settings.antiAlias
 });
 
 const mapDispatchToProps = dispatch => ({

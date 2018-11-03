@@ -1,20 +1,16 @@
 import RandomSeed from "random-seed";
 import HighresExport from "three/vendor/Highres";
-import { TweenMax } from "gsap";
 import SceneManager from "./SceneManager";
 import GeneralCanvas from "./GeneralCanvas";
 import DataFactory from "util/DataFactory";
 import ColorFactory from "util/ColorFactory";
 import TextureFactory from "util/TextureFactory";
-import Settings from "util/Settings";
 import InsecurityCalculator from "data/InsecurityCalculator";
 
 export default (container, settings) => {
   console.log("settings ", settings);
 
-  const { seed } = settings;
-
-  new Settings();
+  const { seed, dpr, antiAlias } = settings;
 
   // const seed = Math.random();
   // const seed = 0.4865584781852079;

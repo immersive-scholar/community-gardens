@@ -22,7 +22,9 @@ export default ({ generalCanvas, R, settings }) => {
   const renderer = new GeneralRenderer({
     canvas: generalCanvas.canvas,
     width: screenDimensions.width,
-    height: screenDimensions.height
+    height: screenDimensions.height,
+    dpr: settings.dpr,
+    antiAlias: settings.antiAlias
   });
   const camera = new GeneralCamera(screenDimensions);
   const controls = new GeneralControls({ camera });

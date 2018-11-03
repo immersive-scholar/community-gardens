@@ -1,15 +1,14 @@
 import { WebGLRenderer } from "three-full";
 
-export default ({ canvas, width, height }) => {
+export default ({ canvas, width, height, dpr, antiAlias }) => {
   const renderer = new WebGLRenderer({
     canvas: canvas,
-    antialias: true,
+    antialias: antiAlias,
     alpha: !true,
     logarithmicDepthBuffer: false,
     preserveDrawingBuffer: true
   });
-  const DPR = window.devicePixelRatio ? window.devicePixelRatio : 1;
-  renderer.setPixelRatio(DPR);
+  renderer.setPixelRatio(dpr);
   renderer.setSize(width, height);
   renderer.gammaInput = true;
   renderer.gammaOutput = true;
