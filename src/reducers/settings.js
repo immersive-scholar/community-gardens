@@ -9,6 +9,8 @@ import {
 import { TweenMax } from "gsap";
 import GPU from "util/GPU";
 
+const version = "0.1.2";
+
 // 1. Derive values from query string if available
 const queryString = require("query-string");
 const location = window.location;
@@ -44,20 +46,21 @@ switch (true) {
 if (device.mobile) {
   switch (true) {
     case tierIndex === 3:
-      quantityMultiplier = 5;
-      break;
-    case tierIndex === 2:
       quantityMultiplier = 2;
       break;
-    case tierIndex === 1:
+    case tierIndex === 2:
       quantityMultiplier = 1;
+      break;
+    case tierIndex === 1:
+      quantityMultiplier = 0.5;
       break;
     default:
       break;
   }
 }
 
-alert(`tier ${tier.tier} quantityMultiplier: ${quantityMultiplier}`);
+quantityMultiplier =
+  parseFloat(parsed.quantityMultiplier) || quantityMultiplier;
 
 // slow it down on large displays
 const width = window.innerWidth;
@@ -66,6 +69,7 @@ if (width > 5200) {
 }
 
 const initialState = {
+  version,
   timeMultiplier,
   quantityMultiplier,
   seed,

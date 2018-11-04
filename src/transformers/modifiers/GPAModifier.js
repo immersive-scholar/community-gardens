@@ -3,7 +3,7 @@ import { Vector3, Color } from "three-full";
 const GPAModifier = ({ props, gpa }) => {
   if (gpa >= 3) {
     // props.color = 0xfbd58e;
-    props.color = 0xffffff;
+    // props.color = 0xffffff;
     props.leafColor = 0xffffff;
     const color = new Color(props.color);
     let hsl = {};
