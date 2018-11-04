@@ -5,6 +5,7 @@ import PersonalScarcityCalculator from "./calculators/PersonalScarcity";
 import EmotionalHealthCalculator from "./calculators/EmotionalHealth";
 import HealthCalculator from "./calculators/Health";
 
+import CommunityGarden from "./stats/CommunityGarden";
 import SleptOutside from "./stats/SleptOutside";
 import Inhabitable from "./stats/Inhabitable";
 import HousingInsecurity from "./stats/HousingInsecurity";
@@ -63,6 +64,7 @@ class InsecurityCalculator {
       // it's easier to combine Filters
       // see WorkALotAndAreHungry for an example.
       const stats = {};
+      stats.communityGarden = CommunityGarden(data, total);
       stats.sleptOutside = SleptOutside(data);
       stats.inhabitable = Inhabitable(data);
       stats.foodInsecurity = FoodInsecurity(data, total);

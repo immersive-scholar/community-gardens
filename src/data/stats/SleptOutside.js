@@ -1,4 +1,5 @@
 import map from "lodash/map";
+
 import { SLEPT_OUTSIDE } from "constants/Stats";
 
 const SleptOutside = data => {

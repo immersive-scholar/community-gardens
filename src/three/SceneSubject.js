@@ -24,15 +24,15 @@ class SceneSubject {
   }
 
   createScene() {
-    const chapter = this.createDidNotEatForADayChapter();
-    // const chapter = this.createRandomChapter();
+    // const chapter = this.createDidNotEatForADayChapter();
+    const chapter = this.createRandomChapter();
     this.setCurrentChapter(chapter);
   }
 
   createRandomChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new RandomGardenChapter(
-      { settings, focusTotal: 1 },
+      { settings, focusTotal: 10 },
       camera,
       controls,
       R
@@ -43,7 +43,7 @@ class SceneSubject {
   createDidNotEatForADayChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new DidNotEatForADayChapter(
-      { settings, focusTotal: 1 },
+      { settings, focusTotal: 3 },
       camera,
       controls,
       R

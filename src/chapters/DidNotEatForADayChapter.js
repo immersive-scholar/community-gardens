@@ -8,11 +8,9 @@ import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
 import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import ChapterPlate from "art/chapter-plate/ChapterPlate";
 import ChapterTitle from "art/chapter-plate/ChapterTitle";
-import ColorFactory from "util/ColorFactory";
 import InsecurityCalculator from "data/InsecurityCalculator";
 import RandomLayout from "art/layouts/RandomLayout";
-// import TextureFactory from "util/TextureFactory";
-import { DID_NOT_EAT_FOR_A_DAY } from "../constants/Stats";
+import { DID_NOT_EAT_FOR_A_DAY } from "constants/Stats";
 
 class DidNotEatForADayChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
@@ -21,15 +19,12 @@ class DidNotEatForADayChapter extends BaseChapter {
 
   init = props => {
     const stat = InsecurityCalculator.stats[DID_NOT_EAT_FOR_A_DAY];
+    const { color, textArray, bgColor } = stat;
+
     const { quantityMultiplier } = this.settings;
     const count = Math.min(stat.count, 10 * quantityMultiplier);
     const plantTypeCount = 3;
     const plantCount = Math.floor(count / plantTypeCount);
-
-    const bgColor = ColorFactory.getRandomColor(
-      ColorFactory.WINTER,
-      ColorFactory.SKY
-    );
 
     this.background = new BackgroundBAS({ color: bgColor });
     this.addCleanable(this.background);
@@ -50,7 +45,6 @@ class DidNotEatForADayChapter extends BaseChapter {
     });
     this.addCleanable(this.chapterPlate, this.chapterPlate.group);
 
-    const { color, textArray } = stat;
     this.chapterTitle = new ChapterTitle({
       color,
       textArray

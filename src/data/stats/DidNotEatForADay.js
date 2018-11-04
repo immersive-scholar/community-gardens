@@ -1,6 +1,7 @@
 import map from "lodash/map";
 import DidNotEatForADayFilter from "data/filters/DidNotEatForADayFilter";
 import { DID_NOT_EAT_FOR_A_DAY } from "constants/Stats";
+import ColorFactory from "util/ColorFactory";
 
 const DidNotEatForADay = (data, total) => {
   const rows = DidNotEatForADayFilter(data);
@@ -12,11 +13,17 @@ const DidNotEatForADay = (data, total) => {
     rows[i][DID_NOT_EAT_FOR_A_DAY] = true;
   }
 
+  const bgColor = ColorFactory.getRandomColor(
+    ColorFactory.WINTER,
+    ColorFactory.SKY
+  );
+
   return {
     id: DID_NOT_EAT_FOR_A_DAY,
     label: `${pct}% of students do not eat for an entire day during the past month`,
     count,
     ids,
+    bgColor,
     color: 0xffffff,
     textArray: [
       { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.4 },

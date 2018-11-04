@@ -1,3 +1,4 @@
+export const COMMUNITY_GARDEN = "communityGarden";
 export const BELOW_POVERTY_LINE = "belowPovertyLine";
 export const DID_NOT_EAT_FOR_A_DAY = "didNotEatForADay";
 export const EARN_A_LOT = "earnALot";
