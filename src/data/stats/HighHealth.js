@@ -17,6 +17,8 @@ const HighHealth = (data, threshold = 5) => {
     ColorFactory.LEAF
   );
 
+  console.log("bgColor ", bgColor);
+
   const color = ColorFactory.getRandomColor(
     ColorFactory.WINTER,
     ColorFactory.SKY
