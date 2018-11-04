@@ -1,6 +1,8 @@
 const AgeModifier = ({ props, age }) => {
-  props.petalCount = age;
-  props.leafCount = age;
+  if (age > 18) {
+    props.petalCount = age;
+    props.leafCount = age;
+  }
 
   return props;
 };

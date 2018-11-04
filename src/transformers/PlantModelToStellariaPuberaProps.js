@@ -57,12 +57,15 @@ const PlantModelToStellariaPuberaProps = ({
   const sleptOutside = model[STATS.SLEPT_OUTSIDE];
   const housingInsecurityScore = model[STATS.HOUSING_INSECURITY_SCORE];
 
-  const age = model.Age;
-  const gpa = model.GPA;
-  const degree = model.Degree;
+  const age = parseInt(model.Age, 10);
+  const gpa = parseInt(model.GPA, 10);
+  const degree = parseInt(model.Degree, 10);
   const firstGen = model.FirstGen === "Y";
-  const outOfState = model.OutofState;
-  const shares = model.sharemeals || model.givefood || model.sharemeals;
+  const outOfState = parseInt(model.OutofState, 10);
+  const shares =
+    parseInt(model.sharemeals, 10) ||
+    parseInt(model.givefood, 10) ||
+    parseInt(model.sharemeals, 10);
 
   props = Modifiers.PersonalScarcityModifier({ props, personalScarcity });
   props = Modifiers.ResourcesIncomingModifier({ props, resourcesIncoming });
@@ -107,6 +110,8 @@ const PlantModelToStellariaPuberaProps = ({
       R.floatBetween(-1.5, 1.5)
     );
   }
+
+  // props.petalCount = 8;
 
   return props;
 };

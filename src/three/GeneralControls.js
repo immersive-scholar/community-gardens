@@ -13,7 +13,8 @@ const Controls = ({ camera, velocity = 1 }) => {
   orbitControls.rotateSpeed = 0.1;
   orbitControls.zoomSpeed = 0.1;
 
-  // this.timeScale = velocity;
+  this.timeScale = velocity;
+  this.oldAutoRotate = false;
 
   let cameraTween, targetTween, zoomTween, zoomTween2;
 
@@ -236,11 +237,24 @@ const Controls = ({ camera, velocity = 1 }) => {
   }
 
   function pause() {
-    TweenMax.globalTimeScale(0);
+    // TweenMax.globalTimeScale(0);
+    cameraTween && cameraTween.pause();
+    targetTween && targetTween.pause();
+    zoomTween && zoomTween.pause();
+    zoomTween2 && zoomTween2.pause();
+
+    this.oldAutoRotate = orbitControls.autoRotate;
+    orbitControls.autoRotate = false;
   }
 
   function play() {
-    TweenMax.globalTimeScale(this.timeScale || 1);
+    // TweenMax.globalTimeScale(this.timeScale || 1);
+    cameraTween && cameraTween.play();
+    targetTween && targetTween.play();
+    zoomTween && zoomTween.play();
+    zoomTween2 && zoomTween2.play();
+
+    orbitControls.autoRotate = this.oldAutoRotate;
   }
 
   function setGlobalTimeScale(v) {

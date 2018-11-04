@@ -127,8 +127,6 @@ function Petals({
     geometry.setPrefabData(aQuaternion, i, dataArray);
   }
 
-  console.log("geometry ", geometry);
-
   // 3 create the material
   const aColor = geometry.createAttribute("color", 3);
   const petalColor = new Color(color);
