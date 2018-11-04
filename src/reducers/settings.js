@@ -22,7 +22,7 @@ let debug =
 
 // 2. Sniff GPU to derive default performance options
 const gpu = new GPU();
-const { tierIndex, device } = gpu;
+const { tier, tierIndex, device } = gpu;
 const { antiAlias, dpr } = gpu.config;
 
 // 3. Adjust values based on environment app is running within
@@ -47,15 +47,17 @@ if (device.mobile) {
       quantityMultiplier = 5;
       break;
     case tierIndex === 2:
-      quantityMultiplier = 4;
+      quantityMultiplier = 2;
       break;
     case tierIndex === 1:
-      quantityMultiplier = 2;
+      quantityMultiplier = 1;
       break;
     default:
       break;
   }
 }
+
+alert(`tier ${tier.tier} quantityMultiplier: ${quantityMultiplier}`);
 
 // slow it down on large displays
 const width = window.innerWidth;
