@@ -43,7 +43,7 @@ class AsiminaTriloba extends BasePlant {
       petalDistanceFromCenter = 0.01,
       imagePath = TextureFactory.getStroke(),
       // imagePath = TextureFactory.getPattern(),
-      textureSize = new Vector2(5, 5),
+      textureSize = new Vector2(15, 15),
       animated = true,
       delay = 0,
       openness = 0.3,

@@ -45,7 +45,7 @@ class StellariaPubera extends BasePlant {
       petalUpperMidPointRatio = 0.8,
       petalDistanceFromCenter = 0,
       imagePath = TextureFactory.getPattern(),
-      textureSize = new Vector2(5, 5),
+      textureSize = new Vector2(15, 15),
       animated = true,
       delay = 0,
       openness = 0.3,

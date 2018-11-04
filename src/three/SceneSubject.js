@@ -39,12 +39,12 @@ class SceneSubject {
     // const chapter = this.createRandomChapter();
     // const chapter = this.createPellGrantChapter();
     // const chapter = this.createHighGPAChapter();
-    // const chapter = this.createOutOfStateChapter();
+    const chapter = this.createOutOfStateChapter();
     // const chapter = this.createFirstGenerationChapter();
     // const chapter = this.createSummerGardenChapter();
     // const chapter = this.createWinterGardenChapter();
     // const chapter = this.createWellnessChapter();
-    const chapter = this.createResourcedChapter();
+    // const chapter = this.createResourcedChapter();
     this.setCurrentChapter(chapter);
   }
 

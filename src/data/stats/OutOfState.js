@@ -1,10 +1,10 @@
 import map from "lodash/map";
-import HealthFilter from "data/filters/HealthFilter";
+import OutOfStateFilter from "data/filters/OutOfStateFilter";
 import { OUT_OF_STATE } from "constants/Stats";
 import ColorFactory from "util/ColorFactory";
 
-const OutOfState = (data, threshold = 5) => {
-  const rows = HealthFilter(data, threshold, "<");
+const OutOfState = data => {
+  const rows = OutOfStateFilter(data);
   const count = rows.length;
   const ids = map(rows, row => row.ID);
 

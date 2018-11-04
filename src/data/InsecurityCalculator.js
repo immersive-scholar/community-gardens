@@ -79,9 +79,9 @@ class InsecurityCalculator {
       stats.experienceHunger = ExperienceHunger(data, total);
       stats.firstGeneration = FirstGeneration(data, total);
       stats.foodInsecurity = FoodInsecurity(data, total);
-      stats.highResources = HighResources(data, 1);
       stats.highGPA = HighGPA(data, total);
       stats.highHealth = HighHealth(data, 2);
+      stats.highResources = HighResources(data, 1);
       stats.housingInsecurity = HousingInsecurity(data, total);
       stats.inhabitable = Inhabitable(data);
       stats.lowHealth = LowHealth(data, -2);
