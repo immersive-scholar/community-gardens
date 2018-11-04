@@ -1,16 +1,58 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Switch, Redirect } from "react-router";
+import Helmet from "react-helmet";
+import { TypographyStyle, GoogleFont } from "react-typography";
 
-import ThreeContainer from "three/ThreeContainer";
-// import Settings from "ui/organisms/settings";
+import typography from "util/typography";
+import ScrollToTop from "util/scrollToTop";
+import Home from "pages/Home";
+
+import LoadableThreeContainer from "./loadables/LoadableThreeContainer";
 
 class App extends Component {
+  componentWillUpdate({ location, history }) {
+    const gtag = window.gtag;
+
+    if (location.pathname === this.props.location.pathname) {
+      return;
+    }
+
+    if (history.action === "PUSH" && typeof gtag === "function") {
+      gtag("config", "UA-117743172-2", {
+        page_location: window.location.href,
+        page_path: location.pathname
+      });
+    }
+  }
   render() {
     return (
-      <Fragment>
-        <Router basename={process.env.PUBLIC_URL}>{/* <Settings /> */}</Router>
-        <ThreeContainer />
-      </Fragment>
+      <div className="App">
+        <Helmet
+          title="Generative Artist lucastswick"
+          description="lucastswick is a generative artist writing algorithms that describe natural phenomena."
+        />
+        <TypographyStyle typography={typography} />
+        <GoogleFont typography={typography} />
+        <Router basename={process.env.PUBLIC_URL}>
+          <div id="outer-container">
+            {/* <TopNavContainer /> */}
+            <div id="page-wrap">
+              <ScrollToTop>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route
+                    exact
+                    path="/garden"
+                    component={LoadableThreeContainer}
+                  />
+                  {/* <Route component={NotFound} /> */}
+                </Switch>
+              </ScrollToTop>
+            </div>
+          </div>
+        </Router>
+      </div>
     );
   }
 }

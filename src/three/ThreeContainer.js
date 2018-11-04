@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import * as dat from "dat.gui";
 import threeEntryPoint from "three/ThreeEntryPoint";
 import { settings } from "actions";
 
