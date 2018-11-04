@@ -15,6 +15,7 @@ import FirstGeneration from "./stats/FirstGeneration";
 import FoodInsecurity from "./stats/FoodInsecurity";
 import HighGPA from "./stats/HighGPA";
 import HighHealth from "./stats/HighHealth";
+import HighResources from "./stats/HighResources";
 import HousingInsecurity from "./stats/HousingInsecurity";
 import Inhabitable from "./stats/Inhabitable";
 import LowHealth from "./stats/LowHealth";
@@ -78,6 +79,7 @@ class InsecurityCalculator {
       stats.experienceHunger = ExperienceHunger(data, total);
       stats.firstGeneration = FirstGeneration(data, total);
       stats.foodInsecurity = FoodInsecurity(data, total);
+      stats.highResources = HighResources(data, 1);
       stats.highGPA = HighGPA(data, total);
       stats.highHealth = HighHealth(data, 2);
       stats.housingInsecurity = HousingInsecurity(data, total);

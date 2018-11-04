@@ -6,6 +6,7 @@ export const EARN_A_LOT_AND_ARE_HUNGRY = "earnALotAndAreHungry";
 export const EXPERIENCE_HUNGER = "experienceHunger";
 export const FIRST_GENERATION = "firstGeneration";
 export const FOOD_INSECURITY = "foodInsecurity";
+export const HIGH_RESOURCES = "highResources";
 export const HIGH_GPA = "highGPA";
 export const HIGH_HEALTH = "highHealth";
 export const HOUSING_INSECURITY = "housingInsecurity";

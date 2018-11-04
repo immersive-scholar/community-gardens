@@ -5,6 +5,7 @@ import HousingInsecurityChapter from "chapters/HousingInsecurityChapter";
 import OutOfStateChapter from "chapters/OutOfStateChapter";
 import PellGrantChapter from "chapters/PellGrantChapter";
 import RandomGardenChapter from "chapters/RandomGardenChapter";
+import ResourcedChapter from "chapters/ResourcedChapter";
 import SummerGardenChapter from "chapters/SummerGardenChapter";
 import WellnessChapter from "chapters/WellnessChapter";
 import WinterGardenChapter from "chapters/WinterGardenChapter";
@@ -42,7 +43,8 @@ class SceneSubject {
     // const chapter = this.createFirstGenerationChapter();
     // const chapter = this.createSummerGardenChapter();
     // const chapter = this.createWinterGardenChapter();
-    const chapter = this.createWellnessChapter();
+    // const chapter = this.createWellnessChapter();
+    const chapter = this.createResourcedChapter();
     this.setCurrentChapter(chapter);
   }
 
@@ -148,6 +150,17 @@ class SceneSubject {
   createWellnessChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new WellnessChapter(
+      { settings, focusTotal: 3 },
+      camera,
+      controls,
+      R
+    );
+    return chapter;
+  }
+
+  createResourcedChapter() {
+    const { settings, camera, controls, R } = this;
+    const chapter = new ResourcedChapter(
       { settings, focusTotal: 3 },
       camera,
       controls,
