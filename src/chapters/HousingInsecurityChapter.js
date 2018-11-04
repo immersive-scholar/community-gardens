@@ -23,8 +23,6 @@ class HousingInsecurityChapter extends BaseChapter {
 
     const { quantityMultiplier } = this.settings;
     const count = Math.min(stat.count, 25 * quantityMultiplier);
-    console.log("count ", count);
-    // const count = stat.count;
     const plantTypeCount = 3;
     const plantCount = Math.floor(count / plantTypeCount);
 
