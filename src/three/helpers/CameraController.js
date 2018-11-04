@@ -13,8 +13,11 @@ export default ({ controls, camera, settings }) => {
       ty: 0.5,
       tz: 1,
       autoRotate: false,
-      kill: () => {
-        controls.killTweens();
+      pause: () => {
+        controls.pause();
+      },
+      play: () => {
+        controls.play();
       },
       reset: () => {
         const { original } = config;
@@ -25,12 +28,6 @@ export default ({ controls, camera, settings }) => {
         configTargetYSlider.setValue(original.ty);
         configTargetZSlider.setValue(original.tz);
         onDataChangeComplete();
-      },
-      animateChapter1: () => {
-        controls.animateChapter1();
-      },
-      animateChapter2: () => {
-        controls.animateChapter2();
       },
       getCameraPosition: () => {
         configXSlider.setValue(camera.position.x);
@@ -75,7 +72,8 @@ export default ({ controls, camera, settings }) => {
     };
 
     const gui = new dat.GUI().getRoot();
-    gui.add(config, "kill");
+    gui.add(config, "pause");
+    gui.add(config, "play");
     gui.add(config, "reset");
     gui
       .add(config, "velocity", 0, 2, 0.01)
@@ -111,8 +109,6 @@ export default ({ controls, camera, settings }) => {
     positionFolder.add(config, "getCameraPosition");
 
     const animationsFolder = gui.addFolder("Animations");
-    animationsFolder.add(config, "animateChapter1");
-    animationsFolder.add(config, "animateChapter2");
     animationsFolder
       .add(config, "autoRotate")
       .onChange(onDataChange)

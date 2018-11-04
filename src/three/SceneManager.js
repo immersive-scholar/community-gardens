@@ -30,7 +30,10 @@ export default ({ generalCanvas, R, settings }) => {
     antiAlias: settings.antiAlias
   });
   const camera = new GeneralCamera(screenDimensions);
-  const controls = new GeneralControls({ camera });
+  const controls = new GeneralControls({
+    camera,
+    velocity: settings.timeMultiplier
+  });
   // const postProcessing = new PostProcessing({ scene, camera, renderer });
 
   if (settings.debug) {

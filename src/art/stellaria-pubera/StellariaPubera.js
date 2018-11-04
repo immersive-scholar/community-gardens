@@ -78,6 +78,8 @@ class StellariaPubera extends BasePlant {
       )
     } = this.state;
 
+    console.log("petalCount ", petalCount, rearPetalCount);
+
     const stemProps = {
       height,
       color,
@@ -106,6 +108,7 @@ class StellariaPubera extends BasePlant {
       petalLowerMidPointRatio,
       petalUpperMidPointRatio
     });
+    console.log("petalWidth, petalLength ", petalWidth, petalLength);
 
     this.petals = new Petals({
       petalCount,

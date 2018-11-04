@@ -13,6 +13,8 @@ const Controls = ({ camera, velocity = 1 }) => {
   orbitControls.rotateSpeed = 0.1;
   orbitControls.zoomSpeed = 0.1;
 
+  // this.timeScale = velocity;
+
   let cameraTween, targetTween, zoomTween, zoomTween2;
 
   const cameraTweenParams = new Vector3(),
@@ -233,10 +235,19 @@ const Controls = ({ camera, velocity = 1 }) => {
     zoomTween2 && zoomTween2.kill();
   }
 
+  function pause() {
+    TweenMax.globalTimeScale(0);
+  }
+
+  function play() {
+    TweenMax.globalTimeScale(this.timeScale || 1);
+  }
+
   function setGlobalTimeScale(v) {
     // we can affect just the camera movement
     // velocity = v;
     // or we can affect _all_ of the animations
+    this.timeScale = v;
     TweenMax.globalTimeScale(v);
   }
 
@@ -259,6 +270,8 @@ const Controls = ({ camera, velocity = 1 }) => {
     animateChapter1,
     animateChapter2,
     killTweens,
+    pause,
+    play,
     set,
     setGlobalTimeScale,
     walkabout,
