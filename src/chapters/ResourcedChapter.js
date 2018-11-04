@@ -1,4 +1,4 @@
-import { Vector3 } from "three-full";
+import { Vector3, Group } from "three-full";
 
 import BaseChapter from "./BaseChapter";
 import BackgroundBAS from "art/background/BackgroundBAS";
@@ -9,8 +9,9 @@ import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import ChapterPlate from "art/chapter-plate/ChapterPlate";
 import ChapterTitle from "art/chapter-plate/ChapterTitle";
 import InsecurityCalculator from "data/InsecurityCalculator";
-import CircularLayout from "art/layouts/CircularLayout";
+import GridLayout from "art/layouts/GridLayout";
 import { HIGH_RESOURCES } from "constants/Stats";
+import { LAYOUT_FLOOR } from "art/layouts/LayoutConstants";
 
 class ResourcedChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
@@ -18,6 +19,10 @@ class ResourcedChapter extends BaseChapter {
   }
 
   init = () => {
+    // group to house isntances
+    this.plantGroup = new Group();
+    this.group.add(this.plantGroup);
+
     const stat = InsecurityCalculator.getStat(HIGH_RESOURCES);
     const { color, textArray, bgColor } = stat;
 
@@ -70,19 +75,9 @@ class ResourcedChapter extends BaseChapter {
       camera: this.camera,
       controls: this.controls
     });
-    this.group.add(this.solomonsSealSpawn.group);
+    this.plantGroup.add(this.solomonsSealSpawn.group);
     this.addInstances(this.solomonsSealSpawn.instances);
     this.spawns.push(this.solomonsSealSpawn);
-
-    bounds.set(0.5, 0, 0.5);
-    position.set(0, 0.5, 0.5);
-    new CircularLayout({
-      instances: this.solomonsSealSpawn.instances,
-      group: this.group,
-      R: this.R,
-      bounds,
-      position
-    });
 
     // Stellaria Pubera
 
@@ -95,19 +90,9 @@ class ResourcedChapter extends BaseChapter {
       controls: this.controls
     });
 
-    this.group.add(this.stellariaPuberaSpawn.group);
+    this.plantGroup.add(this.stellariaPuberaSpawn.group);
     this.addInstances(this.stellariaPuberaSpawn.instances);
     this.spawns.push(this.stellariaPuberaSpawn);
-
-    bounds.set(1, 0, 1);
-    position.set(0, 0.5, 1);
-    new CircularLayout({
-      instances: this.stellariaPuberaSpawn.instances,
-      group: this.group,
-      R: this.R,
-      bounds,
-      position
-    });
 
     // Asimina Triloba
 
@@ -120,16 +105,17 @@ class ResourcedChapter extends BaseChapter {
       controls: this.controls
     });
 
-    this.group.add(this.asiminaTrilobaSpawn.group);
+    this.plantGroup.add(this.asiminaTrilobaSpawn.group);
     this.addInstances(this.asiminaTrilobaSpawn.instances);
     this.spawns.push(this.asiminaTrilobaSpawn);
 
     // layout
-    bounds.set(1.5, 0, 1.5);
-    position.set(0, 0.5, 1.5);
-    new CircularLayout({
-      instances: this.asiminaTrilobaSpawn.instances,
-      group: this.group,
+    bounds.set(4, 0, 2);
+    position.set(-2, 0.25, 0.5);
+    new GridLayout({
+      layoutType: LAYOUT_FLOOR,
+      instances: this.instances,
+      group: this.plantGroup,
       R: this.R,
       bounds,
       position

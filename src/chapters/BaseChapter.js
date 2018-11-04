@@ -233,17 +233,10 @@ class BaseChapter {
     // 1. Spin around
     this.controls.setTimeMultiplier(timeMultiplier);
     this.controls.setAutoRotate(true);
-    this.timeoutID && clearTimeout(this.timeoutID);
 
     // 2. Call a timeout to stop spinning when done
-    return new Promise(resolve => {
-      this.timeoutID = setTimeout(() => {
-        this.controls.setAutoRotate(false);
-        return resolve();
-        // if timeMultiplier is 0.3, then everything is playing at 30%
-        // so we need to make the timeout longer
-      }, 60000 * (1 / timeMultiplier));
-    });
+    const duration = 60000 * (1 / timeMultiplier);
+    return this.controls.animateSpin({ duration });
   };
 
   setTimeMultiplier = t => {

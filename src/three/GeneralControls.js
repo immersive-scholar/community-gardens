@@ -13,8 +13,9 @@ const Controls = ({ camera, velocity = 1 }) => {
   orbitControls.rotateSpeed = 0.1;
   orbitControls.zoomSpeed = 0.1;
 
-  this.timeScale = velocity;
-  this.oldAutoRotate = false;
+  let timeScale = velocity;
+  let oldAutoRotate = false;
+  let timeoutID = 0;
 
   let cameraTween, targetTween, zoomTween, zoomTween2;
 
@@ -157,6 +158,19 @@ const Controls = ({ camera, velocity = 1 }) => {
     onCameraMoveUpdate();
   }
 
+  function animateSpin({ duration = 60000 }) {
+    timeoutID && clearTimeout(timeoutID);
+
+    return new Promise(resolve => {
+      timeoutID = setTimeout(() => {
+        setAutoRotate(false);
+        return resolve();
+        // if timeMultiplier is 0.3, then everything is playing at 30%
+        // so we need to make the timeout longer
+      }, duration);
+    });
+  }
+
   function animateChapter1({ delay = 0, duration = 10 } = {}) {
     killTweens();
 
@@ -234,6 +248,8 @@ const Controls = ({ camera, velocity = 1 }) => {
     targetTween && targetTween.kill();
     zoomTween && zoomTween.kill();
     zoomTween2 && zoomTween2.kill();
+
+    timeoutID && clearTimeout(timeoutID);
   }
 
   function pause() {
@@ -243,30 +259,35 @@ const Controls = ({ camera, velocity = 1 }) => {
     zoomTween && zoomTween.pause();
     zoomTween2 && zoomTween2.pause();
 
-    this.oldAutoRotate = orbitControls.autoRotate;
+    timeoutID && clearTimeout(timeoutID);
+
+    oldAutoRotate = orbitControls.autoRotate;
     orbitControls.autoRotate = false;
   }
 
   function play() {
-    // TweenMax.globalTimeScale(this.timeScale || 1);
+    // TweenMax.globalTimeScale(timeScale || 1);
     cameraTween && cameraTween.play();
     targetTween && targetTween.play();
     zoomTween && zoomTween.play();
     zoomTween2 && zoomTween2.play();
 
-    orbitControls.autoRotate = this.oldAutoRotate;
+    // orbitControls.autoRotate = oldAutoRotate;
+    if (oldAutoRotate) {
+      animateSpin({ duration: 15000 });
+    }
   }
 
   function setGlobalTimeScale(v) {
     // we can affect just the camera movement
     // velocity = v;
     // or we can affect _all_ of the animations
-    this.timeScale = v;
+    timeScale = v;
     TweenMax.globalTimeScale(v);
   }
 
   function setTimeMultiplier(t) {
-    orbitControls.autoRotateSpeed = 0.2 * (1 / t);
+    orbitControls.autoRotateSpeed = 0.15 * (1 / t);
   }
 
   function update() {
@@ -283,6 +304,7 @@ const Controls = ({ camera, velocity = 1 }) => {
     animate,
     animateChapter1,
     animateChapter2,
+    animateSpin,
     killTweens,
     pause,
     play,
