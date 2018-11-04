@@ -7,6 +7,7 @@ import { TypographyStyle, GoogleFont } from "react-typography";
 import typography from "util/typography";
 import ScrollToTop from "util/scrollToTop";
 import Home from "pages/Home";
+import NotFound from "pages/NotFound";
 
 import LoadableThreeContainer from "./loadables/LoadableThreeContainer";
 
@@ -41,12 +42,8 @@ class App extends Component {
               <ScrollToTop>
                 <Switch>
                   <Route exact path="/" component={Home} />
-                  <Route
-                    exact
-                    path="/garden"
-                    component={LoadableThreeContainer}
-                  />
-                  {/* <Route component={NotFound} /> */}
+                  <Route path="/garden" component={LoadableThreeContainer} />
+                  <Route component={NotFound} />
                 </Switch>
               </ScrollToTop>
             </div>

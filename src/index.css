@@ -31,3 +31,8 @@ body {
 canvas {
   display: block;
 }
+
+/* dat.gui should not be affected by our typography classes */
+.dg li {
+  margin-bottom: 0;
+}
