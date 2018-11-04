@@ -39,7 +39,7 @@ const HousingInsecurity = data => {
   }
 
   const bgColor = ColorFactory.getRandomColor(
-    ColorFactory.WINTER,
+    ColorFactory.SUMMER,
     ColorFactory.SKY
   );
 

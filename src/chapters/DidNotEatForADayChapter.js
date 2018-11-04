@@ -22,7 +22,7 @@ class DidNotEatForADayChapter extends BaseChapter {
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;
-    const count = Math.min(stat.count, 10 * quantityMultiplier);
+    const count = Math.min(stat.count, 25 * quantityMultiplier);
     const plantTypeCount = 3;
     const plantCount = Math.floor(count / plantTypeCount);
 
