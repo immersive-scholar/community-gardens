@@ -10,7 +10,7 @@ import ChapterPlate from "art/chapter-plate/ChapterPlate";
 import ChapterTitle from "art/chapter-plate/ChapterTitle";
 import InsecurityCalculator from "data/InsecurityCalculator";
 import CircularLayout from "art/layouts/CircularLayout";
-import { HIGH_WELLNESS } from "constants/Stats";
+import { WELLNESS } from "constants/Stats";
 
 class WellnessChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
@@ -18,7 +18,7 @@ class WellnessChapter extends BaseChapter {
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[HIGH_WELLNESS];
+    const stat = InsecurityCalculator.stats[WELLNESS];
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;
@@ -58,7 +58,7 @@ class WellnessChapter extends BaseChapter {
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
       count,
-      key: HIGH_WELLNESS
+      key: WELLNESS
     });
 
     // Solomon's Seal
@@ -74,6 +74,16 @@ class WellnessChapter extends BaseChapter {
     this.addInstances(this.solomonsSealSpawn.instances);
     this.spawns.push(this.solomonsSealSpawn);
 
+    bounds.set(0.5, 0, 0.5);
+    position.set(0, 0.5, 0.5);
+    new CircularLayout({
+      instances: this.solomonsSealSpawn.instances,
+      group: this.group,
+      R: this.R,
+      bounds,
+      position
+    });
+
     // Stellaria Pubera
 
     this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
@@ -88,6 +98,16 @@ class WellnessChapter extends BaseChapter {
     this.group.add(this.stellariaPuberaSpawn.group);
     this.addInstances(this.stellariaPuberaSpawn.instances);
     this.spawns.push(this.stellariaPuberaSpawn);
+
+    bounds.set(1, 0, 1);
+    position.set(0, 0.5, 1);
+    new CircularLayout({
+      instances: this.stellariaPuberaSpawn.instances,
+      group: this.group,
+      R: this.R,
+      bounds,
+      position
+    });
 
     // Asimina Triloba
 
@@ -105,10 +125,10 @@ class WellnessChapter extends BaseChapter {
     this.spawns.push(this.asiminaTrilobaSpawn);
 
     // layout
-    bounds.set(1, 0, 1);
-    position.set(0, 0.5, 1);
+    bounds.set(1.5, 0, 1.5);
+    position.set(0, 0.5, 1.5);
     new CircularLayout({
-      instances: this.instances,
+      instances: this.asiminaTrilobaSpawn.instances,
       group: this.group,
       R: this.R,
       bounds,

@@ -17,13 +17,18 @@ const Wellness = data => {
     ColorFactory.LEAF
   );
 
+  const color = ColorFactory.getRandomColor(
+    ColorFactory.WINTER,
+    ColorFactory.SKY
+  );
+
   return {
     id: WELLNESS,
     label: `${count} students are first generation.`,
     count,
     ids,
     bgColor,
-    color: 0xffffff,
+    color,
     textArray: [
       { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.2 },
       { size: 0.25, text: "With High Emotional Health", offsetY: 0.8 }

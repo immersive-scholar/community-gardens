@@ -42,7 +42,7 @@ class SceneSubject {
     // const chapter = this.createFirstGenerationChapter();
     // const chapter = this.createSummerGardenChapter();
     // const chapter = this.createWinterGardenChapter();
-    const chapter = this.createWellnessGarden();
+    const chapter = this.createWellnessChapter();
     this.setCurrentChapter(chapter);
   }
 
