@@ -6,6 +6,7 @@ import OutOfStateChapter from "chapters/OutOfStateChapter";
 import PellGrantChapter from "chapters/PellGrantChapter";
 import RandomGardenChapter from "chapters/RandomGardenChapter";
 import SummerGardenChapter from "chapters/SummerGardenChapter";
+import WellnessChapter from "chapters/WellnessChapter";
 import WinterGardenChapter from "chapters/WinterGardenChapter";
 
 import ChapterPlate from "art/chapter-plate/ChapterPlate";
@@ -38,9 +39,10 @@ class SceneSubject {
     // const chapter = this.createPellGrantChapter();
     // const chapter = this.createHighGPAChapter();
     // const chapter = this.createOutOfStateChapter();
-    const chapter = this.createFirstGenerationChapter();
+    // const chapter = this.createFirstGenerationChapter();
     // const chapter = this.createSummerGardenChapter();
     // const chapter = this.createWinterGardenChapter();
+    const chapter = this.createWellnessGarden();
     this.setCurrentChapter(chapter);
   }
 
@@ -135,6 +137,17 @@ class SceneSubject {
   createWinterGardenChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new WinterGardenChapter(
+      { settings, focusTotal: 3 },
+      camera,
+      controls,
+      R
+    );
+    return chapter;
+  }
+
+  createWellnessChapter() {
+    const { settings, camera, controls, R } = this;
+    const chapter = new WellnessChapter(
       { settings, focusTotal: 3 },
       camera,
       controls,

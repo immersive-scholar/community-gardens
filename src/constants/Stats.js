@@ -17,3 +17,4 @@ export const SKIP_MEALS = "skipMeals";
 export const SLEPT_OUTSIDE = "sleptOutside";
 export const OUT_OF_STATE = "outOfState";
 export const WORK_A_LOT_AND_ARE_HUNGRY = "workALotAndAreHungry";
+export const WELLNESS = "wellness";

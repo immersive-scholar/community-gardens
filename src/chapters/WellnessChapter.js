@@ -10,15 +10,15 @@ import ChapterPlate from "art/chapter-plate/ChapterPlate";
 import ChapterTitle from "art/chapter-plate/ChapterTitle";
 import InsecurityCalculator from "data/InsecurityCalculator";
 import CircularLayout from "art/layouts/CircularLayout";
-import { HIGH_GPA } from "constants/Stats";
+import { HIGH_WELLNESS } from "constants/Stats";
 
-class HighGPAChapter extends BaseChapter {
+class WellnessChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
     super(props, camera, controls, R);
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[HIGH_GPA];
+    const stat = InsecurityCalculator.stats[HIGH_WELLNESS];
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;
@@ -58,7 +58,7 @@ class HighGPAChapter extends BaseChapter {
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
       count,
-      key: HIGH_GPA
+      key: HIGH_WELLNESS
     });
 
     // Solomon's Seal
@@ -117,4 +117,4 @@ class HighGPAChapter extends BaseChapter {
   };
 }
 
-export default HighGPAChapter;
+export default WellnessChapter;

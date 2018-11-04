@@ -22,6 +22,7 @@ import OutOfState from "./stats/OutOfState";
 import PellGrant from "./stats/PellGrant";
 import SkipMeals from "./stats/SkipMeals";
 import SleptOutside from "./stats/SleptOutside";
+import Wellness from "./stats/Wellness";
 import WorkALotAndAreHungry from "./stats/WorkALotAndAreHungry";
 
 class InsecurityCalculator {
@@ -86,9 +87,11 @@ class InsecurityCalculator {
       stats.pellGrant = PellGrant(data);
       stats.skipMeals = SkipMeals(data);
       stats.sleptOutside = SleptOutside(data);
+      stats.wellness = Wellness(data);
       stats.workALotAndAreHungry = WorkALotAndAreHungry(data);
 
       console.log("stats ", stats);
+      // console.log("data ", data);
 
       // store staticly, so data is accessible via
       // `InsecurityCalculator.data` and
