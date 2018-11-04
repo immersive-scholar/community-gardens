@@ -22,7 +22,7 @@ class ThreeContainer extends Component {
     this.threeEntryPoint = threeEntryPoint(this.threeRootElement, this.props);
   }
 
-  componnetWillUnmount() {
+  componentWillUnmount() {
     document.removeEventListener("gesturestart", this.preventScroll);
   }
 

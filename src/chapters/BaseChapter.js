@@ -1,5 +1,6 @@
 import { Group, Vector3, Box3, Object3D } from "three-full";
 import { LookUpOffset, LookDownOffset } from "three/helpers/CameraOffsets";
+import { TweenMax } from "gsap";
 
 class BaseChapter {
   constructor(props, camera, controls, R) {
@@ -8,9 +9,9 @@ class BaseChapter {
     this.controls = controls;
     this.R = R;
 
-    const { focusTotal = 0 } = props;
+    const { focusTotal = 0, timeMultiplier = 1 } = props;
 
-    this.state = { currentFocusCount: 0, focusTotal };
+    this.state = { currentFocusCount: 0, focusTotal, timeMultiplier };
     this.group = new Group();
     this.instances = [];
     this.cleanables = [];
@@ -140,10 +141,15 @@ class BaseChapter {
       // as a signal that the chapter is complete
       // we will also resolve the promise
       // so the sceneSubject knows to go on to the next chapter.
-      this.animateOut({
-        onComplete: () => this.resolve("done")
-      });
-
+      this.returnToZero()
+        .then(() => {
+          return this.orbit();
+        })
+        .then(() => {
+          return this.animateOut({
+            onComplete: () => this.resolve()
+          });
+        });
       // otherwise, we're going to select an item and focus on it
     } else {
       const element = this.getRandomInstance();
@@ -213,6 +219,36 @@ class BaseChapter {
       duration,
       callback: onComplete
     });
+  };
+
+  returnToZero = ({ duration = 10 } = {}) => {
+    return new Promise(resolve => {
+      const to = { x: 0, y: 0.5, z: -1, tx: 0, ty: 0.5, tz: 1 };
+      this.controls.animate({ to, duration, callback: () => resolve() });
+    });
+  };
+
+  orbit = () => {
+    const { timeMultiplier } = this.state;
+
+    // 1. Spin around
+    this.controls.setTimeMultiplier(timeMultiplier);
+    this.controls.setAutoRotate(true);
+    this.timeoutID && clearTimeout(this.timeoutID);
+
+    // 2. Call a timeout to stop spinning when done
+    return new Promise(resolve => {
+      this.timeoutID = setTimeout(() => {
+        this.controls.setAutoRotate(false);
+        return resolve();
+        // if timeMultiplier is 0.3, then everything is playing at 30%
+        // so we need to make the timeout longer
+      }, 60000 * (1 / timeMultiplier));
+    });
+  };
+
+  setTimeMultiplier = t => {
+    this.state.timeMultiplier = t;
   };
 
   clean = () => {

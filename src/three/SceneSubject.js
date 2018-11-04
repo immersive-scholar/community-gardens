@@ -32,7 +32,7 @@ class SceneSubject {
   createRandomChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new RandomGardenChapter(
-      { settings, focusTotal: 10 },
+      { settings, focusTotal: 3 },
       camera,
       controls,
       R
@@ -75,6 +75,11 @@ class SceneSubject {
       const chapter = this.createDidNotEatForADayChapter();
       this.setCurrentChapter(chapter);
     });
+  }
+
+  setTimeMultiplier(t) {
+    this.settings.timeMultiplier = t;
+    this.currentChapter.setTimeMultiplier(t);
   }
 
   update() {}

@@ -108,6 +108,9 @@ const PlantModelToSolomonsSealProps = ({
     props.sizeEnd = new Vector2(0.3, 0.01);
   }
 
+  props.berryCount =
+    R.intBetween(1, 4) * Math.max(12, Math.abs(resourcesIncoming));
+
   return props;
 };
 

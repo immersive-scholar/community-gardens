@@ -4,7 +4,7 @@ const ResourcesIncomingModifier = ({ props, resourcesIncoming }) => {
   if (resourcesIncoming > 1) {
     // props.petalLength = resourcesIncoming * 0.025;
     // props.petalWidth = resourcesIncoming * 0.025;
-    props.thickness = resourcesIncoming * 0.005;
+    props.thickness = resourcesIncoming * 0.01;
   }
 
   props.berryCount = Math.max(0, resourcesIncoming * 2);

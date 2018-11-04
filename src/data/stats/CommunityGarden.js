@@ -15,7 +15,7 @@ const CommunityGarden = (data, count) => {
   //     ColorFactory.LEAF
   //   );
 
-  const bgColor = 0xffc883;
+  const bgColor = 0xed7e28;
 
   const color = ColorFactory.getRandomColor(
     ColorFactory.WINTER,

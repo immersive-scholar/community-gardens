@@ -240,8 +240,16 @@ const Controls = ({ camera, velocity = 1 }) => {
     TweenMax.globalTimeScale(v);
   }
 
+  function setTimeMultiplier(t) {
+    orbitControls.autoRotateSpeed = 0.2 * (1 / t);
+  }
+
   function update() {
     orbitControls.update();
+  }
+
+  function setAutoRotate(a) {
+    orbitControls.autoRotate = a;
   }
 
   return {
@@ -253,7 +261,9 @@ const Controls = ({ camera, velocity = 1 }) => {
     killTweens,
     set,
     setGlobalTimeScale,
-    walkabout
+    walkabout,
+    setAutoRotate,
+    setTimeMultiplier
   };
 };
 

@@ -90,8 +90,10 @@ export default (container, settings) => {
   // when redux dispatches a settings change event,
   // this function is summoned with the new settings object
   function setSettings(settings) {
-    const { quantityMultiplier, debug } = settings;
+    const { quantityMultiplier, timeMultiplier, debug } = settings;
     sceneManager.subject.setQuantityMultiplier(quantityMultiplier);
+    sceneManager.subject.setTimeMultiplier(timeMultiplier);
+    sceneManager.controls.setTimeMultiplier(timeMultiplier);
 
     sceneManager.setDebug(debug);
   }
