@@ -76,7 +76,8 @@ const initialState = {
   seed,
   antiAlias,
   dpr,
-  debug
+  debug,
+  mobile: device.mobile
 };
 
 export default (state = initialState, action) => {

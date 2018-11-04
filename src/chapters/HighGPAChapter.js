@@ -21,7 +21,7 @@ class HighGPAChapter extends BaseChapter {
     const stat = InsecurityCalculator.getStat(HIGH_GPA);
     const { color, textArray, bgColor } = stat;
 
-    const { quantityMultiplier } = this.settings;
+    const { quantityMultiplier, mobile } = this.settings;
     const count = Math.min(stat.count, 25 * quantityMultiplier);
     const plantTypeCount = 3;
     const plantCount = Math.floor(count / plantTypeCount);
@@ -49,7 +49,7 @@ class HighGPAChapter extends BaseChapter {
       color,
       textArray
     });
-    this.chapterTitle.createChildren();
+    !mobile && this.chapterTitle.createChildren();
     this.addCleanable(this.chapterTitle, this.chapterTitle.group);
 
     let bounds = new Vector3(1, 1, 1),

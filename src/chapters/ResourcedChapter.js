@@ -26,7 +26,7 @@ class ResourcedChapter extends BaseChapter {
     const stat = InsecurityCalculator.getStat(HIGH_RESOURCES);
     const { color, textArray, bgColor } = stat;
 
-    const { quantityMultiplier } = this.settings;
+    const { quantityMultiplier, mobile } = this.settings;
     const count = Math.min(stat.count, 25 * quantityMultiplier);
     const plantTypeCount = 3;
     const plantCount = Math.floor(count / plantTypeCount);
@@ -54,7 +54,7 @@ class ResourcedChapter extends BaseChapter {
       color,
       textArray
     });
-    this.chapterTitle.createChildren();
+    !mobile && this.chapterTitle.createChildren();
     this.addCleanable(this.chapterTitle, this.chapterTitle.group);
 
     let bounds = new Vector3(1, 1, 1),

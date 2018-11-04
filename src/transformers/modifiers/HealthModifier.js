@@ -19,25 +19,28 @@ const HealthModifier = ({ props, health }) => {
         ColorFactory.SKY
       );
       // props.berryColor = props.leafColor;
-      props.hslRange = new Vector3(0.1, 0.1, -0.5);
+      props.hslRange = new Vector3(0.1, 0.1, -0.2);
       droop = (Math.PI / 2) * health * 0.01;
       props.rotationStart = new Vector3(droop, 0, 0);
       break;
-    case health <= 0:
+    case health > 10 && health <= 0:
       props.color = ColorFactory.getRandomColor(
         ColorFactory.SUMMER,
         ColorFactory.LEAF
       );
       props.hslRange = new Vector3(0.1, 0.1, 0.2);
-      droop = (Math.PI / 2) * health * 0.03;
+      droop = (Math.PI / 2) * health * 0.02;
       props.rotationStart = new Vector3(droop, 0, 0);
       break;
     case health > 0:
       props.color = ColorFactory.getRandomColor(
-        ColorFactory.FALL,
+        ColorFactory.SUMMER,
         ColorFactory.LEAF
       );
       props.hslRange = new Vector3(0.1, 0.1, health / 100);
+      props.imagePath = `${
+        process.env.PUBLIC_URL
+      }/img/strokes/watercolor-1.png`;
       break;
     default:
       break;
