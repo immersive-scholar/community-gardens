@@ -18,7 +18,7 @@ class WinterGardenChapter extends BaseChapter {
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[LOW_HEALTH];
+    const stat = InsecurityCalculator.getStat(LOW_HEALTH);
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;

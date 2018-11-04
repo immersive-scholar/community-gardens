@@ -18,7 +18,7 @@ class HousingInsecurityChapter extends BaseChapter {
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[HOUSING_INSECURITY];
+    const stat = InsecurityCalculator.getStat(HOUSING_INSECURITY);
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;

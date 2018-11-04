@@ -18,7 +18,7 @@ class WellnessChapter extends BaseChapter {
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[WELLNESS];
+    const stat = InsecurityCalculator.getStat(WELLNESS);
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;

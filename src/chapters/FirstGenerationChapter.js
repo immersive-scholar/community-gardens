@@ -18,7 +18,7 @@ class FirstGenerationChapter extends BaseChapter {
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[FIRST_GENERATION];
+    const stat = InsecurityCalculator.getStat(FIRST_GENERATION);
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;

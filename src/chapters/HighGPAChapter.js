@@ -18,7 +18,7 @@ class HighGPAChapter extends BaseChapter {
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[HIGH_GPA];
+    const stat = InsecurityCalculator.getStat(HIGH_GPA);
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;

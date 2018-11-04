@@ -18,7 +18,7 @@ class PellGrantChapter extends BaseChapter {
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[PELL_GRANT];
+    const stat = InsecurityCalculator.getStat(PELL_GRANT);
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;

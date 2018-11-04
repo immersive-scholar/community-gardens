@@ -25,6 +25,28 @@ import SkipMeals from "./stats/SkipMeals";
 import SleptOutside from "./stats/SleptOutside";
 import Wellness from "./stats/Wellness";
 import WorkALotAndAreHungry from "./stats/WorkALotAndAreHungry";
+import {
+  BELOW_POVERTY_LINE,
+  COMMUNITY_GARDEN,
+  DID_NOT_EAT_FOR_A_DAY,
+  EARN_A_LOT,
+  EARN_A_LOT_AND_ARE_HUNGRY,
+  EXPERIENCE_HUNGER,
+  FIRST_GENERATION,
+  FOOD_INSECURITY,
+  HIGH_GPA,
+  HIGH_HEALTH,
+  HIGH_RESOURCES,
+  HOUSING_INSECURITY,
+  INHABITABLE,
+  LOW_HEALTH,
+  OUT_OF_STATE,
+  PELL_GRANT,
+  SKIP_MEALS,
+  SLEPT_OUTSIDE,
+  WELLNESS,
+  WORK_A_LOT_AND_ARE_HUNGRY
+} from "../constants/Stats";
 
 class InsecurityCalculator {
   static async parse(data) {
@@ -71,28 +93,28 @@ class InsecurityCalculator {
       // it's easier to combine Filters
       // see WorkALotAndAreHungry for an example.
       const stats = {};
-      stats.belowPovertyLine = BelowPovertyLine(data, total);
-      stats.communityGarden = CommunityGarden(data, total);
-      stats.didNotEatForADay = DidNotEatForADay(data, total);
-      stats.earnALot = EarnALot(data);
-      stats.earnALotAndAreHungry = EarnALotAndAreHungry(data);
-      stats.experienceHunger = ExperienceHunger(data, total);
-      stats.firstGeneration = FirstGeneration(data, total);
-      stats.foodInsecurity = FoodInsecurity(data, total);
-      stats.highGPA = HighGPA(data, total);
-      stats.highHealth = HighHealth(data, 2);
-      stats.highResources = HighResources(data, 1);
-      stats.housingInsecurity = HousingInsecurity(data, total);
-      stats.inhabitable = Inhabitable(data);
-      stats.lowHealth = LowHealth(data, -2);
-      stats.outOfState = OutOfState(data);
-      stats.pellGrant = PellGrant(data);
-      stats.skipMeals = SkipMeals(data);
-      stats.sleptOutside = SleptOutside(data);
-      stats.wellness = Wellness(data);
-      stats.workALotAndAreHungry = WorkALotAndAreHungry(data);
+      // stats.belowPovertyLine = BelowPovertyLine(data, total);
+      // stats.communityGarden = CommunityGarden(data, total);
+      // stats.didNotEatForADay = DidNotEatForADay(data, total);
+      // stats.earnALot = EarnALot(data);
+      // stats.earnALotAndAreHungry = EarnALotAndAreHungry(data);
+      // stats.experienceHunger = ExperienceHunger(data, total);
+      // stats.firstGeneration = FirstGeneration(data, total);
+      // stats.foodInsecurity = FoodInsecurity(data, total);
+      // stats.highGPA = HighGPA(data, total);
+      // stats.highHealth = HighHealth(data, 2);
+      // stats.highResources = HighResources(data, 1);
+      // stats.housingInsecurity = HousingInsecurity(data, total);
+      // stats.inhabitable = Inhabitable(data);
+      // stats.lowHealth = LowHealth(data, -2);
+      // stats.outOfState = OutOfState(data);
+      // stats.pellGrant = PellGrant(data);
+      // stats.skipMeals = SkipMeals(data);
+      // stats.sleptOutside = SleptOutside(data);
+      // stats.wellness = Wellness(data);
+      // stats.workALotAndAreHungry = WorkALotAndAreHungry(data);
 
-      console.log("stats ", stats);
+      // console.log("stats ", stats);
       // console.log("data ", data);
 
       // store staticly, so data is accessible via
@@ -106,6 +128,87 @@ class InsecurityCalculator {
       resolve(data);
     });
   }
+
+  /* eslint-disable no-unreachable */
+
+  static calculateStat = function(label) {
+    const { stats, total, data } = this;
+
+    switch (label) {
+      case BELOW_POVERTY_LINE:
+        stats.belowPovertyLine = BelowPovertyLine(data, total);
+        return stats.belowPovertyLine;
+      case COMMUNITY_GARDEN:
+        stats.communityGarden = CommunityGarden(data, total);
+        return stats.communityGarden;
+      case DID_NOT_EAT_FOR_A_DAY:
+        stats.didNotEatForADay = DidNotEatForADay(data, total);
+        return stats.didNotEatForADay;
+      case EARN_A_LOT:
+        stats.earnALot = EarnALot(data);
+        return stats.earnALot;
+      case EARN_A_LOT_AND_ARE_HUNGRY:
+        stats.earnALotAndAreHungry = EarnALotAndAreHungry(data);
+        return stats.earnALotAndAreHungry;
+      case EXPERIENCE_HUNGER:
+        stats.experienceHunger = ExperienceHunger(data, total);
+        return stats.experienceHunger;
+      case FIRST_GENERATION:
+        stats.firstGeneration = FirstGeneration(data, total);
+        return stats.firstGeneration;
+      case FOOD_INSECURITY:
+        stats.foodInsecurity = FoodInsecurity(data, total);
+        return stats.foodInsecurity;
+      case HIGH_GPA:
+        stats.highGPA = HighGPA(data, total);
+        return stats.highGPA;
+      case HIGH_HEALTH:
+        stats.highHealth = HighHealth(data, 2);
+        return stats.highHealth;
+      case HIGH_RESOURCES:
+        stats.highResources = HighResources(data, 1);
+        return stats.highResources;
+      case HOUSING_INSECURITY:
+        stats.housingInsecurity = HousingInsecurity(data, total);
+        return stats.housingInsecurity;
+      case INHABITABLE:
+        stats.inhabitable = Inhabitable(data);
+        return stats.inhabitable;
+      case LOW_HEALTH:
+        stats.lowHealth = LowHealth(data, -2);
+        return stats.lowHealth;
+      case OUT_OF_STATE:
+        stats.outOfState = OutOfState(data);
+        return stats.outOfState;
+      case PELL_GRANT:
+        stats.pellGrant = PellGrant(data);
+        return stats.pellGrant;
+      case SKIP_MEALS:
+        stats.skipMeals = SkipMeals(data);
+        return stats.skipMeals;
+      case SLEPT_OUTSIDE:
+        stats.sleptOutside = SleptOutside(data);
+        return stats.sleptOutside;
+      case WELLNESS:
+        stats.wellness = Wellness(data);
+        return stats.wellness;
+      case WORK_A_LOT_AND_ARE_HUNGRY:
+        stats.workALotAndAreHungry = WorkALotAndAreHungry(data);
+        return stats.workALotAndAreHungry;
+      default:
+        break;
+    }
+    return stats;
+  };
+  /* eslint-enable no-unreachable */
+
+  static getStat = function(label) {
+    let stat = this.stats[label];
+    if (!stat) {
+      stat = InsecurityCalculator.calculateStat(label);
+    }
+    return stat;
+  };
 
   static getRandomRows = function({ R, count = 1, key = "" }) {
     const rows = [];

@@ -18,7 +18,7 @@ class RandomGardenChapter extends BaseChapter {
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[COMMUNITY_GARDEN];
+    const stat = InsecurityCalculator.getStat(COMMUNITY_GARDEN);
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;

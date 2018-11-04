@@ -18,7 +18,7 @@ class OutOfStateGarden extends BaseChapter {
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[OUT_OF_STATE];
+    const stat = InsecurityCalculator.getStat(OUT_OF_STATE);
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;

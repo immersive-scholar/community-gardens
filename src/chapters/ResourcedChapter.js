@@ -18,7 +18,7 @@ class ResourcedChapter extends BaseChapter {
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[HIGH_RESOURCES];
+    const stat = InsecurityCalculator.getStat(HIGH_RESOURCES);
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;

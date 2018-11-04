@@ -18,7 +18,7 @@ class DidNotEatForADayChapter extends BaseChapter {
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[DID_NOT_EAT_FOR_A_DAY];
+    const stat = InsecurityCalculator.getStat(DID_NOT_EAT_FOR_A_DAY);
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;
