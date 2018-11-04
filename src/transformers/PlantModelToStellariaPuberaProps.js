@@ -76,7 +76,8 @@ const PlantModelToStellariaPuberaProps = ({
   props = Modifiers.HousingInsecurityModifier({
     props,
     housingInsecurity,
-    housingInsecurityScore
+    housingInsecurityScore,
+    R
   });
   props = Modifiers.AgeModifier({ props, age });
   props = Modifiers.DegreeModifier({ props, degree, R });
