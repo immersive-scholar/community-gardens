@@ -1,10 +1,10 @@
 import map from "lodash/map";
-import HighGPAFilter from "data/filters/HighGPAFilter";
+import GPAFilter from "data/filters/GPAFilter";
 import { HIGH_GPA } from "constants/Stats";
 import ColorFactory from "util/ColorFactory";
 
 const HighGPA = data => {
-  const rows = HighGPAFilter(data);
+  const rows = GPAFilter(data, 4);
   const count = rows.length;
   const ids = map(rows, row => row.ID);
 
@@ -24,7 +24,7 @@ const HighGPA = data => {
 
   return {
     id: HIGH_GPA,
-    label: `${count} students have a high (3+) GPA.`,
+    label: `${count} students have a 4.0 GPA.`,
     count,
     ids,
     bgColor,
@@ -32,7 +32,7 @@ const HighGPA = data => {
     textArray: [
       { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.2 },
       { size: 0.1, text: "Who Have a", offsetY: 1 },
-      { size: 0.25, text: "High GPA", offsetY: 0.7 }
+      { size: 0.25, text: "4.0 GPA", offsetY: 0.65 }
     ]
   };
 };

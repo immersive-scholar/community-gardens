@@ -9,8 +9,9 @@ import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import ChapterPlate from "art/chapter-plate/ChapterPlate";
 import ChapterTitle from "art/chapter-plate/ChapterTitle";
 import InsecurityCalculator from "data/InsecurityCalculator";
-import RandomLayout from "art/layouts/RandomLayout";
+import CircularLayout from "art/layouts/CircularLayout";
 import { HIGH_GPA } from "constants/Stats";
+import { Circ } from "gsap";
 
 class HighGPAChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
@@ -74,16 +75,6 @@ class HighGPAChapter extends BaseChapter {
     this.addInstances(this.solomonsSealSpawn.instances);
     this.spawns.push(this.solomonsSealSpawn);
 
-    bounds.set(4, 0, 2);
-    position.set(-2, 0, 0.5);
-    new RandomLayout({
-      instances: this.solomonsSealSpawn.instances,
-      group: this.solomonsSealSpawn.group,
-      R: this.R,
-      bounds,
-      position
-    });
-
     // Stellaria Pubera
 
     this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
@@ -93,16 +84,6 @@ class HighGPAChapter extends BaseChapter {
       R: this.R,
       camera: this.camera,
       controls: this.controls
-    });
-
-    bounds.set(4, 0, 2);
-    position.set(-2, 0, 0.5);
-    new RandomLayout({
-      instances: this.stellariaPuberaSpawn.instances,
-      group: this.stellariaPuberaSpawn.group,
-      R: this.R,
-      bounds,
-      position
     });
 
     this.group.add(this.stellariaPuberaSpawn.group);
@@ -120,18 +101,20 @@ class HighGPAChapter extends BaseChapter {
       controls: this.controls
     });
 
-    bounds.set(4, 0, 1);
-    position.set(-2, 0, 0.5);
-    new RandomLayout({
-      R: this.R,
-      instances: this.asiminaTrilobaSpawn.instances,
-      bounds,
-      position
-    });
-
     this.group.add(this.asiminaTrilobaSpawn.group);
     this.addInstances(this.asiminaTrilobaSpawn.instances);
     this.spawns.push(this.asiminaTrilobaSpawn);
+
+    // layout
+    bounds.set(1, 0, 1);
+    position.set(0, 0, 1);
+    new CircularLayout({
+      instances: this.instances,
+      group: this.group,
+      R: this.R,
+      bounds,
+      position
+    });
   };
 }
 

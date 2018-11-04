@@ -34,9 +34,9 @@ class SceneSubject {
     // const chapter = this.createDidNotEatForADayChapter();
     // const chapter = this.createRandomChapter();
     // const chapter = this.createPellGrantChapter();
-    // const chapter = this.createHighGPAChapter();
+    const chapter = this.createHighGPAChapter();
     // const chapter = this.createSummerGardenChapter();
-    const chapter = this.createWinterGardenChapter();
+    // const chapter = this.createWinterGardenChapter();
     this.setCurrentChapter(chapter);
   }
 
