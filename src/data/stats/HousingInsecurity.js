@@ -1,6 +1,8 @@
 import map from "lodash/map";
+
 import HousingInsecurityFilter from "data/filters/HousingInsecurityFilter";
 import { HOUSING_INSECURITY, HOUSING_INSECURITY_SCORE } from "constants/Stats";
+import ColorFactory from "util/ColorFactory";
 
 const HousingInsecurity = data => {
   const rows = HousingInsecurityFilter(data);
@@ -36,11 +38,23 @@ const HousingInsecurity = data => {
     rows[i][HOUSING_INSECURITY_SCORE] = score;
   }
 
+  const bgColor = ColorFactory.getRandomColor(
+    ColorFactory.WINTER,
+    ColorFactory.SKY
+  );
+
   return {
     id: HOUSING_INSECURITY,
     label: `${count} students experienced housing insecurity.`,
     count,
-    ids
+    ids,
+    bgColor,
+    color: 0xffffff,
+    textArray: [
+      { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.2 },
+      { size: 0.1, text: "Who Have Experienced", offsetY: 1 },
+      { size: 0.25, text: "Housing Insecurity", offsetY: 0.7 }
+    ]
   };
 };
 

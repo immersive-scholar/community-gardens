@@ -25,7 +25,8 @@ const PlantModelToStellariaPuberaProps = ({
       R.floatBetween(0.1, 0.25)
     ),
     berryCount: R.intBetween(16, 32),
-    berryDistanceFromStem: R.floatBetween(0.015, 0.05)
+    berryDistanceFromStem: R.floatBetween(0.015, 0.05),
+    petalDistanceFromCenter: 0.01
     // openness: 0,
     // berryCount: R.intBetween(16, 32),
     // berryDistanceFromStem: R.floatBetween(0.01, 0.08),
@@ -99,7 +100,7 @@ const PlantModelToStellariaPuberaProps = ({
 
   // housing insecurity displaces leaves from stems
   if (housingInsecurity) {
-    props.windForce = -housingInsecurityScore * 0.05;
+    props.windForce = R.floatBetween(0.1, 0.5);
     props.windDirection = new Vector3(
       R.floatBetween(-1.5, 1.5),
       R.floatBetween(-1.5, 1.5),

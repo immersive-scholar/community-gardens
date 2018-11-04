@@ -95,7 +95,7 @@ const PlantModelToSolomonsSealProps = ({
   // housing insecurity displaces leaves from stems
   // there is a housingInsecurityModifier but the values are different
   if (housingInsecurity) {
-    props.windForce = housingInsecurityScore * 0.05;
+    props.windForce = R.floatBetween(0.1, 0.5);
     props.windDirection = new Vector3(
       R.floatBetween(-0.5, 0.5),
       R.floatBetween(-0.5, 0.5),

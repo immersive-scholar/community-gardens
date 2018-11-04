@@ -17,7 +17,7 @@ class DidNotEatForADayChapter extends BaseChapter {
     super(props, camera, controls, R);
   }
 
-  init = props => {
+  init = () => {
     const stat = InsecurityCalculator.stats[DID_NOT_EAT_FOR_A_DAY];
     const { color, textArray, bgColor } = stat;
 

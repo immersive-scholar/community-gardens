@@ -1,5 +1,6 @@
 import RandomGardenChapter from "chapters/RandomGardenChapter";
 import DidNotEatForADayChapter from "chapters/DidNotEatForADayChapter";
+import HousingInsecurityChapter from "chapters/HousingInsecurityChapter";
 import ChapterPlate from "art/chapter-plate/ChapterPlate";
 
 class SceneSubject {
@@ -24,7 +25,8 @@ class SceneSubject {
   }
 
   createScene() {
-    const chapter = this.createDidNotEatForADayChapter();
+    const chapter = this.createHousingInsecurityChapter();
+    // const chapter = this.createDidNotEatForADayChapter();
     // const chapter = this.createRandomChapter();
     this.setCurrentChapter(chapter);
   }
@@ -43,6 +45,17 @@ class SceneSubject {
   createDidNotEatForADayChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new DidNotEatForADayChapter(
+      { settings, focusTotal: 3 },
+      camera,
+      controls,
+      R
+    );
+    return chapter;
+  }
+
+  createHousingInsecurityChapter() {
+    const { settings, camera, controls, R } = this;
+    const chapter = new HousingInsecurityChapter(
       { settings, focusTotal: 3 },
       camera,
       controls,

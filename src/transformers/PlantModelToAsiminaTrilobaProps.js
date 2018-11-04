@@ -31,7 +31,8 @@ const PlantModelToAsiminaTrilobaProps = ({
     petalLength: R.floatBetween(0.05, 0.15),
     berryCount: R.intBetween(16, 32),
     berryDistanceFromStem: R.floatBetween(0.015, 0.05),
-    imagePath: TextureFactory.getStroke()
+    imagePath: TextureFactory.getStroke(),
+    petalDistanceFromCenter: 0
     // openness: 0,
     // berryCount: R.intBetween(16, 32),
     // berryDistanceFromStem: R.floatBetween(0.01, 0.08),

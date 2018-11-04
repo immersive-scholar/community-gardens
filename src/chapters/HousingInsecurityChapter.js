@@ -10,19 +10,20 @@ import ChapterPlate from "art/chapter-plate/ChapterPlate";
 import ChapterTitle from "art/chapter-plate/ChapterTitle";
 import InsecurityCalculator from "data/InsecurityCalculator";
 import RandomLayout from "art/layouts/RandomLayout";
-import { COMMUNITY_GARDEN } from "constants/Stats";
+import { HOUSING_INSECURITY } from "constants/Stats";
 
-class RandomGardenChapter extends BaseChapter {
+class HousingInsecurityChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
     super(props, camera, controls, R);
   }
 
   init = () => {
-    const stat = InsecurityCalculator.stats[COMMUNITY_GARDEN];
+    const stat = InsecurityCalculator.stats[HOUSING_INSECURITY];
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier } = this.settings;
-    const count = Math.min(stat.count, 25 * quantityMultiplier);
+    // const count = Math.min(stat.count, 10 * quantityMultiplier);
+    const count = stat.count;
     const plantTypeCount = 3;
     const plantCount = Math.floor(count / plantTypeCount);
 
@@ -58,7 +59,7 @@ class RandomGardenChapter extends BaseChapter {
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
       count,
-      key: COMMUNITY_GARDEN
+      key: HOUSING_INSECURITY
     });
 
     // Solomon's Seal
@@ -135,4 +136,4 @@ class RandomGardenChapter extends BaseChapter {
   };
 }
 
-export default RandomGardenChapter;
+export default HousingInsecurityChapter;

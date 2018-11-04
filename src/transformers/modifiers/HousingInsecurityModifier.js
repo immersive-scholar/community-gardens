@@ -8,9 +8,13 @@ const HousingInsecurityModifier = ({
 }) => {
   // housing insecurity displaces leaves from stems
   if (housingInsecurity) {
-    const s = Math.min(0.3, housingInsecurityScore * 0.1);
-    props.windForce = s;
-    props.windDirection = new Vector3(s, s, 0);
+    const max = housingInsecurityScore > 1 ? 0.5 : 0.3;
+    props.windForce = R.floatBetween(0.1, max);
+    props.windDirection = new Vector3(
+      R.floatBetween(0, max),
+      R.floatBetween(0, max),
+      0
+    );
   }
 
   return props;
