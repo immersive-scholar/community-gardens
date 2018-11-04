@@ -1,6 +1,8 @@
 import DidNotEatForADayChapter from "chapters/DidNotEatForADayChapter";
+import FirstGenerationChapter from "chapters/FirstGenerationChapter";
 import HighGPAChapter from "chapters/HighGPAChapter";
 import HousingInsecurityChapter from "chapters/HousingInsecurityChapter";
+import OutOfStateChapter from "chapters/OutOfStateChapter";
 import PellGrantChapter from "chapters/PellGrantChapter";
 import RandomGardenChapter from "chapters/RandomGardenChapter";
 import SummerGardenChapter from "chapters/SummerGardenChapter";
@@ -34,7 +36,9 @@ class SceneSubject {
     // const chapter = this.createDidNotEatForADayChapter();
     // const chapter = this.createRandomChapter();
     // const chapter = this.createPellGrantChapter();
-    const chapter = this.createHighGPAChapter();
+    // const chapter = this.createHighGPAChapter();
+    // const chapter = this.createOutOfStateChapter();
+    const chapter = this.createFirstGenerationChapter();
     // const chapter = this.createSummerGardenChapter();
     // const chapter = this.createWinterGardenChapter();
     this.setCurrentChapter(chapter);
@@ -76,6 +80,28 @@ class SceneSubject {
   createHighGPAChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new HighGPAChapter(
+      { settings, focusTotal: 3 },
+      camera,
+      controls,
+      R
+    );
+    return chapter;
+  }
+
+  createOutOfStateChapter() {
+    const { settings, camera, controls, R } = this;
+    const chapter = new OutOfStateChapter(
+      { settings, focusTotal: 3 },
+      camera,
+      controls,
+      R
+    );
+    return chapter;
+  }
+
+  createFirstGenerationChapter() {
+    const { settings, camera, controls, R } = this;
+    const chapter = new FirstGenerationChapter(
       { settings, focusTotal: 3 },
       camera,
       controls,
