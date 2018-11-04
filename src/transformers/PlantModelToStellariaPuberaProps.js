@@ -103,7 +103,7 @@ const PlantModelToStellariaPuberaProps = ({
 
   // housing insecurity displaces leaves from stems
   if (housingInsecurity) {
-    props.windForce = R.floatBetween(0.1, 0.5);
+    props.windForce = R.floatBetween(0.1, 0.3);
     props.windDirection = new Vector3(
       R.floatBetween(-1.5, 1.5),
       R.floatBetween(-1.5, 1.5),

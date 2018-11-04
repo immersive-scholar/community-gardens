@@ -59,6 +59,7 @@ if (device.mobile) {
   }
 }
 
+// override with query string
 quantityMultiplier =
   parseFloat(parsed.quantityMultiplier) || quantityMultiplier;
 

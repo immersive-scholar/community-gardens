@@ -16,14 +16,16 @@ class ThreeContainer extends Component {
   };
 
   componentDidMount() {
-    document.addEventListener("gesturestart", this.preventScroll);
+    const root = document.getElementById("root");
+    root.addEventListener("gesturestart", this.preventScroll);
 
     // by passing props down to threeEntryPoint, we can leverage anything in our redux store during initialization.
     this.threeEntryPoint = threeEntryPoint(this.threeRootElement, this.props);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("gesturestart", this.preventScroll);
+    const root = document.getElementById("root");
+    root.removeEventListener("gesturestart", this.preventScroll);
   }
 
   preventScroll = e => {

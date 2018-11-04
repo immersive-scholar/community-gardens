@@ -207,6 +207,7 @@ class InsecurityCalculator {
     if (!stat) {
       stat = InsecurityCalculator.calculateStat(label);
     }
+    console.log("label ", stat);
     return stat;
   };
 
