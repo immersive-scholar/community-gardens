@@ -57,7 +57,7 @@ const PlantModelToSolomonsSealProps = ({
   const age = model.Age;
   const gpa = model.GPA;
   const degree = model.Degree;
-  const firstGen = model.FirstGen;
+  const firstGen = model.FirstGen === "Y";
   const outOfState = model.OutofState;
   const shares = model.sharemeals || model.givefood || model.sharemeals;
 

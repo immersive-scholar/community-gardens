@@ -5,6 +5,7 @@ export const EARN_A_LOT = "earnALot";
 export const EARN_A_LOT_AND_ARE_HUNGRY = "earnALotAndAreHungry";
 export const EXPERIENCE_HUNGER = "experienceHunger";
 export const FOOD_INSECURITY = "foodInsecurity";
+export const HIGH_GPA = "highGPA";
 export const HOUSING_INSECURITY = "housingInsecurity";
 export const HOUSING_INSECURITY_SCORE = "housingInsecurityScore";
 export const INHABITABLE = "inhabitable";

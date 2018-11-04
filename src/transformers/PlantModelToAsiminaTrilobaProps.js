@@ -66,7 +66,7 @@ const PlantModelToAsiminaTrilobaProps = ({
   const age = model.Age;
   const gpa = model.GPA;
   const degree = model.Degree;
-  const firstGen = model.FirstGen;
+  const firstGen = model.FirstGen === "Y";
   const outOfState = model.OutofState;
   const shares = model.sharemeals || model.givefood || model.sharemeals;
 
@@ -95,9 +95,8 @@ const PlantModelToAsiminaTrilobaProps = ({
   });
   props = Modifiers.ShareModifier({ props, shares });
 
-  //
-
-  // berries are not 'full' if food insecure
+  props.petalWidth = 0.05;
+  props.petalLength = 0.1;
 
   // bigger leaves for those who earn a lot but are not hungry
   if (earnALot && !earnALotAndAreHungry) {

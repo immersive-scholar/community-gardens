@@ -1,5 +1,5 @@
-const OutOfStateModifier = ({ props, firstGen }) => {
-  if (firstGen) {
+const OutOfStateModifier = ({ props, outOfState }) => {
+  if (outOfState) {
     props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/topography.png`;
   }
 

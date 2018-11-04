@@ -24,6 +24,7 @@ function LeafAnimation({
   color,
   animated,
   imagePath = TextureFactory.getPattern(),
+  applyLeafImage,
   textureSize = new Vector2(20, -20),
   windForce,
   windDirection,
@@ -76,7 +77,8 @@ function LeafAnimation({
       uWindForce: { value: windForce },
       uWindDirection: { value: new Vector3(0.2, 0.2, 0.2) },
       uTextureSize: { value: new Vector2(10, 10) },
-      color: color
+      color: color,
+      uApplyLeafImage: { value: applyLeafImage ? 1.0 : 0.0 }
       // envMap
     },
     uniformValues: {
@@ -97,9 +99,14 @@ function LeafAnimation({
       "transformed.z *= uTime;",
       "transformed.y *= uTime;"
     ],
-    fragmentParameters: ["uniform float uTime;", "uniform vec2 uTextureSize;"],
+    fragmentParameters: [
+      "uniform float uTime;",
+      "uniform vec2 uTextureSize;",
+      "uniform float uApplyLeafImage;"
+    ],
     fragmentMap: [
       "vec4 texelColor = texture2D(map, vUv * uTextureSize);",
+      "texelColor += vec4(uApplyLeafImage, uApplyLeafImage, uApplyLeafImage, texelColor.a);",
       "diffuseColor *= texelColor;"
       // "diffuseColor.a = 1.0;"
     ]

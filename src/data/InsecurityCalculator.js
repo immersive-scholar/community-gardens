@@ -5,19 +5,20 @@ import PersonalScarcityCalculator from "./calculators/PersonalScarcity";
 import EmotionalHealthCalculator from "./calculators/EmotionalHealth";
 import HealthCalculator from "./calculators/Health";
 
-import CommunityGarden from "./stats/CommunityGarden";
-import SleptOutside from "./stats/SleptOutside";
-import Inhabitable from "./stats/Inhabitable";
-import HousingInsecurity from "./stats/HousingInsecurity";
-import FoodInsecurity from "./stats/FoodInsecurity";
-import PellGrant from "./stats/PellGrant";
-import ExperienceHunger from "./stats/ExperienceHunger";
-import WorkALotAndAreHungry from "./stats/WorkALotAndAreHungry";
 import BelowPovertyLine from "./stats/BelowPovertyLine";
+import CommunityGarden from "./stats/CommunityGarden";
+import DidNotEatForADay from "./stats/DidNotEatForADay";
 import EarnALot from "./stats/EarnALot";
 import EarnALotAndAreHungry from "./stats/EarnALotAndAreHungry";
-import DidNotEatForADay from "./stats/DidNotEatForADay";
+import ExperienceHunger from "./stats/ExperienceHunger";
+import FoodInsecurity from "./stats/FoodInsecurity";
+import HighGPA from "./stats/HighGPA";
+import HousingInsecurity from "./stats/HousingInsecurity";
+import Inhabitable from "./stats/Inhabitable";
+import PellGrant from "./stats/PellGrant";
 import SkipMeals from "./stats/SkipMeals";
+import SleptOutside from "./stats/SleptOutside";
+import WorkALotAndAreHungry from "./stats/WorkALotAndAreHungry";
 
 class InsecurityCalculator {
   static async parse(data) {
@@ -64,19 +65,20 @@ class InsecurityCalculator {
       // it's easier to combine Filters
       // see WorkALotAndAreHungry for an example.
       const stats = {};
-      stats.communityGarden = CommunityGarden(data, total);
-      stats.sleptOutside = SleptOutside(data);
-      stats.inhabitable = Inhabitable(data);
-      stats.foodInsecurity = FoodInsecurity(data, total);
-      stats.housingInsecurity = HousingInsecurity(data, total);
-      stats.pellGrant = PellGrant(data);
-      stats.experienceHunger = ExperienceHunger(data, total);
-      stats.workALotAndAreHungry = WorkALotAndAreHungry(data);
       stats.belowPovertyLine = BelowPovertyLine(data, total);
-      stats.EarnALot = EarnALot(data);
-      stats.earnALotAndAreHungry = EarnALotAndAreHungry(data);
+      stats.communityGarden = CommunityGarden(data, total);
       stats.didNotEatForADay = DidNotEatForADay(data, total);
+      stats.earnALot = EarnALot(data);
+      stats.earnALotAndAreHungry = EarnALotAndAreHungry(data);
+      stats.experienceHunger = ExperienceHunger(data, total);
+      stats.foodInsecurity = FoodInsecurity(data, total);
+      stats.highGPA = HighGPA(data, total);
+      stats.housingInsecurity = HousingInsecurity(data, total);
+      stats.inhabitable = Inhabitable(data);
+      stats.pellGrant = PellGrant(data);
       stats.skipMeals = SkipMeals(data);
+      stats.sleptOutside = SleptOutside(data);
+      stats.workALotAndAreHungry = WorkALotAndAreHungry(data);
 
       console.log("stats ", stats);
 
