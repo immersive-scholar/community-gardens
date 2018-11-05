@@ -12,43 +12,42 @@ import CameraController from "./helpers/CameraController";
 
 export default ({ generalCanvas, R, settings }) => {
   const { debug } = settings;
-  const clock = new Clock();
+  let clock = new Clock();
 
-  const stats = new Stats();
+  let stats = new Stats();
   if (debug) {
     document.body.appendChild(stats.dom);
   }
 
   const screenDimensions = generalCanvas.getDimensions();
 
-  const scene = new GeneralScene({});
-  const renderer = new GeneralRenderer({
+  let scene = new GeneralScene({});
+  let renderer = new GeneralRenderer({
     canvas: generalCanvas.canvas,
     width: screenDimensions.width,
     height: screenDimensions.height,
     dpr: settings.dpr,
     antiAlias: settings.antiAlias
   });
-  const camera = new GeneralCamera(screenDimensions);
-  const controls = new GeneralControls({
+  let camera = new GeneralCamera(screenDimensions);
+  let controls = new GeneralControls({
+    domElement: generalCanvas.canvas,
     camera,
     velocity: settings.timeMultiplier
   });
   // const postProcessing = new PostProcessing({ scene, camera, renderer });
 
+  let cameraGUI;
   if (settings.debug) {
-    const cameraGUI = new CameraController({ camera, controls, settings });
+    cameraGUI = new CameraController({ camera, controls, settings });
     cameraGUI.enable();
   }
 
-  // controls.animateChapter2();
-  // controls.controls.autoRotate = true;
-
-  new GeneralLights({ scene, controls });
-  // const lights = new GeneralLights({ scene, controls });
+  let lights = new GeneralLights({ scene, controls });
+  // let lights = new GeneralLights({ scene, controls });
   // lights.createControls();
 
-  const subject = new SceneSubject({ scene, camera, R, controls, settings });
+  let subject = new SceneSubject({ scene, camera, R, controls, settings });
 
   function update() {
     stats.begin();
@@ -87,6 +86,22 @@ export default ({ generalCanvas, R, settings }) => {
     }
   }
 
+  function clean() {
+    // document.body.removeChild(stats.dom);
+    subject.cleanChapter(subject.currentChapter);
+    controls.enabled = false;
+
+    clock = clock ? null : {};
+    stats = stats ? null : {};
+    renderer = renderer ? null : {};
+    camera = camera ? null : {};
+    controls = controls ? null : {};
+    lights = lights ? null : {};
+    subject = subject ? null : {};
+    cameraGUI = cameraGUI ? null : {};
+    scene = scene ? null : {};
+  }
+
   return {
     update,
     onWindowResize,
@@ -94,6 +109,7 @@ export default ({ generalCanvas, R, settings }) => {
     scene,
     camera,
     subject,
-    setDebug
+    setDebug,
+    clean
   };
 };

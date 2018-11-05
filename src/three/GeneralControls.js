@@ -1,8 +1,9 @@
 import { OrbitControls, Vector3 } from "three-full";
 import { TweenMax, Power2, Power3, Back } from "gsap";
 
-const Controls = ({ camera, velocity = 1 }) => {
-  const orbitControls = new OrbitControls(camera);
+const Controls = ({ camera, velocity = 1, domElement }) => {
+  const orbitControls = new OrbitControls(camera, domElement);
+  console.log("orbitControls.domElement ", orbitControls.domElement);
   orbitControls.enableDamping = true;
   orbitControls.dampingFactor = 0.15;
   orbitControls.enableKeys = true;

@@ -106,6 +106,11 @@ class ChapterPlate extends BaseRenderable {
       });
     });
   }
+
+  clean() {
+    this.tween && this.tween.kill(null, this);
+    this.timeoutID && clearTimeout(this.timeoutID);
+  }
 }
 
 export default ChapterPlate;

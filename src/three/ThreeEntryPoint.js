@@ -55,6 +55,7 @@ export default (container, settings) => {
   const generalCanvas = new GeneralCanvas(document, container);
   const sceneManager = new SceneManager({ generalCanvas, R, settings });
 
+  let highresExport;
   createExporter(
     sceneManager.renderer,
     sceneManager.scene,
@@ -86,7 +87,7 @@ export default (container, settings) => {
       }
     };
 
-    var highresExport = new HighresExport(renderer, scene, camera, options);
+    highresExport = new HighresExport(renderer, scene, camera, options);
     highresExport.enable();
   }
 
@@ -102,7 +103,7 @@ export default (container, settings) => {
   }
 
   function render() {
-    requestAnimationFrame(render);
+    state.requestID = requestAnimationFrame(render);
 
     if (!state.paused) {
       sceneManager.update();
@@ -113,7 +114,14 @@ export default (container, settings) => {
     // }
   }
 
+  function clean() {
+    cancelAnimationFrame(state.requestID);
+    highresExport.disable();
+    sceneManager.clean();
+  }
+
   return {
-    setSettings
+    setSettings,
+    clean
   };
 };

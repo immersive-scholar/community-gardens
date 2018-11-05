@@ -57,6 +57,8 @@ const button = css({
 });
 
 const buttonStyle = css({
+  display: "inline-block",
+  margin: `${typography.rhythm(0.5)} ${typography.rhythm(1)}`,
   background: "#e06b1c",
   color: "#ffffff",
   "&:hover": {

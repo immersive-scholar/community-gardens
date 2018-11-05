@@ -124,6 +124,7 @@ class ChapterTitle extends BaseRenderable {
 
   clean() {
     this.tween && this.tween.kill(null, this);
+    this.timeoutID && clearTimeout(this.timeoutID);
 
     for (let i = 0, iL = this.linesOfText.length, line; i < iL; i++) {
       line = this.linesOfText[i];

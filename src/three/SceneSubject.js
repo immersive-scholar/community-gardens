@@ -279,6 +279,7 @@ class SceneSubject {
   }
 
   cleanChapter(chapter) {
+    if (!chapter) return;
     this.scene.remove(chapter.group);
     chapter.clean();
     chapter = undefined;

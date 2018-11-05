@@ -263,6 +263,10 @@ class BaseChapter {
       this.group.remove(instance);
     }
     this.group = undefined;
+
+    this.chapterPlate && this.chapterPlate.clean();
+    this.chapterTitle && this.chapterTitle.clean();
+    this.controls && this.controls.killTweens();
   };
 }
 

@@ -6,6 +6,7 @@ import get from "lodash/get";
 
 import threeEntryPoint from "three/ThreeEntryPoint";
 import { settings, chapters } from "actions";
+import { TweenMax } from "gsap";
 
 class ThreeContainer extends Component {
   static propTypes = {
@@ -21,7 +22,6 @@ class ThreeContainer extends Component {
     // if (gardenID) {
     //   this.props.focusChapter(gardenID);
     // }
-
     // by passing props down to threeEntryPoint, we can leverage anything in our redux store during initialization.
     this.threeEntryPoint = threeEntryPoint(this.threeRootElement, this.props);
     const root = document.getElementById("three-canvas");
@@ -30,6 +30,9 @@ class ThreeContainer extends Component {
   }
 
   componentWillUnmount() {
+    // TweenMax.killAll();
+
+    this.threeEntryPoint.clean();
     const root = document.getElementById("three-canvas");
     root.removeEventListener("gesturestart", this.preventScroll);
     document.documentElement.classList.remove("state__locked");
@@ -41,7 +44,7 @@ class ThreeContainer extends Component {
   };
 
   shouldComponentUpdate(nextProps) {
-    this.threeEntryPoint.setSettings(nextProps);
+    // this.threeEntryPoint.setSettings(nextProps);
     // there is never any need to render,
     // because ThreeEntryPoint is responsible for it's own rendering.
 
