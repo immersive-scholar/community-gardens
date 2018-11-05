@@ -56,6 +56,7 @@ class ChapterTitle extends BaseRenderable {
     size = 0.2,
     offsetY = 0
   }) {
+    return;
     const loader = new FontLoader();
     let geometry,
       height = 0;

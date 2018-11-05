@@ -37,11 +37,12 @@ export default (container, settings) => {
       InsecurityCalculator.parse(DataFactory.data);
     })
     .then(() => {
-      const { quantityMultiplier } = settings;
-      sceneManager.subject.setQuantityMultiplier(quantityMultiplier);
+      let { quantityMultiplier, selectedChapterID } = settings;
 
-      const chapterID = get(settings, "match.params.gardenID", "");
-      sceneManager.subject.createScene(chapterID);
+      sceneManager.subject.setQuantityMultiplier(quantityMultiplier);
+      sceneManager.subject.createScene(selectedChapterID);
+
+      onSubjectReady();
     });
 
   // State
@@ -91,10 +92,19 @@ export default (container, settings) => {
 
   // when redux dispatches a settings change event,
   // this function is summoned with the new settings object
-  function setSettings(settings) {
-    const { quantityMultiplier, timeMultiplier, debug } = settings;
+  // note that some of the children that depend on the settings
+  // are not yet instantiated
+  // so onSubjectReady is deferred until then
+  function setSettings(s) {
+    settings = { ...s };
+  }
+
+  function onSubjectReady() {
+    let { quantityMultiplier, timeMultiplier, debug } = settings;
+
     sceneManager.subject.setQuantityMultiplier(quantityMultiplier);
     sceneManager.subject.setTimeMultiplier(timeMultiplier);
+    sceneManager.controls.setGlobalTimeScale(timeMultiplier);
     sceneManager.controls.setTimeMultiplier(timeMultiplier);
 
     sceneManager.setDebug(debug);

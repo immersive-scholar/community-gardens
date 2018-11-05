@@ -9,3 +9,8 @@ export const SET_DEBUG = "SET_DEBUG";
 // CHAPTERS
 export const FOCUS_CHAPTER = "FOCUS_CHAPTER";
 export const ADD_CHAPTER = "ADD_CHAPTER";
+
+// PRESENTATION MODE
+export const RANDOM_CYCLE = "RANDOM_CYCLE";
+export const EXPLORE = "EXPLORE";
+export const PRESENTATION_MODE_DEFAULT = RANDOM_CYCLE;

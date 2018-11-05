@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import chapters from "reducers/chapters";
+import chapters, * as fromChapters from "reducers/chapters";
 import settings from "reducers/settings";
 import version from "reducers/version";
 
@@ -16,6 +16,9 @@ const rootReducer = (state, action) => {
 };
 
 export default rootReducer;
+
+export const getSelectedChapter = state =>
+  fromChapters.getSelectedChapter(state.chapters);
 
 /*
 export const getSelectedColorFamily = state =>

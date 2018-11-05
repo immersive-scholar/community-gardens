@@ -297,8 +297,8 @@ class SceneSubject {
 
   update() {}
 
-  setQuantityMultiplier(quantityMultipler) {
-    this.settings.quantityMultipler = quantityMultipler;
+  setQuantityMultiplier(quantityMultiplier) {
+    this.settings.quantityMultiplier = quantityMultiplier;
   }
 }
 

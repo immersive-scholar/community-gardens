@@ -79,10 +79,13 @@ export default ({ generalCanvas, R, settings }) => {
   }
 
   function setDebug(d) {
+    const body = document.body;
     if (d) {
-      document.body.appendChild(stats.dom);
+      body.appendChild(stats.dom);
     } else {
-      document.body.removeChild(stats.dom);
+      if (body.contains(stats.dom)) {
+        body.removeChild(stats.dom);
+      }
     }
   }
 
@@ -110,6 +113,7 @@ export default ({ generalCanvas, R, settings }) => {
     camera,
     subject,
     setDebug,
-    clean
+    clean,
+    controls
   };
 };

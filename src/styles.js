@@ -10,6 +10,10 @@ const textContainer = css({
   textAlign: "left"
 });
 
+const lightText = css({
+  color: "#ffffff"
+});
+
 const wideContainer = css({
   width: "100%",
   maxWidth: "80rem",
@@ -138,6 +142,7 @@ const grid = css({
 
 export {
   textContainer,
+  lightText,
   wideContainer,
   removePaddingVertical,
   removePaddingTop,

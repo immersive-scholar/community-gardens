@@ -4,26 +4,33 @@ import {
   SET_RANDOM_SEED,
   SET_DPR,
   SET_ANTI_ALIAS,
-  SET_DEBUG
+  SET_DEBUG,
+  PRESENTATION_MODE_DEFAULT,
+  EXPLORE
 } from "constants/Constants";
 import { TweenMax } from "gsap";
 import GPU from "util/GPU";
 
-// 1. Derive values from query string if available
 const queryString = require("query-string");
+
+// 1. Default values
 const location = window.location;
 
-const parsed = queryString.parse(location.search);
-let timeMultiplier = parseFloat(parsed.timeMultiplier) || 1;
-let quantityMultiplier = parseFloat(parsed.quantityMultiplier) || 1;
-let seed = parseFloat(parsed.seed) || Math.random();
-let debug = parseFloat(parsed.debug) === 1;
-// debug = debug || window.location.hostname === "localhost";
+let timeMultiplier = 1;
+let quantityMultiplier = 1;
+let seed = Math.random();
+let debug = 0;
+let presentationMode = PRESENTATION_MODE_DEFAULT;
 
 // 2. Sniff GPU to derive default performance options
 const gpu = new GPU();
-const { tier, tierIndex, device } = gpu;
+const { tierIndex, device } = gpu;
 const { antiAlias, dpr } = gpu.config;
+
+const largeDisplay = window.innerWidth > 5200;
+if (largeDisplay) {
+  timeMultiplier = 0.3;
+}
 
 // 3. Adjust values based on environment app is running within
 // fast computer gets many more plants
@@ -41,7 +48,11 @@ switch (true) {
     break;
 }
 
+// tierIndex is a little  misleading  on mobile.
+// an ihpone 6 is rated 3, but so is a K5000
+// downgrade quantityMultiplier for mobile devices.
 if (device.mobile) {
+  presentationMode = EXPLORE;
   switch (true) {
     case tierIndex === 3:
       quantityMultiplier = 2;
@@ -57,15 +68,15 @@ if (device.mobile) {
   }
 }
 
-// override with query string
+// 4. override with any query string params
+const parsed = queryString.parse(location.search);
 quantityMultiplier =
   parseFloat(parsed.quantityMultiplier) || quantityMultiplier;
 
-// slow it down on large displays
-const width = window.innerWidth;
-if (width > 5200) {
-  timeMultiplier = 0.3;
-}
+timeMultiplier = parseFloat(parsed.timeMultiplier) || timeMultiplier;
+seed = parseFloat(parsed.seed) || seed;
+debug = parseFloat(parsed.debug) === 1 || debug;
+// debug = debug || window.location.hostname === "localhost";
 
 const initialState = {
   timeMultiplier,
@@ -74,7 +85,9 @@ const initialState = {
   antiAlias,
   dpr,
   debug,
-  mobile: device.mobile
+  mobile: device.mobile,
+  largeDisplay,
+  presentationMode
 };
 
 export default (state = initialState, action) => {
