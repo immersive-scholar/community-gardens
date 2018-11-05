@@ -4,10 +4,12 @@ import typography from "util/typography";
 
 const ControlBar = glamorous.div({
   position: "fixed",
+  display: "flex",
+  alignItems: "center",
   bottom: 0,
   left: 0,
   width: "100%",
-  height: typography.rhythm(1),
+  height: typography.rhythm(1.5),
   background: "#000000",
   color: "#ffffff",
   zIndex: 1
@@ -15,6 +17,7 @@ const ControlBar = glamorous.div({
 
 const controlsGrid = css({
   display: "grid",
+  alignItems: "center",
   gridTemplateColumns: `${typography.rhythm(1)} auto min-content`,
   gridColumnGap: typography.rhythm(0.5)
 });

@@ -291,6 +291,14 @@ const Controls = ({ camera, velocity = 1, domElement }) => {
     orbitControls.autoRotateSpeed = 0.15 * (1 / t);
   }
 
+  function enable() {
+    orbitControls.enabled = true;
+  }
+
+  function disable() {
+    orbitControls.enabled = false;
+  }
+
   function update() {
     orbitControls.update();
   }
@@ -313,7 +321,9 @@ const Controls = ({ camera, velocity = 1, domElement }) => {
     setGlobalTimeScale,
     walkabout,
     setAutoRotate,
-    setTimeMultiplier
+    setTimeMultiplier,
+    enable,
+    disable
   };
 };
 

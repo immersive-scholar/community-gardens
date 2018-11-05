@@ -1,23 +1,24 @@
 import React, { PureComponent } from "react";
 import get from "lodash/get";
+import { Link } from "react-router-dom";
 
 import PlaybackControls from "./PlaybackControls";
 
-import { wideContainer, removePaddingVertical, lightText } from "styles";
+import {
+  wideContainer,
+  removePaddingVertical,
+  lightText,
+  shadowless
+} from "styles";
 import { ControlBar, controlsGrid } from "./styles";
 
 export default class ThreeControlBar extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { playing: false };
-  }
-
   onPlaybackChange = p => {
-    this.setState({ playing: p });
+    this.props.setPlaying(p);
   };
+
   render() {
-    const { selectedChapterID, selectedChapter } = this.props;
-    const { playing } = this.state;
+    const { playing } = this.props;
     const title = get(this.props, "selectedChapter.title", "Loading...");
 
     return (
@@ -33,7 +34,9 @@ export default class ThreeControlBar extends PureComponent {
             onPlaybackChange={p => this.onPlaybackChange(p)}
           />
           {title}
-          {/* <div>Settings</div> */}
+          <Link {...shadowless} {...lightText} to="/">
+            Exit
+          </Link>
         </div>
       </ControlBar>
     );

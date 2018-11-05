@@ -1146,6 +1146,10 @@ braces@^2.3.0, braces@^2.3.1:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
+brcast@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/brcast/-/brcast-2.0.2.tgz#2db16de44140e418dc37fab10beec0369e78dcef"
+
 brcast@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmjs.org/brcast/-/brcast-3.0.1.tgz#6256a8349b20de9eed44257a9b24d71493cd48dd"
@@ -1336,6 +1340,10 @@ camelcase@^3.0.0:
 camelcase@^4.0.0, camelcase@^4.1.0:
   version "4.1.0"
   resolved "https://registry.npmjs.org/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
+
+can-use-dom@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/can-use-dom/-/can-use-dom-0.1.0.tgz#22cc4a34a0abc43950f42c6411024a3f6366b45a"
 
 caniuse-api@^1.5.2:
   version "1.6.1"
@@ -3100,6 +3108,16 @@ glamor@^2.20.40:
     object-assign "^4.1.1"
     prop-types "^15.5.10"
     through "^2.3.8"
+
+glamorous@^3.23.3:
+  version "3.25.0"
+  resolved "https://registry.npmjs.org/glamorous/-/glamorous-3.25.0.tgz#d6d66c3dfffdc194761469adcbd996d4b70222e1"
+  dependencies:
+    brcast "^2.0.0"
+    fast-memoize "^2.2.7"
+    html-tag-names "^1.1.1"
+    react-html-attributes "^1.3.0"
+    svg-tag-names "^1.1.0"
 
 glamorous@^4.13.1:
   version "4.13.1"
@@ -5454,6 +5472,10 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
 
+picturefill@^3.0.2:
+  version "3.0.3"
+  resolved "https://registry.npmjs.org/picturefill/-/picturefill-3.0.3.tgz#a5c38eeb02d74def38e1790ff61e166166b4f224"
+
 pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
@@ -6041,7 +6063,7 @@ react-helmet@^5.2.0:
     prop-types "^15.5.4"
     react-side-effect "^1.1.0"
 
-react-html-attributes@^1.4.2:
+react-html-attributes@^1.3.0, react-html-attributes@^1.4.2:
   version "1.4.3"
   resolved "https://registry.npmjs.org/react-html-attributes/-/react-html-attributes-1.4.3.tgz#8c36c35fce6b750938d286af428ed1da7625186e"
   dependencies:
@@ -6057,6 +6079,10 @@ react-icons-kit@^1.2.0:
 react-is@^16.3.2, react-is@^16.6.0:
   version "16.6.0"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.6.0.tgz#456645144581a6e99f6816ae2bd24ee94bdd0c01"
+
+react-lazyload@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmjs.org/react-lazyload/-/react-lazyload-2.3.0.tgz#ccb134223012447074a96543954f44b055dc6185"
 
 react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
@@ -6086,6 +6112,15 @@ react-redux@^5.1.0:
     prop-types "^15.6.1"
     react-is "^16.6.0"
     react-lifecycles-compat "^3.0.0"
+
+react-responsive-picture@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/react-responsive-picture/-/react-responsive-picture-2.1.0.tgz#08e4b73c178042bfe008c343047dbc782d23bc0b"
+  dependencies:
+    can-use-dom "^0.1.0"
+    glamorous "^3.23.3"
+    picturefill "^3.0.2"
+    prop-types "^15.5.10"
 
 react-router-dom@^4.3.1:
   version "4.3.1"

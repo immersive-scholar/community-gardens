@@ -5,6 +5,16 @@ import addCollectionToNode from "util/AddCollectionToNode";
 
 const initialState = {
   node: {
+    summerGarden: {
+      id: "summer-garden",
+      title: "Summer Garden",
+      link: "/garden/summer-garden"
+    },
+    winterGarden: {
+      id: "winter-garden",
+      title: "Winter Garden",
+      link: "/garden/winter-garden"
+    },
     didNotEatForADay: {
       id: "did-not-eat-for-a-day",
       title: "Did Not Eat for a Day",
@@ -41,20 +51,11 @@ const initialState = {
       title: "High Resources",
       link: "/garden/resourced"
     },
-    summerGarden: {
-      id: "summer-garden",
-      title: "Summer Garden",
-      link: "/garden/summer-garden"
-    },
+
     wellness: {
       id: "wellness",
       title: "Wellness Garden",
       link: "/garden/wellness"
-    },
-    winterGarden: {
-      id: "winter-garden",
-      title: "Winter Garden",
-      link: "/garden/winter-garden"
     }
   }
 };

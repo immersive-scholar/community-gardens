@@ -4,7 +4,8 @@ import {
   SET_RANDOM_SEED,
   SET_DPR,
   SET_ANTI_ALIAS,
-  SET_DEBUG
+  SET_DEBUG,
+  SET_PLAYING
 } from "constants/Constants";
 
 const settings = {};
@@ -37,6 +38,11 @@ settings.setAntiAlias = antiAlias => ({
 settings.setDebug = debug => ({
   type: SET_DEBUG,
   payload: { data: { debug } }
+});
+
+settings.setPlaying = playing => ({
+  type: SET_PLAYING,
+  payload: { data: { playing } }
 });
 
 export default settings;

@@ -60,13 +60,26 @@ class ThreeContainer extends Component {
     }
 
     this.threeEntryPoint.setSettings(this.props);
+
+    if (this.props.playing) {
+      this.threeEntryPoint.play();
+    } else {
+      this.threeEntryPoint.pause();
+    }
   }
 
   render() {
-    const { selectedChapterID, selectedChapter } = this.props;
+    const {
+      selectedChapterID,
+      selectedChapter,
+      playing,
+      setPlaying
+    } = this.props;
     return (
       <Fragment>
         <ThreeControlBar
+          playing={playing}
+          setPlaying={setPlaying}
           selectedChapterID={selectedChapterID}
           selectedChapter={selectedChapter}
         />
@@ -85,6 +98,7 @@ const mapStateToProps = state => {
     dpr: settings.dpr,
     antiAlias: settings.antiAlias,
     debug: settings.debug,
+    playing: settings.playing,
     selectedChapterID: chapters.selectedID,
     selectedChapter: getSelectedChapter(state)
   };
@@ -96,7 +110,8 @@ const mapDispatchToProps = dispatch => ({
     settings.setQuantityMultiplier,
     dispatch
   ),
-  focusChapter: bindActionCreators(chapters.focusChapter, dispatch)
+  focusChapter: bindActionCreators(chapters.focusChapter, dispatch),
+  setPlaying: bindActionCreators(settings.setPlaying, dispatch)
 });
 
 export default connect(

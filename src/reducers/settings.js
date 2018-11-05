@@ -6,7 +6,8 @@ import {
   SET_ANTI_ALIAS,
   SET_DEBUG,
   PRESENTATION_MODE_DEFAULT,
-  EXPLORE
+  EXPLORE,
+  SET_PLAYING
 } from "constants/Constants";
 import { TweenMax } from "gsap";
 import GPU from "util/GPU";
@@ -21,6 +22,7 @@ let quantityMultiplier = 1;
 let seed = Math.random();
 let debug = 0;
 let presentationMode = PRESENTATION_MODE_DEFAULT;
+let playing = true;
 
 // 2. Sniff GPU to derive default performance options
 const gpu = new GPU();
@@ -86,6 +88,7 @@ const initialState = {
   dpr,
   debug,
   mobile: device.mobile,
+  playing,
   largeDisplay,
   presentationMode
 };
@@ -134,6 +137,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         debug
+      };
+    case SET_PLAYING:
+      const { playing } = action.payload.data;
+
+      return {
+        ...state,
+        playing
       };
     default:
       return state;

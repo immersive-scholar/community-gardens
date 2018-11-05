@@ -7,6 +7,7 @@ import DataFactory from "util/DataFactory";
 import ColorFactory from "util/ColorFactory";
 import TextureFactory from "util/TextureFactory";
 import InsecurityCalculator from "data/InsecurityCalculator";
+import { TweenMax } from "gsap";
 
 export default (container, settings) => {
   const { seed } = settings;
@@ -110,6 +111,18 @@ export default (container, settings) => {
     sceneManager.setDebug(debug);
   }
 
+  function pause() {
+    TweenMax.pauseAll();
+    sceneManager.controls.enable();
+    sceneManager.controls.pause();
+  }
+
+  function play() {
+    TweenMax.pauseAll(false, false, false);
+    sceneManager.controls.disable();
+    sceneManager.controls.play();
+  }
+
   function render() {
     state.requestID = requestAnimationFrame(render);
 
@@ -130,6 +143,8 @@ export default (container, settings) => {
 
   return {
     setSettings,
-    clean
+    clean,
+    pause,
+    play
   };
 };

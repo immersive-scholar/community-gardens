@@ -8,7 +8,7 @@ const PlaybackControls = ({ isPlaying, onPlaybackChange }) => (
     onClick={() => onPlaybackChange(!isPlaying)}
     style={{ color: "#ffffff", display: "inlineBlock" }}
   >
-    {isPlaying ? (
+    {!isPlaying ? (
       <Icon size={24} icon={pause} />
     ) : (
       <Icon size={24} icon={play2} />
