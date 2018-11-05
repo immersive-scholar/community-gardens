@@ -20,7 +20,8 @@ import {
   removePaddingBottom,
   removePaddingVertical,
   thirdWidth,
-  fullWidthSm
+  fullWidthSm,
+  grid
 } from "styles";
 
 class Home extends PureComponent {
@@ -45,19 +46,21 @@ class Home extends PureComponent {
         <Animated delay={450}>
           It is not the fault of the plant that resources are not available.
         </Animated>
-        {map(chapters, chapter => {
-          return (
-            <Link
-              key={chapter.id}
-              {...shadowless}
-              {...buttonStyle}
-              {...fillButton}
-              to={chapter.link}
-            >
-              {chapter.title}
-            </Link>
-          );
-        })}
+        <div {...grid}>
+          {map(chapters, chapter => {
+            return (
+              <Link
+                key={chapter.id}
+                {...shadowless}
+                {...buttonStyle}
+                {...fillButton}
+                to={chapter.link}
+              >
+                {chapter.title}
+              </Link>
+            );
+          })}
+        </div>
       </div>
     );
   }

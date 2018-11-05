@@ -9,8 +9,6 @@ import TextureFactory from "util/TextureFactory";
 import InsecurityCalculator from "data/InsecurityCalculator";
 
 export default (container, settings) => {
-  console.log("settings ", settings);
-
   const { seed } = settings;
 
   // const seed = Math.random();

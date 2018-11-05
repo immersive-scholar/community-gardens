@@ -139,9 +139,6 @@ class SceneSubject {
         break;
     }
 
-    console.log("chapterID ", chapterID);
-    console.log("chapter ", chapter);
-
     this.setCurrentChapter(chapter);
   }
 

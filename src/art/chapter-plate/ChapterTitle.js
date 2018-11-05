@@ -58,7 +58,7 @@ class ChapterTitle extends BaseRenderable {
   }) {
     const loader = new FontLoader();
     let geometry,
-      height = 0.05;
+      height = 0;
 
     loader.load(
       //   `${process.env.PUBLIC_URL}/fonts/helvetiker_regular.typeface.json`,
@@ -74,25 +74,25 @@ class ChapterTitle extends BaseRenderable {
         geometry.computeBoundingBox();
         geometry.computeVertexNormals();
 
-        var triangleAreaHeuristics = 0.1 * (height * size);
-        for (var i = 0; i < geometry.faces.length; i++) {
-          var face = geometry.faces[i];
-          if (face.materialIndex === 1) {
-            for (var j = 0; j < face.vertexNormals.length; j++) {
-              face.vertexNormals[j].z = 0;
-              face.vertexNormals[j].normalize();
-            }
-            var va = geometry.vertices[face.a];
-            var vb = geometry.vertices[face.b];
-            var vc = geometry.vertices[face.c];
-            var s = GeometryUtils.triangleArea(va, vb, vc);
-            if (s > triangleAreaHeuristics) {
-              for (j = 0; j < face.vertexNormals.length; j++) {
-                face.vertexNormals[j].copy(face.normal);
-              }
-            }
-          }
-        }
+        // var triangleAreaHeuristics = 0.1 * (height * size);
+        // for (var i = 0; i < geometry.faces.length; i++) {
+        //   var face = geometry.faces[i];
+        //   if (face.materialIndex === 1) {
+        //     for (var j = 0; j < face.vertexNormals.length; j++) {
+        //       face.vertexNormals[j].z = 0;
+        //       face.vertexNormals[j].normalize();
+        //     }
+        //     var va = geometry.vertices[face.a];
+        //     var vb = geometry.vertices[face.b];
+        //     var vc = geometry.vertices[face.c];
+        //     var s = GeometryUtils.triangleArea(va, vb, vc);
+        //     if (s > triangleAreaHeuristics) {
+        //       for (j = 0; j < face.vertexNormals.length; j++) {
+        //         face.vertexNormals[j].copy(face.normal);
+        //       }
+        //     }
+        //   }
+        // }
 
         var centerOffset =
           -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
