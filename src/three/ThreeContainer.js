@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import get from "lodash/get";
 
-import * as dat from "dat.gui";
 import threeEntryPoint from "three/ThreeEntryPoint";
-import { settings } from "actions";
+import { settings, chapters } from "actions";
 
 class ThreeContainer extends Component {
   static propTypes = {
@@ -17,19 +17,26 @@ class ThreeContainer extends Component {
   };
 
   componentDidMount() {
-    const root = document.getElementById("root");
-    root.addEventListener("gesturestart", this.preventScroll);
+    // const gardenID = get(this.props, "match.params.gardenID");
+    // if (gardenID) {
+    //   this.props.focusChapter(gardenID);
+    // }
 
     // by passing props down to threeEntryPoint, we can leverage anything in our redux store during initialization.
     this.threeEntryPoint = threeEntryPoint(this.threeRootElement, this.props);
+    const root = document.getElementById("three-canvas");
+    root.addEventListener("gesturestart", this.preventScroll);
+    document.documentElement.classList.add("state__locked");
   }
 
   componentWillUnmount() {
-    const root = document.getElementById("root");
+    const root = document.getElementById("three-canvas");
     root.removeEventListener("gesturestart", this.preventScroll);
+    document.documentElement.classList.remove("state__locked");
   }
 
   preventScroll = e => {
+    console.log("preventScroll ", e);
     e.preventDefault();
   };
 
@@ -37,6 +44,7 @@ class ThreeContainer extends Component {
     this.threeEntryPoint.setSettings(nextProps);
     // there is never any need to render,
     // because ThreeEntryPoint is responsible for it's own rendering.
+
     return false;
   }
 
@@ -45,13 +53,14 @@ class ThreeContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ settings }) => ({
+const mapStateToProps = ({ settings, chapters }) => ({
   timeMultiplier: settings.timeMultiplier,
   quantityMultiplier: settings.quantityMultiplier,
   seed: settings.seed,
   dpr: settings.dpr,
   antiAlias: settings.antiAlias,
-  debug: settings.debug
+  debug: settings.debug,
+  selectedChapterID: chapters.selectedID
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -59,7 +68,8 @@ const mapDispatchToProps = dispatch => ({
   setQuantityMultiplier: bindActionCreators(
     settings.setQuantityMultiplier,
     dispatch
-  )
+  ),
+  focusChapter: bindActionCreators(chapters.focusChapter, dispatch)
 });
 
 export default connect(

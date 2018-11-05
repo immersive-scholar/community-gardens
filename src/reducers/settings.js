@@ -9,8 +9,6 @@ import {
 import { TweenMax } from "gsap";
 import GPU from "util/GPU";
 
-const version = "0.1.2";
-
 // 1. Derive values from query string if available
 const queryString = require("query-string");
 const location = window.location;
@@ -19,8 +17,8 @@ const parsed = queryString.parse(location.search);
 let timeMultiplier = parseFloat(parsed.timeMultiplier) || 1;
 let quantityMultiplier = parseFloat(parsed.quantityMultiplier) || 1;
 let seed = parseFloat(parsed.seed) || Math.random();
-let debug =
-  parseFloat(parsed.debug) === 1 || window.location.hostname === "localhost";
+let debug = parseFloat(parsed.debug) === 1;
+// debug = debug || window.location.hostname === "localhost";
 
 // 2. Sniff GPU to derive default performance options
 const gpu = new GPU();
@@ -70,7 +68,6 @@ if (width > 5200) {
 }
 
 const initialState = {
-  version,
   timeMultiplier,
   quantityMultiplier,
   seed,

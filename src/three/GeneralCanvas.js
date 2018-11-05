@@ -1,5 +1,6 @@
 export default (document, container) => {
   const canvas = document.createElement("canvas");
+  canvas.id = "three-canvas";
   container.appendChild(canvas);
 
   function resizeCanvas() {

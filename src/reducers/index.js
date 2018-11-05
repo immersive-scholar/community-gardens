@@ -1,9 +1,13 @@
 import { combineReducers } from "redux";
 
+import chapters from "reducers/chapters";
 import settings from "reducers/settings";
+import version from "reducers/version";
 
 const appReducer = combineReducers({
-  settings
+  chapters,
+  settings,
+  version
 });
 
 const rootReducer = (state, action) => {

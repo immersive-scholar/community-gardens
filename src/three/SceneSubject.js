@@ -1,3 +1,5 @@
+import kebabCase from "lodash/kebabCase";
+
 import DidNotEatForADayChapter from "chapters/DidNotEatForADayChapter";
 import FirstGenerationChapter from "chapters/FirstGenerationChapter";
 import HighGPAChapter from "chapters/HighGPAChapter";
@@ -11,6 +13,7 @@ import WellnessChapter from "chapters/WellnessChapter";
 import WinterGardenChapter from "chapters/WinterGardenChapter";
 
 import ChapterPlate from "art/chapter-plate/ChapterPlate";
+import * as STATS from "constants/Stats";
 
 class SceneSubject {
   constructor({ scene, camera, R, controls, settings }) {
@@ -51,17 +54,11 @@ class SceneSubject {
     const length = this.chapters.length;
     const chapterIndex = this.R.intBetween(0, length - 1);
 
-    console.log(
-      "this.currentChapterIndex ",
-      this.currentChapterIndex,
-      chapterIndex
-    );
     if (this.currentChapterIndex === chapterIndex) {
       return this.sampleChapter();
     }
 
     const chapterClass = this.chapters[chapterIndex];
-    console.log("chapterClass ", chapterClass);
     let chapter;
 
     switch (chapterClass) {
@@ -89,15 +86,13 @@ class SceneSubject {
       case ResourcedChapter:
         chapter = this.createResourcedChapter();
         break;
-      case SummerGardenChapter:
-        chapter = this.createSummerGardenChapter();
-        break;
       case WellnessChapter:
         chapter = this.createWellnessChapter();
         break;
       case WinterGardenChapter:
         chapter = this.createWinterGardenChapter();
         break;
+      case SummerGardenChapter:
       default:
         chapter = this.createSummerGardenChapter();
         break;
@@ -108,18 +103,44 @@ class SceneSubject {
     return chapter;
   }
 
-  createScene() {
-    // const chapter = this.createHousingInsecurityChapter();
-    // const chapter = this.createDidNotEatForADayChapter();
-    // const chapter = this.createRandomChapter();
-    // const chapter = this.createPellGrantChapter();
-    const chapter = this.createHighGPAChapter();
-    // const chapter = this.createOutOfStateChapter();
-    // const chapter = this.createFirstGenerationChapter();
-    // const chapter = this.createSummerGardenChapter();
-    // const chapter = this.createWinterGardenChapter();
-    // const chapter = this.createWellnessChapter();
-    // const chapter = this.createResourcedChapter();
+  createScene(chapterID) {
+    let chapter;
+    switch (chapterID) {
+      case "housing-insecurity":
+        chapter = this.createHousingInsecurityChapter();
+        break;
+      case "did-not-eat-for-a-day":
+        chapter = this.createDidNotEatForADayChapter();
+        break;
+      case "pell-grant":
+        chapter = this.createPellGrantChapter();
+        break;
+      case "high-gpa":
+        chapter = this.createHighGPAChapter();
+        break;
+      case "out-of-state":
+        chapter = this.createOutOfStateChapter();
+        break;
+      case "first-generation":
+        chapter = this.createFirstGenerationChapter();
+        break;
+      case "winter-garden":
+        chapter = this.createWinterGardenChapter();
+        break;
+      case "wellness":
+        chapter = this.createWellnessChapter();
+        break;
+      case "resourced":
+        chapter = this.createResourcedChapter();
+        break;
+      case "summer-garden":
+      default:
+        chapter = this.createSummerGardenChapter();
+        break;
+    }
+
+    console.log("chapterID ", chapterID);
+    console.log("chapter ", chapter);
 
     this.setCurrentChapter(chapter);
   }

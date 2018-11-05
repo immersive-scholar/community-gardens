@@ -1,12 +1,12 @@
 html,
 body,
-#root {
+#three-canvas {
   height: 100%;
   width: 100%;
 }
 
-html,
-body {
+html.state__locked,
+html.state__locked body {
   overflow: hidden;
 }
 
@@ -22,14 +22,14 @@ body {
 
 #root {
   display: block;
+}
+
+#three-canvas {
+  display: block;
   position: fixed;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-}
-
-canvas {
-  display: block;
 }
 
 /* dat.gui should not be affected by our typography classes */

@@ -19,10 +19,7 @@ const HighHealth = (data, threshold = 5) => {
 
   console.log("bgColor ", bgColor);
 
-  const color = ColorFactory.getRandomColor(
-    ColorFactory.WINTER,
-    ColorFactory.SKY
-  );
+  const color = 0xffffff;
 
   return {
     id: HIGH_HEALTH,

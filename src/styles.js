@@ -56,6 +56,16 @@ const button = css({
   }
 });
 
+const buttonStyle = css({
+  background: "#e06b1c",
+  color: "#ffffff",
+  "&:hover": {
+    background: "#e06b1c",
+    color: "#ffffff",
+    textDecoration: "underline"
+  }
+});
+
 const shadowless = css({
   backgroundImage: "none",
   textShadow: "none"
@@ -130,6 +140,7 @@ export {
   link,
   shadowless,
   button,
+  buttonStyle,
   fillButton,
   hideOnSm,
   hideOnLg,

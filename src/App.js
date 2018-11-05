@@ -42,7 +42,18 @@ class App extends Component {
               <ScrollToTop>
                 <Switch>
                   <Route exact path="/" component={Home} />
-                  <Route path="/garden" component={LoadableThreeContainer} />
+                  <Switch>
+                    <Route
+                      exact
+                      path="/garden"
+                      component={LoadableThreeContainer}
+                    />
+                    <Route
+                      path="/garden/:gardenID"
+                      component={LoadableThreeContainer}
+                    />
+                    <Route component={NotFound} />
+                  </Switch>
                   <Route component={NotFound} />
                 </Switch>
               </ScrollToTop>

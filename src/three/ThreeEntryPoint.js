@@ -1,4 +1,5 @@
 import RandomSeed from "random-seed";
+import get from "lodash/get";
 import HighresExport from "three/vendor/Highres";
 import SceneManager from "./SceneManager";
 import GeneralCanvas from "./GeneralCanvas";
@@ -40,7 +41,9 @@ export default (container, settings) => {
     .then(() => {
       const { quantityMultiplier } = settings;
       sceneManager.subject.setQuantityMultiplier(quantityMultiplier);
-      sceneManager.subject.createScene();
+
+      const chapterID = get(settings, "match.params.gardenID", "");
+      sceneManager.subject.createScene(chapterID);
     });
 
   // State

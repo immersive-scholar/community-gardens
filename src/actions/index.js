@@ -1,3 +1,4 @@
+import chapters from "./chapters";
 import settings from "./settings";
 
-export { settings };
+export { chapters, settings };
