@@ -105,9 +105,9 @@ const PlantModelToStellariaPuberaProps = ({
   if (housingInsecurity) {
     props.windForce = R.floatBetween(0.1, 0.3);
     props.windDirection = new Vector3(
-      R.floatBetween(-1.5, 1.5),
-      R.floatBetween(-1.5, 1.5),
-      R.floatBetween(-1.5, 1.5)
+      R.floatBetween(-0.5, 0.5),
+      R.floatBetween(-0.5, 0.5),
+      R.floatBetween(-0.5, 0.5)
     );
   }
 
