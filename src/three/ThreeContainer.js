@@ -77,12 +77,7 @@ class ThreeContainer extends Component {
     } = this.props;
     return (
       <Fragment>
-        <ThreeControlBar
-          playing={playing}
-          setPlaying={setPlaying}
-          selectedChapterID={selectedChapterID}
-          selectedChapter={selectedChapter}
-        />
+        <ThreeControlBar />
         <div ref={element => (this.threeRootElement = element)} />
       </Fragment>
     );

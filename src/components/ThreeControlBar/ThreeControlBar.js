@@ -1,8 +1,15 @@
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import get from "lodash/get";
 import { Link } from "react-router-dom";
+import { Icon } from "react-icons-kit";
+import { exit } from "react-icons-kit/icomoon/exit";
+import { question } from "react-icons-kit/icomoon/question";
 
-import PlaybackControls from "./PlaybackControls";
+import { settings, chapters } from "actions";
+import { getSelectedChapter } from "reducers";
+import Options from "./Options";
 
 import {
   wideContainer,
@@ -12,13 +19,18 @@ import {
 } from "styles";
 import { ControlBar, controlsGrid } from "./styles";
 
-export default class ThreeControlBar extends PureComponent {
+class ThreeControlBar extends PureComponent {
   onPlaybackChange = p => {
     this.props.setPlaying(p);
   };
 
+  toggleOptions = () => {
+    const { optionsOpen } = this.props;
+    this.props.setOptionsOpen(!optionsOpen);
+  };
+
   render() {
-    const { playing } = this.props;
+    const { playing, optionsOpen } = this.props;
     const title = get(this.props, "selectedChapter.title", "Loading...");
 
     return (
@@ -29,16 +41,41 @@ export default class ThreeControlBar extends PureComponent {
           {...lightText}
           {...controlsGrid}
         >
-          <PlaybackControls
+          {/* <PlaybackControls
             isPlaying={playing}
             onPlaybackChange={p => this.onPlaybackChange(p)}
+          /> */}
+          <Options
+            optionsOpen={optionsOpen}
+            toggleOptions={() => this.toggleOptions()}
           />
           {title}
+          <Icon size={24} icon={question} />
           <Link {...shadowless} {...lightText} to="/">
-            Exit
+            <Icon size={24} icon={exit} />
           </Link>
         </div>
       </ControlBar>
     );
   }
 }
+
+const mapStateToProps = state => {
+  const { settings, chapters } = state;
+  return {
+    playing: settings.playing,
+    optionsOpen: settings.optionsOpen,
+    selectedChapterID: chapters.selectedID,
+    selectedChapter: getSelectedChapter(state)
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  setPlaying: bindActionCreators(settings.setPlaying, dispatch),
+  setOptionsOpen: bindActionCreators(settings.setOptionsOpen, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ThreeControlBar);

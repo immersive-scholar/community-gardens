@@ -15,3 +15,4 @@ export const RANDOM_CYCLE = "RANDOM_CYCLE";
 export const EXPLORE = "EXPLORE";
 export const PRESENTATION_MODE_DEFAULT = RANDOM_CYCLE;
 export const SET_PLAYING = "SET_PLAYING";
+export const SET_OPTIONS_OPEN = "SET_OPTIONS_OPEN";

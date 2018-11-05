@@ -18,7 +18,7 @@ const ControlBar = glamorous.div({
 const controlsGrid = css({
   display: "grid",
   alignItems: "center",
-  gridTemplateColumns: `${typography.rhythm(1)} auto min-content`,
+  gridTemplateColumns: `${typography.rhythm(1)} auto min-content min-content`,
   gridColumnGap: typography.rhythm(0.5)
 });
 

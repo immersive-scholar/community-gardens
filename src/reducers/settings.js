@@ -7,7 +7,8 @@ import {
   SET_DEBUG,
   PRESENTATION_MODE_DEFAULT,
   EXPLORE,
-  SET_PLAYING
+  SET_PLAYING,
+  SET_OPTIONS_OPEN
 } from "constants/Constants";
 import { TweenMax } from "gsap";
 import GPU from "util/GPU";
@@ -23,6 +24,7 @@ let seed = Math.random();
 let debug = 0;
 let presentationMode = PRESENTATION_MODE_DEFAULT;
 let playing = true;
+let optionsOpen = false;
 
 // 2. Sniff GPU to derive default performance options
 const gpu = new GPU();
@@ -89,6 +91,7 @@ const initialState = {
   debug,
   mobile: device.mobile,
   playing,
+  optionsOpen,
   largeDisplay,
   presentationMode
 };
@@ -144,6 +147,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         playing
+      };
+    case SET_OPTIONS_OPEN:
+      const { optionsOpen } = action.payload.data;
+
+      return {
+        ...state,
+        optionsOpen
       };
     default:
       return state;

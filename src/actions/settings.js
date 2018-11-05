@@ -5,7 +5,8 @@ import {
   SET_DPR,
   SET_ANTI_ALIAS,
   SET_DEBUG,
-  SET_PLAYING
+  SET_PLAYING,
+  SET_OPTIONS_OPEN
 } from "constants/Constants";
 
 const settings = {};
@@ -43,6 +44,11 @@ settings.setDebug = debug => ({
 settings.setPlaying = playing => ({
   type: SET_PLAYING,
   payload: { data: { playing } }
+});
+
+settings.setOptionsOpen = optionsOpen => ({
+  type: SET_OPTIONS_OPEN,
+  payload: { data: { optionsOpen } }
 });
 
 export default settings;
