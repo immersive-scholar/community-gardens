@@ -58,7 +58,6 @@ const button = css({
 
 const buttonStyle = css({
   display: "inline-block",
-  margin: `${typography.rhythm(0.5)} ${typography.rhythm(1)}`,
   background: "#e06b1c",
   color: "#ffffff",
   "&:hover": {
@@ -130,6 +129,13 @@ const bulletless = css({
   listStyleType: "none"
 });
 
+const grid = css({
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  gridColumnGap: "0.5rem",
+  gridRowGap: "0.5rem"
+});
+
 export {
   textContainer,
   wideContainer,
@@ -153,5 +159,6 @@ export {
   quarterWidth,
   fullWidthSm,
   imageWrapper,
-  bulletless
+  bulletless,
+  grid
 };
