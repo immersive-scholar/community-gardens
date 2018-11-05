@@ -13,4 +13,10 @@ const ControlBar = glamorous.div({
   zIndex: 1
 });
 
-export { ControlBar };
+const controlsGrid = css({
+  display: "grid",
+  gridTemplateColumns: `${typography.rhythm(1)} auto min-content`,
+  gridColumnGap: typography.rhythm(0.5)
+});
+
+export { ControlBar, controlsGrid };
