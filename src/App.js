@@ -50,10 +50,12 @@ class App extends Component {
                       path="/garden"
                       component={LoadableThreeContainer}
                     />
-                    <Route
-                      path="/garden/:gardenID"
-                      component={LoadableThreeContainer}
-                    />
+                    {navigator.userAgent !== "ReactSnap" && (
+                      <Route
+                        path="/garden/:gardenID"
+                        component={LoadableThreeContainer}
+                      />
+                    )}
                     <Route component={NotFound} />
                   </Switch>
                   <Route component={NotFound} />

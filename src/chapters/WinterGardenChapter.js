@@ -22,8 +22,8 @@ class WinterGardenChapter extends BaseChapter {
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier, mobile } = this.settings;
-    const count = 1; //Math.min(stat.count, 25 * quantityMultiplier);
-    const plantTypeCount = 1; //3;
+    const count = Math.min(stat.count, 25 * quantityMultiplier);
+    const plantTypeCount = 3;
     const plantCount = Math.floor(count / plantTypeCount);
 
     this.background = new BackgroundBAS({ color: bgColor });
@@ -33,7 +33,7 @@ class WinterGardenChapter extends BaseChapter {
       color: bgColor,
       R: this.R
     });
-    // this.addCleanable(this.ground);
+    this.addCleanable(this.ground);
 
     this.chapterPlate = new ChapterPlate({
       camera: this.camera,
@@ -82,52 +82,52 @@ class WinterGardenChapter extends BaseChapter {
 
     // Stellaria Pubera
 
-    // this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
-    //   data: data,
-    //   dataOffset: this.instances.length,
-    //   count: plantCount,
-    //   R: this.R,
-    //   camera: this.camera,
-    //   controls: this.controls
-    // });
+    this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
+      data: data,
+      dataOffset: this.instances.length,
+      count: plantCount,
+      R: this.R,
+      camera: this.camera,
+      controls: this.controls
+    });
 
-    // bounds.set(4, 0, 2);
-    // position.set(-2, 0, 0.5);
-    // new RandomLayout({
-    //   instances: this.stellariaPuberaSpawn.instances,
-    //   group: this.stellariaPuberaSpawn.group,
-    //   R: this.R,
-    //   bounds,
-    //   position
-    // });
+    bounds.set(4, 0, 2);
+    position.set(-2, 0, 0.5);
+    new RandomLayout({
+      instances: this.stellariaPuberaSpawn.instances,
+      group: this.stellariaPuberaSpawn.group,
+      R: this.R,
+      bounds,
+      position
+    });
 
-    // this.group.add(this.stellariaPuberaSpawn.group);
-    // this.addInstances(this.stellariaPuberaSpawn.instances);
-    // this.spawns.push(this.stellariaPuberaSpawn);
+    this.group.add(this.stellariaPuberaSpawn.group);
+    this.addInstances(this.stellariaPuberaSpawn.instances);
+    this.spawns.push(this.stellariaPuberaSpawn);
 
     // Asimina Triloba
 
-    // this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
-    //   data: data,
-    //   dataOffset: this.instances.length,
-    //   count: plantCount,
-    //   R: this.R,
-    //   camera: this.camera,
-    //   controls: this.controls
-    // });
+    this.asiminaTrilobaSpawn = new AsiminaTrilobaSpawn({
+      data: data,
+      dataOffset: this.instances.length,
+      count: plantCount,
+      R: this.R,
+      camera: this.camera,
+      controls: this.controls
+    });
 
-    // bounds.set(4, 0, 1);
-    // position.set(-2, 0, 0.5);
-    // new RandomLayout({
-    //   R: this.R,
-    //   instances: this.asiminaTrilobaSpawn.instances,
-    //   bounds,
-    //   position
-    // });
+    bounds.set(4, 0, 1);
+    position.set(-2, 0, 0.5);
+    new RandomLayout({
+      R: this.R,
+      instances: this.asiminaTrilobaSpawn.instances,
+      bounds,
+      position
+    });
 
-    // this.group.add(this.asiminaTrilobaSpawn.group);
-    // this.addInstances(this.asiminaTrilobaSpawn.instances);
-    // this.spawns.push(this.asiminaTrilobaSpawn);
+    this.group.add(this.asiminaTrilobaSpawn.group);
+    this.addInstances(this.asiminaTrilobaSpawn.instances);
+    this.spawns.push(this.asiminaTrilobaSpawn);
   };
 }
 

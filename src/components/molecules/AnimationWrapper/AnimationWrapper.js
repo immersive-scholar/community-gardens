@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import Transition from 'react-transition-group/Transition';
-import get from 'lodash/get';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import Transition from "react-transition-group/Transition";
+import get from "lodash/get";
 
-import * as animations from './animations';
+import * as animations from "./animations";
 
 /**
  * @author [Lucas Swick](https://github.com/lucastswick)
@@ -16,14 +16,14 @@ class AnimationWrapper extends PureComponent {
     super(props);
 
     this.state = {
-      revealed: false,
+      revealed: false
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.inProp && nextProps.once && !this.state.revealed) {
       this.setState({
-        revealed: true,
+        revealed: true
       });
     }
   }
@@ -39,7 +39,7 @@ class AnimationWrapper extends PureComponent {
       fullWidth,
       fullHeight,
       height,
-      width,
+      width
     } = this.props;
     const { revealed } = this.state;
     const arrayOfChildren = React.Children.toArray(children);
@@ -47,8 +47,8 @@ class AnimationWrapper extends PureComponent {
     const theAnimation = get(animations, transitionName);
     const theStyle = theAnimation.default;
     const theTransition = theAnimation;
-    const theHeight = fullHeight ? '100%' : height ? height : 'auto';
-    const theWidth = fullWidth ? '100%' : width ? width : 'auto';
+    const theHeight = fullHeight ? "100%" : height ? height : "auto";
+    const theWidth = fullWidth ? "100%" : width ? width : "auto";
 
     return (
       <Transition in={inProp || revealed} timeout={duration}>
@@ -58,7 +58,7 @@ class AnimationWrapper extends PureComponent {
               ...theStyle({ duration, delay, blockable }),
               ...theTransition[state]({ duration, delay, blockable }),
               height: theHeight,
-              width: theWidth,
+              width: theWidth
             }}
           >
             {arrayOfChildren}
@@ -73,17 +73,17 @@ AnimationWrapper.propTypes = {
   inProp: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
   transitionName: PropTypes.oneOf([
-    'simpleBlock',
-    'drawerVertical',
-    'drawerVerticalReverse',
-    'drop',
-    'fadeAndTwist',
-    'fadeAndZoomIn',
-    'fadeIn',
-    'slideIn',
-    'slideInLeft',
-    'slideInRight',
-    'slideUp',
+    "simpleBlock",
+    "drawerVertical",
+    "drawerVerticalReverse",
+    "drop",
+    "fadeAndTwist",
+    "fadeAndZoomIn",
+    "fadeIn",
+    "slideIn",
+    "slideInLeft",
+    "slideInRight",
+    "slideUp"
   ]),
   duration: PropTypes.number,
   delay: PropTypes.number,
@@ -96,19 +96,19 @@ AnimationWrapper.propTypes = {
   /** height in pixels, overwritten by fullHeight */
   height: PropTypes.number,
   /** width in pixels, overwritten by fullWidth */
-  width: PropTypes.number,
+  width: PropTypes.number
 };
 
 AnimationWrapper.defaultProps = {
   inProp: false,
   children: [],
-  transitionName: 'slideIn',
+  transitionName: "slideIn",
   duration: 300,
   delay: 0,
   blockable: false,
   once: false,
   fullHeight: false,
-  fullWidth: false,
+  fullWidth: false
 };
 
 export default AnimationWrapper;

@@ -1,7 +1,7 @@
 import React from "react";
 import Loadable from "react-loadable";
 
-import { LoadablePage } from "../components/LoadableComponent";
+import { LoadablePage } from "components/molecules/LoadableComponent";
 
 const LoadableCV = Loadable({
   loader: () => import("../three/ThreeContainer"),
