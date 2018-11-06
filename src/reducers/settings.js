@@ -20,8 +20,6 @@ import GPU from "util/GPU";
 const queryString = require("query-string");
 
 // 1. Default values
-const location = window.location;
-
 let timeMultiplier = 1;
 let quantityMultiplier = 1;
 let seed = Math.random();
@@ -30,6 +28,7 @@ let presentationMode = PRESENTATION_MODE_DEFAULT;
 let playing = false;
 let optionsOpen = false;
 let show3DTitles = false;
+let showControlBar = true;
 let env, wallDisplay;
 
 // 2. Sniff GPU to derive default performance options
@@ -73,15 +72,8 @@ if (device.mobile) {
   }
 }
 
-// 4. override with any query string params
+const location = window.location;
 const parsed = queryString.parse(location.search);
-quantityMultiplier =
-  parseFloat(parsed.quantityMultiplier) || quantityMultiplier;
-
-timeMultiplier = parseFloat(parsed.timeMultiplier) || timeMultiplier;
-seed = parseFloat(parsed.seed) || seed;
-debug = parseFloat(parsed.debug) === 1 || debug;
-// debug = debug || window.location.hostname === "localhost";
 
 switch (parsed.env) {
   case IMMERSION:
@@ -97,7 +89,6 @@ switch (parsed.env) {
     wallDisplay = VISUALIZATION;
     break;
   default:
-    console.log("Unkonwn wall");
     break;
 }
 
@@ -106,7 +97,17 @@ if (wallDisplay) {
   playing = true;
   presentationMode = PRESENTATION_MODE_EXPLORE;
   show3DTitles = true;
+  showControlBar = false;
 }
+
+// 4. override with any query string params
+quantityMultiplier =
+  parseFloat(parsed.quantityMultiplier) || quantityMultiplier;
+
+timeMultiplier = parseFloat(parsed.timeMultiplier) || timeMultiplier;
+seed = parseFloat(parsed.seed) || seed;
+debug = parseFloat(parsed.debug) === 1 || debug;
+// debug = debug || window.location.hostname === "localhost";
 
 const initialState = {
   timeMultiplier,
@@ -120,6 +121,7 @@ const initialState = {
   optionsOpen,
   presentationMode,
   show3DTitles,
+  showControlBar,
   env,
   wallDisplay
 };

@@ -69,15 +69,10 @@ class ThreeContainer extends Component {
   }
 
   render() {
-    // const {
-    //   selectedChapterID,
-    //   selectedChapter,
-    //   playing,
-    //   setPlaying
-    // } = this.props;
+    const { showControlBar } = this.props;
     return (
       <Fragment>
-        <ThreeControlBar />
+        {showControlBar && <ThreeControlBar />}
         <div ref={element => (this.threeRootElement = element)} />
       </Fragment>
     );
@@ -95,6 +90,7 @@ const mapStateToProps = state => {
     debug: settings.debug,
     playing: settings.playing,
     show3DTitles: settings.show3DTitles,
+    showControlBar: settings.showControlBar,
     selectedChapterID: chapters.selectedID,
     selectedChapter: getSelectedChapter(state)
   };

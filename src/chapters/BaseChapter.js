@@ -8,7 +8,7 @@ class BaseChapter {
     this.controls = controls;
     this.R = R;
 
-    const { focusTotal = 0, timeMultiplier = 1 } = props;
+    const { focusTotal = 10, timeMultiplier = 1 } = props;
 
     this.state = { currentFocusCount: 0, focusTotal, timeMultiplier };
     this.group = new Group();
@@ -123,12 +123,10 @@ class BaseChapter {
     };
 
     // calculate distance between two elements to keep speed consistent
-    if (this.currentElement) {
-      const distance = this.currentElement.group.position.distanceTo(
-        new Vector3(to.x, to.y, to.z)
-      );
-      duration = distance * 10;
-    }
+    const distance = this.camera.position.distanceTo(
+      new Vector3(to.x, to.y, to.z)
+    );
+    duration = distance * 15;
 
     this.controls.animate({
       to,
@@ -235,6 +233,11 @@ class BaseChapter {
   returnToZero = ({ duration = 10 } = {}) => {
     return new Promise(resolve => {
       const to = { x: 0, y: 0.5, z: -1, tx: 0, ty: 0.5, tz: 1 };
+      // calculate distance between two elements to keep speed consistent
+      const distance = this.camera.position.distanceTo(
+        new Vector3(to.x, to.y, to.z)
+      );
+      duration = distance * 15;
       this.controls.animate({ to, duration, callback: () => resolve() });
     });
   };
