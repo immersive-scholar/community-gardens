@@ -11,7 +11,7 @@ const EnergyOutgoingModel = {
       displaced from the stem.
     </Fragment>
   ),
-  headerImage: PathToPicture("plants", `summer-garden`),
+  headerImage: PathToPicture("plants", `energy-outgoing`),
   cta: "View"
 };
 

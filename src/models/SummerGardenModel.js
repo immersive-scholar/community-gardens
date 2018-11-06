@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PathToPicture from "util/PathToPicture";
 
-const summerGardenModel = {
+const SummerGardenModel = {
   id: "summer-garden",
   title: "Summer Garden",
   link: "/garden/summer-garden",
@@ -14,4 +14,4 @@ const summerGardenModel = {
   cta: "View"
 };
 
-export default summerGardenModel;
+export default SummerGardenModel;

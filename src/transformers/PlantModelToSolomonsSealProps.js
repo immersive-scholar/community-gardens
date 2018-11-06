@@ -115,7 +115,7 @@ const PlantModelToSolomonsSealProps = ({
   }
 
   props.berryCount =
-    R.intBetween(1, 4) * Math.max(12, Math.abs(resourcesIncoming));
+    R.intBetween(1, 4) * Math.max(24, Math.abs(resourcesIncoming));
 
   return props;
 };

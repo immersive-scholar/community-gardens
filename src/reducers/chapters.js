@@ -6,27 +6,21 @@ import {
   SummerGardenModel,
   HousingInsecurityModel,
   HighResourcesModel,
-  EnergyOutgoingModel
+  EnergyOutgoingModel,
+  FirstGenerationModel,
+  WinterGardenModel
 } from "models";
 
 const initialState = {
   node: {
     summerGarden: SummerGardenModel,
-    winterGarden: {
-      id: "winter-garden",
-      title: "Winter Garden",
-      link: "/garden/winter-garden"
-    },
+    winterGarden: WinterGardenModel,
     didNotEatForADay: {
       id: "did-not-eat-for-a-day",
       title: "Did Not Eat for a Day",
       link: "/garden/did-not-eat-for-a-day"
     },
-    firstGeneration: {
-      id: "first-generation",
-      title: "First Generation",
-      link: "/garden/first-generation"
-    },
+    firstGeneration: FirstGenerationModel,
     highGPA: { id: "highGPA", title: "High GPA", link: "/garden/high-gpa" },
     housingInsecurity: HousingInsecurityModel,
     outOfState: {

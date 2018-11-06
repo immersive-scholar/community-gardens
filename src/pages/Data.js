@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -25,10 +25,12 @@ class Data extends PureComponent {
     const { headerImage } = this.state;
 
     const { chapters } = this.props;
-    const summer = chapters.summerGarden;
+    const summerGarden = chapters.summerGarden;
     const housingInsecurity = chapters.housingInsecurity;
     const highResources = chapters.resourced;
     const energyOutgoing = chapters.energyOutgoing;
+    const firstGeneration = chapters.firstGeneration;
+    const winterGarden = chapters.winterGarden;
 
     const theme = {
       baseColor: "#fbb3d1",
@@ -43,7 +45,7 @@ class Data extends PureComponent {
             title="Community Gardens Data Summary"
             description="Details about how the data affects the plants in Community Gardens."
           />
-          <Animated as="h1">Data-driven</Animated>
+          <Animated as="h1">Data-driven Generative Art</Animated>
           <Animated>
             Combining data-driven design and generative art is not immediately
             obvious.
@@ -91,14 +93,14 @@ class Data extends PureComponent {
         </div>
         <div {...wideContainer}>
           <ImageCopyBlock
-            item={summer}
+            item={summerGarden}
             showAllOnSmall
             showLinkOnSmall
             mask="circle"
             theme={theme}
           />
           <CopyImageBlock
-            item={housingInsecurity}
+            item={winterGarden}
             showAllOnSmall
             showLinkOnSmall
             mask="circle"
@@ -118,13 +120,22 @@ class Data extends PureComponent {
             mask="circle"
             theme={theme}
           />
+          <ImageCopyBlock
+            item={firstGeneration}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
+          <CopyImageBlock
+            item={housingInsecurity}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
         </div>{" "}
         <div {...textContainer}>
-          <Animated>
-            <b>First Generation</b> students have mazes on their stems. They
-            have an extra layer of challenges to navigate, often without guides
-            or support.
-          </Animated>
           <Animated>
             The <b>Degree</b> the student is pursing determines the plant
             height: taller plants are more senior degrees.

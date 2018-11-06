@@ -1,7 +1,6 @@
 import React from "react";
 import { hydrate, render } from "react-dom";
 import { Provider } from "react-redux";
-import rootReducer from "./reducers";
 
 import App from "App";
 import store from "store";
