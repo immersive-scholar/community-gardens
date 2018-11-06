@@ -3481,12 +3481,6 @@ hoist-non-react-statics@^3.0.0:
   dependencies:
     react-is "^16.3.2"
 
-hoist-non-react-statics@^3.0.1:
-  version "3.1.0"
-  resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.1.0.tgz#42414ccdfff019cd2168168be998c7b3bd5245c0"
-  dependencies:
-    react-is "^16.3.2"
-
 home-or-tmp@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -6835,11 +6829,10 @@ schema-utils@^0.3.0:
   dependencies:
     ajv "^5.0.0"
 
-scrollmonitor-react@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.npmjs.org/scrollmonitor-react/-/scrollmonitor-react-2.4.1.tgz#107f38f064aadbfe831bf824acc536da4bdc1727"
+scrollmonitor-react@2.3.1:
+  version "2.3.1"
+  resolved "https://registry.npmjs.org/scrollmonitor-react/-/scrollmonitor-react-2.3.1.tgz#4faad11ad100412bbf046adb2ce00de199919fa0"
   dependencies:
-    hoist-non-react-statics "^3.0.1"
     prop-types "^15.5.10"
     scrollmonitor "^1.1.1"
 

@@ -17,6 +17,14 @@ const ControlBarDiv = glamorous.div({
   transition: "transform 300ms ease-out"
 });
 
+const container = css({
+  width: "100%",
+  maxWidth: "80rem",
+  margin: "0 auto",
+  padding: "4rem 2rem",
+  textAlign: "left"
+});
+
 const stateOpen = css({
   transform: "translateY(-136px)",
   "@media screen and (min-width: 720px)": {
@@ -50,4 +58,4 @@ const OptionsDiv = glamorous.div({
   }
 });
 
-export { ControlBarDiv, controlsGrid, OptionsDiv, stateOpen };
+export { ControlBarDiv, controlsGrid, OptionsDiv, stateOpen, container };

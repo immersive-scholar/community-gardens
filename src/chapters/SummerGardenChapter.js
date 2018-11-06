@@ -34,10 +34,6 @@ class SummerGardenChapter extends BaseChapter {
       R: this.R
     });
     this.addCleanable(this.ground);
-    // this.ground.position.set(0, -10, 10);
-
-    // this.plane = new Plane({ color: bgColor });
-    // this.group.add(this.plane.group);
 
     this.chapterPlate = new ChapterPlate({
       camera: this.camera,

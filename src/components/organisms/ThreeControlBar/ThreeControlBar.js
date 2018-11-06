@@ -12,13 +12,8 @@ import { getSelectedChapter } from "reducers";
 import OptionsButton from "./OptionsButton";
 import Options from "./Options";
 
-import {
-  wideContainer,
-  removePaddingVertical,
-  lightText,
-  shadowless
-} from "styles";
-import { ControlBarDiv, controlsGrid, stateOpen } from "./styles";
+import { removePaddingVertical, lightText, shadowless } from "styles";
+import { ControlBarDiv, controlsGrid, stateOpen, container } from "./styles";
 
 class ThreeControlBar extends PureComponent {
   onPlaybackChange = p => {
@@ -38,7 +33,7 @@ class ThreeControlBar extends PureComponent {
     return (
       <ControlBarDiv {...controlBarClass}>
         <div
-          {...wideContainer}
+          {...container}
           {...removePaddingVertical}
           {...lightText}
           {...controlsGrid}

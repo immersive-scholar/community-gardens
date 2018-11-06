@@ -14,15 +14,8 @@ import {
 } from "components/organisms/ImageCopyBlock";
 import PathToPicture from "util/PathToPicture";
 
-import {
-  textContainer,
-  buttonStyle,
-  fillButton,
-  link,
-  shadowless,
-  grid,
-  fullWidth
-} from "styles";
+import { textContainer, wideContainer } from "styles";
+import { css } from "glamor";
 
 class Data extends PureComponent {
   componentWillMount() {
@@ -35,25 +28,50 @@ class Data extends PureComponent {
           Students with a <b>high health</b> score are drawn with summer colors.
         </Fragment>
       ),
-      headerImage: PathToPicture("plants", `summer-garden`)
+      headerImage: PathToPicture("plants", `summer-garden`),
+      cta: "View",
+      link: "/garden/summer-garden"
     };
 
     const housingInsecurity = {
-      title: "High Health",
+      title: "Housing Insecurity",
       excerpt: (
         <Fragment>
           Students who experience <b>housing insecurity</b> are more affected by
           the wind.
         </Fragment>
       ),
-      headerImage: PathToPicture("plants", `housing-insecurity`)
+      headerImage: PathToPicture("plants", `housing-insecurity`),
+      cta: "View",
+      link: "/garden/housing-insecurity"
     };
 
-    this.setState({ summer, headerImage, housingInsecurity });
+    const highResources = {
+      title: "High Resources",
+      excerpt: (
+        <Fragment>
+          Students who have <b>high resources</b> are have thicker stems.
+        </Fragment>
+      ),
+      headerImage: PathToPicture("plants", `high-resources`),
+      cta: "View",
+      link: "/garden/resourced"
+    };
+
+    this.setState({ summer, headerImage, housingInsecurity, highResources });
   }
 
   render() {
-    const { headerImage, summer, housingInsecurity } = this.state;
+    const {
+      headerImage,
+      summer,
+      housingInsecurity,
+      highResources
+    } = this.state;
+    const theme = {
+      baseColor: "#fbb3d1",
+      colors: ["#ec468a", "#fbb3d1", "#ffffff", "#c25482"]
+    };
 
     return (
       <div>
@@ -109,9 +127,28 @@ class Data extends PureComponent {
             follows:
           </Animated>
         </div>
-        <div {...fullWidth}>
-          <ImageCopyBlock item={summer} showAllOnSmall />
-          <CopyImageBlock item={housingInsecurity} showAllOnSmall />
+        <div {...wideContainer}>
+          <ImageCopyBlock
+            item={summer}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
+          <CopyImageBlock
+            item={housingInsecurity}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
+          <ImageCopyBlock
+            item={highResources}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
         </div>{" "}
         <div {...textContainer}>
           <Animated>

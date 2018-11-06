@@ -42,19 +42,38 @@ const image = css({
   flex: "1 0 60%",
   margin: 0,
   "@media(max-width: 48em)": {
-    flex: "1 0 100%"
+    flex: "1 0 100%",
+    order: 1
   }
 });
 
 const left = css({
-  order: 1
+  "@media(min-width: 47.979em)": {
+    order: 1
+  }
 });
 
 const right = css({
-  order: 2
+  "@media(min-width: 47.979em)": {
+    order: 2
+  }
 });
 
 const copy = css({
+  flex: "0 0 40%",
+  position: "relative",
+  padding: typography.rhythm(2),
+  paddingRight: typography.rhythm(1),
+  minHeight: "1px",
+  "@media(max-width: 48em)": {
+    order: 2,
+    margin: 0,
+    padding: typography.rhythm(1),
+    color: "inherit"
+  }
+});
+
+const copyOverlayStyle = css({
   flex: "0 0 40%",
   position: "relative",
   padding: typography.rhythm(2),
@@ -106,6 +125,7 @@ export {
   backgroundImageStyles,
   linkStyles,
   copy,
+  copyOverlayStyle,
   copyAfter,
   header,
   headerAfter,

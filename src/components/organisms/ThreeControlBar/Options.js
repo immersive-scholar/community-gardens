@@ -3,17 +3,16 @@ import React from "react";
 import PlaybackControls from "./PlaybackControls";
 
 import {
-  wideContainer,
   removePaddingVertical,
   lightText,
   shadowless,
   inlineBlock
 } from "styles";
-import { OptionsDiv } from "./styles";
+import { OptionsDiv, container } from "./styles";
 
 const Options = ({ optionsOpen, isPlaying, onPlaybackChange }) => {
   return (
-    <OptionsDiv {...wideContainer} {...removePaddingVertical} {...lightText}>
+    <OptionsDiv {...container} {...removePaddingVertical} {...lightText}>
       OPTIONS
       <PlaybackControls
         {...inlineBlock}

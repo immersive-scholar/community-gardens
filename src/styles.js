@@ -1,3 +1,4 @@
+import glamorous from "glamorous";
 import { css } from "glamor";
 import typography from "util/typography";
 
@@ -19,11 +20,14 @@ const lightFocusedText = css({
 });
 
 const wideContainer = css({
-  width: "100%",
+  width: `calc(100% - ${typography.rhythm(1)})`,
   maxWidth: "80rem",
-  margin: "0 auto",
+  margin: `0 ${typography.rhythm(1)}`,
   padding: "4rem 2rem",
-  textAlign: "left"
+  textAlign: "left",
+  "@media(max-width: 48em)": {
+    margin: "0 auto"
+  }
 });
 
 const removePaddingVertical = css({
@@ -45,6 +49,13 @@ const removeMarginBottom = css({
 
 const removeMarginVertical = css({
   marginBottom: 0
+});
+
+const addMarginSm = css({
+  "@media(max-width: 48em)": {
+    marginLeft: typography.rhythm(1),
+    marginRight: typography.rhythm(1)
+  }
 });
 
 const center = css({
@@ -85,7 +96,9 @@ const shadowless = css({
 });
 
 const fillButton = css({
+  whiteSpace: "nowrap",
   padding: `${typography.rhythm(0.5)} ${typography.rhythm(1)}`,
+  lineHeight: typography.rhythm(1.5),
   "&:hover": {
     cursor: "pointer"
   }
@@ -152,6 +165,11 @@ const inlineBlock = css({
   display: "inline-block"
 });
 
+const CircleMaskDiv = glamorous.div({
+  borderRadius: "50%",
+  overflow: "hidden"
+});
+
 export {
   textContainer,
   lightText,
@@ -162,6 +180,7 @@ export {
   removePaddingBottom,
   removeMarginBottom,
   removeMarginVertical,
+  addMarginSm,
   center,
   link,
   shadowless,
@@ -180,5 +199,6 @@ export {
   bulletless,
   grid,
   inlineBlock,
-  underline
+  underline,
+  CircleMaskDiv
 };
