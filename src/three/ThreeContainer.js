@@ -69,12 +69,12 @@ class ThreeContainer extends Component {
   }
 
   render() {
-    const {
-      selectedChapterID,
-      selectedChapter,
-      playing,
-      setPlaying
-    } = this.props;
+    // const {
+    //   selectedChapterID,
+    //   selectedChapter,
+    //   playing,
+    //   setPlaying
+    // } = this.props;
     return (
       <Fragment>
         <ThreeControlBar />

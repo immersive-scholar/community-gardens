@@ -86,7 +86,6 @@ class BaseChapter {
     // ensure we don't select the currently selected element
     // this would mean the camera doesn't move.
     // boooooring.
-    console.log("this.instances.length ", this.instances.length);
     if (this.instances.length > 1 && index === this.state.currentFocusIndex) {
       return this.getRandomInstance();
     }

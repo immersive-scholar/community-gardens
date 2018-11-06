@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
@@ -16,8 +16,7 @@ import {
   fillButton,
   link,
   shadowless,
-  grid,
-  fullWidth
+  grid
 } from "styles";
 
 class Home extends PureComponent {

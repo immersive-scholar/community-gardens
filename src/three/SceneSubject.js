@@ -1,6 +1,5 @@
-import kebabCase from "lodash/kebabCase";
-
 import DidNotEatForADayChapter from "chapters/DidNotEatForADayChapter";
+import EnergyOutgoingChapter from "chapters/EnergyOutgoingChapter";
 import FirstGenerationChapter from "chapters/FirstGenerationChapter";
 import HighGPAChapter from "chapters/HighGPAChapter";
 import HousingInsecurityChapter from "chapters/HousingInsecurityChapter";
@@ -13,7 +12,6 @@ import WellnessChapter from "chapters/WellnessChapter";
 import WinterGardenChapter from "chapters/WinterGardenChapter";
 
 import ChapterPlate from "art/chapter-plate/ChapterPlate";
-import * as STATS from "constants/Stats";
 
 class SceneSubject {
   constructor({ scene, camera, R, controls, settings }) {
@@ -26,6 +24,7 @@ class SceneSubject {
 
     this.chapters = [
       DidNotEatForADayChapter,
+      EnergyOutgoingChapter,
       FirstGenerationChapter,
       HighGPAChapter,
       HousingInsecurityChapter,
@@ -61,12 +60,17 @@ class SceneSubject {
     const chapterClass = this.chapters[chapterIndex];
     let chapter;
 
+    console.log(chapterClass);
+
     switch (chapterClass) {
       case HousingInsecurityChapter:
         chapter = this.createHousingInsecurityChapter();
         break;
       case DidNotEatForADayChapter:
         chapter = this.createDidNotEatForADayChapter();
+        break;
+      case EnergyOutgoingChapter:
+        chapter = this.createEnergyOutgoingChapter();
         break;
       case RandomGardenChapter:
         chapter = this.createRandomChapter();
@@ -112,6 +116,9 @@ class SceneSubject {
       case "did-not-eat-for-a-day":
         chapter = this.createDidNotEatForADayChapter();
         break;
+      case "energy-outgoing":
+        chapter = this.createEnergyOutgoingChapter();
+        break;
       case "pell-grant":
         chapter = this.createPellGrantChapter();
         break;
@@ -156,6 +163,16 @@ class SceneSubject {
   createDidNotEatForADayChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new DidNotEatForADayChapter(
+      { settings, focusTotal: 3 },
+      camera,
+      controls,
+      R
+    );
+    return chapter;
+  }
+  createEnergyOutgoingChapter() {
+    const { settings, camera, controls, R } = this;
+    const chapter = new EnergyOutgoingChapter(
       { settings, focusTotal: 3 },
       camera,
       controls,

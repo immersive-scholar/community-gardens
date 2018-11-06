@@ -88,6 +88,8 @@ class ChapterPlate extends BaseRenderable {
     this.tween && this.tween.kill(null, this);
     this.tween2 && this.tween2.kill(null, this);
 
+    this.timeoutID && clearTimeout(this.timeoutID);
+
     if (this.plane) {
       this.plane.geometry.dispose();
       this.plane.material.dispose();
@@ -171,11 +173,6 @@ class ChapterPlate extends BaseRenderable {
         }
       });
     });
-  }
-
-  clean() {
-    this.tween && this.tween.kill(null, this);
-    this.timeoutID && clearTimeout(this.timeoutID);
   }
 }
 

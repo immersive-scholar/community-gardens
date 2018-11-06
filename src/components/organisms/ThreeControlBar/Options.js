@@ -2,12 +2,7 @@ import React from "react";
 
 import PlaybackControls from "./PlaybackControls";
 
-import {
-  removePaddingVertical,
-  lightText,
-  shadowless,
-  inlineBlock
-} from "styles";
+import { removePaddingVertical, lightText, inlineBlock } from "styles";
 import { OptionsDiv, container } from "./styles";
 
 const Options = ({ optionsOpen, isPlaying, onPlaybackChange }) => {

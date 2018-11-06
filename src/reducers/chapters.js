@@ -2,14 +2,16 @@ import camelCase from "lodash/camelCase";
 
 import { ADD_CHAPTER, FOCUS_CHAPTER } from "constants/Constants";
 import addCollectionToNode from "util/AddCollectionToNode";
+import {
+  SummerGardenModel,
+  HousingInsecurityModel,
+  HighResourcesModel,
+  EnergyOutgoingModel
+} from "models";
 
 const initialState = {
   node: {
-    summerGarden: {
-      id: "summer-garden",
-      title: "Summer Garden",
-      link: "/garden/summer-garden"
-    },
+    summerGarden: SummerGardenModel,
     winterGarden: {
       id: "winter-garden",
       title: "Winter Garden",
@@ -26,11 +28,7 @@ const initialState = {
       link: "/garden/first-generation"
     },
     highGPA: { id: "highGPA", title: "High GPA", link: "/garden/high-gpa" },
-    housingInsecurity: {
-      id: "housing-insecurity",
-      title: "Housing Insecurity",
-      link: "/garden/housing-insecurity"
-    },
+    housingInsecurity: HousingInsecurityModel,
     outOfState: {
       id: "out-of-state",
       title: "Out of State",
@@ -46,12 +44,8 @@ const initialState = {
       title: "Random Garden",
       link: "/garden/random-garden"
     },
-    resourced: {
-      id: "resourced",
-      title: "High Resources",
-      link: "/garden/resourced"
-    },
-
+    resourced: HighResourcesModel,
+    energyOutgoing: EnergyOutgoingModel,
     wellness: {
       id: "wellness",
       title: "Wellness Garden",

@@ -3,6 +3,7 @@ export const BELOW_POVERTY_LINE = "belowPovertyLine";
 export const DID_NOT_EAT_FOR_A_DAY = "didNotEatForADay";
 export const EARN_A_LOT = "earnALot";
 export const EARN_A_LOT_AND_ARE_HUNGRY = "earnALotAndAreHungry";
+export const ENERGY_OUTGOING = "energyOutgoing";
 export const EXPERIENCE_HUNGER = "experienceHunger";
 export const FIRST_GENERATION = "firstGeneration";
 export const FOOD_INSECURITY = "foodInsecurity";

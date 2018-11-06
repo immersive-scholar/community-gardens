@@ -1,5 +1,4 @@
 import RandomSeed from "random-seed";
-import get from "lodash/get";
 import HighresExport from "three/vendor/Highres";
 import SceneManager from "./SceneManager";
 import GeneralCanvas from "./GeneralCanvas";

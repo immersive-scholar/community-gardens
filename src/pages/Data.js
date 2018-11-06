@@ -1,9 +1,7 @@
 import React, { PureComponent, Fragment } from "react";
-import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import map from "lodash/map";
 
 import { chapters } from "actions";
 import Image from "components/atoms/Image";
@@ -15,59 +13,23 @@ import {
 import PathToPicture from "util/PathToPicture";
 
 import { textContainer, wideContainer } from "styles";
-import { css } from "glamor";
 
 class Data extends PureComponent {
   componentWillMount() {
     const headerImage = PathToPicture("headers", `community-gardens-data`);
 
-    const summer = {
-      title: "High Health",
-      excerpt: (
-        <Fragment>
-          Students with a <b>high health</b> score are drawn with summer colors.
-        </Fragment>
-      ),
-      headerImage: PathToPicture("plants", `summer-garden`),
-      cta: "View",
-      link: "/garden/summer-garden"
-    };
-
-    const housingInsecurity = {
-      title: "Housing Insecurity",
-      excerpt: (
-        <Fragment>
-          Students who experience <b>housing insecurity</b> are more affected by
-          the wind.
-        </Fragment>
-      ),
-      headerImage: PathToPicture("plants", `housing-insecurity`),
-      cta: "View",
-      link: "/garden/housing-insecurity"
-    };
-
-    const highResources = {
-      title: "High Resources",
-      excerpt: (
-        <Fragment>
-          Students who have <b>high resources</b> are have thicker stems.
-        </Fragment>
-      ),
-      headerImage: PathToPicture("plants", `high-resources`),
-      cta: "View",
-      link: "/garden/resourced"
-    };
-
-    this.setState({ summer, headerImage, housingInsecurity, highResources });
+    this.setState({ headerImage });
   }
 
   render() {
-    const {
-      headerImage,
-      summer,
-      housingInsecurity,
-      highResources
-    } = this.state;
+    const { headerImage } = this.state;
+
+    const { chapters } = this.props;
+    const summer = chapters.summerGarden;
+    const housingInsecurity = chapters.housingInsecurity;
+    const highResources = chapters.resourced;
+    const energyOutgoing = chapters.energyOutgoing;
+
     const theme = {
       baseColor: "#fbb3d1",
       colors: ["#ec468a", "#fbb3d1", "#ffffff", "#c25482"]
@@ -149,16 +111,15 @@ class Data extends PureComponent {
             mask="circle"
             theme={theme}
           />
+          <CopyImageBlock
+            item={energyOutgoing}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
         </div>{" "}
         <div {...textContainer}>
-          <Animated>
-            Students who have high <b>Resources Incoming</b> scores have thicker
-            stems.
-          </Animated>
-          <Animated>
-            Students who have high <b>Energy Outgoing</b> scores have berries
-            displaced from the stem.
-          </Animated>
           <Animated>
             <b>First Generation</b> students have mazes on their stems. They
             have an extra layer of challenges to navigate, often without guides

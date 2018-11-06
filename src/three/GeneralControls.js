@@ -13,7 +13,10 @@ const Controls = ({ camera, velocity = 1, domElement }) => {
   orbitControls.rotateSpeed = 0.1;
   orbitControls.zoomSpeed = 0.1;
 
+  /* eslint-disable no-unused-vars */
   let timeScale = velocity;
+  /* eslint-enable no-unused-vars */
+
   let oldAutoRotate = false;
   let timeoutID = 0;
 

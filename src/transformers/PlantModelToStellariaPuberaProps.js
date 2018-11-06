@@ -1,10 +1,9 @@
-import { Vector3, Color } from "three-full";
+import { Vector3 } from "three-full";
 import * as STATS from "constants/Stats";
 import Modifiers from "./modifiers/";
 
 const PlantModelToStellariaPuberaProps = ({
   model,
-  stats,
   i,
   delay = 0,
   instanceDelay = 0.5,
@@ -36,6 +35,8 @@ const PlantModelToStellariaPuberaProps = ({
 
   // if any of these triggers are true,
   // we will adjust the props accordingly
+
+  /* eslint-enable no-unused-vars */
   const resourcesIncoming = model.resourcesIncoming;
   const energyOutgoing = model.energyOutgoing;
   const communityFitness = model.communityFitness;
@@ -66,6 +67,7 @@ const PlantModelToStellariaPuberaProps = ({
     parseInt(model.sharemeals, 10) ||
     parseInt(model.givefood, 10) ||
     parseInt(model.sharemeals, 10);
+  /* eslint-disable no-unused-vars */
 
   props = Modifiers.PersonalScarcityModifier({ props, personalScarcity });
   props = Modifiers.ResourcesIncomingModifier({ props, resourcesIncoming });

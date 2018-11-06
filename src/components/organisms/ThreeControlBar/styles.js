@@ -1,7 +1,6 @@
 import glamorous from "glamorous";
 import { css } from "glamor";
 import typography from "util/typography";
-import { blockParams } from "handlebars";
 
 const ControlBarDiv = glamorous.div({
   position: "fixed",

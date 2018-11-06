@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { css } from "glamor";
 
-import AnimationWrapper from "components/molecules/AnimationWrapper";
-
 import Image from "components/atoms/Image";
 import Video from "components/atoms/Video";
 

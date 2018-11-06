@@ -1,7 +1,4 @@
 import React from "react";
-import { Icon } from "react-icons-kit";
-import { play2 } from "react-icons-kit/icomoon/play2";
-import { pause } from "react-icons-kit/icomoon/pause";
 
 import {
   inlineBlock,

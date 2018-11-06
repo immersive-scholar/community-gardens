@@ -40,6 +40,7 @@ const PlantModelToSolomonsSealProps = ({
   const emotionalHealth = model.emotionalHealth;
   const health = model.health;
 
+  /* eslint-disable no-unused-vars */
   const didNotEatForADay = model[STATS.DID_NOT_EAT_FOR_A_DAY];
   const experienceHunger = model[STATS.EXPERIENCE_HUNGER];
   const foodInsecurity = model[STATS.FOOD_INSECURITY];
@@ -63,6 +64,7 @@ const PlantModelToSolomonsSealProps = ({
     parseInt(model.sharemeals, 10) ||
     parseInt(model.givefood, 10) ||
     parseInt(model.sharemeals, 10);
+  /* eslint-enable no-unused-vars */
 
   props = Modifiers.PersonalScarcityModifier({ props, personalScarcity });
   props = Modifiers.ResourcesIncomingModifier({ props, resourcesIncoming });

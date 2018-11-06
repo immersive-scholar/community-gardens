@@ -1,7 +1,7 @@
 import {
   BufferGeometry,
   FontLoader,
-  GeometryUtils,
+  // GeometryUtils,
   Mesh,
   MeshBasicMaterial,
   TextGeometry

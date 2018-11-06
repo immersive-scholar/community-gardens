@@ -10,6 +10,7 @@ import CommunityGarden from "./stats/CommunityGarden";
 import DidNotEatForADay from "./stats/DidNotEatForADay";
 import EarnALot from "./stats/EarnALot";
 import EarnALotAndAreHungry from "./stats/EarnALotAndAreHungry";
+import EnergyOutgoing from "./stats/EnergyOutgoing";
 import ExperienceHunger from "./stats/ExperienceHunger";
 import FirstGeneration from "./stats/FirstGeneration";
 import FoodInsecurity from "./stats/FoodInsecurity";
@@ -31,6 +32,7 @@ import {
   DID_NOT_EAT_FOR_A_DAY,
   EARN_A_LOT,
   EARN_A_LOT_AND_ARE_HUNGRY,
+  ENERGY_OUTGOING,
   EXPERIENCE_HUNGER,
   FIRST_GENERATION,
   FOOD_INSECURITY,
@@ -97,6 +99,7 @@ class InsecurityCalculator {
       // stats.communityGarden = CommunityGarden(data, total);
       // stats.didNotEatForADay = DidNotEatForADay(data, total);
       // stats.earnALot = EarnALot(data);
+      // stats.energyOutgoing = EnergyOutgoing(data);
       // stats.earnALotAndAreHungry = EarnALotAndAreHungry(data);
       // stats.experienceHunger = ExperienceHunger(data, total);
       // stats.firstGeneration = FirstGeneration(data, total);
@@ -150,6 +153,9 @@ class InsecurityCalculator {
       case EARN_A_LOT_AND_ARE_HUNGRY:
         stats.earnALotAndAreHungry = EarnALotAndAreHungry(data);
         return stats.earnALotAndAreHungry;
+      case ENERGY_OUTGOING:
+        stats.energyOutgoing = EnergyOutgoing(data);
+        return stats.energyOutgoing;
       case EXPERIENCE_HUNGER:
         stats.experienceHunger = ExperienceHunger(data, total);
         return stats.experienceHunger;
@@ -207,7 +213,6 @@ class InsecurityCalculator {
     if (!stat) {
       stat = InsecurityCalculator.calculateStat(label);
     }
-    console.log("label ", stat);
     return stat;
   };
 

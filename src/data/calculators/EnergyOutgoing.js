@@ -9,11 +9,11 @@ const EnergyOutgoing = d => {
   }
 
   // if the student is fulltime, then working more takes more energy
-  let workHours = parseInt(d.workhours, 10);
+  let workHours = parseInt(d.workhours, 10) || 0;
 
   // If the individual works full-time, their workhours ‘cost’ twice as much energy as if they are part-time
   const fullTime = parseInt(d.FT_PT, 10) === 1;
-  energyOutgoing += fullTime ? workHours * 2 : workHours;
+  // energyOutgoing += fullTime ? workHours * 2 : workHours;
 
   // some degrees take more energy to pursue than others
   const degree = parseInt(d.Degree, 10);

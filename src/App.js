@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Switch, Redirect } from "react-router";
+import { Switch } from "react-router";
 import Helmet from "react-helmet";
 import { TypographyStyle, GoogleFont } from "react-typography";
 
