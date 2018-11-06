@@ -12,7 +12,7 @@ const HealthModifier = ({ props, health }) => {
     hslObject = {},
     healthOffset = 1;
   switch (true) {
-    case health <= -10:
+    case health <= 0:
       props.color = ColorFactory.getRandomColor(
         ColorFactory.WINTER,
         ColorFactory.LEAF
@@ -51,8 +51,8 @@ const HealthModifier = ({ props, health }) => {
       break;
   }
 
-  if (health < 0) {
-    healthOffset = 1 + health / 30;
+  if (health <= 0) {
+    healthOffset = (1 + health / 30) * 0.25;
 
     healthOffset = Math.min(1, Math.max(0, healthOffset));
 
@@ -60,11 +60,12 @@ const HealthModifier = ({ props, health }) => {
     c.getHSL(hslObject);
     props.hslBase = new Vector3(
       hslObject.h,
-      hslObject.s * healthOffset * 0.8,
-      hslObject.l * healthOffset
+      hslObject.s * (1 - healthOffset),
+      hslObject.l
     );
-    c.setHSL(props.hslBase.x, props.hslBase.y, props.hslBase.z);
+    // c.setHSL(props.hslBase.x, props.hslBase.y, props.hslBase.z);
     props.color = c.getHex();
+    props.stemColor = c.getHex();
     // props.leafColor = c.getHex();
   }
 
