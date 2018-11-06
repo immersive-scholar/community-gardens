@@ -119,6 +119,7 @@ export default (container, settings) => {
     // TweenMax.pauseAll(false, false, false);
     sceneManager.controls.disable();
     sceneManager.controls.play();
+    sceneManager.subject.currentChapter.startGuide({ delay: 0.5 });
   }
 
   function render() {

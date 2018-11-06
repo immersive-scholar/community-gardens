@@ -186,18 +186,20 @@ class BaseChapter {
       for (let i = 0, iL = this.spawns.length; i < iL; i++) {
         this.spawns[i].animateIn({ delay: i * 2, instanceDelay: 0.3 });
       }
+    });
+  };
 
-      const element = this.getRandomInstance();
-      element.createChildren();
-      element.animateIn({ delay: 8, duration: 7 });
-      this.focusElement({
-        element,
-        delay: 15,
-        duration: 10,
-        offset: element.state.lookUpAt
-          ? LookUpOffset(this.R)
-          : LookDownOffset(this.R)
-      });
+  startGuide = ({ delay = 0, duration = 10 }) => {
+    const element = this.getRandomInstance();
+    // element.createChildren();
+    // element.animateIn({ delay, duration });
+    this.focusElement({
+      element,
+      delay: delay,
+      duration: duration,
+      offset: element.state.lookUpAt
+        ? LookUpOffset(this.R)
+        : LookDownOffset(this.R)
     });
   };
 
