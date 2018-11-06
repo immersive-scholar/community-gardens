@@ -103,6 +103,10 @@ const PlantModelToStellariaPuberaProps = ({
   // the more resources Incoming you have, the more berries are created.
   props.berryCount = Math.max(10, resourcesIncoming * 5);
 
+  if (energyOutgoing > 0) {
+    props.berryDistanceFromStem = energyOutgoing * 0.02;
+  }
+
   // housing insecurity displaces leaves from stems
   if (housingInsecurity) {
     props.windForce = R.floatBetween(0.1, 0.3);

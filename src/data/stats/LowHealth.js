@@ -3,7 +3,7 @@ import HealthFilter from "data/filters/HealthFilter";
 import { LOW_HEALTH } from "constants/Stats";
 import ColorFactory from "util/ColorFactory";
 
-const LowHealth = (data, threshold = 5) => {
+const LowHealth = (data, threshold = 0) => {
   const rows = HealthFilter(data, threshold, "<");
   const count = rows.length;
   const ids = map(rows, row => row.ID);

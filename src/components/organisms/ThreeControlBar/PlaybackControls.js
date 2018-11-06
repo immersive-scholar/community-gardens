@@ -14,19 +14,19 @@ const PlaybackControls = ({ isPlaying, onPlaybackChange }) => (
     <a
       {...shadowless}
       {...button}
-      {...(!isPlaying ? lightText : lightFocusedText)}
-      onClick={() => onPlaybackChange(true)}
+      {...(isPlaying ? lightText : lightFocusedText)}
+      onClick={() => onPlaybackChange(false)}
     >
-      Guided Tour
+      You drive
     </a>{" "}
     <i>or</i>{" "}
     <a
       {...shadowless}
       {...button}
-      {...(isPlaying ? lightText : lightFocusedText)}
-      onClick={() => onPlaybackChange(false)}
+      {...(!isPlaying ? lightText : lightFocusedText)}
+      onClick={() => onPlaybackChange(true)}
     >
-      You drive
+      Guided Tour
     </a>
   </div>
 );

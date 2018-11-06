@@ -51,24 +51,22 @@ const HealthModifier = ({ props, health }) => {
       break;
   }
 
-  if (health > 0) {
-    healthOffset = 0.5 + health / 20;
-  } else {
+  if (health < 0) {
     healthOffset = 1 + health / 30;
+
+    healthOffset = Math.min(1, Math.max(0, healthOffset));
+
+    c = new Color(props.color);
+    c.getHSL(hslObject);
+    props.hslBase = new Vector3(
+      hslObject.h,
+      hslObject.s * healthOffset * 0.8,
+      hslObject.l * healthOffset
+    );
+    c.setHSL(props.hslBase.x, props.hslBase.y, props.hslBase.z);
+    props.color = c.getHex();
+    // props.leafColor = c.getHex();
   }
-
-  healthOffset = Math.min(1, Math.max(0, healthOffset));
-
-  c = new Color(props.color);
-  c.getHSL(hslObject);
-  props.hslBase = new Vector3(
-    hslObject.h,
-    hslObject.s * healthOffset,
-    hslObject.l * healthOffset
-  );
-  c.setHSL(props.hslBase.x, props.hslBase.y, props.hslBase.z);
-  props.color = c.getHex();
-  // props.leafColor = c.getHex();
 
   props.openness = health * 0.1;
 

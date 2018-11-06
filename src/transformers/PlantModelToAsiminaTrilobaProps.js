@@ -101,8 +101,13 @@ const PlantModelToAsiminaTrilobaProps = ({
   });
   props = Modifiers.ShareModifier({ props, shares });
 
+  // CUSTOM
   props.petalWidth = 0.05;
   props.petalLength = 0.1;
+
+  if (energyOutgoing > 0) {
+    props.berryDistanceFromStem = energyOutgoing * 0.02;
+  }
 
   // bigger leaves for those who earn a lot but are not hungry
   if (earnALot && !earnALotAndAreHungry) {

@@ -6,7 +6,7 @@ import {
   SET_ANTI_ALIAS,
   SET_DEBUG,
   PRESENTATION_MODE_DEFAULT,
-  EXPLORE,
+  PRESENTATION_MODE_EXPLORE,
   SET_PLAYING,
   SET_OPTIONS_OPEN
 } from "constants/Constants";
@@ -23,7 +23,7 @@ let quantityMultiplier = 1;
 let seed = Math.random();
 let debug = 0;
 let presentationMode = PRESENTATION_MODE_DEFAULT;
-let playing = true;
+let playing = false;
 let optionsOpen = false;
 
 // 2. Sniff GPU to derive default performance options
@@ -34,6 +34,8 @@ const { antiAlias, dpr } = gpu.config;
 const largeDisplay = window.innerWidth > 5200;
 if (largeDisplay) {
   timeMultiplier = 0.3;
+  presentationMode = PRESENTATION_MODE_EXPLORE;
+  playing = true;
 }
 
 // 3. Adjust values based on environment app is running within
@@ -56,7 +58,7 @@ switch (true) {
 // an ihpone 6 is rated 3, but so is a K5000
 // downgrade quantityMultiplier for mobile devices.
 if (device.mobile) {
-  presentationMode = EXPLORE;
+  presentationMode = PRESENTATION_MODE_EXPLORE;
   switch (true) {
     case tierIndex === 3:
       quantityMultiplier = 2;

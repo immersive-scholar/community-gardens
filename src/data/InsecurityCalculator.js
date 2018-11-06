@@ -169,7 +169,7 @@ class InsecurityCalculator {
         stats.highGPA = HighGPA(data, total);
         return stats.highGPA;
       case HIGH_HEALTH:
-        stats.highHealth = HighHealth(data, 2);
+        stats.highHealth = HighHealth(data, 0);
         return stats.highHealth;
       case HIGH_RESOURCES:
         stats.highResources = HighResources(data, 1);
@@ -181,7 +181,7 @@ class InsecurityCalculator {
         stats.inhabitable = Inhabitable(data);
         return stats.inhabitable;
       case LOW_HEALTH:
-        stats.lowHealth = LowHealth(data, -2);
+        stats.lowHealth = LowHealth(data, 0);
         return stats.lowHealth;
       case OUT_OF_STATE:
         stats.outOfState = OutOfState(data);
