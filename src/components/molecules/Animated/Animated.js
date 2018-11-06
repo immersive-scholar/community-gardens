@@ -1,7 +1,7 @@
 import React from "react";
 import { Watch } from "scrollmonitor-react";
 
-import AnimationWrapper from "../AnimationWrapper";
+import AnimationWrapper from "components/molecules/AnimationWrapper";
 
 const Animated = ({ isInViewport, children, as, delay = 50 }) => {
   const Component = as || "p";

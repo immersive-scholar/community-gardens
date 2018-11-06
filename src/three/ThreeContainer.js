@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import get from "lodash/get";
 
-import ThreeControlBar from "components/ThreeControlBar";
+import ThreeControlBar from "components/organisms/ThreeControlBar";
 import threeEntryPoint from "three/ThreeEntryPoint";
 import { settings, chapters } from "actions";
 import { getSelectedChapter } from "reducers";

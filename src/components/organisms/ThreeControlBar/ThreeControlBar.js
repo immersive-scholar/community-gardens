@@ -55,7 +55,9 @@ class ThreeControlBar extends PureComponent {
             onPlaybackChange={p => this.onPlaybackChange(p)}
           />
           {title}
-          <Icon size={24} icon={question} />
+          <Link {...shadowless} {...lightText} to="/data">
+            <Icon size={24} icon={question} />
+          </Link>
           <Link {...shadowless} {...lightText} to="/">
             <Icon size={24} icon={exit} />
           </Link>

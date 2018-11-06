@@ -1,5 +1,5 @@
 import React from "react";
-import Animated from "components/Animated";
+import Animated from "components/molecules/Animated";
 
 const LoadableComponent = props => {
   const { error, pastDelay, timedOut, retry, page } = props;

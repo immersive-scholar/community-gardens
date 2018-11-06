@@ -6,9 +6,9 @@ import { bindActionCreators } from "redux";
 import map from "lodash/map";
 
 import { chapters } from "actions";
-import Animated from "components/Animated";
+import Animated from "components/molecules/Animated";
+import Image from "components/atoms/Image";
 import PathToPicture from "util/PathToPicture";
-import Image from "../components/Image";
 
 import {
   textContainer,
@@ -16,7 +16,8 @@ import {
   fillButton,
   link,
   shadowless,
-  grid
+  grid,
+  fullWidth
 } from "styles";
 
 class Home extends PureComponent {
@@ -29,12 +30,13 @@ class Home extends PureComponent {
 
     this.state = { headerImage };
   }
+
   render() {
     const { chapters } = this.props;
     const { headerImage } = this.state;
 
     return (
-      <Fragment>
+      <div>
         <Image ratio="16x9" sources={headerImage} />
         <div {...textContainer}>
           <Helmet
@@ -46,7 +48,7 @@ class Home extends PureComponent {
           <Animated>
             Community Gardens is a data-driven generative art installation that
             uses gardens as a metaphor to discuss food and housing insecurity
-            within the NCSU student body.
+            within the NC State student body.
           </Animated>
           <Animated>
             In summer, plants have all the resources they need to thrive. In
@@ -60,9 +62,14 @@ class Home extends PureComponent {
             >
               Dr Haskett
             </a>, each student becomes a plant in the garden. Depending on the
-            data, plants are created with different attributes. They are taller
-            or shorter, have different colors and patterns, and are affected by
-            the wind differently.{" "}
+            data, plants are created with different attributes. The sizes,
+            shapes, colors and species change according to the data.
+          </Animated>
+          <Animated>
+            Students that are First Generation have mazes on their leaves
+            because they have extra challenges to navigate. Students who have
+            been awarded grants have golden leaves. Students who experience
+            housing insecurity are more affected by the wind.{" "}
             <Link to="/data" {...shadowless} {...link}>
               Read more about how data affects the plants.
             </Link>
@@ -70,7 +77,7 @@ class Home extends PureComponent {
 
           <Animated as="h2">Gardens</Animated>
           <Animated>
-            Each Garden represents a different grouping of students. Upon
+            Each garden represents a different grouping of students. Upon
             entering the garden, you will be taken on a tour to look at
             different plants.
           </Animated>
@@ -94,7 +101,7 @@ class Home extends PureComponent {
             })}
           </div>
         </div>
-      </Fragment>
+      </div>
     );
   }
 }

@@ -10,6 +10,7 @@ import Home from "pages/Home";
 import NotFound from "pages/NotFound";
 
 import LoadableThreeContainer from "./loadables/LoadableThreeContainer";
+import LoadableData from "./loadables/LoadableData";
 
 class App extends Component {
   componentWillUpdate({ location, history }) {
@@ -42,6 +43,7 @@ class App extends Component {
               <ScrollToTop>
                 <Switch>
                   <Route exact path="/" component={Home} />
+                  <Route exact path="/data" component={LoadableData} />
                   <Switch>
                     <Route
                       exact

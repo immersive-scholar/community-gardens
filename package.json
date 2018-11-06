@@ -32,6 +32,7 @@
     "react-scripts": "1.1.4",
     "react-transition-group": "^2.5.0",
     "react-typography": "^0.16.13",
+    "react-vimeo": "^2.0.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0",
@@ -46,7 +47,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "react-snap",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "npm run build && aws --profile communitygardens s3 sync build/ s3://communitygardens.com && aws --profile communitygardens cloudfront create-invalidation --distribution-id E23MD48ALLMDEF --paths '/*'"
