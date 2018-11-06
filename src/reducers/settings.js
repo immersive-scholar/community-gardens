@@ -8,7 +8,11 @@ import {
   PRESENTATION_MODE_DEFAULT,
   PRESENTATION_MODE_EXPLORE,
   SET_PLAYING,
-  SET_OPTIONS_OPEN
+  SET_OPTIONS_OPEN,
+  IMMERSION,
+  ART_WALL,
+  COMMONS,
+  VISUALIZATION
 } from "constants/Constants";
 import { TweenMax } from "gsap";
 import GPU from "util/GPU";
@@ -25,18 +29,13 @@ let debug = 0;
 let presentationMode = PRESENTATION_MODE_DEFAULT;
 let playing = false;
 let optionsOpen = false;
+let show3DTitles = false;
+let env, wallDisplay;
 
 // 2. Sniff GPU to derive default performance options
 const gpu = new GPU();
 const { tierIndex, device } = gpu;
 const { antiAlias, dpr } = gpu.config;
-
-const largeDisplay = window.innerWidth > 5200;
-if (largeDisplay) {
-  timeMultiplier = 0.3;
-  presentationMode = PRESENTATION_MODE_EXPLORE;
-  playing = true;
-}
 
 // 3. Adjust values based on environment app is running within
 // fast computer gets many more plants
@@ -84,6 +83,31 @@ seed = parseFloat(parsed.seed) || seed;
 debug = parseFloat(parsed.debug) === 1 || debug;
 // debug = debug || window.location.hostname === "localhost";
 
+switch (parsed.env) {
+  case IMMERSION:
+    wallDisplay = IMMERSION;
+    break;
+  case ART_WALL:
+    wallDisplay = ART_WALL;
+    break;
+  case COMMONS:
+    wallDisplay = COMMONS;
+    break;
+  case VISUALIZATION:
+    wallDisplay = VISUALIZATION;
+    break;
+  default:
+    console.log("Unkonwn wall");
+    break;
+}
+
+if (wallDisplay) {
+  timeMultiplier = 0.3;
+  playing = true;
+  presentationMode = PRESENTATION_MODE_EXPLORE;
+  show3DTitles = true;
+}
+
 const initialState = {
   timeMultiplier,
   quantityMultiplier,
@@ -94,8 +118,10 @@ const initialState = {
   mobile: device.mobile,
   playing,
   optionsOpen,
-  largeDisplay,
-  presentationMode
+  presentationMode,
+  show3DTitles,
+  env,
+  wallDisplay
 };
 
 export default (state = initialState, action) => {

@@ -1,7 +1,7 @@
 import {
   BufferGeometry,
   FontLoader,
-  // GeometryUtils,
+  GeometryUtils,
   Mesh,
   MeshBasicMaterial,
   TextGeometry
@@ -19,6 +19,7 @@ class ChapterTitle extends BaseRenderable {
     this.text = text;
     this.color = color;
     this.textArray = textArray;
+    this.linesOfText = [];
 
     // start location
     this.group.position.y = 0;
@@ -29,6 +30,7 @@ class ChapterTitle extends BaseRenderable {
   }
 
   createChildren() {
+    console.log("CREATING...");
     return new Promise((resolve, reject) => {
       // We need to resolve the animateIn once a bunch of animations have run
       // so we're storing these for later retrieval.
@@ -56,10 +58,9 @@ class ChapterTitle extends BaseRenderable {
     size = 0.2,
     offsetY = 0
   }) {
-    return;
     const loader = new FontLoader();
     let geometry,
-      height = 0;
+      height = 0.05;
 
     loader.load(
       //   `${process.env.PUBLIC_URL}/fonts/helvetiker_regular.typeface.json`,
@@ -75,25 +76,28 @@ class ChapterTitle extends BaseRenderable {
         geometry.computeBoundingBox();
         geometry.computeVertexNormals();
 
-        // var triangleAreaHeuristics = 0.1 * (height * size);
-        // for (var i = 0; i < geometry.faces.length; i++) {
-        //   var face = geometry.faces[i];
-        //   if (face.materialIndex === 1) {
-        //     for (var j = 0; j < face.vertexNormals.length; j++) {
-        //       face.vertexNormals[j].z = 0;
-        //       face.vertexNormals[j].normalize();
-        //     }
-        //     var va = geometry.vertices[face.a];
-        //     var vb = geometry.vertices[face.b];
-        //     var vc = geometry.vertices[face.c];
-        //     var s = GeometryUtils.triangleArea(va, vb, vc);
-        //     if (s > triangleAreaHeuristics) {
-        //       for (j = 0; j < face.vertexNormals.length; j++) {
-        //         face.vertexNormals[j].copy(face.normal);
-        //       }
-        //     }
-        //   }
-        // }
+        // console.time("faces");
+
+        var triangleAreaHeuristics = 0.1 * (height * size);
+        for (var i = 0; i < geometry.faces.length; i++) {
+          var face = geometry.faces[i];
+          if (face.materialIndex === 1) {
+            for (var j = 0; j < face.vertexNormals.length; j++) {
+              face.vertexNormals[j].z = 0;
+              face.vertexNormals[j].normalize();
+            }
+            var va = geometry.vertices[face.a];
+            var vb = geometry.vertices[face.b];
+            var vc = geometry.vertices[face.c];
+            var s = GeometryUtils.triangleArea(va, vb, vc);
+            if (s > triangleAreaHeuristics) {
+              for (j = 0; j < face.vertexNormals.length; j++) {
+                face.vertexNormals[j].copy(face.normal);
+              }
+            }
+          }
+        }
+        // console.timeEnd("faces");
 
         var centerOffset =
           -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);

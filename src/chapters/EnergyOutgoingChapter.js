@@ -21,7 +21,7 @@ class EnergyOutgoingChapter extends BaseChapter {
     const stat = InsecurityCalculator.getStat(ENERGY_OUTGOING);
     const { color, textArray, bgColor } = stat;
 
-    const { quantityMultiplier, mobile } = this.settings;
+    const { quantityMultiplier, show3DTitles } = this.settings;
     const count = Math.min(stat.count, 25 * quantityMultiplier);
     const plantTypeCount = 3;
     const plantCount = Math.floor(count / plantTypeCount);
@@ -45,7 +45,7 @@ class EnergyOutgoingChapter extends BaseChapter {
       color,
       textArray
     });
-    !mobile && this.chapterTitle.createChildren();
+    show3DTitles && this.chapterTitle.createChildren();
     this.addCleanable(this.chapterTitle, this.chapterTitle.group);
 
     let bounds = new Vector3(1, 1, 1),

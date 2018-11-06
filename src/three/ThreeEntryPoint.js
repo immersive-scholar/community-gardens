@@ -10,6 +10,8 @@ import InsecurityCalculator from "data/InsecurityCalculator";
 export default (container, settings) => {
   const { seed } = settings;
 
+  let subjectReady = false;
+
   // const seed = Math.random();
   // const seed = 0.4865584781852079;
   const R = RandomSeed.create(seed);
@@ -99,7 +101,7 @@ export default (container, settings) => {
   }
 
   function onSubjectReady() {
-    let { quantityMultiplier, timeMultiplier, debug } = settings;
+    let { quantityMultiplier, timeMultiplier, debug, playing } = settings;
 
     sceneManager.subject.setQuantityMultiplier(quantityMultiplier);
     sceneManager.subject.setTimeMultiplier(timeMultiplier);
@@ -107,6 +109,12 @@ export default (container, settings) => {
     sceneManager.controls.setTimeMultiplier(timeMultiplier);
 
     sceneManager.setDebug(debug);
+
+    if (playing) {
+      sceneManager.subject.currentChapter.startGuide({ delay: 10 });
+    }
+
+    subjectReady = true;
   }
 
   function pause() {
@@ -119,7 +127,10 @@ export default (container, settings) => {
     // TweenMax.pauseAll(false, false, false);
     sceneManager.controls.disable();
     sceneManager.controls.play();
-    sceneManager.subject.currentChapter.startGuide({ delay: 0.5 });
+
+    if (subjectReady) {
+      sceneManager.subject.currentChapter.startGuide({ delay: 1 });
+    }
   }
 
   function render() {

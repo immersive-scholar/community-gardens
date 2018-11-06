@@ -287,13 +287,13 @@ class SceneSubject {
     chapter.init();
     chapter.animateIn().then(() => this.playNextChapter());
 
-    if (this.settings.playing) {
-      chapter.startGuide({ delay: 15 });
-    }
-
     this.currentChapter = chapter;
 
     this.chapterPlate.animateOut({ delay: 1 });
+
+    if (this.settings.playing) {
+      chapter.startGuide({ delay: 15 });
+    }
   }
 
   cleanChapter(chapter) {

@@ -94,6 +94,7 @@ const mapStateToProps = state => {
     antiAlias: settings.antiAlias,
     debug: settings.debug,
     playing: settings.playing,
+    show3DTitles: settings.show3DTitles,
     selectedChapterID: chapters.selectedID,
     selectedChapter: getSelectedChapter(state)
   };

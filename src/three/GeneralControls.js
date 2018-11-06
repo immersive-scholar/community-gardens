@@ -291,7 +291,7 @@ const Controls = ({ camera, velocity = 1, domElement }) => {
   }
 
   function setTimeMultiplier(t) {
-    orbitControls.autoRotateSpeed = 0.15 * (1 / t);
+    orbitControls.autoRotateSpeed = t * 0.15;
   }
 
   function enable() {

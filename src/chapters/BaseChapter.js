@@ -122,12 +122,22 @@ class BaseChapter {
       tz: position.z + offset.tz
     };
 
+    // calculate distance between two elements to keep speed consistent
+    if (this.currentElement) {
+      const distance = this.currentElement.group.position.distanceTo(
+        new Vector3(to.x, to.y, to.z)
+      );
+      duration = distance * 10;
+    }
+
     this.controls.animate({
       to,
       delay,
       duration,
       callback: () => this.onTransitionComplete()
     });
+
+    this.currentElement = element;
   };
 
   onTransitionComplete = () => {
