@@ -12,6 +12,10 @@ const EmotionalHealthModifier = ({ props, emotionalHealth }) => {
     );
   }
 
+  if (emotionalHealth > 0) {
+    props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/polka-dots-4.png`;
+  }
+
   return props;
 };
 
