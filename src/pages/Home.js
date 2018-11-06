@@ -14,15 +14,8 @@ import {
   textContainer,
   buttonStyle,
   fillButton,
-  center,
-  removeMarginBottom,
-  removeMarginVertical,
+  link,
   shadowless,
-  bulletless,
-  removePaddingBottom,
-  removePaddingVertical,
-  thirdWidth,
-  fullWidthSm,
   grid
 } from "styles";
 
@@ -46,7 +39,7 @@ class Home extends PureComponent {
         <div {...textContainer}>
           <Helmet
             title="Community Gardens"
-            description="Community Gardens is a data-driven generative art installation using gardens as metaphor to discuss food and housing insecurity within the student body at NCSU."
+            description="Community Gardens is a data-driven generative art installation using gardens as metaphor to discuss food and housing insecurity within the student body at NC State."
           />
 
           <Animated as="h1">Community Gardens</Animated>
@@ -59,17 +52,32 @@ class Home extends PureComponent {
             In summer, plants have all the resources they need to thrive. In
             winter, less so. Using data collected by{" "}
             <a
+              {...shadowless}
+              {...link}
               target="_blank"
               rel="nofollow noopener noreferrer"
               href="https://psychology.chass.ncsu.edu/faculty_staff/mehasket"
             >
               Dr Haskett
             </a>, each student becomes a plant in the garden. Depending on the
-            data, plants of varying types are created that are taller or shorter
-            with differing amounts of leaves and berries.
+            data, plants are created with different attributes. They are taller
+            or shorter, have different colors and patterns, and are affected by
+            the wind differently.{" "}
+            <Link to="/data" {...shadowless} {...link}>
+              Read more about how data affects the plants.
+            </Link>
           </Animated>
-          <Animated as="h2">Gardens</Animated>
 
+          <Animated as="h2">Gardens</Animated>
+          <Animated>
+            Each Garden represents a different grouping of students. Upon
+            entering the garden, you will be taken on a tour to look at
+            different plants.
+          </Animated>
+          <Animated>
+            Every garden is created at the moment you enter it so you will never
+            see the exact same garden twice.
+          </Animated>
           <div {...grid}>
             {map(chapters, chapter => {
               return (

@@ -9,6 +9,7 @@ import { question } from "react-icons-kit/icomoon/question";
 
 import { settings, chapters } from "actions";
 import { getSelectedChapter } from "reducers";
+import OptionsButton from "./OptionsButton";
 import Options from "./Options";
 
 import {
@@ -17,7 +18,7 @@ import {
   lightText,
   shadowless
 } from "styles";
-import { ControlBar, controlsGrid } from "./styles";
+import { ControlBarDiv, controlsGrid, stateOpen } from "./styles";
 
 class ThreeControlBar extends PureComponent {
   onPlaybackChange = p => {
@@ -32,9 +33,10 @@ class ThreeControlBar extends PureComponent {
   render() {
     const { playing, optionsOpen } = this.props;
     const title = get(this.props, "selectedChapter.title", "Loading...");
+    const controlBarClass = optionsOpen ? stateOpen : {};
 
     return (
-      <ControlBar>
+      <ControlBarDiv {...controlBarClass}>
         <div
           {...wideContainer}
           {...removePaddingVertical}
@@ -45,9 +47,12 @@ class ThreeControlBar extends PureComponent {
             isPlaying={playing}
             onPlaybackChange={p => this.onPlaybackChange(p)}
           /> */}
-          <Options
+
+          <OptionsButton
             optionsOpen={optionsOpen}
             toggleOptions={() => this.toggleOptions()}
+            isPlaying={playing}
+            onPlaybackChange={p => this.onPlaybackChange(p)}
           />
           {title}
           <Icon size={24} icon={question} />
@@ -55,7 +60,11 @@ class ThreeControlBar extends PureComponent {
             <Icon size={24} icon={exit} />
           </Link>
         </div>
-      </ControlBar>
+        <Options
+          isPlaying={playing}
+          onPlaybackChange={p => this.onPlaybackChange(p)}
+        />
+      </ControlBarDiv>
     );
   }
 }

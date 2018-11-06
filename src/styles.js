@@ -14,6 +14,10 @@ const lightText = css({
   color: "#ffffff"
 });
 
+const lightFocusedText = css({
+  color: "#fe6442"
+});
+
 const wideContainer = css({
   width: "100%",
   maxWidth: "80rem",
@@ -58,6 +62,10 @@ const button = css({
   "&:hover": {
     cursor: "pointer"
   }
+});
+
+const underline = css({
+  textDecoration: "underline"
 });
 
 const buttonStyle = css({
@@ -140,9 +148,14 @@ const grid = css({
   gridRowGap: "0.5rem"
 });
 
+const inlineBlock = css({
+  display: "inline-block"
+});
+
 export {
   textContainer,
   lightText,
+  lightFocusedText,
   wideContainer,
   removePaddingVertical,
   removePaddingTop,
@@ -165,5 +178,7 @@ export {
   fullWidthSm,
   imageWrapper,
   bulletless,
-  grid
+  grid,
+  inlineBlock,
+  underline
 };

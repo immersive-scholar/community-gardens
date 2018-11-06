@@ -3,16 +3,34 @@ import { Icon } from "react-icons-kit";
 import { play2 } from "react-icons-kit/icomoon/play2";
 import { pause } from "react-icons-kit/icomoon/pause";
 
+import {
+  inlineBlock,
+  lightText,
+  shadowless,
+  lightFocusedText,
+  button
+} from "styles";
+
 const PlaybackControls = ({ isPlaying, onPlaybackChange }) => (
-  <div
-    onClick={() => onPlaybackChange(!isPlaying)}
-    style={{ color: "#ffffff", display: "inlineBlock" }}
-  >
-    {!isPlaying ? (
-      <Icon size={24} icon={pause} />
-    ) : (
-      <Icon size={24} icon={play2} />
-    )}
+  <div {...inlineBlock} {...lightText}>
+    Choose Controls:{" "}
+    <a
+      {...shadowless}
+      {...button}
+      {...(!isPlaying ? lightText : lightFocusedText)}
+      onClick={() => onPlaybackChange(true)}
+    >
+      Guided Tour
+    </a>{" "}
+    <i>or</i>{" "}
+    <a
+      {...shadowless}
+      {...button}
+      {...(isPlaying ? lightText : lightFocusedText)}
+      onClick={() => onPlaybackChange(false)}
+    >
+      You drive
+    </a>
   </div>
 );
 
