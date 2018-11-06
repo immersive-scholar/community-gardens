@@ -12,8 +12,8 @@ const GPAModifier = ({ props, gpa }) => {
     // color.getHSL(hsl);
     // props.hslBase = new Vector3(hsl.h, hsl.s, hsl.l);
     // props.hslRange = new Vector3(0, 0.1, 0.2);
+    props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/stars.png`;
   }
-  props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/stars.png`;
 
   return props;
 };
