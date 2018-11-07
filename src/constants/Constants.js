@@ -25,3 +25,5 @@ export const VISUALIZATION = "VISUALIZATION";
 
 // SLIDES
 export const FOCUS_SLIDE = "FOCUS_SLIDE";
+export const NEXT_SLIDE = "NEXT_SLIDE";
+export const PREV_SLIDE = "PREV_SLIDE";

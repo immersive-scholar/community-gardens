@@ -11,7 +11,8 @@ import {
   PlateText,
   Empty,
   Circle,
-  Background
+  Background,
+  blackBg
 } from "pages/Presentation/styles";
 
 class IntroSlide extends PureComponent {
@@ -27,7 +28,7 @@ class IntroSlide extends PureComponent {
         {map(slides, (slide, i) => {
           let bg = sampledBackgrounds[i];
           return (
-            <Circle key={`circle-${i}`}>
+            <Circle key={`circle-${i}`} {...blackBg}>
               <Background>
                 <Image sources={bg} />
               </Background>

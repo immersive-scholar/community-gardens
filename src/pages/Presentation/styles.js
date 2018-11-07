@@ -26,10 +26,12 @@ const Circle = glamorous.div({
   overflow: "hidden"
 });
 
+const blackBg = { ...css({ background: "#000000 !important" }) };
+
 const PlateText = glamorous.h1({
   position: "relative",
-  margin: "-70px 0 0 -20px",
-  fontSize: "230px",
+  margin: "0 auto",
+  fontSize: "100px",
   textAlign: "center",
   fontFamily: "Alegreya"
 });
@@ -42,4 +44,4 @@ const Background = glamorous.div({
   height: "100%"
 });
 
-export { PageWrapper, PlateText, Empty, Circle, Background };
+export { PageWrapper, PlateText, Empty, Circle, Background, blackBg };

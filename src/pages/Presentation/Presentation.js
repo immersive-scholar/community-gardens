@@ -6,7 +6,9 @@ import { bindActionCreators } from "redux";
 import { slides } from "actions";
 import { getSelectedSlide } from "reducers";
 
+import SlideController from "components/molecules/SlideController";
 import IntroSlide from "./slides/IntroSlide";
+import MeSlide from "./slides/MeSlide";
 import GenerativeSlide from "./slides/GenerativeSlide";
 
 import { PageWrapper } from "./styles";
@@ -71,8 +73,9 @@ class Presentation extends PureComponent {
   }
 
   render() {
-    const { selectedSlideID } = this.props;
+    const { selectedSlideID, selectedSlide } = this.props;
     const { backgrounds, blomDark, blomLight, theme } = this.state;
+    const SlideClass = selectedSlide.slideClass;
 
     return (
       <div>
@@ -81,11 +84,13 @@ class Presentation extends PureComponent {
           description="Presentation materials for Vis Studio at Hill."
         />
         <PageWrapper>
+          <SlideController />
           {selectedSlideID === "intro" && (
-            <IntroSlide backgrounds={blomDark} theme={theme} />
+            <SlideClass backgrounds={blomDark} theme={theme} />
           )}
+          {selectedSlideID === "me" && <SlideClass theme={theme} />}
           {selectedSlideID === "generative" && (
-            <GenerativeSlide backgrounds={backgrounds} theme={theme} />
+            <SlideClass backgrounds={backgrounds} theme={theme} />
           )}
         </PageWrapper>
       </div>
@@ -96,7 +101,7 @@ class Presentation extends PureComponent {
 const mapStateToProps = state => {
   const { slides } = state;
   return {
-    selectedSlideID: slides.selectedId,
+    selectedSlideID: slides.selectedID,
     selectedSlide: getSelectedSlide(state)
   };
 };
