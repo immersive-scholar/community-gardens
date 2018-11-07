@@ -3,7 +3,8 @@ import Helmet from "react-helmet";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { chapters } from "actions";
+import { slides } from "actions";
+import { getSelectedSlide } from "reducers";
 
 import IntroSlide from "./slides/IntroSlide";
 import GenerativeSlide from "./slides/GenerativeSlide";
@@ -61,10 +62,16 @@ class Presentation extends PureComponent {
       colors: ["#fbb3d1", "#ffffff", "#c25482"]
     };
 
-    this.setState({ backgrounds, blomDark, blomLight, theme });
+    this.setState({
+      backgrounds,
+      blomDark,
+      blomLight,
+      theme
+    });
   }
 
   render() {
+    const { selectedSlideID } = this.props;
     const { backgrounds, blomDark, blomLight, theme } = this.state;
 
     return (
@@ -74,20 +81,28 @@ class Presentation extends PureComponent {
           description="Presentation materials for Vis Studio at Hill."
         />
         <PageWrapper>
-          <IntroSlide backgrounds={blomDark} theme={theme} />
-          {/* <GenerativeSlide backgrounds={backgrounds} theme={theme} /> */}
+          {selectedSlideID === "intro" && (
+            <IntroSlide backgrounds={blomDark} theme={theme} />
+          )}
+          {selectedSlideID === "generative" && (
+            <GenerativeSlide backgrounds={backgrounds} theme={theme} />
+          )}
         </PageWrapper>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ chapters }) => ({
-  chapters: chapters.node
-});
+const mapStateToProps = state => {
+  const { slides } = state;
+  return {
+    selectedSlideID: slides.selectedId,
+    selectedSlide: getSelectedSlide(state)
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
-  focusChapter: bindActionCreators(chapters.focusChapter, dispatch)
+  focusSlide: bindActionCreators(slides.focusSlide, dispatch)
 });
 
 export default connect(

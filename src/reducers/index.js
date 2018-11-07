@@ -3,10 +3,12 @@ import { combineReducers } from "redux";
 import chapters, * as fromChapters from "reducers/chapters";
 import settings from "reducers/settings";
 import version from "reducers/version";
+import slides, * as fromSlides from "reducers/slides";
 
 const appReducer = combineReducers({
   chapters,
   settings,
+  slides,
   version
 });
 
@@ -19,6 +21,9 @@ export default rootReducer;
 
 export const getSelectedChapter = state =>
   fromChapters.getSelectedChapter(state.chapters);
+
+export const getSelectedSlide = state =>
+  fromSlides.getSelectedSlide(state.slides);
 
 /*
 export const getSelectedColorFamily = state =>

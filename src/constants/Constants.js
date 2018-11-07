@@ -22,3 +22,6 @@ export const IMMERSION = "IMMERSION";
 export const ART_WALL = "ART_WALL";
 export const COMMONS = "COMMONS";
 export const VISUALIZATION = "VISUALIZATION";
+
+// SLIDES
+export const FOCUS_SLIDE = "FOCUS_SLIDE";
