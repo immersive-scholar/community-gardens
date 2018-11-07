@@ -14,7 +14,7 @@ const LogoWrapperDiv = glamorous.div({
   bottom: 0,
   right: 0,
   padding: "10px",
-  width: Microtiles.getWidth(8),
+  width: Microtiles.getWidth(2),
   //   height: Microtiles.getHeight(0.5),
   background: "#000000",
   color: "#ffffff",

@@ -30,7 +30,6 @@ class ChapterTitle extends BaseRenderable {
   }
 
   createChildren() {
-    console.log("CREATING...");
     return new Promise((resolve, reject) => {
       // We need to resolve the animateIn once a bunch of animations have run
       // so we're storing these for later retrieval.

@@ -31,12 +31,14 @@ let optionsOpen = false;
 let show3DTitles = false;
 let showControlBar = true;
 let showImmersiveScholarLogo = true;
+let showSidebar = false;
+let sidebarWidth = 0;
 let env, wallDisplay;
 
 // 2. Sniff GPU to derive default performance options
 const gpu = new GPU();
 const { tierIndex, device } = gpu;
-const { antiAlias, dpr } = gpu.config;
+let { antiAlias, dpr } = gpu.config;
 
 // 3. Adjust values based on environment app is running within
 // fast computer gets many more plants
@@ -80,6 +82,7 @@ const parsed = queryString.parse(location.search);
 switch (parsed.env) {
   case IMMERSION:
     wallDisplay = IMMERSION;
+
     break;
   case ART_WALL:
     wallDisplay = ART_WALL;
@@ -94,6 +97,8 @@ switch (parsed.env) {
     break;
 }
 
+Microtiles.setEnvironment(wallDisplay);
+
 if (wallDisplay) {
   timeMultiplier = 0.3;
   playing = true;
@@ -103,6 +108,11 @@ if (wallDisplay) {
   showImmersiveScholarLogo = true;
 }
 
+if (wallDisplay === IMMERSION) {
+  showSidebar = true;
+  sidebarWidth = Microtiles.getWidth(2);
+}
+
 // 4. override with any query string params
 quantityMultiplier =
   parseFloat(parsed.quantityMultiplier) || quantityMultiplier;
@@ -110,9 +120,9 @@ quantityMultiplier =
 timeMultiplier = parseFloat(parsed.timeMultiplier) || timeMultiplier;
 seed = parseFloat(parsed.seed) || seed;
 debug = parseFloat(parsed.debug) === 1 || debug;
+dpr = parseFloat(parsed.dpr) || dpr;
+show3DTitles = parseFloat(parsed.show3DTitles) === 0 ? false : show3DTitles;
 // debug = debug || window.location.hostname === "localhost";
-
-Microtiles.setEnvironment(wallDisplay);
 
 const initialState = {
   timeMultiplier,
@@ -128,6 +138,8 @@ const initialState = {
   show3DTitles,
   showControlBar,
   showImmersiveScholarLogo,
+  showSidebar,
+  sidebarWidth,
   env,
   wallDisplay
 };

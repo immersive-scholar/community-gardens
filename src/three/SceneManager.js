@@ -11,7 +11,7 @@ import GeneralLights from "./GeneralLights";
 import CameraController from "./helpers/CameraController";
 
 export default ({ generalCanvas, R, settings }) => {
-  const { debug } = settings;
+  const { debug, sidebarWidth = 0 } = settings;
   let clock = new Clock();
 
   let stats = new Stats();
@@ -24,7 +24,7 @@ export default ({ generalCanvas, R, settings }) => {
   let scene = new GeneralScene({});
   let renderer = new GeneralRenderer({
     canvas: generalCanvas.canvas,
-    width: screenDimensions.width,
+    width: screenDimensions.width - sidebarWidth,
     height: screenDimensions.height,
     dpr: settings.dpr,
     antiAlias: settings.antiAlias
@@ -68,8 +68,10 @@ export default ({ generalCanvas, R, settings }) => {
   function onWindowResize() {
     generalCanvas.resizeCanvas();
 
-    const width = window.innerWidth,
+    const width = window.innerWidth - sidebarWidth,
       height = window.innerHeight;
+
+    console.log("width ", width);
 
     camera.aspect = width / height;
     camera.updateProjectionMatrix();

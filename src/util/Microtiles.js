@@ -66,11 +66,11 @@ class MicroTiles {
   }
 
   static getWidth(count) {
-    return `${this.tileWidth * count}px`;
+    return `${this.tileWidth * count}`;
   }
 
   static getHeight(count) {
-    return `${this.tileWidth * count}px`;
+    return `${this.tileWidth * count}`;
   }
 }
 

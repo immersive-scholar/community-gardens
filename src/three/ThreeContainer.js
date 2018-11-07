@@ -94,6 +94,8 @@ const mapStateToProps = state => {
     show3DTitles: settings.show3DTitles,
     showControlBar: settings.showControlBar,
     showImmersiveScholarLogo: settings.showImmersiveScholarLogo,
+    showSidebar: settings.showSidebar,
+    sidebarWidth: settings.sidebarWidth,
     selectedChapterID: chapters.selectedID,
     selectedChapter: getSelectedChapter(state)
   };

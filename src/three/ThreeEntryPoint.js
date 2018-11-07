@@ -8,7 +8,8 @@ import TextureFactory from "util/TextureFactory";
 import InsecurityCalculator from "data/InsecurityCalculator";
 
 export default (container, settings) => {
-  const { seed } = settings;
+  const { seed, sidebarWidth } = settings;
+  console.log("settings ", settings);
 
   let subjectReady = false;
 
@@ -52,7 +53,7 @@ export default (container, settings) => {
     pausedRenderer: false
   };
 
-  const generalCanvas = new GeneralCanvas(document, container);
+  const generalCanvas = new GeneralCanvas(document, container, sidebarWidth);
   const sceneManager = new SceneManager({ generalCanvas, R, settings });
 
   let highresExport;
