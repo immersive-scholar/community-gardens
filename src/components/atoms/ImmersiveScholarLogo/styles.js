@@ -6,25 +6,28 @@ import Microtiles from "util/Microtiles";
 
 const LogoWrapperDiv = glamorous.div({
   position: "fixed",
-  display: "flex",
-  flexDirection: "row",
+  display: "grid",
+  gridTemplateColumns: `1fr 1fr`,
+  gridColumnGap: "10px",
   alignItems: "center",
   justifyContent: "center",
   fontSize: Microtiles.caption,
   bottom: 0,
   right: 0,
-  padding: "10px",
-  width: Microtiles.getWidth(2),
-  //   height: Microtiles.getHeight(0.5),
-  background: "#000000",
-  color: "#ffffff",
-  zIndex: 2,
+  padding: "30px",
+  width: `${Microtiles.getWidth(4)}px`,
+  //   height: `${Microtiles.getHeight(0.5)}px`,
+  background: "#ffdc99",
+  color: "#333333",
+  textAlign: "center",
+  zIndex: 3,
   transition: "transform 300ms ease-out",
-  border: "1px solid black"
+  border: "30px solid #ffffff"
 });
 
 const Logo = glamorous.div({
-  width: Microtiles.getWidth(1),
+  width: `${Microtiles.getWidth(1)}px`,
+  margin: "0 auto",
   background: "#ffffff"
 });
 

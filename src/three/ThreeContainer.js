@@ -6,6 +6,7 @@ import get from "lodash/get";
 
 import ThreeControlBar from "components/organisms/ThreeControlBar";
 import ImmersiveScholarLogo from "components/atoms/ImmersiveScholarLogo";
+import Infobar from "components/molecules/Infobar";
 import threeEntryPoint from "three/ThreeEntryPoint";
 import { settings, chapters } from "actions";
 import { getSelectedChapter } from "reducers";
@@ -70,10 +71,15 @@ class ThreeContainer extends Component {
   }
 
   render() {
-    const { showControlBar, showImmersiveScholarLogo } = this.props;
+    const {
+      showControlBar,
+      showImmersiveScholarLogo,
+      showSidebar
+    } = this.props;
     return (
       <Fragment>
         {showControlBar && <ThreeControlBar />}
+        {showSidebar && <Infobar />}
         {showImmersiveScholarLogo && <ImmersiveScholarLogo />}
         <div ref={element => (this.threeRootElement = element)} />
       </Fragment>

@@ -28,7 +28,7 @@ class ImmersiveScholarLogo extends PureComponent {
     return (
       <LogoWrapperDiv>
         <p {...removeMarginBottom}>
-          This project was funded by the Andrew W. Mellon Foundation.
+          This project was funded by the<br />Andrew W. Mellon Foundation.
         </p>
         <Logo>
           <Image ratio="3x1" sources={image} />

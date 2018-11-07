@@ -110,7 +110,7 @@ if (wallDisplay) {
 
 if (wallDisplay === IMMERSION) {
   showSidebar = true;
-  sidebarWidth = Microtiles.getWidth(2);
+  sidebarWidth = Microtiles.getWidth(4);
 }
 
 // 4. override with any query string params

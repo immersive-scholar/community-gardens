@@ -18,8 +18,8 @@ class MicroTiles {
         columns = 16;
         h = 8618;
         rows = 16;
-        h1 = 225;
-        h2 = 150;
+        h1 = 196;
+        h2 = 100;
         body = 60;
         caption = 30;
         break;

@@ -2,16 +2,16 @@ import Typography from "typography";
 import lincolnTheme from "typography-theme-lincoln";
 
 const custom = {
-  headerFontFamily: ["Open Sans"],
+  headerFontFamily: ["Alegreya"],
   baseFontSize: "24px",
-  bodyFontFamily: ["Merriweather"],
+  bodyFontFamily: ["Roboto"],
   googleFonts: [
     {
-      name: "Open Sans",
+      name: "Alegreya",
       styles: ["700"]
     },
     {
-      name: "Merriweather",
+      name: "Roboto",
       styles: ["400", "400i", "700", "700i"]
     }
   ]
