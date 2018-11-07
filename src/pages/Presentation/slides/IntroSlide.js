@@ -16,16 +16,43 @@ import {
 } from "pages/Presentation/styles";
 
 class IntroSlide extends PureComponent {
-  render() {
-    let slides = new Array(12);
+  componentWillMount() {
+    const backgroundFilenames = [
+      "hr-1541474916803-2048x2048",
+      "hr-1541474986837-2048x2048",
+      "hr-1541475258969-2048x2048",
+      "hr-1541475347108-2048x2048",
+      "hr-1541475561202-2048x2048",
+      "hr-1541475664041-2048x2048",
+      "hr-1541476768539-2048x2048",
+      "hr-1541477034736-2048x2048",
+      "hr-1541478064355-2048x2048",
+      "hr-1541478160164-2048x2048",
+      "hr-1541478795951-2048x2048",
+      "hr-1541519404405-2048x2048",
+      "hr-1541519465781-2048x2048",
+      "hr-1541526484189-2048x2048"
+    ];
 
-    let { backgrounds, theme } = this.props;
+    const backgrounds = backgroundFilenames.map(filename => [
+      {
+        srcSet: require(`assets/backgrounds/community-gardens/${filename}.png`)
+      }
+    ]);
+
+    this.setState({ backgrounds });
+  }
+  render() {
+    let screens = new Array(12);
+
+    let { theme } = this.props;
+    let { backgrounds } = this.state;
 
     const sampledBackgrounds = sampleSize(backgrounds, 12);
 
     return (
       <Fragment>
-        {map(slides, (slide, i) => {
+        {map(screens, (screen, i) => {
           let bg = sampledBackgrounds[i];
           return (
             <Circle key={`circle-${i}`} {...blackBg}>

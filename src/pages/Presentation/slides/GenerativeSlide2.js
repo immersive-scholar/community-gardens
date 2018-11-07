@@ -11,9 +11,9 @@ import {
   Background
 } from "pages/Presentation/styles";
 
-class MeSlide extends PureComponent {
+class GenerativeSlide2 extends PureComponent {
   render() {
-    const title = "lucastswick";
+    const title = "GENERATIVE";
     const { theme } = this.props;
 
     return (
@@ -36,4 +36,4 @@ class MeSlide extends PureComponent {
   }
 }
 
-export default MeSlide;
+export default GenerativeSlide2;

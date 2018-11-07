@@ -7,13 +7,15 @@ import addCollectionToNode from "util/AddCollectionToNode";
 import IntroSlide from "pages/Presentation/slides/IntroSlide";
 import MeSlide from "pages/Presentation/slides/MeSlide";
 import GenerativeSlide from "pages/Presentation/slides/GenerativeSlide";
+import GenerativeSlide2 from "pages/Presentation/slides/GenerativeSlide2";
 
 const initialState = {
   selectedID: "intro",
   node: {
     intro: { index: 0, id: "intro", slideClass: IntroSlide },
     me: { index: 1, id: "me", slideClass: MeSlide },
-    generative: { index: 2, id: "generative", slideClass: GenerativeSlide }
+    generative: { index: 2, id: "generative", slideClass: GenerativeSlide },
+    generative2: { index: 3, id: "generative2", slideClass: GenerativeSlide2 }
   }
 };
 
