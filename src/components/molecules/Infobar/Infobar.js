@@ -9,17 +9,7 @@ import { SidebarDiv, Title, P, Bold } from "./styles";
 const QRCode = require("qrcode.react");
 
 class Sidebar extends PureComponent {
-  componentWillMount() {
-    const image = [
-      {
-        srcSet: require(`assets/logos/community-gardens-logo.png`)
-      }
-    ];
-    this.setState({ image });
-  }
   render() {
-    const { image } = this.state;
-
     return (
       <SidebarDiv>
         <Logo />

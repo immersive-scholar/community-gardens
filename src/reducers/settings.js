@@ -30,7 +30,7 @@ let playing = false;
 let optionsOpen = false;
 let show3DTitles = false;
 let showControlBar = true;
-let showImmersiveScholarLogo = true;
+let showImmersiveScholarLogo = false;
 let showSidebar = false;
 let sidebarWidth = 0;
 let env, wallDisplay;
@@ -82,7 +82,6 @@ const parsed = queryString.parse(location.search);
 switch (parsed.env) {
   case IMMERSION:
     wallDisplay = IMMERSION;
-
     break;
   case ART_WALL:
     wallDisplay = ART_WALL;
@@ -105,12 +104,12 @@ if (wallDisplay) {
   presentationMode = PRESENTATION_MODE_EXPLORE;
   show3DTitles = true;
   showControlBar = false;
-  showImmersiveScholarLogo = true;
 }
 
 if (wallDisplay === IMMERSION) {
   showSidebar = true;
   sidebarWidth = Microtiles.getWidth(3);
+  showImmersiveScholarLogo = true;
 }
 
 // 4. override with any query string params

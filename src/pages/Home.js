@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import map from "lodash/map";
 
 import { chapters } from "actions";
 import Animated from "components/molecules/Animated";
