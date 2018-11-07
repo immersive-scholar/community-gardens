@@ -9,15 +9,26 @@ import MeSlide from "pages/Presentation/slides/MeSlide";
 import GenerativeSlide from "pages/Presentation/slides/GenerativeSlide";
 import GenerativeSlide2 from "pages/Presentation/slides/GenerativeSlide2";
 
-const initialState = {
-  selectedID: "intro",
-  node: {
-    intro: { index: 0, id: "intro", slideClass: IntroSlide },
-    me: { index: 1, id: "me", slideClass: MeSlide },
-    generative: { index: 2, id: "generative", slideClass: GenerativeSlide },
-    generative2: { index: 3, id: "generative2", slideClass: GenerativeSlide2 }
-  }
+const queryString = require("query-string");
+
+const node = {
+  intro: { index: 0, id: "intro", slideClass: IntroSlide },
+  me: { index: 1, id: "me", slideClass: MeSlide },
+  generative2: { index: 2, id: "generative2", slideClass: GenerativeSlide2 },
+  generative: { index: 3, id: "generative", slideClass: GenerativeSlide }
 };
+
+const location = window.location;
+const parsed = queryString.parse(location.search);
+const slide = parseInt(parsed.slide, 10) || 0;
+let selectedID = find(node, n => n.index === slide).id;
+
+const initialState = {
+  selectedID,
+  node
+};
+
+const searchParams = new URLSearchParams(window.location.search);
 
 export default (state = initialState, action) => {
   let currentSlide = state.node[state.selectedID];
@@ -27,6 +38,12 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case FOCUS_SLIDE:
       let id = action.payload.data.id;
+
+      // push index to url
+      let index = state.node[id].index;
+      searchParams.set("slide", index);
+      window.history.pushState(null, "", searchParams.toString());
+
       return {
         ...state,
         selectedID: id
@@ -35,6 +52,11 @@ export default (state = initialState, action) => {
       let nextIndex = Math.min(currentIndex + 1, slideCount - 1);
       let nextSlide = find(state.node, s => s.index === nextIndex);
       let nextID = nextSlide.id;
+
+      // push index to url
+      searchParams.set("slide", nextIndex);
+      window.history.pushState(null, "", searchParams.toString());
+
       return {
         ...state,
         selectedID: nextID
@@ -43,6 +65,11 @@ export default (state = initialState, action) => {
       let prevIndex = Math.max(currentIndex - 1, 0);
       let prevSlide = find(state.node, s => s.index === prevIndex);
       let prevID = prevSlide.id;
+
+      // push index to url
+      searchParams.set("slide", prevIndex);
+      window.history.pushState(null, "", searchParams.toString());
+
       return {
         ...state,
         selectedID: prevID
