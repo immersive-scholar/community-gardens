@@ -8,16 +8,13 @@ import map from "lodash/map";
 import { chapters } from "actions";
 import Animated from "components/molecules/Animated";
 import Image from "components/atoms/Image";
+import {
+  ImageCopyBlock,
+  CopyImageBlock
+} from "components/organisms/ImageCopyBlock";
 import PathToPicture from "util/PathToPicture";
 
-import {
-  textContainer,
-  buttonStyle,
-  fillButton,
-  link,
-  shadowless,
-  grid
-} from "styles";
+import { textContainer, wideContainer, link, shadowless } from "styles";
 
 class Home extends PureComponent {
   constructor(props) {
@@ -33,6 +30,18 @@ class Home extends PureComponent {
   render() {
     const { chapters } = this.props;
     const { headerImage } = this.state;
+
+    const summerGarden = chapters.summerGarden;
+    const housingInsecurity = chapters.housingInsecurity;
+    const highResources = chapters.resourced;
+    const energyOutgoing = chapters.energyOutgoing;
+    const firstGeneration = chapters.firstGeneration;
+    const winterGarden = chapters.winterGarden;
+
+    const theme = {
+      baseColor: "#fbb3d1",
+      colors: ["#ec468a", "#fbb3d1", "#ffffff", "#c25482"]
+    };
 
     return (
       <div>
@@ -84,7 +93,52 @@ class Home extends PureComponent {
             Every garden is created at the moment you enter it so you will never
             see the exact same garden twice.
           </Animated>
-          <div {...grid}>
+        </div>
+        <div {...wideContainer}>
+          <ImageCopyBlock
+            item={summerGarden}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
+          <CopyImageBlock
+            item={winterGarden}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
+          <ImageCopyBlock
+            item={highResources}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
+          <CopyImageBlock
+            item={energyOutgoing}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
+          <ImageCopyBlock
+            item={firstGeneration}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
+          <CopyImageBlock
+            item={housingInsecurity}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
+        </div>
+        {/* <div {...grid}>
             {map(chapters, chapter => {
               return (
                 <Link
@@ -98,8 +152,7 @@ class Home extends PureComponent {
                 </Link>
               );
             })}
-          </div>
-        </div>
+          </div> */}
       </div>
     );
   }

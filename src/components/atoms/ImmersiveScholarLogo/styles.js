@@ -22,7 +22,7 @@ const LogoWrapperDiv = glamorous.div({
   textAlign: "center",
   zIndex: 3,
   transition: "transform 300ms ease-out",
-  border: "30px solid #ffffff"
+  border: "15px solid #ffffff"
 });
 
 const Logo = glamorous.div({

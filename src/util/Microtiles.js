@@ -19,8 +19,8 @@ class MicroTiles {
         h = 8618;
         rows = 16;
         h1 = 196;
-        h2 = 100;
-        body = 60;
+        h2 = 120;
+        body = 50;
         caption = 30;
         break;
       case ART_WALL:

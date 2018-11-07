@@ -19,7 +19,7 @@ const SidebarDiv = glamorous.div({
   background: "#ffce72",
   color: "#000000",
   zIndex: 2,
-  border: "30px solid #ffffff"
+  border: "10px solid #ffffff"
 });
 
 const Title = glamorous.h2({

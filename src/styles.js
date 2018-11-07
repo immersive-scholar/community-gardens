@@ -22,7 +22,7 @@ const lightFocusedText = css({
 const wideContainer = css({
   width: `calc(100% - ${typography.rhythm(1)})`,
   maxWidth: "80rem",
-  margin: `0 ${typography.rhythm(1)}`,
+  margin: `0 auto`,
   padding: "4rem 2rem",
   textAlign: "left",
   "@media(max-width: 48em)": {

@@ -134,7 +134,7 @@ class Data extends PureComponent {
             mask="circle"
             theme={theme}
           />
-        </div>{" "}
+        </div>
         <div {...textContainer}>
           <Animated>
             The <b>Degree</b> the student is pursing determines the plant
