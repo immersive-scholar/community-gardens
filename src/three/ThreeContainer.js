@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import get from "lodash/get";
 
 import ThreeControlBar from "components/organisms/ThreeControlBar";
+import ImmersiveScholarLogo from "components/atoms/ImmersiveScholarLogo";
 import threeEntryPoint from "three/ThreeEntryPoint";
 import { settings, chapters } from "actions";
 import { getSelectedChapter } from "reducers";
@@ -69,10 +70,11 @@ class ThreeContainer extends Component {
   }
 
   render() {
-    const { showControlBar } = this.props;
+    const { showControlBar, showImmersiveScholarLogo } = this.props;
     return (
       <Fragment>
         {showControlBar && <ThreeControlBar />}
+        {showImmersiveScholarLogo && <ImmersiveScholarLogo />}
         <div ref={element => (this.threeRootElement = element)} />
       </Fragment>
     );
@@ -91,6 +93,7 @@ const mapStateToProps = state => {
     playing: settings.playing,
     show3DTitles: settings.show3DTitles,
     showControlBar: settings.showControlBar,
+    showImmersiveScholarLogo: settings.showImmersiveScholarLogo,
     selectedChapterID: chapters.selectedID,
     selectedChapter: getSelectedChapter(state)
   };

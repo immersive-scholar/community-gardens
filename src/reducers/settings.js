@@ -16,6 +16,7 @@ import {
 } from "constants/Constants";
 import { TweenMax } from "gsap";
 import GPU from "util/GPU";
+import Microtiles from "util/Microtiles";
 
 const queryString = require("query-string");
 
@@ -29,6 +30,7 @@ let playing = false;
 let optionsOpen = false;
 let show3DTitles = false;
 let showControlBar = true;
+let showImmersiveScholarLogo = true;
 let env, wallDisplay;
 
 // 2. Sniff GPU to derive default performance options
@@ -98,6 +100,7 @@ if (wallDisplay) {
   presentationMode = PRESENTATION_MODE_EXPLORE;
   show3DTitles = true;
   showControlBar = false;
+  showImmersiveScholarLogo = true;
 }
 
 // 4. override with any query string params
@@ -108,6 +111,8 @@ timeMultiplier = parseFloat(parsed.timeMultiplier) || timeMultiplier;
 seed = parseFloat(parsed.seed) || seed;
 debug = parseFloat(parsed.debug) === 1 || debug;
 // debug = debug || window.location.hostname === "localhost";
+
+Microtiles.setEnvironment(wallDisplay);
 
 const initialState = {
   timeMultiplier,
@@ -122,6 +127,7 @@ const initialState = {
   presentationMode,
   show3DTitles,
   showControlBar,
+  showImmersiveScholarLogo,
   env,
   wallDisplay
 };

@@ -1,22 +1,23 @@
-import React from 'react';
-import { Watch } from 'scrollmonitor-react';
-import LazyLoad from 'react-lazyload';
+import React from "react";
+import { Watch } from "scrollmonitor-react";
+import LazyLoad from "react-lazyload";
 
-import { css } from 'glamor';
-import { Picture } from 'react-responsive-picture';
+import { css } from "glamor";
+import { Picture } from "react-responsive-picture";
 
 import {
   wrapper,
   placeholder,
   placeholder16x9,
+  placeholder3x1,
   placeholderLoaded,
   image,
   imageLoaded,
   base,
   baseLoaded,
   hilite,
-  hiliteLoaded,
-} from './styles';
+  hiliteLoaded
+} from "./styles";
 
 class Image extends React.Component {
   constructor(props) {
@@ -45,12 +46,12 @@ class Image extends React.Component {
     const baseColor =
       theme && theme.colors && theme.colors.length
         ? theme.colors[0]
-        : '#212121';
+        : "#212121";
 
     const hiliteColor =
       theme && theme.colors && theme.colors.length
         ? theme.colors[1]
-        : '#121212';
+        : "#121212";
 
     var windowInnerHeight =
       window.innerHeight || document.documentElement.clientHeight;
@@ -60,7 +61,8 @@ class Image extends React.Component {
         <div
           {...css(
             placeholder,
-            ratio === '16x9' ? placeholder16x9 : {},
+            ratio === "16x9" ? placeholder16x9 : {},
+            ratio === "3x1" ? placeholder3x1 : ratio,
             ready ? placeholderLoaded : {}
           )}
         />

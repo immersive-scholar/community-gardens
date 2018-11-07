@@ -20,6 +20,10 @@ const placeholder16x9 = {
   paddingTop: "56%"
 };
 
+const placeholder3x1 = {
+  paddingTop: "33%"
+};
+
 const placeholderLoaded = {
   display: "none"
 };
@@ -70,6 +74,7 @@ export {
   wrapper,
   placeholder,
   placeholder16x9,
+  placeholder3x1,
   placeholderLoaded,
   image,
   imageLoaded,
