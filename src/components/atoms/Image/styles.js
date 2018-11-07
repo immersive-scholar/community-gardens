@@ -24,6 +24,11 @@ const placeholder3x1 = {
   paddingTop: "33%"
 };
 
+const placeholderVis = {
+  // 12288 / 768
+  paddingTop: "6.25%"
+};
+
 const placeholderLoaded = {
   display: "none"
 };
@@ -75,6 +80,7 @@ export {
   placeholder,
   placeholder16x9,
   placeholder3x1,
+  placeholderVis,
   placeholderLoaded,
   image,
   imageLoaded,
