@@ -1,6 +1,4 @@
 import glamorous from "glamorous";
-import { css } from "glamor";
-import typography from "util/typography";
 
 import Microtiles from "util/Microtiles";
 

@@ -12,11 +12,6 @@ import InsecurityCalculator from "data/InsecurityCalculator";
 import GridLayout from "art/layouts/GridLayout";
 import { LAYOUT_FLOOR } from "art/layouts/LayoutConstants";
 import { LOW_HEALTH } from "constants/Stats";
-import {
-  INHABITABLE,
-  FOOD_INSECURITY,
-  HOUSING_INSECURITY
-} from "../constants/Stats";
 
 class WinterGardenChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {

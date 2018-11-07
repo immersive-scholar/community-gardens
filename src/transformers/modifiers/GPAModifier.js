@@ -1,5 +1,3 @@
-import { Vector3, Color } from "three-full";
-
 const GPAModifier = ({ props, gpa }) => {
   if (gpa >= 3) {
     // const c = 0xffffff;

@@ -1,10 +1,9 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import { css } from "glamor";
 
-import Image from "components/atoms/Image";
 import Logo from "components/atoms/Logo";
 
-import { removeMarginBottom, shadowless, link } from "styles";
+import { shadowless, link } from "styles";
 import { SidebarDiv, Title, P, Bold } from "./styles";
 
 const QRCode = require("qrcode.react");

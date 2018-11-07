@@ -7,7 +7,7 @@ import { Icon } from "react-icons-kit";
 import { exit } from "react-icons-kit/icomoon/exit";
 import { question } from "react-icons-kit/icomoon/question";
 
-import { settings, chapters } from "actions";
+import { settings } from "actions";
 import { getSelectedChapter } from "reducers";
 import OptionsButton from "./OptionsButton";
 import Options from "./Options";
