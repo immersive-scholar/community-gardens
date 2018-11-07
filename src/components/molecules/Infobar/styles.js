@@ -14,7 +14,7 @@ const SidebarDiv = glamorous.div({
   top: 0,
   right: 0,
   padding: "60px 120px",
-  width: `${Microtiles.getWidth(4)}px`,
+  width: `${Microtiles.getWidth(3)}px`,
   height: "100vh",
   background: "#ffce72",
   color: "#000000",
@@ -32,4 +32,10 @@ const P = glamorous.p({
   color: "inherit"
 });
 
-export { SidebarDiv, Title, P };
+const Bold = glamorous.p({
+  fontSize: 60,
+  color: "inherit",
+  fontFamily: "Alegreya"
+});
+
+export { SidebarDiv, Title, P, Bold };

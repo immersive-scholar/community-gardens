@@ -19,7 +19,7 @@ class MicroTiles {
         h = 8618;
         rows = 16;
         h1 = 196;
-        h2 = 120;
+        h2 = 110;
         body = 50;
         caption = 30;
         break;

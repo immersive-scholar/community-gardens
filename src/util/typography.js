@@ -4,14 +4,14 @@ import lincolnTheme from "typography-theme-lincoln";
 const custom = {
   headerFontFamily: ["Alegreya"],
   baseFontSize: "24px",
-  bodyFontFamily: ["Roboto"],
+  bodyFontFamily: ["Alegreya Sans"],
   googleFonts: [
     {
       name: "Alegreya",
       styles: ["700"]
     },
     {
-      name: "Roboto",
+      name: "Alegreya Sans",
       styles: ["400", "400i", "700", "700i"]
     }
   ]

@@ -5,7 +5,7 @@ import Image from "components/atoms/Image";
 import Logo from "components/atoms/Logo";
 
 import { removeMarginBottom, shadowless, link } from "styles";
-import { SidebarDiv, Title, P } from "./styles";
+import { SidebarDiv, Title, P, Bold } from "./styles";
 
 const QRCode = require("qrcode.react");
 
@@ -25,13 +25,13 @@ class Sidebar extends PureComponent {
       <SidebarDiv>
         <Logo />
         <Title>Community Gardens</Title>
-        <P>
+        <Bold>
           A data-driven generative art installation about food and housing
-          insecurity at NC State.
-        </P>
+          insecurity at NC&nbsp;State
+        </Bold>
         <P>
           Each plant represents a student. The plant's size, shape, species,
-          leaves, and other characteristics are all driven by the data.
+          leaves, and other characteristics are driven by data.
         </P>
         <P {...css({ marginBottom: "60px" })}>
           Go to{" "}
@@ -55,7 +55,7 @@ class Sidebar extends PureComponent {
         >
           <QRCode value="https://communitygardens.generativeartist.com/" />,
         </div>
-        <P {...css({ alignSelf: "center" })}>Let's do better.</P>
+        <Bold {...css({ alignSelf: "center" })}>Let's do better.</Bold>
       </SidebarDiv>
     );
   }

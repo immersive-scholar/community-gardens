@@ -14,12 +14,11 @@ const LogoWrapperDiv = glamorous.div({
   fontSize: Microtiles.caption,
   bottom: 0,
   right: 0,
-  padding: "30px",
-  width: `${Microtiles.getWidth(4)}px`,
+  padding: "30px 120px",
+  width: `${Microtiles.getWidth(3)}px`,
   //   height: `${Microtiles.getHeight(0.5)}px`,
   background: "#ffdc99",
   color: "#333333",
-  textAlign: "center",
   zIndex: 3,
   transition: "transform 300ms ease-out",
   border: "15px solid #ffffff"
@@ -27,7 +26,7 @@ const LogoWrapperDiv = glamorous.div({
 
 const Logo = glamorous.div({
   width: `${Microtiles.getWidth(1)}px`,
-  margin: "0 auto",
+  margin: "0 0 0 auto",
   background: "#ffffff"
 });
 
