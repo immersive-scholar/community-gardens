@@ -68,7 +68,7 @@ class Image extends React.Component {
             ready ? placeholderLoaded : {}
           )}
         />
-        <LazyLoad once offset={windowInnerHeight}>
+        <LazyLoad once offset={windowInnerHeight} height={1}>
           <Picture
             sources={sources}
             {...css(image, ready ? imageLoaded : {})}

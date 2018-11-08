@@ -15,6 +15,15 @@ const PageWrapper = glamorous.div({
 
 const Empty = glamorous.div({});
 
+const Wrapper = glamorous.div({
+  position: "relative",
+  width: "100%",
+  height: "100%",
+  display: "grid",
+  alignItems: "center",
+  justifyContent: "center"
+});
+
 const Circle = glamorous.div({
   position: "relative",
   background: "#ffffff",
@@ -33,7 +42,12 @@ const PlateText = glamorous.h1({
   margin: "0 auto",
   fontSize: "100px",
   textAlign: "center",
-  fontFamily: "Alegreya"
+  fontFamily: "Alegreya",
+  // lineHeight: 1.8,
+  "@media screen and (min-width: 10000px)": {
+    fontSize: "200px",
+    lineHeight: 1.8
+  }
 });
 
 const Background = glamorous.div({
@@ -44,4 +58,23 @@ const Background = glamorous.div({
   height: "100%"
 });
 
-export { PageWrapper, PlateText, Empty, Circle, Background, blackBg };
+const Caption = glamorous.div({
+  position: "absolute",
+  bottom: "0",
+  width: "100%",
+  margin: "0 auto",
+  fontSize: "24px",
+  color: "#ffffff",
+  textAlign: "center"
+});
+
+export {
+  Wrapper,
+  PageWrapper,
+  PlateText,
+  Empty,
+  Circle,
+  Background,
+  blackBg,
+  Caption
+};

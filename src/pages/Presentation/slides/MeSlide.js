@@ -21,10 +21,7 @@ class MeSlide extends PureComponent {
         <Empty />
         {map(title, (t, i) => {
           return (
-            <Circle
-              key={`circle-${i}`}
-              {...css({ color: `${theme.pink} !important` })}
-            >
+            <Circle key={`circle-${i}`}>
               <PlateText {...css({ color: `${theme.bright} !important` })}>
                 {t.toUpperCase()}
               </PlateText>

@@ -14,14 +14,30 @@ import { getSelectedSlide } from "reducers";
 import { SlideControllerDiv } from "./styles";
 
 class SlideController extends PureComponent {
-  onPlaybackChange = p => {
-    this.props.setPlaying(p);
-  };
+  componentWillMount() {
+    document.body.addEventListener("keyup", e => this.keyHandler(e));
+  }
 
-  toggleOptions = () => {
-    const { optionsOpen } = this.props;
-    this.props.setOptionsOpen(!optionsOpen);
-  };
+  componentWillUnmount() {
+    document.body.removeEventListener("keyup", e => this.keyHandler(e));
+  }
+
+  keyHandler(e) {
+    switch (e.key) {
+      case "r":
+        window.location.reload();
+        break;
+      case "ArrowRight":
+        this.props.next();
+        break;
+      case "ArrowLeft":
+        this.props.prev();
+        break;
+      default:
+        console.log(e);
+        break;
+    }
+  }
 
   render() {
     return (

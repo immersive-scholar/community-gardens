@@ -7,15 +7,31 @@ import addCollectionToNode from "util/AddCollectionToNode";
 import IntroSlide from "pages/Presentation/slides/IntroSlide";
 import MeSlide from "pages/Presentation/slides/MeSlide";
 import GenerativeSlide from "pages/Presentation/slides/GenerativeSlide";
-import GenerativeSlide2 from "pages/Presentation/slides/GenerativeSlide2";
+import GenerativeArtSlide from "pages/Presentation/slides/GenerativeArtSlide";
+import HistorySlide from "pages/Presentation/slides/HistorySlide";
+import ProcessingSlide from "pages/Presentation/slides/ProcessingSlide";
 
 const queryString = require("query-string");
 
 const node = {
   intro: { index: 0, id: "intro", slideClass: IntroSlide },
   me: { index: 1, id: "me", slideClass: MeSlide },
-  generative2: { index: 2, id: "generative2", slideClass: GenerativeSlide2 },
-  generative: { index: 3, id: "generative", slideClass: GenerativeSlide }
+  generative: { index: 2, id: "generative", slideClass: GenerativeSlide },
+  generativeArt: {
+    index: 3,
+    id: "generativeArt",
+    slideClass: GenerativeArtSlide
+  },
+  history: {
+    index: 4,
+    id: "history",
+    slideClass: HistorySlide
+  },
+  processing: {
+    index: 5,
+    id: "processing",
+    slideClass: ProcessingSlide
+  }
 };
 
 const location = window.location;
@@ -42,7 +58,11 @@ export default (state = initialState, action) => {
       // push index to url
       let index = state.node[id].index;
       searchParams.set("slide", index);
-      window.history.pushState(null, "", searchParams.toString());
+      window.history.pushState(
+        null,
+        "",
+        window.location.pathname + "?" + searchParams.toString()
+      );
 
       return {
         ...state,
@@ -55,7 +75,11 @@ export default (state = initialState, action) => {
 
       // push index to url
       searchParams.set("slide", nextIndex);
-      window.history.pushState(null, "", searchParams.toString());
+      window.history.pushState(
+        null,
+        "",
+        window.location.pathname + "?" + searchParams.toString()
+      );
 
       return {
         ...state,
@@ -68,7 +92,11 @@ export default (state = initialState, action) => {
 
       // push index to url
       searchParams.set("slide", prevIndex);
-      window.history.pushState(null, "", searchParams.toString());
+      window.history.pushState(
+        null,
+        "",
+        window.location.pathname + "?" + searchParams.toString()
+      );
 
       return {
         ...state,

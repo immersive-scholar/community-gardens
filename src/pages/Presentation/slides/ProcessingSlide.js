@@ -13,7 +13,7 @@ import {
 
 class GenerativeSlide2 extends PureComponent {
   render() {
-    const title = "GENERATIVE";
+    const title = "PROCESSING";
     const { theme } = this.props;
 
     return (
