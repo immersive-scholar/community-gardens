@@ -50,6 +50,19 @@ const PlateText = glamorous.h1({
   }
 });
 
+const BodyText = glamorous.h1({
+  position: "relative",
+  margin: "0 auto",
+  fontSize: "50px",
+  textAlign: "center",
+  fontFamily: "Alegreya",
+  // lineHeight: 1.8,
+  "@media screen and (min-width: 10000px)": {
+    fontSize: "100px",
+    lineHeight: 1.8
+  }
+});
+
 const Background = glamorous.div({
   position: "absolute",
   top: 0,
@@ -72,6 +85,7 @@ export {
   Wrapper,
   PageWrapper,
   PlateText,
+  BodyText,
   Empty,
   Circle,
   Background,

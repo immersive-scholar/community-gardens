@@ -11,9 +11,9 @@ import {
   Background
 } from "pages/Presentation/styles";
 
-class ProcessingSlide extends PureComponent {
+class CollaborateSlide extends PureComponent {
   render() {
-    const title = "PROCESSING";
+    const title = "Collaborate";
     const { theme } = this.props;
 
     return (
@@ -36,4 +36,4 @@ class ProcessingSlide extends PureComponent {
   }
 }
 
-export default ProcessingSlide;
+export default CollaborateSlide;

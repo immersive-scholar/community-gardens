@@ -15,48 +15,54 @@ import {
 } from "pages/Presentation/styles";
 import { Em } from "glamorous";
 
-class HistorySlide extends PureComponent {
+class InspirationSlide extends PureComponent {
   componentWillMount() {
     const history = [];
-    history.push([
-      {
-        srcSet: require(`assets/presentation/george-nees.jpg`)
-      }
-    ]);
-
-    history.push([
-      {
-        srcSet: require(`assets/presentation/vera-molnar-1974.jpg`)
-      }
-    ]);
-
-    history.push([
-      {
-        srcSet: require(`assets/presentation/john-maeda-1990.jpg`)
-      }
-    ]);
+    for (var i = 1; i <= 3; i++) {
+      history.push([
+        {
+          srcSet: require(`assets/presentation/jared-tarbell-${i}.jpg`)
+        }
+      ]);
+    }
+    for (var i = 1; i <= 3; i++) {
+      history.push([
+        {
+          srcSet: require(`assets/presentation/inconvergent-${i}.jpg`)
+        }
+      ]);
+    }
+    for (var i = 1; i <= 3; i++) {
+      history.push([
+        {
+          srcSet: require(`assets/presentation/flight404-${i}.jpg`)
+        }
+      ]);
+    }
+    for (var i = 1; i <= 3; i++) {
+      history.push([
+        {
+          srcSet: require(`assets/presentation/nervous-${i}.jpg`)
+        }
+      ]);
+    }
 
     const captions = [
-      "George Nees, 1968",
-      "Vera Molnar, 1974",
-      "John Maeda, 1990"
+      "Jared Tarbell",
+      "Anders Hoff",
+      "Robert Hodgin",
+      "n-e-r-v-o-u-s"
     ];
 
     this.setState({ backgrounds: history, captions });
   }
   render() {
-    let screens = new Array(3);
+    let screens = new Array(12);
     const { theme } = this.props;
     const { backgrounds, captions } = this.state;
 
     return (
       <Fragment>
-        <Empty />
-        <Empty />
-        <Empty />
-        <Empty />
-        <Empty />
-        <Empty />
         {map(screens, (screen, i) => {
           let bg = backgrounds[i];
           return (
@@ -66,7 +72,7 @@ class HistorySlide extends PureComponent {
                   <Image sources={bg} />
                 </Background>
               </Circle>
-              <Caption>{captions[i]}</Caption>
+              {i % 3 === 1 && <Caption>{captions[(i - 1) / 3]}</Caption>}
             </Wrapper>
           );
         })}
@@ -75,4 +81,4 @@ class HistorySlide extends PureComponent {
   }
 }
 
-export default HistorySlide;
+export default InspirationSlide;

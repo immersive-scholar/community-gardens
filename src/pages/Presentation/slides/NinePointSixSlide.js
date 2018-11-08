@@ -11,15 +11,21 @@ import {
   Background
 } from "pages/Presentation/styles";
 
-class ProcessingSlide extends PureComponent {
+class NinePointSixSlide extends PureComponent {
   render() {
-    const title = "PROCESSING";
+    const title = "9.6%";
     const { theme } = this.props;
 
     return (
       <Fragment>
         <Empty />
+        <Empty />
+        <Empty />
+        <Empty />
+        <Empty />
+        <Empty />
         {map(title, (t, i) => {
+          if (t === " ") return <Empty key={`circle-${i}`} />;
           return (
             <Circle
               key={`circle-${i}`}
@@ -36,4 +42,4 @@ class ProcessingSlide extends PureComponent {
   }
 }
 
-export default ProcessingSlide;
+export default NinePointSixSlide;

@@ -11,15 +11,16 @@ import {
   Background
 } from "pages/Presentation/styles";
 
-class ProcessingSlide extends PureComponent {
+class NoControlSlide extends PureComponent {
   render() {
-    const title = "PROCESSING";
+    const title = "NO CONTROL";
     const { theme } = this.props;
 
     return (
       <Fragment>
         <Empty />
         {map(title, (t, i) => {
+          if (t === " ") return <Empty key={`circle-${i}`} />;
           return (
             <Circle
               key={`circle-${i}`}
@@ -36,4 +37,4 @@ class ProcessingSlide extends PureComponent {
   }
 }
 
-export default ProcessingSlide;
+export default NoControlSlide;

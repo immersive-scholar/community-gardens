@@ -6,10 +6,17 @@ import addCollectionToNode from "util/AddCollectionToNode";
 
 import IntroSlide from "pages/Presentation/slides/IntroSlide";
 import MeSlide from "pages/Presentation/slides/MeSlide";
+import NoControlSlide from "pages/Presentation/slides/NoControlSlide";
 import GenerativeSlide from "pages/Presentation/slides/GenerativeSlide";
-import GenerativeArtSlide from "pages/Presentation/slides/GenerativeArtSlide";
 import HistorySlide from "pages/Presentation/slides/HistorySlide";
 import ProcessingSlide from "pages/Presentation/slides/ProcessingSlide";
+import InspirationSlide from "pages/Presentation/slides/InspirationSlide";
+import GenerativeArtSlide from "pages/Presentation/slides/GenerativeArtSlide";
+import EquationSlide from "pages/Presentation/slides/EquationSlide";
+import AnticipationSlide from "pages/Presentation/slides/AnticipationSlide";
+import CollaborateSlide from "pages/Presentation/slides/CollaborateSlide";
+import DataDrivenSlide from "pages/Presentation/slides/DataDrivenSlide";
+import NinePointSixSlide from "pages/Presentation/slides/NinePointSixSlide";
 
 const queryString = require("query-string");
 
@@ -17,11 +24,7 @@ const node = {
   intro: { index: 0, id: "intro", slideClass: IntroSlide },
   me: { index: 1, id: "me", slideClass: MeSlide },
   generative: { index: 2, id: "generative", slideClass: GenerativeSlide },
-  generativeArt: {
-    index: 3,
-    id: "generativeArt",
-    slideClass: GenerativeArtSlide
-  },
+  noControl: { index: 3, id: "noControl", slideClass: NoControlSlide },
   history: {
     index: 4,
     id: "history",
@@ -31,7 +34,43 @@ const node = {
     index: 5,
     id: "processing",
     slideClass: ProcessingSlide
-  }
+  },
+  inspiration: {
+    index: 6,
+    id: "inspiration",
+    slideClass: InspirationSlide
+  },
+  equation: {
+    index: 7,
+    id: "equation",
+    slideClass: EquationSlide
+  },
+  generativeArt: {
+    index: 8,
+    id: "generativeArt",
+    slideClass: GenerativeArtSlide
+  },
+  anticipation: {
+    index: 9,
+    id: "anticipation",
+    slideClass: AnticipationSlide
+  },
+  collaborate: {
+    index: 10,
+    id: "collaborate",
+    slideClass: CollaborateSlide
+  },
+  dataDriven: {
+    index: 11,
+    id: "dataDriven",
+    slideClass: DataDrivenSlide
+  },
+  ninePointSix: {
+    index: 12,
+    id: "ninePointSix",
+    slideClass: NinePointSixSlide
+  },
+  intro2: { index: 13, id: "intro2", slideClass: IntroSlide }
 };
 
 const location = window.location;
