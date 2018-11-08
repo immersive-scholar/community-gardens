@@ -18,6 +18,7 @@ import CollaborateSlide from "pages/Presentation/slides/CollaborateSlide";
 import DataDrivenSlide from "pages/Presentation/slides/DataDrivenSlide";
 import NinePointSixSlide from "pages/Presentation/slides/NinePointSixSlide";
 import ColorSlide from "pages/Presentation/slides/ColorSlide";
+import AmbientDataSlide from "pages/Presentation/slides/AmbientDataSlide";
 
 const queryString = require("query-string");
 
@@ -26,53 +27,54 @@ const node = {
   me: { index: 1, id: "me", slideClass: MeSlide },
   generative: { index: 2, id: "generative", slideClass: GenerativeSlide },
   noControl: { index: 3, id: "noControl", slideClass: NoControlSlide },
-  history: {
+  equation: {
     index: 4,
+    id: "equation",
+    slideClass: EquationSlide
+  },
+  history: {
+    index: 5,
     id: "history",
     slideClass: HistorySlide
   },
   processing: {
-    index: 5,
+    index: 6,
     id: "processing",
     slideClass: ProcessingSlide
   },
   inspiration: {
-    index: 6,
+    index: 7,
     id: "inspiration",
     slideClass: InspirationSlide
   },
-  equation: {
-    index: 7,
-    id: "equation",
-    slideClass: EquationSlide
-  },
-  generativeArt: {
-    index: 8,
-    id: "generativeArt",
-    slideClass: GenerativeArtSlide
-  },
   anticipation: {
-    index: 9,
+    index: 8,
     id: "anticipation",
     slideClass: AnticipationSlide
   },
   collaborate: {
-    index: 10,
+    index: 9,
     id: "collaborate",
     slideClass: CollaborateSlide
   },
+  generativeArt: {
+    index: 10,
+    id: "generativeArt",
+    slideClass: GenerativeArtSlide
+  },
+  ambientData: { index: 11, id: "ambientData", slideClass: AmbientDataSlide },
   dataDriven: {
-    index: 11,
+    index: 12,
     id: "dataDriven",
     slideClass: DataDrivenSlide
   },
   ninePointSix: {
-    index: 12,
+    index: 13,
     id: "ninePointSix",
     slideClass: NinePointSixSlide
   },
-  intro2: { index: 13, id: "intro2", slideClass: IntroSlide },
-  color: { index: 14, id: "color", slideClass: ColorSlide }
+  intro2: { index: 14, id: "intro2", slideClass: IntroSlide },
+  color: { index: 15, id: "color", slideClass: ColorSlide }
 };
 
 const location = window.location;
