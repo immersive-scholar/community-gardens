@@ -4,6 +4,7 @@ import HighResourcesModel from "./HighResourcesModel";
 import EnergyOutgoingModel from "./EnergyOutgoingModel";
 import FirstGenerationModel from "./FirstGenerationModel";
 import WinterGardenModel from "./WinterGardenModel";
+import RandomGardenModel from "./RandomGardenModel";
 
 export {
   SummerGardenModel,
@@ -11,5 +12,6 @@ export {
   HighResourcesModel,
   EnergyOutgoingModel,
   FirstGenerationModel,
-  WinterGardenModel
+  WinterGardenModel,
+  RandomGardenModel
 };

@@ -36,6 +36,7 @@ class Home extends PureComponent {
     const energyOutgoing = chapters.energyOutgoing;
     const firstGeneration = chapters.firstGeneration;
     const winterGarden = chapters.winterGarden;
+    const randomGarden = chapters.randomGarden;
 
     const theme = {
       baseColor: "#fbb3d1",
@@ -131,6 +132,13 @@ class Home extends PureComponent {
           />
           <CopyImageBlock
             item={housingInsecurity}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
+          <ImageCopyBlock
+            item={randomGarden}
             showAllOnSmall
             showLinkOnSmall
             mask="circle"

@@ -8,7 +8,8 @@ import {
   HighResourcesModel,
   EnergyOutgoingModel,
   FirstGenerationModel,
-  WinterGardenModel
+  WinterGardenModel,
+  RandomGardenModel
 } from "models";
 
 const initialState = {
@@ -33,11 +34,7 @@ const initialState = {
       title: "Pell Grant",
       link: "/garden/pell-grant"
     },
-    randomGarden: {
-      id: "random-garden",
-      title: "Random Garden",
-      link: "/garden/random-garden"
-    },
+    randomGarden: RandomGardenModel,
     resourced: HighResourcesModel,
     energyOutgoing: EnergyOutgoingModel,
     wellness: {
