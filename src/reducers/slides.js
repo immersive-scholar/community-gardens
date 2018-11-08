@@ -19,6 +19,7 @@ import DataDrivenSlide from "pages/Presentation/slides/DataDrivenSlide";
 import NinePointSixSlide from "pages/Presentation/slides/NinePointSixSlide";
 import ColorSlide from "pages/Presentation/slides/ColorSlide";
 import AmbientDataSlide from "pages/Presentation/slides/AmbientDataSlide";
+import SolomonsSealSlide from "pages/Presentation/slides/SolomonsSealSlide";
 
 const queryString = require("query-string");
 
@@ -74,7 +75,8 @@ const node = {
     slideClass: NinePointSixSlide
   },
   intro2: { index: 14, id: "intro2", slideClass: IntroSlide },
-  color: { index: 15, id: "color", slideClass: ColorSlide }
+  color: { index: 15, id: "color", slideClass: ColorSlide },
+  solomonsSeal: { index: 16, id: "solomonsSeal", slideClass: SolomonsSealSlide }
 };
 
 const location = window.location;
