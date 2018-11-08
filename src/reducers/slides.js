@@ -17,6 +17,7 @@ import AnticipationSlide from "pages/Presentation/slides/AnticipationSlide";
 import CollaborateSlide from "pages/Presentation/slides/CollaborateSlide";
 import DataDrivenSlide from "pages/Presentation/slides/DataDrivenSlide";
 import NinePointSixSlide from "pages/Presentation/slides/NinePointSixSlide";
+import ColorSlide from "pages/Presentation/slides/ColorSlide";
 
 const queryString = require("query-string");
 
@@ -70,7 +71,8 @@ const node = {
     id: "ninePointSix",
     slideClass: NinePointSixSlide
   },
-  intro2: { index: 13, id: "intro2", slideClass: IntroSlide }
+  intro2: { index: 13, id: "intro2", slideClass: IntroSlide },
+  color: { index: 14, id: "color", slideClass: ColorSlide }
 };
 
 const location = window.location;
