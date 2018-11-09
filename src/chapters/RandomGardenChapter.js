@@ -49,8 +49,8 @@ class RandomGardenChapter extends BaseChapter {
       color,
       textArray
     });
-    show3DTitles && this.chapterTitle.createChildren();
-    this.addCleanable(this.chapterTitle, this.chapterTitle.group);
+    // show3DTitles && this.chapterTitle.createChildren();
+    // this.addCleanable(this.chapterTitle, this.chapterTitle.group);
 
     let bounds = new Vector3(1, 1, 1),
       position = new Vector3();

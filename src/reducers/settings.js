@@ -104,6 +104,7 @@ if (wallDisplay) {
   presentationMode = PRESENTATION_MODE_EXPLORE;
   show3DTitles = true;
   showControlBar = false;
+  quantityMultiplier = 8;
 }
 
 if (wallDisplay === IMMERSION) {

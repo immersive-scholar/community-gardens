@@ -60,8 +60,6 @@ class SceneSubject {
     const chapterClass = this.chapters[chapterIndex];
     let chapter;
 
-    console.log(chapterClass);
-
     switch (chapterClass) {
       case HousingInsecurityChapter:
         chapter = this.createHousingInsecurityChapter();
@@ -141,8 +139,11 @@ class SceneSubject {
         chapter = this.createResourcedChapter();
         break;
       case "summer-garden":
-      default:
         chapter = this.createSummerGardenChapter();
+        break;
+      case "random-garden":
+      default:
+        chapter = this.createRandomChapter();
         break;
     }
 
