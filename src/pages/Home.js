@@ -85,13 +85,9 @@ class Home extends PureComponent {
 
           <Animated as="h2">Gardens</Animated>
           <Animated>
-            Each garden represents a different grouping of students. Upon
-            entering the garden, you will be taken on a tour to look at
-            different plants.
-          </Animated>
-          <Animated>
-            Every garden is created at the moment you enter it so you will never
-            see the exact same garden twice.
+            Each garden represents a different grouping of students. Every
+            garden is created at the moment you enter it so you will never see
+            the exact same garden twice.
           </Animated>
         </div>
         <div {...wideContainer}>

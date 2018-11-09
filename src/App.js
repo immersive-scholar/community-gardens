@@ -8,6 +8,8 @@ import typography from "util/typography";
 import ScrollToTop from "util/scrollToTop";
 import Home from "pages/Home";
 import NotFound from "pages/NotFound";
+import Newsletter from "components/organisms/Newsletter";
+import Footer from "components/organisms/Footer";
 
 import LoadableThreeContainer from "./loadables/LoadableThreeContainer";
 import LoadableData from "./loadables/LoadableData";
@@ -70,6 +72,8 @@ class App extends Component {
             </div>
           </div>
         </Router>
+        <Newsletter />
+        <Footer />
       </div>
     );
   }
