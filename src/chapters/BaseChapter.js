@@ -8,7 +8,8 @@ class BaseChapter {
     this.controls = controls;
     this.R = R;
 
-    const { focusTotal = 10, timeMultiplier = 1 } = props;
+    const { focusTotal = 100, timeMultiplier = 1 } = props;
+    console.log("focusTotal ", focusTotal);
 
     this.state = { currentFocusCount: 0, focusTotal, timeMultiplier };
     this.group = new Group();

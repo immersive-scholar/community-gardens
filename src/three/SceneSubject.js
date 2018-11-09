@@ -151,19 +151,14 @@ class SceneSubject {
 
   createRandomChapter() {
     const { settings, camera, controls, R } = this;
-    const chapter = new RandomGardenChapter(
-      { settings, focusTotal: 3 },
-      camera,
-      controls,
-      R
-    );
+    const chapter = new RandomGardenChapter({ settings }, camera, controls, R);
     return chapter;
   }
 
   createDidNotEatForADayChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new DidNotEatForADayChapter(
-      { settings, focusTotal: 3 },
+      { settings },
       camera,
       controls,
       R
@@ -173,7 +168,7 @@ class SceneSubject {
   createEnergyOutgoingChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new EnergyOutgoingChapter(
-      { settings, focusTotal: 3 },
+      { settings },
       camera,
       controls,
       R
@@ -184,7 +179,7 @@ class SceneSubject {
   createHousingInsecurityChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new HousingInsecurityChapter(
-      { settings, focusTotal: 3 },
+      { settings },
       camera,
       controls,
       R
@@ -194,30 +189,20 @@ class SceneSubject {
 
   createHighGPAChapter() {
     const { settings, camera, controls, R } = this;
-    const chapter = new HighGPAChapter(
-      { settings, focusTotal: 3 },
-      camera,
-      controls,
-      R
-    );
+    const chapter = new HighGPAChapter({ settings }, camera, controls, R);
     return chapter;
   }
 
   createOutOfStateChapter() {
     const { settings, camera, controls, R } = this;
-    const chapter = new OutOfStateChapter(
-      { settings, focusTotal: 3 },
-      camera,
-      controls,
-      R
-    );
+    const chapter = new OutOfStateChapter({ settings }, camera, controls, R);
     return chapter;
   }
 
   createFirstGenerationChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new FirstGenerationChapter(
-      { settings, focusTotal: 3 },
+      { settings },
       camera,
       controls,
       R
@@ -227,56 +212,31 @@ class SceneSubject {
 
   createPellGrantChapter() {
     const { settings, camera, controls, R } = this;
-    const chapter = new PellGrantChapter(
-      { settings, focusTotal: 3 },
-      camera,
-      controls,
-      R
-    );
+    const chapter = new PellGrantChapter({ settings }, camera, controls, R);
     return chapter;
   }
 
   createSummerGardenChapter() {
     const { settings, camera, controls, R } = this;
-    const chapter = new SummerGardenChapter(
-      { settings, focusTotal: 3 },
-      camera,
-      controls,
-      R
-    );
+    const chapter = new SummerGardenChapter({ settings }, camera, controls, R);
     return chapter;
   }
 
   createWinterGardenChapter() {
     const { settings, camera, controls, R } = this;
-    const chapter = new WinterGardenChapter(
-      { settings, focusTotal: 3 },
-      camera,
-      controls,
-      R
-    );
+    const chapter = new WinterGardenChapter({ settings }, camera, controls, R);
     return chapter;
   }
 
   createWellnessChapter() {
     const { settings, camera, controls, R } = this;
-    const chapter = new WellnessChapter(
-      { settings, focusTotal: 3 },
-      camera,
-      controls,
-      R
-    );
+    const chapter = new WellnessChapter({ settings }, camera, controls, R);
     return chapter;
   }
 
   createResourcedChapter() {
     const { settings, camera, controls, R } = this;
-    const chapter = new ResourcedChapter(
-      { settings, focusTotal: 3 },
-      camera,
-      controls,
-      R
-    );
+    const chapter = new ResourcedChapter({ settings }, camera, controls, R);
     return chapter;
   }
 
