@@ -12,6 +12,8 @@ import {
   CopyImageBlock
 } from "components/organisms/ImageCopyBlock";
 import PathToPicture from "util/PathToPicture";
+import Newsletter from "components/organisms/Newsletter";
+import Footer from "components/organisms/Footer";
 
 import { textContainer, wideContainer, link, shadowless } from "styles";
 
@@ -141,6 +143,8 @@ class Home extends PureComponent {
             theme={theme}
           />
         </div>
+        <Newsletter />
+        <Footer />
         {/* <div {...grid}>
             {map(chapters, chapter => {
               return (

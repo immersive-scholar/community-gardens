@@ -11,6 +11,8 @@ import {
   CopyImageBlock
 } from "components/organisms/ImageCopyBlock";
 import PathToPicture from "util/PathToPicture";
+import Newsletter from "components/organisms/Newsletter";
+import Footer from "components/organisms/Footer";
 
 import { textContainer, wideContainer } from "styles";
 
@@ -171,6 +173,8 @@ class Data extends PureComponent {
             and viewers begin to connect information in a new way.
           </Animated>
         </div>
+        <Newsletter />
+        <Footer />
       </div>
     );
   }
