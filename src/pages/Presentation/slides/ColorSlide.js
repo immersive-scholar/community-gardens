@@ -3,19 +3,11 @@ import map from "lodash/map";
 import { css } from "glamor";
 import shuffle from "lodash/shuffle";
 
-import Image from "components/atoms/Image";
-
-import {
-  PlateText,
-  Empty,
-  Circle,
-  Background
-} from "pages/Presentation/styles";
+import { PlateText, Empty, Circle } from "pages/Presentation/styles";
 
 class ColorSlide extends PureComponent {
   render() {
     const title = "Color";
-    const { theme } = this.props;
 
     let colors = [
       "#cb94cd",
@@ -47,7 +39,6 @@ class ColorSlide extends PureComponent {
         <Empty />
         {map(title, (t, i) => {
           if (t === " ") return <Empty key={`circle-${i}`} />;
-          console.log("colors[i] ", colors[i]);
           return (
             <Circle
               key={`circle-${i}`}

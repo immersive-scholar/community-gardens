@@ -5,17 +5,13 @@ import shuffle from "lodash/shuffle";
 
 import Image from "components/atoms/Image";
 
-import {
-  PlateText,
-  Empty,
-  Circle,
-  Background
-} from "pages/Presentation/styles";
+import { Circle, Background } from "pages/Presentation/styles";
 
 class GenerativeSlide extends PureComponent {
   componentWillMount() {
     const blomDark = [];
-    for (var i = 1; i < 68; i++) {
+    let i;
+    for (i = 1; i < 68; i++) {
       blomDark.push([
         {
           srcSet: require(`assets/backgrounds/blom-dark/blom-a-generative-art-series-by-lucastswick-sm-${i}.jpg`)
@@ -24,7 +20,7 @@ class GenerativeSlide extends PureComponent {
     }
 
     const blomLight = [];
-    for (var i = 70; i < 95; i++) {
+    for (i = 70; i < 95; i++) {
       blomLight.push([
         {
           srcSet: require(`assets/backgrounds/blom-light/blom-a-generative-art-series-by-lucastswick-sm-${i}.jpg`)
@@ -36,7 +32,6 @@ class GenerativeSlide extends PureComponent {
   }
   render() {
     let screens = new Array(12);
-    const { theme } = this.props;
     const { backgrounds } = this.state;
 
     return (

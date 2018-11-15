@@ -71,8 +71,6 @@ export default ({ generalCanvas, R, settings }) => {
     const width = window.innerWidth - sidebarWidth,
       height = window.innerHeight;
 
-    console.log("width ", width);
-
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 

@@ -1,6 +1,5 @@
 import glamorous from "glamorous";
 import { css } from "glamor";
-import typography from "util/typography";
 
 const PageWrapper = glamorous.div({
   position: "absolute",

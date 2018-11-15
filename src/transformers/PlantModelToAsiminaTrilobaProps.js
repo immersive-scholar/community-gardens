@@ -43,7 +43,7 @@ const PlantModelToAsiminaTrilobaProps = ({
   // if any of these triggers are true,
   // we will adjust the props accordingly
 
-  /* eslint-enable no-unused-vars */
+  /* eslint-disable no-unused-vars */
   const resourcesIncoming = model.resourcesIncoming;
   const energyOutgoing = model.energyOutgoing;
   const communityFitness = model.communityFitness;
@@ -74,7 +74,7 @@ const PlantModelToAsiminaTrilobaProps = ({
     parseInt(model.sharemeals, 10) ||
     parseInt(model.givefood, 10) ||
     parseInt(model.sharemeals, 10);
-  /* eslint-disable no-unused-vars */
+  /* eslint-enable no-unused-vars */
 
   props = Modifiers.PersonalScarcityModifier({ props, personalScarcity });
   props = Modifiers.ResourcesIncomingModifier({ props, resourcesIncoming });

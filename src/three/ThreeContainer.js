@@ -49,7 +49,6 @@ class ThreeContainer extends Component {
   }
 
   preventScroll = e => {
-    console.log("preventScroll ", e);
     e.preventDefault();
   };
 

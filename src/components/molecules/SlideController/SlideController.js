@@ -1,8 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import get from "lodash/get";
-import { Link } from "react-router-dom";
 import { Icon } from "react-icons-kit";
 import { arrowRight } from "react-icons-kit/icomoon/arrowRight";
 import { arrowLeft } from "react-icons-kit/icomoon/arrowLeft";

@@ -36,7 +36,7 @@ const PlantModelToStellariaPuberaProps = ({
   // if any of these triggers are true,
   // we will adjust the props accordingly
 
-  /* eslint-enable no-unused-vars */
+  /* eslint-disable no-unused-vars */
   const resourcesIncoming = model.resourcesIncoming;
   const energyOutgoing = model.energyOutgoing;
   const communityFitness = model.communityFitness;
@@ -57,6 +57,7 @@ const PlantModelToStellariaPuberaProps = ({
   const skipMeals = model[STATS.SKIP_MEALS];
   const sleptOutside = model[STATS.SLEPT_OUTSIDE];
   const housingInsecurityScore = model[STATS.HOUSING_INSECURITY_SCORE];
+  /* eslint-enable no-unused-vars */
 
   const age = parseInt(model.Age, 10);
   const gpa = parseInt(model.GPA, 10);
@@ -67,7 +68,6 @@ const PlantModelToStellariaPuberaProps = ({
     parseInt(model.sharemeals, 10) ||
     parseInt(model.givefood, 10) ||
     parseInt(model.sharemeals, 10);
-  /* eslint-disable no-unused-vars */
 
   props = Modifiers.PersonalScarcityModifier({ props, personalScarcity });
   props = Modifiers.ResourcesIncomingModifier({ props, resourcesIncoming });

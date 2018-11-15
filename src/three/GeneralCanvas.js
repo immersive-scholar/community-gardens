@@ -10,13 +10,10 @@ export default (document, container, sidebarWidth = 0) => {
     canvas.width = canvas.offsetWidth - sidebarWidth;
     canvas.height = canvas.offsetHeight;
 
-    console.log("canvas.width ", canvas.width);
-
     // sceneManager.onWindowResize();
   }
 
   function getDimensions() {
-    console.log("canvas.width ", canvas.width);
     return {
       width: canvas.width - sidebarWidth,
       height: canvas.height

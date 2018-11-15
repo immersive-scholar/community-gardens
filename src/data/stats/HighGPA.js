@@ -16,7 +16,6 @@ const HighGPA = data => {
     ColorFactory.SUMMER,
     ColorFactory.LEAF
   );
-  console.log("bgColor ", bgColor);
 
   const color = ColorFactory.getRandomColor(
     ColorFactory.WINTER,

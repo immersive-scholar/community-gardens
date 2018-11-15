@@ -21,7 +21,7 @@ class RandomGardenChapter extends BaseChapter {
     const stat = InsecurityCalculator.getStat(COMMUNITY_GARDEN);
     const { color, textArray, bgColor } = stat;
 
-    const { quantityMultiplier, show3DTitles } = this.settings;
+    const { quantityMultiplier } = this.settings;
     const count = 25 * quantityMultiplier;
     const plantTypeCount = 3;
     const plantCount = Math.floor(count / plantTypeCount);

@@ -1,45 +1,42 @@
 import React, { PureComponent, Fragment } from "react";
 import map from "lodash/map";
 import { css } from "glamor";
-import shuffle from "lodash/shuffle";
 
 import Image from "components/atoms/Image";
 
 import {
-  PlateText,
-  Empty,
   Circle,
   Background,
   Caption,
   Wrapper
 } from "pages/Presentation/styles";
-import { Em } from "glamorous";
 
 class InspirationSlide extends PureComponent {
   componentWillMount() {
     const history = [];
-    for (var i = 1; i <= 3; i++) {
+    let i;
+    for (i = 1; i <= 3; i++) {
       history.push([
         {
           srcSet: require(`assets/presentation/jared-tarbell-${i}.jpg`)
         }
       ]);
     }
-    for (var i = 1; i <= 3; i++) {
+    for (i = 1; i <= 3; i++) {
       history.push([
         {
           srcSet: require(`assets/presentation/inconvergent-${i}.jpg`)
         }
       ]);
     }
-    for (var i = 1; i <= 3; i++) {
+    for (i = 1; i <= 3; i++) {
       history.push([
         {
           srcSet: require(`assets/presentation/flight404-${i}.jpg`)
         }
       ]);
     }
-    for (var i = 1; i <= 3; i++) {
+    for (i = 1; i <= 3; i++) {
       history.push([
         {
           srcSet: require(`assets/presentation/nervous-${i}.jpg`)
@@ -58,7 +55,6 @@ class InspirationSlide extends PureComponent {
   }
   render() {
     let screens = new Array(12);
-    const { theme } = this.props;
     const { backgrounds, captions } = this.state;
 
     return (

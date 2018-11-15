@@ -17,8 +17,6 @@ const HighHealth = (data, threshold = 0) => {
     ColorFactory.LEAF
   );
 
-  console.log("bgColor ", bgColor);
-
   const color = 0xffffff;
 
   return {

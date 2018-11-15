@@ -2,9 +2,7 @@ import React, { PureComponent, Fragment } from "react";
 import map from "lodash/map";
 import { css } from "glamor";
 
-import Image from "components/atoms/Image";
-
-import { BodyText, Empty, Circle, Background } from "pages/Presentation/styles";
+import { BodyText, Empty } from "pages/Presentation/styles";
 
 class EquationSlide extends PureComponent {
   render() {

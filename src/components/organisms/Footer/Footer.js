@@ -1,11 +1,9 @@
 import React, { PureComponent } from "react";
 import { css } from "glamor";
 
-import typography from "util/typography";
-import Animated from "components/molecules/Animated";
 import Image from "components/atoms/Image";
 
-import { textContainer, removePaddingBottom, removeMarginBottom } from "styles";
+import { textContainer, removeMarginBottom } from "styles";
 import { Logo } from "./styles";
 class Footer extends PureComponent {
   componentWillMount() {
@@ -38,7 +36,7 @@ class Footer extends PureComponent {
     });
   }
   render() {
-    const { theme, image } = this.state;
+    const { image } = this.state;
 
     return (
       <div

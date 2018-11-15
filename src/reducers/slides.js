@@ -2,7 +2,6 @@ import find from "lodash/find";
 import size from "lodash/size";
 
 import { FOCUS_SLIDE, NEXT_SLIDE, PREV_SLIDE } from "constants/Constants";
-import addCollectionToNode from "util/AddCollectionToNode";
 
 import IntroSlide from "pages/Presentation/slides/IntroSlide";
 import MeSlide from "pages/Presentation/slides/MeSlide";

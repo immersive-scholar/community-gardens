@@ -27,7 +27,7 @@ class Presentation extends PureComponent {
   }
 
   render() {
-    const { selectedSlideID, selectedSlide } = this.props;
+    const { selectedSlide } = this.props;
     const { theme } = this.state;
     const SlideClass = selectedSlide.slideClass;
 
