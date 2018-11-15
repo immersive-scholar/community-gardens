@@ -102,8 +102,8 @@ if (wallDisplay) {
   timeMultiplier = 0.3;
   playing = true;
   presentationMode = PRESENTATION_MODE_EXPLORE;
-  show3DTitles = true;
   showControlBar = false;
+  show3DTitles = true;
   quantityMultiplier = 8;
 }
 
@@ -111,6 +111,11 @@ if (wallDisplay === IMMERSION) {
   showSidebar = true;
   sidebarWidth = Microtiles.getWidth(3);
   showImmersiveScholarLogo = true;
+}
+
+if (wallDisplay === COMMONS) {
+    // COMMONS has an older CPU that sometimes takes too long to render text.
+    show3DTitles = false; 
 }
 
 // 4. override with any query string params
