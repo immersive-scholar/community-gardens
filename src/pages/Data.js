@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 
 import { chapters } from "actions";
 import Image from "components/atoms/Image";
+import FillButton from "components/atoms/FillButton";
 import Animated from "components/molecules/Animated";
 import {
   ImageCopyBlock,
@@ -201,6 +202,13 @@ class Data extends PureComponent {
             accordingly. Creating groups of plants based on similar
             characteristics results in gardens that reveal meaning within the
             data.
+          </Animated>
+          <Animated>
+            <FillButton
+              to="/solutions"
+              label="Want to make a difference?"
+              theme={theme}
+            />
           </Animated>
         </div>
         <Newsletter />

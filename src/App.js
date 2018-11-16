@@ -11,6 +11,7 @@ import NotFound from "pages/NotFound";
 
 import LoadableThreeContainer from "./loadables/LoadableThreeContainer";
 import LoadableData from "./loadables/LoadableData";
+import LoadableSolutions from "./loadables/LoadableSolutions";
 import LoadablePresentation from "./loadables/LoadablePresentation";
 
 class App extends Component {
@@ -50,6 +51,11 @@ class App extends Component {
                     component={LoadablePresentation}
                   />
                   <Route exact path="/data" component={LoadableData} />
+                  <Route
+                    exact
+                    path="/solutions"
+                    component={LoadableSolutions}
+                  />
                   <Switch>
                     <Route
                       exact
