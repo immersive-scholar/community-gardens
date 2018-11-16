@@ -1,4 +1,4 @@
-import { Vector3 } from "three-full";
+import { Vector3, Group } from "three-full";
 
 import BaseChapter from "./BaseChapter";
 import BackgroundBAS from "art/background/BackgroundBAS";
@@ -9,17 +9,22 @@ import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import ChapterPlate from "art/chapter-plate/ChapterPlate";
 import ChapterTitle from "art/chapter-plate/ChapterTitle";
 import InsecurityCalculator from "data/InsecurityCalculator";
-import CircularLayout from "art/layouts/CircularLayout";
-import { HIGH_GPA } from "constants/Stats";
+import GridLayout from "art/layouts/GridLayout";
+import { LAYOUT_FLOOR } from "art/layouts/LayoutConstants";
+import { FOOD_INSECURITY } from "constants/Stats";
 
-class HighGPAChapter extends BaseChapter {
+class FoodInsecurityChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
     super(props, camera, controls, R);
   }
 
   init = () => {
-    const stat = InsecurityCalculator.getStat(HIGH_GPA);
+    this.plantGroup = new Group();
+    this.group.add(this.plantGroup);
+
+    const stat = InsecurityCalculator.getStat(FOOD_INSECURITY);
     const { color, textArray, bgColor } = stat;
+    console.log("stat ", stat);
 
     const { quantityMultiplier, show3DTitles } = this.settings;
     const count = Math.min(stat.count, 25 * quantityMultiplier);
@@ -34,10 +39,6 @@ class HighGPAChapter extends BaseChapter {
       R: this.R
     });
     this.addCleanable(this.ground);
-    // this.ground.position.set(0, -10, 10);
-
-    // this.plane = new Plane({ color: bgColor });
-    // this.group.add(this.plane.group);
 
     this.chapterPlate = new ChapterPlate({
       camera: this.camera,
@@ -58,7 +59,7 @@ class HighGPAChapter extends BaseChapter {
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
       count,
-      key: HIGH_GPA
+      key: FOOD_INSECURITY
     });
 
     // Solomon's Seal
@@ -70,12 +71,11 @@ class HighGPAChapter extends BaseChapter {
       camera: this.camera,
       controls: this.controls
     });
-    this.group.add(this.solomonsSealSpawn.group);
+    this.plantGroup.add(this.solomonsSealSpawn.group);
     this.addInstances(this.solomonsSealSpawn.instances);
     this.spawns.push(this.solomonsSealSpawn);
 
     // Stellaria Pubera
-
     this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
       data: data,
       dataOffset: this.instances.length,
@@ -84,8 +84,7 @@ class HighGPAChapter extends BaseChapter {
       camera: this.camera,
       controls: this.controls
     });
-
-    this.group.add(this.stellariaPuberaSpawn.group);
+    this.plantGroup.add(this.stellariaPuberaSpawn.group);
     this.addInstances(this.stellariaPuberaSpawn.instances);
     this.spawns.push(this.stellariaPuberaSpawn);
 
@@ -99,17 +98,17 @@ class HighGPAChapter extends BaseChapter {
       camera: this.camera,
       controls: this.controls
     });
-
-    this.group.add(this.asiminaTrilobaSpawn.group);
+    this.plantGroup.add(this.asiminaTrilobaSpawn.group);
     this.addInstances(this.asiminaTrilobaSpawn.instances);
     this.spawns.push(this.asiminaTrilobaSpawn);
 
     // layout
-    bounds.set(2, 0, 2);
-    position.set(0, 0.5, 2);
-    new CircularLayout({
+    bounds.set(4, 0, 2);
+    position.set(-2, 0.25, 0.5);
+    new GridLayout({
+      layoutType: LAYOUT_FLOOR,
       instances: this.instances,
-      group: this.group,
+      group: this.plantGroup,
       R: this.R,
       bounds,
       position
@@ -117,4 +116,4 @@ class HighGPAChapter extends BaseChapter {
   };
 }
 
-export default HighGPAChapter;
+export default FoodInsecurityChapter;

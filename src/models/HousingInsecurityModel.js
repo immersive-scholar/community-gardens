@@ -7,8 +7,11 @@ const HousingInsecurityModel = {
   link: "/garden/housing-insecurity",
   excerpt: (
     <Fragment>
-      Students who experience <b>housing insecurity</b> are more affected by the
-      wind.
+      Students who have experienced <b>Housing Insecurity</b> are affected by
+      the wind. Wind displaces leaves from the stem; the further the
+      displacement the more severe the insecurity. These students care so much
+      about their education that they are willing to sleep outside or in
+      inhabitable spaces.
     </Fragment>
   ),
   headerImage: PathToPicture("plants", `housing-insecurity`),

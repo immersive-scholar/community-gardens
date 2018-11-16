@@ -26,7 +26,7 @@ const OutOfState = data => {
 
   return {
     id: OUT_OF_STATE,
-    label: `${count} students have a low health score.`,
+    label: `${count} students are out of state.`,
     count,
     ids,
     bgColor,

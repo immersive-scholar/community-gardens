@@ -21,7 +21,7 @@ const HighHealth = (data, threshold = 0) => {
 
   return {
     id: HIGH_HEALTH,
-    label: `${count} students have a high health score.`,
+    label: `${count} students have a high resourcing score.`,
     count,
     ids,
     bgColor,

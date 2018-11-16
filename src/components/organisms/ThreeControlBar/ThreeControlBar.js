@@ -27,6 +27,7 @@ class ThreeControlBar extends PureComponent {
 
   render() {
     const { playing, optionsOpen } = this.props;
+    console.log("this.props ", this.props);
     const title = get(this.props, "selectedChapter.title", "Loading...");
     const controlBarClass = optionsOpen ? stateOpen : {};
 

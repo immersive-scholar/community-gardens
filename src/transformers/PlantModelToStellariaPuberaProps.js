@@ -119,6 +119,8 @@ const PlantModelToStellariaPuberaProps = ({
 
   // props.petalCount = 8;
 
+  props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/topography.png`;
+
   return props;
 };
 

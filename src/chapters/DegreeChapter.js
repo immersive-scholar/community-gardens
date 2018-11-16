@@ -9,20 +9,20 @@ import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import ChapterPlate from "art/chapter-plate/ChapterPlate";
 import ChapterTitle from "art/chapter-plate/ChapterTitle";
 import InsecurityCalculator from "data/InsecurityCalculator";
-import CircularLayout from "art/layouts/CircularLayout";
-import { HIGH_GPA } from "constants/Stats";
+import RandomLayout from "art/layouts/RandomLayout";
+import { COMMUNITY_GARDEN } from "constants/Stats";
 
-class HighGPAChapter extends BaseChapter {
+class RandomGardenChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
     super(props, camera, controls, R);
   }
 
   init = () => {
-    const stat = InsecurityCalculator.getStat(HIGH_GPA);
+    const stat = InsecurityCalculator.getStat(COMMUNITY_GARDEN);
     const { color, textArray, bgColor } = stat;
 
-    const { quantityMultiplier, show3DTitles } = this.settings;
-    const count = Math.min(stat.count, 25 * quantityMultiplier);
+    const { quantityMultiplier } = this.settings;
+    const count = 25 * quantityMultiplier;
     const plantTypeCount = 3;
     const plantCount = Math.floor(count / plantTypeCount);
 
@@ -49,8 +49,8 @@ class HighGPAChapter extends BaseChapter {
       color,
       textArray
     });
-    show3DTitles && this.chapterTitle.createChildren();
-    this.addCleanable(this.chapterTitle, this.chapterTitle.group);
+    // show3DTitles && this.chapterTitle.createChildren();
+    // this.addCleanable(this.chapterTitle, this.chapterTitle.group);
 
     let bounds = new Vector3(1, 1, 1),
       position = new Vector3();
@@ -58,8 +58,12 @@ class HighGPAChapter extends BaseChapter {
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
       count,
-      key: HIGH_GPA
+      key: COMMUNITY_GARDEN
     });
+
+    for (var i in data) {
+      data[i].OutofState = 1;
+    }
 
     // Solomon's Seal
     this.solomonsSealSpawn = new SolomonsSealSpawn({
@@ -74,6 +78,16 @@ class HighGPAChapter extends BaseChapter {
     this.addInstances(this.solomonsSealSpawn.instances);
     this.spawns.push(this.solomonsSealSpawn);
 
+    bounds.set(4, 0, 2);
+    position.set(-2, 0, 0.5);
+    new RandomLayout({
+      instances: this.solomonsSealSpawn.instances,
+      group: this.solomonsSealSpawn.group,
+      R: this.R,
+      bounds,
+      position
+    });
+
     // Stellaria Pubera
 
     this.stellariaPuberaSpawn = new StellariaPuberaSpawn({
@@ -83,6 +97,16 @@ class HighGPAChapter extends BaseChapter {
       R: this.R,
       camera: this.camera,
       controls: this.controls
+    });
+
+    bounds.set(4, 0, 2);
+    position.set(-2, 0, 0.5);
+    new RandomLayout({
+      instances: this.stellariaPuberaSpawn.instances,
+      group: this.stellariaPuberaSpawn.group,
+      R: this.R,
+      bounds,
+      position
     });
 
     this.group.add(this.stellariaPuberaSpawn.group);
@@ -100,21 +124,19 @@ class HighGPAChapter extends BaseChapter {
       controls: this.controls
     });
 
-    this.group.add(this.asiminaTrilobaSpawn.group);
-    this.addInstances(this.asiminaTrilobaSpawn.instances);
-    this.spawns.push(this.asiminaTrilobaSpawn);
-
-    // layout
-    bounds.set(2, 0, 2);
-    position.set(0, 0.5, 2);
-    new CircularLayout({
-      instances: this.instances,
-      group: this.group,
+    bounds.set(4, 0, 1);
+    position.set(-2, 0, 0.5);
+    new RandomLayout({
       R: this.R,
+      instances: this.asiminaTrilobaSpawn.instances,
       bounds,
       position
     });
+
+    this.group.add(this.asiminaTrilobaSpawn.group);
+    this.addInstances(this.asiminaTrilobaSpawn.instances);
+    this.spawns.push(this.asiminaTrilobaSpawn);
   };
 }
 
-export default HighGPAChapter;
+export default RandomGardenChapter;

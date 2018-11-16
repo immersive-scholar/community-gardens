@@ -19,7 +19,6 @@ import { textContainer, wideContainer } from "styles";
 class Data extends PureComponent {
   componentWillMount() {
     const headerImage = PathToPicture("headers", `community-gardens-data`);
-
     this.setState({ headerImage });
   }
 
@@ -27,11 +26,17 @@ class Data extends PureComponent {
     const { headerImage } = this.state;
 
     const { chapters } = this.props;
-    const summerGarden = chapters.summerGarden;
-    const housingInsecurity = chapters.housingInsecurity;
-    const highResources = chapters.resourced;
+    const age = chapters.age;
+    const anxiety = chapters.anxiety;
+    const degree = chapters.degree;
     const energyOutgoing = chapters.energyOutgoing;
     const firstGeneration = chapters.firstGeneration;
+    const foodInsecurity = chapters.foodInsecurity;
+    const highResources = chapters.resourced;
+    const highGPA = chapters.highGpa;
+    const housingInsecurity = chapters.housingInsecurity;
+    const outOfState = chapters.outOfState;
+    const summerGarden = chapters.summerGarden;
     const winterGarden = chapters.winterGarden;
 
     const theme = {
@@ -136,41 +141,66 @@ class Data extends PureComponent {
             mask="circle"
             theme={theme}
           />
+          <ImageCopyBlock
+            item={foodInsecurity}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
+          <CopyImageBlock
+            item={highGPA}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+          />
         </div>
         <div {...textContainer}>
+          <Animated as="h2">Additional Attributes</Animated>
+          <ImageCopyBlock
+            item={degree}
+            showAllOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <CopyImageBlock
+            item={age}
+            showAllOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <ImageCopyBlock
+            item={anxiety}
+            showAllOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <CopyImageBlock
+            item={outOfState}
+            showAllOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <Animated as="h2">Aggregate Data</Animated>
           <Animated>
-            The <b>Degree</b> the student is pursing determines the plant
-            height: taller plants are more senior degrees.
-          </Animated>
-          <Animated>
-            The <b>age</b> of the student determines how many leaves or petals
-            are present
-          </Animated>
-          <Animated>
-            Students who indicate <b>high anxiety</b> are drawn with angular
-            lines. Smooth, elegant lines are used for other students
-          </Animated>
-          <Animated>
-            Students with a <b>high GPA</b> are drawn with white leaves.
-          </Animated>
-          <Animated>
-            Students who come from <b>out of state</b> have leaves with
-            topographical maps drawn on them.
-          </Animated>
-          <Animated>
-            Students who experience <b>food insecurity</b> have berries drawn as
-            wireframes. The berries are present but hollow.
+            As viewers learn how to 'read' the attributes of the plants,
+            connections are made. For instance, the Garden of Housing Insecurity
+            has many mazes on the leaves. This is because there is a
+            disproportionate number of First Generation students who experience
+            Housing Insecurity.
           </Animated>
           <Animated as="h2">Generating Art</Animated>
           <Animated>
             Each plant is a mathematical equation that outputs a 3D model.
             Depending on the data fed to the plant, the output changes
             accordingly. Creating groups of plants based on similar
-            characteristics results in gardens that tell stories about the data.
-            For instance, if you visit the Garden of Students Who Experience
-            Housing Insecurity, you will notice that many of the plants have
-            mazes on their leaves. This represents First Generation students,
-            and viewers begin to connect information in a new way.
+            characteristics results in gardens that reveal meaning within the
+            data.
           </Animated>
         </div>
         <Newsletter />
