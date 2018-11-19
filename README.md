@@ -378,12 +378,8 @@ Created by [lucastswick](https://generativeartist.com) during a six-week artist 
 - [Sarah Wright](https://trio.dasa.ncsu.edu/student-support-services/about/our-staff/)
 - [Micah Vandegrift](https://www.lib.ncsu.edu/staff/mlvandeg)
 
-### Special thanks so
+### Special thanks to
 
 - [Molly Renda](https://www.lib.ncsu.edu/staff/mrenda) for creating the print exhibition
 - [Walt Gurley](https://www.lib.ncsu.edu/staff/jwgurley) for the encouragement and assistance with hardware testing
 - [Marian Fragola](https://www.lib.ncsu.edu/staff/mgfragol) for making the presentations an enormous success
-
-```
-
-```

@@ -48,7 +48,12 @@ const removeMarginBottom = css({
 });
 
 const removeMarginVertical = css({
+  marginTop: 0,
   marginBottom: 0
+});
+
+const removeMarginLeft = css({
+  marginLeft: 0
 });
 
 const addMarginSm = css({
@@ -180,6 +185,7 @@ export {
   removePaddingBottom,
   removeMarginBottom,
   removeMarginVertical,
+  removeMarginLeft,
   addMarginSm,
   center,
   link,
