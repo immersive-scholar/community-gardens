@@ -9,7 +9,7 @@ import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 
-import { textContainer, bulletless, removeMarginLeft } from "styles";
+import { textContainer, removePaddingTop } from "styles";
 
 class TechnicalDetails extends PureComponent {
   componentWillMount() {
@@ -19,11 +19,6 @@ class TechnicalDetails extends PureComponent {
 
   render() {
     const { headerImage } = this.state;
-
-    const theme = {
-      baseColor: "#fbb3d1",
-      colors: ["#ec468a", "#fbb3d1", "#ffffff", "#c25482"]
-    };
 
     return (
       <div>
@@ -506,6 +501,11 @@ class TechnicalDetails extends PureComponent {
             </li>
 
             <li>
+              <TextLink href="https://fonts.google.com/" label="Google Fonts" />{" "}
+              for Alegreya and Alegreya Sans.
+            </li>
+
+            <li>
               <TextLink
                 href="https://kyleamathews.github.io/typography.js/"
                 label="typography"
@@ -513,8 +513,12 @@ class TechnicalDetails extends PureComponent {
               for ... typography.
             </li>
           </ul>
+          <Animated as="p">
+            Learn more about how the{" "}
+            <TextLink label="data affects each individual plant" to="/data" />,
+            or <TextLink label="commit to making a change" to="/solutions" />.
+          </Animated>
         </div>
-
         <Newsletter />
         <Footer />
       </div>

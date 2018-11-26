@@ -43,6 +43,13 @@ const removePaddingBottom = css({
   paddingBottom: 0
 });
 
+const addMarginBottom = css({
+  marginBottom: "2rem"
+});
+
+const removeMarginTop = css({
+  marginTop: 0
+});
 const removeMarginBottom = css({
   marginBottom: 0
 });
@@ -170,6 +177,10 @@ const inlineBlock = css({
   display: "inline-block"
 });
 
+const lead = css({
+  fontSize: "1.4rem"
+});
+
 const CircleMaskDiv = glamorous.div({
   borderRadius: "50%",
   overflow: "hidden"
@@ -180,9 +191,11 @@ export {
   lightText,
   lightFocusedText,
   wideContainer,
+  addMarginBottom,
   removePaddingVertical,
   removePaddingTop,
   removePaddingBottom,
+  removeMarginTop,
   removeMarginBottom,
   removeMarginVertical,
   removeMarginLeft,
@@ -206,5 +219,6 @@ export {
   grid,
   inlineBlock,
   underline,
-  CircleMaskDiv
+  CircleMaskDiv,
+  lead
 };

@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import { chapters } from "actions";
 import Animated from "components/molecules/Animated";
 import Image from "components/atoms/Image";
+import TextLink from "components/atoms/TextLink";
 import {
   ImageCopyBlock,
   CopyImageBlock
@@ -15,7 +16,13 @@ import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 
-import { textContainer, wideContainer, link, shadowless } from "styles";
+import {
+  textContainer,
+  wideContainer,
+  link,
+  shadowless,
+  removePaddingTop
+} from "styles";
 
 class Home extends PureComponent {
   constructor(props) {
@@ -142,6 +149,13 @@ class Home extends PureComponent {
             mask="circle"
             theme={theme}
           />
+        </div>
+        <div {...textContainer} {...removePaddingTop}>
+          <Animated as="p">
+            Learn more about how the{" "}
+            <TextLink label="data affects each individual plant" to="/data" />,
+            or <TextLink label="commit to making a change" to="/solutions" />.
+          </Animated>
         </div>
         <Newsletter />
         <Footer />

@@ -3,7 +3,21 @@ import { Watch } from "scrollmonitor-react";
 
 import AnimationWrapper from "components/molecules/AnimationWrapper";
 
-const Animated = ({ isInViewport, children, as, delay = 50 }) => {
+const Animated = ({
+  isInViewport,
+  children,
+  as,
+  delay = 50,
+  autoStart = false,
+  isAboveViewport = false,
+  isBelowViewport = false,
+  isFullyInViewport = false,
+  lockWatcher = false,
+  unlockWatcher = false,
+  startWatcher = false,
+  stopWatcher = false,
+  ...otherProps
+}) => {
   const Component = as || "p";
   return (
     <AnimationWrapper
@@ -12,7 +26,7 @@ const Animated = ({ isInViewport, children, as, delay = 50 }) => {
       delay={delay}
       once
     >
-      <Component {...this.props}>{children}</Component>
+      <Component {...otherProps}>{children}</Component>
     </AnimationWrapper>
   );
 };

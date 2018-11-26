@@ -3,8 +3,9 @@ import { css } from "glamor";
 
 import Image from "components/atoms/Image";
 
-import { textContainer, removeMarginBottom } from "styles";
+import { textContainer, removeMarginBottom, shadowless, link } from "styles";
 import { Logo } from "./styles";
+import TextLink from "../../atoms/TextLink/TextLink";
 class Footer extends PureComponent {
   componentWillMount() {
     // this.props.loadTheme();
@@ -55,11 +56,23 @@ class Footer extends PureComponent {
           })}
         >
           <p {...removeMarginBottom}>
-            This project was funded by the<br />Andrew W. Mellon Foundation.
+            This project was funded by the<br />
+            <TextLink
+              href="https://www.immersivescholar.org/"
+              label="Andrew W. Mellon Foundation"
+            />.
           </p>
-          <Logo>
-            <Image ratio="3x1" sources={image} />
-          </Logo>
+          <a
+            {...shadowless}
+            {...link}
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+            href="https://www.immersivescholar.org/"
+          >
+            <Logo>
+              <Image ratio="3x1" sources={image} />
+            </Logo>
+          </a>
         </div>
       </div>
     );

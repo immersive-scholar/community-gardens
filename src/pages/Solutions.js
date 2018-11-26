@@ -4,6 +4,7 @@ import { smile } from "react-icons-kit/icomoon/smile";
 import { Icon } from "react-icons-kit";
 
 import FillButton from "components/atoms/FillButton";
+import TextLink from "components/atoms/TextLink";
 import Image from "components/atoms/Image";
 import Animated from "components/molecules/Animated";
 import PathToPicture from "util/PathToPicture";
@@ -61,9 +62,13 @@ class Solutions extends PureComponent {
           </Animated>
           <Animated as="h2">Faculty</Animated>
           <Animated>
-            Faculty members need support too! Reach out to Sarah Wright who runs
-            the Trio program and find out how you can help raise awareness about
-            the issues of food and housing insecurity.
+            Faculty members need support too! Reach out to{" "}
+            <TextLink
+              label="Sarah Wright"
+              href="https://trio.dasa.ncsu.edu/student-support-services/about/our-staff/"
+            />{" "}
+            who runs the Trio program and find out how you can help raise
+            awareness about the issues of food and housing insecurity.
           </Animated>
           <Animated>
             <FillButton
@@ -91,7 +96,7 @@ class Solutions extends PureComponent {
           <Animated>
             Together, we can help everyone succeed and thrive.
           </Animated>
-          <Animated>
+          <Animated as="div">
             <Icon size={48} icon={smile} />
           </Animated>
         </div>

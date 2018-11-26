@@ -60,8 +60,8 @@ class Data extends PureComponent {
           </Animated>
           <Animated>
             Data-driven design means using real data to inform decisions.
-            Community Gardens started as a survey of students at NC State. This
-            same data became a spreadsheet and is now used to generate plants.
+            Community Gardens began as a survey of students at NC State. The
+            data is now used to generate plants.
           </Animated>
           <Animated>
             The data is very rich. Details range from numeric (age, number of

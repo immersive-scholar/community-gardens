@@ -20,6 +20,7 @@
     "query-string": "5",
     "random-seed": "^0.3.0",
     "react": "^16.4.0",
+    "react-burger-menu": "^2.5.4",
     "react-dom": "^16.4.0",
     "react-helmet": "^5.2.0",
     "react-icons-kit": "^1.2.0",
