@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -16,13 +15,7 @@ import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 
-import {
-  textContainer,
-  wideContainer,
-  link,
-  shadowless,
-  removePaddingTop
-} from "styles";
+import { textContainer, wideContainer, removePaddingTop, center } from "styles";
 
 class Gardens extends PureComponent {
   constructor(props) {
@@ -60,7 +53,7 @@ class Gardens extends PureComponent {
           description="Community Gardens is a data-driven generative art installation using gardens as metaphor to discuss food and housing insecurity within the student body at NC State."
         />
 
-        <div {...textContainer}>
+        <div {...textContainer} {...center}>
           <Animated as="h1">Community Gardens</Animated>
         </div>
         <div {...wideContainer}>

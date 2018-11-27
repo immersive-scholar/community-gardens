@@ -21,18 +21,13 @@ class About extends PureComponent {
   componentWillMount() {
     const headerImage = PathToPicture("headers", `about-community-gardens`);
     const aboutImage1 = PathToPicture("about", `community-gardens-about`);
-    const aboutImage2 = PathToPicture("about", `community-gardens-about-2`);
-    const aboutImages = [aboutImage1, aboutImage2];
+    // const aboutImage2 = PathToPicture("about", `community-gardens-about-2`);
+    const aboutImages = [aboutImage1];
     this.setState({ headerImage, aboutImages });
   }
 
   render() {
     const { headerImage, aboutImages } = this.state;
-
-    const theme = {
-      baseColor: "#fbb3d1",
-      colors: ["#ec468a", "#fbb3d1", "#ffffff", "#c25482"]
-    };
 
     return (
       <div>

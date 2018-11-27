@@ -158,6 +158,21 @@ const fullWidthSm = css({
   }
 });
 
+const threeCols = css({
+  display: "grid",
+  gridTemplateColumns: "33% 33% 33%",
+  alignItems: "center",
+  "@media(max-width: 48em)": {
+    gridTemplateColumns: "100%"
+  }
+});
+
+const twoColsSm = css({
+  "@media(max-width: 48em)": {
+    gridTemplateColumns: "50% 50%"
+  }
+});
+
 const imageWrapper = css({
   marginBottom: typography.rhythm(1.5)
 });
@@ -220,5 +235,7 @@ export {
   inlineBlock,
   underline,
   CircleMaskDiv,
-  lead
+  lead,
+  threeCols,
+  twoColsSm
 };

@@ -9,7 +9,7 @@ import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 
-import { textContainer, removePaddingTop } from "styles";
+import { textContainer } from "styles";
 
 class TechnicalDetails extends PureComponent {
   componentWillMount() {

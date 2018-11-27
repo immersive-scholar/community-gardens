@@ -12,6 +12,7 @@ import TopNav from "components/molecules/TopNav";
 import LoadableHome from "./loadables/LoadableHome";
 import LoadableGardens from "./loadables/LoadableGardens";
 import LoadableAbout from "./loadables/LoadableAbout";
+import LoadableContact from "./loadables/LoadableContact";
 import LoadableThreeContainer from "./loadables/LoadableThreeContainer";
 import LoadableData from "./loadables/LoadableData";
 import LoadableSolutions from "./loadables/LoadableSolutions";
@@ -51,6 +52,7 @@ class App extends Component {
                 <Switch>
                   <Route exact path="/" component={LoadableHome} />
                   <Route exact path="/gardens" component={LoadableGardens} />
+                  <Route exact path="/contact" component={LoadableContact} />
                   <Route
                     exact
                     path="/presentation"

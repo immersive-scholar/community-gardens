@@ -19,11 +19,6 @@ class Credits extends PureComponent {
   render() {
     const { headerImage } = this.state;
 
-    const theme = {
-      baseColor: "#fbb3d1",
-      colors: ["#ec468a", "#fbb3d1", "#ffffff", "#c25482"]
-    };
-
     return (
       <div>
         <Image ratio="16x9" sources={headerImage} />

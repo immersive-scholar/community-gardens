@@ -6316,6 +6316,10 @@ react-icons-kit@^1.2.0:
     camel-case "^3.0.0"
     prop-types "^15.5.8"
 
+react-icons@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.npmjs.org/react-icons/-/react-icons-3.2.2.tgz#7b1dc795004a119a35175e62ecef91e5c9c90962"
+
 react-is@^16.3.2, react-is@^16.6.0:
   version "16.6.0"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.6.0.tgz#456645144581a6e99f6816ae2bd24ee94bdd0c01"
@@ -6333,6 +6337,10 @@ react-loadable@^5.5.0:
   resolved "https://registry.npmjs.org/react-loadable/-/react-loadable-5.5.0.tgz#582251679d3da86c32aae2c8e689c59f1196d8c4"
   dependencies:
     prop-types "^15.5.0"
+
+react-obfuscate@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.npmjs.org/react-obfuscate/-/react-obfuscate-2.2.1.tgz#2892a0604a298282495f4a1f770b46b0aaedd196"
 
 react-player-controls@^1.0.0-beta.0:
   version "1.0.0-beta.0"
