@@ -55,7 +55,7 @@ class Solutions extends PureComponent {
           </Animated>
           <Animated>
             <FillButton
-              to="https://www.facebook.com/groups/184819805787255/"
+              href="https://www.facebook.com/groups/184819805787255/"
               label="Join the coalition"
               theme={theme}
             />
@@ -72,7 +72,7 @@ class Solutions extends PureComponent {
           </Animated>
           <Animated>
             <FillButton
-              to="https://trio.dasa.ncsu.edu/student-support-services/"
+              href="https://trio.dasa.ncsu.edu/student-support-services/"
               label="Support Services"
               theme={theme}
             />

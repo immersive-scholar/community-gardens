@@ -82,6 +82,7 @@ class TopNav extends React.Component {
       { title: "Home", uid: "home", link: "/" },
       { title: "Gardens", uid: "gardens", link: "/gardens" },
       { title: "About", uid: "about", link: "/about" },
+      { title: "Solutions", uid: "solutions", link: "/solutions" },
       { title: "Data", uid: "data", link: "/data" },
       { title: "Tech", uid: "tech", link: "/tech" }
     ];
