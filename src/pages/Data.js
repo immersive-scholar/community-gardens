@@ -15,7 +15,7 @@ import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 
-import { textContainer, wideContainer } from "styles";
+import { textContainer, wideContainer, lead } from "styles";
 
 class Data extends PureComponent {
   componentWillMount() {
@@ -54,7 +54,7 @@ class Data extends PureComponent {
             description="Details about how the data affects the plants in Community Gardens."
           />
           <Animated as="h1">Data-driven Generative Art</Animated>
-          <Animated>
+          <Animated {...lead}>
             Combining data-driven design and generative art is not immediately
             obvious.
           </Animated>

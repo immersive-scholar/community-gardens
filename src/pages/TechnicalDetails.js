@@ -9,7 +9,7 @@ import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 
-import { textContainer } from "styles";
+import { textContainer, lead } from "styles";
 
 class TechnicalDetails extends PureComponent {
   componentWillMount() {
@@ -32,11 +32,14 @@ class TechnicalDetails extends PureComponent {
           <Animated as="h2">
             Curious about how Community Gardens was built?
           </Animated>
-          <Animated as="p">
+          <Animated as="p" {...lead}>
             Community Gardens is a data-driven generative art installation that
-            runs inside a browser. Built using javascript and threejs, it
-            generates plants. Each plant represents a student that we have food
-            and housing insecurity information about.
+            runs inside a browser.
+          </Animated>
+          <Animated as="p">
+            Built using javascript and threejs, it generates plants. Each plant
+            represents a student that we have food and housing insecurity
+            information about.
           </Animated>
 
           <Animated as="h2">Data Processing</Animated>
@@ -49,19 +52,14 @@ class TechnicalDetails extends PureComponent {
           </Animated>
           <Animated as="p">
             My job starts with the data. The survey results are exported from a
-            spreadsheet to a{" "}
-            <a href="https://github.com/lucastswick/community-gardens/blob/master/public/json/data.json">
-              json file
-            </a>. The file is zipped to preserve bandwidth. It was an 8 meg json
-            file, but I got it down to 145k by removing irrelevant values and
-            zipping the file.
+            spreadsheet to a <a href="/json/data.json">json file</a>. The file
+            is zipped to preserve bandwidth. It was an 8 meg json file, but I
+            got it down to 145k by removing irrelevant values and zipping the
+            file.
           </Animated>
 
           <Animated as="p">
-            Once the file is loaded and unzipped, the{" "}
-            <a href="https://github.com/lucastswick/community-gardens/blob/master/src/data/InsecurityCalculator.js">
-              Insecurity Calculator
-            </a>{" "}
+            Once the file is loaded and unzipped, the Insecurity Calculator
             processes the data. It calculates:
           </Animated>
 

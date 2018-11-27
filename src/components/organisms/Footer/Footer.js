@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from "react";
 import { css } from "glamor";
+import { TiSocialTwitter, TiSocialInstagram } from "react-icons/ti";
 
 import Image from "components/atoms/Image";
 
@@ -14,8 +15,10 @@ import {
   twoColsSm,
   center
 } from "styles";
-import { Logo } from "./styles";
 import TextLink from "components/atoms/TextLink";
+
+import { Logo, links } from "./styles";
+
 class Footer extends PureComponent {
   componentWillMount() {
     // this.props.loadTheme();
@@ -61,14 +64,46 @@ class Footer extends PureComponent {
             backgroundColor: theme.bright
           })}
         >
-          <div {...textContainer} {...threeCols} {...twoColsSm}>
-            <TextLink to="/about" label="About" />
-            <TextLink to="/gardens" label="Gardens" />
-            <TextLink to="/credits" label="Credits" />
-            <TextLink to="/data" label="Data" />
-            <TextLink to="/solutions" label="Solutions" />
-            <TextLink to="/contact" label="Contact" />
-            <TextLink to="/tech" label="Technical Summary" />
+          <div {...textContainer} {...threeCols} {...twoColsSm} {...links}>
+            <TextLink
+              {...css({ gridArea: "about" })}
+              to="/about"
+              label="About"
+            />
+            <TextLink
+              {...css({ gridArea: "gardens" })}
+              to="/gardens"
+              label="Gardens"
+            />
+            <TextLink
+              {...css({ gridArea: "credits" })}
+              to="/credits"
+              label="Credits"
+            />
+            <TextLink {...css({ gridArea: "data" })} to="/data" label="Data" />
+            <TextLink
+              {...css({ gridArea: "solutions" })}
+              to="/solutions"
+              label="Solutions"
+            />
+            <TextLink
+              {...css({ gridArea: "contact" })}
+              to="/contact"
+              label="Contact"
+            />
+            <TextLink
+              {...css({ gridArea: "tech" })}
+              to="/tech"
+              label="Technical Summary"
+            />
+            <div {...css({ gridArea: "social" })}>
+              <TextLink href="https://instagram.com/lucastswick">
+                <TiSocialInstagram />
+              </TextLink>{" "}
+              <TextLink href="https://twitter.com/lucastswick">
+                <TiSocialTwitter />
+              </TextLink>
+            </div>
           </div>
         </div>
         <div

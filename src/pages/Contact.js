@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import Helmet from "react-helmet";
-import { TiSocialTwitter } from "react-icons/ti";
-import { TiSocialInstagram } from "react-icons/ti";
+import { TiSocialTwitter, TiSocialInstagram } from "react-icons/ti";
 import Obfuscate from "react-obfuscate";
 
 import Image from "components/atoms/Image";

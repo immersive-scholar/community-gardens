@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { shadowless, link, button } from "styles";
 export default class TextLink extends PureComponent {
   render() {
-    const { href, label, to, children } = this.props;
+    const { href, label, to, children, ...otherProps } = this.props;
     const arrayOfChildren = React.Children.toArray(children);
 
     if (href) {
@@ -13,6 +13,7 @@ export default class TextLink extends PureComponent {
           {...shadowless}
           {...link}
           {...button}
+          {...otherProps}
           target="_blank"
           rel="nofollow noopener noreferrer"
           href={href}
@@ -22,7 +23,7 @@ export default class TextLink extends PureComponent {
       );
     } else {
       return (
-        <Link {...shadowless} {...link} {...button} to={to}>
+        <Link {...shadowless} {...link} {...button} to={to} {...otherProps}>
           {label}
         </Link>
       );
