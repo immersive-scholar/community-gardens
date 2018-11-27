@@ -3,32 +3,37 @@ import camelCase from "lodash/camelCase";
 import { ADD_CHAPTER, FOCUS_CHAPTER } from "constants/Constants";
 import addCollectionToNode from "util/AddCollectionToNode";
 import {
-  SummerGardenModel,
-  HousingInsecurityModel,
-  HighResourcesModel,
+  AgeModel,
+  AnxietyModel,
+  DegreeModel,
   EnergyOutgoingModel,
   FirstGenerationModel,
-  WinterGardenModel,
-  RandomGardenModel
+  FoodInsecurityModel,
+  HighResourcesModel,
+  HighGPAModel,
+  HousingInsecurityModel,
+  OutOfStateModel,
+  RandomGardenModel,
+  SummerGardenModel,
+  WinterGardenModel
 } from "models";
 
 const initialState = {
   node: {
-    summerGarden: SummerGardenModel,
-    winterGarden: WinterGardenModel,
+    age: AgeModel,
+    anxiety: AnxietyModel,
+    degree: DegreeModel,
     didNotEatForADay: {
       id: "did-not-eat-for-a-day",
       title: "Did Not Eat for a Day",
       link: "/garden/did-not-eat-for-a-day"
     },
+    energyOutgoing: EnergyOutgoingModel,
     firstGeneration: FirstGenerationModel,
-    highGPA: { id: "highGPA", title: "High GPA", link: "/garden/high-gpa" },
+    foodInsecurity: FoodInsecurityModel,
+    highGpa: HighGPAModel,
     housingInsecurity: HousingInsecurityModel,
-    outOfState: {
-      id: "out-of-state",
-      title: "Out of State",
-      link: "/garden/out-of-state"
-    },
+    outOfState: OutOfStateModel,
     pellGrant: {
       id: "pell-grant",
       title: "Pell Grant",
@@ -36,12 +41,13 @@ const initialState = {
     },
     randomGarden: RandomGardenModel,
     resourced: HighResourcesModel,
-    energyOutgoing: EnergyOutgoingModel,
+    summerGarden: SummerGardenModel,
     wellness: {
       id: "wellness",
       title: "Wellness Garden",
       link: "/garden/wellness"
-    }
+    },
+    winterGarden: WinterGardenModel
   }
 };
 

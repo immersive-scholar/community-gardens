@@ -10,6 +10,7 @@ import {
   placeholder,
   placeholder16x9,
   placeholder3x1,
+  placeholder3x4,
   placeholderVis,
   placeholderLoaded,
   image,
@@ -64,6 +65,7 @@ class Image extends React.Component {
             placeholder,
             ratio === "16x9" ? placeholder16x9 : {},
             ratio === "3x1" ? placeholder3x1 : ratio,
+            ratio === "3x4" ? placeholder3x4 : ratio,
             ratio === "vis" ? placeholderVis : ratio,
             ready ? placeholderLoaded : {}
           )}

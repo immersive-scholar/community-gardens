@@ -7,6 +7,8 @@ import { bindActionCreators } from "redux";
 import { chapters } from "actions";
 import Animated from "components/molecules/Animated";
 import Image from "components/atoms/Image";
+import TextLink from "components/atoms/TextLink";
+import FillButton from "components/atoms/FillButton";
 import {
   ImageCopyBlock,
   CopyImageBlock
@@ -15,7 +17,15 @@ import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 
-import { textContainer, wideContainer, link, shadowless } from "styles";
+import {
+  textContainer,
+  wideContainer,
+  link,
+  shadowless,
+  removePaddingTop,
+  center,
+  lead
+} from "styles";
 
 class Home extends PureComponent {
   constructor(props) {
@@ -33,10 +43,6 @@ class Home extends PureComponent {
     const { headerImage } = this.state;
 
     const summerGarden = chapters.summerGarden;
-    const housingInsecurity = chapters.housingInsecurity;
-    const highResources = chapters.resourced;
-    const energyOutgoing = chapters.energyOutgoing;
-    const firstGeneration = chapters.firstGeneration;
     const winterGarden = chapters.winterGarden;
     const randomGarden = chapters.randomGarden;
 
@@ -55,7 +61,7 @@ class Home extends PureComponent {
           />
 
           <Animated as="h1">Community Gardens</Animated>
-          <Animated>
+          <Animated {...lead}>
             Community Gardens is a data-driven generative art installation that
             uses gardens as a metaphor to discuss food and housing insecurity
             within the NC State student body.
@@ -108,40 +114,26 @@ class Home extends PureComponent {
             theme={theme}
           />
           <ImageCopyBlock
-            item={highResources}
-            showAllOnSmall
-            showLinkOnSmall
-            mask="circle"
-            theme={theme}
-          />
-          <CopyImageBlock
-            item={energyOutgoing}
-            showAllOnSmall
-            showLinkOnSmall
-            mask="circle"
-            theme={theme}
-          />
-          <ImageCopyBlock
-            item={firstGeneration}
-            showAllOnSmall
-            showLinkOnSmall
-            mask="circle"
-            theme={theme}
-          />
-          <CopyImageBlock
-            item={housingInsecurity}
-            showAllOnSmall
-            showLinkOnSmall
-            mask="circle"
-            theme={theme}
-          />
-          <ImageCopyBlock
             item={randomGarden}
             showAllOnSmall
             showLinkOnSmall
             mask="circle"
             theme={theme}
           />
+          <Animated {...center}>
+            <FillButton
+              to="/gardens"
+              label="See all the gardens"
+              theme={theme}
+            />
+          </Animated>
+        </div>
+        <div {...textContainer} {...removePaddingTop}>
+          <Animated as="p">
+            Learn more about how the{" "}
+            <TextLink label="data affects each individual plant" to="/data" />,
+            or <TextLink label="commit to making a change" to="/solutions" />.
+          </Animated>
         </div>
         <Newsletter />
         <Footer />

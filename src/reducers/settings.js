@@ -32,6 +32,7 @@ let show3DTitles = false;
 let showControlBar = true;
 let showImmersiveScholarLogo = false;
 let showSidebar = false;
+let showBurgerButton = true;
 let sidebarWidth = 0;
 let env, wallDisplay;
 
@@ -104,6 +105,7 @@ if (wallDisplay) {
   presentationMode = PRESENTATION_MODE_EXPLORE;
   showControlBar = false;
   show3DTitles = true;
+  showBurgerButton = false;
   quantityMultiplier = 8;
 }
 
@@ -114,8 +116,8 @@ if (wallDisplay === IMMERSION) {
 }
 
 if (wallDisplay === COMMONS) {
-    // COMMONS has an older CPU that sometimes takes too long to render text.
-    show3DTitles = false; 
+  // COMMONS has an older CPU that sometimes takes too long to render text.
+  show3DTitles = false;
 }
 
 // 4. override with any query string params
@@ -144,6 +146,7 @@ const initialState = {
   showControlBar,
   showImmersiveScholarLogo,
   showSidebar,
+  showBurgerButton,
   sidebarWidth,
   env,
   wallDisplay
