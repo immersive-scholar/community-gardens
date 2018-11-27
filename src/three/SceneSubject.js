@@ -1,5 +1,7 @@
 import DidNotEatForADayChapter from "chapters/DidNotEatForADayChapter";
+import DegreeChapter from "chapters/DegreeChapter";
 import EnergyOutgoingChapter from "chapters/EnergyOutgoingChapter";
+import FoodInsecurityChapter from "chapters/FoodInsecurityChapter";
 import FirstGenerationChapter from "chapters/FirstGenerationChapter";
 import HighGPAChapter from "chapters/HighGPAChapter";
 import HousingInsecurityChapter from "chapters/HousingInsecurityChapter";
@@ -23,9 +25,11 @@ class SceneSubject {
     this.chaptersPlayed = 0;
 
     this.chapters = [
+      DegreeChapter,
       DidNotEatForADayChapter,
       EnergyOutgoingChapter,
       FirstGenerationChapter,
+      FoodInsecurityChapter,
       HighGPAChapter,
       HousingInsecurityChapter,
       OutOfStateChapter,
@@ -63,6 +67,12 @@ class SceneSubject {
     switch (chapterClass) {
       case HousingInsecurityChapter:
         chapter = this.createHousingInsecurityChapter();
+        break;
+      case FoodInsecurityChapter:
+        chapter = this.createFoodInsecurityChapter();
+        break;
+      case DegreeChapter:
+        chapter = this.createDegreeChapter();
         break;
       case DidNotEatForADayChapter:
         chapter = this.createDidNotEatForADayChapter();
@@ -111,6 +121,12 @@ class SceneSubject {
       case "housing-insecurity":
         chapter = this.createHousingInsecurityChapter();
         break;
+      case "food-insecurity":
+        chapter = this.createFoodInsecurityChapter();
+        break;
+      case "degree":
+        chapter = this.createDegreeChapter();
+        break;
       case "did-not-eat-for-a-day":
         chapter = this.createDidNotEatForADayChapter();
         break;
@@ -156,6 +172,12 @@ class SceneSubject {
     return chapter;
   }
 
+  createDegreeChapter() {
+    const { settings, camera, controls, R } = this;
+    const chapter = new DegreeChapter({ settings }, camera, controls, R);
+    return chapter;
+  }
+
   createDidNotEatForADayChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new DidNotEatForADayChapter(
@@ -180,6 +202,17 @@ class SceneSubject {
   createHousingInsecurityChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new HousingInsecurityChapter(
+      { settings },
+      camera,
+      controls,
+      R
+    );
+    return chapter;
+  }
+
+  createFoodInsecurityChapter() {
+    const { settings, camera, controls, R } = this;
+    const chapter = new FoodInsecurityChapter(
       { settings },
       camera,
       controls,

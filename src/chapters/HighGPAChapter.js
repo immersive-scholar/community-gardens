@@ -21,7 +21,7 @@ class HighGPAChapter extends BaseChapter {
     const stat = InsecurityCalculator.getStat(HIGH_GPA);
     const { color, textArray, bgColor } = stat;
 
-    const { quantityMultiplier, mobile } = this.settings;
+    const { quantityMultiplier, show3DTitles } = this.settings;
     const count = Math.min(stat.count, 25 * quantityMultiplier);
     const plantTypeCount = 3;
     const plantCount = Math.floor(count / plantTypeCount);
@@ -49,7 +49,7 @@ class HighGPAChapter extends BaseChapter {
       color,
       textArray
     });
-    !mobile && this.chapterTitle.createChildren();
+    show3DTitles && this.chapterTitle.createChildren();
     this.addCleanable(this.chapterTitle, this.chapterTitle.group);
 
     let bounds = new Vector3(1, 1, 1),
@@ -105,8 +105,8 @@ class HighGPAChapter extends BaseChapter {
     this.spawns.push(this.asiminaTrilobaSpawn);
 
     // layout
-    bounds.set(1, 0, 1);
-    position.set(0, 0.5, 1);
+    bounds.set(2, 0, 2);
+    position.set(0, 0.5, 2);
     new CircularLayout({
       instances: this.instances,
       group: this.group,

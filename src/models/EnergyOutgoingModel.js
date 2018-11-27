@@ -8,7 +8,9 @@ const EnergyOutgoingModel = {
   excerpt: (
     <Fragment>
       Students who have high <b>Energy Outgoing</b> scores have berries
-      displaced from the stem.
+      displaced from the stem. These students are working 30+ hours per week,
+      have children, are searching for a job, or are pursuing their Masters or
+      Doctoral degrees.
     </Fragment>
   ),
   headerImage: PathToPicture("plants", `energy-outgoing`),

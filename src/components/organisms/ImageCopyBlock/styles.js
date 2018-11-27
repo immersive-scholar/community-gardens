@@ -47,6 +47,10 @@ const image = css({
   }
 });
 
+const imageSmall = css({
+  flex: "1 0 40%"
+});
+
 const left = css({
   "@media(min-width: 47.979em)": {
     order: 1
@@ -71,6 +75,10 @@ const copy = css({
     padding: typography.rhythm(1),
     color: "inherit"
   }
+});
+
+const copyLarge = css({
+  flex: "0 0 60%"
 });
 
 const copyOverlayStyle = css({
@@ -119,12 +127,14 @@ const absolute = css({
 
 export {
   image,
+  imageSmall,
   left,
   right,
   itemStyles,
   backgroundImageStyles,
   linkStyles,
   copy,
+  copyLarge,
   copyOverlayStyle,
   copyAfter,
   header,

@@ -6,11 +6,18 @@ import { TypographyStyle, GoogleFont } from "react-typography";
 
 import typography from "util/typography";
 import ScrollToTop from "util/scrollToTop";
-import Home from "pages/Home";
 import NotFound from "pages/NotFound";
+import TopNav from "components/molecules/TopNav";
 
+import LoadableHome from "./loadables/LoadableHome";
+import LoadableGardens from "./loadables/LoadableGardens";
+import LoadableAbout from "./loadables/LoadableAbout";
+import LoadableContact from "./loadables/LoadableContact";
 import LoadableThreeContainer from "./loadables/LoadableThreeContainer";
 import LoadableData from "./loadables/LoadableData";
+import LoadableSolutions from "./loadables/LoadableSolutions";
+import LoadableCredits from "./loadables/LoadableCredits";
+import LoadableTechnicalDetails from "./loadables/LoadableTechnicalDetails";
 import LoadablePresentation from "./loadables/LoadablePresentation";
 
 class App extends Component {
@@ -39,17 +46,31 @@ class App extends Component {
         <GoogleFont typography={typography} />
         <Router basename={process.env.PUBLIC_URL}>
           <div id="outer-container">
-            {/* <TopNavContainer /> */}
+            <TopNav />
             <div id="page-wrap">
               <ScrollToTop>
                 <Switch>
-                  <Route exact path="/" component={Home} />
+                  <Route exact path="/" component={LoadableHome} />
+                  <Route exact path="/gardens" component={LoadableGardens} />
+                  <Route exact path="/contact" component={LoadableContact} />
                   <Route
                     exact
                     path="/presentation"
                     component={LoadablePresentation}
                   />
+                  <Route exact path="/about" component={LoadableAbout} />
                   <Route exact path="/data" component={LoadableData} />
+                  <Route
+                    exact
+                    path="/solutions"
+                    component={LoadableSolutions}
+                  />
+                  <Route exact path="/credits" component={LoadableCredits} />
+                  <Route
+                    exact
+                    path="/tech"
+                    component={LoadableTechnicalDetails}
+                  />
                   <Switch>
                     <Route
                       exact

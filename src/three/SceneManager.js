@@ -79,6 +79,8 @@ export default ({ generalCanvas, R, settings }) => {
   }
 
   function setDebug(d) {
+    if (!document || !document.body) return false;
+
     const body = document.body;
     if (d) {
       body.appendChild(stats.dom);

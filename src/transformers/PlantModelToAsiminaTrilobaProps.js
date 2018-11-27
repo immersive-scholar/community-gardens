@@ -115,6 +115,8 @@ const PlantModelToAsiminaTrilobaProps = ({
     // props.petalLength = 0.25;
   }
 
+  props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/topography.png`;
+
   return props;
 };
 

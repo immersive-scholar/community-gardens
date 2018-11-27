@@ -4,7 +4,7 @@ import { HIGH_GPA } from "constants/Stats";
 import ColorFactory from "util/ColorFactory";
 
 const HighGPA = data => {
-  const rows = GPAFilter(data, 4);
+  const rows = GPAFilter(data, 3);
   const count = rows.length;
   const ids = map(rows, row => row.ID);
 
