@@ -15,7 +15,6 @@ import {
   textContainer,
   wideContainer,
   threeCols,
-  removePaddingTop,
   center,
   CircleMaskDiv
 } from "styles";
