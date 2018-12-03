@@ -10,7 +10,6 @@ import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
 import ChapterTitle from "art/chapter-plate/ChapterTitle";
 import InsecurityCalculator from "data/InsecurityCalculator";
 import TextureFactory from "util/TextureFactory";
-import ColorFactory from "util/ColorFactory";
 import CircularLayout from "art/layouts/CircularLayout";
 import { LAYOUT_FLOOR } from "art/layouts/LayoutConstants";
 import { LOW_HEALTH } from "constants/Stats";
@@ -28,8 +27,8 @@ class XmasCardChapter extends BaseChapter {
     const { color, textArray } = stat;
     const bgColor = 0x14161f;
 
-    const { quantityMultiplier, show3DTitles } = this.settings;
-    const count = 120; //Math.min(stat.count, 25 * quantityMultiplier);
+    const { show3DTitles } = this.settings;
+    const count = 120;
     const solomonsSealCount = count * 0.8;
     const stellariaPuberaCount = count * 0.1;
     const asiminaTrilobaCount = count * 0.1;
