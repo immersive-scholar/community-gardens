@@ -95,7 +95,6 @@ export default (container, settings) => {
       highresExport.enable();
 
       capturer = new Capturer();
-      console.log("capturer ", capturer);
     }
   }
 

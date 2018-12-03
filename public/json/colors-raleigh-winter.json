@@ -2,7 +2,14 @@
   "samplesByColorFamily": [
     {
       "color": "leaf",
-      "samples": ["#ecfcf4", "#dddae8", "#9c9cba", "#b6c6d6", "#dbe3e7"]
+      "samples": [
+        "#ecfcf4",
+        "#dddae8",
+        "#9c9cba",
+        "#b6c6d6",
+        "#dbe3e7",
+        "#bf1229"
+      ]
     },
     {
       "color": "ground",

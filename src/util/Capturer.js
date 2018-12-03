@@ -32,7 +32,7 @@ export default class Capturer {
         this.capturer.save();
         break;
       default:
-        console.log(e);
+        // console.log(e);
         break;
     }
   }

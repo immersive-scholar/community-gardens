@@ -25,7 +25,7 @@ function LeafAnimation({
   animated,
   imagePath = TextureFactory.getPattern(),
   applyLeafImage,
-  textureSize = new Vector2(20, -20),
+  textureSize = new Vector2(10, 10),
   windForce,
   windDirection,
   hslBase,
@@ -76,7 +76,7 @@ function LeafAnimation({
       uTime: { value: animated ? 0 : 1 },
       uWindForce: { value: windForce },
       uWindDirection: { value: new Vector3(0.2, 0.2, 0.2) },
-      uTextureSize: { value: new Vector2(10, 10) },
+      uTextureSize: { value: textureSize },
       color: color,
       uApplyLeafImage: { value: applyLeafImage ? 1.0 : 0.0 }
       // envMap

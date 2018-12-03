@@ -124,7 +124,7 @@ if (wallDisplay === COMMONS) {
 quantityMultiplier =
   parseFloat(parsed.quantityMultiplier) || quantityMultiplier;
 
-playing = parseFloat(parsed.timeMultiplier) === 1 ? true : playing;
+playing = parseFloat(parsed.playing) === 1 ? true : playing;
 timeMultiplier = parseFloat(parsed.timeMultiplier) || timeMultiplier;
 seed = parseFloat(parsed.seed) || seed;
 debug = parseFloat(parsed.debug) === 1 || debug;

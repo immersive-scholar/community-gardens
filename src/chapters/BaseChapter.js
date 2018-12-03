@@ -185,11 +185,16 @@ class BaseChapter {
       // this.ground.animateIn({ duration: 5, delay: 2 });
       // this.ground.animateCliff({ cliff: 0.5, duration: 5, delay: 2 });
 
-      this.background.time = 1;
-      this.background.update();
-      this.ground.time = 1;
-      this.ground.cliff = 0.5;
-      this.ground.update();
+      if (this.background) {
+        this.background.time = 1;
+        this.background.update();
+      }
+
+      if (this.ground) {
+        this.ground.time = 1;
+        this.ground.cliff = 0.5;
+        this.ground.update();
+      }
 
       for (let i = 0, iL = this.spawns.length; i < iL; i++) {
         this.spawns[i].animateIn({ delay: i * 2, instanceDelay: 0.3 });
