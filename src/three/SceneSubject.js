@@ -12,6 +12,7 @@ import ResourcedChapter from "chapters/ResourcedChapter";
 import SummerGardenChapter from "chapters/SummerGardenChapter";
 import WellnessChapter from "chapters/WellnessChapter";
 import WinterGardenChapter from "chapters/WinterGardenChapter";
+import XmasCardChapter from "chapters/XmasCardChapter";
 
 import ChapterPlate from "art/chapter-plate/ChapterPlate";
 
@@ -38,7 +39,8 @@ class SceneSubject {
       ResourcedChapter,
       SummerGardenChapter,
       WellnessChapter,
-      WinterGardenChapter
+      WinterGardenChapter,
+      XmasCardChapter
     ];
 
     this.createChapterPlate();
@@ -104,6 +106,9 @@ class SceneSubject {
       case WinterGardenChapter:
         chapter = this.createWinterGardenChapter();
         break;
+      case XmasCardChapter:
+        chapter = this.createXmasCardChapter();
+        break;
       case SummerGardenChapter:
       default:
         chapter = this.createSummerGardenChapter();
@@ -147,6 +152,9 @@ class SceneSubject {
         break;
       case "winter-garden":
         chapter = this.createWinterGardenChapter();
+        break;
+      case "xmas-card":
+        chapter = this.createXmasCardChapter();
         break;
       case "wellness":
         chapter = this.createWellnessChapter();
@@ -259,6 +267,12 @@ class SceneSubject {
   createWinterGardenChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new WinterGardenChapter({ settings }, camera, controls, R);
+    return chapter;
+  }
+
+  createXmasCardChapter() {
+    const { settings, camera, controls, R } = this;
+    const chapter = new XmasCardChapter({ settings }, camera, controls, R);
     return chapter;
   }
 

@@ -245,6 +245,11 @@ class BasePlant extends BaseRenderable {
       isDirty && this.init();
     });
   }
+  setBerryWireframe(berryWireframe) {
+    this.setState({ berryWireframe }, isDirty => {
+      isDirty && this.init();
+    });
+  }
 
   setOpenness(openness) {
     this.setState({ openness }, isDirty => {
@@ -313,6 +318,36 @@ class BasePlant extends BaseRenderable {
 
   setPetalRotation(petalRotation) {
     this.setState({ petalRotation }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setStemEnabled(stemEnabled) {
+    this.setState({ stemEnabled }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setImagePath(imagePath) {
+    this.setState({ imagePath }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setTextureSize(textureSize) {
+    this.setState({ textureSize }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setFogColor(fogColor) {
+    this.setState({ fogColor }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setFogDensity(fogDensity) {
+    this.setState({ fogDensity }, isDirty => {
       isDirty && this.init();
     });
   }

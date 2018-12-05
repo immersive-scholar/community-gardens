@@ -1,10 +1,12 @@
 import RandomSeed from "random-seed";
 import HighresExport from "three/vendor/Highres";
+
 import SceneManager from "./SceneManager";
 import GeneralCanvas from "./GeneralCanvas";
 import DataFactory from "util/DataFactory";
 import ColorFactory from "util/ColorFactory";
 import TextureFactory from "util/TextureFactory";
+import Capturer from "util/Capturer";
 import InsecurityCalculator from "data/InsecurityCalculator";
 
 export default (container, settings) => {
@@ -56,7 +58,7 @@ export default (container, settings) => {
   const generalCanvas = new GeneralCanvas(document, container, sidebarWidth);
   const sceneManager = new SceneManager({ generalCanvas, R, settings });
 
-  let highresExport;
+  let highresExport, capturer;
   createExporter(
     sceneManager.renderer,
     sceneManager.scene,
@@ -88,8 +90,12 @@ export default (container, settings) => {
       }
     };
 
-    highresExport = new HighresExport(renderer, scene, camera, options);
-    highresExport.enable();
+    if (process.env.NODE_ENV === "development") {
+      highresExport = new HighresExport(renderer, scene, camera, options);
+      highresExport.enable();
+
+      capturer = new Capturer();
+    }
   }
 
   // when redux dispatches a settings change event,
@@ -139,6 +145,10 @@ export default (container, settings) => {
 
     if (!state.paused) {
       sceneManager.update();
+
+      if (sceneManager.renderer.domElement) {
+        if (capturer) capturer.capture(sceneManager.renderer.domElement);
+      }
     }
 
     // if (!state.pausedRenderer) {
@@ -148,7 +158,8 @@ export default (container, settings) => {
 
   function clean() {
     cancelAnimationFrame(state.requestID);
-    highresExport.disable();
+    highresExport && highresExport.disable();
+    capturer && capturer.clean();
     sceneManager.clean();
   }
 

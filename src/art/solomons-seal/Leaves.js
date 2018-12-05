@@ -15,7 +15,7 @@ const Leaves = ({
   sizeStart,
   sizeEnd,
   leafMidPoint,
-  leafTextureSize = new Vector2(
+  textureSize = new Vector2(
     (1 / (1 - sizeStart.x * sizeEnd.x)) * 10,
     (-1 / (1 - sizeStart.y * sizeEnd.y)) * 10
   ),
@@ -119,7 +119,7 @@ const Leaves = ({
     imagePath,
     applyLeafImage,
     animated,
-    leafTextureSize,
+    textureSize,
     windForce,
     windDirection,
     hslBase,

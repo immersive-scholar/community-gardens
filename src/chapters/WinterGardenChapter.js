@@ -1,4 +1,5 @@
 import { Vector3, Group } from "three-full";
+import shuffle from "lodash/shuffle";
 
 import BaseChapter from "./BaseChapter";
 import BackgroundBAS from "art/background/BackgroundBAS";
@@ -106,12 +107,18 @@ class WinterGardenChapter extends BaseChapter {
     position.set(-2, 0.25, 0.5);
     new GridLayout({
       layoutType: LAYOUT_FLOOR,
-      instances: this.instances,
+      instances: shuffle(this.instances),
       group: this.plantGroup,
       R: this.R,
       bounds,
       position
     });
+
+    // for (var i = 0, j = this.instances.length, instance; i < j; i++) {
+    //   instance = this.instances[i];
+    //   instance.setImagePath(`${process.env.PUBLIC_URL}/img/strokes/stroke.png`);
+    //   instance.setTextureSize(new Vector2(15, 5));
+    // }
   };
 }
 

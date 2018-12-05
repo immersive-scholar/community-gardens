@@ -11,6 +11,7 @@ import OutOfStateModel from "./OutOfStateModel";
 import RandomGardenModel from "./RandomGardenModel";
 import SummerGardenModel from "./SummerGardenModel";
 import WinterGardenModel from "./WinterGardenModel";
+import XmasCardModel from "./XmasCardModel";
 
 export {
   AgeModel,
@@ -25,5 +26,6 @@ export {
   OutOfStateModel,
   RandomGardenModel,
   SummerGardenModel,
-  WinterGardenModel
+  WinterGardenModel,
+  XmasCardModel
 };

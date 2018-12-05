@@ -15,7 +15,8 @@ import {
   OutOfStateModel,
   RandomGardenModel,
   SummerGardenModel,
-  WinterGardenModel
+  WinterGardenModel,
+  XmasCardModel
 } from "models";
 
 const initialState = {
@@ -47,7 +48,8 @@ const initialState = {
       title: "Wellness Garden",
       link: "/garden/wellness"
     },
-    winterGarden: WinterGardenModel
+    winterGarden: WinterGardenModel,
+    xmasCard: XmasCardModel
   }
 };
 

@@ -96,6 +96,11 @@ class Footer extends PureComponent {
               to="/tech"
               label="Technical Summary"
             />
+            <TextLink
+              {...css({ display: "none" })}
+              to="/garden/xmas-card"
+              label="xmas 2018"
+            />
             <div {...css({ gridArea: "social" })}>
               <TextLink href="https://instagram.com/lucastswick">
                 <TiSocialInstagram />
