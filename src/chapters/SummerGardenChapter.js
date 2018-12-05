@@ -128,6 +128,12 @@ class SummerGardenChapter extends BaseChapter {
     this.group.add(this.asiminaTrilobaSpawn.group);
     this.addInstances(this.asiminaTrilobaSpawn.instances);
     this.spawns.push(this.asiminaTrilobaSpawn);
+
+    // for (var i = 0, j = this.instances.length, instance; i < j; i++) {
+    //   instance = this.instances[i];
+    //   instance.setImagePath(`${process.env.PUBLIC_URL}/img/strokes/stroke.png`);
+    //   instance.setTextureSize(new Vector2(15, 5));
+    // }
   };
 }
 

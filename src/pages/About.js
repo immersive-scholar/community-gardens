@@ -14,7 +14,8 @@ import {
   wideContainer,
   lead,
   addMarginBottom,
-  removePaddingTop
+  removePaddingTop,
+  blockquote
 } from "styles";
 
 class About extends PureComponent {
@@ -64,8 +65,21 @@ class About extends PureComponent {
           ))}
         </div>
         <div {...textContainer} {...removePaddingTop}>
+          <Animated as="blockquote" {...blockquote}>
+            I really started to understand the representations of the data by
+            just looking at the gardens. It's really an experience; our
+            community is so diverse in its successes and its disparity. It
+            really hit home in the GPA gardens because you see a good range of
+            people denoting that everyone can do it, but that high GPA is also
+            experienced through lack of resources, different types of outside
+            pressures, anxiety etc.
+          </Animated>
+          <Animated as="cite">– Indira Gutierrez, NC State Student</Animated>
+        </div>
+        <div {...textContainer} {...removePaddingTop}>
           <Animated as="p">
-            Learn more about how the{" "}
+            <TextLink label="Choose a garden to visit" to="/gardens" />, learn
+            more about how the{" "}
             <TextLink label="data affects each individual plant" to="/data" />,
             or <TextLink label="commit to making a change" to="/solutions" />.
           </Animated>

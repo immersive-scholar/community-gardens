@@ -44,7 +44,7 @@ class SceneSubject {
     ];
 
     this.createChapterPlate();
-    // this.chapterPlate.animateIn({ animated: false });
+    this.chapterPlate.animateIn({ animated: false });
   }
 
   createChapterPlate() {

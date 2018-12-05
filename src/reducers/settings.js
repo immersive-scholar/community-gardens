@@ -9,6 +9,7 @@ import {
   PRESENTATION_MODE_EXPLORE,
   SET_PLAYING,
   SET_OPTIONS_OPEN,
+  SET_ABOUT_MODAL_OPEN,
   IMMERSION,
   ART_WALL,
   COMMONS,
@@ -28,6 +29,7 @@ let debug = 0;
 let presentationMode = PRESENTATION_MODE_DEFAULT;
 let playing = false;
 let optionsOpen = false;
+let aboutModalOpen = false;
 let show3DTitles = false;
 let showControlBar = true;
 let showImmersiveScholarLogo = false;
@@ -67,15 +69,17 @@ if (device.mobile) {
       quantityMultiplier = 2;
       break;
     case tierIndex === 2:
-      quantityMultiplier = 1;
+      quantityMultiplier = 1.5;
       break;
     case tierIndex === 1:
-      quantityMultiplier = 0.5;
+      quantityMultiplier = 1;
       break;
     default:
       break;
   }
 }
+
+console.log("quantityMultiplier ", quantityMultiplier);
 
 const location = window.location;
 const parsed = queryString.parse(location.search);
@@ -142,6 +146,7 @@ const initialState = {
   mobile: device.mobile,
   playing,
   optionsOpen,
+  aboutModalOpen,
   presentationMode,
   show3DTitles,
   showControlBar,
@@ -211,6 +216,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         optionsOpen
+      };
+    case SET_ABOUT_MODAL_OPEN:
+      const { aboutModalOpen } = action.payload.data;
+
+      return {
+        ...state,
+        aboutModalOpen
       };
     default:
       return state;

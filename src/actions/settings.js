@@ -6,7 +6,8 @@ import {
   SET_ANTI_ALIAS,
   SET_DEBUG,
   SET_PLAYING,
-  SET_OPTIONS_OPEN
+  SET_OPTIONS_OPEN,
+  SET_ABOUT_MODAL_OPEN
 } from "constants/Constants";
 
 const settings = {};
@@ -49,6 +50,11 @@ settings.setPlaying = playing => ({
 settings.setOptionsOpen = optionsOpen => ({
   type: SET_OPTIONS_OPEN,
   payload: { data: { optionsOpen } }
+});
+
+settings.setAboutModalOpen = aboutModalOpen => ({
+  type: SET_ABOUT_MODAL_OPEN,
+  payload: { data: { aboutModalOpen } }
 });
 
 export default settings;

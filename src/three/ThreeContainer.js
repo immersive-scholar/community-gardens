@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import get from "lodash/get";
 
+import Modal from "components/molecules/Modal";
+import AboutModalContents from "components/organisms/AboutModalContents";
 import ThreeControlBar from "components/organisms/ThreeControlBar";
 import ImmersiveScholarLogo from "components/atoms/ImmersiveScholarLogo";
 import Infobar from "components/molecules/Infobar";
@@ -46,6 +48,8 @@ class ThreeContainer extends Component {
     const root = document.getElementById("three-canvas");
     root.removeEventListener("gesturestart", this.preventScroll);
     document.documentElement.classList.remove("state__locked");
+
+    this.props.setAboutModalOpen(false);
   }
 
   preventScroll = e => {
@@ -73,10 +77,15 @@ class ThreeContainer extends Component {
     const {
       showControlBar,
       showImmersiveScholarLogo,
-      showSidebar
+      showSidebar,
+      aboutModalOpen,
+      setAboutModalOpen
     } = this.props;
     return (
       <Fragment>
+        <Modal open={aboutModalOpen} onClose={() => setAboutModalOpen(false)}>
+          <AboutModalContents />
+        </Modal>
         {showControlBar && <ThreeControlBar />}
         {showSidebar && <Infobar />}
         {showImmersiveScholarLogo && <ImmersiveScholarLogo />}
@@ -98,6 +107,7 @@ const mapStateToProps = state => {
     playing: settings.playing,
     show3DTitles: settings.show3DTitles,
     showControlBar: settings.showControlBar,
+    aboutModalOpen: settings.aboutModalOpen,
     showImmersiveScholarLogo: settings.showImmersiveScholarLogo,
     showSidebar: settings.showSidebar,
     sidebarWidth: settings.sidebarWidth,
@@ -113,7 +123,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch
   ),
   focusChapter: bindActionCreators(chapters.focusChapter, dispatch),
-  setPlaying: bindActionCreators(settings.setPlaying, dispatch)
+  setPlaying: bindActionCreators(settings.setPlaying, dispatch),
+  setAboutModalOpen: bindActionCreators(settings.setAboutModalOpen, dispatch)
 });
 
 export default connect(

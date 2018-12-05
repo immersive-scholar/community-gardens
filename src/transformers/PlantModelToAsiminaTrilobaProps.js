@@ -69,7 +69,7 @@ const PlantModelToAsiminaTrilobaProps = ({
   const gpa = parseInt(model.GPA, 10);
   const degree = parseInt(model.Degree, 10);
   const firstGen = model.FirstGen === "Y";
-  const outOfState = parseInt(model.OutofState, 10);
+  const outOfState = parseInt(model.OutofState, 10) === 1;
   const shares =
     parseInt(model.sharemeals, 10) ||
     parseInt(model.givefood, 10) ||
@@ -114,8 +114,6 @@ const PlantModelToAsiminaTrilobaProps = ({
     // props.petalWidth = props.petalWidth * 1.5;
     // props.petalLength = 0.25;
   }
-
-  props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/topography.png`;
 
   return props;
 };

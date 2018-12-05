@@ -12,7 +12,7 @@ import { getSelectedChapter } from "reducers";
 import OptionsButton from "./OptionsButton";
 import Options from "./Options";
 
-import { removePaddingVertical, lightText, shadowless } from "styles";
+import { removePaddingVertical, lightText, shadowless, button } from "styles";
 import { ControlBarDiv, controlsGrid, stateOpen, container } from "./styles";
 
 class ThreeControlBar extends PureComponent {
@@ -23,6 +23,11 @@ class ThreeControlBar extends PureComponent {
   toggleOptions = () => {
     const { optionsOpen } = this.props;
     this.props.setOptionsOpen(!optionsOpen);
+  };
+
+  toggleAboutModal = () => {
+    const { aboutModalOpen } = this.props;
+    this.props.setAboutModalOpen(!aboutModalOpen);
   };
 
   render() {
@@ -49,10 +54,17 @@ class ThreeControlBar extends PureComponent {
             isPlaying={playing}
             onPlaybackChange={p => this.onPlaybackChange(p)}
           />
+
           {title}
-          <Link {...shadowless} {...lightText} to="/data">
-            <Icon size={24} icon={question} />
-          </Link>
+
+          <a {...shadowless} {...lightText} {...button}>
+            <Icon
+              size={24}
+              icon={question}
+              onClick={() => this.toggleAboutModal()}
+            />
+          </a>
+
           <Link {...shadowless} {...lightText} to="/">
             <Icon size={24} icon={exit} />
           </Link>
@@ -71,6 +83,7 @@ const mapStateToProps = state => {
   return {
     playing: settings.playing,
     optionsOpen: settings.optionsOpen,
+    aboutModalOpen: settings.aboutModalOpen,
     selectedChapterID: chapters.selectedID,
     selectedChapter: getSelectedChapter(state)
   };
@@ -78,7 +91,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   setPlaying: bindActionCreators(settings.setPlaying, dispatch),
-  setOptionsOpen: bindActionCreators(settings.setOptionsOpen, dispatch)
+  setOptionsOpen: bindActionCreators(settings.setOptionsOpen, dispatch),
+  setAboutModalOpen: bindActionCreators(settings.setAboutModalOpen, dispatch)
 });
 
 export default connect(

@@ -196,6 +196,22 @@ const lead = css({
   fontSize: "1.4rem"
 });
 
+const hideVisually = css({
+  border: "0 !important",
+  clip: "rect(0 0 0 0) !important",
+  height: "1px !important",
+  margin: "-1px !important",
+  overflow: "hidden !important",
+  padding: "0 !important",
+  position: "absolute !important",
+  width: "1px !important",
+  whiteSpace: "nowrap !important"
+});
+
+const blockquote = css({
+  borderLeft: "1px solid #dedede"
+});
+
 const CircleMaskDiv = glamorous.div({
   borderRadius: "50%",
   overflow: "hidden"
@@ -237,5 +253,7 @@ export {
   CircleMaskDiv,
   lead,
   threeCols,
+  hideVisually,
+  blockquote,
   twoColsSm
 };

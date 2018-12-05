@@ -117,7 +117,7 @@ const PlantModelToSolomonsSealProps = ({
   props.berryCount =
     R.intBetween(1, 4) * Math.max(24, Math.abs(resourcesIncoming));
 
-  props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/topography.png`;
+  // props.imagePath = `${process.env.PUBLIC_URL}/img/patterns/topography.png`;
 
   return props;
 };

@@ -57,4 +57,16 @@ const OptionsDiv = glamorous.div({
   }
 });
 
-export { ControlBarDiv, controlsGrid, OptionsDiv, stateOpen, container };
+const whiteButton = css({
+  color: "#ffffff",
+  cursor: "pointer"
+});
+
+export {
+  ControlBarDiv,
+  controlsGrid,
+  OptionsDiv,
+  stateOpen,
+  container,
+  whiteButton
+};

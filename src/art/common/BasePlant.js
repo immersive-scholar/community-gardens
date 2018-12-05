@@ -334,6 +334,12 @@ class BasePlant extends BaseRenderable {
     });
   }
 
+  setTextureSize(textureSize) {
+    this.setState({ textureSize }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
   setFogColor(fogColor) {
     this.setState({ fogColor }, isDirty => {
       isDirty && this.init();
