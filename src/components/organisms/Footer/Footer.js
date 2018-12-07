@@ -97,6 +97,11 @@ class Footer extends PureComponent {
               label="Technical Summary"
             />
             <TextLink
+              {...css({ gridArea: "gallery" })}
+              to="/gallery"
+              label="Gallery"
+            />
+            <TextLink
               {...css({ display: "none" })}
               to="/garden/xmas-card"
               label="xmas 2018"

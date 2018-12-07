@@ -16,6 +16,7 @@ import LoadableContact from "./loadables/LoadableContact";
 import LoadableThreeContainer from "./loadables/LoadableThreeContainer";
 import LoadableData from "./loadables/LoadableData";
 import LoadableSolutions from "./loadables/LoadableSolutions";
+import LoadableGallery from "./loadables/LoadableGallery";
 import LoadableCredits from "./loadables/LoadableCredits";
 import LoadableTechnicalDetails from "./loadables/LoadableTechnicalDetails";
 import LoadablePresentation from "./loadables/LoadablePresentation";
@@ -66,6 +67,7 @@ class App extends Component {
                     component={LoadableSolutions}
                   />
                   <Route exact path="/credits" component={LoadableCredits} />
+                  <Route exact path="/gallery" component={LoadableGallery} />
                   <Route
                     exact
                     path="/tech"

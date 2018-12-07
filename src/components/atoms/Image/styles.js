@@ -28,6 +28,10 @@ const placeholder3x1 = {
   paddingTop: "33%"
 };
 
+const placeholder1x1 = {
+  paddingTop: "100%"
+};
+
 const placeholderVis = {
   // 12288 / 768
   paddingTop: "6.25%"
@@ -85,6 +89,7 @@ export {
   placeholder16x9,
   placeholder3x1,
   placeholder3x4,
+  placeholder1x1,
   placeholderVis,
   placeholderLoaded,
   image,

@@ -196,6 +196,13 @@ const lead = css({
   fontSize: "1.4rem"
 });
 
+const galleryOffset = css({
+  "@media(min-width: 48em)": {
+    marginLeft: "20vw",
+    paddingLeft: "2rem"
+  }
+});
+
 const hideVisually = css({
   border: "0 !important",
   clip: "rect(0 0 0 0) !important",
@@ -255,5 +262,6 @@ export {
   threeCols,
   hideVisually,
   blockquote,
-  twoColsSm
+  twoColsSm,
+  galleryOffset
 };

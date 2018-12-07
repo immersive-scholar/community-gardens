@@ -81,6 +81,7 @@ class TopNav extends React.Component {
     const pages = [
       { title: "Home", uid: "home", link: "/" },
       { title: "Gardens", uid: "gardens", link: "/gardens" },
+      { title: "Gallery", uid: "gallery", link: "/gallery" },
       { title: "About", uid: "about", link: "/about" },
       { title: "Data", uid: "data", link: "/data" },
       { title: "Tech", uid: "tech", link: "/tech" }
