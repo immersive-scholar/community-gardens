@@ -44,6 +44,10 @@ class BasePlant extends BaseRenderable {
 
     // add to group
     this.group.add(this.stem.curvePainter.mesh);
+
+    this.stem.curvePainter.mesh.visible = props.hasOwnProperty("stemEnabled")
+      ? props.stemEnabled
+      : true;
   };
 
   toCurve = ({
@@ -324,6 +328,12 @@ class BasePlant extends BaseRenderable {
 
   setStemEnabled(stemEnabled) {
     this.setState({ stemEnabled }, isDirty => {
+      isDirty && this.init();
+    });
+  }
+
+  setPetalTarget(petalTarget) {
+    this.setState({ petalTarget }, isDirty => {
       isDirty && this.init();
     });
   }

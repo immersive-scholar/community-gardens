@@ -23,6 +23,7 @@ class AsiminaTriloba extends BasePlant {
     this.clean();
 
     const {
+      stemEnabled = true,
       height = this.R.floatBetween(0.25, 0.75),
       pointCount = 24,
       displacement = new Vector3(0.2, 0.1, 0.2),
@@ -69,6 +70,7 @@ class AsiminaTriloba extends BasePlant {
     } = this.state;
 
     const stemProps = {
+      stemEnabled,
       height,
       thickness,
       color,
@@ -122,8 +124,10 @@ class AsiminaTriloba extends BasePlant {
       rotationAngle,
       translateToY
     });
-    this.petals.position.copy(stemTopPoint);
-    this.petals.rotation.z = Math.PI / 2;
+    if (stemEnabled) {
+      this.petals.position.copy(stemTopPoint);
+      this.petals.rotation.z = Math.PI / 2;
+    }
     this.group.add(this.petals);
 
     // pollen
@@ -143,8 +147,10 @@ class AsiminaTriloba extends BasePlant {
       windDirection,
       delay: 0
     });
-    this.pollen.position.copy(stemTopPoint);
-    // this.pollen.rotation.y = -Math.PI / 2;
+    if (stemEnabled) {
+      this.pollen.position.copy(stemTopPoint);
+      // this.pollen.rotation.y = -Math.PI / 2;
+    }
     this.group.add(this.pollen);
 
     this.focalPoint = this.pollen;

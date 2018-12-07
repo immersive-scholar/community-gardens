@@ -15,7 +15,7 @@ import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 
-import { textContainer, wideContainer, lead } from "styles";
+import { textContainer, removePaddingTop, lead } from "styles";
 
 class Data extends PureComponent {
   componentWillMount() {
@@ -99,20 +99,22 @@ class Data extends PureComponent {
             follows:
           </Animated>
         </div>
-        <div {...wideContainer}>
+        <div {...textContainer} {...removePaddingTop}>
           <ImageCopyBlock
-            item={summerGarden}
+            item={{ ...summerGarden, title: "High Support" }}
             showAllOnSmall
             showLinkOnSmall
             mask="circle"
             theme={theme}
+            smallImage={true}
           />
           <CopyImageBlock
-            item={winterGarden}
+            item={{ ...winterGarden, title: "Low Support" }}
             showAllOnSmall
             showLinkOnSmall
             mask="circle"
             theme={theme}
+            smallImage={true}
           />
           <ImageCopyBlock
             item={highResources}
@@ -120,6 +122,7 @@ class Data extends PureComponent {
             showLinkOnSmall
             mask="circle"
             theme={theme}
+            smallImage={true}
           />
           <CopyImageBlock
             item={energyOutgoing}
@@ -127,6 +130,7 @@ class Data extends PureComponent {
             showLinkOnSmall
             mask="circle"
             theme={theme}
+            smallImage={true}
           />
           <ImageCopyBlock
             item={firstGeneration}
@@ -134,6 +138,7 @@ class Data extends PureComponent {
             showLinkOnSmall
             mask="circle"
             theme={theme}
+            smallImage={true}
           />
           <CopyImageBlock
             item={housingInsecurity}
@@ -141,6 +146,7 @@ class Data extends PureComponent {
             showLinkOnSmall
             mask="circle"
             theme={theme}
+            smallImage={true}
           />
           <ImageCopyBlock
             item={foodInsecurity}
@@ -148,6 +154,7 @@ class Data extends PureComponent {
             showLinkOnSmall
             mask="circle"
             theme={theme}
+            smallImage={true}
           />
           <CopyImageBlock
             item={highGPA}
@@ -155,10 +162,8 @@ class Data extends PureComponent {
             showLinkOnSmall
             mask="circle"
             theme={theme}
+            smallImage={true}
           />
-        </div>
-        <div {...textContainer}>
-          <Animated as="h2">Additional Attributes</Animated>
           <ImageCopyBlock
             item={degree}
             showAllOnSmall
@@ -205,8 +210,8 @@ class Data extends PureComponent {
           </Animated>
           <Animated>
             <FillButton
-              to="/solutions"
-              label="Want to make a difference?"
+              to="/gardens"
+              label="View all the gardens"
               theme={theme}
             />
           </Animated>

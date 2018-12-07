@@ -26,8 +26,7 @@ class Plane extends BaseRenderable {
     var planeMaterial = new MeshLambertMaterial({
       color,
       wireframe: !true,
-      fog: true,
-      receiveShadow: true
+      fog: !true
     });
     var plane = new Mesh(planeGeometry, planeMaterial);
     plane.rotation.x = -Math.PI / 2;

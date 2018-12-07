@@ -101,6 +101,11 @@ class Footer extends PureComponent {
               to="/garden/xmas-card"
               label="xmas 2018"
             />
+            <TextLink
+              {...css({ display: "none" })}
+              to="/garden/petal-print"
+              label="petal print"
+            />
             <div {...css({ gridArea: "social" })}>
               <TextLink href="https://instagram.com/lucastswick">
                 <TiSocialInstagram />

@@ -44,7 +44,6 @@ export default ({ generalCanvas, R, settings }) => {
   }
 
   let lights = new GeneralLights({ scene, controls });
-  // let lights = new GeneralLights({ scene, controls });
   // lights.createControls();
 
   let subject = new SceneSubject({ scene, camera, R, controls, settings });

@@ -28,21 +28,22 @@ export default ({ scene, controls }) => {
 
   const light2 = new DirectionalLight(0xffffff, 0.5);
   scene.add(light2);
+  light2.position.set(-2, 2, -2);
 
-  // var r = 2;
+  var r = 2;
   // light2.castShadow = true;
-  // light2.shadow.mapSize.set(1024, 1024);
-  // light2.shadow.camera.left = -r;
-  // light2.shadow.camera.right = r;
-  // light2.shadow.camera.top = r;
-  // light2.shadow.camera.bottom = -r;
-  // light2.shadow.camera.updateProjectionMatrix();
+  light2.shadow.mapSize.set(2048, 2048);
+  light2.shadow.camera.left = -r;
+  light2.shadow.camera.right = r;
+  light2.shadow.camera.top = r;
+  light2.shadow.camera.bottom = -r;
+  light2.shadow.camera.updateProjectionMatrix();
 
   const createControls = () => {
     var effectController = {
-      x: 30,
-      y: 90,
-      z: -50
+      x: 162,
+      y: -68,
+      z: -110
     };
 
     const onDataChange = function() {

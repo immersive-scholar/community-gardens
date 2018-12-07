@@ -33,6 +33,8 @@ class XmasCardChapter extends BaseChapter {
     const stellariaPuberaCount = count * 0.1;
     const asiminaTrilobaCount = count * 0.1;
 
+    this.camera.position.z = -3;
+
     this.background = new BackgroundBAS({ color: bgColor });
     this.addCleanable(this.background);
 
@@ -158,8 +160,6 @@ class XmasCardChapter extends BaseChapter {
       bounds,
       position
     });
-
-    this.camera.position.z = -3;
   };
 
   animateIn = ({ delay = 0 } = {}) => {
