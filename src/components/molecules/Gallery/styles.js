@@ -1,4 +1,5 @@
 import { css } from "glamor";
+import glamorous from "glamorous";
 
 const gallery = css({
   padding: "1rem 0",
@@ -20,7 +21,7 @@ const hs = css({
   display: "grid",
   gridGap: ".5rem",
   gridTemplateColumns: "35vw",
-  gridTemplateRows: "35vw",
+  gridTemplateRows: "54vw",
   gridAutoFlow: "column",
   gridAutoColumns: "35vw",
   overflowX: "scroll",
@@ -32,10 +33,14 @@ const hs = css({
   "&::after": {
     content: "",
     width: "1rem"
+  },
+  "@media screen and (min-width: 48em)": {
+    gridTemplateRows: "41vw"
   }
 });
 
 const item = css({
+  position: "relative",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -44,4 +49,9 @@ const item = css({
   padding: 0
 });
 
-export { gallery, wrapper, full, hs, item };
+const ButtonWrapper = glamorous.div({
+  display: "grid",
+  width: "100%"
+});
+
+export { gallery, wrapper, full, hs, item, ButtonWrapper };

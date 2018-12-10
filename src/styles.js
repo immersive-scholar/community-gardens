@@ -171,6 +171,16 @@ const threeCols = css({
   }
 });
 
+const twoCols = css({
+  display: "grid",
+  gridTemplateColumns: "50% 50%"
+});
+
+const twoColsLg = css({
+  display: "grid",
+  gridTemplateColumns: "100%"
+});
+
 const twoColsSm = css({
   "@media(max-width: 48em)": {
     gridTemplateColumns: "50% 50%"
@@ -268,5 +278,7 @@ export {
   hideVisually,
   blockquote,
   twoColsSm,
+  twoColsLg,
+  twoCols,
   galleryOffset
 };

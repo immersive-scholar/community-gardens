@@ -9,9 +9,9 @@ const MarqueeWrapper = glamorous.div({
 
 const ShortMarqueeWrapper = glamorous.div({
   position: "relative",
-  height: "30vh",
+  height: "40vh",
   maxHeight: "20rem",
-  "@media screen and (min-width: 48em)": {
+  "@media screen and (min-width: 72em)": {
     height: "60vh"
   }
 });
@@ -26,7 +26,7 @@ const Darken = glamorous.div({
 });
 
 const TextWrapper = glamorous.div({
-  display: "grid",
+  display: "flex",
   alignItems: "center",
   justifyContent: "center",
   textAlign: "center",
@@ -47,16 +47,17 @@ const Absolute = glamorous.div({
 });
 
 const titleStyles = css({
-  "@media screen and (min-width: 48em)": {
+  "@media screen and (min-width: 72em)": {
     fontSize: "4rem"
   }
 });
 
 const subtitleStyles = css({
-  "@media screen and (max-width: 48em)": {
+  marginBottom: 0,
+  "@media screen and (max-width: 71.997em)": {
     marginTop: "1rem"
   },
-  "@media screen and (min-width: 48em)": {
+  "@media screen and (min-width: 72em)": {
     fontSize: "3rem"
   }
 });

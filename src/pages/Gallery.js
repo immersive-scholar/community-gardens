@@ -2,11 +2,14 @@ import React, { PureComponent } from "react";
 import Helmet from "react-helmet";
 import { css } from "glamor";
 
+import Animated from "components/molecules/Animated";
 import ShortMarquee from "components/molecules/Marquee/ShortMarquee";
 import PathToPicture from "util/PathToPicture";
 import GalleryTemplate from "components/molecules/Gallery/GalleryTemplate";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
+
+import { lead, textContainer, removePaddingBottom } from "styles";
 
 class GalleryPage extends PureComponent {
   componentWillMount() {
@@ -74,9 +77,16 @@ class GalleryPage extends PureComponent {
           description="Images from Community Gardens."
         />
         <ShortMarquee title="Gallery" subtitle="Images from the gardens" />
+        <div {...textContainer} {...removePaddingBottom}>
+          <Animated {...lead}>
+            Because each garden is created with code, every single time a garden
+            is viewed it is unique. You will never see the exact same garden
+            twice.
+          </Animated>
+          <Animated>These are a few images captured from the gardens.</Animated>
+        </div>
         <GalleryTemplate title="Solomon's Seal" pictures={solomonsSealGroup} />
         <GalleryTemplate title="Plant Portraits" pictures={plantPortraits} />
-        <GalleryTemplate title="Summer Gardens" pictures={summerGarden} />
         <GalleryTemplate title="Summer Gardens" pictures={summerGarden} />
         <GalleryTemplate title="Fall Gardens" pictures={fallGarden} />
         <GalleryTemplate title="Xmas 2018" last pictures={xmas} />

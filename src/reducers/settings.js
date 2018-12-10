@@ -66,10 +66,10 @@ if (device.mobile) {
   presentationMode = PRESENTATION_MODE_EXPLORE;
   switch (true) {
     case tierIndex === 3:
-      quantityMultiplier = 2;
+      quantityMultiplier = 5;
       break;
     case tierIndex === 2:
-      quantityMultiplier = 1.5;
+      quantityMultiplier = 2;
       break;
     case tierIndex === 1:
       quantityMultiplier = 1;
@@ -78,8 +78,6 @@ if (device.mobile) {
       break;
   }
 }
-
-console.log("quantityMultiplier ", quantityMultiplier);
 
 const location = window.location;
 const parsed = queryString.parse(location.search);

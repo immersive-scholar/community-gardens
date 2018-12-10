@@ -84,7 +84,8 @@ class Home extends PureComponent {
             Students that are First Generation have mazes on their leaves
             because they have extra challenges to navigate. Students who have
             been awarded grants have golden leaves. Students who experience
-            housing insecurity are more affected by the wind.{" "}
+            housing insecurity are more affected by the wind. These are just a
+            few examples of how the data is visualized.{" "}
             <Link to="/data" {...shadowless} {...link}>
               Read more about how data affects the plants.
             </Link>
@@ -92,9 +93,8 @@ class Home extends PureComponent {
 
           <Animated as="h2">Gardens</Animated>
           <Animated>
-            Each garden represents a different grouping of students. Every
-            garden is created at the moment you enter it so you will never see
-            the exact same garden twice.
+            Each garden represents a grouping of students around common
+            datapoints.
           </Animated>
         </div>
         <div {...wideContainer}>
@@ -129,7 +129,8 @@ class Home extends PureComponent {
         </div>
         <div {...textContainer} {...removePaddingTop}>
           <Animated as="p">
-            Learn more about how the{" "}
+            <TextLink label="View the gallery" to="/gallery" />, learn more
+            about how the{" "}
             <TextLink label="data affects each individual plant" to="/data" />,
             or <TextLink label="commit to making a change" to="/solutions" />.
           </Animated>
