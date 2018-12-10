@@ -3,6 +3,10 @@ import { css } from "glamor";
 import typography from "util/typography";
 
 // GLOBAL css rules
+const relative = css({
+  position: "relative"
+});
+
 const textContainer = css({
   width: "100%",
   maxWidth: "40rem",
@@ -225,6 +229,7 @@ const CircleMaskDiv = glamorous.div({
 });
 
 export {
+  relative,
   textContainer,
   lightText,
   lightFocusedText,

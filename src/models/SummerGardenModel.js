@@ -7,7 +7,8 @@ const SummerGardenModel = {
   link: "/garden/summer-garden",
   excerpt: (
     <Fragment>
-      Students with a <b>high health</b> score are drawn with summer colors.
+      Students with a <b>high health</b> score are drawn with warm colors and
+      grouped in the Summer Garden.
     </Fragment>
   ),
   headerImage: PathToPicture("plants", `summer-garden`),

@@ -4,12 +4,12 @@ import Helmet from "react-helmet";
 import { TiSocialTwitter, TiSocialInstagram } from "react-icons/ti";
 import Obfuscate from "react-obfuscate";
 
-import Image from "components/atoms/Image";
 import TextLink from "components/atoms/TextLink";
+import Marquee from "components/molecules/Marquee";
 import Animated from "components/molecules/Animated";
-import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
+import PathToPicture from "util/PathToPicture";
 import profilePic from "assets/lucastswick-avatar.jpg";
 
 import {
@@ -37,7 +37,7 @@ class Contact extends PureComponent {
           title="About Community Gardens"
           description="Contact generative artist lucastswick"
         />
-        <Image ratio="16x9" sources={headerImage} />
+        <Marquee image={headerImage} />
         <div {...textContainer}>
           <Animated as="h1">Contact</Animated>
           <Animated>

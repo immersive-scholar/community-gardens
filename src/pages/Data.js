@@ -42,12 +42,12 @@ class Data extends PureComponent {
 
     return (
       <div>
-        <Image ratio="16x9" sources={headerImage} />
+        <Helmet
+          title="Community Gardens Data Summary"
+          description="Details about how the data affects the plants in Community Gardens."
+        />
+        <Image ratio="16x9" sources={headerImage} theme={theme} />
         <div {...textContainer}>
-          <Helmet
-            title="Community Gardens Data Summary"
-            description="Details about how the data affects the plants in Community Gardens."
-          />
           <Animated as="h1">Data-driven Generative Art</Animated>
           <Animated {...lead}>
             Combining data-driven design and generative art is not immediately

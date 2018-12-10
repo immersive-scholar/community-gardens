@@ -5,7 +5,7 @@ import Helmet from "react-helmet";
 
 import { chapters } from "actions";
 import Animated from "components/molecules/Animated";
-import Image from "components/atoms/Image";
+import Marquee from "components/molecules/Marquee";
 import TextLink from "components/atoms/TextLink";
 import {
   ImageCopyBlock,
@@ -15,7 +15,7 @@ import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 
-import { textContainer, wideContainer, removePaddingTop, center } from "styles";
+import { textContainer, wideContainer, removePaddingTop } from "styles";
 
 class Gardens extends PureComponent {
   constructor(props) {
@@ -42,15 +42,15 @@ class Gardens extends PureComponent {
 
     return (
       <div>
-        <Image ratio="16x9" sources={headerImage} />
         <Helmet
           title="Community Gardens"
           description="Community Gardens is a data-driven generative art installation using gardens as metaphor to discuss food and housing insecurity within the student body at NC State."
         />
-
-        <div {...textContainer} {...center}>
-          <Animated as="h1">Community Gardens</Animated>
-        </div>
+        <Marquee
+          image={headerImage}
+          title="Community Gardens"
+          subtitle="Explore the interactive gardens"
+        />
         <div {...wideContainer}>
           <ImageCopyBlock
             item={summerGarden}

@@ -13,10 +13,10 @@ const links = css({
   'tech data social'`,
   "@media(max-width: 48em)": {
     gridTemplateAreas: `
-      'about credits'
-      'gardens contact'
-      'data social'
-      'solutions solutions' 
+      'about gallery'
+      'gardens credits'
+      'data contact'
+      'solutions social' 
       'tech tech'`
   }
 });

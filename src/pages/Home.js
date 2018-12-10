@@ -5,14 +5,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { chapters } from "actions";
-import Animated from "components/molecules/Animated";
-import Image from "components/atoms/Image";
 import TextLink from "components/atoms/TextLink";
 import FillButton from "components/atoms/FillButton";
 import {
   ImageCopyBlock,
   CopyImageBlock
 } from "components/organisms/ImageCopyBlock";
+import Animated from "components/molecules/Animated";
+import Marquee from "components/molecules/Marquee";
 import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
@@ -48,7 +48,11 @@ class Home extends PureComponent {
 
     return (
       <div>
-        <Image ratio="16x9" sources={headerImage} />
+        <Marquee
+          image={headerImage}
+          title="Community Gardens"
+          subtitle="100% pure data-driven generative art"
+        />
         <div {...textContainer}>
           <Helmet
             title="Community Gardens"
@@ -132,21 +136,6 @@ class Home extends PureComponent {
         </div>
         <Newsletter />
         <Footer />
-        {/* <div {...grid}>
-            {map(chapters, chapter => {
-              return (
-                <Link
-                  key={chapter.id}
-                  {...shadowless}
-                  {...buttonStyle}
-                  {...fillButton}
-                  to={chapter.link}
-                >
-                  {chapter.title}
-                </Link>
-              );
-            })}
-          </div> */}
       </div>
     );
   }

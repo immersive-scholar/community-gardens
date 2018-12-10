@@ -6,13 +6,13 @@ import { Icon } from "react-icons-kit";
 
 import FillButton from "components/atoms/FillButton";
 import TextLink from "components/atoms/TextLink";
-import Image from "components/atoms/Image";
+import Marquee from "components/molecules/Marquee";
 import Animated from "components/molecules/Animated";
 import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 
-import { textContainer } from "styles";
+import { textContainer, center } from "styles";
 
 class Solutions extends PureComponent {
   componentWillMount() {
@@ -26,13 +26,16 @@ class Solutions extends PureComponent {
 
     return (
       <div>
-        <Image ratio="16x9" sources={headerImage} />
+        <Helmet
+          title="Community Gardens Solutions"
+          description="How to be a part of the solution for food and housing insecurity."
+        />
+        <Marquee
+          image={headerImage}
+          title="Solutions"
+          subtitle="How you can help"
+        />
         <div {...textContainer}>
-          <Helmet
-            title="Community Gardens Solutions"
-            description="How to be a part of the solution for food and housing insecurity."
-          />
-          <Animated as="h1">Solutions</Animated>
           <Animated>
             Whether you are a student, a faculty member, or someone who simply
             has a heart and wants all students to have the support they need to
@@ -93,7 +96,7 @@ class Solutions extends PureComponent {
           <Animated>
             Together, we can help everyone succeed and thrive.
           </Animated>
-          <Animated as="div">
+          <Animated as="div" {...center}>
             <Icon size={48} icon={smile} />
           </Animated>
         </div>

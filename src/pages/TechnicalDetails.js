@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 import { css } from "glamor";
 
 import TextLink from "components/atoms/TextLink";
-import Image from "components/atoms/Image";
+import Marquee from "components/molecules/Marquee";
 import Animated from "components/molecules/Animated";
 import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
@@ -22,13 +22,12 @@ class TechnicalDetails extends PureComponent {
 
     return (
       <div>
-        <Image ratio="16x9" sources={headerImage} />
+        <Helmet
+          title="Community Gardens Credits"
+          description="The team behind Community Gardens."
+        />
+        <Marquee image={headerImage} title="Technical Summary" />
         <div {...textContainer}>
-          <Helmet
-            title="Community Gardens Credits"
-            description="The team behind Community Gardens."
-          />
-
           <Animated as="h2">
             Curious about how Community Gardens was built?
           </Animated>

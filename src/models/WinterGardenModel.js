@@ -7,7 +7,8 @@ const WinterGardenModel = {
   link: "/garden/winter-garden",
   excerpt: (
     <Fragment>
-      Students with a <b>lower health</b> score are drawn with winter colors.
+      Students with a <b>lower health</b> score drawn with cooler colors and
+      grouped in the Winter Garden.
     </Fragment>
   ),
   headerImage: PathToPicture("plants", `winter-garden`),

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import Helmet from "react-helmet";
 import { css } from "glamor";
 
-import Image from "components/atoms/Image";
+import ShortMarquee from "components/molecules/Marquee/ShortMarquee";
 import PathToPicture from "util/PathToPicture";
 import GalleryTemplate from "components/molecules/Gallery/GalleryTemplate";
 import Newsletter from "components/organisms/Newsletter";
@@ -10,8 +10,6 @@ import Footer from "components/organisms/Footer";
 
 class GalleryPage extends PureComponent {
   componentWillMount() {
-    const headerImage = PathToPicture("headers", `credits`);
-
     const solomonsSealGroup = [
       PathToPicture("gallery", "community-gardens-gallery-5"),
       PathToPicture("gallery", "community-gardens-gallery-3"),
@@ -52,7 +50,6 @@ class GalleryPage extends PureComponent {
     ];
 
     this.setState({
-      headerImage,
       solomonsSealGroup,
       plantPortraits,
       summerGarden,
@@ -63,7 +60,6 @@ class GalleryPage extends PureComponent {
 
   render() {
     const {
-      headerImage,
       solomonsSealGroup,
       plantPortraits,
       summerGarden,
@@ -77,7 +73,7 @@ class GalleryPage extends PureComponent {
           title="Community Gardens Gallery"
           description="Images from Community Gardens."
         />
-        <Image ratio="16x9" sources={headerImage} />
+        <ShortMarquee title="Gallery" subtitle="Images from the gardens" />
         <GalleryTemplate title="Solomon's Seal" pictures={solomonsSealGroup} />
         <GalleryTemplate title="Plant Portraits" pictures={plantPortraits} />
         <GalleryTemplate title="Summer Gardens" pictures={summerGarden} />
