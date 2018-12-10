@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import { smile } from "react-icons-kit/icomoon/smile";
 import { Icon } from "react-icons-kit";
@@ -21,11 +22,7 @@ class Solutions extends PureComponent {
 
   render() {
     const { headerImage } = this.state;
-
-    const theme = {
-      baseColor: "#fbb3d1",
-      colors: ["#ec468a", "#fbb3d1", "#ffffff", "#c25482"]
-    };
+    const { theme } = this.props;
 
     return (
       <div>
@@ -108,4 +105,8 @@ class Solutions extends PureComponent {
   }
 }
 
-export default Solutions;
+const mapStateToProps = ({ settings, theme }) => ({
+  theme
+});
+
+export default connect(mapStateToProps)(Solutions);

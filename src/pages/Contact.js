@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import { TiSocialTwitter, TiSocialInstagram } from "react-icons/ti";
 import Obfuscate from "react-obfuscate";
@@ -28,13 +29,7 @@ class Contact extends PureComponent {
 
   render() {
     const { headerImage } = this.state;
-
-    const theme = {
-      bright: "#fbb3d1",
-      pink: "#ec468a",
-      dark: "#574f65",
-      colors: ["#fbb3d1", "#ffffff", "#c25482"]
-    };
+    const { theme } = this.props;
 
     return (
       <div>
@@ -60,7 +55,7 @@ class Contact extends PureComponent {
           <div {...threeCols} {...center}>
             <Animated as="span">
               <TextLink href="https://instagram.com/lucastswick">
-                <TiSocialInstagram size={"8rem"} color={theme.pink} />
+                <TiSocialInstagram size={"8rem"} color={theme.colors.pink} />
               </TextLink>
             </Animated>
             <Animated as="span">
@@ -74,7 +69,7 @@ class Contact extends PureComponent {
             </Animated>
             <Animated as="span">
               <TextLink href="https://twitter.com/lucastswick">
-                <TiSocialTwitter size={"8rem"} color={theme.pink} />
+                <TiSocialTwitter size={"8rem"} color={theme.colors.pink} />
               </TextLink>
             </Animated>
           </div>
@@ -96,4 +91,8 @@ class Contact extends PureComponent {
   }
 }
 
-export default Contact;
+const mapStateToProps = ({ theme }) => ({
+  theme
+});
+
+export default connect(mapStateToProps)(Contact);

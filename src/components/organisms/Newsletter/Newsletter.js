@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 import { css } from "glamor";
 import typography from "util/typography";
 import Animated from "components/molecules/Animated";
@@ -19,27 +20,13 @@ import {
 } from "styles";
 
 class Newsletter extends PureComponent {
-  componentWillMount() {
-    // this.props.loadTheme();
-
-    const theme = {
-      bright: "#fbb3d1",
-      pink: "#ec468a",
-      dark: "#574f65",
-      colors: ["#fbb3d1", "#ffffff", "#c25482"]
-    };
-
-    this.setState({
-      theme
-    });
-  }
   render() {
-    const { theme } = this.state;
+    const { theme } = this.props;
 
     const buttonStyle = css({
-      color: theme.pink,
+      color: theme.colors.pink,
       "&:hover": {
-        color: theme.pink,
+        color: theme.colors.pink,
         textDecoration: "underline"
       }
     });
@@ -48,7 +35,7 @@ class Newsletter extends PureComponent {
       <div
         {...css({
           transition: "background 1s ease-out 0.5s",
-          backgroundColor: theme.dark
+          backgroundColor: theme.colors.dark
         })}
         {...newsletterWrapper}
       >
@@ -72,12 +59,12 @@ class Newsletter extends PureComponent {
             }}
           >
             <Animated as="div">
-              <h3 {...header} {...css({ color: theme.pink })}>
+              <h3 {...header} {...css({ color: theme.colors.pink })}>
                 Community Gardens <br {...hideOnLg} />Mailing List
               </h3>
             </Animated>
             <Animated as="p" delay={50}>
-              <label htmlFor="tlemail" {...css({ color: theme.bright })}>
+              <label htmlFor="tlemail" {...css({ color: theme.colors.bright })}>
                 Stay up to date with Community Gardens, new chapter releases,
                 and ways you can help combat food and housing insecurity.
               </label>
@@ -110,4 +97,8 @@ class Newsletter extends PureComponent {
   }
 }
 
-export default Newsletter;
+const mapStateToProps = ({ theme }) => ({
+  theme
+});
+
+export default connect(mapStateToProps)(Newsletter);

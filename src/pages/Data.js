@@ -26,7 +26,7 @@ class Data extends PureComponent {
   render() {
     const { headerImage } = this.state;
 
-    const { chapters } = this.props;
+    const { chapters, theme } = this.props;
     const age = chapters.age;
     const anxiety = chapters.anxiety;
     const degree = chapters.degree;
@@ -39,11 +39,6 @@ class Data extends PureComponent {
     const outOfState = chapters.outOfState;
     const summerGarden = chapters.summerGarden;
     const winterGarden = chapters.winterGarden;
-
-    const theme = {
-      baseColor: "#fbb3d1",
-      colors: ["#ec468a", "#fbb3d1", "#ffffff", "#c25482"]
-    };
 
     return (
       <div>
@@ -101,17 +96,15 @@ class Data extends PureComponent {
         </div>
         <div {...textContainer} {...removePaddingTop}>
           <ImageCopyBlock
-            item={{ ...summerGarden, title: "High Support" }}
+            item={degree}
             showAllOnSmall
-            showLinkOnSmall
             mask="circle"
             theme={theme}
             smallImage={true}
           />
           <CopyImageBlock
-            item={{ ...winterGarden, title: "Low Support" }}
+            item={age}
             showAllOnSmall
-            showLinkOnSmall
             mask="circle"
             theme={theme}
             smallImage={true}
@@ -164,20 +157,7 @@ class Data extends PureComponent {
             theme={theme}
             smallImage={true}
           />
-          <ImageCopyBlock
-            item={degree}
-            showAllOnSmall
-            mask="circle"
-            theme={theme}
-            smallImage={true}
-          />
-          <CopyImageBlock
-            item={age}
-            showAllOnSmall
-            mask="circle"
-            theme={theme}
-            smallImage={true}
-          />
+
           <ImageCopyBlock
             item={anxiety}
             showAllOnSmall
@@ -188,6 +168,22 @@ class Data extends PureComponent {
           <CopyImageBlock
             item={outOfState}
             showAllOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <ImageCopyBlock
+            item={{ ...summerGarden, title: "High Support" }}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <CopyImageBlock
+            item={{ ...winterGarden, title: "Low Support" }}
+            showAllOnSmall
+            showLinkOnSmall
             mask="circle"
             theme={theme}
             smallImage={true}
@@ -223,8 +219,9 @@ class Data extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ chapters }) => ({
-  chapters: chapters.node
+const mapStateToProps = ({ chapters, theme }) => ({
+  chapters: chapters.node,
+  theme
 });
 
 const mapDispatchToProps = dispatch => ({

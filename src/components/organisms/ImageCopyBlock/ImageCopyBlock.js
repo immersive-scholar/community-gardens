@@ -63,7 +63,7 @@ const CopyBlock = ({
         {...css(
           theme &&
             theme.colors && {
-              color: theme.colors[0]
+              color: theme.colors.pink
             }
         )}
       >
@@ -82,8 +82,8 @@ const CopyBlock = ({
           {...css(
             theme &&
               theme.colors && {
-                color: theme.colors[0],
-                background: theme.colors[1],
+                color: theme.colors.button.text,
+                background: theme.colors.button.bg,
                 transition: "all 0.2s"
               }
           )}
@@ -92,8 +92,8 @@ const CopyBlock = ({
               theme.colors && {
                 "&:hover": {
                   textDecoration: "none",
-                  color: theme.colors[2],
-                  background: theme.colors[3]
+                  color: theme.colors.button.hover.text,
+                  background: theme.colors.button.hover.bg
                 }
               }
           )}

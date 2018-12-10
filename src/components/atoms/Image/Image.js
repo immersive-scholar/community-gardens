@@ -46,15 +46,9 @@ class Image extends React.Component {
     const { sources, isInViewport, theme, ratio } = this.props;
     const ready =
       (this.state.imageLoaded && isInViewport) || this.state.animated;
-    const baseColor =
-      theme && theme.colors && theme.colors.length
-        ? theme.colors[0]
-        : "#212121";
+    const baseColor = theme && theme.colors ? theme.colors.base : "#212121";
 
-    const hiliteColor =
-      theme && theme.colors && theme.colors.length
-        ? theme.colors[1]
-        : "#121212";
+    const hiliteColor = theme && theme.colors ? theme.colors.pink : "#121212";
 
     var windowInnerHeight =
       window.innerHeight || document.documentElement.clientHeight;

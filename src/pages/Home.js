@@ -39,17 +39,12 @@ class Home extends PureComponent {
   }
 
   render() {
-    const { chapters } = this.props;
+    const { chapters, theme } = this.props;
     const { headerImage } = this.state;
 
     const summerGarden = chapters.summerGarden;
     const winterGarden = chapters.winterGarden;
     const randomGarden = chapters.randomGarden;
-
-    const theme = {
-      baseColor: "#fbb3d1",
-      colors: ["#ec468a", "#fbb3d1", "#ffffff", "#c25482"]
-    };
 
     return (
       <div>
@@ -157,8 +152,9 @@ class Home extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ chapters }) => ({
-  chapters: chapters.node
+const mapStateToProps = ({ chapters, theme }) => ({
+  chapters: chapters.node,
+  theme
 });
 
 const mapDispatchToProps = dispatch => ({

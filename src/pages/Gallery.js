@@ -3,13 +3,10 @@ import Helmet from "react-helmet";
 import { css } from "glamor";
 
 import Image from "components/atoms/Image";
-import Animated from "components/molecules/Animated";
 import PathToPicture from "util/PathToPicture";
-import Gallery from "components/molecules/Gallery";
+import GalleryTemplate from "components/molecules/Gallery/GalleryTemplate";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
-
-import { textContainer, fullWidth, removePaddingBottom } from "styles";
 
 class GalleryPage extends PureComponent {
   componentWillMount() {
@@ -81,27 +78,12 @@ class GalleryPage extends PureComponent {
           description="Images from Community Gardens."
         />
         <Image ratio="16x9" sources={headerImage} />
-        <div {...textContainer} {...removePaddingBottom}>
-          <Animated as="h1">Gallery</Animated>
-          <Animated as="h2">Solomon's Seal</Animated>
-          <Gallery pictures={solomonsSealGroup} />
-        </div>
-        <div {...textContainer} {...removePaddingBottom}>
-          <Animated as="h2">Plant Portraits</Animated>
-          <Gallery pictures={plantPortraits} />
-        </div>
-        <div {...textContainer} {...removePaddingBottom}>
-          <Animated as="h2">Summer Gardens</Animated>
-          <Gallery pictures={summerGarden} />
-        </div>
-        <div {...textContainer} {...removePaddingBottom}>
-          <Animated as="h2">Fall Gardens</Animated>
-          <Gallery pictures={fallGarden} />
-        </div>
-        <div {...textContainer}>
-          <Animated as="h2">Xmas 2018</Animated>
-          <Gallery pictures={xmas} />
-        </div>
+        <GalleryTemplate title="Solomon's Seal" pictures={solomonsSealGroup} />
+        <GalleryTemplate title="Plant Portraits" pictures={plantPortraits} />
+        <GalleryTemplate title="Summer Gardens" pictures={summerGarden} />
+        <GalleryTemplate title="Summer Gardens" pictures={summerGarden} />
+        <GalleryTemplate title="Fall Gardens" pictures={fallGarden} />
+        <GalleryTemplate title="Xmas 2018" last pictures={xmas} />
         <Newsletter />
         <Footer />
       </div>

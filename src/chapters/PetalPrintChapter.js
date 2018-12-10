@@ -1,18 +1,13 @@
-import { Vector2, Vector3, _Math, Group, Color } from "three-full";
+import { Vector2, Vector3, Group } from "three-full";
 import shuffle from "lodash/shuffle";
 
 import BaseChapter from "./BaseChapter";
 import BackgroundBAS from "art/background/BackgroundBAS";
-import GroundBAS from "art/ground/GroundBAS";
 import Plane from "art/plane/Plane";
 import SolomonsSealSpawn from "art/solomons-seal/SolomonsSealSpawn";
-import StellariaPuberaSpawn from "art/stellaria-pubera/StellariaPuberaSpawn";
-import AsiminaTrilobaSpawn from "art/asimina-triloba/AsiminaTrilobaSpawn";
-// import ChapterPlate from "art/chapter-plate/ChapterPlate";
 import ChapterTitle from "art/chapter-plate/ChapterTitle";
 import InsecurityCalculator from "data/InsecurityCalculator";
 import TextureFactory from "util/TextureFactory";
-import ColorFactory from "util/ColorFactory";
 import GridLayout from "art/layouts/GridLayout";
 import { LAYOUT_WALL } from "art/layouts/LayoutConstants";
 import { COMMUNITY_GARDEN } from "constants/Stats";
@@ -119,12 +114,11 @@ class PetalPrintChapter extends BaseChapter {
     this.instances = shuffle(this.instances);
 
     for (
-      let i = 0, j = this.solomonsSealSpawn.instances.length, instance, ratio;
+      let i = 0, j = this.solomonsSealSpawn.instances.length, instance;
       i < j;
       i++
     ) {
       instance = this.solomonsSealSpawn.instances[i];
-      ratio = i / j;
       instance.group.rotation.x = -Math.PI / 2;
     }
 
@@ -151,11 +145,10 @@ class PetalPrintChapter extends BaseChapter {
     // }
 
     for (
-      let i = 0, j = this.instances.length, instance, ratio, rx, ry, rt;
+      let i = 0, j = this.instances.length, instance, rx, ry, rt;
       i < j;
       i++
     ) {
-      ratio = i / j;
       rx = i % 10;
       ry = Math.floor(i / 10);
       rt = (rx + ry) / 100;

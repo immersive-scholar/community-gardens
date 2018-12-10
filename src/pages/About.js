@@ -1,4 +1,6 @@
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+
 import Helmet from "react-helmet";
 import map from "lodash/map";
 
@@ -29,12 +31,13 @@ class About extends PureComponent {
 
   render() {
     const { headerImage, aboutImages } = this.state;
+    const { theme } = this.props;
 
     return (
       <div>
         <video width="100%" height="auto" autoPlay loop>
           <source src="/vid/header-full.mp4" type="video/mp4" />
-          <Image ratio="16x9" sources={headerImage} />
+          <Image ratio="16x9" sources={headerImage} theme={theme} />
         </video>
         <div {...textContainer}>
           <Helmet
@@ -60,7 +63,7 @@ class About extends PureComponent {
         <div {...wideContainer} {...removePaddingTop}>
           {map(aboutImages, (image, index) => (
             <div {...addMarginBottom} key={`image-${index}`}>
-              <Image sources={image} ratio="4x3" />
+              <Image sources={image} ratio="4x3" theme={theme} />
             </div>
           ))}
         </div>
@@ -91,4 +94,8 @@ class About extends PureComponent {
   }
 }
 
-export default About;
+const mapStateToProps = ({ theme }) => ({
+  theme
+});
+
+export default connect(mapStateToProps)(About);

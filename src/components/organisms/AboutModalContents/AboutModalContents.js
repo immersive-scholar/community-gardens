@@ -1,16 +1,14 @@
 import React, { PureComponent, Fragment } from "react";
+import { connect } from "react-redux";
 
 import TextLink from "components/atoms/TextLink";
 import FillButton from "components/atoms/FillButton";
 
 import { removeMarginTop, center } from "styles";
 
-export default class AboutModal extends PureComponent {
+class AboutModal extends PureComponent {
   render() {
-    const theme = {
-      baseColor: "#fbb3d1",
-      colors: ["#ec468a", "#fbb3d1", "#ffffff", "#c25482"]
-    };
+    const { theme } = this.props;
 
     return (
       <Fragment>
@@ -42,3 +40,9 @@ export default class AboutModal extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = ({ settings, theme }) => ({
+  theme
+});
+
+export default connect(mapStateToProps)(AboutModal);

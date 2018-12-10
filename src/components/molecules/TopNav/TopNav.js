@@ -64,17 +64,12 @@ class TopNav extends React.Component {
   render() {
     if (!this.props.showBurgerButton) return null;
 
-    const theme = {
-      bright: "#fbb3d1",
-      pink: "#ec468a",
-      dark: "#574f65",
-      colors: ["#fbb3d1", "#ffffff", "#c25482"]
-    };
+    const { colors } = this.props;
 
     const buttonStyle = css({
-      color: theme.colors[1],
+      color: colors.topNav.text,
       "&:hover": {
-        color: theme.colors[2]
+        color: colors.topNav.hover.text
       }
     });
 
@@ -84,7 +79,8 @@ class TopNav extends React.Component {
       { title: "Gallery", uid: "gallery", link: "/gallery" },
       { title: "About", uid: "about", link: "/about" },
       { title: "Data", uid: "data", link: "/data" },
-      { title: "Tech", uid: "tech", link: "/tech" }
+      { title: "Tech", uid: "tech", link: "/tech" },
+      { title: "Solutions", uid: "solutions", link: "/solutions" }
     ];
 
     return (
@@ -134,8 +130,9 @@ class TopNav extends React.Component {
   }
 }
 
-const mapStateToProps = ({ settings }) => ({
-  showBurgerButton: settings.showBurgerButton
+const mapStateToProps = ({ settings, theme }) => ({
+  showBurgerButton: settings.showBurgerButton,
+  colors: theme.colors
 });
 
 export default connect(mapStateToProps)(TopNav);
