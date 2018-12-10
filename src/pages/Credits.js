@@ -53,6 +53,14 @@ class Credits extends PureComponent {
           <ul {...removeMarginLeft}>
             <li {...bulletless}>
               <TextLink
+                href="https://generativeartist.com"
+                label="Lucas Swick"
+              />
+              , Concepting &amp; Engineering
+            </li>
+
+            <li {...bulletless}>
+              <TextLink
                 href="https://jlangdesign.github.io/about.html"
                 label="Jasmine Lang"
               />

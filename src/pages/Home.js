@@ -66,6 +66,13 @@ class Home extends PureComponent {
             within the NC State student body.
           </Animated>
           <Animated>
+            The data reveals that <b>9.6%</b> of students at NC State
+            experienced homelessness in the past year. Community Gardens is part
+            of the solution. By using art to challenge the biases around
+            homelessness and create empathy, we can have more meaningful
+            conversations about solutions.
+          </Animated>
+          <Animated>
             In summer, plants have all the resources they need to thrive. In
             winter, less so. Using data collected by{" "}
             <a
@@ -78,14 +85,7 @@ class Home extends PureComponent {
               Dr Haskett
             </a>, each student becomes a plant in the garden. Depending on the
             data, plants are created with different attributes. The sizes,
-            shapes, colors and species change according to the data.
-          </Animated>
-          <Animated>
-            Students that are First Generation have mazes on their leaves
-            because they have extra challenges to navigate. Students who have
-            been awarded grants have golden leaves. Students who experience
-            housing insecurity are more affected by the wind. These are just a
-            few examples of how the data is visualized.{" "}
+            shapes, colors and species change according to the data.{" "}
             <Link to="/data" {...shadowless} {...link}>
               Read more about how data affects the plants.
             </Link>

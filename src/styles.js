@@ -178,7 +178,9 @@ const twoCols = css({
 
 const twoColsLg = css({
   display: "grid",
-  gridTemplateColumns: "100%"
+  "@media(min-width: 48em)": {
+    gridTemplateColumns: "50% 50%"
+  }
 });
 
 const twoColsSm = css({
