@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const FirstGenerationModel = {
   id: "first-generation",
   title: "First Generation",
-  link: "/gardens/first-generation",
+  link: "/garden/first-generation",
   excerpt: (
     <Fragment>
       <b>First Generation</b> students have mazes on their leaves. They have an

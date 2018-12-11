@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const FoodInsecurityModel = {
   id: "food-insecurity",
   title: "Food Insecurity",
-  link: "/gardens/food-insecurity",
+  link: "/garden/food-insecurity",
   excerpt: (
     <Fragment>
       Students who experience <b>Food Insecurity</b> have berries drawn as

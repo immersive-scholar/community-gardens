@@ -76,6 +76,12 @@ class App extends Component {
                   <Switch>
                     {navigator.userAgent !== "ReactSnap" && (
                       <Route
+                        path="/garden/:gardenID"
+                        component={LoadableThreeContainer}
+                      />
+                    )}
+                    {navigator.userAgent !== "ReactSnap" && (
+                      <Route
                         path="/gardens/:gardenID"
                         component={LoadableThreeContainer}
                       />

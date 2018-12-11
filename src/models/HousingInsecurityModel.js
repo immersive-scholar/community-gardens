@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const HousingInsecurityModel = {
   id: "housing-insecurity",
   title: "Housing Insecurity",
-  link: "/gardens/housing-insecurity",
+  link: "/garden/housing-insecurity",
   excerpt: (
     <Fragment>
       Students who have experienced <b>Housing Insecurity</b> are affected by

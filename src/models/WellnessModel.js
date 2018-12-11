@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const WellnessModel = {
   id: "wellness",
   title: "High Wellness",
-  link: "/gardens/wellness",
+  link: "/garden/wellness",
   excerpt: (
     <Fragment>
       Students who have <b>high wellness</b> have polka dots on their leaves.

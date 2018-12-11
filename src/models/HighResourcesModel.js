@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const HighResourcesModel = {
   id: "resourced",
   title: "High Incoming Resources",
-  link: "/gardens/resourced",
+  link: "/garden/resourced",
   excerpt: (
     <Fragment>
       Students who have <b>high incoming resources</b>, such as grants or an

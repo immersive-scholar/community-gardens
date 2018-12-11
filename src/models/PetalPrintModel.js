@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const PetalPrintModel = {
   id: "petal-print",
   title: "Petal Print",
-  link: "/gardens/petal-print",
+  link: "/garden/petal-print",
   excerpt: <Fragment>Petal Print</Fragment>,
   headerImage: PathToPicture("plants", `community-gardens-data`),
   cta: "View"
