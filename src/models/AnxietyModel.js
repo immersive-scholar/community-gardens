@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const AnxietyModel = {
   id: "anxiety",
   title: "Anxiety",
-  // link: "/garden/anxiety",
+  // link: "/gardens/anxiety",
   excerpt: (
     <Fragment>
       Students who indicate <b>high anxiety</b> are drawn with angular lines in

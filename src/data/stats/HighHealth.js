@@ -27,10 +27,9 @@ const HighHealth = (data, threshold = 0) => {
     bgColor,
     color,
     textArray: [
-      { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.2 },
-      { size: 0.1, text: "Who have", offsetY: 1 },
-      { size: 0.25, text: "Lots of Support", offsetY: 0.7 }
-    ]
+      { size: 0.35, text: "SUMMER", offsetY: 1.2 },
+      { size: 0.35, text: "GARDEN", offsetY: 0.7 },
+    ],
   };
 };
 

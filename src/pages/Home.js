@@ -9,7 +9,7 @@ import TextLink from "components/atoms/TextLink";
 import FillButton from "components/atoms/FillButton";
 import {
   ImageCopyBlock,
-  CopyImageBlock
+  CopyImageBlock,
 } from "components/organisms/ImageCopyBlock";
 import Animated from "components/molecules/Animated";
 import Marquee from "components/molecules/Marquee";
@@ -24,7 +24,7 @@ import {
   shadowless,
   removePaddingTop,
   center,
-  lead
+  lead,
 } from "styles";
 
 class Home extends PureComponent {
@@ -48,17 +48,16 @@ class Home extends PureComponent {
 
     return (
       <div>
+        <Helmet
+          title="Community Gardens"
+          description="Community Gardens is a data-driven generative art installation using gardens as metaphor to discuss food and housing insecurity within the student body at NC State."
+        />
         <Marquee
           image={headerImage}
           title="Community Gardens"
-          subtitle="100% pure data-driven generative art"
+          subtitle="Data-driven generative art"
         />
         <div {...textContainer}>
-          <Helmet
-            title="Community Gardens"
-            description="Community Gardens is a data-driven generative art installation using gardens as metaphor to discuss food and housing insecurity within the student body at NC State."
-          />
-
           <Animated as="h1">Community Gardens</Animated>
           <Animated {...lead}>
             Community Gardens is a data-driven generative art installation that
@@ -66,11 +65,11 @@ class Home extends PureComponent {
             within the NC State student body.
           </Animated>
           <Animated>
-            The data reveals that <b>9.6%</b> of students at NC State
-            experienced homelessness in the past year. Community Gardens is part
-            of the solution. By using art to challenge the biases around
-            homelessness and create empathy, we can have more meaningful
-            conversations about solutions.
+            Data reveals that <b>9.6%</b> of students at NC State experienced
+            homelessness in the past year. Community Gardens is part of the
+            solution. By using art to challenge the biases around homelessness
+            and create empathy, we can have more meaningful conversations about
+            solutions.
           </Animated>
           <Animated>
             In summer, plants have all the resources they need to thrive. In
@@ -94,7 +93,8 @@ class Home extends PureComponent {
           <Animated as="h2">Gardens</Animated>
           <Animated>
             Each garden represents a grouping of students around common
-            datapoints.
+            datapoints. Each garden is created to be unique and is also
+            interactive. Click and drag to look around.
           </Animated>
         </div>
         <div {...wideContainer}>
@@ -144,11 +144,11 @@ class Home extends PureComponent {
 
 const mapStateToProps = ({ chapters, theme }) => ({
   chapters: chapters.node,
-  theme
+  theme,
 });
 
 const mapDispatchToProps = dispatch => ({
-  focusChapter: bindActionCreators(chapters.focusChapter, dispatch)
+  focusChapter: bindActionCreators(chapters.focusChapter, dispatch),
 });
 
 export default connect(

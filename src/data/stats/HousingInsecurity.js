@@ -22,7 +22,7 @@ const HousingInsecurity = data => {
     "sleep102", // group home
     "sleep112", // treatment center
     "sleep122", // outdoor, on the street
-    "sleep132" // space not intended for habitation
+    "sleep132", // space not intended for habitation
   ];
 
   let label, match, score;
@@ -51,10 +51,9 @@ const HousingInsecurity = data => {
     bgColor,
     color: 0xffffff,
     textArray: [
-      { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.2 },
-      { size: 0.1, text: "Who Have Experienced", offsetY: 1 },
-      { size: 0.25, text: "Housing Insecurity", offsetY: 0.7 }
-    ]
+      { size: 0.35, text: "HOUSING", offsetY: 1.2 },
+      { size: 0.35, text: "INSECURE", offsetY: 0.7 },
+    ],
   };
 };
 

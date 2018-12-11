@@ -32,9 +32,9 @@ const LowHealth = (data, threshold = 0) => {
     bgColor,
     color,
     textArray: [
-      { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1 },
-      { size: 0.25, text: "Who have Little Support", offsetY: 0.6 }
-    ]
+      { size: 0.35, text: "WINTER", offsetY: 1.2 },
+      { size: 0.35, text: "GARDEN", offsetY: 0.7 },
+    ],
   };
 };
 

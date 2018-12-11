@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const OutOfStateModel = {
   id: "out-of-state",
   title: "Out of State",
-  // link: "/garden/out-of-state",
+  // link: "/gardens/out-of-state",
   excerpt: (
     <Fragment>
       Students who come from <b>out of state</b> have leaves with topographical

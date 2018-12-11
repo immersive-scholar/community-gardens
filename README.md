@@ -69,13 +69,13 @@ As viewers learn how to 'read' the attributes of the plants, connections are mad
 
 ## Gardens
 
-- [Summer Garden](https://communitygardens.generativeartist.com/garden/summer-garden/) represents plants who have high aggregate support.
+- [Summer Garden](https://communitygardens.generativeartist.com/gardens/summer-garden/) represents plants who have high aggregate support.
 
-- [Winter Garden](https://communitygardens.generativeartist.com/garden/winter-garden) represents students who have lower levels of support.
+- [Winter Garden](https://communitygardens.generativeartist.com/gardens/winter-garden) represents students who have lower levels of support.
 
-- [Random Garden](https://communitygardens.generativeartist.com/garden/random-garden/) is a random sampling of students.
+- [Random Garden](https://communitygardens.generativeartist.com/gardens/random-garden/) is a random sampling of students.
 
-- [Resourced](https://communitygardens.generativeartist.com/garden/resourced) represents students who have higher levels of Incoming Resources. Incoming Resource scores are high when a student has:
+- [Resourced](https://communitygardens.generativeartist.com/gardens/resourced) represents students who have higher levels of Incoming Resources. Incoming Resource scores are high when a student has:
 
   - Scholarships
   - Grants
@@ -85,7 +85,7 @@ As viewers learn how to 'read' the attributes of the plants, connections are mad
   - High monthly incomes
   - Get 8 hours of sleep/night
 
-- [Energy Outgoing](https://communitygardens.generativeartist.com/garden/energy-outgoing) represents students who have higher Energy Outgoing scores. Energy Outgoing is high when a student:
+- [Energy Outgoing](https://communitygardens.generativeartist.com/gardens/energy-outgoing) represents students who have higher Energy Outgoing scores. Energy Outgoing is high when a student:
 
   - is working 30+ hours per week, especially if they are full-time students
   - has children
@@ -111,9 +111,9 @@ Community Support also considers how _safe_ the student feels within their envir
   - how rested the student feels
   - how interested the student feels
 
-- [Housing Insecurity](https://communitygardens.generativeartist.com/garden/housing-insecurity) represents students who have low housing security scores. They care so much about their education that they are willing to sleep outside or in inhabitable spaces.
+- [Housing Insecurity](https://communitygardens.generativeartist.com/gardens/housing-insecurity) represents students who have low housing security scores. They care so much about their education that they are willing to sleep outside or in inhabitable spaces.
 
-- [First Generation](https://communitygardens.generativeartist.com/garden/first-generation) represents the amazing students who recently immigrated.
+- [First Generation](https://communitygardens.generativeartist.com/gardens/first-generation) represents the amazing students who recently immigrated.
 
 ## Data Processing
 

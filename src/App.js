@@ -32,7 +32,7 @@ class App extends Component {
     if (history.action === "PUSH" && typeof gtag === "function") {
       gtag("config", "UA-117743172-2", {
         page_location: window.location.href,
-        page_path: location.pathname
+        page_path: location.pathname,
       });
     }
   }
@@ -74,14 +74,9 @@ class App extends Component {
                     component={LoadableTechnicalDetails}
                   />
                   <Switch>
-                    <Route
-                      exact
-                      path="/garden"
-                      component={LoadableThreeContainer}
-                    />
                     {navigator.userAgent !== "ReactSnap" && (
                       <Route
-                        path="/garden/:gardenID"
+                        path="/gardens/:gardenID"
                         component={LoadableThreeContainer}
                       />
                     )}

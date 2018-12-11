@@ -30,10 +30,9 @@ const HighGPA = data => {
     bgColor,
     color,
     textArray: [
-      { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.2 },
-      { size: 0.1, text: "Who Have a", offsetY: 1 },
-      { size: 0.25, text: "4.0 GPA", offsetY: 0.65 }
-    ]
+      { size: 0.35, text: "HIGH GPA", offsetY: 1.2 },
+      { size: 0.35, text: "GARDEN", offsetY: 0.7 },
+    ],
   };
 };
 

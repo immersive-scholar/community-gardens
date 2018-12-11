@@ -30,10 +30,9 @@ const HighResources = (data, threshold = 1) => {
     bgColor,
     color,
     textArray: [
-      { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.2 },
-      { size: 0.1, text: "Who have", offsetY: 1 },
-      { size: 0.25, text: "High Resources", offsetY: 0.7 }
-    ]
+      { size: 0.35, text: "HIGH", offsetY: 1.2 },
+      { size: 0.35, text: "RESOURCES", offsetY: 0.7 },
+    ],
   };
 };
 

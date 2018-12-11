@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const WinterGardenModel = {
   id: "winter-garden",
   title: "Winter Garden",
-  link: "/garden/winter-garden",
+  link: "/gardens/winter-garden",
   excerpt: (
     <Fragment>
       Students with a <b>lower health</b> score drawn with cooler colors and

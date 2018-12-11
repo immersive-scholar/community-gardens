@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const AgeModel = {
   id: "age",
   title: "Age",
-  // link: "/garden/deagegree",
+  // link: "/gardens/deagegree",
   excerpt: (
     <Fragment>
       The <b>age</b> of the student determines how many leaves or petals are on

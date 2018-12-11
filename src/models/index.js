@@ -10,6 +10,7 @@ import HousingInsecurityModel from "./HousingInsecurityModel";
 import OutOfStateModel from "./OutOfStateModel";
 import RandomGardenModel from "./RandomGardenModel";
 import SummerGardenModel from "./SummerGardenModel";
+import WellnessModel from "./WellnessModel";
 import WinterGardenModel from "./WinterGardenModel";
 import XmasCardModel from "./XmasCardModel";
 
@@ -26,6 +27,7 @@ export {
   OutOfStateModel,
   RandomGardenModel,
   SummerGardenModel,
+  WellnessModel,
   WinterGardenModel,
-  XmasCardModel
+  XmasCardModel,
 };
