@@ -27,7 +27,7 @@ class XmasCardChapter extends BaseChapter {
     const { color, textArray } = stat;
     const bgColor = 0x14161f;
 
-    const { show3DTitles } = this.settings;
+    // const { show3DTitles } = this.settings;
     const count = 120;
     const solomonsSealCount = count * 0.8;
     const stellariaPuberaCount = count * 0.1;
