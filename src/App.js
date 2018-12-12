@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Switch } from "react-router";
+import { Switch, Redirect } from "react-router";
 import Helmet from "react-helmet";
 import { TypographyStyle, GoogleFont } from "react-typography";
 
@@ -74,12 +74,11 @@ class App extends Component {
                     component={LoadableTechnicalDetails}
                   />
                   <Switch>
-                    {navigator.userAgent !== "ReactSnap" && (
-                      <Route
-                        path="/garden/:gardenID"
-                        component={LoadableThreeContainer}
-                      />
-                    )}
+                    <Redirect
+                      from="/garden/:gardenID"
+                      to="/gardens/:gardenID"
+                    />
+
                     {navigator.userAgent !== "ReactSnap" && (
                       <Route
                         path="/gardens/:gardenID"
