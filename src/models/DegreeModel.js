@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const DegreeModel = {
   id: "degree",
   title: "Degree",
-  // link: "/garden/degree",
+  // link: "/gardens/degree",
   excerpt: (
     <Fragment>
       The <b>Degree</b> the student is pursing determines the plant height:

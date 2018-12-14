@@ -28,7 +28,7 @@ const initialState = {
     didNotEatForADay: {
       id: "did-not-eat-for-a-day",
       title: "Did Not Eat for a Day",
-      link: "/garden/did-not-eat-for-a-day",
+      link: "/gardens/did-not-eat-for-a-day",
     },
     energyOutgoing: EnergyOutgoingModel,
     firstGeneration: FirstGenerationModel,
@@ -39,7 +39,7 @@ const initialState = {
     pellGrant: {
       id: "pell-grant",
       title: "Pell Grant",
-      link: "/garden/pell-grant",
+      link: "/gardens/pell-grant",
     },
     randomGarden: RandomGardenModel,
     resourced: HighResourcesModel,

@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const EnergyOutgoingModel = {
   id: "energy-outgoing",
   title: "Energy Outgoing",
-  link: "/garden/energy-outgoing",
+  link: "/gardens/energy-outgoing",
   excerpt: (
     <Fragment>
       Students who have high <b>Energy Outgoing</b> scores have berries

@@ -68,10 +68,10 @@ if (device.mobile) {
 
   switch (true) {
     case tierIndex === 3:
-      quantityMultiplier = 5;
+      quantityMultiplier = 2;
       break;
     case tierIndex === 2:
-      quantityMultiplier = 2;
+      quantityMultiplier = 1.5;
       break;
     case tierIndex === 1:
       quantityMultiplier = 1;

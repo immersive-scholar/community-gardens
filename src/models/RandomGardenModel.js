@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const RandomGardenModel = {
   id: "random-garden",
   title: "Mixed Seeds",
-  link: "/garden/random-garden",
+  link: "/gardens/random-garden",
   excerpt: <Fragment>A random sampling of NC State students.</Fragment>,
   headerImage: PathToPicture("plants", `random-garden`),
   cta: "View",

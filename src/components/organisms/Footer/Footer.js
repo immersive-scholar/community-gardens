@@ -94,12 +94,12 @@ class Footer extends PureComponent {
             />
             <TextLink
               {...css({ display: "none" })}
-              to="/garden/xmas-card"
+              to="/gardens/xmas-card"
               label="xmas 2018"
             />
             <TextLink
               {...css({ display: "none" })}
-              to="/garden/petal-print"
+              to="/gardens/petal-print"
               label="petal print"
             />
             <div {...css({ gridArea: "social" })}>

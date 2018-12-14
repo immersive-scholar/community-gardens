@@ -4,7 +4,7 @@ import PathToPicture from "util/PathToPicture";
 const HighGPAModel = {
   id: "high-gpa",
   title: "High GPA",
-  link: "/garden/high-gpa",
+  link: "/gardens/high-gpa",
   excerpt: (
     <Fragment>
       Students with a <b>high GPA</b> are drawn with stars on their leaves.
