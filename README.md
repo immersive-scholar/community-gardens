@@ -4,6 +4,8 @@ Community Gardens is a generative art experience about food and housing insecuri
 
 9.6% of students experienced housing insecurity within the past year. Community Garden's purpose is to raise awareness and challenge the stigmas and bias towards food and housing insecurities.
 
+To view the installation, go to [https://communitygardens.generativeartist.com/](https://communitygardens.generativeartist.com/).
+
 - **Data-Driven**: Plant attributes are driven by data collected by [Dr Mary Haskett](https://psychology.chass.ncsu.edu/faculty_staff/mehasket). Read the [report](https://dasa.ncsu.edu/wp-content/uploads/2018/03/NC-State-Food-and-Housing-Insecurity-1.pdf), and then see how [data affects the plants](https://communitygardens.generativeartist.com/data/)
 
 - **Generative**: The gardens are unique every time the garden is created. No one will ever see the same garden twice.
@@ -14,7 +16,7 @@ Community Gardens is a generative art experience about food and housing insecuri
 
 Community Gardens is developed to be easily installed.
 
-First go to the [Community Gardens respository](https://github.com/lucastswick/community-gardens) and download the zip file. Unzip the file once it has downloaded.
+First go to the [Community Gardens repository](https://github.com/lucastswick/community-gardens) and download the zip file. Unzip the file once it has downloaded.
 
 Next you will need access to the command line. On osx, this is inside the Applications folder. Open the `terminal` application.
 
