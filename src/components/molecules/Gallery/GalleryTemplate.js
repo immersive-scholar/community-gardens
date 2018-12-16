@@ -7,7 +7,7 @@ import { textContainer, removePaddingBottom, removePaddingTop } from "styles";
 
 export default class GalleryTemplate extends PureComponent {
   render() {
-    const { title, pictures, last = false } = this.props;
+    const { title, body, pictures, last = false } = this.props;
 
     return (
       <div
@@ -16,6 +16,7 @@ export default class GalleryTemplate extends PureComponent {
         {...(last ? {} : removePaddingBottom)}
       >
         <Animated as="h2">{title}</Animated>
+        <Animated>{body}</Animated>
         <Gallery pictures={pictures} />
       </div>
     );
