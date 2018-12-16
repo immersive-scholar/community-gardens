@@ -11,11 +11,12 @@ class Gallery extends PureComponent {
   renderPic = ({ pic, theme, index }) => {
     const downloadable = true;
     const purchasable = false;
+    const lowResSource = [{ srcSet: pic[0].srcSet }];
     const highResSource = pic[pic.length - 1].srcSet;
 
     return (
       <div {...item} key={`pic_${index}`}>
-        <Image ratio="1x1" sources={pic} theme={theme} />
+        <Image ratio="1x1" sources={lowResSource} theme={theme} />
         <ButtonWrapper>
           {downloadable && (
             <DownloadButton
@@ -46,7 +47,7 @@ class Gallery extends PureComponent {
 
 const mapStateToProps = ({ theme }) => {
   return {
-    theme
+    theme,
   };
 };
 

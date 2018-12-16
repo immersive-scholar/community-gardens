@@ -103,7 +103,7 @@ class GalleryPage extends PureComponent {
               In summer, plants have all the resources they need to thrive. The{" "}
               <TextLink to="/gardens/summer-garden" label="Summer Garden" />{" "}
               represents students who have a high level of resources. Our goal
-              is that all students have access to adequate food and housing.
+              is that <i>all</i> student's basic needs are met.
             </Fragment>
           }
           pictures={summerGarden}
@@ -114,7 +114,7 @@ class GalleryPage extends PureComponent {
             <Fragment>
               In winter, resources are scarce, and plants in the{" "}
               <TextLink to="/gardens/winter-garden" label="Winter Garden" />{" "}
-              represent students who face food and housing insecurity.
+              represent students who face resource scarcity.
             </Fragment>
           }
           pictures={fallGarden}
