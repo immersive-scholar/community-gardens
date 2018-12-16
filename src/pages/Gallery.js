@@ -112,7 +112,7 @@ class GalleryPage extends PureComponent {
           title="Winter Gardens"
           body={
             <Fragment>
-              In winter, resources are scarce, and plants in the{" "}
+              In winter, resources are scarce. Plants in the{" "}
               <TextLink to="/gardens/winter-garden" label="Winter Garden" />{" "}
               represent students who face resource scarcity.
             </Fragment>
