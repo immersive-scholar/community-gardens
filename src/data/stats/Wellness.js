@@ -30,9 +30,9 @@ const Wellness = data => {
     bgColor,
     color,
     textArray: [
-      { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.2 },
-      { size: 0.25, text: "With High Emotional Health", offsetY: 0.8 }
-    ]
+      { size: 0.35, text: "HAPPY", offsetY: 1.2 },
+      { size: 0.35, text: "GARDEN", offsetY: 0.7 },
+    ],
   };
 };
 

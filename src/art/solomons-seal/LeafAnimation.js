@@ -122,7 +122,7 @@ function LeafAnimation({
 
   Mesh.call(this, geometry, material);
 
-  // this.castShadow = true;
+  this.castShadow = true;
   this.frustumCulled = false;
 
   this.animateIn = ({ delay = 0, duration = 1, animated = true }) => {

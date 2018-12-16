@@ -31,10 +31,7 @@ const OutOfState = data => {
     ids,
     bgColor,
     color,
-    textArray: [
-      { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1 },
-      { size: 0.25, text: "Who are Out of State", offsetY: 0.6 }
-    ]
+    textArray: [{ size: 0.35, text: "OUT OF STATE", offsetY: 1 }],
   };
 };
 

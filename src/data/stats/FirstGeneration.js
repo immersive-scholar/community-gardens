@@ -25,9 +25,9 @@ const HousingInsecurity = data => {
     bgColor,
     color: 0xffffff,
     textArray: [
-      { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.2 },
-      { size: 0.25, text: "First Generation", offsetY: 0.8 }
-    ]
+      { size: 0.35, text: "FIRST", offsetY: 1.2 },
+      { size: 0.35, text: "GENERATION", offsetY: 0.7 },
+    ],
   };
 };
 

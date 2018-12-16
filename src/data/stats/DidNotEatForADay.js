@@ -26,10 +26,9 @@ const DidNotEatForADay = (data, total) => {
     bgColor,
     color: 0xffffff,
     textArray: [
-      { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.4 },
-      { size: 0.25, text: "Who Did Not", offsetY: 1 },
-      { size: 0.25, text: "Eat For a Day", offsetY: 0.6 }
-    ]
+      { size: 0.35, text: "GARDEN OF", offsetY: 1.2 },
+      { size: 0.35, text: "HUNGER", offsetY: 0.7 },
+    ],
   };
 };
 

@@ -7,6 +7,7 @@ import HighGPAChapter from "chapters/HighGPAChapter";
 import HousingInsecurityChapter from "chapters/HousingInsecurityChapter";
 import OutOfStateChapter from "chapters/OutOfStateChapter";
 import PellGrantChapter from "chapters/PellGrantChapter";
+import PetalPrintChapter from "chapters/PetalPrintChapter";
 import RandomGardenChapter from "chapters/RandomGardenChapter";
 import ResourcedChapter from "chapters/ResourcedChapter";
 import SummerGardenChapter from "chapters/SummerGardenChapter";
@@ -40,7 +41,7 @@ class SceneSubject {
       SummerGardenChapter,
       WellnessChapter,
       WinterGardenChapter,
-      XmasCardChapter
+      XmasCardChapter,
     ];
 
     this.createChapterPlate();
@@ -50,7 +51,7 @@ class SceneSubject {
   createChapterPlate() {
     this.chapterPlate = new ChapterPlate({
       camera: this.camera,
-      color: 0xffffff
+      color: 0xffffff,
     });
     this.scene.add(this.chapterPlate.group);
   }
@@ -153,8 +154,11 @@ class SceneSubject {
       case "winter-garden":
         chapter = this.createWinterGardenChapter();
         break;
-      case "xmas-card":
+      case "holiday-card":
         chapter = this.createXmasCardChapter();
+        break;
+      case "petal-print":
+        chapter = this.createPetalPrintModel();
         break;
       case "wellness":
         chapter = this.createWellnessChapter();
@@ -273,6 +277,12 @@ class SceneSubject {
   createXmasCardChapter() {
     const { settings, camera, controls, R } = this;
     const chapter = new XmasCardChapter({ settings }, camera, controls, R);
+    return chapter;
+  }
+
+  createPetalPrintModel() {
+    const { settings, camera, controls, R } = this;
+    const chapter = new PetalPrintChapter({ settings }, camera, controls, R);
     return chapter;
   }
 

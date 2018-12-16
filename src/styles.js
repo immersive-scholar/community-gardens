@@ -3,6 +3,10 @@ import { css } from "glamor";
 import typography from "util/typography";
 
 // GLOBAL css rules
+const relative = css({
+  position: "relative"
+});
+
 const textContainer = css({
   width: "100%",
   maxWidth: "40rem",
@@ -167,6 +171,18 @@ const threeCols = css({
   }
 });
 
+const twoCols = css({
+  display: "grid",
+  gridTemplateColumns: "50% 50%"
+});
+
+const twoColsLg = css({
+  display: "grid",
+  "@media(min-width: 48em)": {
+    gridTemplateColumns: "50% 50%"
+  }
+});
+
 const twoColsSm = css({
   "@media(max-width: 48em)": {
     gridTemplateColumns: "50% 50%"
@@ -196,6 +212,13 @@ const lead = css({
   fontSize: "1.4rem"
 });
 
+const galleryOffset = css({
+  "@media(min-width: 48em)": {
+    marginLeft: "20vw",
+    paddingLeft: "2rem"
+  }
+});
+
 const hideVisually = css({
   border: "0 !important",
   clip: "rect(0 0 0 0) !important",
@@ -218,6 +241,7 @@ const CircleMaskDiv = glamorous.div({
 });
 
 export {
+  relative,
   textContainer,
   lightText,
   lightFocusedText,
@@ -255,5 +279,8 @@ export {
   threeCols,
   hideVisually,
   blockquote,
-  twoColsSm
+  twoColsSm,
+  twoColsLg,
+  twoCols,
+  galleryOffset
 };

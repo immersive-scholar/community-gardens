@@ -8,15 +8,15 @@ const Logo = glamorous.div({
 
 const links = css({
   gridTemplateAreas: `
-  'about gardens credits'
-  'data solutions contact'
-  'tech tech social'`,
+  'gardens about credits'
+  'gallery solutions contact'
+  'tech data social'`,
   "@media(max-width: 48em)": {
     gridTemplateAreas: `
-      'about credits'
-      'gardens contact'
-      'data social'
-      'solutions solutions' 
+      'about gallery'
+      'gardens credits'
+      'data contact'
+      'solutions social' 
       'tech tech'`
   }
 });

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 715.87 554.74" style="enable-background:new 0 0 715.87 554.74;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;fill-opacity:0.5;stroke:#282828;stroke-width:7;stroke-miterlimit:10;}
+	.st1{filter:url(#Adobe_OpacityMaskFilter);}
+	.st2{fill:url(#SVGID_2_);}
+	.st3{mask:url(#SVGID_1_);}
+	.st4{fill:none;stroke:#282828;stroke-width:7;stroke-miterlimit:10;}
+	.st5{fill:#282828;}
+	.st6{fill:none;stroke:#282828;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+<g>
+	<circle class="st0" cx="170" cy="173.89" r="35"/>
+	<defs>
+		<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="1.5" y="2.55" width="337" height="339.68">
+			<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+		</filter>
+	</defs>
+	<mask maskUnits="userSpaceOnUse" x="1.5" y="2.55" width="337" height="339.68" id="SVGID_1_">
+		<g class="st1">
+			<radialGradient id="SVGID_2_" cx="170" cy="172.8877" r="200.848" gradientUnits="userSpaceOnUse">
+				<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0"/>
+				<stop  offset="0.5" style="stop-color:#FFFFFF"/>
+			</radialGradient>
+			<circle class="st2" cx="170" cy="172.89" r="200.85"/>
+		</g>
+	</mask>
+	<g class="st3">
+		<g>
+			<g>
+				<line class="st4" x1="170" y1="139.83" x2="170" y2="26.14"/>
+				<g>
+					<polygon class="st5" points="183.96,30.23 170,6.05 156.04,30.23 					"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<line class="st4" x1="170" y1="204.94" x2="170" y2="318.63"/>
+				<g>
+					<polygon class="st5" points="156.04,314.55 170,338.73 183.96,314.55 					"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<line class="st4" x1="138.78" y1="175.06" x2="25.09" y2="175.06"/>
+				<g>
+					<polygon class="st5" points="29.18,161.1 5,175.06 29.18,189.03 					"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<line class="st4" x1="201.22" y1="175.06" x2="314.91" y2="175.06"/>
+				<g>
+					<polygon class="st5" points="310.82,189.03 335,175.06 310.82,161.1 					"/>
+				</g>
+			</g>
+		</g>
+		<polyline class="st6" points="141.61,55.22 170,6.05 198.39,55.22 		"/>
+		<polyline class="st6" points="285.83,146.67 335,175.06 285.83,203.45 		"/>
+		<polyline class="st6" points="198.39,289.55 170,338.73 141.61,289.55 		"/>
+		<polyline class="st6" points="54.17,203.45 5,175.06 54.17,146.67 		"/>
+	</g>
+</g>
+<path class="st6" d="M545,530.89c-126.52-36.01-141.13-41.29-158-48c-9.68-3.85-50.82-25.41-102-51c0,0-19.68-11.94-54-46
+	c-13.14-13.04-24.43-25.85-21-37c1.54-4.99,5.48-7.88,7-9c14.97-10.99,39.94,0.64,45,3c18.75,8.74,16.75,15.98,41,33
+	c16.09,11.3,29.23,20.26,46,19c12.69-0.95,22.38-7.39,28-12c-7.08-8.55-18.71-22.15-34-38c-21.21-21.98-53.04-55.04-99-87
+	c-18.12-12.6-34.15-28.02-52-41c-8.91-6.48-23.1-16.52-26-33c-0.62-3.54-1.84-10.47,2-15c9.09-10.72,38.56,1.36,45,4
+	c17.47,7.16,23.88,14.38,48,31l0,0c2.85,1.73,15.51,9.73,38,24c1.01-2.34,10.46-23.2,33.5-28.5c16.93-3.9,30.49,3.06,34,5
+	c2.31-3.45,10.59-14.92,26-19c24.61-6.52,43.99,12,45,13c3.27-2.96,8.6-7.12,16-10c6.88-2.68,30.33-10.01,78,19
+	c10.87,6.61,79.52,48.4,110,118c5.5,12.56,11.02,28.91,27,46c17.18,18.38,27.79,17.64,36,32c12.13,21.22,3.07,47.49-4,68
+	c-7.39,21.43-20.31,58.91-52,74C629.27,554.55,613.67,550.44,545,530.89z"/>
+</svg>

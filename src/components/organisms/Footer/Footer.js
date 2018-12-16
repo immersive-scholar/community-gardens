@@ -1,8 +1,10 @@
 import React, { PureComponent, Fragment } from "react";
+import { connect } from "react-redux";
 import { css } from "glamor";
 import { TiSocialTwitter, TiSocialInstagram } from "react-icons/ti";
 
 import Image from "components/atoms/Image";
+import TextLink from "components/atoms/TextLink";
 
 import {
   textContainer,
@@ -15,21 +17,10 @@ import {
   twoColsSm,
   center
 } from "styles";
-import TextLink from "components/atoms/TextLink";
-
 import { Logo, links } from "./styles";
 
 class Footer extends PureComponent {
   componentWillMount() {
-    // this.props.loadTheme();
-
-    const theme = {
-      bright: "#fbb3d1",
-      pink: "#ec468a",
-      dark: "#574f65",
-      colors: ["#fbb3d1", "#ffffff", "#c25482"]
-    };
-
     const image = [
       {
         srcSet: require(`assets/logos/immersive-scholar-logo-sm.png`),
@@ -47,13 +38,13 @@ class Footer extends PureComponent {
     const year = new Date().getFullYear();
 
     this.setState({
-      theme,
       image,
       year
     });
   }
   render() {
-    const { image, theme, year } = this.state;
+    const { image, year } = this.state;
+    const { theme } = this.props;
 
     return (
       <Fragment>
@@ -61,7 +52,7 @@ class Footer extends PureComponent {
           {...css({
             display: "block",
             transition: "background 1s ease-out 0.5s",
-            backgroundColor: theme.bright
+            backgroundColor: theme.colors.bright
           })}
         >
           <div {...textContainer} {...threeCols} {...twoColsSm} {...links}>
@@ -97,9 +88,19 @@ class Footer extends PureComponent {
               label="Technical Summary"
             />
             <TextLink
+              {...css({ gridArea: "gallery" })}
+              to="/gallery"
+              label="Gallery"
+            />
+            <TextLink
               {...css({ display: "none" })}
-              to="/garden/xmas-card"
-              label="xmas 2018"
+              to="/gardens/holiday-card"
+              label="Holiday card 2018"
+            />
+            <TextLink
+              {...css({ display: "none" })}
+              to="/gardens/petal-print"
+              label="Petal Print"
             />
             <div {...css({ gridArea: "social" })}>
               <TextLink href="https://instagram.com/lucastswick">
@@ -153,11 +154,17 @@ class Footer extends PureComponent {
           {...removePaddingTop}
           {...css({ color: "#ababab" })}
         >
-          <p>Copyright © {year} lucastswick. All rights reserved.</p>
+          <p {...removeMarginBottom}>
+            Copyright © {year} lucastswick. All rights reserved.
+          </p>
         </div>
       </Fragment>
     );
   }
 }
 
-export default Footer;
+const mapStateToProps = ({ settings, theme }) => ({
+  theme
+});
+
+export default connect(mapStateToProps)(Footer);

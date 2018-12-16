@@ -5,14 +5,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { chapters } from "actions";
-import Animated from "components/molecules/Animated";
-import Image from "components/atoms/Image";
 import TextLink from "components/atoms/TextLink";
 import FillButton from "components/atoms/FillButton";
 import {
   ImageCopyBlock,
-  CopyImageBlock
+  CopyImageBlock,
 } from "components/organisms/ImageCopyBlock";
+import Animated from "components/molecules/Animated";
+import Marquee from "components/molecules/Marquee";
 import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
@@ -24,7 +24,7 @@ import {
   shadowless,
   removePaddingTop,
   center,
-  lead
+  lead,
 } from "styles";
 
 class Home extends PureComponent {
@@ -39,32 +39,37 @@ class Home extends PureComponent {
   }
 
   render() {
-    const { chapters } = this.props;
+    const { chapters, theme } = this.props;
     const { headerImage } = this.state;
 
     const summerGarden = chapters.summerGarden;
     const winterGarden = chapters.winterGarden;
     const randomGarden = chapters.randomGarden;
 
-    const theme = {
-      baseColor: "#fbb3d1",
-      colors: ["#ec468a", "#fbb3d1", "#ffffff", "#c25482"]
-    };
-
     return (
       <div>
-        <Image ratio="16x9" sources={headerImage} />
+        <Helmet
+          title="Community Gardens"
+          description="Community Gardens is a data-driven generative art installation using gardens as metaphor to discuss food and housing insecurity within the student body at NC State."
+        />
+        <Marquee
+          image={headerImage}
+          title="Community Gardens"
+          subtitle="Data-driven generative art"
+        />
         <div {...textContainer}>
-          <Helmet
-            title="Community Gardens"
-            description="Community Gardens is a data-driven generative art installation using gardens as metaphor to discuss food and housing insecurity within the student body at NC State."
-          />
-
           <Animated as="h1">Community Gardens</Animated>
           <Animated {...lead}>
             Community Gardens is a data-driven generative art installation that
             uses gardens as a metaphor to discuss food and housing insecurity
             within the NC State student body.
+          </Animated>
+          <Animated>
+            Data reveals that <b>9.6%</b> of students at NC State experienced
+            homelessness in the past year. Community Gardens is part of the
+            solution. By using art to challenge the biases around homelessness
+            and create empathy, we can have more meaningful conversations about
+            solutions.
           </Animated>
           <Animated>
             In summer, plants have all the resources they need to thrive. In
@@ -79,13 +84,7 @@ class Home extends PureComponent {
               Dr Haskett
             </a>, each student becomes a plant in the garden. Depending on the
             data, plants are created with different attributes. The sizes,
-            shapes, colors and species change according to the data.
-          </Animated>
-          <Animated>
-            Students that are First Generation have mazes on their leaves
-            because they have extra challenges to navigate. Students who have
-            been awarded grants have golden leaves. Students who experience
-            housing insecurity are more affected by the wind.{" "}
+            shapes, colors and species change according to the data.{" "}
             <Link to="/data" {...shadowless} {...link}>
               Read more about how data affects the plants.
             </Link>
@@ -93,9 +92,9 @@ class Home extends PureComponent {
 
           <Animated as="h2">Gardens</Animated>
           <Animated>
-            Each garden represents a different grouping of students. Every
-            garden is created at the moment you enter it so you will never see
-            the exact same garden twice.
+            Each garden represents a grouping of students around common
+            datapoints. Each garden is created to be unique and is also
+            interactive. Click and drag to look around.
           </Animated>
         </div>
         <div {...wideContainer}>
@@ -130,39 +129,26 @@ class Home extends PureComponent {
         </div>
         <div {...textContainer} {...removePaddingTop}>
           <Animated as="p">
-            Learn more about how the{" "}
+            <TextLink label="View the gallery" to="/gallery" />, learn more
+            about how the{" "}
             <TextLink label="data affects each individual plant" to="/data" />,
             or <TextLink label="commit to making a change" to="/solutions" />.
           </Animated>
         </div>
         <Newsletter />
         <Footer />
-        {/* <div {...grid}>
-            {map(chapters, chapter => {
-              return (
-                <Link
-                  key={chapter.id}
-                  {...shadowless}
-                  {...buttonStyle}
-                  {...fillButton}
-                  to={chapter.link}
-                >
-                  {chapter.title}
-                </Link>
-              );
-            })}
-          </div> */}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ chapters }) => ({
-  chapters: chapters.node
+const mapStateToProps = ({ chapters, theme }) => ({
+  chapters: chapters.node,
+  theme,
 });
 
 const mapDispatchToProps = dispatch => ({
-  focusChapter: bindActionCreators(chapters.focusChapter, dispatch)
+  focusChapter: bindActionCreators(chapters.focusChapter, dispatch),
 });
 
 export default connect(

@@ -6,34 +6,68 @@ import { fillButton, link, shadowless } from "styles";
 
 export default class FillButton extends PureComponent {
   render() {
-    const { label, to, theme } = this.props;
-    return (
-      <Link
-        {...fillButton}
-        {...link}
-        {...shadowless}
-        {...css(
-          theme &&
-            theme.colors && {
-              color: theme.colors[0],
-              background: theme.colors[1],
+    const {
+      label,
+      to,
+      theme: { colors },
+      href
+    } = this.props;
+    if (href) {
+      return (
+        <a
+          {...fillButton}
+          {...link}
+          {...shadowless}
+          {...css(
+            colors && {
+              color: colors.button.text,
+              background: colors.button.bg,
               transition: "all 0.2s"
             }
-        )}
-        {...css(
-          theme &&
-            theme.colors && {
+          )}
+          {...css(
+            colors && {
               "&:hover": {
                 textDecoration: "none",
-                color: theme.colors[2],
-                background: theme.colors[3]
+                color: colors.button.hover.text,
+                background: colors.button.hover.bg
               }
             }
-        )}
-        to={to}
-      >
-        {label}
-      </Link>
-    );
+          )}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+          href={href}
+        >
+          {label}
+        </a>
+      );
+    } else {
+      return (
+        <Link
+          {...fillButton}
+          {...link}
+          {...shadowless}
+          {...css(
+            colors && {
+              color: colors.button.text,
+              background: colors.button.bg,
+              transition: "all 0.2s"
+            }
+          )}
+          {...css(
+            colors && {
+              "&:hover": {
+                textDecoration: "none",
+                color: colors.button.hover.text,
+                background: colors.button.hover.bg
+              }
+            }
+          )}
+          to={to}
+        >
+          {label}
+        </Link>
+      );
+    }
   }
 }

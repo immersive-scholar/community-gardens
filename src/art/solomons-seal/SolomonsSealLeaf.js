@@ -167,7 +167,7 @@ class SolomonsSealLeaf extends BaseRenderable {
       side: DoubleSide
     });
     const fillMesh = new Mesh(fillGeometry, fillMaterial);
-    // fillMesh.castShadow = true;
+    fillMesh.castShadow = true;
     fillMesh.position.y = -0.001;
 
     return fillMesh;

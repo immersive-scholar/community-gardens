@@ -15,8 +15,9 @@ import {
   OutOfStateModel,
   RandomGardenModel,
   SummerGardenModel,
+  WellnessModel,
   WinterGardenModel,
-  XmasCardModel
+  XmasCardModel,
 } from "models";
 
 const initialState = {
@@ -27,7 +28,7 @@ const initialState = {
     didNotEatForADay: {
       id: "did-not-eat-for-a-day",
       title: "Did Not Eat for a Day",
-      link: "/garden/did-not-eat-for-a-day"
+      link: "/gardens/did-not-eat-for-a-day",
     },
     energyOutgoing: EnergyOutgoingModel,
     firstGeneration: FirstGenerationModel,
@@ -38,19 +39,15 @@ const initialState = {
     pellGrant: {
       id: "pell-grant",
       title: "Pell Grant",
-      link: "/garden/pell-grant"
+      link: "/gardens/pell-grant",
     },
     randomGarden: RandomGardenModel,
     resourced: HighResourcesModel,
     summerGarden: SummerGardenModel,
-    wellness: {
-      id: "wellness",
-      title: "Wellness Garden",
-      link: "/garden/wellness"
-    },
+    wellness: WellnessModel,
     winterGarden: WinterGardenModel,
-    xmasCard: XmasCardModel
-  }
+    holidayCard: XmasCardModel,
+  },
 };
 
 export default (state = initialState, action) => {
@@ -58,13 +55,13 @@ export default (state = initialState, action) => {
     case ADD_CHAPTER:
       return {
         ...state,
-        node: addCollectionToNode(action.payload.data.files, state.node)
+        node: addCollectionToNode(action.payload.data.files, state.node),
       };
     case FOCUS_CHAPTER:
       let id = action.payload.data.id;
       return {
         ...state,
-        selectedID: id
+        selectedID: id,
       };
     default:
       return state;

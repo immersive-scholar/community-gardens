@@ -11,6 +11,7 @@ import {
   placeholder16x9,
   placeholder3x1,
   placeholder3x4,
+  placeholder1x1,
   placeholderVis,
   placeholderLoaded,
   image,
@@ -45,15 +46,9 @@ class Image extends React.Component {
     const { sources, isInViewport, theme, ratio } = this.props;
     const ready =
       (this.state.imageLoaded && isInViewport) || this.state.animated;
-    const baseColor =
-      theme && theme.colors && theme.colors.length
-        ? theme.colors[0]
-        : "#212121";
+    const baseColor = theme && theme.colors ? theme.colors.base : "#212121";
 
-    const hiliteColor =
-      theme && theme.colors && theme.colors.length
-        ? theme.colors[1]
-        : "#121212";
+    const hiliteColor = theme && theme.colors ? theme.colors.pink : "#121212";
 
     var windowInnerHeight =
       window.innerHeight || document.documentElement.clientHeight;
@@ -66,6 +61,7 @@ class Image extends React.Component {
             ratio === "16x9" ? placeholder16x9 : {},
             ratio === "3x1" ? placeholder3x1 : ratio,
             ratio === "3x4" ? placeholder3x4 : ratio,
+            ratio === "1x1" ? placeholder1x1 : ratio,
             ratio === "vis" ? placeholderVis : ratio,
             ready ? placeholderLoaded : {}
           )}

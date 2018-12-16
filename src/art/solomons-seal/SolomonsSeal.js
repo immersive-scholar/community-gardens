@@ -12,6 +12,7 @@ class SolomonsSeal extends BasePlant {
     this.clean();
 
     const {
+      stemEnabled = true,
       height = this.R.floatBetween(0.5, 1),
       displacement = new Vector3(0.2, 0.1, 0.2),
       scale = new Vector3(2, 2, 4),
@@ -60,6 +61,7 @@ class SolomonsSeal extends BasePlant {
     } = this.state;
 
     const stemProps = {
+      stemEnabled,
       height,
       thickness,
       color,

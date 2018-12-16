@@ -27,7 +27,7 @@ class XmasCardChapter extends BaseChapter {
     const { color, textArray } = stat;
     const bgColor = 0x14161f;
 
-    const { show3DTitles } = this.settings;
+    // const { show3DTitles } = this.settings;
     const count = 120;
     const solomonsSealCount = count * 0.8;
     const stellariaPuberaCount = count * 0.1;
@@ -44,9 +44,9 @@ class XmasCardChapter extends BaseChapter {
 
     this.chapterTitle = new ChapterTitle({
       color,
-      textArray
+      textArray,
     });
-    show3DTitles && this.chapterTitle.createChildren();
+    // show3DTitles && this.chapterTitle.createChildren();
     this.addCleanable(this.chapterTitle, this.chapterTitle.group);
 
     let bounds = new Vector3(1, 1, 1),
@@ -55,7 +55,7 @@ class XmasCardChapter extends BaseChapter {
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
       count,
-      key: LOW_HEALTH
+      key: LOW_HEALTH,
     });
 
     // Solomon's Seal
@@ -66,7 +66,7 @@ class XmasCardChapter extends BaseChapter {
       count: solomonsSealCount,
       R: this.R,
       camera: this.camera,
-      controls: this.controls
+      controls: this.controls,
     });
     this.plantGroup.add(this.solomonsSealSpawn.group);
     this.addInstances(this.solomonsSealSpawn.instances);
@@ -80,7 +80,7 @@ class XmasCardChapter extends BaseChapter {
       count: stellariaPuberaCount,
       R: this.R,
       camera: this.camera,
-      controls: this.controls
+      controls: this.controls,
     });
     this.plantGroup.add(this.stellariaPuberaSpawn.group);
     this.addInstances(this.stellariaPuberaSpawn.instances);
@@ -95,7 +95,7 @@ class XmasCardChapter extends BaseChapter {
       count: asiminaTrilobaCount,
       R: this.R,
       camera: this.camera,
-      controls: this.controls
+      controls: this.controls,
     });
     this.plantGroup.add(this.asiminaTrilobaSpawn.group);
     this.addInstances(this.asiminaTrilobaSpawn.instances);
@@ -149,17 +149,15 @@ class XmasCardChapter extends BaseChapter {
 
     // layout
     bounds.set(1, 1, 0);
-    position.set(0, 1, 0);
+    position.set(0, 1, 3);
     new CircularLayout({
       layoutType: LAYOUT_FLOOR,
       instances: this.instances,
       group: this.plantGroup,
       R: this.R,
       bounds,
-      position
+      position,
     });
-
-    this.camera.position.z = -3;
   };
 
   animateIn = ({ delay = 0 } = {}) => {

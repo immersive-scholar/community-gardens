@@ -15,7 +15,7 @@ import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 
-import { textContainer, wideContainer, lead } from "styles";
+import { textContainer, removePaddingTop, lead } from "styles";
 
 class Data extends PureComponent {
   componentWillMount() {
@@ -26,7 +26,7 @@ class Data extends PureComponent {
   render() {
     const { headerImage } = this.state;
 
-    const { chapters } = this.props;
+    const { chapters, theme } = this.props;
     const age = chapters.age;
     const anxiety = chapters.anxiety;
     const degree = chapters.degree;
@@ -40,19 +40,14 @@ class Data extends PureComponent {
     const summerGarden = chapters.summerGarden;
     const winterGarden = chapters.winterGarden;
 
-    const theme = {
-      baseColor: "#fbb3d1",
-      colors: ["#ec468a", "#fbb3d1", "#ffffff", "#c25482"]
-    };
-
     return (
       <div>
-        <Image ratio="16x9" sources={headerImage} />
+        <Helmet
+          title="Community Gardens Data Summary"
+          description="Details about how the data affects the plants in Community Gardens."
+        />
+        <Image ratio="16x9" sources={headerImage} theme={theme} />
         <div {...textContainer}>
-          <Helmet
-            title="Community Gardens Data Summary"
-            description="Details about how the data affects the plants in Community Gardens."
-          />
           <Animated as="h1">Data-driven Generative Art</Animated>
           <Animated {...lead}>
             Combining data-driven design and generative art is not immediately
@@ -99,66 +94,7 @@ class Data extends PureComponent {
             follows:
           </Animated>
         </div>
-        <div {...wideContainer}>
-          <ImageCopyBlock
-            item={summerGarden}
-            showAllOnSmall
-            showLinkOnSmall
-            mask="circle"
-            theme={theme}
-          />
-          <CopyImageBlock
-            item={winterGarden}
-            showAllOnSmall
-            showLinkOnSmall
-            mask="circle"
-            theme={theme}
-          />
-          <ImageCopyBlock
-            item={highResources}
-            showAllOnSmall
-            showLinkOnSmall
-            mask="circle"
-            theme={theme}
-          />
-          <CopyImageBlock
-            item={energyOutgoing}
-            showAllOnSmall
-            showLinkOnSmall
-            mask="circle"
-            theme={theme}
-          />
-          <ImageCopyBlock
-            item={firstGeneration}
-            showAllOnSmall
-            showLinkOnSmall
-            mask="circle"
-            theme={theme}
-          />
-          <CopyImageBlock
-            item={housingInsecurity}
-            showAllOnSmall
-            showLinkOnSmall
-            mask="circle"
-            theme={theme}
-          />
-          <ImageCopyBlock
-            item={foodInsecurity}
-            showAllOnSmall
-            showLinkOnSmall
-            mask="circle"
-            theme={theme}
-          />
-          <CopyImageBlock
-            item={highGPA}
-            showAllOnSmall
-            showLinkOnSmall
-            mask="circle"
-            theme={theme}
-          />
-        </div>
-        <div {...textContainer}>
-          <Animated as="h2">Additional Attributes</Animated>
+        <div {...textContainer} {...removePaddingTop}>
           <ImageCopyBlock
             item={degree}
             showAllOnSmall
@@ -174,6 +110,55 @@ class Data extends PureComponent {
             smallImage={true}
           />
           <ImageCopyBlock
+            item={highResources}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <CopyImageBlock
+            item={energyOutgoing}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <ImageCopyBlock
+            item={firstGeneration}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <CopyImageBlock
+            item={housingInsecurity}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <ImageCopyBlock
+            item={foodInsecurity}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <CopyImageBlock
+            item={highGPA}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+
+          <ImageCopyBlock
             item={anxiety}
             showAllOnSmall
             mask="circle"
@@ -183,6 +168,22 @@ class Data extends PureComponent {
           <CopyImageBlock
             item={outOfState}
             showAllOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <ImageCopyBlock
+            item={{ ...summerGarden, title: "High Support" }}
+            showAllOnSmall
+            showLinkOnSmall
+            mask="circle"
+            theme={theme}
+            smallImage={true}
+          />
+          <CopyImageBlock
+            item={{ ...winterGarden, title: "Low Support" }}
+            showAllOnSmall
+            showLinkOnSmall
             mask="circle"
             theme={theme}
             smallImage={true}
@@ -205,8 +206,8 @@ class Data extends PureComponent {
           </Animated>
           <Animated>
             <FillButton
-              to="/solutions"
-              label="Want to make a difference?"
+              to="/gardens"
+              label="View all the gardens"
               theme={theme}
             />
           </Animated>
@@ -218,8 +219,9 @@ class Data extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ chapters }) => ({
-  chapters: chapters.node
+const mapStateToProps = ({ chapters, theme }) => ({
+  chapters: chapters.node,
+  theme
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import Helmet from "react-helmet";
 
 import TextLink from "components/atoms/TextLink";
-import Image from "components/atoms/Image";
+import Marquee from "components/molecules/Marquee";
 import Animated from "components/molecules/Animated";
 import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
@@ -21,14 +21,16 @@ class Credits extends PureComponent {
 
     return (
       <div>
-        <Image ratio="16x9" sources={headerImage} />
+        <Helmet
+          title="Community Gardens Credits"
+          description="The team behind Community Gardens."
+        />
+        <Marquee
+          image={headerImage}
+          title="Credits"
+          subtitle="The team behind Community Gardens"
+        />
         <div {...textContainer}>
-          <Helmet
-            title="Community Gardens Credits"
-            description="The team behind Community Gardens."
-          />
-          <Animated as="h1">Credits</Animated>
-
           <Animated>
             Community Gardens is concepted and engineered by{" "}
             <TextLink href="https://generativeartist.com" label="lucastswick" />{" "}
@@ -49,6 +51,14 @@ class Credits extends PureComponent {
           <Animated as="h2">Core Team</Animated>
 
           <ul {...removeMarginLeft}>
+            <li {...bulletless}>
+              <TextLink
+                href="https://generativeartist.com"
+                label="Lucas Swick"
+              />
+              , Concepting &amp; Engineering
+            </li>
+
             <li {...bulletless}>
               <TextLink
                 href="https://jlangdesign.github.io/about.html"

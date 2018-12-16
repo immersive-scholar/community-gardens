@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Switch } from "react-router";
+import { Switch, Redirect } from "react-router";
 import Helmet from "react-helmet";
 import { TypographyStyle, GoogleFont } from "react-typography";
 
@@ -16,6 +16,7 @@ import LoadableContact from "./loadables/LoadableContact";
 import LoadableThreeContainer from "./loadables/LoadableThreeContainer";
 import LoadableData from "./loadables/LoadableData";
 import LoadableSolutions from "./loadables/LoadableSolutions";
+import LoadableGallery from "./loadables/LoadableGallery";
 import LoadableCredits from "./loadables/LoadableCredits";
 import LoadableTechnicalDetails from "./loadables/LoadableTechnicalDetails";
 import LoadablePresentation from "./loadables/LoadablePresentation";
@@ -31,7 +32,7 @@ class App extends Component {
     if (history.action === "PUSH" && typeof gtag === "function") {
       gtag("config", "UA-117743172-2", {
         page_location: window.location.href,
-        page_path: location.pathname
+        page_path: location.pathname,
       });
     }
   }
@@ -66,20 +67,29 @@ class App extends Component {
                     component={LoadableSolutions}
                   />
                   <Route exact path="/credits" component={LoadableCredits} />
+                  <Route exact path="/gallery" component={LoadableGallery} />
                   <Route
                     exact
                     path="/tech"
                     component={LoadableTechnicalDetails}
                   />
                   <Switch>
-                    <Route
-                      exact
-                      path="/garden"
-                      component={LoadableThreeContainer}
+                    <Redirect
+                      from="/gardens/xmas-card"
+                      to="/gardens/holiday-card"
                     />
+                    <Redirect
+                      from="/garden/xmas-card"
+                      to="/gardens/holiday-card"
+                    />
+                    <Redirect
+                      from="/garden/:gardenID"
+                      to="/gardens/:gardenID"
+                    />
+
                     {navigator.userAgent !== "ReactSnap" && (
                       <Route
-                        path="/garden/:gardenID"
+                        path="/gardens/:gardenID"
                         component={LoadableThreeContainer}
                       />
                     )}

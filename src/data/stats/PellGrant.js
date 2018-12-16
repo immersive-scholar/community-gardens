@@ -26,11 +26,7 @@ const PellGrant = data => {
     ids,
     bgColor,
     color,
-    textArray: [
-      { size: 0.1, text: "GARDEN OF STUDENTS", offsetY: 1.2 },
-      { size: 0.1, text: "Who Earned a", offsetY: 1 },
-      { size: 0.3, text: "Pell Grant", offsetY: 0.6 }
-    ]
+    textArray: [{ size: 0.35, text: "PELL GRANT", offsetY: 1 }],
   };
 };
 

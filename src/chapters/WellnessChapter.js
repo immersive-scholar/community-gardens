@@ -31,7 +31,7 @@ class WellnessChapter extends BaseChapter {
 
     this.ground = new GroundBAS({
       color: bgColor,
-      R: this.R
+      R: this.R,
     });
     this.addCleanable(this.ground);
     // this.ground.position.set(0, -10, 10);
@@ -41,13 +41,13 @@ class WellnessChapter extends BaseChapter {
 
     this.chapterPlate = new ChapterPlate({
       camera: this.camera,
-      color: bgColor
+      color: bgColor,
     });
     this.addCleanable(this.chapterPlate, this.chapterPlate.group);
 
     this.chapterTitle = new ChapterTitle({
       color,
-      textArray
+      textArray,
     });
     show3DTitles && this.chapterTitle.createChildren();
     this.addCleanable(this.chapterTitle, this.chapterTitle.group);
@@ -58,7 +58,7 @@ class WellnessChapter extends BaseChapter {
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
       count,
-      key: WELLNESS
+      key: WELLNESS,
     });
 
     // Solomon's Seal
@@ -68,7 +68,7 @@ class WellnessChapter extends BaseChapter {
       count: plantCount,
       R: this.R,
       camera: this.camera,
-      controls: this.controls
+      controls: this.controls,
     });
     this.group.add(this.solomonsSealSpawn.group);
     this.addInstances(this.solomonsSealSpawn.instances);
@@ -81,7 +81,7 @@ class WellnessChapter extends BaseChapter {
       group: this.group,
       R: this.R,
       bounds,
-      position
+      position,
     });
 
     // Stellaria Pubera
@@ -92,7 +92,7 @@ class WellnessChapter extends BaseChapter {
       count: plantCount,
       R: this.R,
       camera: this.camera,
-      controls: this.controls
+      controls: this.controls,
     });
 
     this.group.add(this.stellariaPuberaSpawn.group);
@@ -106,7 +106,7 @@ class WellnessChapter extends BaseChapter {
       group: this.group,
       R: this.R,
       bounds,
-      position
+      position,
     });
 
     // Asimina Triloba
@@ -117,7 +117,7 @@ class WellnessChapter extends BaseChapter {
       count: plantCount,
       R: this.R,
       camera: this.camera,
-      controls: this.controls
+      controls: this.controls,
     });
 
     this.group.add(this.asiminaTrilobaSpawn.group);
@@ -132,7 +132,7 @@ class WellnessChapter extends BaseChapter {
       group: this.group,
       R: this.R,
       bounds,
-      position
+      position,
     });
   };
 }

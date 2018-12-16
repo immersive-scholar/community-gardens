@@ -13,7 +13,7 @@ import {
   IMMERSION,
   ART_WALL,
   COMMONS,
-  VISUALIZATION
+  VISUALIZATION,
 } from "constants/Constants";
 import { TweenMax } from "gsap";
 import GPU from "util/GPU";
@@ -30,7 +30,7 @@ let presentationMode = PRESENTATION_MODE_DEFAULT;
 let playing = false;
 let optionsOpen = false;
 let aboutModalOpen = false;
-let show3DTitles = false;
+let show3DTitles = true;
 let showControlBar = true;
 let showImmersiveScholarLogo = false;
 let showSidebar = false;
@@ -64,6 +64,8 @@ switch (true) {
 // downgrade quantityMultiplier for mobile devices.
 if (device.mobile) {
   presentationMode = PRESENTATION_MODE_EXPLORE;
+  show3DTitles = false;
+
   switch (true) {
     case tierIndex === 3:
       quantityMultiplier = 2;
@@ -78,8 +80,6 @@ if (device.mobile) {
       break;
   }
 }
-
-console.log("quantityMultiplier ", quantityMultiplier);
 
 const location = window.location;
 const parsed = queryString.parse(location.search);
@@ -155,7 +155,7 @@ const initialState = {
   showBurgerButton,
   sidebarWidth,
   env,
-  wallDisplay
+  wallDisplay,
 };
 
 export default (state = initialState, action) => {
@@ -166,63 +166,63 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        timeMultiplier
+        timeMultiplier,
       };
     case SET_QUANTITY_MULTIPLIER:
       const { quantityMultiplier } = action.payload.data;
 
       return {
         ...state,
-        quantityMultiplier
+        quantityMultiplier,
       };
     case SET_RANDOM_SEED:
       const { seed } = action.payload.data;
 
       return {
         ...state,
-        seed
+        seed,
       };
     case SET_DPR:
       const { dpr } = action.payload.data;
 
       return {
         ...state,
-        dpr
+        dpr,
       };
     case SET_ANTI_ALIAS:
       const { antiAlias } = action.payload.data;
 
       return {
         ...state,
-        antiAlias
+        antiAlias,
       };
     case SET_DEBUG:
       const { debug } = action.payload.data;
 
       return {
         ...state,
-        debug
+        debug,
       };
     case SET_PLAYING:
       const { playing } = action.payload.data;
 
       return {
         ...state,
-        playing
+        playing,
       };
     case SET_OPTIONS_OPEN:
       const { optionsOpen } = action.payload.data;
 
       return {
         ...state,
-        optionsOpen
+        optionsOpen,
       };
     case SET_ABOUT_MODAL_OPEN:
       const { aboutModalOpen } = action.payload.data;
 
       return {
         ...state,
-        aboutModalOpen
+        aboutModalOpen,
       };
     default:
       return state;

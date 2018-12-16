@@ -33,6 +33,7 @@ class StellariaPubera extends BasePlant {
     this.clean();
 
     const {
+      stemEnabled = true,
       height = this.R.floatBetween(0.25, 1.5),
       color = ColorFactory.getRandomColor(),
       rearPetalColor = color,
@@ -79,6 +80,7 @@ class StellariaPubera extends BasePlant {
     } = this.state;
 
     const stemProps = {
+      stemEnabled,
       height,
       color,
       thickness,
@@ -127,7 +129,9 @@ class StellariaPubera extends BasePlant {
       translateToY
     });
     // this.petals.position.y = height;
-    this.petals.position.copy(stemTopPoint);
+    if (stemEnabled) {
+      this.petals.position.copy(stemTopPoint);
+    }
     this.petals.lookAt(petalTarget);
     // this.petals.rotation.y = -Math.PI / 2;
     this.group.add(this.petals);
@@ -162,9 +166,11 @@ class StellariaPubera extends BasePlant {
       rotationAngle,
       translateToY
     });
-    // this.rearPetals.position.y = height;
-    this.rearPetals.position.copy(stemTopPoint);
-    this.rearPetals.position.z += 0.002;
+    if (stemEnabled) {
+      // this.rearPetals.position.y = height;
+      this.rearPetals.position.copy(stemTopPoint);
+      this.rearPetals.position.z += 0.002;
+    }
     this.rearPetals.lookAt(petalTarget);
     // this.rearPetals.rotation.y = -Math.PI / 2;
     this.group.add(this.rearPetals);
@@ -187,7 +193,9 @@ class StellariaPubera extends BasePlant {
       windDirection,
       delay: 0
     });
-    this.pollen.position.copy(stemTopPoint);
+    if (stemEnabled) {
+      this.pollen.position.copy(stemTopPoint);
+    }
     this.pollen.lookAt(petalTarget);
     this.pollen.position.z -= 0.002;
     // this.pollen.rotation.y = -Math.PI / 2;
