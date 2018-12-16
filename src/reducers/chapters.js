@@ -46,7 +46,7 @@ const initialState = {
     summerGarden: SummerGardenModel,
     wellness: WellnessModel,
     winterGarden: WinterGardenModel,
-    xmasCard: XmasCardModel,
+    holidayCard: XmasCardModel,
   },
 };
 

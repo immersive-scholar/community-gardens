@@ -41,7 +41,7 @@ class Gardens extends PureComponent {
     const winterGarden = chapters.winterGarden;
     const randomGarden = chapters.randomGarden;
     const wellness = chapters.wellness;
-    const xmas = chapters.xmasCard;
+    const holiday = chapters.holidayCard;
 
     return (
       <div>
@@ -152,7 +152,7 @@ class Gardens extends PureComponent {
           />
           <CopyImageBlock
             item={{
-              ...xmas,
+              ...holiday,
               excerpt: "Happy Holidays!",
             }}
             showAllOnSmall

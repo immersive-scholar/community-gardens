@@ -41,7 +41,7 @@ class SceneSubject {
       SummerGardenChapter,
       WellnessChapter,
       WinterGardenChapter,
-      XmasCardChapter
+      XmasCardChapter,
     ];
 
     this.createChapterPlate();
@@ -51,7 +51,7 @@ class SceneSubject {
   createChapterPlate() {
     this.chapterPlate = new ChapterPlate({
       camera: this.camera,
-      color: 0xffffff
+      color: 0xffffff,
     });
     this.scene.add(this.chapterPlate.group);
   }
@@ -154,7 +154,7 @@ class SceneSubject {
       case "winter-garden":
         chapter = this.createWinterGardenChapter();
         break;
-      case "xmas-card":
+      case "holiday-card":
         chapter = this.createXmasCardChapter();
         break;
       case "petal-print":

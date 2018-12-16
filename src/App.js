@@ -75,6 +75,14 @@ class App extends Component {
                   />
                   <Switch>
                     <Redirect
+                      from="/gardens/xmas-card"
+                      to="/gardens/holiday-card"
+                    />
+                    <Redirect
+                      from="/garden/xmas-card"
+                      to="/gardens/holiday-card"
+                    />
+                    <Redirect
                       from="/garden/:gardenID"
                       to="/gardens/:gardenID"
                     />

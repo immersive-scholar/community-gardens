@@ -94,13 +94,13 @@ class Footer extends PureComponent {
             />
             <TextLink
               {...css({ display: "none" })}
-              to="/gardens/xmas-card"
-              label="xmas 2018"
+              to="/gardens/holiday-card"
+              label="Holiday card 2018"
             />
             <TextLink
               {...css({ display: "none" })}
               to="/gardens/petal-print"
-              label="petal print"
+              label="Petal Print"
             />
             <div {...css({ gridArea: "social" })}>
               <TextLink href="https://instagram.com/lucastswick">
