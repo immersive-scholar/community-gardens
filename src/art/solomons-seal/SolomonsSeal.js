@@ -56,7 +56,7 @@ class SolomonsSeal extends BasePlant {
       // glitchAngle = new Vector3(1, 1, 1),
       // glitchThreshold = new Vector3(1, 1, 1),
       /* eslint-disable no-unused-vars */
-      lookUpAt = false
+      lookUpAt = false,
       /* eslint-ensable no-unused-vars */
     } = this.state;
 
@@ -75,8 +75,9 @@ class SolomonsSeal extends BasePlant {
       glitchThreshold: new Vector3(1, 1, 1),
       fogDensity: 0.3,
       animated,
-      stemImagePath
+      stemImagePath,
     };
+
     const geometry = new StemGeometry(stemProps);
     stemProps.geometry = geometry;
     this.createStem(stemProps);
@@ -97,7 +98,7 @@ class SolomonsSeal extends BasePlant {
       R: this.R,
       animated,
       windForce,
-      windDirection
+      windDirection,
     });
     this.group.add(this.berriesMesh);
 
@@ -124,7 +125,7 @@ class SolomonsSeal extends BasePlant {
       windForce,
       windDirection,
       hslBase,
-      hslRange
+      hslRange,
     });
     this.group.add(this.leavesMesh);
   };

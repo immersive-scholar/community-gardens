@@ -47,7 +47,7 @@ import {
   SKIP_MEALS,
   SLEPT_OUTSIDE,
   WELLNESS,
-  WORK_A_LOT_AND_ARE_HUNGRY
+  WORK_A_LOT_AND_ARE_HUNGRY,
 } from "../constants/Stats";
 
 class InsecurityCalculator {

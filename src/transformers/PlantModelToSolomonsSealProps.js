@@ -8,7 +8,7 @@ const PlantModelToSolomonsSealProps = ({
   i,
   delay = 0,
   instanceDelay = 0.5,
-  R
+  R,
 }) => {
   // these are the default props
   // which result in a pleasing amount of variety within each plant
@@ -23,7 +23,7 @@ const PlantModelToSolomonsSealProps = ({
       R.floatBetween(0.2, 0.5)
     ),
     berryCount: R.intBetween(24, 96),
-    berryDistanceFromStem: R.floatBetween(0.015, 0.05)
+    berryDistanceFromStem: R.floatBetween(0.015, 0.05),
     // berryDisplacement: new Vector2(
     //   R.floatBetween(-0.4, 0.4),
     //   R.floatBetween(-0.4, 0.4)
@@ -80,7 +80,7 @@ const PlantModelToSolomonsSealProps = ({
     props,
     housingInsecurity,
     housingInsecurityScore,
-    R
+    R,
   });
   props = Modifiers.AgeModifier({ props, age });
   props = Modifiers.DegreeModifier({ props, degree, R });
@@ -88,7 +88,7 @@ const PlantModelToSolomonsSealProps = ({
   props = Modifiers.InsecurityModifier({
     props,
     foodInsecurity,
-    housingInsecurity
+    housingInsecurity,
   });
   props = Modifiers.ShareModifier({ props, shares });
 
@@ -99,6 +99,7 @@ const PlantModelToSolomonsSealProps = ({
 
   // housing insecurity displaces leaves from stems
   // there is a housingInsecurityModifier but the values are different
+
   if (housingInsecurity) {
     props.windForce = R.floatBetween(0.1, 0.5);
     props.windDirection = new Vector3(

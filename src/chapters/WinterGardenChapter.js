@@ -12,7 +12,7 @@ import ChapterTitle from "art/chapter-plate/ChapterTitle";
 import InsecurityCalculator from "data/InsecurityCalculator";
 import GridLayout from "art/layouts/GridLayout";
 import { LAYOUT_FLOOR } from "art/layouts/LayoutConstants";
-import { LOW_HEALTH } from "constants/Stats";
+import { LOW_HEALTH, HOUSING_INSECURITY } from "constants/Stats";
 
 class WinterGardenChapter extends BaseChapter {
   constructor(props = {}, camera, controls, R) {
@@ -23,7 +23,8 @@ class WinterGardenChapter extends BaseChapter {
     this.plantGroup = new Group();
     this.group.add(this.plantGroup);
 
-    const stat = InsecurityCalculator.getStat(LOW_HEALTH);
+    let stat = InsecurityCalculator.getStat(HOUSING_INSECURITY);
+    stat = InsecurityCalculator.getStat(LOW_HEALTH);
     const { color, textArray, bgColor } = stat;
 
     const { quantityMultiplier, show3DTitles } = this.settings;
@@ -36,19 +37,19 @@ class WinterGardenChapter extends BaseChapter {
 
     this.ground = new GroundBAS({
       color: bgColor,
-      R: this.R
+      R: this.R,
     });
     this.addCleanable(this.ground);
 
     this.chapterPlate = new ChapterPlate({
       camera: this.camera,
-      color: bgColor
+      color: bgColor,
     });
     this.addCleanable(this.chapterPlate, this.chapterPlate.group);
 
     this.chapterTitle = new ChapterTitle({
       color,
-      textArray
+      textArray,
     });
     show3DTitles && this.chapterTitle.createChildren();
     this.addCleanable(this.chapterTitle, this.chapterTitle.group);
@@ -59,7 +60,7 @@ class WinterGardenChapter extends BaseChapter {
     let data = InsecurityCalculator.getRandomRows({
       R: this.R,
       count,
-      key: LOW_HEALTH
+      key: LOW_HEALTH,
     });
 
     // Solomon's Seal
@@ -69,7 +70,7 @@ class WinterGardenChapter extends BaseChapter {
       count: plantCount,
       R: this.R,
       camera: this.camera,
-      controls: this.controls
+      controls: this.controls,
     });
     this.plantGroup.add(this.solomonsSealSpawn.group);
     this.addInstances(this.solomonsSealSpawn.instances);
@@ -82,7 +83,7 @@ class WinterGardenChapter extends BaseChapter {
       count: plantCount,
       R: this.R,
       camera: this.camera,
-      controls: this.controls
+      controls: this.controls,
     });
     this.plantGroup.add(this.stellariaPuberaSpawn.group);
     this.addInstances(this.stellariaPuberaSpawn.instances);
@@ -96,7 +97,7 @@ class WinterGardenChapter extends BaseChapter {
       count: plantCount,
       R: this.R,
       camera: this.camera,
-      controls: this.controls
+      controls: this.controls,
     });
     this.plantGroup.add(this.asiminaTrilobaSpawn.group);
     this.addInstances(this.asiminaTrilobaSpawn.instances);
@@ -111,7 +112,7 @@ class WinterGardenChapter extends BaseChapter {
       group: this.plantGroup,
       R: this.R,
       bounds,
-      position
+      position,
     });
 
     // for (var i = 0, j = this.instances.length, instance; i < j; i++) {
