@@ -104,7 +104,7 @@ class GenerativeMarquee extends PureComponent {
                 color="#ffffff"
                 sizeUnit={"px"}
                 size={50}
-                loading={!initComplete}
+                loading={!delayedReveal}
               />
             </div>
           </TextWrapper>
