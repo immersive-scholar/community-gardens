@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ClipLoader from "react-spinners/ClipLoader";
 import { TweenMax } from "gsap";
+/* eslint-disable no-unused-vars */
 import ScrollToPlugin from "gsap/umd/ScrollToPlugin";
+/* eslint-enable */
 
 import { chapters, settings } from "actions";
 
