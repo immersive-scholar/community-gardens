@@ -1,6 +1,5 @@
 import { css } from "glamor";
 import typography from "util/typography";
-import { ScaleLoader } from "react-spinners";
 
 // const image = css({
 //   width: '100%',
