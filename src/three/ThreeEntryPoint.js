@@ -11,9 +11,9 @@ import InsecurityCalculator from "data/InsecurityCalculator";
 
 export default (container, settings) => {
   const { seed, sidebarWidth } = settings;
-  console.log("settings ", settings);
 
   let subjectReady = false;
+  settings.setInitComplete(false);
 
   // const seed = Math.random();
   // const seed = 0.4865584781852079;
@@ -30,9 +30,9 @@ export default (container, settings) => {
     ColorFactory.load({
       summer: `${process.env.PUBLIC_URL}/json/colors-raleigh-summer.json`,
       fall: `${process.env.PUBLIC_URL}/json/colors-raleigh-fall.json`,
-      winter: `${process.env.PUBLIC_URL}/json/colors-raleigh-winter.json`
+      winter: `${process.env.PUBLIC_URL}/json/colors-raleigh-winter.json`,
     }),
-    TextureFactory.load(`${process.env.PUBLIC_URL}/json/textures.json`)
+    TextureFactory.load(`${process.env.PUBLIC_URL}/json/textures.json`),
   ])
     .then(() => {
       settings.debug && ColorFactory.debug();
@@ -52,7 +52,7 @@ export default (container, settings) => {
   // State
   const state = {
     paused: false,
-    pausedRenderer: false
+    pausedRenderer: false,
   };
 
   const generalCanvas = new GeneralCanvas(document, container, sidebarWidth);
@@ -87,7 +87,7 @@ export default (container, settings) => {
       },
       onExit: () => {
         state.paused = false;
-      }
+      },
     };
 
     if (process.env.NODE_ENV === "development") {
@@ -108,7 +108,14 @@ export default (container, settings) => {
   }
 
   function onSubjectReady() {
-    let { quantityMultiplier, timeMultiplier, debug, playing } = settings;
+    let {
+      quantityMultiplier,
+      timeMultiplier,
+      debug,
+      playing,
+      setInitComplete,
+    } = settings;
+    console.log("settings ", settings);
 
     sceneManager.subject.setQuantityMultiplier(quantityMultiplier);
     sceneManager.subject.setTimeMultiplier(timeMultiplier);
@@ -122,6 +129,9 @@ export default (container, settings) => {
     }
 
     subjectReady = true;
+
+    // dispatched to redux
+    setInitComplete(true);
   }
 
   function pause() {
@@ -167,6 +177,6 @@ export default (container, settings) => {
     setSettings,
     clean,
     pause,
-    play
+    play,
   };
 };

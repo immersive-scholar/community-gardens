@@ -77,7 +77,11 @@ class TextureFactory {
 
     textureGroup = textureType.textures;
     const index = this.R.intBetween(0, textureGroup.length - 1);
-    return process.env.PUBLIC_URL + textureType.baseUri + textureGroup[index];
+    const isMobile = window && window.innerWidth < 800;
+    const filename = isMobile
+      ? textureGroup[index].split(".").join("-xs.")
+      : textureGroup[index];
+    return process.env.PUBLIC_URL + textureType.baseUri + filename;
   }
 
   static setSeed(seed) {

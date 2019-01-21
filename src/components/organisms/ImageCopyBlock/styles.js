@@ -1,5 +1,6 @@
 import { css } from "glamor";
 import typography from "util/typography";
+import { ScaleLoader } from "react-spinners";
 
 // const image = css({
 //   width: '100%',
@@ -14,8 +15,8 @@ const itemStyles = css({
   width: "100%",
   margin: `0 0 ${typography.rhythm(2)}`,
   "@media(min-width: 48em)": {
-    flexFlow: "row"
-  }
+    flexFlow: "row",
+  },
 });
 
 const backgroundImageStyles = css({
@@ -26,7 +27,7 @@ const backgroundImageStyles = css({
   height: "100%",
   backgroundColor: "red",
   backgroundSize: "cover",
-  backgroundPosition: "center"
+  backgroundPosition: "center",
 });
 
 const linkStyles = css({
@@ -34,8 +35,8 @@ const linkStyles = css({
   backgroundImage: "none",
   textShadow: "none",
   "@media(max-width: 48em)": {
-    color: "white"
-  }
+    color: "white",
+  },
 });
 
 const image = css({
@@ -43,24 +44,34 @@ const image = css({
   margin: 0,
   "@media(max-width: 48em)": {
     flex: "1 0 100%",
-    order: 1
-  }
+    order: 1,
+  },
 });
 
 const imageSmall = css({
-  flex: "1 0 40%"
+  flex: "1 0 40%",
+});
+
+const hoverable = css({
+  transform: "scale(1)",
+  transition: "transform 0.3s ease-out",
+  pointer: "cursor",
+
+  "&:hover": {
+    transform: "scale(1.05)",
+  },
 });
 
 const left = css({
   "@media(min-width: 47.979em)": {
-    order: 1
-  }
+    order: 1,
+  },
 });
 
 const right = css({
   "@media(min-width: 47.979em)": {
-    order: 2
-  }
+    order: 2,
+  },
 });
 
 const copy = css({
@@ -73,12 +84,12 @@ const copy = css({
     order: 2,
     margin: 0,
     padding: typography.rhythm(1),
-    color: "inherit"
-  }
+    color: "inherit",
+  },
 });
 
 const copyLarge = css({
-  flex: "0 0 60%"
+  flex: "0 0 60%",
 });
 
 const copyOverlayStyle = css({
@@ -94,40 +105,41 @@ const copyOverlayStyle = css({
     padding: "2rem 4rem",
     color: "inherit",
     border: "1px solid rgba(255, 255, 255, 0.5)",
-    zIndex: 1
-  }
+    zIndex: 1,
+  },
 });
 
 const copyAfter = {
   "@media(max-width: 48em)": {
     position: "relative",
-    border: "none"
-  }
+    border: "none",
+  },
 };
 
 const header = css({
   marginTop: 0,
   "@media(max-width: 48em)": {
-    color: "white"
-  }
+    color: "white",
+  },
 });
 
 const headerAfter = {
   "@media(max-width: 48em)": {
-    color: "rgba(0, 0, 0, 0.8)"
-  }
+    color: "rgba(0, 0, 0, 0.8)",
+  },
 };
 
 const absolute = css({
   position: "absolute",
   top: "-50%",
   left: "-50%",
-  translate: "transform(-50%)"
+  translate: "transform(-50%)",
 });
 
 export {
   image,
   imageSmall,
+  hoverable,
   left,
   right,
   itemStyles,
@@ -139,5 +151,5 @@ export {
   copyAfter,
   header,
   headerAfter,
-  absolute
+  absolute,
 };

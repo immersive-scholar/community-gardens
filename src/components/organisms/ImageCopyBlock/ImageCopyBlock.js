@@ -10,6 +10,7 @@ import {
   linkStyles,
   image,
   imageSmall,
+  hoverable,
   left,
   right,
   copy,
@@ -17,7 +18,7 @@ import {
   copyOverlayStyle,
   copyAfter,
   header,
-  headerAfter
+  headerAfter,
 } from "./styles";
 import { fillButton, hideOnSm, link, CircleMaskDiv } from "styles";
 
@@ -29,12 +30,23 @@ const ImageBlock = ({ item, theme, side, mask = "", smallImage = false }) => {
       {...css(side === "left" ? left : right)}
       {...css(item.video ? { width: "100%" } : {})}
       {...css(smallImage ? imageSmall : {})}
+      {...css(item.link ? hoverable : {})}
     >
-      {item.video ? (
-        <Video videoId={item.video} sources={item.headerImage} />
-      ) : (
-        <Image sources={item.headerImage} theme={theme} />
+      {item.link && (
+        <Link to={item.link}>
+          {item.video ? (
+            <Video videoId={item.video} sources={item.headerImage} />
+          ) : (
+            <Image sources={item.headerImage} theme={theme} />
+          )}
+        </Link>
       )}
+      {!item.link &&
+        (item.video ? (
+          <Video videoId={item.video} sources={item.headerImage} />
+        ) : (
+          <Image sources={item.headerImage} theme={theme} />
+        ))}
     </WrapperDiv>
   );
 };
@@ -47,7 +59,7 @@ const CopyBlock = ({
   showLinkOnSmall,
   isInViewport,
   copyOverlay = false,
-  smallImage = false
+  smallImage = false,
 }) => {
   return (
     <div
@@ -63,7 +75,7 @@ const CopyBlock = ({
         {...css(
           theme &&
             theme.colors && {
-              color: theme.colors.pink
+              color: theme.colors.pink,
             }
         )}
       >
@@ -84,7 +96,7 @@ const CopyBlock = ({
               theme.colors && {
                 color: theme.colors.button.text,
                 background: theme.colors.button.bg,
-                transition: "all 0.2s"
+                transition: "all 0.2s",
               }
           )}
           {...css(
@@ -93,8 +105,8 @@ const CopyBlock = ({
                 "&:hover": {
                   textDecoration: "none",
                   color: theme.colors.button.hover.text,
-                  background: theme.colors.button.hover.bg
-                }
+                  background: theme.colors.button.hover.bg,
+                },
               }
           )}
           {...(showLinkOnSmall ? {} : hideOnSm)}
@@ -115,7 +127,7 @@ export const ImageCopyBlock = ({
   isInViewport,
   mask = "",
   copyOverlay = false,
-  smallImage = false
+  smallImage = false,
 }) => (
   <div {...itemStyles} data-component="ImageCopyBlock">
     <ImageBlock
@@ -146,7 +158,7 @@ export const CopyImageBlock = ({
   isInViewport,
   mask = "",
   copyOverlay = false,
-  smallImage = false
+  smallImage = false,
 }) => (
   <div {...itemStyles} data-component="CopyImageBlock">
     <CopyBlock

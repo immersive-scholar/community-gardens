@@ -19,7 +19,7 @@ class ThreeContainer extends Component {
     quantityMultiplier: PropTypes.number,
     seed: PropTypes.number,
     dpr: PropTypes.number,
-    antiAlias: PropTypes.bool
+    antiAlias: PropTypes.bool,
   };
 
   componentDidMount() {
@@ -29,9 +29,11 @@ class ThreeContainer extends Component {
     // }
     // by passing props down to threeEntryPoint, we can leverage anything in our redux store during initialization.
     this.threeEntryPoint = threeEntryPoint(this.threeRootElement, this.props);
-    const root = document.getElementById("three-canvas");
-    root.addEventListener("gesturestart", this.preventScroll);
-    document.documentElement.classList.add("state__locked");
+    const root = document.getElementById("threeCanvas");
+    if (!this.props.inheritSize) {
+      root.addEventListener("gesturestart", this.preventScroll);
+      document.documentElement.classList.add("state__locked");
+    }
 
     const oldChapterID = get(this.props, "selectedChapterID", "");
     const chapterID = get(this.props, "match.params.gardenID", "");
@@ -45,7 +47,7 @@ class ThreeContainer extends Component {
     // TweenMax.killAll();
 
     this.threeEntryPoint.clean();
-    const root = document.getElementById("three-canvas");
+    const root = document.getElementById("threeCanvas");
     root.removeEventListener("gesturestart", this.preventScroll);
     document.documentElement.classList.remove("state__locked");
 
@@ -74,13 +76,21 @@ class ThreeContainer extends Component {
   }
 
   render() {
-    const {
+    let {
       showControlBar,
       showImmersiveScholarLogo,
       showSidebar,
       aboutModalOpen,
-      setAboutModalOpen
+      setAboutModalOpen,
     } = this.props;
+
+    // overrides
+    if (Object.keys(this.props).indexOf("overrideShowControlBar") > -1) {
+      if (this.props.overrideShowControlBar === false) {
+        showControlBar = false;
+      }
+    }
+
     return (
       <Fragment>
         <Modal open={aboutModalOpen} onClose={() => setAboutModalOpen(false)}>
@@ -112,7 +122,7 @@ const mapStateToProps = state => {
     showSidebar: settings.showSidebar,
     sidebarWidth: settings.sidebarWidth,
     selectedChapterID: chapters.selectedID,
-    selectedChapter: getSelectedChapter(state)
+    selectedChapter: getSelectedChapter(state),
   };
 };
 
@@ -124,7 +134,8 @@ const mapDispatchToProps = dispatch => ({
   ),
   focusChapter: bindActionCreators(chapters.focusChapter, dispatch),
   setPlaying: bindActionCreators(settings.setPlaying, dispatch),
-  setAboutModalOpen: bindActionCreators(settings.setAboutModalOpen, dispatch)
+  setAboutModalOpen: bindActionCreators(settings.setAboutModalOpen, dispatch),
+  setInitComplete: bindActionCreators(settings.setInitComplete, dispatch),
 });
 
 export default connect(

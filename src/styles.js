@@ -4,7 +4,7 @@ import typography from "util/typography";
 
 // GLOBAL css rules
 const relative = css({
-  position: "relative"
+  position: "relative",
 });
 
 const textContainer = css({
@@ -12,15 +12,15 @@ const textContainer = css({
   maxWidth: "40rem",
   margin: "0 auto",
   padding: "4rem 2rem",
-  textAlign: "left"
+  textAlign: "left",
 });
 
 const lightText = css({
-  color: "#ffffff"
+  color: "#ffffff",
 });
 
 const lightFocusedText = css({
-  color: "#fe6442"
+  color: "#fe6442",
 });
 
 const wideContainer = css({
@@ -30,69 +30,69 @@ const wideContainer = css({
   padding: "4rem 2rem",
   textAlign: "left",
   "@media(max-width: 48em)": {
-    margin: "0 auto"
-  }
+    margin: "0 auto",
+  },
 });
 
 const removePaddingVertical = css({
   paddingTop: 0,
-  paddingBottom: 0
+  paddingBottom: 0,
 });
 
 const removePaddingTop = css({
-  paddingTop: 0
+  paddingTop: 0,
 });
 
 const removePaddingBottom = css({
-  paddingBottom: 0
+  paddingBottom: 0,
 });
 
 const addMarginBottom = css({
-  marginBottom: "2rem"
+  marginBottom: "2rem",
 });
 
 const removeMarginTop = css({
-  marginTop: 0
+  marginTop: 0,
 });
 const removeMarginBottom = css({
-  marginBottom: 0
+  marginBottom: 0,
 });
 
 const removeMarginVertical = css({
   marginTop: 0,
-  marginBottom: 0
+  marginBottom: 0,
 });
 
 const removeMarginLeft = css({
-  marginLeft: 0
+  marginLeft: 0,
 });
 
 const addMarginSm = css({
   "@media(max-width: 48em)": {
     marginLeft: typography.rhythm(1),
-    marginRight: typography.rhythm(1)
-  }
+    marginRight: typography.rhythm(1),
+  },
 });
 
 const center = css({
   textAlign: "center",
-  margin: "0 auto"
+  margin: "0 auto",
 });
 
 const link = css({
   "&:hover": {
-    textDecoration: "underline"
-  }
+    textDecoration: "underline",
+  },
 });
 
 const button = css({
   "&:hover": {
-    cursor: "pointer"
-  }
+    cursor: "pointer",
+  },
 });
 
 const underline = css({
-  textDecoration: "underline"
+  textDecoration: "underline",
 });
 
 const buttonStyle = css({
@@ -102,13 +102,13 @@ const buttonStyle = css({
   "&:hover": {
     background: "#e06b1c",
     color: "#ffffff",
-    textDecoration: "underline"
-  }
+    textDecoration: "underline",
+  },
 });
 
 const shadowless = css({
   backgroundImage: "none",
-  textShadow: "none"
+  textShadow: "none",
 });
 
 const fillButton = css({
@@ -116,50 +116,50 @@ const fillButton = css({
   padding: `${typography.rhythm(0.5)} ${typography.rhythm(1)}`,
   lineHeight: typography.rhythm(1.5),
   "&:hover": {
-    cursor: "pointer"
-  }
+    cursor: "pointer",
+  },
 });
 
 const hideOnSm = css({
   "@media(max-width: 47.997em)": {
-    display: "none"
-  }
+    display: "none",
+  },
 });
 
 const hideOnLg = css({
   "@media(min-width: 48em)": {
-    display: "none"
-  }
+    display: "none",
+  },
 });
 
 const wrapper = css({
   display: "flex",
-  flexFlow: "wrap"
+  flexFlow: "wrap",
 });
 
 const fullWidth = css({
-  flex: "1 0 100%"
+  flex: "1 0 100%",
 });
 
 const halfWidth = css({
   flex: "1 0 100%",
   "@media(min-width: 48em)": {
-    flex: "1 0 50%"
-  }
+    flex: "1 0 50%",
+  },
 });
 
 const thirdWidth = css({
-  flex: "1 0 33.333%"
+  flex: "1 0 33.333%",
 });
 
 const quarterWidth = css({
-  flex: "1 0 25%"
+  flex: "1 0 25%",
 });
 
 const fullWidthSm = css({
   "@media(max-width: 48em)": {
-    flex: "1 0 100%"
-  }
+    flex: "1 0 100%",
+  },
 });
 
 const threeCols = css({
@@ -167,56 +167,56 @@ const threeCols = css({
   gridTemplateColumns: "33% 33% 33%",
   alignItems: "center",
   "@media(max-width: 48em)": {
-    gridTemplateColumns: "100%"
-  }
+    gridTemplateColumns: "100%",
+  },
 });
 
 const twoCols = css({
   display: "grid",
-  gridTemplateColumns: "50% 50%"
+  gridTemplateColumns: "50% 50%",
 });
 
 const twoColsLg = css({
   display: "grid",
   "@media(min-width: 48em)": {
-    gridTemplateColumns: "50% 50%"
-  }
+    gridTemplateColumns: "50% 50%",
+  },
 });
 
 const twoColsSm = css({
   "@media(max-width: 48em)": {
-    gridTemplateColumns: "50% 50%"
-  }
+    gridTemplateColumns: "50% 50%",
+  },
 });
 
 const imageWrapper = css({
-  marginBottom: typography.rhythm(1.5)
+  marginBottom: typography.rhythm(1.5),
 });
 
 const bulletless = css({
-  listStyleType: "none"
+  listStyleType: "none",
 });
 
 const grid = css({
   display: "grid",
   gridTemplateColumns: "1fr 1fr",
   gridColumnGap: "0.5rem",
-  gridRowGap: "0.5rem"
+  gridRowGap: "0.5rem",
 });
 
 const inlineBlock = css({
-  display: "inline-block"
+  display: "inline-block",
 });
 
 const lead = css({
-  fontSize: "1.4rem"
+  fontSize: "1.4rem",
 });
 
 const galleryOffset = css({
   "@media(min-width: 48em)": {
     marginLeft: "20vw",
-    paddingLeft: "2rem"
-  }
+    paddingLeft: "2rem",
+  },
 });
 
 const hideVisually = css({
@@ -228,16 +228,20 @@ const hideVisually = css({
   padding: "0 !important",
   position: "absolute !important",
   width: "1px !important",
-  whiteSpace: "nowrap !important"
+  whiteSpace: "nowrap !important",
 });
 
 const blockquote = css({
-  borderLeft: "1px solid #dedede"
+  borderLeft: "1px solid #dedede",
 });
 
 const CircleMaskDiv = glamorous.div({
   borderRadius: "50%",
-  overflow: "hidden"
+  overflow: "hidden",
+});
+
+const onWhite = css({
+  background: "#ffffff",
 });
 
 export {
@@ -282,5 +286,6 @@ export {
   twoColsSm,
   twoColsLg,
   twoCols,
-  galleryOffset
+  galleryOffset,
+  onWhite,
 };

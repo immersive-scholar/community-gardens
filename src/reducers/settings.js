@@ -8,6 +8,7 @@ import {
   PRESENTATION_MODE_DEFAULT,
   PRESENTATION_MODE_EXPLORE,
   SET_PLAYING,
+  SET_INIT_COMPLETE,
   SET_OPTIONS_OPEN,
   SET_ABOUT_MODAL_OPEN,
   IMMERSION,
@@ -36,6 +37,7 @@ let showImmersiveScholarLogo = false;
 let showSidebar = false;
 let showBurgerButton = true;
 let sidebarWidth = 0;
+let initComplete = false;
 let env, wallDisplay;
 
 // 2. Sniff GPU to derive default performance options
@@ -47,7 +49,7 @@ let { antiAlias, dpr } = gpu.config;
 // fast computer gets many more plants
 switch (true) {
   case tierIndex === 3:
-    quantityMultiplier = 10;
+    quantityMultiplier = 7;
     break;
   case tierIndex === 2:
     quantityMultiplier = 5;
@@ -156,6 +158,7 @@ const initialState = {
   sidebarWidth,
   env,
   wallDisplay,
+  initComplete,
 };
 
 export default (state = initialState, action) => {
@@ -209,6 +212,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         playing,
+      };
+    case SET_INIT_COMPLETE:
+      const { initComplete } = action.payload.data;
+
+      return {
+        ...state,
+        initComplete: initComplete,
       };
     case SET_OPTIONS_OPEN:
       const { optionsOpen } = action.payload.data;
