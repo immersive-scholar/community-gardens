@@ -15,42 +15,127 @@ import { lead, textContainer, removePaddingBottom } from "styles";
 class GalleryPage extends PureComponent {
   componentWillMount() {
     const solomonsSealGroup = [
-      PathToPicture("gallery", "community-gardens-gallery-5"),
-      PathToPicture("gallery", "community-gardens-gallery-3"),
-      PathToPicture("gallery", "community-gardens-gallery-1"),
-      PathToPicture("gallery", "community-gardens-gallery-2"),
-      PathToPicture("gallery", "community-gardens-gallery-4"),
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-5"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-21",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-3"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-2",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-1"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-22",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-2"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-23",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-4"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-3",
+      },
     ];
 
     const plantPortraits = [
-      PathToPicture("gallery", "community-gardens-gallery-8"),
-      PathToPicture("gallery", "community-gardens-gallery-6"),
-      PathToPicture("gallery", "community-gardens-gallery-7"),
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-8"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-5",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-6"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-4",
+      },
     ];
 
     const summerGarden = [
-      PathToPicture("gallery", "community-gardens-gallery-9"),
-      PathToPicture("gallery", "community-gardens-gallery-10"),
-      PathToPicture("gallery", "community-gardens-gallery-11"),
-      PathToPicture("gallery", "community-gardens-gallery-12"),
-      PathToPicture("gallery", "community-gardens-gallery-13"),
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-9"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-1",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-10"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-6",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-11"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-7",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-12"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-8",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-13"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-9",
+      },
     ];
 
     const fallGarden = [
-      PathToPicture("gallery", "community-gardens-gallery-17"),
-      PathToPicture("gallery", "community-gardens-gallery-18"),
-      PathToPicture("gallery", "community-gardens-gallery-19"),
-      PathToPicture("gallery", "community-gardens-gallery-20"),
-      PathToPicture("gallery", "community-gardens-gallery-21"),
-      PathToPicture("gallery", "community-gardens-gallery-22"),
-      PathToPicture("gallery", "community-gardens-gallery-23"),
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-17"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-11",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-18"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-12",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-19"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-13",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-20"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-14",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-21"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-15",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-22"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-16",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-23"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-17",
+      },
     ];
 
     const xmas = [
-      PathToPicture("gallery", "community-gardens-gallery-29"),
-      PathToPicture("gallery", "community-gardens-gallery-30"),
-      PathToPicture("gallery", "community-gardens-gallery-31"),
-      PathToPicture("gallery", "community-gardens-gallery-32"),
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-30"),
+        shopifyLink:
+          "https://store.lucastswick.com/products/community-gardens-20",
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-29"),
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-31"),
+      },
+      {
+        url: PathToPicture("gallery", "community-gardens-gallery-32"),
+      },
     ];
 
     this.setState({

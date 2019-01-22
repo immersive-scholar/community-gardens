@@ -1,5 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import { css } from "glamor";
+import typography from "util/typography";
 import map from "lodash/map";
 
 import Image from "components/atoms/Image";
@@ -7,12 +9,14 @@ import FillButton from "components/atoms/FillButton";
 import DownloadButton from "components/atoms/FillButton/DownloadButton";
 
 import { gallery, full, hs, item, wrapper, ButtonWrapper } from "./styles";
+
 class Gallery extends PureComponent {
   renderPic = ({ pic, theme, index }) => {
     const downloadable = true;
-    const purchasable = false;
-    const lowResSource = [{ srcSet: pic[0].srcSet }];
-    const highResSource = pic[pic.length - 1].srcSet;
+    const purchasable = pic.shopifyLink;
+    const lowResSource = [{ srcSet: pic.url[0].srcSet }];
+    const highResSource = pic.url[pic.url.length - 1].srcSet;
+    const shopifyLink = pic.shopifyLink;
 
     return (
       <div {...item} key={`pic_${index}`}>
@@ -25,8 +29,20 @@ class Gallery extends PureComponent {
               theme={theme}
             />
           )}
-          {purchasable && (
-            <FillButton to="/purchase" label="Purchase" theme={theme} />
+          {purchasable ? (
+            <FillButton href={shopifyLink} label="Purchase" theme={theme} />
+          ) : (
+            <p
+              {...css({
+                whiteSpace: "nowrap",
+                padding: `${typography.rhythm(0.5)} ${typography.rhythm(1)}`,
+                lineHeight: typography.rhythm(1.5),
+                margin: 0,
+                background: "#cecece",
+              })}
+            >
+              Unavailable
+            </p>
           )}
         </ButtonWrapper>
       </div>
