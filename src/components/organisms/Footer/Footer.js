@@ -15,7 +15,7 @@ import {
   link,
   threeCols,
   twoColsSm,
-  center
+  center,
 } from "styles";
 import { Logo, links } from "./styles";
 
@@ -24,22 +24,22 @@ class Footer extends PureComponent {
     const image = [
       {
         srcSet: require(`assets/logos/immersive-scholar-logo-sm.png`),
-        media: "(max-width: 720px)"
+        media: "(max-width: 720px)",
       },
       {
         srcSet: require(`assets/logos/immersive-scholar-logo.png`),
-        media: "(max-width: 1400px)"
+        media: "(max-width: 1400px)",
       },
       {
-        srcSet: require(`assets/logos/immersive-scholar-logo-xl.png`)
-      }
+        srcSet: require(`assets/logos/immersive-scholar-logo-xl.png`),
+      },
     ];
 
     const year = new Date().getFullYear();
 
     this.setState({
       image,
-      year
+      year,
     });
   }
   render() {
@@ -52,7 +52,7 @@ class Footer extends PureComponent {
           {...css({
             display: "block",
             transition: "background 1s ease-out 0.5s",
-            backgroundColor: theme.colors.bright
+            backgroundColor: theme.colors.bright,
           })}
         >
           <div {...textContainer} {...threeCols} {...twoColsSm} {...links}>
@@ -102,6 +102,11 @@ class Footer extends PureComponent {
               to="/gardens/petal-print"
               label="Petal Print"
             />
+            <TextLink
+              {...css({ gridArea: "shop" })}
+              href="https://store.lucastswick.com/"
+              label="Buy Prints"
+            />
             <div {...css({ gridArea: "social" })}>
               <TextLink href="https://instagram.com/lucastswick">
                 <TiSocialInstagram />
@@ -116,7 +121,7 @@ class Footer extends PureComponent {
           {...css({
             display: "block",
             transition: "background 1s ease-out 0.5s",
-            backgroundColor: "#ffffff"
+            backgroundColor: "#ffffff",
           })}
         >
           <div
@@ -124,7 +129,7 @@ class Footer extends PureComponent {
             {...css({
               display: "grid",
               gridTemplateColumns: "50% 50%",
-              alignItems: "center"
+              alignItems: "center",
             })}
           >
             <p {...removeMarginBottom}>
@@ -164,7 +169,7 @@ class Footer extends PureComponent {
 }
 
 const mapStateToProps = ({ settings, theme }) => ({
-  theme
+  theme,
 });
 
 export default connect(mapStateToProps)(Footer);
