@@ -1,6 +1,6 @@
 import TypographyTemplate from "../templates/TypographyTemplate";
 
-class MeSlide extends TypographyTemplate {
+class GenerativeSlide extends TypographyTemplate {
   constructor(props) {
     super(props);
 
@@ -9,4 +9,4 @@ class MeSlide extends TypographyTemplate {
   }
 }
 
-export default MeSlide;
+export default GenerativeSlide;

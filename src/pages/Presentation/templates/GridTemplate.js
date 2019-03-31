@@ -1,6 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
 import map from "lodash/map";
-import sampleSize from "lodash/sampleSize";
 
 import Image from "components/atoms/Image";
 
@@ -10,26 +9,24 @@ import {
   Circle,
   Background,
   blackBg,
+  Caption,
 } from "pages/Presentation/styles";
 
-class ImageTransitionSlide extends PureComponent {
+class GridTemplate extends PureComponent {
   render() {
-    let screens = new Array(12);
-
-    let { backgrounds } = this.state;
-
-    const sampledBackgrounds = sampleSize(backgrounds, 12);
+    let { backgrounds, captions } = this.state;
 
     return (
       <Center>
         <PageWrapper>
-          {map(screens, (screen, i) => {
-            let bg = sampledBackgrounds[i];
+          {map(backgrounds, (background, i) => {
+            let caption = captions[i];
             return (
               <Circle key={`circle-${i}`} {...blackBg}>
                 <Background>
-                  <Image sources={bg} />
+                  <Image sources={background} />
                 </Background>
+                {caption && <Caption>{captions[i]}</Caption>}
               </Circle>
             );
           })}
@@ -39,4 +36,4 @@ class ImageTransitionSlide extends PureComponent {
   }
 }
 
-export default ImageTransitionSlide;
+export default GridTemplate;

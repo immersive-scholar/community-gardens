@@ -3,21 +3,24 @@ import size from "lodash/size";
 
 import { FOCUS_SLIDE, NEXT_SLIDE, PREV_SLIDE } from "constants/Constants";
 
-import IntroSlide from "pages/Presentation/slides/IntroSlide";
-import MeSlide from "pages/Presentation/slides/MeSlide";
-import NoControlSlide from "pages/Presentation/slides/NoControlSlide";
-import GenerativeSlide from "pages/Presentation/slides/GenerativeSlide";
-import HistorySlide from "pages/Presentation/slides/HistorySlide";
-import ProcessingSlide from "pages/Presentation/slides/ProcessingSlide";
-import InspirationSlide from "pages/Presentation/slides/InspirationSlide";
-import GenerativeArtSlide from "pages/Presentation/slides/GenerativeArtSlide";
-import EquationSlide from "pages/Presentation/slides/EquationSlide";
+import AmbientDataSlide from "pages/Presentation/slides/AmbientDataSlide";
 import AnticipationSlide from "pages/Presentation/slides/AnticipationSlide";
 import CollaborateSlide from "pages/Presentation/slides/CollaborateSlide";
-import DataDrivenSlide from "pages/Presentation/slides/DataDrivenSlide";
-import NinePointSixSlide from "pages/Presentation/slides/NinePointSixSlide";
 import ColorSlide from "pages/Presentation/slides/ColorSlide";
-import AmbientDataSlide from "pages/Presentation/slides/AmbientDataSlide";
+import DataDrivenSlide from "pages/Presentation/slides/DataDrivenSlide";
+import DefinitionTitleSlide from "pages/Presentation/slides/DefinitionTitleSlide";
+import EquationSlide from "pages/Presentation/slides/EquationSlide";
+import GenerativeArtSlide from "pages/Presentation/slides/GenerativeArtSlide";
+import GenerativeSlide from "pages/Presentation/slides/GenerativeSlide";
+import HistorySlide from "pages/Presentation/slides/HistorySlide";
+import HistoryTitleSlide from "pages/Presentation/slides/HistoryTitleSlide";
+import InspirationSlide from "pages/Presentation/slides/InspirationSlide";
+import IntroSlide from "pages/Presentation/slides/IntroSlide";
+import MeSlide from "pages/Presentation/slides/MeSlide";
+import NinePointSixSlide from "pages/Presentation/slides/NinePointSixSlide";
+import NoControlSlide from "pages/Presentation/slides/NoControlSlide";
+import PersonalHistoryTitleSlide from "pages/Presentation/slides/PersonalHistoryTitleSlide";
+import ProcessingSlide from "pages/Presentation/slides/ProcessingSlide";
 import SolomonsSealSlide from "pages/Presentation/slides/SolomonsSealSlide";
 
 const queryString = require("query-string");
@@ -27,11 +30,21 @@ const node = {
   intro: { index: index++, id: "intro", slideClass: IntroSlide },
   me: { index: index++, id: "me", slideClass: MeSlide },
   generative: { index: index++, id: "generative", slideClass: GenerativeSlide },
+  definitionTitle: {
+    index: index++,
+    id: "definitionTitle",
+    slideClass: DefinitionTitleSlide,
+  },
   noControl: { index: index++, id: "noControl", slideClass: NoControlSlide },
   equation: {
     index: index++,
     id: "equation",
     slideClass: EquationSlide,
+  },
+  historyTitle: {
+    index: index++,
+    id: "historyTitle",
+    slideClass: HistoryTitleSlide,
   },
   history: {
     index: index++,
@@ -48,15 +61,20 @@ const node = {
     id: "inspiration",
     slideClass: InspirationSlide,
   },
-  anticipation: {
+  // anticipation: {
+  //   index: index++,
+  //   id: "anticipation",
+  //   slideClass: AnticipationSlide,
+  // },
+  // collaborate: {
+  //   index: index++,
+  //   id: "collaborate",
+  //   slideClass: CollaborateSlide,
+  // },
+  personalHistoryTitle: {
     index: index++,
-    id: "anticipation",
-    slideClass: AnticipationSlide,
-  },
-  collaborate: {
-    index: index++,
-    id: "collaborate",
-    slideClass: CollaborateSlide,
+    id: "personalHistoryTitle",
+    slideClass: PersonalHistoryTitleSlide,
   },
   generativeArt: {
     index: index++,

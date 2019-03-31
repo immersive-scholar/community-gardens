@@ -22,11 +22,12 @@ const NCSUWrapper = glamorous.div({
 });
 
 const PageWrapper = glamorous.div({
-  width: "100vmin",
-  height: "75vmin",
+  width: "100%",
+  height: "90vmin",
   display: "grid",
-  gridTemplateColumns: "1fr 1fr 1fr 1fr",
-  gridAutoRows: "1fr",
+  gridAutoFlow: "column",
+  gridTemplateColumns: "auto",
+  gridTemplateRows: "1fr",
   alignItems: "center",
   justifyItems: "center",
   background: "#000",
@@ -67,13 +68,14 @@ const LargeCircle = glamorous.div({
 const Circle = glamorous.div({
   position: "relative",
   background: "#ffffff",
-  width: "100%",
-  height: "100%",
+  width: "100vmin",
+  height: "auto",
   // width: "80vh",
   // height: "80vh",
+  margin: "0 auto",
   padding: "1rem",
   color: "#000000",
-  borderRadius: "50%",
+  // borderRadius: "50%",
   overflow: "hidden",
 });
 
@@ -86,6 +88,18 @@ const RowCircle = glamorous.div({
   // height: "80vh",
   padding: "1rem",
   color: "#000000",
+  borderRadius: "50%",
+  overflow: "hidden",
+});
+
+const ChapterTitle = glamorous.div({
+  position: "absolute",
+  top: "15vmin",
+  width: "75vmin",
+  height: "75vmin",
+  padding: "1rem",
+  background: "none",
+  border: "2px dashed white",
   borderRadius: "50%",
   overflow: "hidden",
 });
@@ -128,15 +142,15 @@ const BodyText = glamorous.h1({
 });
 
 const Background = glamorous.div({
-  position: "absolute",
   top: 0,
   left: 0,
   width: "100%",
   height: "100%",
+  clipPath: "circle(50%)",
 });
 
 const Caption = glamorous.div({
-  position: "absolute",
+  position: "relative",
   bottom: "0",
   width: "100%",
   margin: "0 auto",
@@ -157,6 +171,7 @@ export {
   LargeCircle,
   Circle,
   RowCircle,
+  ChapterTitle,
   H1,
   Background,
   blackBg,

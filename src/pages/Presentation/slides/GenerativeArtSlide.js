@@ -14,8 +14,8 @@ class GenerativeSlide extends PureComponent {
     for (i = 1; i < 68; i++) {
       blomDark.push([
         {
-          srcSet: require(`assets/backgrounds/blom-dark/blom-a-generative-art-series-by-lucastswick-sm-${i}.jpg`)
-        }
+          srcSet: require(`assets/backgrounds/blom-dark/blom-a-generative-art-series-by-lucastswick-${i}.jpg`),
+        },
       ]);
     }
 
@@ -23,8 +23,8 @@ class GenerativeSlide extends PureComponent {
     for (i = 70; i < 95; i++) {
       blomLight.push([
         {
-          srcSet: require(`assets/backgrounds/blom-light/blom-a-generative-art-series-by-lucastswick-sm-${i}.jpg`)
-        }
+          srcSet: require(`assets/backgrounds/blom-light/blom-a-generative-art-series-by-lucastswick-sm-${i}.jpg`),
+        },
       ]);
     }
 

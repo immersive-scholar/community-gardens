@@ -7,6 +7,7 @@ import { slides } from "actions";
 import { getSelectedSlide } from "reducers";
 
 import SlideController from "components/molecules/SlideController";
+import { css } from "glamor";
 
 class NikePresentation extends PureComponent {
   componentWillMount() {
@@ -30,7 +31,7 @@ class NikePresentation extends PureComponent {
     const SlideClass = selectedSlide.slideClass;
 
     return (
-      <div>
+      <div {...css({ background: "#000" })}>
         <Helmet
           title="Community Gardens Presentation"
           description="Presentation materials for Vis Studio at Hill."
