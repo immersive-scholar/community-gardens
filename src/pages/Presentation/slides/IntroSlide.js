@@ -1,12 +1,8 @@
-import React, { PureComponent, Fragment } from "react";
-import map from "lodash/map";
-import sampleSize from "lodash/sampleSize";
+import shuffle from "lodash/shuffle";
 
-import Image from "components/atoms/Image";
+import ImageTransitionTemplate from "../templates/ImageTransitionTemplate";
 
-import { Circle, Background, blackBg } from "pages/Presentation/styles";
-
-class IntroSlide extends PureComponent {
+class IntroSlide extends ImageTransitionTemplate {
   componentWillMount() {
     const backgroundFilenames = [
       "hr-1541474916803-2048x2048",
@@ -22,38 +18,21 @@ class IntroSlide extends PureComponent {
       "hr-1541478795951-2048x2048",
       "hr-1541519404405-2048x2048",
       "hr-1541519465781-2048x2048",
-      "hr-1541526484189-2048x2048"
+      "hr-1541526484189-2048x2048",
     ];
 
-    const backgrounds = backgroundFilenames.map(filename => [
+    let backgrounds = backgroundFilenames.map(filename => [
       {
-        srcSet: require(`assets/backgrounds/community-gardens/${filename}.png`)
-      }
+        srcSet: require(`assets/backgrounds/community-gardens/${filename}.png`),
+      },
     ]);
 
-    this.setState({ backgrounds });
-  }
-  render() {
-    let screens = new Array(12);
+    const shuffledBackground = shuffle(backgrounds);
 
-    let { backgrounds } = this.state;
-
-    const sampledBackgrounds = sampleSize(backgrounds, 12);
-
-    return (
-      <Fragment>
-        {map(screens, (screen, i) => {
-          let bg = sampledBackgrounds[i];
-          return (
-            <Circle key={`circle-${i}`} {...blackBg}>
-              <Background>
-                <Image sources={bg} />
-              </Background>
-            </Circle>
-          );
-        })}
-      </Fragment>
+    this.setState({ backgrounds: shuffledBackground }, () =>
+      this.animateIn({ delay: 1 })
     );
+    // this.setState({ backgrounds, order });
   }
 }
 

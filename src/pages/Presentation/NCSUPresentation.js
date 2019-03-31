@@ -8,7 +8,9 @@ import { getSelectedSlide } from "reducers";
 
 import SlideController from "components/molecules/SlideController";
 
-class NikePresentation extends PureComponent {
+import { NCSUWrapper } from "./styles";
+
+class NCSUPresentation extends PureComponent {
   componentWillMount() {
     // const headerImage = PathToPicture("headers", `community-gardens-data`);
 
@@ -35,8 +37,10 @@ class NikePresentation extends PureComponent {
           title="Community Gardens Presentation"
           description="Presentation materials for Vis Studio at Hill."
         />
-        <SlideController />
-        <SlideClass theme={theme} />
+        <NCSUWrapper>
+          <SlideController />
+          <SlideClass theme={theme} />
+        </NCSUWrapper>
       </div>
     );
   }
@@ -57,4 +61,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NikePresentation);
+)(NCSUPresentation);

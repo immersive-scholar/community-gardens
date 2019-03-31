@@ -32,7 +32,7 @@ class SlideController extends PureComponent {
         this.props.prev();
         break;
       default:
-        console.log(e);
+        // console.log(e);
         break;
     }
   }
@@ -61,13 +61,13 @@ const mapStateToProps = state => {
   const { slides } = state;
   return {
     selectedID: slides.selectedID,
-    selectedSlide: getSelectedSlide(state)
+    selectedSlide: getSelectedSlide(state),
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   next: bindActionCreators(slides.next, dispatch),
-  prev: bindActionCreators(slides.prev, dispatch)
+  prev: bindActionCreators(slides.prev, dispatch),
 });
 
 export default connect(

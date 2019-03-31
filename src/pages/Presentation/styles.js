@@ -1,7 +1,16 @@
 import glamorous from "glamorous";
 import { css } from "glamor";
 
-const PageWrapper = glamorous.div({
+const Center = glamorous.div({
+  width: "100%",
+  height: "100vh",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  background: "black",
+});
+
+const NCSUWrapper = glamorous.div({
   position: "absolute",
   width: "100%",
   height: "100vh",
@@ -9,7 +18,30 @@ const PageWrapper = glamorous.div({
   gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr",
   alignItems: "center",
   justifyItems: "center",
-  background: "#000"
+  background: "#000",
+});
+
+const PageWrapper = glamorous.div({
+  width: "100vmin",
+  height: "75vmin",
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr 1fr 1fr",
+  gridAutoRows: "1fr",
+  alignItems: "center",
+  justifyItems: "center",
+  background: "#000",
+});
+
+const ColumnsGrid = glamorous.div({
+  width: "100%",
+  height: "auto",
+  display: "grid",
+  gridAutoFlow: "column",
+  gridTemplateRows: "1fr",
+  gridAutoRows: "1fr",
+  alignItems: "center",
+  justifyItems: "center",
+  background: "#000",
 });
 
 const Empty = glamorous.div({});
@@ -20,21 +52,54 @@ const Wrapper = glamorous.div({
   height: "100%",
   display: "grid",
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
+});
+
+const LargeCircle = glamorous.div({
+  position: "absolute",
+  width: "90vmin",
+  height: "90vmin",
+  borderRadius: "50%",
+  overflow: "hidden",
+  transition: "opacity 0.3s",
 });
 
 const Circle = glamorous.div({
   position: "relative",
   background: "#ffffff",
-  width: "80vh",
-  height: "80vh",
-  padding: "100px",
+  width: "100%",
+  height: "100%",
+  // width: "80vh",
+  // height: "80vh",
+  padding: "1rem",
   color: "#000000",
   borderRadius: "50%",
-  overflow: "hidden"
+  overflow: "hidden",
+});
+
+const RowCircle = glamorous.div({
+  position: "relative",
+  background: "#ffffff",
+  width: "18.75vmin",
+  height: "18.75vmin",
+  // width: "80vh",
+  // height: "80vh",
+  padding: "1rem",
+  color: "#000000",
+  borderRadius: "50%",
+  overflow: "hidden",
 });
 
 const blackBg = { ...css({ background: "#000000 !important" }) };
+
+const H1 = glamorous.h1({
+  position: "relative",
+  margin: "5.5vmin auto 0",
+  fontSize: "70px",
+  textAlign: "center",
+  fontFamily: "Alegreya",
+  lineHeight: 0,
+});
 
 const PlateText = glamorous.h1({
   position: "relative",
@@ -45,8 +110,8 @@ const PlateText = glamorous.h1({
   // lineHeight: 1.8,
   "@media screen and (min-width: 10000px)": {
     fontSize: "200px",
-    lineHeight: 1.8
-  }
+    lineHeight: 1.8,
+  },
 });
 
 const BodyText = glamorous.h1({
@@ -58,8 +123,8 @@ const BodyText = glamorous.h1({
   // lineHeight: 1.8,
   "@media screen and (min-width: 10000px)": {
     fontSize: "100px",
-    lineHeight: 1.8
-  }
+    lineHeight: 1.8,
+  },
 });
 
 const Background = glamorous.div({
@@ -67,7 +132,7 @@ const Background = glamorous.div({
   top: 0,
   left: 0,
   width: "100%",
-  height: "100%"
+  height: "100%",
 });
 
 const Caption = glamorous.div({
@@ -77,17 +142,23 @@ const Caption = glamorous.div({
   margin: "0 auto",
   fontSize: "24px",
   color: "#ffffff",
-  textAlign: "center"
+  textAlign: "center",
 });
 
 export {
+  Center,
   Wrapper,
+  NCSUWrapper,
   PageWrapper,
+  ColumnsGrid,
   PlateText,
   BodyText,
   Empty,
+  LargeCircle,
   Circle,
+  RowCircle,
+  H1,
   Background,
   blackBg,
-  Caption
+  Caption,
 };

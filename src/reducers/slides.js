@@ -22,60 +22,69 @@ import SolomonsSealSlide from "pages/Presentation/slides/SolomonsSealSlide";
 
 const queryString = require("query-string");
 
+let index = 0;
 const node = {
-  intro: { index: 0, id: "intro", slideClass: IntroSlide },
-  me: { index: 1, id: "me", slideClass: MeSlide },
-  generative: { index: 2, id: "generative", slideClass: GenerativeSlide },
-  noControl: { index: 3, id: "noControl", slideClass: NoControlSlide },
+  intro: { index: index++, id: "intro", slideClass: IntroSlide },
+  me: { index: index++, id: "me", slideClass: MeSlide },
+  generative: { index: index++, id: "generative", slideClass: GenerativeSlide },
+  noControl: { index: index++, id: "noControl", slideClass: NoControlSlide },
   equation: {
-    index: 4,
+    index: index++,
     id: "equation",
-    slideClass: EquationSlide
+    slideClass: EquationSlide,
   },
   history: {
-    index: 5,
+    index: index++,
     id: "history",
-    slideClass: HistorySlide
+    slideClass: HistorySlide,
   },
   processing: {
-    index: 6,
+    index: index++,
     id: "processing",
-    slideClass: ProcessingSlide
+    slideClass: ProcessingSlide,
   },
   inspiration: {
-    index: 7,
+    index: index++,
     id: "inspiration",
-    slideClass: InspirationSlide
+    slideClass: InspirationSlide,
   },
   anticipation: {
-    index: 8,
+    index: index++,
     id: "anticipation",
-    slideClass: AnticipationSlide
+    slideClass: AnticipationSlide,
   },
   collaborate: {
-    index: 9,
+    index: index++,
     id: "collaborate",
-    slideClass: CollaborateSlide
+    slideClass: CollaborateSlide,
   },
   generativeArt: {
-    index: 10,
+    index: index++,
     id: "generativeArt",
-    slideClass: GenerativeArtSlide
+    slideClass: GenerativeArtSlide,
   },
-  ambientData: { index: 11, id: "ambientData", slideClass: AmbientDataSlide },
+  ambientData: {
+    index: index++,
+    id: "ambientData",
+    slideClass: AmbientDataSlide,
+  },
   dataDriven: {
-    index: 12,
+    index: index++,
     id: "dataDriven",
-    slideClass: DataDrivenSlide
+    slideClass: DataDrivenSlide,
   },
   ninePointSix: {
-    index: 13,
+    index: index++,
     id: "ninePointSix",
-    slideClass: NinePointSixSlide
+    slideClass: NinePointSixSlide,
   },
-  intro2: { index: 14, id: "intro2", slideClass: IntroSlide },
-  color: { index: 15, id: "color", slideClass: ColorSlide },
-  solomonsSeal: { index: 16, id: "solomonsSeal", slideClass: SolomonsSealSlide }
+  intro2: { index: index++, id: "intro2", slideClass: IntroSlide },
+  color: { index: index++, id: "color", slideClass: ColorSlide },
+  solomonsSeal: {
+    index: index++,
+    id: "solomonsSeal",
+    slideClass: SolomonsSealSlide,
+  },
 };
 
 const location = window.location;
@@ -85,7 +94,7 @@ let selectedID = find(node, n => n.index === slide).id;
 
 const initialState = {
   selectedID,
-  node
+  node,
 };
 
 const searchParams = new URLSearchParams(window.location.search);
@@ -110,7 +119,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        selectedID: id
+        selectedID: id,
       };
     case NEXT_SLIDE:
       let nextIndex = Math.min(currentIndex + 1, slideCount - 1);
@@ -127,7 +136,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        selectedID: nextID
+        selectedID: nextID,
       };
     case PREV_SLIDE:
       let prevIndex = Math.max(currentIndex - 1, 0);
@@ -144,7 +153,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        selectedID: prevID
+        selectedID: prevID,
       };
     default:
       return state;

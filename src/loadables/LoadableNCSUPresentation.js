@@ -3,8 +3,8 @@ import Loadable from "react-loadable";
 
 import { LoadablePage } from "components/molecules/LoadableComponent";
 
-const LoadablePresentation = Loadable({
-  loader: () => import("../pages/Presentation/Presentation"),
+const LoadableNSCUPresentation = Loadable({
+  loader: () => import("../pages/Presentation"),
   loading: LoadablePage,
   render(loaded, props) {
     const Component = loaded.default;
@@ -12,4 +12,4 @@ const LoadablePresentation = Loadable({
   },
 });
 
-export default LoadablePresentation;
+export default LoadableNSCUPresentation;
