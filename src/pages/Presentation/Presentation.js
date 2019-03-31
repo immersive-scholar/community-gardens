@@ -7,10 +7,9 @@ import { slides } from "actions";
 import { getSelectedSlide } from "reducers";
 
 import SlideController from "components/molecules/SlideController";
+import { css } from "glamor";
 
-import { PageWrapper } from "./styles";
-
-class Presentation extends PureComponent {
+class NikePresentation extends PureComponent {
   componentWillMount() {
     // const headerImage = PathToPicture("headers", `community-gardens-data`);
 
@@ -18,11 +17,11 @@ class Presentation extends PureComponent {
       bright: "#fbb3d1",
       pink: "#ec468a",
       dark: "#574f65",
-      colors: ["#fbb3d1", "#ffffff", "#c25482"]
+      colors: ["#fbb3d1", "#ffffff", "#c25482"],
     };
 
     this.setState({
-      theme
+      theme,
     });
   }
 
@@ -32,15 +31,13 @@ class Presentation extends PureComponent {
     const SlideClass = selectedSlide.slideClass;
 
     return (
-      <div>
+      <div {...css({ background: "#000" })}>
         <Helmet
           title="Community Gardens Presentation"
           description="Presentation materials for Vis Studio at Hill."
         />
-        <PageWrapper>
-          <SlideController />
-          <SlideClass theme={theme} />
-        </PageWrapper>
+        <SlideController />
+        <SlideClass theme={theme} />
       </div>
     );
   }
@@ -50,15 +47,15 @@ const mapStateToProps = state => {
   const { slides } = state;
   return {
     selectedSlideID: slides.selectedID,
-    selectedSlide: getSelectedSlide(state)
+    selectedSlide: getSelectedSlide(state),
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  focusSlide: bindActionCreators(slides.focusSlide, dispatch)
+  focusSlide: bindActionCreators(slides.focusSlide, dispatch),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Presentation);
+)(NikePresentation);

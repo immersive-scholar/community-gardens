@@ -1,35 +1,12 @@
-import React, { PureComponent, Fragment } from "react";
-import map from "lodash/map";
-import { css } from "glamor";
+import TypographyTemplate from "../templates/TypographyTemplate";
 
-import { BodyText, Empty } from "pages/Presentation/styles";
+class GenerativeSlide extends TypographyTemplate {
+  constructor(props) {
+    super(props);
 
-class EquationSlide extends PureComponent {
-  render() {
     const titles = ["input", "equation", "output"];
-    const { theme } = this.props;
-
-    return (
-      <Fragment>
-        <Empty />
-        <Empty />
-        <Empty />
-        <Empty />
-        <Empty />
-        <Empty />
-        {map(titles, (t, i) => {
-          return (
-            <BodyText
-              key={`body_${i}`}
-              {...css({ color: `${theme.bright} !important` })}
-            >
-              {t.toUpperCase()}
-            </BodyText>
-          );
-        })}
-      </Fragment>
-    );
+    this.state = { titles };
   }
 }
 
-export default EquationSlide;
+export default GenerativeSlide;

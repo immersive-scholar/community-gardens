@@ -19,7 +19,7 @@ import {
   base,
   baseLoaded,
   hilite,
-  hiliteLoaded
+  hiliteLoaded,
 } from "./styles";
 
 class Image extends React.Component {

@@ -19,6 +19,7 @@ import LoadableSolutions from "./loadables/LoadableSolutions";
 import LoadableGallery from "./loadables/LoadableGallery";
 import LoadableCredits from "./loadables/LoadableCredits";
 import LoadableTechnicalDetails from "./loadables/LoadableTechnicalDetails";
+import LoadableNCSUPresentation from "./loadables/LoadableNCSUPresentation";
 import LoadablePresentation from "./loadables/LoadablePresentation";
 
 class App extends Component {
@@ -54,6 +55,11 @@ class App extends Component {
                   <Route exact path="/" component={LoadableHome} />
                   <Route exact path="/gardens" component={LoadableGardens} />
                   <Route exact path="/contact" component={LoadableContact} />
+                  <Route
+                    exact
+                    path="/ncsu-presentation"
+                    component={LoadableNCSUPresentation}
+                  />
                   <Route
                     exact
                     path="/presentation"

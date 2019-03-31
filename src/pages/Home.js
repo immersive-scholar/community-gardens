@@ -12,9 +12,8 @@ import {
   CopyImageBlock,
 } from "components/organisms/ImageCopyBlock";
 import Animated from "components/molecules/Animated";
-// import Marquee from "components/molecules/Marquee/Marquee";
 import Marquee from "components/molecules/Marquee";
-import GenerativeMarquee from "components/molecules/Marquee/GenerativeMarquee";
+// import GenerativeMarquee from "components/molecules/Marquee/GenerativeMarquee";
 import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
@@ -57,7 +56,7 @@ class Home extends PureComponent {
           title="Community Gardens"
           description="Community Gardens is a data-driven generative art installation using gardens as metaphor to discuss food and housing insecurity within the student body at NC State."
         />
-        {navigator.userAgent !== "ReactSnap" ? (
+        {/* {navigator.userAgent !== "ReactSnap" ? (
           <GenerativeMarquee
             image={headerImage}
             theme={theme}
@@ -65,13 +64,13 @@ class Home extends PureComponent {
             subtitle="Building generative art garden"
             scrollTo={this.contentRef}
           />
-        ) : (
-          <Marquee
-            image={headerImage}
-            title="Community Gardens"
-            subtitle="Data-driven generative art"
-          />
-        )}
+        ) : ( */}
+        <Marquee
+          image={headerImage}
+          title="Community Gardens"
+          subtitle="Data-driven generative art"
+        />
+        {/* )} */}
         <div {...onWhite}>
           <div {...textContainer} ref={this.contentRef}>
             <Animated as="h1">Community Gardens</Animated>

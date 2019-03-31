@@ -3,79 +3,128 @@ import size from "lodash/size";
 
 import { FOCUS_SLIDE, NEXT_SLIDE, PREV_SLIDE } from "constants/Constants";
 
+import AmbientDataSlide from "pages/Presentation/slides/AmbientDataSlide";
+// import AnticipationSlide from "pages/Presentation/slides/AnticipationSlide";
+// import CollaborateSlide from "pages/Presentation/slides/CollaborateSlide";
+import ColorSlide from "pages/Presentation/slides/ColorSlide";
+import CommunityGardensTitleSlide from "pages/Presentation/slides/CommunityGardensTitleSlide";
+import DataDrivenSlide from "pages/Presentation/slides/DataDrivenSlide";
+import DefinitionTitleSlide from "pages/Presentation/slides/DefinitionTitleSlide";
+import EquationSlide from "pages/Presentation/slides/EquationSlide";
+import GenerativeArtSlide from "pages/Presentation/slides/GenerativeArtSlide";
+import GenerativeSlide from "pages/Presentation/slides/GenerativeSlide";
+import GoalsSlide from "pages/Presentation/slides/GoalsSlide";
+import HistorySlide from "pages/Presentation/slides/HistorySlide";
+import HistoryTitleSlide from "pages/Presentation/slides/HistoryTitleSlide";
+import InBrowserSlide from "pages/Presentation/slides/InBrowserSlide";
+import InspirationSlide from "pages/Presentation/slides/InspirationSlide";
 import IntroSlide from "pages/Presentation/slides/IntroSlide";
 import MeSlide from "pages/Presentation/slides/MeSlide";
+// import NinePointSixSlide from "pages/Presentation/slides/NinePointSixSlide";
 import NoControlSlide from "pages/Presentation/slides/NoControlSlide";
-import GenerativeSlide from "pages/Presentation/slides/GenerativeSlide";
-import HistorySlide from "pages/Presentation/slides/HistorySlide";
+import PersonalHistoryTitleSlide from "pages/Presentation/slides/PersonalHistoryTitleSlide";
 import ProcessingSlide from "pages/Presentation/slides/ProcessingSlide";
-import InspirationSlide from "pages/Presentation/slides/InspirationSlide";
-import GenerativeArtSlide from "pages/Presentation/slides/GenerativeArtSlide";
-import EquationSlide from "pages/Presentation/slides/EquationSlide";
-import AnticipationSlide from "pages/Presentation/slides/AnticipationSlide";
-import CollaborateSlide from "pages/Presentation/slides/CollaborateSlide";
-import DataDrivenSlide from "pages/Presentation/slides/DataDrivenSlide";
-import NinePointSixSlide from "pages/Presentation/slides/NinePointSixSlide";
-import ColorSlide from "pages/Presentation/slides/ColorSlide";
-import AmbientDataSlide from "pages/Presentation/slides/AmbientDataSlide";
 import SolomonsSealSlide from "pages/Presentation/slides/SolomonsSealSlide";
 
 const queryString = require("query-string");
 
+let index = 0;
 const node = {
-  intro: { index: 0, id: "intro", slideClass: IntroSlide },
-  me: { index: 1, id: "me", slideClass: MeSlide },
-  generative: { index: 2, id: "generative", slideClass: GenerativeSlide },
-  noControl: { index: 3, id: "noControl", slideClass: NoControlSlide },
+  intro: { index: index++, id: "intro", slideClass: IntroSlide },
+  me: { index: index++, id: "me", slideClass: MeSlide },
+  generative: { index: index++, id: "generative", slideClass: GenerativeSlide },
+  definitionTitle: {
+    index: index++,
+    id: "definitionTitle",
+    slideClass: DefinitionTitleSlide,
+  },
+  noControl: { index: index++, id: "noControl", slideClass: NoControlSlide },
   equation: {
-    index: 4,
+    index: index++,
     id: "equation",
-    slideClass: EquationSlide
+    slideClass: EquationSlide,
+  },
+  historyTitle: {
+    index: index++,
+    id: "historyTitle",
+    slideClass: HistoryTitleSlide,
   },
   history: {
-    index: 5,
+    index: index++,
     id: "history",
-    slideClass: HistorySlide
+    slideClass: HistorySlide,
   },
   processing: {
-    index: 6,
+    index: index++,
     id: "processing",
-    slideClass: ProcessingSlide
+    slideClass: ProcessingSlide,
   },
   inspiration: {
-    index: 7,
+    index: index++,
     id: "inspiration",
-    slideClass: InspirationSlide
+    slideClass: InspirationSlide,
   },
-  anticipation: {
-    index: 8,
-    id: "anticipation",
-    slideClass: AnticipationSlide
-  },
-  collaborate: {
-    index: 9,
-    id: "collaborate",
-    slideClass: CollaborateSlide
+  // anticipation: {
+  //   index: index++,
+  //   id: "anticipation",
+  //   slideClass: AnticipationSlide,
+  // },
+  // collaborate: {
+  //   index: index++,
+  //   id: "collaborate",
+  //   slideClass: CollaborateSlide,
+  // },
+  personalHistoryTitle: {
+    index: index++,
+    id: "personalHistoryTitle",
+    slideClass: PersonalHistoryTitleSlide,
   },
   generativeArt: {
-    index: 10,
+    index: index++,
     id: "generativeArt",
-    slideClass: GenerativeArtSlide
+    slideClass: GenerativeArtSlide,
   },
-  ambientData: { index: 11, id: "ambientData", slideClass: AmbientDataSlide },
+  communityGardensTitle: {
+    index: index++,
+    id: "communityGardensTitle",
+    slideClass: CommunityGardensTitleSlide,
+  },
+  goals: {
+    index: index++,
+    id: "goals",
+    slideClass: GoalsSlide,
+  },
+  // ambientData: {
+  //   index: index++,
+  //   id: "ambientData",
+  //   slideClass: AmbientDataSlide,
+  // },
   dataDriven: {
-    index: 12,
+    index: index++,
     id: "dataDriven",
-    slideClass: DataDrivenSlide
+    slideClass: DataDrivenSlide,
   },
-  ninePointSix: {
-    index: 13,
-    id: "ninePointSix",
-    slideClass: NinePointSixSlide
+  inBrowser: {
+    index: index++,
+    id: "inBrowser",
+    slideClass: InBrowserSlide,
   },
-  intro2: { index: 14, id: "intro2", slideClass: IntroSlide },
-  color: { index: 15, id: "color", slideClass: ColorSlide },
-  solomonsSeal: { index: 16, id: "solomonsSeal", slideClass: SolomonsSealSlide }
+  colorSlide: {
+    index: index++,
+    id: "colorSlide",
+    slideClass: ColorSlide,
+  },
+  // ninePointSix: {
+  //   index: index++,
+  //   id: "ninePointSix",
+  //   slideClass: NinePointSixSlide,
+  // },
+  // intro2: { index: index++, id: "intro2", slideClass: IntroSlide },
+  solomonsSeal: {
+    index: index++,
+    id: "solomonsSeal",
+    slideClass: SolomonsSealSlide,
+  },
 };
 
 const location = window.location;
@@ -85,7 +134,7 @@ let selectedID = find(node, n => n.index === slide).id;
 
 const initialState = {
   selectedID,
-  node
+  node,
 };
 
 const searchParams = new URLSearchParams(window.location.search);
@@ -110,7 +159,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        selectedID: id
+        selectedID: id,
       };
     case NEXT_SLIDE:
       let nextIndex = Math.min(currentIndex + 1, slideCount - 1);
@@ -127,7 +176,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        selectedID: nextID
+        selectedID: nextID,
       };
     case PREV_SLIDE:
       let prevIndex = Math.max(currentIndex - 1, 0);
@@ -144,7 +193,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        selectedID: prevID
+        selectedID: prevID,
       };
     default:
       return state;
