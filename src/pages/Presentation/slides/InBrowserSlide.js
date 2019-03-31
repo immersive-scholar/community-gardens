@@ -1,12 +1,12 @@
 import TypographyTemplate from "../templates/TypographyTemplate";
 
-class DataDrivenSlide extends TypographyTemplate {
+class InBrowserSlide extends TypographyTemplate {
   constructor(props) {
     super(props);
 
-    const title = "PLANTS";
+    const title = "IN BROWSER";
     this.state = { title };
   }
 }
 
-export default DataDrivenSlide;
+export default InBrowserSlide;

@@ -1,9 +1,9 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import map from "lodash/map";
 import { css } from "glamor";
-import shuffle from "lodash/shuffle";
+import sampleSize from "lodash/sampleSize";
 
-import { PlateText, Empty, Circle } from "pages/Presentation/styles";
+import { Center, ColumnsGrid, H1, RowCircle } from "pages/Presentation/styles";
 
 class ColorSlide extends PureComponent {
   render() {
@@ -27,30 +27,28 @@ class ColorSlide extends PureComponent {
       "#fc8d45",
       "#ed7e28",
       "#db8531",
-      "#bd9493"
+      "#bd9493",
     ];
 
-    colors = shuffle(colors);
+    colors = sampleSize(colors, 5);
 
     return (
-      <Fragment>
-        <Empty />
-        <Empty />
-        <Empty />
-        {map(title, (t, i) => {
-          if (t === " ") return <Empty key={`circle-${i}`} />;
-          return (
-            <Circle
-              key={`circle-${i}`}
-              {...css({ background: `${colors[i]} !important` })}
-            >
-              <PlateText {...css({ color: `#ffffff !important` })}>
-                {t.toUpperCase()}
-              </PlateText>
-            </Circle>
-          );
-        })}
-      </Fragment>
+      <Center>
+        <ColumnsGrid>
+          {map(colors, (color, i) => {
+            return (
+              <RowCircle
+                key={`circle-${i}`}
+                {...css({ background: `${colors[i]} !important` })}
+              >
+                <H1 {...css({ color: "#fff !important" })}>
+                  {title.charAt(i).toUpperCase()}
+                </H1>
+              </RowCircle>
+            );
+          })}
+        </ColumnsGrid>
+      </Center>
     );
   }
 }

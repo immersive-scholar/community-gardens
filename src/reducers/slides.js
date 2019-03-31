@@ -7,17 +7,20 @@ import AmbientDataSlide from "pages/Presentation/slides/AmbientDataSlide";
 // import AnticipationSlide from "pages/Presentation/slides/AnticipationSlide";
 // import CollaborateSlide from "pages/Presentation/slides/CollaborateSlide";
 import ColorSlide from "pages/Presentation/slides/ColorSlide";
+import CommunityGardensTitleSlide from "pages/Presentation/slides/CommunityGardensTitleSlide";
 import DataDrivenSlide from "pages/Presentation/slides/DataDrivenSlide";
 import DefinitionTitleSlide from "pages/Presentation/slides/DefinitionTitleSlide";
 import EquationSlide from "pages/Presentation/slides/EquationSlide";
 import GenerativeArtSlide from "pages/Presentation/slides/GenerativeArtSlide";
 import GenerativeSlide from "pages/Presentation/slides/GenerativeSlide";
+import GoalsSlide from "pages/Presentation/slides/GoalsSlide";
 import HistorySlide from "pages/Presentation/slides/HistorySlide";
 import HistoryTitleSlide from "pages/Presentation/slides/HistoryTitleSlide";
+import InBrowserSlide from "pages/Presentation/slides/InBrowserSlide";
 import InspirationSlide from "pages/Presentation/slides/InspirationSlide";
 import IntroSlide from "pages/Presentation/slides/IntroSlide";
 import MeSlide from "pages/Presentation/slides/MeSlide";
-import NinePointSixSlide from "pages/Presentation/slides/NinePointSixSlide";
+// import NinePointSixSlide from "pages/Presentation/slides/NinePointSixSlide";
 import NoControlSlide from "pages/Presentation/slides/NoControlSlide";
 import PersonalHistoryTitleSlide from "pages/Presentation/slides/PersonalHistoryTitleSlide";
 import ProcessingSlide from "pages/Presentation/slides/ProcessingSlide";
@@ -81,23 +84,42 @@ const node = {
     id: "generativeArt",
     slideClass: GenerativeArtSlide,
   },
-  ambientData: {
+  communityGardensTitle: {
     index: index++,
-    id: "ambientData",
-    slideClass: AmbientDataSlide,
+    id: "communityGardensTitle",
+    slideClass: CommunityGardensTitleSlide,
   },
+  goals: {
+    index: index++,
+    id: "goals",
+    slideClass: GoalsSlide,
+  },
+  // ambientData: {
+  //   index: index++,
+  //   id: "ambientData",
+  //   slideClass: AmbientDataSlide,
+  // },
   dataDriven: {
     index: index++,
     id: "dataDriven",
     slideClass: DataDrivenSlide,
   },
-  ninePointSix: {
+  inBrowser: {
     index: index++,
-    id: "ninePointSix",
-    slideClass: NinePointSixSlide,
+    id: "inBrowser",
+    slideClass: InBrowserSlide,
   },
-  intro2: { index: index++, id: "intro2", slideClass: IntroSlide },
-  color: { index: index++, id: "color", slideClass: ColorSlide },
+  colorSlide: {
+    index: index++,
+    id: "colorSlide",
+    slideClass: ColorSlide,
+  },
+  // ninePointSix: {
+  //   index: index++,
+  //   id: "ninePointSix",
+  //   slideClass: NinePointSixSlide,
+  // },
+  // intro2: { index: index++, id: "intro2", slideClass: IntroSlide },
   solomonsSeal: {
     index: index++,
     id: "solomonsSeal",

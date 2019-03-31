@@ -1,12 +1,12 @@
 import TypographyTemplate from "../templates/TypographyTemplate";
 
-class DataDrivenSlide extends TypographyTemplate {
+class GoalsSlide extends TypographyTemplate {
   constructor(props) {
     super(props);
 
-    const title = "PLANTS";
+    const title = "GOALS";
     this.state = { title };
   }
 }
 
-export default DataDrivenSlide;
+export default GoalsSlide;
