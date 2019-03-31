@@ -4,8 +4,8 @@ import size from "lodash/size";
 import { FOCUS_SLIDE, NEXT_SLIDE, PREV_SLIDE } from "constants/Constants";
 
 import AmbientDataSlide from "pages/Presentation/slides/AmbientDataSlide";
-import AnticipationSlide from "pages/Presentation/slides/AnticipationSlide";
-import CollaborateSlide from "pages/Presentation/slides/CollaborateSlide";
+// import AnticipationSlide from "pages/Presentation/slides/AnticipationSlide";
+// import CollaborateSlide from "pages/Presentation/slides/CollaborateSlide";
 import ColorSlide from "pages/Presentation/slides/ColorSlide";
 import DataDrivenSlide from "pages/Presentation/slides/DataDrivenSlide";
 import DefinitionTitleSlide from "pages/Presentation/slides/DefinitionTitleSlide";
