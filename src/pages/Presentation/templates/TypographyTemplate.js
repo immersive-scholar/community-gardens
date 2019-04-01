@@ -15,7 +15,14 @@ class TypographyTemplate extends PureComponent {
   renderIndex = (index, theme) => {
     return (
       <ChapterTitle key={`index-${index}`}>
-        <H1 {...css({ color: `${theme.bright} !important` })}>{index}</H1>
+        <H1
+          {...css({
+            color: `${theme.bright} !important`,
+            marginTop: "50px !important",
+          })}
+        >
+          {index}
+        </H1>
       </ChapterTitle>
     );
   };

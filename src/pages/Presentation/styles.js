@@ -84,6 +84,8 @@ const RowCircle = glamorous.div({
   background: "#ffffff",
   width: "18.75vmin",
   height: "18.75vmin",
+  maxWidth: "100px",
+  maxHeight: "100px",
   // width: "80vh",
   // height: "80vh",
   padding: "1rem",
@@ -108,7 +110,7 @@ const blackBg = { ...css({ background: "#000000 !important" }) };
 
 const H1 = glamorous.h1({
   position: "relative",
-  margin: "5.5vmin auto 0",
+  margin: "50% auto 0",
   fontSize: "70px",
   textAlign: "center",
   fontFamily: "Alegreya",

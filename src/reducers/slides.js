@@ -3,7 +3,7 @@ import size from "lodash/size";
 
 import { FOCUS_SLIDE, NEXT_SLIDE, PREV_SLIDE } from "constants/Constants";
 
-import AmbientDataSlide from "pages/Presentation/slides/AmbientDataSlide";
+// import AmbientDataSlide from "pages/Presentation/slides/AmbientDataSlide";
 // import AnticipationSlide from "pages/Presentation/slides/AnticipationSlide";
 // import CollaborateSlide from "pages/Presentation/slides/CollaborateSlide";
 import ColorSlide from "pages/Presentation/slides/ColorSlide";
@@ -24,6 +24,7 @@ import MeSlide from "pages/Presentation/slides/MeSlide";
 import NoControlSlide from "pages/Presentation/slides/NoControlSlide";
 import PersonalHistoryTitleSlide from "pages/Presentation/slides/PersonalHistoryTitleSlide";
 import ProcessingSlide from "pages/Presentation/slides/ProcessingSlide";
+import ProcessTitleSlide from "pages/Presentation/slides/ProcessTitleSlide";
 import SolomonsSealSlide from "pages/Presentation/slides/SolomonsSealSlide";
 
 const queryString = require("query-string");
@@ -83,6 +84,11 @@ const node = {
     index: index++,
     id: "generativeArt",
     slideClass: GenerativeArtSlide,
+  },
+  processTitle: {
+    index: index++,
+    id: "processTitle",
+    slideClass: ProcessTitleSlide,
   },
   communityGardensTitle: {
     index: index++,

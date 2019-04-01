@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import map from "lodash/map";
 
 import Image from "components/atoms/Image";
