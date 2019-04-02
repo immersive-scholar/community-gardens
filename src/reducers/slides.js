@@ -24,7 +24,7 @@ import MeSlide from "pages/Presentation/slides/MeSlide";
 import NoControlSlide from "pages/Presentation/slides/NoControlSlide";
 import PersonalHistoryTitleSlide from "pages/Presentation/slides/PersonalHistoryTitleSlide";
 import ProcessingSlide from "pages/Presentation/slides/ProcessingSlide";
-import ProcessTitleSlide from "pages/Presentation/slides/ProcessTitleSlide";
+// import ProcessTitleSlide from "pages/Presentation/slides/ProcessTitleSlide";
 import SolomonsSealSlide from "pages/Presentation/slides/SolomonsSealSlide";
 
 const queryString = require("query-string");
@@ -85,11 +85,11 @@ const node = {
     id: "generativeArt",
     slideClass: GenerativeArtSlide,
   },
-  processTitle: {
-    index: index++,
-    id: "processTitle",
-    slideClass: ProcessTitleSlide,
-  },
+  // processTitle: {
+  //   index: index++,
+  //   id: "processTitle",
+  //   slideClass: ProcessTitleSlide,
+  // },
   communityGardensTitle: {
     index: index++,
     id: "communityGardensTitle",
