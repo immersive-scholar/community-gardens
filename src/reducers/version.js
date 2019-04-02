@@ -1,7 +1,7 @@
 const initialState = {
-  id: "1.1.1",
+  id: "1.1.2",
   env: process.env.NODE_ENV,
-  releaseDate: "2019-03-31",
+  releaseDate: "2019-04-01",
 };
 
 console.log(initialState);
