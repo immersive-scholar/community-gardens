@@ -1,12 +1,12 @@
 import TypographyTemplate from "../templates/TypographyTemplate";
 
-class ProcessTitleSlide extends TypographyTemplate {
+class DemoSlide extends TypographyTemplate {
   constructor(props) {
     super(props);
 
-    const title = "PROCESS";
+    const title = "STARTER BLOM";
     this.state = { title };
   }
 }
 
-export default ProcessTitleSlide;
+export default DemoSlide;
