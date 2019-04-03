@@ -11,6 +11,7 @@ import Animated from "components/molecules/Animated";
 import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
+import WebbyBanner from "components/atoms/FillButton/WebbyBanner";
 
 import { textContainer, center } from "styles";
 
@@ -30,6 +31,7 @@ class Solutions extends PureComponent {
           title="Community Gardens Solutions"
           description="How to be a part of the solution for food and housing insecurity."
         />
+        <WebbyBanner />
         <Marquee
           image={headerImage}
           title="Solutions"
@@ -109,7 +111,7 @@ class Solutions extends PureComponent {
 }
 
 const mapStateToProps = ({ settings, theme }) => ({
-  theme
+  theme,
 });
 
 export default connect(mapStateToProps)(Solutions);

@@ -10,8 +10,11 @@ import ThreeControlBar from "components/organisms/ThreeControlBar";
 import ImmersiveScholarLogo from "components/atoms/ImmersiveScholarLogo";
 import Infobar from "components/molecules/Infobar";
 import threeEntryPoint from "three/ThreeEntryPoint";
+import WebbyBanner from "components/atoms/FillButton/WebbyBanner";
+
 import { settings, chapters } from "actions";
 import { getSelectedChapter } from "reducers";
+import { css } from "glamor";
 
 class ThreeContainer extends Component {
   static propTypes = {
@@ -96,6 +99,19 @@ class ThreeContainer extends Component {
         <Modal open={aboutModalOpen} onClose={() => setAboutModalOpen(false)}>
           <AboutModalContents />
         </Modal>
+        {showControlBar && (
+          <div
+            {...css({
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              zIndex: 101,
+            })}
+          >
+            <WebbyBanner />
+          </div>
+        )}
         {showControlBar && <ThreeControlBar />}
         {showSidebar && <Infobar />}
         {showImmersiveScholarLogo && <ImmersiveScholarLogo />}

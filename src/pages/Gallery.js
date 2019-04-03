@@ -9,6 +9,7 @@ import GalleryTemplate from "components/molecules/Gallery/GalleryTemplate";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 import PathToPicture from "util/PathToPicture";
+import WebbyBanner from "components/atoms/FillButton/WebbyBanner";
 
 import { lead, textContainer, removePaddingBottom } from "styles";
 
@@ -162,6 +163,7 @@ class GalleryPage extends PureComponent {
           title="Community Gardens Gallery"
           description="Images from Community Gardens."
         />
+        <WebbyBanner />
         <ShortMarquee title="Gallery" subtitle="Images from the gardens" />
         <div {...textContainer} {...removePaddingBottom}>
           <Animated {...lead}>

@@ -7,6 +7,7 @@ import Animated from "components/molecules/Animated";
 import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
+import WebbyBanner from "components/atoms/FillButton/WebbyBanner";
 
 import { textContainer, bulletless, removeMarginLeft } from "styles";
 
@@ -25,6 +26,7 @@ class Credits extends PureComponent {
           title="Community Gardens Credits"
           description="The team behind Community Gardens."
         />
+        <WebbyBanner />
         <Marquee
           image={headerImage}
           title="Credits"

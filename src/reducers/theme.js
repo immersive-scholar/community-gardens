@@ -5,24 +5,25 @@ const initialState = {
     base: "#fbb3d1",
     bright: "#fbb3d1",
     pink: "#ec468a",
+    pink2: "#972d58",
     dark: "#574f65",
     button: {
       bg: "#fbb3d1",
       text: "#ec468a",
-      hover: { text: "#ffffff", bg: "c25482" }
+      hover: { text: "#ffffff", bg: "c25482" },
     },
     topNav: {
       text: "#ffffff",
-      hover: { text: "#c25482" }
-    }
-  }
+      hover: { text: "#c25482" },
+    },
+  },
 };
 
 export default function themeReducer(state = initialState, action) {
   switch (action.type) {
     default:
       return {
-        ...state
+        ...state,
       };
   }
 }
@@ -34,8 +35,8 @@ export const getPinkButton = state => {
     color: state.colors.pink,
     "&:hover": {
       color: state.colors.pink,
-      textDecoration: "underline"
-    }
+      textDecoration: "underline",
+    },
   });
   return buttonStyle;
 };

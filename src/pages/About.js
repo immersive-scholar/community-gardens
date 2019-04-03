@@ -10,6 +10,7 @@ import Animated from "components/molecules/Animated";
 import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
+import WebbyBanner from "components/atoms/FillButton/WebbyBanner";
 
 import {
   textContainer,
@@ -17,7 +18,7 @@ import {
   lead,
   addMarginBottom,
   removePaddingTop,
-  blockquote
+  blockquote,
 } from "styles";
 
 class About extends PureComponent {
@@ -35,6 +36,7 @@ class About extends PureComponent {
 
     return (
       <div>
+        <WebbyBanner />
         <video width="100%" height="auto" autoPlay loop>
           <source src="/vid/header-full.mp4" type="video/mp4" />
           <Image ratio="16x9" sources={headerImage} theme={theme} />
@@ -95,7 +97,7 @@ class About extends PureComponent {
 }
 
 const mapStateToProps = ({ theme }) => ({
-  theme
+  theme,
 });
 
 export default connect(mapStateToProps)(About);

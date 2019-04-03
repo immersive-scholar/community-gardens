@@ -7,13 +7,13 @@ import {
   ShortMarqueeWrapper,
   TextWrapper,
   titleStyles,
-  subtitleStyles
+  subtitleStyles,
 } from "./styles";
 
 class ShortMarquee extends PureComponent {
   render() {
     const { title, subtitle, theme } = this.props;
-    const bg = theme.colors.pink;
+    const bg = theme.colors.pink2;
 
     return (
       <ShortMarqueeWrapper {...css({ backgroundColor: bg })}>
@@ -37,7 +37,7 @@ class ShortMarquee extends PureComponent {
 }
 
 const mapStateToProps = ({ settings, theme }) => ({
-  theme
+  theme,
 });
 
 export default connect(mapStateToProps)(ShortMarquee);
