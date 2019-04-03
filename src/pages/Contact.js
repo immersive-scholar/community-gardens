@@ -11,13 +11,14 @@ import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 import PathToPicture from "util/PathToPicture";
 import profilePic from "assets/lucastswick-avatar.jpg";
+import WebbyBanner from "components/atoms/FillButton/WebbyBanner";
 
 import {
   textContainer,
   wideContainer,
   threeCols,
   center,
-  CircleMaskDiv
+  CircleMaskDiv,
 } from "styles";
 import { css } from "glamor";
 
@@ -37,6 +38,7 @@ class Contact extends PureComponent {
           title="About Community Gardens"
           description="Contact generative artist lucastswick"
         />
+        <WebbyBanner />
         <Marquee image={headerImage} />
         <div {...textContainer}>
           <Animated as="h1">Contact</Animated>
@@ -78,7 +80,7 @@ class Contact extends PureComponent {
               <Obfuscate
                 email="lucas@lucastswick.com"
                 headers={{
-                  subject: "Questions about Generative Art"
+                  subject: "Questions about Generative Art",
                 }}
               />
             </Animated>
@@ -92,7 +94,7 @@ class Contact extends PureComponent {
 }
 
 const mapStateToProps = ({ theme }) => ({
-  theme
+  theme,
 });
 
 export default connect(mapStateToProps)(Contact);

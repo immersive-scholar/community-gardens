@@ -11,6 +11,8 @@ import {
   ImageCopyBlock,
   CopyImageBlock,
 } from "components/organisms/ImageCopyBlock";
+import WebbyBanner from "components/atoms/FillButton/WebbyBanner";
+
 import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
@@ -49,6 +51,7 @@ class Gardens extends PureComponent {
           title="Community Gardens"
           description="Community Gardens is a data-driven generative art installation using gardens as metaphor to discuss food and housing insecurity within the student body at NC State."
         />
+        <WebbyBanner />
         <Marquee
           image={headerImage}
           title="Community Gardens"
