@@ -3,8 +3,11 @@ import glamorous from "glamorous";
 
 const MarqueeWrapper = glamorous.div({
   position: "relative",
-  maxHeight: "calc(100vh - 1rem)",
+  maxHeight: "calc(100vh - 5rem)",
   overflow: "hidden",
+  "@media screen and (min-width: 72em)": {
+    minHeight: "500px",
+  },
 });
 
 const ShortMarqueeWrapper = glamorous.div({
