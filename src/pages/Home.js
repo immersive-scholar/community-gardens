@@ -13,7 +13,6 @@ import {
 } from "components/organisms/ImageCopyBlock";
 import Animated from "components/molecules/Animated";
 import Marquee from "components/molecules/Marquee";
-import WebbyBanner from "components/atoms/FillButton/WebbyBanner";
 // import GenerativeMarquee from "components/molecules/Marquee/GenerativeMarquee";
 import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
@@ -66,7 +65,6 @@ class Home extends PureComponent {
             scrollTo={this.contentRef}
           />
         ) : ( */}
-        <WebbyBanner />
 
         <Marquee
           image={headerImage}

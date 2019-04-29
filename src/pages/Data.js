@@ -14,7 +14,6 @@ import {
 import PathToPicture from "util/PathToPicture";
 import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
-import WebbyBanner from "components/atoms/FillButton/WebbyBanner";
 
 import { textContainer, removePaddingTop, lead } from "styles";
 
@@ -47,7 +46,6 @@ class Data extends PureComponent {
           title="Community Gardens Data Summary"
           description="Details about how the data affects the plants in Community Gardens."
         />
-        <WebbyBanner />
         <Image ratio="16x9" sources={headerImage} theme={theme} />
         <div {...textContainer}>
           <Animated as="h1">Data-driven Generative Art</Animated>

@@ -10,7 +10,6 @@ import ThreeControlBar from "components/organisms/ThreeControlBar";
 import ImmersiveScholarLogo from "components/atoms/ImmersiveScholarLogo";
 import Infobar from "components/molecules/Infobar";
 import threeEntryPoint from "three/ThreeEntryPoint";
-import WebbyBanner from "components/atoms/FillButton/WebbyBanner";
 
 import { settings, chapters } from "actions";
 import { getSelectedChapter } from "reducers";
@@ -108,9 +107,7 @@ class ThreeContainer extends Component {
               width: "100%",
               zIndex: 101,
             })}
-          >
-            <WebbyBanner />
-          </div>
+          />
         )}
         {showControlBar && <ThreeControlBar />}
         {showSidebar && <Infobar />}

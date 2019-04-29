@@ -11,7 +11,6 @@ import Newsletter from "components/organisms/Newsletter";
 import Footer from "components/organisms/Footer";
 import PathToPicture from "util/PathToPicture";
 import profilePic from "assets/lucastswick-avatar.jpg";
-import WebbyBanner from "components/atoms/FillButton/WebbyBanner";
 
 import {
   textContainer,
@@ -38,7 +37,6 @@ class Contact extends PureComponent {
           title="About Community Gardens"
           description="Contact generative artist lucastswick"
         />
-        <WebbyBanner />
         <Marquee image={headerImage} />
         <div {...textContainer}>
           <Animated as="h1">Contact</Animated>
