@@ -4,13 +4,26 @@ Community Gardens is a generative art experience about food and housing insecuri
 
 9.6% of students experienced housing insecurity within the past year. Community Garden's purpose is to raise awareness and challenge the stigmas and bias towards food and housing insecurities.
 
-To view the installation, go to [https://communitygardens.generativeartist.com/](https://communitygardens.generativeartist.com/).
+To view the installation, go to [https://communitygardens.immersivescholar.org/](https://communitygardens.immersivescholar.org/).
 
 - **Data-Driven**: Plant attributes are driven by data collected by [Dr Mary Haskett](https://psychology.chass.ncsu.edu/faculty_staff/mehasket). Read the [report](https://dasa.ncsu.edu/wp-content/uploads/2018/03/NC-State-Food-and-Housing-Insecurity-1.pdf), and then see how [data affects the plants](https://communitygardens.generativeartist.com/data/)
 
 - **Generative**: The gardens are unique every time the garden is created. No one will ever see the same garden twice.
 
 - **Democratized**: The project runs on large, 20' displays as well as your laptop or your phone. Powered by javascript and WebGL, it runs just about anywhere you are.
+
+*This README file follows documentation recommendations established in [Testing Guidelines for Immersive Digital Applications](https://mfr.osf.io/render?url=https://osf.io/7hmcy/?direct%26mode=render%26action=download%26mode=render) to support sharing and testing of immersive digital content.*
+
+## Hardware dependencies
+
+1. **Display type**: The project runs on large format displays as well as a laptop or phone.
+1. **Display size**: The project should run on any size and aspect display.
+1. **Processing power and memory size**: See [Environments](##-Environments) for some considerations for performance based on GPU and devices type
+1. **Connectivity**: The project can be run locally after installation or run using the online hosted version at [https://communitygardens.immersivescholar.org/](https://communitygardens.immersivescholar.org/)
+1. **Input devices**: See [Controls](##-Controls)
+
+## Software dependencies
+1. A modern browser
 
 ## Installation
 
@@ -22,7 +35,7 @@ Next you will need access to the command line. On osx, this is inside the Applic
 
 Now drag and drop the unzipped folder in to the terminal application. This will change directory to the downloaded files. To install the application dependencies, type:
 
-```
+```sh
 npm i
 ```
 
@@ -155,7 +168,7 @@ Gardens can be created based around a certain statistic, and derived at any time
 
 Note that the InsecurityCalculator's data is stored staticly. There is no need to pass the `InsecurityCalculator` around as a prop. Simply use
 
-```
+```js
 let data = InsecurityCalculator.getRandomRows({
     count,
     key: ENERGY_OUTGOING
@@ -364,7 +377,7 @@ The project is all javascript and [WebGL](https://developer.mozilla.org/en-US/do
 
 ## Credits
 
-Created by [lucastswick](https://generativeartist.com) during a six-week artist residency funded by the [Andrew Mellon Foundation](https://mellon.org/) through the [Immersive Scholar](https://www.immersivescholar.org/) program with [NCSU](https://www.ncsu.edu/).
+Created by [lucastswick](https://generativeartist.com) during a six-week artist residency funded by the [Andrew Mellon Foundation](https://mellon.org/) through the [Immersive Scholar](https://www.immersivescholar.org/) program with the [NC State University Libraries](https://www.lib.ncsu.edu/).
 
 ### Core Team
 
@@ -385,3 +398,7 @@ Created by [lucastswick](https://generativeartist.com) during a six-week artist 
 - [Molly Renda](https://www.lib.ncsu.edu/staff/mrenda) for creating the print exhibition
 - [Walt Gurley](https://www.lib.ncsu.edu/staff/jwgurley) for the encouragement and assistance with hardware testing
 - [Marian Fragola](https://www.lib.ncsu.edu/staff/mgfragol) for making the presentations an enormous success
+
+### Contact
+
+For general questions or troubleshooting questions contact [Walt Gurley](https://www.lib.ncsu.edu/staff/jwgurley).
