@@ -23,7 +23,9 @@ To view the installation, go to [https://communitygardens.immersivescholar.org/]
 1. **Input devices**: See [Controls](##-Controls)
 
 ## Software dependencies
-1. A modern browser
+
+1. A modern browser is required to run the remotely hosted version.
+1. See [Installation](##-Installation) for dependencies based on installation method when running locally.
 
 ## Installation
 
