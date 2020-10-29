@@ -18,14 +18,14 @@ To view the installation, go to [https://communitygardens.immersivescholar.org/]
 
 1. **Display type**: The project runs on large format displays as well as a laptop or phone.
 1. **Display size**: The project should run on any size and aspect display.
-1. **Processing power and memory size**: See [Environments](##-Environments) for some considerations for performance based on GPU and devices type
+1. **Processing power and memory size**: See [Environments](#environments) for some considerations for performance based on GPU and devices type
 1. **Connectivity**: The project can be run locally after installation or run using the online hosted version at [https://communitygardens.immersivescholar.org/](https://communitygardens.immersivescholar.org/)
-1. **Input devices**: See [Controls](##-Controls)
+1. **Input devices**: See [Controls](#controls)
 
 ## Software dependencies
 
 1. A modern browser is required to run the remotely hosted version.
-1. See [Installation](##-Installation) for dependencies based on installation method when running locally.
+1. See [Installation](#installation) for dependencies based on installation method when running locally.
 
 ## Installation
 
