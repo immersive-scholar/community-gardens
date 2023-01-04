@@ -34,7 +34,7 @@
     "react-responsive-picture": "^2.1.0",
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^4.0.8",
-    "react-scripts": "1.1.4",
+    "react-scripts": "5.0.1",
     "react-spinners": "^0.5.1",
     "react-transition-group": "^2.5.0",
     "react-typography": "^0.16.13",
